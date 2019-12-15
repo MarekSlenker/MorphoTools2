@@ -1,6 +1,6 @@
 #' A read.morphodata Function
 #'
-#' Imports data from tab-delimited text file and produces a "morphodata" object from it.
+#' @description Imports data from tab-delimited text file and produces a "morphodata" object from it.
 #' @usage read.morphodata(infile, dec=".")
 #' @param infile the name of the file which the data are to be read from.
 #' @param dec the character used in the file for decimal points.

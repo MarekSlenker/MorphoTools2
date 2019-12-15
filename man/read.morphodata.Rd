@@ -12,7 +12,7 @@ read.morphodata(infile, dec=".")
 \item{dec}{the character used in the file for decimal points.}
 }
 \value{
-object of class "morphodata"
+Abject of class "morphodata"
 }
 \description{
 Imports data from tab-delimited text file and produces a "morphodata" object from it.
