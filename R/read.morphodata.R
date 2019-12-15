@@ -11,5 +11,12 @@
 #' read.morphodata("infile.txt")
 #' read.morphodata("clipboard")
 read.morphodata<-function(infile, dec="."){
+  xdata<-read.delim(infile, header=T, dec = dec)
 
-}
+  if (dim(xdata)[2] <= 3) stop("incorrect data format", call. = F)
+
+  return(morphodata(xdata))
+
+
+
+  }
