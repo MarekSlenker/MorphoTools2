@@ -2,20 +2,22 @@
 % Please edit documentation in R/read.morphodata.R
 \name{read.morphodata}
 \alias{read.morphodata}
-\title{A read.morphodata Function}
+\title{Data Input}
 \usage{
-read.morphodata(infile, dec=".")
+read.morphodata(infile, dec=".", ...)
 }
 \arguments{
 \item{infile}{the name of the file which the data are to be read from.}
 
 \item{dec}{the character used in the file for decimal points.}
+
+\item{...}{further arguments to be passed to read.table.}
 }
 \value{
-Abject of class "morphodata"
+object of class 'morphodata'
 }
 \description{
-Imports data from tab-delimited text file and produces a "morphodata" object from it.
+Imports data from tab-delimited text file and produces a 'morphodata' object from it.
 }
 \examples{
 read.morphodata("infile.txt")

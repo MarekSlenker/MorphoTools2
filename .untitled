@@ -1,0 +1,33 @@
+
+
+
+
+dd = read.morphodata("/home/mint/Git/MorphoTools/tests/testFiles/sample_NaNs.txt")
+dd = read.morphodata("/home/mint/Git/MorphoTools/tests/testFiles/sample.txt")
+dd = read.morphodata("/home/mint/Git/MorphoTools/tests/testFiles/sample_numericNames.txt")
+
+
+
+sum(is.nan(as.matrix(dd$data)))
+
+is.numeric(as.matrix(dd$data))
+
+str(dd)
+
+View(dd$data)
+
+rm(dd)
+
+dd$data
+
+class(dd)
+
+summary(dd)
+
+any(is.nan.data.frame(dd))
+
+any(is.na(dd$data))
+
+dd
+
+methods(summary)

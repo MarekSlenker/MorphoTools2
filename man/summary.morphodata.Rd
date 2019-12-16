@@ -4,13 +4,14 @@
 \alias{summary.morphodata}
 \title{summary.morphodata}
 \usage{
-summary(x)
+## S3 method for class 'morphodata'
+summary(object)
 }
 \arguments{
-\item{x}{bject of class "morphodata".}
+\item{object}{an object of class 'morphodata'.}
 }
 \description{
-Summarize morphodata.
+#' Summarize a structure of morphodata object.
 }
 \examples{
 summary(object)
