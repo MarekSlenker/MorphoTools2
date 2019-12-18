@@ -2,7 +2,7 @@
 % Please edit documentation in R/summary.morphodata.R
 \name{summary.morphodata}
 \alias{summary.morphodata}
-\title{summary.morphodata}
+\title{Summarize a structure of a morphodata object.}
 \usage{
 ## S3 method for class 'morphodata'
 summary(object)
@@ -11,7 +11,7 @@ summary(object)
 \item{object}{an object of class 'morphodata'.}
 }
 \description{
-#' Summarize a structure of morphodata object.
+This function summarizes the information contained in the a morphodata object.
 }
 \examples{
 summary(object)
