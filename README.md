@@ -21,3 +21,8 @@ na.meanSubst()
 ```
 
 
+### export.res
+implemented as generic function
+```
+export.res.morphodata()
+```
