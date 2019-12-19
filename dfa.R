@@ -1,10 +1,16 @@
 
-
 data = read.morphodata("./tests/testFiles/sample.txt")
+data = read.delim("./tests/testFiles/sample.txt")
+
+data = read.morphodata("./tests/testFiles/sample_Na_celyZnak.txt")
 
 data = read.delim("./tests/testFiles/sample_NaNs.txt")
 
 data = read.morphodata("./tests/testFiles/sample_numericNames.txt")
+
+
+export.res(data, "clipboard.txt")
+
 
 View(data$data)
 
@@ -12,6 +18,10 @@ dd = delete.taxon(data, "hybr")
 
 dim(dd$data)
 
+class(data)
+oo = na.meanSubst(object)
+
+write.table(oo$data, "meanSubstMK.txt")
 
 dd = delete.population(data, c("CERV", "DEB", "KOT"))
 
@@ -21,6 +31,9 @@ object = data
 column = "Taxon"
 groupName = "hybr"
 
+print(object, file = "rr.txt")
+
+export.res(object, file = "re.txt", kk=9)
 
 for (ch in charecter) {
   if (! (ch %in% colnames(data$data))) stop(paste("charecter", ch , "does not exist"), call. = F)

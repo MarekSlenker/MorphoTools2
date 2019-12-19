@@ -2,7 +2,7 @@
 % Please edit documentation in R/read.morphodata.R
 \name{read.morphodata}
 \alias{read.morphodata}
-\title{Data Input}
+\title{Data input}
 \usage{
 read.morphodata(infile, dec=".", ...)
 }

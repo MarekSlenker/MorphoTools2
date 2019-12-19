@@ -18,3 +18,4 @@ devtools::test()
 is.nan(dd$data)
 sample_decComa
 
+export.res(object)

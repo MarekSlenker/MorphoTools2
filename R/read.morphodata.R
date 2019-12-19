@@ -1,4 +1,4 @@
-#' Data Input
+#' Data input
 #'
 #' @description Imports data from tab-delimited text file and produces a 'morphodata' object from it.
 #'
