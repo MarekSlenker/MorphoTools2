@@ -7,7 +7,7 @@
 ##### S3 methods
 
 ```
-summary.morphodata
+summary.morphodata()
 ```
 
 ##### data manipulation
