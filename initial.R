@@ -7,7 +7,9 @@ devtools::load_all()
 
 devtools::document()
 
-usethis::use_r("summary.morphodata.R")
+options(warn=1)
+
+usethis::use_r("newMorphodata")
 
 
 devtools::test()

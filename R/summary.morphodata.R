@@ -16,7 +16,7 @@
 summary.morphodata <- function(object) {
 
   #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
-  if (!(is(object, "morphodata"))) stop("object is not of class 'morphodata'", call. = F)
+  checkMorphodataClass(object)
 
   # cat summary
 

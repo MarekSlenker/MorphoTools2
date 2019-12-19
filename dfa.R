@@ -2,12 +2,102 @@
 
 data = read.morphodata("./tests/testFiles/sample.txt")
 
-data = read.morphodata("./tests/testFiles/sample_NaNs.txt")
+data = read.delim("./tests/testFiles/sample_NaNs.txt")
 
 data = read.morphodata("./tests/testFiles/sample_numericNames.txt")
 
+View(data$data)
+
+dd = delete.taxon(data, "hybr")
+
+dim(dd$data)
+
+
+dd = delete.population(data, c("CERV", "DEB", "KOT"))
+
+subData = newObject
+
+object = data
+column = "Taxon"
+groupName = "hybr"
+
+
+for (ch in charecter) {
+  if (! (ch %in% colnames(data$data))) stop(paste("charecter", ch , "does not exist"), call. = F)
+}
+
+as.character(data$data[1,])
+
+paste(data$data[1,], collapse = " ")
+
+
+i = "Population"
+
+column = "Population"
+groupName = c("RTE", "PREL", "RUS", "HVLT")
+
+column = "Taxon"
+groupName = "hybr"
+
+
+
+
+toRemove = array(data = NA, dim = 0)
+for (name in groupName) {
+  toRemove = c(toRemove, which( unlist(data[column]) == name) )
+  #toRemove = paste(toRemove, (which( unlist(data[column]) == name) ))
+}
+
+toRemove
+
+data$data[,1]
+
+newdata = newMorphodata()
+
+charecter = c("SN", "SF", "ST", "LL")
+
+for (ch in charecter) {
+  toRemove = c(toRemove, which(colnames(data$data) == ch) )
+}
+
+
+
+
+
+newdata$Population = droplevels( data$Population[-toRemove])
+
+newdata$Taxon = ( data$Taxon[-toRemove] )
+
+newdata$Taxon = droplevels( data$Taxon[-toRemove] )
+
+
+newdata$data = data$data[-toRemove, ]
+
+
+for (ch in charecter) {
+  toRemove = c(toRemove, which( object$data == ch) )
+}
+
+
+droplevels(newdata$Taxon)
+
+
+
+
+x = data$data[-toRemove, ]
+class(x)
+
+rm(toRemove)
+
+str(which( unlist(data[column]) == name))
+
+str(data$Population)
+
 
 is.null(data$ID)
+
+
+
 
 data = read.delim("./tests/testFiles/sample_NaNs.txt")
 
@@ -18,3 +108,27 @@ summary(data)
 
 
 paste(levels(data$Population), collapse = " ")
+
+
+
+
+
+
+
+
+
+
+
+
+dim(data$data)[2] -1
+
+
+
+
+
+
+
+
+
+
+
