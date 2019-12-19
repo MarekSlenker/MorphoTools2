@@ -16,6 +16,8 @@ summary.morphodata
 delete.population()
 delete.taxon()
 delete.charecter()
+
+na.meanSubst()
 ```
 
 
