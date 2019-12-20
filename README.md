@@ -7,7 +7,7 @@
 ##### S3 methods
 
 ```
-summary.morphodata
+summary.morphodata()
 ```
 
 ##### data manipulation
@@ -21,3 +21,8 @@ na.meanSubst()
 ```
 
 
+### export.res
+implemented as generic function
+```
+export.res.morphodata()
+```
