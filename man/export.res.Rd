@@ -23,9 +23,6 @@ export.res(object, ...)
 \description{
 This is a generic function for exporting results, stored in objects of MorphoTools package.
 }
-\details{
-____________.
-}
 \section{Methods (by class)}{
 \itemize{
 \item \code{morphodata}: function for exporting 'morphodata' objects

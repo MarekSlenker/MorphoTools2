@@ -34,6 +34,7 @@ na.meanSubst <- function(object){
 
   populs<-levels(object$Population)
 
+  # R passes arguments by value
   for (pop in populs) {
     popPositions = which( object$Population %in% pop)
     object$data[popPositions,] = sapply(object$data[popPositions,],meansubst)

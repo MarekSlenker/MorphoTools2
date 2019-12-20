@@ -9,7 +9,21 @@ data = read.delim("./tests/testFiles/sample_NaNs.txt")
 data = read.morphodata("./tests/testFiles/sample_numericNames.txt")
 
 
-export.res(data, "clipboard.txt")
+
+descr.pop(data, format = "$MEAN + $MAX")
+
+object = data
+
+
+._mean = descrStatistic[ char, "Mean",  group]
+._sd = descrStatistic[ char, "SD",  group]
+._min = descrStatistic[ char, "Min",  group]
+._5thPercentile = descrStatistic[ char, "5%",  group]
+._25thPercentile = descrStatistic[ char, "25%",  group]
+._median = descrStatistic[ char, "Median",  group]
+._.75thPercentile = descrStatistic[ char, "75%",  group]
+._95thPercentile = descrStatistic[ char, "95%",  group]
+._max = descrStatistic[ char, "Max",  group]
 
 
 View(data$data)

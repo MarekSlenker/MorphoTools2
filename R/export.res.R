@@ -20,15 +20,16 @@ export.res <- function(object, ...) {
   UseMethod("export.res")
 }
 
-
 #' @describeIn export.res function for exporting 'morphodata' objects
 #' @export
-export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t") {
+  export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t") {
   checkMorphodataClass(object)
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
   write.table(objToWrite, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
-}
+  }
+
+
 
 
