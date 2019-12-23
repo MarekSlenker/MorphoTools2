@@ -25,4 +25,5 @@ na.meanSubst()
 implemented as generic function
 ```
 export.res.morphodata()
+export.res.data.frame()
 ```
