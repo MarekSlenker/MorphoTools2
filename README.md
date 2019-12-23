@@ -27,3 +27,10 @@ implemented as generic function
 export.res.morphodata()
 export.res.data.frame()
 ```
+
+### Box Plots
+allowin user to extend whiskers to desired percentiles
+```
+boxplot.character()
+boxplot.all()
+```
