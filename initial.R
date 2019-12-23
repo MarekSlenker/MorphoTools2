@@ -7,6 +7,9 @@ devtools::load_all()
 
 devtools::document()
 
+
+
+
 options(warn=1)
 
 usethis::use_r("newMorphodata")

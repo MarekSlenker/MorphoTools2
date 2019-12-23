@@ -1,3 +1,3 @@
 #TODO
 
-export.res  -   generic function??
+export.res  -   data.frame (descr stat)

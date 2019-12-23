@@ -13,8 +13,6 @@
 #' @param dec the string to use for decimal points in numeric or complex columns: must be a single character.
 #' @param sep the field separator string. Values within each row of x are separated by this string.
 #'
-#' @examples
-#' myCompleteDataset = na.meansubst(initialdataset)
 #' @export
 export.res <- function(object, ...) {
   UseMethod("export.res")
@@ -28,8 +26,15 @@ export.res <- function(object, ...) {
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
   write.table(objToWrite, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
-  }
+}
 
+#' @describeIn export.res function for exporting 'data.frame' objects
+#' @export
+export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t") {
 
+  if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = F)
+
+  write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
+}
 
 

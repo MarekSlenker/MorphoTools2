@@ -20,8 +20,7 @@
 #'
 #'
 #' @examples
-#' descr.tax(object, format = "($MEAN +- $SD)")
-#'
+#' descr.tax(object, format = "($MEAN ± $SD)")
 #' @export
 descr.tax <- function(object, format = NULL) {
   checkMorphodataClass(object)
@@ -76,16 +75,21 @@ descr.pop <- function(object, format = NULL) {
 descr.all <- function(object, format = NULL) {
   checkMorphodataClass(object)
 
+  object$all = as.factor( rep("all", length(object$Taxon)))
+
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "Population")
+  descrStatistic = descrByGroup(object, "all")
+
+  #alls =  levels(object$all)
+  characters = colnames(object$data)
 
   if ( !(is.null(format))){
     # format output according to user specification
-    return(formatDescrStatistic(object, descrStatistic, format))
+    return(formatDescrStatistic("all", characters, descrStatistic, format))
   }
   else{
     # do not format descr stat for export ~ row data
-    return(unFormatDescrStatistic(object, descrStatistic, format))
+    return(unFormatDescrStatistic("all", characters, descrStatistic, format))
   }
 }
 

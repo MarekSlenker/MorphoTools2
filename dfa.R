@@ -8,25 +8,22 @@ data = read.delim("./tests/testFiles/sample_NaNs.txt")
 
 data = read.morphodata("./tests/testFiles/sample_numericNames.txt")
 
-
+column = "all"
 
 descr.pop(data, format = "$MEAN + $MAX")
 
 object = data
 
+descr.all(data)
 
-._mean = descrStatistic[ char, "Mean",  group]
-._sd = descrStatistic[ char, "SD",  group]
-._min = descrStatistic[ char, "Min",  group]
-._5thPercentile = descrStatistic[ char, "5%",  group]
-._25thPercentile = descrStatistic[ char, "25%",  group]
-._median = descrStatistic[ char, "Median",  group]
-._.75thPercentile = descrStatistic[ char, "75%",  group]
-._95thPercentile = descrStatistic[ char, "95%",  group]
-._max = descrStatistic[ char, "Max",  group]
+al = descr.all(data,format = "$MEAN")
+
+str(al)
 
 
-View(data$data)
+export.res(al, file = "ds")
+
+View(morphoMockup$data)
 
 dd = delete.taxon(data, "hybr")
 
