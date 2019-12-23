@@ -30,7 +30,7 @@ export.res <- function(object, ...) {
 
 #' @describeIn export.res function for exporting 'data.frame' objects
 #' @export
-export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t") {
+  export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t") {
 
   if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = F)
 
