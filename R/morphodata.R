@@ -11,7 +11,6 @@ morphodata <- function(indata) {
     "Population" = as.factor(indata$Population),
     "Taxon" = as.factor(indata$Taxon),
     "data" = as.data.frame(indata[,-(1:3)],  row.names = as.character(indata$ID))
-    #, row.names = indata$ID
   )
 
   #testuj ci tam nie je nejaky nezmysel .. slovo v cislach etc   .  cislo ako pop?

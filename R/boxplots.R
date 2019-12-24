@@ -11,7 +11,7 @@
 #' @param folderName the name of folder, where to save produces boxplot
 #' @param ... 	further arguments to be passed to boxplot or bxp {graphics}.
 #'
-#' @details These functions are wrappers above classicla R boxplot {graphics} function, allowin users to extend whiskers
+#' @details These functions are wrappers above classicla R boxplot {graphics} function, allowin user to extend whiskers
 #'  to desired percentiles. By default, the  whiskers are extended to the 5\% and 95\% percentiles, because the trimmed range
 #'  (without the most extreme 10% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle define 25th and 75th
 #'  percentiles, bold horizontal line show median.
@@ -46,7 +46,7 @@ boxplot.character <- function(object, character, outline = TRUE, lowerWhisker = 
 #' boxplot.all(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
 #'
 #' @export
-boxplot.all=function(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...)
+boxplot.all <- function(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...)
 {
   checkMorphodataClass(object)
 
