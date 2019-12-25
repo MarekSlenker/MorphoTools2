@@ -10,7 +10,7 @@ devtools::document()
 
 
 
-options(warn=1)
+Boptions(warn=1)
 
 usethis::use_r("newMorphodata")
 

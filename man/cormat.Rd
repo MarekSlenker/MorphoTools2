@@ -25,11 +25,11 @@ object of class 'data.frame'
 cormat calculates the matrix of the correlation coefficients of the characters.
 }
 \details{
-This function return table with pairwise correlation coefficients for each pair of
+This functions return table with pairwise correlation coefficients for each pair of
 morphological characters. The results are formatted as data frames to allow export with the export.res function.
 
-Significance tests are not performed, as they are usually unnecessary for morphometric analysis.
-If significance tests are needed, they can be computed using the cormat.signifTest() function
+Significance tests are usually unnecessary for morphometric analysis. Anyway,
+if tests are needed, they can be computed using the cormat.signifTest() function.
 }
 \examples{
 correlations.p = cormat(myMorphodata, method="pearson")
