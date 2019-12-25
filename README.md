@@ -34,3 +34,17 @@ allowin user to extend whiskers to desired percentiles
 boxplot.character()
 boxplot.all()
 ```
+
+### Population means
+```
+popul.otu()
+```
+
+### Distribution of characters, transformations
+zatial neimplementovane
+
+### Correlations of characters
+
+
+
+
