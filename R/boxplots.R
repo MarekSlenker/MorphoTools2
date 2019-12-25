@@ -28,8 +28,6 @@ boxplot.character <- function(object, character, outline = TRUE, lowerWhisker = 
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = F)
 
-
-
   bxPlot = makeMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
   bxp(bxPlot, boxfill = col, outline = outline, ...)

@@ -1,6 +1,13 @@
 
-data = read.morphodata("./tests/testFiles/sample.txt")
-data = read.delim("./tests/testFiles/sample.txt")
+object = read.morphodata("./tests/testFiles/sample.txt")
+dtFrame = read.delim("./tests/testFiles/sample.txt")
+
+rm(popul.otu)
+
+populs_MK = popul.otu(morfoData)
+pops_kouta = popul.otu_KOUTA(dtFrame)
+
+View(populs_MK$data)
 
 data = read.morphodata("./tests/testFiles/sample_Na_celyZnak.txt")
 
@@ -23,7 +30,6 @@ str(al)
 
 export.res(al, file = "ds")
 
-View(morphoMockup$data)
 
 dd = delete.taxon(data, "hybr")
 

@@ -23,7 +23,7 @@ popul.otu <- function(object) {
 
   populData = aggregate(object$data, by =  list( object$Taxon, object$Population), mean, na.rm=TRUE)
 
-  dt = data.frame("ID" = row.names(populData), "Population" = populData[,2],
+  dt = data.frame("ID" = populData[,2], "Population" = populData[,2],
                   "Taxon" = populData[,1], populData[ ,-c(1:2)])
 
   return(morphodata(dt))
