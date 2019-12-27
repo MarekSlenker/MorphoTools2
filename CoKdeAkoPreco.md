@@ -33,3 +33,38 @@ genericka gunkcia, rekapitulacia struktury dat
 2. vyratam priemry pre populaciu (sapply)
 3. skontrolujem ci boly priemery vyratane. ak je pre nejaky znak cela populacia NA, priemer bude NA. Toto reportujem ako Warning. Ak tam ostanu NA, spradne to dalej, napr v PCA.
 
+
+# export.res
+genericka funkcia, na export vsetkych typov dat sa bude pouzivat export.res(). 
+```
+export.res.morphodata()
+export.res.data.frame()
+```
+
+# Descriptive statistics
+
+### descr.tax
+### descr.pop
+### descr.all 
+
+1. skontrolujem ci objekt je typu 'morphodata'
+2. interne volam descrByGroup(object, column). metoda vyrata descr. stat. podla definovaneho stlpca (Taxon, Population, alebo all (implementovane tak, ze do dat vlozim este jeden stlpec (all) rovnaky pre vsetky polozky = vyrata descr. stat. pre cely dataset))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
