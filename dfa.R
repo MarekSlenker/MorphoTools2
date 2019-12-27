@@ -1,19 +1,22 @@
 checkMorphodataClass(object)
+
+
 object = read.morphodata("./tests/testFiles/sample.txt")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
 
 rm(popul.otu)
 
-populs_MK = popul.otu(object)
+populs_MK2 = popul.otu(object)
 
 plot(clust(populs_MK))
 
+export.res(object, file = "sa")
 
 objNa = MorphoTools::na.meanSubst(object)
 
 objNa = delete.population(object = objNa, populationName = c("LIP", "PREL"))
 
-pca = prcomp(objNa$data)
+pca = prcomp(object$data)
 
 summary(pca)
 

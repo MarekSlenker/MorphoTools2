@@ -6,13 +6,13 @@
 #'
 #' @param object an object of class 'morphodata'.
 #'
-#' @details Generally, most of the multivariate analyses require a full data matrix.
-#' The preferred approach is to reduce the data set to complete observations only (i.e. perform the casewise deletion of
+#' @details
+#'
 #'
 #' @return object of class 'prcomp'
 #'
 #' @examples
-#' myCompleteDataset = na.meansubst(initialdataset)
+#'
 
 #' @export
 pca.calc <- function(object) {

@@ -25,7 +25,8 @@ export.res <- function(object, ...) {
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
-  write.table(objToWrite, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
+  export.res(objToWrite ,file = file, dec = dec, sep = sep)
+  #write.table(objToWrite, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
 }
 
 #' @describeIn export.res function for exporting 'data.frame' objects

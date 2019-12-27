@@ -23,5 +23,5 @@ delete.taxon <- function(object, taxonName) {
     if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist"), call. = F)
   }
 
-  return(removeColumn(object, "Taxon", taxonName))
+  return(removeByColumn(object, "Taxon", taxonName))
 }

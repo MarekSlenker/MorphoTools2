@@ -23,5 +23,5 @@ delete.population <- function(object, populationName) {
     if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist"), call. = F)
   }
 
-  return(removeColumn(object, "Population", populationName))
+  return(removeByColumn(object, "Population", populationName))
 }

@@ -4,7 +4,7 @@
 # @param column column where to look for groupName
 # @param groupName name of particular Population or Taxon, which should be removed
 
-removeColumn <- function(object, column, groupName) {
+removeByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 
   # groupName moze byt i viac
