@@ -91,7 +91,9 @@ UPGMA; Ward’s; complete linkage - okrm tohto su pre hclust validne aj ine vstu
 # Principal component analysis
 # pca.calc
 uzivatelovi nevyhadzujem datas s NA bez jeho vedomia. Radsej nech to spadne s chybovou hlaskou a uzivatel nech si to vyriesi podla lubovôle.
+
 vrati objekt triedy ________
+
 tento objekt ma vsebe vsetky potrebne data, nie len to co je v prcomp
 
 
