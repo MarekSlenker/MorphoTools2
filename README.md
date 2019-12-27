@@ -28,6 +28,13 @@ export.res.morphodata()
 export.res.data.frame()
 ```
 
+### Descriptive statistics
+```
+descr.tax(object, format)
+descr.pop(object, format)
+descr.all(object, format
+```
+
 ### Box Plots
 allowin user to extend whiskers to desired percentiles
 ```
