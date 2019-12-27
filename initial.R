@@ -5,12 +5,14 @@ library(roxygen2)
 
 devtools::load_all()
 
+devtools::install()
+
 devtools::document()
 
+BiocManager::install("prcomp")
 
 
-
-Boptions(warn=1)
+sBoptions(warn=1)
 
 usethis::use_r("newMorphodata")
 

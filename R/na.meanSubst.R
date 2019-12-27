@@ -38,6 +38,10 @@ na.meanSubst <- function(object){
   for (pop in populs) {
     popPositions = which( object$Population %in% pop)
     object$data[popPositions,] = sapply(object$data[popPositions,],meansubst)
+
+    if (any(is.na(object$data[popPositions,])))
+      warning("unable to replace some NA in population ", pop,
+              ". Probably all values for that characters are NA.", call. = FALSE)
   }
   return(object)
 }

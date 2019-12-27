@@ -1,13 +1,36 @@
-
+checkMorphodataClass(object)
 object = read.morphodata("./tests/testFiles/sample.txt")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
 
 rm(popul.otu)
 
-populs_MK = popul.otu(morfoData)
+populs_MK = popul.otu(object)
+
+plot(clust(populs_MK))
+
+
+objNa = MorphoTools::na.meanSubst(object)
+
+objNa = delete.population(object = objNa, populationName = c("LIP", "PREL"))
+
+pca = prcomp(objNa$data)
+
+summary(pca)
+
+str(pp)
+
+str(pca)
+
+methods(summary, "prcomp")
+
+pop = "LIP"
+
+
+
+
 pops_kouta = popul.otu_KOUTA(dtFrame)
 
-View(populs_MK$data)
+View(objNa$data)
 
 data = read.morphodata("./tests/testFiles/sample_Na_celyZnak.txt")
 
