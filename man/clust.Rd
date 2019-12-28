@@ -37,10 +37,8 @@ the other methods are rarely used in morphometric analyses.
 Dendrograms are produced using plot function.
 }
 \examples{
-correlations.p = cormat(myMorphodata, method="pearson")
-correlations.s = cormat(myMorphodata, method="spearman")
+clustering.UPGMA = clust(data, method = "average")
 
-export.res(correlations.p, file="correlations.pearson.txt")
-export.res(correlations.s, file="correlations.spearman.txt")
+plot(clustering.UPGMA, cex=0.6, cex.lab=0.8, frame.plot=T, hang=-0.1, main="", xlab="", ylab="distance")
 
 }
