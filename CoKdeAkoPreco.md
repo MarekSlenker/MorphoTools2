@@ -85,7 +85,7 @@ klasika. v popise v metode spominam okrem Pearson a Spearman aj Kendall, nakolko
 cormat + significance tests. output je rovnaky, akurat rozsireny o p-value.
 
 ## Cluster analysis
-### clust
+### clust
 UPGMA; Ward’s; complete linkage - okrm tohto su pre hclust validne aj ine vstupy. uvadzam v dokumentacia. ak ich nechceme, treba to osetrit
 
 ## Principal component analysis
