@@ -19,7 +19,7 @@
 #'
 #' @export
 popul.otu <- function(object) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   populData = aggregate(object$data, by =  list( object$Taxon, object$Population), mean, na.rm=TRUE)
 

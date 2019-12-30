@@ -16,7 +16,7 @@
 #' @export
 
 delete.population <- function(object, populationName) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # skontroluj ci object ma popname
   for (pop in populationName) {

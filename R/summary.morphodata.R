@@ -16,7 +16,7 @@
 summary.morphodata <- function(object) {
 
   #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # cat summary
 

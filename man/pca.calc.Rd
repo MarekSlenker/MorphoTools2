@@ -12,17 +12,13 @@ pca.calc(object)
 \value{
 object of class 'pcadata' containing the following components:
 
-  \item{price}{price in US dollars (\$326--\$18,823)}
-  \item{carat}{weight of the diamond (0.2--5.01)}
-  \item{cut}{quality of the cut (Fair, Good, Very Good, Premium, Ideal)}
-  \item{color}{diamond colour, from D (best) to J (worst)}
-  \item{clarity}{a measurement of how clear the diamond is (I1 (worst), SI2,
-    SI1, VS2, VS1, VVS2, VVS1, IF (best))}
-  \item{x}{length in mm (0--10.74)}
-  \item{y}{width in mm (0--58.9)}
-  \item{z}{depth in mm (0--31.8)}
-  \item{depth}{total depth percentage = z / mean(x, y) = 2 * z / (x + y) (43--79)}
-  \item{table}{width of top of diamond relative to widest point (43--95)}
+\item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
+\item{scores}{ordination scores of cases (objects, OTUs), centred and scaled. }
+\item{center, scale}{the centering and scaling used, or FALSE.}
+\item{eigenVectors}{matrix of eigenvectors (i.e., a matrix of variable loadings).}
+\item{eigenValues}{eigenvalues of principal components.}
+\item{axesVariance}{eigenvalues as percent. }
+\item{cumulativeAxesVariance}{cumulative percentage of eigenvalues. }
 }
 \description{
 This function performs principal component analysis.
@@ -30,30 +26,6 @@ This function performs principal component analysis.
 \details{
 
 }
-\section{Fields}{
-
-\describe{
-\item{\code{sdev}}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues of
-the covariance/correlation matrix, though the calculation is actually done with the singular values of the
- data matrix).
-
- eigenVectors the matrix of variable loadings (i.e., a matrix whose columns contain the eigenvectors).
-The function princomp returns this in the element loadings.
-
- x if retx is true the value of the rotated data (the centred (and scaled if requested)
-data multiplied by the rotation matrix) is returned. Hence, cov(x) is the diagonal matrix diag(sdev^2).
-For the formula method, napredict() is applied to handle the treatment of values omitted by the na.action.
-
- center, scale the centering and scaling used, or FALSE.
-## \tabular{ccccc}{
-##   21.0 \tab 6 \tab 160 \tab 110 \tab 3.90\cr
-##   21.0 \tab 6 \tab 160 \tab 110 \tab 3.90\cr
-##   22.8 \tab 4 \tab 108 \tab  93 \tab 3.85\cr
-##   21.4 \tab 6 \tab 258 \tab 110 \tab 3.08\cr
-##   18.7 \tab 8 \tab 360 \tab 175 \tab 3.15
-## }}
-}}
-
 \examples{
-
+pca.calc(myMorphoData)
 }

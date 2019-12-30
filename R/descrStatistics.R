@@ -23,7 +23,7 @@
 #' descr.tax(object, format = "($MEAN ± $SD)")
 #' @export
 descr.tax <- function(object, format = NULL) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # calculate descr stat
   descrStatistic = descrByGroup(object, "Taxon")

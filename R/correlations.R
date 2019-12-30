@@ -25,7 +25,7 @@
 #'
 #' @export
 cormat <- function (object, method = "pearson") {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   corelations = cor(object$data, use="pairwise.complete.obs", method = method)
   corelations = round(corelations, digits = 3)

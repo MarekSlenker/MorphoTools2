@@ -23,7 +23,7 @@
 #' @export
 
 na.meanSubst <- function(object){
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
    meansubst<-function(x){
       m<-mean(x,na.rm=T)

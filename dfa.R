@@ -1,8 +1,32 @@
 checkMorphodataClass(object)
 
 
-object = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
+data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
+data = read.morphodata("clipboard")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
+
+object = data
+data = object
+
+rm(pch)
+
+object = pca.calc(data)
+
+
+plot(object, pch = c(19, 11, 8), col = c("black", "red", "yellow", "green"), cex = 0.8, xlab = "ds")
+
+plot(object)
+
+
+labels(object, cex = 0.8, pos = 3)
+
+vector = object$objects$Taxon
+
+col = c("green", "red")
+
+plot(x = object$scores[ ,axes[1]], y = object$scores[ ,axes[2]], xlab = xlab, ylab = ylab)
+
+
 
 rm(popul.otu)
 

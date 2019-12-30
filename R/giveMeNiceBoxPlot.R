@@ -1,6 +1,6 @@
 # internal
 
-makeMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
+giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   # vyrataj klasicky bxplot
   bxPlot = boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = F)
 

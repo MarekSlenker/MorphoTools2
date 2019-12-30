@@ -16,7 +16,7 @@
 #' @export
 
 delete.charecter <- function(object, charecter) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # check existence of CH
   for (ch in charecter) {

@@ -24,11 +24,11 @@
 #'
 #' @export
 boxplot.character <- function(object, character, outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = F)
 
-  bxPlot = makeMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
+  bxPlot = giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
   bxp(bxPlot, boxfill = col, outline = outline, ...)
 }
@@ -57,7 +57,7 @@ boxplot.all <- function(object, folderName = "boxplots", outline = TRUE, lowerWh
   for (char in colnames(object$data))
   {
 
-    bxPlot = makeMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
+    bxPlot = giveMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
     jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ))
 

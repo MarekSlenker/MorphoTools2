@@ -21,7 +21,7 @@ export.res <- function(object, ...) {
 #' @describeIn export.res function for exporting 'morphodata' objects
 #' @export
   export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t") {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 

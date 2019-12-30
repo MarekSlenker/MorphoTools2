@@ -31,6 +31,8 @@
 #'
 #' @export
 clust <- function(object, method = "average") {
+  checkClass(object, "morphodata")
+
   object$data = scale(object$data)
   distances = dist(object$data, method = "euclidean")
 

@@ -16,7 +16,7 @@
 #' @export
 
 delete.taxon <- function(object, taxonName) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # skontroluj ci object ma taxName
   for (tax in taxonName) {
