@@ -3,11 +3,6 @@
 # vector aj symbols su oba vektory. hodnoty vo vektore nahradi postupne symbolmi.
 # ak je symbolov menej, tak ich zrecykluje, ak ich je viace, kasle na ne
 
-vector = object$objects$Taxon
-symbols = c("black", "red", "green", "yellow")
-levels(vector)
-level = "ph"
-
 setValuesForVector <- function(vector, symbols) {
 
   levels = levels(vector)
