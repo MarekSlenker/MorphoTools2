@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' pcaResult = pca.calc(myMorphoData)
-
+#'
 #' @export
 pca.calc <- function(object) {
   checkClass(object, "morphodata")

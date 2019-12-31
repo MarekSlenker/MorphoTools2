@@ -9,7 +9,7 @@
 #' @param lowerWhisker percentile, to which the lower whisker is extended
 #' @param upperWhisker percentile, to which the upper whisker is extended
 #' @param folderName the name of folder, where to save produces boxplot
-#' @param ... 	further arguments to be passed to boxplot or bxp {graphics}.
+#' @param ... 	further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}} {graphics}.
 #'
 #' @details These functions are wrappers above classicla R boxplot {graphics} function, allowin user to extend whiskers
 #'  to desired percentiles. By default, the  whiskers are extended to the 5\% and 95\% percentiles, because the trimmed range

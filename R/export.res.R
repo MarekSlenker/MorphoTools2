@@ -20,7 +20,7 @@ export.res <- function(object, ...) {
 
 #' @describeIn export.res function for exporting 'morphodata' objects
 #' @export
-  export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t") {
+export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t") {
   checkClass(object, "morphodata")
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
@@ -31,7 +31,7 @@ export.res <- function(object, ...) {
 
 #' @describeIn export.res function for exporting 'data.frame' objects
 #' @export
-  export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t") {
+export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t") {
 
   if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = F)
 

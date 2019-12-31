@@ -1,16 +1,24 @@
-
 #' @rdname pca.calc
 #' @usage
 #' ## S3 method for class 'pcadata'
 #' plot(pcaResult, axes = c(1,2), pch = 16, col = "black", ...)
 #'
+#' ## S3 method for class 'pcadata'
+#' plot.labels(pcaResult, axes = c(1,2), ...)
+#'
 #' @param pcaResult object of class 'pcadata'
+#' @param axes x, y axes of plot
+#' @param pch a vector of plotting characters or symbols: see \code{\link{points}}.
+#' @param col the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.
+#' @param ... further arguments to be passed to \code{\link{plot.default}}, \code{\link{text}} or other graphical parameters in \code{\link{par}}.
 #'
 #' @examples
+#' plot(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange")
+#' plot(pcaRes, main = "My PCA plot", frame.plot = F, cex = 0.8)
 #'
+#' plot.labels(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
 #'
 #' @export
-
 plot.pcadata <- function(object, axes = c(1,2), xlab = NULL, ylab = NULL,
                          pch = 16, col = "black", ...) {
   checkClass(object, "pcadata")

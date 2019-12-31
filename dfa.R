@@ -10,8 +10,16 @@ data = object
 
 pcaRes = pca.calc(data)
 
-plot(pcaRes, axes = c(1,36))
+plot(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange")
 
+plot.labels(pcaRes)
+plot.labels(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
+
+s3_dispatch(plot.labels)
+
+#########################x
+   LABELS   generic???
+################x
 length(pcaRes$eigenValues)
 
 object = pca.calc(data)

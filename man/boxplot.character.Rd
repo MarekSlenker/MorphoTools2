@@ -18,7 +18,7 @@ boxplot.all(object, folderName = "boxplots", ...)
 
 \item{upperWhisker}{percentile, to which the upper whisker is extended}
 
-\item{...}{further arguments to be passed to boxplot or bxp {graphics}.}
+\item{...}{further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}} {graphics}.}
 
 \item{folderName}{the name of folder, where to save produces boxplot}
 }
