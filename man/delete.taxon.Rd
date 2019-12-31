@@ -10,7 +10,7 @@ delete.taxon(object, taxonName)
 
 delete.population(object, populationName)
 
-delete.charecter(object, charecter)
+delete.charecter(object, charecterName)
 }
 \arguments{
 \item{object}{an object of class 'morphodata'.}

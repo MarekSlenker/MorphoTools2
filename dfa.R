@@ -8,7 +8,11 @@ dtFrame = read.delim("./tests/testFiles/sample.txt")
 object = morphoMockup
 data = object
 
-rm(pch)
+pcaRes = pca.calc(data)
+
+plot(pcaRes, axes = c(1,36))
+
+length(pcaRes$eigenValues)
 
 object = pca.calc(data)
 

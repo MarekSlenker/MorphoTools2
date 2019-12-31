@@ -63,6 +63,7 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
 
       table[row, col] = paste( round(cc$estimate, digits = 3), "; p-value = ", round(cc$p.value, digits = 3), sep = "" )
     }
+  }
 
     corelations = data.frame(table)
 
@@ -72,5 +73,7 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
     if (method=="kendall") names(corelations)[1]<-"Kendall"
 
     return(corelations)
-  }
+
+
+
 }
