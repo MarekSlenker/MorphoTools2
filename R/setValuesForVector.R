@@ -5,7 +5,7 @@
 
 setValuesForVector <- function(vector, symbols) {
 
-  levels = levels(vector)
+  levels = levels(as.factor(vector))
 
   for (level in levels) {
 

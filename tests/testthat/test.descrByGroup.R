@@ -1,14 +1,15 @@
 context("descrByGroup")
 
-morphoMockup = list("ID" = factor(x = c(1,2,3,4,5,6,7,8)),
-                    "Population" = factor(x = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4")),
-                    "Taxon" = factor(x = c("TaxA", "TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB", "TaxB")),
-                    "all" = factor(x = c("all", "all", "all", "all", "all", "all", "all", "all")),
-                    "data" = data.frame(
-                      "Ch1" = 1:8,
-                      "Ch2" = 11:18))
+morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
+                             "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
+                             "Taxon" = c("TaxA", "TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB", "TaxB"),
+                             "data" = data.frame(
+                               "Ch1" = 1:8,
+                               "Ch2" = 11:18))
 
+morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
+morphoMockup$all = as.factor( rep("all", length(morphoMockup$Taxon)))
 
 
 test_that("checking accuracy of computation for level Taxon",  {
@@ -28,6 +29,7 @@ test_that("checking accuracy of computation for level Population",  {
 })
 
 test_that("checking accuracy of computation for level All",  {
+
   result = descrByGroup(morphoMockup, "all")
 
   expect_match(paste(result[,,"all"][1,], collapse = ", "), "8, 4.5, 2.449, 1, 1.35, 2.75, 4.5, 6.25, 7.65, 8")

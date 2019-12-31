@@ -5,7 +5,7 @@ data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 data = read.morphodata("clipboard")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
 
-object = data
+object = morphoMockup
 data = object
 
 rm(pch)
