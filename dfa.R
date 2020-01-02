@@ -5,14 +5,29 @@ data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 data = read.morphodata("clipboard")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
 
-object = morphoMockup
+object = pcaRes
 data = object
+
+pops = popul.otu(data)
 
 pcaRes = pca.calc(data)
 
-plot(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange")
+pcaRes = pca.calc(pops)
 
-plot.labels(pcaRes)
+warnings()
+
+plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2)
+
+legend("topleft", legend = levels(pcaRes$eigenVectors))
+
+
+labels.points(pcaRes)
+
+unique(pcaRes$objects$Taxon)
+
+
+
+
 plot.labels(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
 
 s3_dispatch(plot.labels)

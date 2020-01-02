@@ -5,32 +5,33 @@
 #'
 #' @description This is a generic function for drawing labels to the data points.
 #'
-#' @usage plot.labels(result, axes = c(1,2), ...)
+#' @usage labels.points(result, axes = c(1,2), ...)
+#' @usage labels.characters(result, axes = c(1,2), ...)
 #'
 #' @param result 	an results previously ploted.
 #' @param axes x, y axes of plot
 #' @param ... further arguments to be passed to \code{\link{text}} or other graphical parameters in \code{\link{par}}.
 #'
 #' @export
-plot.labels <- function(object, ...) {
-  UseMethod("plot.labels")
+labels.points <- function(object, ...) {
+  UseMethod("labels.points")
 }
 
 
 #' @rdname pca.calc
 #' @usage NULL
-#' @method plot.labels pcadata
+#' @method labels.points pcadata
 #' @export
-plot.labels.pcadata <- function(object, axes = c(1,2), ...) {
-  # suitable for "pcadata" or "cdadata", as both stores XY coordinates in $scores
-  checkClass(data, "pcadata")
+labels.points.pcadata <- function(object, axes = c(1,2), ...) {
+  checkClass(object, "pcadata")
 
-  plot.labels.internal(object, axes, ...)
+  labels.points.internal(object, axes, ...)
 
 }
 
 
-plot.labels.internal <- function(object, axes, ...) {
+# suitable for "pcadata" or "cdadata", as both stores XY coordinates in $scores
+labels.points.internal <- function(object, axes, ...) {
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
   if (max(axes) > length(object$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(object$eigenValues), " axes.", sep = "" ), call. = F)

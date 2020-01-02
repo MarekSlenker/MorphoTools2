@@ -5,11 +5,11 @@
 
 setValuesForVector <- function(vector, symbols) {
 
-  levels = levels(as.factor(vector))
+  uniques = unique(vector)
 
-  for (level in levels) {
+  for (uniq in uniques) {
 
-    levelPos = which( levels %in% level )
+    levelPos = which( uniques %in% uniq )
 
     while (levelPos > length(symbols)) {
 
@@ -17,11 +17,11 @@ setValuesForVector <- function(vector, symbols) {
       levelPos = levelPos - length(symbols)
     }
 
-    #symbolsPositions = which( object$objects$Taxon %in% level)
-    #vector[symbolsPositions == level] = symbols[levelPos]
+    #symbolsPositions = which( object$objects$Taxon %in% uniq)
+    #vector[symbolsPositions == uniq] = symbols[levelPos]
 
     vector = as.character(vector)
-    vector[vector == level] = symbols[levelPos]
+    vector[vector == uniq] = symbols[levelPos]
     vector = as.factor(vector)
   }
 

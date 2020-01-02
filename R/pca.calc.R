@@ -14,7 +14,7 @@
 #' \item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
 #' \item{center, scale}{the centering and scaling used, or FALSE.}
 #' \item{objects}{containing ID, Population, Taxon, and ordination scores of cases (objects, OTUs), centred and scaled.}
-#' \item{eigenVectors}{matrix of eigenvectors (i.e., a matrix of variable loadings).}
+#' \item{eigenVectors}{matrix of eigenvectors (i.e., a matrix of characters loadings).}
 #' \item{eigenValues}{eigenvalues of principal components.}
 #' \item{axesVariance}{eigenvalues as percent. }
 #' \item{cumulativeAxesVariance}{cumulative percentage of eigenvalues. }
