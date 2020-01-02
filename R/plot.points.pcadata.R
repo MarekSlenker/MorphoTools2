@@ -5,10 +5,9 @@
 #'
 #' @description A generic function for ploting ordination scores stored in 'pcadata' and 'cdadata' objects.
 #'
-#' @usage plot.points(object, axes = c(1,2), ...)
+#' @usage plot.points(object, ...)
 #'
 #' @param object object of class 'pcadata' or 'cdadata'.
-#' @param axes x, y axes of plot
 #' @param ... further arguments passed to or from other methods.
 #' @export
 plot.points <- function(object, ...) {
@@ -24,14 +23,17 @@ plot.points <- function(object, ...) {
 #' ## S3 method for class 'pcadata'
 #' labels.points(pcaResult, axes = c(1,2), ...)
 #'
-#' @param pcaResult object of class 'pcadata'
-#' @param axes x, y axes of plot
+#' @param pcaResult object of class 'pcadata'.
+#' @param axes x, y axes of plot.
 #' @param pch a vector of plotting characters or symbols: see \code{\link{points}}.
 #' @param col the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.
+#' @param legend logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{legend}} directly.
+#' @param legend.pos the x and y co-ordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.
+#' @param ncol the number of columns in which to set the legend items (default is 1, a vertical legend).
 #' @param ... further arguments to be passed to \code{\link{plot.default}}, \code{\link{text}} or other graphical parameters in \code{\link{par}}.
 #'
 #' @examples
-#' plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange")
+#' plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2)
 #' plot.points(pcaRes, main = "My PCA plot", frame.plot = F, cex = 0.8)
 #'
 #' labels.points(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
@@ -70,11 +72,11 @@ plot.points.pcadata <- function(object, axes = c(1,2), xlab = NULL, ylab = NULL,
                                         legend = unique(pcaRes$objects$Taxon),
                                         pch = unique(object$pch),
                                         col = unique(object$col),
-                                        bty="o", pt.bg = bg, ncol = ncol, ...)
+                                        bty="o", pt.bg = bg, ncol = ncol)
     else legend(legend.pos[1], legend.pos[2], legend = unique(pcaRes$objects$Taxon),
                 pch = unique(object$pch),
                 col = unique(object$col),
-                bty="o", pt.bg = bg, ncol = ncol, ...)}
+                bty="o", pt.bg = bg, ncol = ncol)}
 
 
 }

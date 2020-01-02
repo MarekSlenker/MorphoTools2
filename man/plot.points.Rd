@@ -4,14 +4,12 @@
 \alias{plot.points}
 \title{The default scatterplot function}
 \usage{
-plot.points(object, axes = c(1,2), ...)
+plot.points(object, ...)
 }
 \arguments{
 \item{object}{object of class 'pcadata' or 'cdadata'.}
 
 \item{...}{further arguments passed to or from other methods.}
-
-\item{axes}{x, y axes of plot}
 }
 \description{
 A generic function for ploting ordination scores stored in 'pcadata' and 'cdadata' objects.

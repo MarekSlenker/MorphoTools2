@@ -18,7 +18,7 @@ labels.points(pcaResult, axes = c(1,2), ...)
 \arguments{
 \item{object}{an object of class 'morphodata'.}
 
-\item{axes}{x, y axes of plot}
+\item{axes}{x, y axes of plot.}
 
 \item{...}{further arguments to be passed to \code{\link{plot.default}}, \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
 
@@ -26,7 +26,13 @@ labels.points(pcaResult, axes = c(1,2), ...)
 
 \item{col}{the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
 
-\item{pcaResult}{object of class 'pcadata'}
+\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{legend}} directly.}
+
+\item{legend.pos}{the x and y co-ordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
+
+\item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
+
+\item{pcaResult}{object of class 'pcadata'.}
 }
 \value{
 object of class 'pcadata' containing the following components:
@@ -48,7 +54,7 @@ This function performs principal component analysis.
 \examples{
 pcaResult = pca.calc(myMorphoData)
 
-plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange")
+plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2)
 plot.points(pcaRes, main = "My PCA plot", frame.plot = F, cex = 0.8)
 
 labels.points(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
