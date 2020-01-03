@@ -91,12 +91,21 @@ UPGMA; Ward’s; complete linkage - okrm tohto su pre hclust validne aj ine vstu
 ## Principal component analysis
 #### pca.calc
 uzivatelovi nevyhadzujem datas s NA bez jeho vedomia. Radsej nech to spadne s chybovou hlaskou a uzivatel nech si to vyriesi podla lubovôle.  
-vrati objekt triedy ________  
+vrati objekt triedy pcadata  
 tento objekt ma vsebe vsetky potrebne data, nie len to co je v prcomp
+nepodporujem pasivne premiestanie objektov, ako to bolo mozne v Koutecky 2014. V PCA toto nema zmysel, nakolko su vsetky objekty vykreslene bez informacie o ich prislusnosti a zobrazuje to len variabilitu v celom subore. 
 
 
+plot.points(pcadata) vykresli scatterplot of objects. Genericka metoda, rovnaka metoda vykresli scatterplot aj pre CDA
+labels.points(pcadata) vykrelsli labels k bodom; genericka metoda
 
+plot.characters(pcadata) - vykresli scatterplot of characters
+labels.characters(pcadata) - vykrelsli labels ku znakom
 
+plot.legend(pcadata) vykresli legendu k obrazku, genericka metoda 
 
+genericke metody - nie ze by to bolo nutne, je to vsak potrebne pre to aby tato niektore metody mohli byt pomenovane tak ako su. keby plot.legend nebola sama genericka, tak by ju R chapalo ako genericku metodu k plot(). rovnaky pripad je labels.points a labels.characters. keby sami neboli genericke, R by ich chapalo ako gener voci metode labels()
+
+metody labels.points() a plot.legend() su len genericke wrapery pre metody labels.points.internal() a plot.legend.internal(). objekty "pcares" a "cdares" maju ~ rovnaku vnutornu strukturu. data potrebne pre vykreslovanie su ulozene v result$objects$..
 
 
