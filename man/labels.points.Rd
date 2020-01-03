@@ -9,9 +9,9 @@ labels.points(result, axes = c(1,2), ...)
 labels.characters(result, axes = c(1,2), ...)
 }
 \arguments{
-\item{...}{further arguments to be passed to \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
-
 \item{result}{an results previously ploted.}
+
+\item{...}{further arguments to be passed to \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
 
 \item{axes}{x, y axes of plot}
 }

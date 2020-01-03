@@ -16,23 +16,23 @@ plot.points(pcaResult, axes = c(1,2), pch = 16, col = "black", ...)
 labels.points(pcaResult, axes = c(1,2), ...)
 }
 \arguments{
-\item{object}{an object of class 'morphodata'.}
-
 \item{axes}{x, y axes of plot.}
 
 \item{...}{further arguments to be passed to \code{\link{plot.default}}, \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
+
+\item{object}{an object of class 'morphodata'.}
+
+\item{pcaResult}{object of class 'pcadata'.}
 
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
 
 \item{col}{the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
 
-\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{legend}} directly.}
+\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plot.legend}} directly.}
 
 \item{legend.pos}{the x and y co-ordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
 
 \item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
-
-\item{pcaResult}{object of class 'pcadata'.}
 }
 \value{
 object of class 'pcadata' containing the following components:

@@ -16,7 +16,19 @@ pcaRes = pca.calc(pops)
 
 warnings()
 
+plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21),
+            bg = "orange",
+            cex = 1,
+            legend = F, legend.pos = "bottomright")
+
+
+plot.legend(pcaRes, col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21))
+
+
+plot.points(pcaRes, axes = c(1,2),  bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2, cex = 2)
+
 plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2)
+
 
 legend("topleft", legend = levels(pcaRes$eigenVectors))
 
@@ -25,8 +37,11 @@ labels.points(pcaRes)
 
 unique(pcaRes$objects$Taxon)
 
+uniq = "ps"
 
+vector = pcaRes$objects$Taxon
 
+symbols = col
 
 plot.labels(pcaRes, axes = c(1,2), cex = 0.8, col = "red", pos = 4, offset = 0.4)
 
