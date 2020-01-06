@@ -22,18 +22,22 @@ plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch =
             legend = F, legend.pos = "bottomright")
 
 
-plot.legend(pcaRes, col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21))
+plot.points(pcaRes, col = c("#E41A1C","#0000FF","#00FF00","#AFA900")
+            )
 
+pcaResult = pcaRes
 
 plot.points(pcaRes, axes = c(1,2),  bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2, cex = 2)
 
 plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), bg = "orange", legend = T, legend.pos = "bottomright", ncol = 2)
 
 
+plot.characters(pcaRes)
+
 legend("topleft", legend = levels(pcaRes$eigenVectors))
 
 
-labels.points(pcaRes)
+labels.points(pcaRes
 
 unique(pcaRes$objects$Taxon)
 
