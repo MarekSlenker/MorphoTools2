@@ -1,3 +1,12 @@
+#' @export
+boxplot.character <- function(object, ...) {
+  UseMethod("boxplot.character")
+}
+#' @export
+boxplot.all <- function(object, ...) {
+  UseMethod("boxplot.all")
+}
+
 #' Box Plots
 #'
 #' @description These functions produce box-and-whisker plot(s) of the given morphological characters.
@@ -16,14 +25,20 @@
 #'  (without the most extreme 10% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle define 25th and 75th
 #'  percentiles, bold horizontal line show median.
 #'
+#' @details The \strong{boxplot.all} function produce boxplot for each morphological character and save
+#'  them to folder named in folderName parameter. If it does not exist, new folder is created.
+#'
 #' @examples
 #' boxplot.character(myMorphoData, "ST", col = "grey", border = "red")
 #' boxplot.character(myMorphoData, "ST", outline = TRUE, pch = 8, lowerWhisker = 0.05, upperWhisker = 0.95)
 #' boxplot.character(myMorphoData, "ST", outline = FALSE, xlab = "Taxa", ylab = "length", main = "Total stem height (cm)")
 #' boxplot.character(myMorphoData, "ST", varwidth = T, notch = T, boxwex = 0.4, staplewex = 1.3, horizontal = T)
 #'
+#' boxplot.all(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
+#'
+#' @method boxplot.character default
 #' @export
-boxplot.character <- function(object, character, outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...) {
+boxplot.character.default <- function(object, character, outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...) {
   checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = F)
@@ -35,16 +50,9 @@ boxplot.character <- function(object, character, outline = TRUE, lowerWhisker = 
 
 
 #' @rdname boxplot.character
-#' @usage boxplot.all(object, folderName = "boxplots", ...)
-#'
-#' @details The \strong{boxplot.all} function produce boxplot for each morphological character and save
-#'  them to folder named in folderName parameter. If it does not exist, new folder is created.
-#'
-#' @examples
-#' boxplot.all(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
-#'
+#' @method boxplot.all default
 #' @export
-boxplot.all <- function(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...)
+boxplot.all.default <- function(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...)
 {
   checkClass(object, "morphodata")
 

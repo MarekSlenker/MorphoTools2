@@ -20,7 +20,7 @@ warnings()
 
 
 plot.3D(pcaRes,   col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21),  pt.bg = "white", labels = T, cex = 2,
-        phi = 10, theta = 110, cex = 1.3, bg.col = "orange", legend = T)
+        phi = 10, theta = 110, cex = 1.3, bg.col = "wheat", legend = T)
 
 text3D(x = rep(1, 4),   y = 1:4, z = rep(0, 4),
        labels  = colnames(VADeaths),

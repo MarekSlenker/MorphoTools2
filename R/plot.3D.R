@@ -30,7 +30,7 @@ plot.3D <- function(object, ...) {
 #' @method plot.3D pcadata
 #' @export
 plot.3D.pcadata <- function(pcaResult, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
-                                pch = 16, col = "white", bg.col = "white",
+                                pch = 16, col = "black", bg.col = "white",
                             phi = 10, theta = 2,
                             ticktype = "detailed", bty = "u", type = "n",
                             labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {

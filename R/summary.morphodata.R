@@ -24,6 +24,6 @@ summary.morphodata <- function(object) {
   cat(paste(" - contains ", length(levels(object$Population)), " populations\n", sep = ""))
   cat(paste(" - contains ", length(levels(object$Taxon)), " defined groups (taxa)\n", sep = ""))
   cat("\n")
-  cat(paste("* Populations: ", paste(levels(data$Population), collapse = ", "), "\n", sep = ""))
-  cat(paste("* Groups (taxa): ", paste(levels(data$Taxon), collapse = ", "), "\n", sep = ""))
+  cat(paste("* Populations: ", paste(levels(object$Population), collapse = ", "), "\n", sep = ""))
+  cat(paste("* Groups (taxa): ", paste(levels(object$Taxon), collapse = ", "), "\n", sep = ""))
 }

@@ -48,7 +48,7 @@ descr.tax <- function(object, format = NULL) {
 #' descr.pop(object, format = "$MEAN ($MIN - $MAX)")
 #' @export
 descr.pop <- function(object, format = NULL) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   # calculate descr stat
   descrStatistic = descrByGroup(object, "Population")
@@ -73,7 +73,7 @@ descr.pop <- function(object, format = NULL) {
 #' descr.all(object, format = "$MEAN ± $SD ($5% - $95%)")
 #' @export
 descr.all <- function(object, format = NULL) {
-  checkMorphodataClass(object)
+  checkClass(object, "morphodata")
 
   object$all = as.factor( rep("all", length(object$Taxon)))
 
