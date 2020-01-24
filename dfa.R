@@ -5,9 +5,11 @@ data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 data = read.morphodata("clipboard")
 dtFrame = read.delim("./tests/testFiles/sample.txt")
 
-object = pcaRes
-data = object
+plot.characters(dtFrame)
 
+      object = pcaRes
+data = object
+pcaResult = pcaRes
 pops = popul.otu(data)
 
 pcaRes = pca.calc(data)
@@ -16,14 +18,23 @@ pcaRes = pca.calc(pops)
 
 warnings()
 
+
+plot.3D(pcaRes,   col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21),  pt.bg = "white", labels = T, cex = 2,
+        phi = 10, theta = 110, cex = 1.3, bg.col = "orange", legend = T)
+
+text3D(x = rep(1, 4),   y = 1:4, z = rep(0, 4),
+       labels  = colnames(VADeaths),
+       add = TRUE, adj = 1)
+
 plot.points(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21),
             bg = "orange",
             cex = 1,
             legend = F, legend.pos = "bottomright")
 
+plot.legend(pcaRes, col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21), pt.bg = "orange")
 
-plot.points(pcaRes, col = c("#E41A1C","#0000FF","#00FF00","#AFA900")
-            )
+
+plot.points(pcaRes, col = c("#E41A1C","#0000FF","#00FF00","#AFA900"))
 
 pcaResult = pcaRes
 

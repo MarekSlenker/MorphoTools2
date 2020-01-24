@@ -7,7 +7,15 @@
 \usage{
 plot.legend(result, x = "topright", y = NULL, axes = c(1,2), pch = 16, col = "black", ...)
 
-\method{plot.legend}{pcadata}(result, x = "topright", y = NULL, pch = 16, col = "black", ...)
+\method{plot.legend}{pcadata}(
+  result,
+  x = "topright",
+  y = NULL,
+  pch = 16,
+  col = "black",
+  pt.bg = "white",
+  ...
+)
 }
 \arguments{
 \item{result}{an results previously ploted.}
@@ -19,6 +27,8 @@ plot.legend(result, x = "topright", y = NULL, axes = c(1,2), pch = 16, col = "bl
 \item{pch}{the  plotting symbols of points appearing in the legend.}
 
 \item{col}{the color of points appearing in the legend.}
+
+\item{pt.bg}{the background color for the \code{\link{points}}, corresponding to its argument bg.}
 }
 \description{
 This function can be used to add legends to plots.
