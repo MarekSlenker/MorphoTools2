@@ -2,21 +2,67 @@ checkMorphodataClass(object)
 
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
+
+data = read.morphodata("./tests/testFiles/sample.txt")
+
 data = read.morphodata("clipboard")
-dtFrame = read.delim("./tests/testFiles/sample.txt")
+individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
+
+cda.calc(data)
+
+
+colnames(cda$score)[1] = "Taxon"
+
 
 plot.characters(dtFrame)
 
-      object = pcaRes
-data = object
-pcaResult = pcaRes
-pops = popul.otu(data)
+boxplot.()
+
+
+str(cda$rank)
+cda$rank
+cda$eigenvalues
+cda$canrsq
+cda$pct
+cda$means
+??? cda$factors
+cda$coeffs.raw
+cda$coeffs.std
+cda$structure
+cda$scores
+
+
+4.41939 - 2.00487
+
+2.00487 + 0.36473
+
+2.41452
+cda$
+
+
 
 pcaRes = pca.calc(data)
 
 pcaRes = pca.calc(pops)
 
-warnings()
+prccc = prcomp(x = data$data)
+
+      object = data
+object = data
+pcaResult = pcaRes
+pops = popul.otu(data)
+
+
+
+
+
+
+
+
+
+
+
+summary(pcaRes)
 
 
 plot.3D(pcaRes,   col = c("red", "green", "blue", "red"), pch = c(20, 17, 8, 21),  pt.bg = "white", labels = T, cex = 2,

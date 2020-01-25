@@ -18,7 +18,7 @@ pca.calc(object)
   ylab = NULL,
   zlab = NULL,
   pch = 16,
-  col = "white",
+  col = "black",
   bg.col = "white",
   phi = 10,
   theta = 2,
@@ -66,8 +66,6 @@ labels.points(pcaResult, axes = c(1,2), ...)
 \item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
 
 \item{length}{length of the edges of the arrow head (in inches).}
-
-\item{labels__?????__??????}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{labels.points}} directly.}
 }
 \value{
 object of class 'pcadata' containing the following components:

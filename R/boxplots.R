@@ -1,12 +1,3 @@
-#' @export
-boxplot.character <- function(object, ...) {
-  UseMethod("boxplot.character")
-}
-#' @export
-boxplot.all <- function(object, ...) {
-  UseMethod("boxplot.all")
-}
-
 #' Box Plots
 #'
 #' @description These functions produce box-and-whisker plot(s) of the given morphological characters.
@@ -36,6 +27,19 @@ boxplot.all <- function(object, ...) {
 #'
 #' boxplot.all(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
 #'
+#' @export
+boxplot.character <- function(object, ...) {
+  UseMethod("boxplot.character")
+}
+
+#' @rdname boxplot.character
+#' @aliases boxplot.all
+#' @export
+boxplot.all <- function(object, ...) {
+  UseMethod("boxplot.all")
+}
+
+#' @rdname boxplot.character
 #' @method boxplot.character default
 #' @export
 boxplot.character.default <- function(object, character, outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...) {

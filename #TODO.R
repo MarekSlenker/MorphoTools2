@@ -1,6 +1,6 @@
 #TODO
 
-Summary PCAdata
+Summary CDA DATA
 
 natahaj data do R a pridaj linku data() do examples
 

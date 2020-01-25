@@ -31,6 +31,30 @@ newPcadata <- function() {
   return(newPcadata)
 }
 
+# internal
+# returns new pcadata object
+newCdadata <- function() {
+
+  newCdadata <- list(
+    axesVariance = numeric(),
+    groupMeans = data.frame(),
+    coeffs.raw = matrix(),
+    coeffs.std = matrix(),
+    totalCanonicalStructure = matrix(),
+    objects = list(
+      ID = factor(),
+      Population = factor(),
+      Taxon = factor(),
+      scores = data.frame()),
+    rank = numeric(),
+    eigenValues = numeric(),
+    canrsq = numeric()
+    )
+
+  attr(newCdadata, "class") <- "cdadata"
+  return(newCdadata)
+}
+
 
 # Class "morphodata"
 morphodataFromDataFrame <- function(indata) {

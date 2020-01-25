@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.3D.R
 \name{plot.3D}
 \alias{plot.3D}
-\title{The default scatterplot function}
+\title{The default scatterplot 3D function}
 \usage{
 plot.3D(object, ...)
 }
