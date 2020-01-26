@@ -14,9 +14,7 @@ newMorphodata <- function() {
 # returns new pcadata object
 newPcadata <- function() {
 
-  newPcadata <- list(sdev = numeric(),
-                     center = numeric(),
-                     scale = numeric(),
+  newPcadata <- list(
                      objects = list(
                           ID = numeric(),
                           Population = numeric(),
@@ -25,7 +23,12 @@ newPcadata <- function() {
                      eigenVectors = numeric(),
                      eigenValues = numeric(),
                      axesVariance = numeric(),
-                     cumulativeAxesVariance = numeric())
+                     cumulativeAxesVariance = numeric(),
+                     groupMeans = data.frame(),
+                     sdev = numeric(),
+                     center = numeric(),
+                     scale = numeric()
+                     )
 
   attr(newPcadata, "class") <- "pcadata"
   return(newPcadata)

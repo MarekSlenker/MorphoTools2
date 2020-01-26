@@ -3,15 +3,20 @@ checkMorphodataClass(object)
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 
-data = read.morphodata("./tests/testFiles/sample.txt")
+data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 
 data = read.morphodata("clipboard")
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
-cda.calc(data)
+object = data
 
+cdaResult = cda.calc(data)
 
-colnames(cda$score)[1] = "Taxon"
+plot.points(cdaResult, col = c( rgb(0, 0, 255, max = 255, alpha = 100), rgb(218, 0, 0, max = 255, alpha = 100)), legend = F, labels = T)
+
+  plot(x = cdaResult$objects$scores[ ,axes[1]], y = cdaResult$objects$scores[ ,axes[2]])
+
+cdaResult$rank
 
 
 plot.characters(dtFrame)
@@ -37,11 +42,12 @@ cda$scores
 2.00487 + 0.36473
 
 2.41452
-cda$
+
 
 
 
 pcaRes = pca.calc(data)
+
 
 pcaRes = pca.calc(pops)
 

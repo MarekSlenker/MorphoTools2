@@ -25,8 +25,8 @@ cda.calc <- function(object) {
 
   # calculate
   d = as.matrix(object$data)
-  x <- lm(d ~ object$Taxon)
-  cda <- candisc(x, term="object$Taxon")
+  x = lm(d ~ object$Taxon)
+  cda = candisc(x, term="object$Taxon")
 
 
   cdaResult = newCdadata()
@@ -44,8 +44,7 @@ cda.calc <- function(object) {
   cdaResult$objects$Population = object$Population
   cdaResult$objects$Taxon = object$Taxon
 
-  cdaResult$objects$scores = cda$scores
-  colnames(cdaResult$objects$scores)[1] = "Taxon"
+  cdaResult$objects$scores = cda$scores[,-1]
 
   return(cdaResult)
 }
