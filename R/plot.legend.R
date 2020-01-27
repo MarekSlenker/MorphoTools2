@@ -31,15 +31,27 @@ plot.legend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col 
 
 }
 
+#' @rdname plot.legend
+#' @method plot.legend cdadata
+#' @export
+plot.legend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black", pt.bg = "white", ...) {
+
+  checkClass(result, "cdadata")
+
+  plot.legend.internal(result, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, ...)
+
+}
+
 plot.legend.internal <- function(result, x, y, pch, col, pt.bg, ...) {
   # nastav pch a col spravne podla taxonu
   result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
   result$col = setValuesForVector(result$objects$Taxon, col)
+  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
 
 
   legend(x, y, legend = unique(result$objects$Taxon),
                pch = unique(result$pch),
                col = unique(result$col),
-               pt.bg = pt.bg,
+               pt.bg = unique(result$pt.bg),
                ...)
 }

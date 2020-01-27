@@ -3,11 +3,22 @@
 \name{plot.legend}
 \alias{plot.legend}
 \alias{plot.legend.pcadata}
+\alias{plot.legend.cdadata}
 \title{Add legends to plot}
 \usage{
 plot.legend(result, x = "topright", y = NULL, axes = c(1,2), pch = 16, col = "black", ...)
 
 \method{plot.legend}{pcadata}(
+  result,
+  x = "topright",
+  y = NULL,
+  pch = 16,
+  col = "black",
+  pt.bg = "white",
+  ...
+)
+
+\method{plot.legend}{cdadata}(
   result,
   x = "topright",
   y = NULL,

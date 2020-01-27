@@ -12,13 +12,32 @@ object = cdaRes
 
 export.res(e)
 
+cdaRes = cda.calc(dataShort)
 cdaRes = cda.calc(data)
-
-
-summary(cdaRes)
+pcaRes = pca.calc(dataShort)
 
 
 
+dataShort = delete.taxon(object = data, taxonName =  c("hybr", "ph"))
+
+
+plot.points(cdaRes, col = c(rgb(0,0,0, alpha=0.6), rgb(1,1,1, alpha=0.6)), legend = T, breaks = seq(-6, 4, 0.2))
+plot.points(cdaRes, col = c("green", "orange"), legend = F, breaks = seq(-6, 4, 0.2), pch = c(22, 15, 25, 21))
+plot.points(pcaRes, pt.bg = c("green", "red", "navy", "orange"), col = c("black", "red", "black", "red"),  legend = F, pch = c(22, 15, 25, 21))
+
+labels.points(cdaRes)
+
+plot.legend(cdaRes, pt.bg = c("green", "orange"), pch = 22)
+
+
+plot.3D(pcaRes, pch = 22, pt.bg = c("red", "green"), legend = T, type = "h")
+
+
+length(colnames(cdaRes$objects$scores))
+
+length(pcaRes$eigenValues)
+length(colnames(cdaRes$objects$scores))
+length(colnames(pcaRes$objects$scores))
 
 e = pca.eigenVectors(pcaRes)
 

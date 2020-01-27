@@ -25,6 +25,7 @@ newPcadata <- function() {
                      axesVariance = numeric(),
                      cumulativeAxesVariance = numeric(),
                      groupMeans = data.frame(),
+                     rank = numeric(),
                      sdev = numeric(),
                      center = numeric(),
                      scale = numeric()

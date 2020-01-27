@@ -28,12 +28,23 @@ labels.points.pcadata <- function(result, axes = c(1,2), ...) {
   labels.points.internal(result, axes, ...)
 }
 
+#' @rdname cda.calc
+#' @usage NULL
+#' @method labels.points cdadata
+#' @export
+labels.points.cdadata <- function(result, axes = c(1,2), ...) {
+  checkClass(result, "cdadata")
+
+  labels.points.internal(result, axes, ...)
+}
+
 
 # suitable for "pcadata" or "cdadata", as both stores XY coordinates in $scores
 labels.points.internal <- function(result, axes, ...) {
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
+  if (result$rank == 1) stop("this method is not applicable to histograms", call. = F)
+  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
 
   text(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
        labels = result$objects$ID, ...)

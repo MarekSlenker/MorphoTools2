@@ -71,6 +71,7 @@ pca.calc <- function(object) {
   pcaResult$sdev = prcompRes$sdev
   pcaResult$center = prcompRes$center
   pcaResult$scale = prcompRes$scale
+  pcaResult$rank = length(prcompRes$sdev)
 
   # Koutecky 2014
   #pcaResult$scores = predict(prcompRes,object$data)

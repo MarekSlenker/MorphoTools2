@@ -32,16 +32,16 @@ setValuesForVector <- function(vector, symbols) {
 
 
 
-plotLegend <- function(object, legend.pos, bg, ncol) {
+plotLegend <- function(object, legend.pos, pt.bg, pch, col, ncol) {
   if (length(legend.pos) == 1) legend(legend.pos,
                                       legend = unique(object$objects$Taxon),
-                                      pch = unique(object$pch),
-                                      col = unique(object$col),
-                                      bty="o", pt.bg = bg, ncol = ncol)
+                                      pch = pch,
+                                      col = col,
+                                      bty="o", pt.bg = pt.bg, ncol = ncol)
   if (length(legend.pos) == 2) legend(legend.pos[1], legend.pos[2], legend = unique(object$objects$Taxon),
-                                      pch = unique(object$pch),
-                                      col = unique(object$col),
-                                      bty="o", pt.bg = bg, ncol = ncol)
+                                      pch = pch,
+                                      col = col,
+                                      bty="o", pt.bg = pt.bg, ncol = ncol)
 }
 
 plot2DLabels <- function(object, axes) {
