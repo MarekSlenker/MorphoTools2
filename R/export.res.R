@@ -26,7 +26,6 @@ export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
   export.res(objToWrite ,file = file, dec = dec, sep = sep)
-  #write.table(objToWrite, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
 }
 
 #' @describeIn export.res function for exporting 'data.frame' objects
@@ -36,6 +35,17 @@ export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "
   if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = F)
 
   write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = F, col.names = T, na = "")
+}
+
+#' @describeIn export.res function for exporting 'matrix' objects
+#' @export
+export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t") {
+
+  if (!(is.matrix(object))) stop("object is not of class 'data.frame'", call. = F)
+
+  objToWrite = data.frame("character" = rownames(object), object)
+
+  export.res(objToWrite ,file = file, dec = dec, sep = sep)
 }
 
 

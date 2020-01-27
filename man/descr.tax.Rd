@@ -34,9 +34,9 @@ Keywords: "$MEAN" = mean; "$SD" = standard deviation"; "$MIN" = minimum; "$5\%" 
 "$95\%" = 95th percentile; "$MAX" = maximum.
 }
 \examples{
-descr.tax(object, format = "($MEAN ± $SD)")
+descr.tax(object, format = "($MEAN Â± $SD)")
 
 descr.pop(object, format = "$MEAN ($MIN - $MAX)")
 
-descr.all(object, format = "$MEAN ± $SD ($5\% - $95\%)")
+descr.all(object, format = "$MEAN Â± $SD ($5\% - $95\%)")
 }

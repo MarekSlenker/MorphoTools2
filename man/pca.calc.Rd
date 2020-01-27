@@ -44,6 +44,17 @@ labels.points(pcaResult, axes = c(1,2), ...)
   ...
 )
 
+\method{plot.characters}{pcadata}(
+  pcaResult,
+  axes = c(1, 2),
+  xlab = NULL,
+  ylab = NULL,
+  col = "red",
+  length = 0.1,
+  labels = TRUE,
+  ...
+)
+
 \method{plot.points}{pcadata}(
   pcaResult,
   axes = c(1, 2),

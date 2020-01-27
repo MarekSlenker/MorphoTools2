@@ -8,7 +8,49 @@ data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 data = read.morphodata("clipboard")
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
-object = data
+object = cdaRes
+
+export.res(e)
+
+cdaRes = cda.calc(data)
+
+
+summary(cdaRes)
+
+
+
+
+e = pca.eigenVectors(pcaRes)
+
+plot.points(pcaRes, legend = T, ncol = 2)
+
+
+plot.legend(pcaRes)
+
+
+labels.points(pcaRes)
+
+
+data.frame("character" = rownames(e), e)
+
+
+summary(pcaRes)
+
+pcaRes$eigenValues
+
+pca.eigenVectors
+
+class(pcaRes)
+
+
+
+
+
+
+
+
+
+
 
 cdaResult = cda.calc(data)
 

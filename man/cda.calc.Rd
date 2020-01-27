@@ -2,7 +2,7 @@
 % Please edit documentation in R/cda.calc.R, R/plot.points.R
 \name{cda.calc}
 \alias{cda.calc}
-\alias{Dplot.points.cdadata}
+\alias{plot.points.cdadata}
 \title{Canonical discriminant analysis (CDA)}
 \usage{
 cda.calc(object)
@@ -14,6 +14,8 @@ cda.calc(object)
   ylab = NULL,
   pch = 16,
   col = "black",
+  breaks = NULL,
+  ylim = NULL,
   bg = "white",
   labels = FALSE,
   legend = FALSE,

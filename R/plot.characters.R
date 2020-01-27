@@ -21,8 +21,6 @@ plot.characters <- function(pcaResult, ...) {
 
 
 #' @rdname pca.calc
-# USAGE je v    plot.points.pcadata
-#' @usage NULL
 #' @method plot.characters pcadata
 #' @export
 plot.characters.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,

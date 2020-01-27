@@ -11,7 +11,7 @@ summary(object)
 \item{object}{an object of class 'morphodata'.}
 }
 \description{
-This function summarizes the information contained in the a morphodata object.
+This function summarizes the information contained in the a 'morphodata' object.
 }
 \examples{
 summary(object)

@@ -35,6 +35,11 @@ cda.calc <- function(object) {
   cdaResult$eigenValues = cda$eigenvalues
   cdaResult$canrsq = cda$canrsq
   cdaResult$axesVariance = cda$pct
+
+  for (i in cdaResult$rank:1) {
+    cdaResult$cumulativeAxesVariance[i] = sum(cdaResult$axesVariance[1:i])
+  }
+
   cdaResult$groupMeans = cda$means
   cdaResult$coeffs.raw = cda$coeffs.raw
   cdaResult$coeffs.std = cda$coeffs.std

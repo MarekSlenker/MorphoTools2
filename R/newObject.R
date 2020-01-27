@@ -40,6 +40,7 @@ newCdadata <- function() {
 
   newCdadata <- list(
     axesVariance = numeric(),
+    cumulativeAxesVariance = numeric(),
     groupMeans = data.frame(),
     coeffs.raw = matrix(),
     coeffs.std = matrix(),

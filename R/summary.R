@@ -1,6 +1,6 @@
 #' Summarize a structure of a morphodata object.
 #'
-#' @description This function summarizes the information contained in the a morphodata object.
+#' @description This function summarizes the information contained in the a 'morphodata' object.
 #' @usage
 #' ## S3 method for class 'morphodata'
 #' summary(object)
@@ -27,7 +27,7 @@ summary.morphodata <- function(object) {
 
 #' Summarize a structure of a pcadata object.
 #'
-#' @description This function summarizes the information contained in the a pcadata object.
+#' @description This function summarizes the information contained in the a 'pcadata' object.
 #' @usage
 #' ## S3 method for class 'pcadata'
 #' summary(object)
@@ -51,13 +51,48 @@ summary.pcadata <- function(object) {
 
   print(descrTable)
 
-  cat("\nThe correlation of the characters and ordination axes:\n")
+  cat("\nEigenvectors, i.e. correlation of the characters and ordination axes:\n")
 
   print(object$eigenVectors[,1:4])
 
 }
 
 
+#' Summarize a structure of a cdadata object.
+#'
+#' @description This function summarizes the information contained in the a 'cdadata' object.
+#' @usage
+#' ## S3 method for class 'cdadata'
+#' summary(object)
+#' @param object an object of class 'cdadata'.
+#' @examples
+#' summary(object)
+#' @export
+summary.cdadata <- function(object) {
+  checkClass(object, "cdadata")
+
+  cat("object of class 'cdadata'; storing original data and results of Canonical Discriminant Analysis\n")
+
+
+
+  descrTable = data.frame(row.names = c(1: object$rank),
+                          "CanRsq" = round(object$canrsq[1:object$rank], digits = 4),
+                          "Eigenvalue" = round(object$eigenValues[1:object$rank], digits = 4),
+                          "Proportion of Variance" = round(object$axesVariance[1:object$rank], digits = 4),
+                          "Cumulative Proportion" = round(object$cumulativeAxesVariance[1:object$rank], digits = 4)
+  )
+  names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
+
+
+  cat("\nVariation explained by individual axes:\n")
+  print(descrTable)
+
+
+  cat("\nTotal canonical structure, i.e. correlation of the characters and ordination axes:\n")
+
+  print(object$totalCanonicalStructure[,1:object$rank])
+
+}
 
 
 

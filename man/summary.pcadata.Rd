@@ -11,7 +11,7 @@ summary(object)
 \item{object}{an object of class 'pcadata'.}
 }
 \description{
-This function summarizes the information contained in the a pcadata object.
+This function summarizes the information contained in the a 'pcadata' object.
 }
 \examples{
 summary(object)
