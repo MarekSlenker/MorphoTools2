@@ -8,21 +8,23 @@ data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 data = read.morphodata("clipboard")
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
-object = cdaRes
+object = dataShort
 
 export.res(e)
+
+passiveSamples = NULL
 
 cdaRes = cda.calc(dataShort)
 cdaRes = cda.calc(data)
 pcaRes = pca.calc(dataShort)
 
+summary(data)
 
-
-dataShort = delete.taxon(object = data, taxonName =  c("hybr", "ph"))
+dataShort = delete.taxon(object = data, taxonName =  c("ph"))
 
 
 plot.points(cdaRes, col = c(rgb(0,0,0, alpha=0.6), rgb(1,1,1, alpha=0.6)), legend = T, breaks = seq(-6, 4, 0.2))
-plot.points(cdaRes, col = c("green", "orange"), legend = F, breaks = seq(-6, 4, 0.2), pch = c(22, 15, 25, 21))
+plot.points(cdaRes, col = c("green", "orange"), legend = T, breaks = seq(-6, 4, 0.2), pch = c(22, 15, 25, 21))
 plot.points(pcaRes, pt.bg = c("green", "red", "navy", "orange"), col = c("black", "red", "black", "red"),  legend = F, pch = c(22, 15, 25, 21))
 
 labels.points(cdaRes)

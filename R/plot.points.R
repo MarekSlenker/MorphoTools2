@@ -73,12 +73,16 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     cdaResult$col = setValuesForVector(cdaResult$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
     cdaResult$pt.bg = setValuesForVector(cdaResult$objects$Taxon, col)
 
+    ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bud skupin
 
+    # cyklicky pridavaj do niecoho ako list vysledky hystogramov, a nakonec ich vsetky cyklicky plotni
 
     hist1 = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[1]], plot = F, breaks = breaks )
     hist1$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[1]][1]
     hist2 = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[2]], plot = F, breaks = breaks )
     hist2$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[2]][1]
+
+    #   MAX porovnanaj v cykle, na konci cyklu budes mat max zo vsetkych
 
     if (is.null(ylim)) {
       ymax = max( c(hist1$counts, hist2$counts))
@@ -87,6 +91,8 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
     plot(hist1, main="", xlab = "canonical score", ylab = "count", col = hist1$pt.bg, ylim = ylim, axes = F, ...)
     plot(hist2, col = hist2$pt.bg, axes = F, add = T, ...)
+
+    ########### ENDREGION
 
     axis(1, at = breaks, labels = breaks, tcl = -0.5)
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
