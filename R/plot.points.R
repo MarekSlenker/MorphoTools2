@@ -145,7 +145,7 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
       legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pch, cdaResult$col, cdaResult$pt.bg)
       legendTable = unique(legendTable)
 
-      plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
+      plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
     }
 
 
