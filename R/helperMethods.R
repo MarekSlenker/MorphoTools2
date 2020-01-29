@@ -34,7 +34,7 @@ checkClass <- function(object, class) {
 }
 
 
-plotLegend <- function(legend.pos, legend = legend, pt.bg, pch, col, ncol) {
+plotLegend <- function(legend.pos, legend, pt.bg, pch, col, ncol) {
   if (length(legend.pos) == 1) legend(legend.pos,
                                       legend =legend,
                                       pch = pch,

@@ -44,13 +44,12 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
        xlab = xlab, ylab = ylab, pch = pcaResult$pch, col = pcaResult$col, bg = pcaResult$pt.bg, ... )
 
 
-
   # legend
   if (legend == TRUE) {
     legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
     legendTable = unique(legendTable)
 
-    plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
+    plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
   }
 
   if (labels == TRUE) plot2DLabels(pcaResult, axes)

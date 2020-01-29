@@ -209,9 +209,10 @@ unFormatDescrStatistic <- function(groups, characters, descrStatistic, format) {
   outputTable = data.frame("characters" = c("Taxon",  characters))
 
   for (group in groups){
-    firstRow = rep(group, dim(descrStatistic[ , , group])[2])
-    outputTable = cbind(outputTable, rbind(firstRow, descrStatistic[ , , group]))
+    characters = rep(group, dim(descrStatistic[ , , group])[2])
+    outputTable = cbind(outputTable, rbind(characters, descrStatistic[ , , group]))
   }
+  row.names(outputTable) = NULL
   return(outputTable)
 }
 
