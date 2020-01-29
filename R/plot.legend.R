@@ -49,9 +49,9 @@ plot.legend.internal <- function(result, x, y, pch, col, pt.bg, ...) {
   result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
 
 
-  legend(x, y, legend = unique(result$objects$Taxon),
-               pch = unique(result$pch),
-               col = unique(result$col),
-               pt.bg = unique(result$pt.bg),
-               ...)
+  legendTable = cbind(as.character(result$objects$Taxon), result$pch, result$col, result$pt.bg)
+  legendTable = unique(legendTable)
+
+  plotLegend(x, y, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ...)
+
 }

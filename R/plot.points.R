@@ -44,7 +44,14 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
        xlab = xlab, ylab = ylab, pch = pcaResult$pch, col = pcaResult$col, bg = pcaResult$pt.bg, ... )
 
 
-  if (legend == TRUE) plotLegend(pcaResult, legend.pos, pch = unique(pcaResult$pch), col = unique(pcaResult$col), pt.bg = unique(pcaResult$pt.bg), ncol)
+
+  # legend
+  if (legend == TRUE) {
+    legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
+    legendTable = unique(legendTable)
+
+    plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
+  }
 
   if (labels == TRUE) plot2DLabels(pcaResult, axes)
 
@@ -65,39 +72,51 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
     taxlev = levels(cdaResult$objects$Taxon)
 
-    if (is.null(breaks)) {xhist = hist(cdaResult$objects$scores, plot = F)
-                          breaks = xhist$breaks }
+    xhist = hist(cdaResult$objects$scores, plot = F)
 
+    if (is.null(breaks)) breaks = xhist$breaks
 
     # nastav pch, col a pt.bg spravne podla taxonu
     cdaResult$col = setValuesForVector(cdaResult$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
     cdaResult$pt.bg = setValuesForVector(cdaResult$objects$Taxon, col)
 
-    ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bud skupin
+    ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bude skupin
 
-    # cyklicky pridavaj do niecoho ako list vysledky hystogramov, a nakonec ich vsetky cyklicky plotni
+    # struktura pre skladovanie hystogramov
+    histograms = list(list(list(),list(),list(),list(),list(),list()))
 
-    hist1 = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[1]], plot = F, breaks = breaks )
-    hist1$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[1]][1]
-    hist2 = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[2]], plot = F, breaks = breaks )
-    hist2$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[2]][1]
+    for (i in 1:length(taxlev)) {
+      histograms[[i]] = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[i]], plot = F, breaks = breaks )
+      histograms[[i]]$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[i]][1]
+    }
 
-    #   MAX porovnanaj v cykle, na konci cyklu budes mat max zo vsetkych
-
+    #   MAX porovnanaj v cykle, na konci cyklu budes mat max zo vsetkych - na nastavien ylim
+    ymax = 0
     if (is.null(ylim)) {
-      ymax = max( c(hist1$counts, hist2$counts))
+      for (i in 1:length(taxlev)) {
+        ymax = max( c(ymax, histograms[[i]]$counts))
+      }
+      # hrajkanie sa s delenim a zvyskom po delenie, aby som nasiel nablizsie cislo delitelne 10
       upperLim = ymax  %/% 10; if ((ymax %% 10) > 0) upperLim = upperLim + 1; upperLim = upperLim * 10
-      ylim = c(0, upperLim)}
+      ylim = c(0, upperLim)
+    }
 
-    plot(hist1, main="", xlab = "canonical score", ylab = "count", col = hist1$pt.bg, ylim = ylim, axes = F, ...)
-    plot(hist2, col = hist2$pt.bg, axes = F, add = T, ...)
+    #   plotni v cykle
+    plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, axes = F, ...)
+    for (i in 2:length(taxlev)) {
+      plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = F, add = T)
+    }
 
     ########### ENDREGION
 
     axis(1, at = breaks, labels = breaks, tcl = -0.5)
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
-    if (legend == TRUE) plotLegend(cdaResult, legend.pos, pch = 22, col = unique(cdaResult$col), pt.bg = unique(cdaResult$pt.bg), ncol)
+    # legend
+    legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pt.bg)
+    legendTable = unique(legendTable)
+
+    if (legend == TRUE) plotLegend(legend.pos, legend = legendTable[,1],  pch = 22, col = "black", pt.bg = legendTable[,2], ncol)
 
     # labels neplotujem
 
@@ -122,16 +141,19 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
          xlab = xlab, ylab = ylab, pch = cdaResult$pch, col = cdaResult$col, bg = cdaResult$pt.bg, ... )
 
 
-    if (legend == TRUE) plotLegend(cdaResult, legend.pos, pch = unique(cdaResult$pch), col = unique(cdaResult$col), pt.bg = unique(cdaResult$pt.bg), ncol)
+    # legend
+    if (legend == TRUE) {
+      legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pch, cdaResult$col, cdaResult$pt.bg)
+      legendTable = unique(legendTable)
 
-    if (labels == TRUE) plot2DLabels(cdaResult, axes)
-
+      plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
     }
 
 
 
+    if (labels == TRUE) plot2DLabels(cdaResult, axes)
 
-
+    }
 }
 
 

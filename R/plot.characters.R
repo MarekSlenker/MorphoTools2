@@ -47,6 +47,7 @@ plot.characters.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab 
 
   if (labels == T) text(x = pcaResult$eigenVectors[ ,axes[1]], y = pcaResult$eigenVectors[ ,axes[2]],
                       labels = row.names(pcaResult$eigenVectors), cex = 0.7, pos = 4, offset = 0.5)
-
-
 }
+
+
+

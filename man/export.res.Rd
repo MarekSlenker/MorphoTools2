@@ -9,11 +9,32 @@
 \usage{
 export.res(object, ...)
 
-\method{export.res}{morphodata}(object, file = "clipboard", dec = ".", sep = "\\t")
+\method{export.res}{morphodata}(
+  object,
+  file = "clipboard",
+  dec = ".",
+  sep = "\\t",
+  row.names = F,
+  col.names = T
+)
 
-\method{export.res}{data.frame}(object, file = "clipboard", dec = ".", sep = "\\t")
+\method{export.res}{data.frame}(
+  object,
+  file = "clipboard",
+  dec = ".",
+  sep = "\\t",
+  row.names = F,
+  col.names = T
+)
 
-\method{export.res}{matrix}(object, file = "clipboard", dec = ".", sep = "\\t")
+\method{export.res}{matrix}(
+  object,
+  file = "clipboard",
+  dec = ".",
+  sep = "\\t",
+  row.names = F,
+  col.names = T
+)
 }
 \arguments{
 \item{object}{an object to be exported.}

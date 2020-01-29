@@ -8,26 +8,61 @@ data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 data = read.morphodata("clipboard")
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
-object = dataShort
+dataShort = delete.taxon(object = data, taxonName =  c("ph"))
+
 
 export.res(e)
 
 passiveSamples = NULL
 
-cdaRes = cda.calc(dataShort)
-cdaRes = cda.calc(data)
+cdaResult = cda.calc(dataShort, passiveSamples = "hybr")
+cdaResult = cda.calc(data)
 pcaRes = pca.calc(dataShort)
 
 summary(data)
 
-dataShort = delete.taxon(object = data, taxonName =  c("ph"))
 
 
 plot.points(cdaRes, col = c(rgb(0,0,0, alpha=0.6), rgb(1,1,1, alpha=0.6)), legend = T, breaks = seq(-6, 4, 0.2))
-plot.points(cdaRes, col = c("green", "orange"), legend = T, breaks = seq(-6, 4, 0.2), pch = c(22, 15, 25, 21))
-plot.points(pcaRes, pt.bg = c("green", "red", "navy", "orange"), col = c("black", "red", "black", "red"),  legend = F, pch = c(22, 15, 25, 21))
+plot.points(cdaResult, col = c("green", "orange"), legend = T, breaks = seq(-6, 4, 0.2), pch = c(22, 15, 25, 21))
+plot.points(cdaResult, pt.bg = c("green", "red", "navy", "orange"), col = c("black", "red", "black", "red"),  legend = T, pch = c(22, 15, 25, 21))
 
-labels.points(cdaRes)
+plot.points(cdaResult, col = c(rgb(0,0,0, alpha=0.6), rgb(1,1,1, alpha=0.6), rgb(1,1,1, alpha=0.6)),  legend = T, breaks = seq(-6,3.5,0.5))
+
+plot.points(cdaResult, col = c("black", "white", "white"),  legend = T, breaks = seq(-6,3.5,0.5))
+
+
+
+legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pt.bg)
+
+unique(legendTable)
+
+aggregate(cdaResult$objects$Taxon, )
+
+
+
+
+
+
+
+
+
+
+
+
+labels.points(cdaResult)
+
+plot.points(pcaRes, pt.bg = c("green", "red", "navy", "orange"), col = c("black", "red", "black", "red"),  legend = T, pch = c(22, 15, 25, 21))
+labels.points(pcaRes)
+
+plot.characters(pcaRes, labels = F)
+labels.characters(pcaRes, cex = 2, pos = 2)
+
+
+
+
+
+
 
 plot.legend(cdaRes, pt.bg = c("green", "orange"), pch = 22)
 

@@ -17,7 +17,7 @@ cda.calc(object)
   col = "black",
   breaks = NULL,
   ylim = NULL,
-  bg = "white",
+  pt.bg = "white",
   labels = FALSE,
   legend = FALSE,
   legend.pos = "topright",

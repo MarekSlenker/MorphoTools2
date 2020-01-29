@@ -29,16 +29,18 @@ setValuesForVector <- function(vector, symbols) {
 }
 
 
+checkClass <- function(object, class) {
+  if (! (is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = F)
+}
 
 
-
-plotLegend <- function(object, legend.pos, pt.bg, pch, col, ncol) {
+plotLegend <- function(legend.pos, legend = legend, pt.bg, pch, col, ncol) {
   if (length(legend.pos) == 1) legend(legend.pos,
-                                      legend = unique(object$objects$Taxon),
+                                      legend =legend,
                                       pch = pch,
                                       col = col,
                                       bty="o", pt.bg = pt.bg, ncol = ncol)
-  if (length(legend.pos) == 2) legend(legend.pos[1], legend.pos[2], legend = unique(object$objects$Taxon),
+  if (length(legend.pos) == 2) legend(legend.pos[1], legend.pos[2], legend = legend,
                                       pch = pch,
                                       col = col,
                                       bty="o", pt.bg = pt.bg, ncol = ncol)
