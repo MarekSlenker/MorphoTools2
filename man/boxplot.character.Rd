@@ -7,24 +7,25 @@
 \alias{boxplot.all.default}
 \title{Box Plots}
 \usage{
-boxplot.character(object, character, outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, ...)
+boxplot.character(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, ...)
 
 boxplot.all(object, ...)
 
 \method{boxplot.character}{default}(
   object,
   character,
-  outline = TRUE,
+  outliers = TRUE,
   lowerWhisker = 0.05,
   upperWhisker = 0.95,
   col = "white",
+  main = character,
   ...
 )
 
 \method{boxplot.all}{default}(
   object,
   folderName = "boxplots",
-  outline = TRUE,
+  outliers = TRUE,
   lowerWhisker = 0.05,
   upperWhisker = 0.95,
   col = "white",
@@ -58,10 +59,10 @@ The \strong{boxplot.all} function produce boxplot for each morphological charact
 }
 \examples{
 boxplot.character(myMorphoData, "ST", col = "grey", border = "red")
-boxplot.character(myMorphoData, "ST", outline = TRUE, pch = 8, lowerWhisker = 0.05, upperWhisker = 0.95)
-boxplot.character(myMorphoData, "ST", outline = FALSE, xlab = "Taxa", ylab = "length", main = "Total stem height (cm)")
+boxplot.character(myMorphoData, "ST", outliers = TRUE, pch = 8, lowerWhisker = 0.05, upperWhisker = 0.95)
+boxplot.character(myMorphoData, "ST", outliers = FALSE, xlab = "Taxa", ylab = "length", main = "Total stem height (cm)")
 boxplot.character(myMorphoData, "ST", varwidth = T, notch = T, boxwex = 0.4, staplewex = 1.3, horizontal = T)
 
-boxplot.all(object, folderName = "boxplots", outline = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
+boxplot.all(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
 
 }
