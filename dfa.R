@@ -9,14 +9,52 @@ data = read.morphodata("clipboard")
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
 dataShort = delete.taxon(object = data, taxonName =  c("ph"))
+dataXShort = delete.taxon(object = data, taxonName =  c("ph", "hybr"))
 
 
-export.res(e)
+groupName = "OLE2"
+column = "Population"
 
-passiveSamples = NULL
+round(lda.samp$posterior, digits = 6)
+
+delete.population(object = data, populationName = )
+
+object = ss
+class(ss)
+
+
+ss= classifda.lda(data, crossval = "pop")
+ss= classifda.lda(data)
+
+sa = classif.matrix(ss)
+classif.matrix(ss, level = "Population")
+
+knn.select(data)
+ss = classifda.knn(data, k = 11, crossval = "indiv")
+
+checkClass(ss, "data.frame")
+
+export.res(ss, file = "ddddsa.txt")
+
+
+k = 8
+
+kselmin[k]
+
+str(knn.samp)
+
+j =1
+pop = "BABL"
+rm(kselj)
+
+length(train$Population) + length(samp$Population) == length(object$Population)
+
 
 cdaResult = cda.calc(dataShort, passiveSamples = "hybr")
-cdaResult = cda.calc(data)
+cdaResultX = cda.calc(dataXShort)
+
+View(cbind(cdaResult$coeffs.std, cdaResultX$coeffs.std))
+
 pcaRes = pca.calc(dataShort)
 
 summary(data)
@@ -29,9 +67,11 @@ plot.points(cdaResult, pt.bg = c("green", "red", "navy", "orange"), col = c("bla
 
 plot.points(cdaResult, col = c(rgb(0,0,0, alpha=0.6), rgb(1,1,1, alpha=0.6), rgb(1,1,1, alpha=0.6)),  legend = T, breaks = seq(-6,3.5,0.5))
 
-plot.points(cdaResult, col = c("black", "white", "white"),  legend = T, breaks = seq(-6,3.5,0.5))
+plot.points(pcaRes, col = c("black", "white", "white"),  legend = T)
 
+pca.eigenVectors(pcaRes, n = 100)
 
+warnings()
 
 legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pt.bg)
 

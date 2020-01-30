@@ -6,6 +6,7 @@
 \alias{export.res.data.frame}
 \alias{export.res.matrix}
 \alias{export.res.numeric}
+\alias{export.res.classifdata}
 \title{Export data}
 \usage{
 export.res(object, ...)
@@ -38,6 +39,15 @@ export.res(object, ...)
 )
 
 \method{export.res}{numeric}(object, file = "clipboard", dec = ".", sep = "\\t")
+
+\method{export.res}{classifdata}(
+  object,
+  file = "clipboard",
+  dec = ".",
+  sep = "\\t",
+  row.names = F,
+  col.names = T
+)
 }
 \arguments{
 \item{object}{an object to be exported.}
@@ -62,5 +72,7 @@ This is a generic function for exporting results, stored in objects of MorphoToo
 \item \code{matrix}: function for exporting 'matrix' objects
 
 \item \code{numeric}: function for exporting 'numeric' objects
+
+\item \code{classifdata}: function for exporting 'classifdata' objects
 }}
 

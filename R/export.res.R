@@ -59,4 +59,17 @@ export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t"
   export.res(objToWrite ,file = file, dec = dec, sep = sep, row.names = F, col.names = F)
 }
 
+#' @describeIn export.res function for exporting 'classifdata' objects
+#' @export
+export.res.classifdata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
+
+  checkClass(object, "classifdata")
+
+  attr(object, "class") <- "data.frame"
+
+  export.res(object ,file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
+}
+
+
+
 

@@ -79,7 +79,6 @@ delete.charecter <- function(object, charecterName) {
 
 
 # internal
-
 # @param object object of class morphodata
 # @param column column where to look for groupName
 # @param groupName name of particular Population or Taxon, which should be removed
@@ -102,6 +101,23 @@ removeByColumn <- function(object, column, groupName) {
   return(newObject)
 }
 
+keepByColumn <- function(object, column, groupName) {
+  # obj je triedy morfodata, skontrolovane vyssie
+
+  # groupName moze byt i viac
+  toKeep = array(data = NA, dim = 0)
+  for (name in groupName) {
+    toKeep = c(toKeep, which( unlist(object[column]) %in% groupName) )
+  }
+
+  newObject = newMorphodata()
+  newObject$ID = droplevels( object$ID[toKeep] )
+  newObject$Population = droplevels( object$Population[toKeep] )
+  newObject$Taxon = droplevels( object$Taxon[toKeep] )
+  newObject$data = object$data[toKeep, ]
+
+  return(newObject)
+}
 
 
 
