@@ -33,7 +33,7 @@ classifda.lda <- function(object, crossval="indiv") {
 
   if (crossval=="indiv")
   {
-    lda.res = lda(as.formula(paste("object$Taxon ~ ", paste(char, collapse="+"))), data=object$data, prior = rep(1/ntax,ntax), CV=TRUE)
+    lda.res = lda(as.formula(paste("object$Taxon ~ ", paste(char, collapse="+"))), data=object$data,  CV=TRUE, prior = rep(1/ntax,ntax))
     res = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, "Classif" = lda.res$class, round(lda.res$posterior, digits = 6))
   }
   else if (crossval=="pop")

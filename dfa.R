@@ -6,6 +6,20 @@ data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 
 data = read.morphodata("clipboard")
+
+
+classifda.lda(data, crossval = "pop")
+classifda.lda(data)
+
+
+knn.select(data)
+
+classRes = classifda.knn(data, k = 3, crossval = "indiv")
+
+classif.matrix(classRes, level = "Population")
+
+
+
 individuals = read.delim("./tests/testFiles/samplePlnaMatica.txt")
 
 dataShort = delete.taxon(object = data, taxonName =  c("ph"))
@@ -20,11 +34,9 @@ round(lda.samp$posterior, digits = 6)
 delete.population(object = data, populationName = )
 
 object = ss
-class(ss)
+class(sa)
 
 
-ss= classifda.lda(data, crossval = "pop")
-ss= classifda.lda(data)
 
 sa = classif.matrix(ss)
 classif.matrix(ss, level = "Population")
@@ -34,7 +46,7 @@ ss = classifda.knn(data, k = 11, crossval = "indiv")
 
 checkClass(ss, "data.frame")
 
-export.res(ss, file = "ddddsa.txt")
+export.res(sa, file = "ddddsa.txt")
 
 
 k = 8

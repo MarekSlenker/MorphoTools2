@@ -6,6 +6,8 @@ classif.matrix <- function(object, level = "Taxon") {
 
   checkClass(object, "classifdata")
 
+  attr(object, "class") <- "data.frame"
+
   if (level!="Taxon" & level!="Population") stop("Invalid level of grouping. Consider using \"Taxon\" or \"Population\"")
 
   if (level == "Taxon" )

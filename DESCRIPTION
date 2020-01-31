@@ -1,5 +1,5 @@
 Package: MorphoTools
-Title: What the Package Does (One Line, Title Case)
+Title: Morphometric analysis
 Version: 1.0.0
 Authors@R: 
     person(given = "Marek",
