@@ -9,7 +9,7 @@
 plot.legend(result, x = "topright", y = NULL, axes = c(1,2), pch = 16, col = "black", ...)
 
 \method{plot.legend}{pcadata}(
-  result,
+  pcaResult,
   x = "topright",
   y = NULL,
   pch = 16,
@@ -19,7 +19,7 @@ plot.legend(result, x = "topright", y = NULL, axes = c(1,2), pch = 16, col = "bl
 )
 
 \method{plot.legend}{cdadata}(
-  result,
+  cdaResult,
   x = "topright",
   y = NULL,
   pch = 16,

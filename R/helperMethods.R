@@ -34,16 +34,16 @@ checkClass <- function(object, class) {
 }
 
 
-plotLegend <- function(legend.pos, legend, pt.bg, pch, col, ncol) {
+plotLegend <- function(legend.pos, legend, pch, col, pt.bg, ncol = 1, ...) {
   if (length(legend.pos) == 1) legend(legend.pos,
                                       legend =legend,
                                       pch = pch,
                                       col = col,
-                                      bty="o", pt.bg = pt.bg, ncol = ncol)
+                                      bty="o", pt.bg = pt.bg, ncol = ncol, ...)
   if (length(legend.pos) == 2) legend(legend.pos[1], legend.pos[2], legend = legend,
                                       pch = pch,
                                       col = col,
-                                      bty="o", pt.bg = pt.bg, ncol = ncol)
+                                      bty="o", pt.bg = pt.bg, ncol = ncol, ...)
 }
 
 plot2DLabels <- function(object, axes) {

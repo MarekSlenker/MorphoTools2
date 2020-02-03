@@ -23,35 +23,34 @@ plot.legend <- function(result, ...) {
 #' @rdname plot.legend
 #' @method plot.legend pcadata
 #' @export
-plot.legend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black", pt.bg = "white", ...) {
+plot.legend.pcadata <- function(pcaResult, x = "topright", y = NULL, pch = 16, col = "black", pt.bg = "white", ...) {
 
-  checkClass(result, "pcadata")
+  checkClass(pcaResult, "pcadata")
 
-  plot.legend.internal(result, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, ...)
+  plot_legend_internal(pcaResult, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, ...)
 
 }
 
 #' @rdname plot.legend
 #' @method plot.legend cdadata
 #' @export
-plot.legend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black", pt.bg = "white", ...) {
+plot.legend.cdadata <- function(cdaResult, x = "topright", y = NULL, pch = 16, col = "black", pt.bg = "white", ...) {
 
-  checkClass(result, "cdadata")
+  checkClass(cdaResult, "cdadata")
 
-  plot.legend.internal(result, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, ...)
+  plot_legend_internal(cdaResult, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, ...)
 
 }
 
-plot.legend.internal <- function(result, x, y, pch, col, pt.bg, ...) {
+plot_legend_internal <- function(object, x, y, pch, col, pt.bg, ...) {
   # nastav pch a col spravne podla taxonu
-  result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
-  result$col = setValuesForVector(result$objects$Taxon, col)
-  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
+  object$pch = as.numeric( setValuesForVector(object$objects$Taxon, pch))
+  object$col = setValuesForVector(object$objects$Taxon, col)
+  object$pt.bg = setValuesForVector(object$objects$Taxon, pt.bg)
 
 
-  legendTable = cbind(as.character(result$objects$Taxon), result$pch, result$col, result$pt.bg)
+  legendTable = cbind(as.character(object$objects$Taxon), object$pch, object$col, object$pt.bg)
   legendTable = unique(legendTable)
 
-  plotLegend(x, y, legend = legendTable[,1],  pch = as.numeric(legendTable[,]), col = legendTable[,3], pt.bg = legendTable[,4], ...)
-
+  plotLegend(legend.pos = c(x, y), legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ...)
 }

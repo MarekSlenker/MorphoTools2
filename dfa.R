@@ -7,6 +7,27 @@ data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 
 data = read.morphodata("clipboard")
 
+pops = popul.otu(data)
+
+pcaResult = pca.calc(pops)
+
+plot.3D(pcaResult, col = c("red", "green", "navy", "orange"), theta = 100, phi = 20, axes = c(1,3,4))
+labels.points3D(pcaResult, cex = 0.7, axes = c(1,3,4))
+
+plot.legend(cdaResult,  xjust = 1, x.intersp = 2)
+
+
+
+
+text3D(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]], z = object$objects$scores[ ,axes[3]],
+       labels  = object$objects$ID,
+       add = TRUE)
+
+
+
+object = cdaResult
+
+plot.points(cdaResult, col = c("red", "green", "navy", "orange"))
 
 classifda.lda(data, crossval = "pop")
 classifda.lda(data)
@@ -33,8 +54,9 @@ round(lda.samp$posterior, digits = 6)
 
 delete.population(object = data, populationName = )
 
-object = ss
+object = data
 class(sa)
+
 
 
 
@@ -63,7 +85,7 @@ length(train$Population) + length(samp$Population) == length(object$Population)
 
 
 cdaResult = cda.calc(dataShort, passiveSamples = "hybr")
-cdaResultX = cda.calc(dataXShort)
+cdaRes = cda.calc(data)
 
 View(cbind(cdaResult$coeffs.std, cdaResultX$coeffs.std))
 

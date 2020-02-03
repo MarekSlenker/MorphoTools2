@@ -48,7 +48,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
   cdaResult$rank = cda$rank
   cdaResult$eigenValues = cda$eigenvalues
   cdaResult$canrsq = cda$canrsq
-  cdaResult$axesVariance = cda$pct
+  cdaResult$axesVariance = cda$pct / 100
 
   for (i in cdaResult$rank:1) {
     cdaResult$cumulativeAxesVariance[i] = sum(cdaResult$axesVariance[1:i])
