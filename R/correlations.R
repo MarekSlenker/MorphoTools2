@@ -61,7 +61,7 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
       cc = cor.test(x = object$data[, row], y = object$data[, col], method = method,
                     use="pairwise.complete.obs", alternative = alternative)
 
-      table[row, col] = paste( round(cc$estimate, digits = 3), "; p-value = ", round(cc$p.value, digits = 3), sep = "" )
+      table[row, col] = paste( round(cc$estimate, digits = 3), "; p-value = ", cc$p.value)
     }
   }
 

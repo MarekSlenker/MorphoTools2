@@ -1,39 +1,10 @@
 #' Box Plots
-#'
-#' @description These functions produce box-and-whisker plot(s) of the given morphological characters.
-#'
-#' @usage boxplot.character(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, ...)
-#'
-#' @param object 	an object of class 'morphodata'.
-#' @param character morphological character used for plotting boxplot
-#' @param lowerWhisker percentile, to which the lower whisker is extended
-#' @param upperWhisker percentile, to which the upper whisker is extended
-#' @param folderName the name of folder, where to save produces boxplot
-#' @param ... 	further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}} {graphics}.
-#'
-#' @details These functions are wrappers above classicla R boxplot {graphics} function, allowin user to extend whiskers
-#'  to desired percentiles. By default, the  whiskers are extended to the 5\% and 95\% percentiles, because the trimmed range
-#'  (without the most extreme 10% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle define 25th and 75th
-#'  percentiles, bold horizontal line show median.
-#'
-#' @details The \strong{boxplot.all} function produce boxplot for each morphological character and save
-#'  them to folder named in folderName parameter. If it does not exist, new folder is created.
-#'
-#' @examples
-#' boxplot.character(myMorphoData, "ST", col = "grey", border = "red")
-#' boxplot.character(myMorphoData, "ST", outliers = TRUE, pch = 8, lowerWhisker = 0.05, upperWhisker = 0.95)
-#' boxplot.character(myMorphoData, "ST", outliers = FALSE, xlab = "Taxa", ylab = "length", main = "Total stem height (cm)")
-#' boxplot.character(myMorphoData, "ST", varwidth = T, notch = T, boxwex = 0.4, staplewex = 1.3, horizontal = T)
-#'
-#' boxplot.all(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95)
-#'
 #' @export
 boxplot.character <- function(object, ...) {
   UseMethod("boxplot.character")
 }
 
 #' @rdname boxplot.character
-#' @aliases boxplot.all
 #' @export
 boxplot.all <- function(object, ...) {
   UseMethod("boxplot.all")
@@ -42,22 +13,28 @@ boxplot.all <- function(object, ...) {
 #' @rdname boxplot.character
 #' @method boxplot.character default
 #' @export
-boxplot.character.default <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", main = character, ...) {
+boxplot.character.default <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+                                      main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                                      varwidth = FALSE, ...) {
+
+
   checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = F)
 
   bxPlot = giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
-  bxp(bxPlot, boxfill = col, outline = outliers, ...)
-  title(main, cex.main = 2)
+  bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
+  title(main, cex.main = cex.main)
 }
 
 
 #' @rdname boxplot.character
 #' @method boxplot.all default
 #' @export
-boxplot.all.default <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", ...)
+boxplot.all.default <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+                                main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                                varwidth = FALSE, ...)
 {
   checkClass(object, "morphodata")
 
@@ -74,9 +51,9 @@ boxplot.all.default <- function(object, folderName = "boxplots", outliers = TRUE
 
     jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ))
 
-    bxp(bxPlot, boxfill = col, outline = outliers, ...)
+    bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
 
-    title(char, cex.main = 2)
+    title(char, cex.main = cex.main)
 
     dev.off()
   }
@@ -84,7 +61,6 @@ boxplot.all.default <- function(object, folderName = "boxplots", outliers = TRUE
 
 
 # internal
-
 giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   # vyrataj klasicky bxplot
   bxPlot = boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = F)

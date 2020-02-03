@@ -2,6 +2,7 @@ checkMorphodataClass(object)
 
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
+data = read.morphodata("./tests/testFiles/sample.txt")
 
 data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 
