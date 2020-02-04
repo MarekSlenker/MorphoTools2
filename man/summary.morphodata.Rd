@@ -4,15 +4,8 @@
 \alias{summary.morphodata}
 \title{Summarize a structure of a morphodata object.}
 \usage{
-## S3 method for class 'morphodata'
-summary(object)
-}
-\arguments{
-\item{object}{an object of class 'morphodata'.}
+\method{summary}{morphodata}(object)
 }
 \description{
-This function summarizes the information contained in the a 'morphodata' object.
-}
-\examples{
-summary(object)
+Summarize a structure of a morphodata object.
 }

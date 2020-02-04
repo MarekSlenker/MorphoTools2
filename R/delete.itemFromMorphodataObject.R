@@ -1,18 +1,4 @@
 #' Remove items (Taxa, Populations, morphological characters) from an morphodata object
-#'
-#' @description This functions remove particular taxa, populations or morphological characters from morphodata object.
-#'
-#' @usage delete.taxon(object, taxonName)
-#'
-#' @param object an object of class 'morphodata'.
-#' @param taxonName vector of taxa to be removed.
-#'
-#' @return object of class 'morphodata'
-#'
-#' @examples
-#' myPartialDataset = delete.taxon(initialdataset, "hybr")
-#' myPartialDataset = delete.taxon(initialdataset, c("ph", "st"))
-#'
 #' @export
 delete.taxon <- function(object, taxonName) {
   checkClass(object, "morphodata")
@@ -27,14 +13,6 @@ delete.taxon <- function(object, taxonName) {
 
 
 #' @rdname delete.taxon
-#' @usage delete.population(object, populationName)
-#'
-#' @param populationName vector of populations to be removed.
-#'
-#' @examples
-#' myPartialDataset = delete.population(initialdataset, "CZLE")
-#' myPartialDataset = delete.population(initialdataset, c("CERV", "DEB", "KOT"))
-#'
 #' @export
 delete.population <- function(object, populationName) {
   checkClass(object, "morphodata")
@@ -49,14 +27,6 @@ delete.population <- function(object, populationName) {
 
 
 #' @rdname delete.taxon
-#' @usage delete.charecter(object, charecterName)
-#'
-#' @param charecterName vector of characters to be removed.
-#'
-#' @examples
-#' myPartialDataset = delete.charecter(initialdataset, "StemHeight")
-#' myPartialDataset = delete.charecter(initialdataset, c("StemHeight", "LeafNo", "PetalLength"))
-#'
 #' @export
 delete.charecter <- function(object, charecterName) {
   checkClass(object, "morphodata")
@@ -82,7 +52,6 @@ delete.charecter <- function(object, charecterName) {
 # @param object object of class morphodata
 # @param column column where to look for groupName
 # @param groupName name of particular Population or Taxon, which should be removed
-
 removeByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 
@@ -101,6 +70,7 @@ removeByColumn <- function(object, column, groupName) {
   return(newObject)
 }
 
+# internal
 keepByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 

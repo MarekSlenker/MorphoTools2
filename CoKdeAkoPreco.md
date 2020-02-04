@@ -6,7 +6,7 @@ vstupny format je ako v MorfoTools 2014. Rozdiel je v tom, ze explicitne vyzaduj
 
 #### read.morphodata
 
-skontroluje ci ma vstupny subor aspon 3 stlpce a interne volam metodu morphodata(). Metoda morphodata() zobere data.frame a urobi z toho objekt triedy morphodata (implementovane ako list). Kontrolujem ci data.frame obsahuje stlpce "ID", "Population" a "Taxon". Este skontolujem ci medzi datami nie su textove retazce = problem desatinnej ciarky a bodky. aby to niekde dalej nespadlo s nejakou divnou chybou. Ak su data chybme, musi to spadnut tu.
+skontroluje ci ma vstupny subor aspon 3 stlpce a interne volam metodu morphodataFromDataFrame(). Metoda morphodataFromDataFrame() zobere data.frame a urobi z toho objekt triedy morphodata (implementovane ako list). Kontrolujem ci data.frame obsahuje stlpce "ID", "Population" a "Taxon". Este skontolujem ci medzi datami nie su textove retazce = problem desatinnej ciarky a bodky. aby to niekde dalej nespadlo s nejakou divnou chybou. Ak su data chybme, musi to spadnut tu.
 
 #### summary(morphodata)
 genericka gunkcia, rekapitulacia struktury dat
@@ -20,13 +20,13 @@ genericka gunkcia, rekapitulacia struktury dat
 1. skontrolujem ci objekt je typu 'morphodata'
 2. skontrolujem ci populationName alebo taxonName sa nachadza v objekte
 
-3. interne volam removeColumn(object, column, groupName), kde je implementovana core funkcionalita. Najdem riadky ktore sa maju vyhodit podla definovaneho stlpca. Vratim novy objekt triedy 'morphodata'.
+3. interne volam removeByColumn(object, column, groupName), kde je implementovana core funkcionalita. Najdem riadky ktore sa maju vyhodit podla definovaneho stlpca. Vratim novy objekt triedy 'morphodata'.
 
 
 #### delete.charecter(object, charecter)
 1. skontrolujem ci objekt je typu 'morphodata'
 2. skontrolujem ci charecter existuje
-
+Vratim novy objekt triedy 'morphodata'.
 
 #### na.meanSubst(object)
 1. skontrolujem ci objekt je typu 'morphodata'
@@ -39,6 +39,9 @@ genericka funkcia, na export vsetkych typov dat sa bude pouzivat export.res().
 ```
 export.res.morphodata()
 export.res.data.frame()
+export.res.matrix()
+export.res.numeric()
+export.res.classifdata()
 ```
 
 ## Descriptive statistics
@@ -64,7 +67,7 @@ fuzy boxplotu sa daju natiahnut podla priania. uzitocne pre hladanie rozdielov v
 boxplot.character() spravi boxplot pre jeden znak  
 boxplot.all() vyrobi boxploty pre vsetky znaky v datasete, obrazky ulozi ako jpeg do priecinka.  
 
-obe metody interne volaju makeMeNiceBoxPlot() - core implementacia.
+obe metody interne volaju giveMeNiceBoxPlot() - core implementacia.
 
 
 ## Population means
@@ -109,3 +112,5 @@ genericke metody - nie ze by to bolo nutne, je to vsak potrebne pre to aby tato 
 metody labels.points() a plot.legend() su len genericke wrapery pre metody labels.points.internal() a plot.legend.internal(). objekty "pcares" a "cdares" maju ~ rovnaku vnutornu strukturu. data potrebne pre vykreslovanie su ulozene v result$objects$..
 
 
+
+summary

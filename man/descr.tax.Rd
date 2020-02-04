@@ -2,7 +2,9 @@
 \alias{descr.tax}
 \alias{descr.pop}
 \alias{descr.all}
+
 \title{Descriptive statistics}
+
 \usage{
 descr.tax(object, format)
 

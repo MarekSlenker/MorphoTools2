@@ -61,17 +61,19 @@ These functions are wrappers above classical R \code{\link{boxplot}} {graphics} 
 The \code{boxplot.all} function produce boxplot for each morphological character and save them to a folder named in the folderName parameter. If it does not exist, a new folder is created.
 }
 \examples{
-boxplot.character(object, "ST", col = "orange", border = "red")
+data(centaurea)
 
-boxplot.character(object, "ST", outliers = FALSE, 
+boxplot.character(centaurea, "ST", col = "orange", border = "red")
+
+boxplot.character(centaurea, "ST", outliers = FALSE, 
           lowerWhisker = 0.1, upperWhisker = 0.9)
 
-boxplot.character(object, "ST", varwidth = T, notch = T, 
+boxplot.character(centaurea, "ST", varwidth = T, notch = T, 
           boxwex = 0.4, staplewex = 1.3, horizontal = T)
 
-boxplot.character(object, "ST", boxlty = 1, medlwd = 5, 
+boxplot.character(centaurea, "ST", boxlty = 1, medlwd = 5, 
           whisklty = 2, whiskcol = "red", staplecol = "red",
-          outcol = "grey", pch = "-")
+          outcol = "grey30", pch = "-")
 
-boxplot.all(object, folderName = "boxplots")
+boxplot.all(centaurea, folderName = "boxplots")
 }

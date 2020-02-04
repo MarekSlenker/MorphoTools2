@@ -15,3 +15,5 @@ export populacii cez view.Population();  view.Taxa()
 classifda.knn   -  je OK   center = TRUE, scale = TRUE  data??
 
   Doreies PRINT metody
+
+na vsetky vystupy vyskusaj, ci na ne funguje export.res()

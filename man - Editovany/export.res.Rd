@@ -32,7 +32,10 @@ export.res(object, file = "clipboard", dec = ".", sep = "\\t", row.names = F, co
 }
 
 \examples{
-export.res(pcaRes, file = "pcaRes.txt")
+data(centaurea)
+
+descr = descr.tax(centaurea, format = "($MEAN ± $SD)")
+export.res(descr, file = "centaurea_descrTax.txt")
 }
 
 

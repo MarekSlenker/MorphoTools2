@@ -31,9 +31,9 @@ object = cdaResult
 plot.points(cdaResult, col = c("red", "green", "navy", "orange"))
 
 classifda.lda(data, crossval = "pop")
-classifda.lda(data)
+aa = classifda.lda(data)
 
-
+summary(aa)
 knn.select(data)
 
 classRes = classifda.knn(data, k = 3, crossval = "indiv")

@@ -12,29 +12,6 @@ delete.population(object, populationName)
 
 delete.charecter(object, charecterName)
 }
-\arguments{
-\item{object}{an object of class 'morphodata'.}
-
-\item{taxonName}{vector of taxa to be removed.}
-
-\item{populationName}{vector of populations to be removed.}
-
-\item{charecterName}{vector of characters to be removed.}
-}
-\value{
-object of class 'morphodata'
-}
 \description{
-This functions remove particular taxa, populations or morphological characters from morphodata object.
-}
-\examples{
-myPartialDataset = delete.taxon(initialdataset, "hybr")
-myPartialDataset = delete.taxon(initialdataset, c("ph", "st"))
-
-myPartialDataset = delete.population(initialdataset, "CZLE")
-myPartialDataset = delete.population(initialdataset, c("CERV", "DEB", "KOT"))
-
-myPartialDataset = delete.charecter(initialdataset, "StemHeight")
-myPartialDataset = delete.charecter(initialdataset, c("StemHeight", "LeafNo", "PetalLength"))
-
+Remove items (Taxa, Populations, morphological characters) from an morphodata object
 }

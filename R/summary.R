@@ -1,12 +1,4 @@
 #' Summarize a structure of a morphodata object.
-#'
-#' @description This function summarizes the information contained in the a 'morphodata' object.
-#' @usage
-#' ## S3 method for class 'morphodata'
-#' summary(object)
-#' @param object an object of class 'morphodata'.
-#' @examples
-#' summary(object)
 #' @export
 summary.morphodata <- function(object) {
   #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
@@ -95,6 +87,25 @@ summary.cdadata <- function(object) {
 }
 
 
+#' Summarize a structure of a classifdata object.
+#'
+#' @description This function summarizes the information contained in the a 'classifdata' object.
+#' @usage
+#' ## S3 method for class 'classifdata'
+#' summary(object)
+#' @param object an object of class 'classifdata'.
+#' @examples
+#' summary(object)
+#' @export
+summary.classifdata <- function(object) {
+  checkClass(object, "classifdata")
+
+  cat("object of class 'classifdata'; storing results of Classificatory Discriminant Analysis\n\n")
+
+  attr(object, "class") <- "data.frame"
+
+  print(object)
+}
 
 
 

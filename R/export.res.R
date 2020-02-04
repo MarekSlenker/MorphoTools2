@@ -1,34 +1,22 @@
 # generic function
 
-
 #' Export data
-#'
-#' @description This is a generic function for exporting results, stored in objects of MorphoTools package.
-#'
-#' @usage export.res(object, ...)
-#'
-#' @param object 	an object to be exported.
-#' @param ... further arguments passed to or from other methods.
-#' @param file either a character string naming a file or a connection open for writing. "" indicates output to the console.
-#' @param dec the string to use for decimal points in numeric or complex columns: must be a single character.
-#' @param sep the field separator string. Values within each row of x are separated by this string.
-#'
 #' @export
 export.res <- function(object, ...) {
   UseMethod("export.res")
 }
 
-#' @describeIn export.res function for exporting 'morphodata' objects
+#' @rdname export.res
 #' @export
 export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
   checkClass(object, "morphodata")
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
-  export.res(objToWrite ,file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
+  export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
 
-#' @describeIn export.res function for exporting 'data.frame' objects
+#' @rdname export.res
 #' @export
 export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
 
@@ -37,7 +25,7 @@ export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "
   write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = row.names, col.names = col.names, na = "")
 }
 
-#' @describeIn export.res function for exporting 'matrix' objects
+#' @rdname export.res
 #' @export
 export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
 
@@ -45,10 +33,10 @@ export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t",
 
   objToWrite = data.frame("character" = rownames(object), object)
 
-  export.res(objToWrite ,file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
+  export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
 
-#' @describeIn export.res function for exporting 'numeric' objects
+#' @rdname export.res
 #' @export
 export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t") {
 
@@ -56,10 +44,10 @@ export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t"
 
   objToWrite = as.data.frame(object)
 
-  export.res(objToWrite ,file = file, dec = dec, sep = sep, row.names = F, col.names = F)
+  export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = F, col.names = F)
 }
 
-#' @describeIn export.res function for exporting 'classifdata' objects
+#' @rdname export.res
 #' @export
 export.res.classifdata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
 
@@ -67,7 +55,7 @@ export.res.classifdata <- function(object, file = "clipboard", dec = ".", sep = 
 
   attr(object, "class") <- "data.frame"
 
-  export.res(object ,file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
+  export.res(object, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
 
 
