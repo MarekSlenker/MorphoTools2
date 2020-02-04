@@ -2,7 +2,22 @@ checkMorphodataClass(object)
 
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
-data = read.morphodata("./tests/testFiles/sample.txt")
+
+
+pcaRes = pca.calc(data)
+
+plot.points(pcaRes)
+plot.characters(pcaRes)
+plot.3D(pcaRes)
+
+cdaRes = cda.calc(data)
+plot.points(cdaRes)
+plot.characters(cdaRes)
+plot.3D(cdaRes)
+
+
+
+    data = read.morphodata("./tests/testFiles/sample.txt")
 
 data = read.morphodata("./tests/testFiles/Impatiens_individuals.txt")
 

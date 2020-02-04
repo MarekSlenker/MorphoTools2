@@ -127,8 +127,8 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
     if (max(axes) > length(cdaResult$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(cdaResult$eigenValues), " axes.", sep = "" ), call. = F)
 
-    if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(cdaResult$axesVariance[axes[1]], digits = 2) ,"%)", sep = "")
-    if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(cdaResult$axesVariance[axes[2]], digits = 2) ,"%)", sep = "")
+    if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(cdaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(cdaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
     cdaResult$pch = as.numeric( setValuesForVector(cdaResult$objects$Taxon, pch))
