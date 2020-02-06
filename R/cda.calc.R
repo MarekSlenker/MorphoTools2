@@ -23,6 +23,11 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
 
+  for (pasSample in passiveSamples) {
+    if (!(pasSample %in% levels(object$Taxon))) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
+  }
+
+
 
   # vypocitaj na zaklade skratenej matice (bez pop alebo taxa)
   # ak NULL, matica sa nezmeni
