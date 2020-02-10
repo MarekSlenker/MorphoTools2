@@ -17,6 +17,12 @@ classifda.lda(object, crossval = "indiv")
 knn.select(object, crossval = "indiv")
 classifda.knn(object, k, crossval = "indiv")
 
+
+# S3 METHODS
+SUMMARY
+
+PRINT
+
 knn.select(object, crossval = "indiv")
 }
 \arguments{
@@ -28,7 +34,15 @@ knn.select(object, crossval = "indiv")
 These functions computes discriminant function for classifying observations. Linear discriminant function or nonparametric k-nearest-neighbor method can be used.
 }
 \details{
-dsa vrati objekt typu "classifdata
+classif.matrix formats the results of the above three functions as a classification matrix of taxa. For each taxon from the original data, the function shows the number of classifications into all taxa
+present and the percentage of correct classifications; the total percentage of correct classifications over all taxa is also computed. The results can be exported using the export.res function.
+matrix<-classif.matrix(results) classif.pmatrix computes the classification matrix for populations; for each population, it shows the numbers of classifications into all taxa present in the data and the percentage of correct
+classifications. The results can be exported using the export.res function. The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned
+populations. For example, most of the populations (excluding hybrids) from the sample data are successfully classified using the classif.da function (generally over 70% correct classifications
+           and often 100%), but two populations (BABL and LES) have only 31% and 15% of correct                                  classifications, respectively; the first one is probably influenced by hybridization, while the latter is
+                                                                  “atypical” within the sample dataset (it may represent different subspecies). When hybrid populations
+                                                                                                                        from the sample data are analysed (using classif.samp function), some individuals are usually
+                                                      classified as C. pseudophrygia and some as C. stenolepis (and none as C. phrygia) within each                                                        population, which clearly demonstrates the intermediacy of these populations.
 }
 \examples{
 classifda.lda(morphodata, crossval = "indiv")

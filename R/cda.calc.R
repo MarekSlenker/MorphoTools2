@@ -42,9 +42,9 @@ cda.calc <- function(object, passiveSamples = NULL) {
 
 
   # calculate with objectNoPassiveSamples
-  d = as.matrix(objectNoPassiveSamples$data)
-  x = lm(d ~ objectNoPassiveSamples$Taxon)
-  cda = candisc(x, term="objectNoPassiveSamples$Taxon")
+  d_NoPassiveSamples = as.matrix(objectNoPassiveSamples$data)
+  x_NoPassiveSamples = lm(d_NoPassiveSamples ~ objectNoPassiveSamples$Taxon)
+  cda = candisc(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
 
 
 
@@ -69,7 +69,14 @@ cda.calc <- function(object, passiveSamples = NULL) {
   cdaResult$objects$Taxon = object$Taxon
 
   # predict na zaklade plnej matice
-  cdaResult$objects$scores = scale(objectWithPassiveSamples$data, center = T, scale = F) %*% cda$coeffs.raw
+  # scaleFactor je konstanta, o ktoru treba posunut data
+  scaleFactor = (d_NoPassiveSamples %*% cda$coeffs.raw - cda$scores[,-1])[1,]
+  d_WithPassiveSamples = as.matrix(objectWithPassiveSamples$data)
+  scoreList = (apply(d_WithPassiveSamples %*% cda$coeffs.raw,1, FUN = function(x) {x - scaleFactor}))
+  cdaResult$objects$scores = data.frame(matrix(unlist(scoreList), nrow=length(scoreList), byrow=T))
+  colnames(cdaResult$objects$scores) = colnames(cda$scores)[-1]
+
+  rownames(cdaResult$objects$scores) = object$ID
 
   #  predict na zaklade plnej matice = novych dat
   cdaResult$groupMeans = aggregate(cdaResult$objects$scores, by = list("Taxon" = cdaResult$objects$Taxon), mean)

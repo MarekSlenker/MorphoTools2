@@ -40,19 +40,19 @@ newPcadata <- function() {
 newCdadata <- function() {
 
   newCdadata <- list(
-    axesVariance = numeric(),
-    cumulativeAxesVariance = numeric(),
-    groupMeans = data.frame(),
-    coeffs.raw = matrix(),
-    coeffs.std = matrix(),
-    totalCanonicalStructure = matrix(),
     objects = list(
       ID = factor(),
       Population = factor(),
       Taxon = factor(),
       scores = data.frame()),
-    rank = numeric(),
     eigenValues = numeric(),
+    axesVariance = numeric(),
+    cumulativeAxesVariance = numeric(),
+    groupMeans = data.frame(),
+    rank = numeric(),
+    coeffs.std = matrix(),
+    coeffs.raw = matrix(),
+    totalCanonicalStructure = matrix(),
     canrsq = numeric()
     )
 

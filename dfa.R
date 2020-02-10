@@ -4,7 +4,16 @@ checkMorphodataClass(object)
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 
 
-pcaRes = pca.calc(data)
+classif = classifda.lda(data)
+
+head(objectNoPassiveSamples)
+
+
+
+cdaRes
+
+
+cdaRes$
 
 plot.points(pcaRes)
 plot.characters(pcaRes)
