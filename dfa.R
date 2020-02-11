@@ -1,7 +1,18 @@
 checkMorphodataClass(object)
-
+object = objectWithPassiveSamples
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
+
+
+objectWithPassiveSamples = data
+objectNoPassiveSamples = delete.taxon(data, "hybr")
+
+
+cdaPas = cda.calc(objectWithPassiveSamples)
+cdaNoPas = cda.calc(objectNoPassiveSamples)
+
+View(objectNoPassiveSamples$data)
+
 
 
 classif = classifda.lda(data)
