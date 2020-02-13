@@ -23,13 +23,7 @@ complete) from 33 populations (31 complete).
 }
 
 \format{An object of class \code{\link{morphodata}}.
-\describe{
-  \item{ID}{IDs of each row of \code{data} object.}
-  \item{Population}{population membership of each row of \code{data} object.}
-  \item{Taxon}{taxon membership of each row of \code{data} object.}
-  \item{data}{\code{data.frame} of individuals (rows) and values of measured morphological characters (columns).}
-}}
-
+}
 
 
 \keyword{datasets}

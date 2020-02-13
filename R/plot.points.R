@@ -71,6 +71,9 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
     taxlev = levels(cdaResult$objects$Taxon)
 
+    # musim to vyhodit z data.frame
+    cdaResult$objects$scores = as.numeric(cdaResult$objects$scores[,])
+
     xhist = hist(cdaResult$objects$scores, plot = F)
 
     if (is.null(breaks)) breaks = xhist$breaks

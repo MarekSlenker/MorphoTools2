@@ -1,10 +1,30 @@
 checkMorphodataClass(object)
-
+object = objectWithPassiveSamples
 
 data = read.morphodata("./tests/testFiles/samplePlnaMatica.txt")
 
 
-pcaRes = pca.calc(data)
+objectWithPassiveSamples = data
+objectNoPassiveSamples = delete.taxon(data, "hybr")
+
+
+cdaPas = cda.calc(objectWithPassiveSamples)
+cdaNoPas = cda.calc(objectNoPassiveSamples)
+
+View(objectNoPassiveSamples$data)
+
+
+
+classif = classifda.lda(data)
+
+head(objectNoPassiveSamples)
+
+
+
+cdaRes
+
+
+cdaRes$
 
 plot.points(pcaRes)
 plot.characters(pcaRes)

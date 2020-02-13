@@ -1,12 +1,23 @@
 \name{read.morphodata}
 \alias{read.morphodata}
 \alias{summary.morphodata}
-\title{Data input}
+\alias{samples}
+\alias{populations}
+\alias{taxa}
+
+\title{Data input & description}
 \usage{
 read.morphodata(file, dec=".", sep = "\t", ...)
 
-## S3 method for class 'morphodata'
+## S3 methods for class 'morphodata'
 summary(object)
+
+samples(object)
+
+populations(object)
+
+taxa(object)
+
 }
 \arguments{
 \item{file}{the name of the file which the data are to be read from.}
@@ -20,7 +31,7 @@ summary(object)
 \item{...}{further arguments to be passed to read.table.}
 }
 \value{
-object of class 'morphodata'
+object of class '\code{\link{morphodata}}'
 }
 \description{
 Imports data from text file and produces a 'morphodata' object from it.
@@ -39,4 +50,7 @@ data = read.morphodata("infile.txt")
 data = read.morphodata("clipboard")
 
 summary(data)
+samples(data)
+populations(data)
+taxa(data)
 }
