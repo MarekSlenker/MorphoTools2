@@ -1,10 +1,10 @@
 #' Descriptive statistics
 #' @export
-descr.tax <- function(object, format = NULL) {
+descr.tax <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "Taxon")
+  descrStatistic = descrByGroup(object, "Taxon", decimalPlaces)
 
   taxa =  levels(object$Taxon)
   characters = colnames(object$data)
@@ -21,11 +21,11 @@ descr.tax <- function(object, format = NULL) {
 
 #' @rdname descr.tax
 #' @export
-descr.pop <- function(object, format = NULL) {
+descr.pop <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "Population")
+  descrStatistic = descrByGroup(object, "Population", decimalPlaces)
 
   populs =  levels(object$Population)
   characters = colnames(object$data)
@@ -42,13 +42,13 @@ descr.pop <- function(object, format = NULL) {
 
 #' @rdname descr.tax
 #' @export
-descr.all <- function(object, format = NULL) {
+descr.all <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   object$all = as.factor( rep("all", length(object$Taxon)))
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "all")
+  descrStatistic = descrByGroup(object, "all", decimalPlaces)
 
   #alls =  levels(object$all)
   characters = colnames(object$data)
@@ -70,7 +70,7 @@ descr.all <- function(object, format = NULL) {
 # @param object object of class morphodata
 # @param column Population, Taxon, or whole dataset - levels for calculating descriptive statistics
 
-descrByGroup <- function(object, column) {
+descrByGroup <- function(object, column, digits) {
   # obj je triedy morfodata, skontrolovane vyssie
 
   characters = colnames(object$data)
@@ -114,7 +114,7 @@ descrByGroup <- function(object, column) {
     descrStatistic[ , "Max", group] = sapply(object$data[groupPositions, ], quantile, probs=1, na.rm=T)
   }
 
-  descrStatistic = round(descrStatistic, digits = 3)
+  descrStatistic = round(descrStatistic, digits = digits)
   descrStatistic[which(is.nan(descrStatistic))] = NA
 
   return(descrStatistic)

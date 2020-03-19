@@ -6,16 +6,19 @@
 \title{Descriptive statistics}
 
 \usage{
-descr.tax(object, format)
+descr.tax(object, format, decimalPlaces)
 
-descr.pop(object, format)
+descr.pop(object, format, decimalPlaces)
 
-descr.all(object, format)
+descr.all(object, format, decimalPlaces)
 }
 \arguments{
 \item{object}{an object of class 'morphodata'.}
 
 \item{format}{form to which will be formatted descriptive characters. See Details.}
+
+\item{decimalPlaces}{the number of a digit to the right of a decimal point.}
+
 }
 \description{
 These functions calculate the descriptive statistics of each character in the whole dataset, each taxon and each population.
@@ -34,7 +37,9 @@ Keywords: "$MEAN" = mean; "$SD" = standard deviation"; "$MIN" = minimum; "$5\%" 
 }
 
 \examples{
-data(centaurea)
+data(centaurea, decimalPlaces = 3)
+
+descr.tax(centaurea)
 
 descr.tax(centaurea, format = "($MEAN ± $SD)")
 
