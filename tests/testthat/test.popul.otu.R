@@ -20,5 +20,7 @@ test_that("correct calculations",  {
 
     expect_equal(pop$data[4,1], ((7+8)/2))
     expect_equal(pop$data[4,2], ((17+18)/2))
+
+    expect_is(morphoMockup, "morphodata")
 })
 
