@@ -5,10 +5,10 @@
 na.meansubst(object)
 }
 \arguments{
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}}'.}
 }
 \value{
-object of class 'morphodata'
+object of class '\code{\link{morphodata}}'
 }
 \description{
 This function substitutes missing data using the average value of the respective character in the respective population.

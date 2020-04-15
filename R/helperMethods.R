@@ -1,5 +1,18 @@
 # internal
 
+
+checkClass <- function(object, class) {
+  if (! (is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = F)
+}
+
+
+####################x
+# dalej nekontrolovane
+
+
+
+
+
 # vector aj symbols su oba vektory. hodnoty vo vektore nahradi postupne symbolmi.
 # ak je symbolov menej, tak ich zrecykluje, ak ich je viace, kasle na ne
 
@@ -29,9 +42,7 @@ setValuesForVector <- function(vector, symbols) {
 }
 
 
-checkClass <- function(object, class) {
-  if (! (is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = F)
-}
+
 
 
 plotLegend <- function(legend.pos, legend, pch, col, pt.bg, ncol = 1, ...) {

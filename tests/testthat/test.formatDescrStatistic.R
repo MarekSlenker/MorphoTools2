@@ -8,7 +8,7 @@ morphoMockup = list("ID" = factor(x = c(1,2,3,4,5,6,7,8)),
                       "Ch1" = 1:8,
                       "Ch2" = 11:18))
 
-result = descrByGroup(morphoMockup, "Taxon")
+result = descrByGroup(morphoMockup, "Taxon", 3)
 taxa =  levels(morphoMockup$Taxon)
 characters = colnames(morphoMockup$data)
 

@@ -6,6 +6,11 @@
 \alias{taxa}
 
 \title{Data input & description}
+
+\description{
+Imports data from text file and produces a '\code{\link{morphodata}}' object from it.
+}
+
 \usage{
 read.morphodata(file, dec=".", sep = "\t", ...)
 
@@ -19,6 +24,7 @@ populations(object)
 taxa(object)
 
 }
+
 \arguments{
 \item{file}{the name of the file which the data are to be read from.}
 
@@ -30,12 +36,11 @@ taxa(object)
 
 \item{...}{further arguments to be passed to read.table.}
 }
+
 \value{
 object of class '\code{\link{morphodata}}'
 }
-\description{
-Imports data from text file and produces a 'morphodata' object from it.
-}
+
 \details{
 The function expect the following data structure: \cr
 (1) the first row contains variable names;\cr
@@ -45,6 +50,7 @@ The function expect the following data structure: \cr
 
 If there are missing values in the data, they must be represented as empty cells or by the text NA (not quoted), not zero, space or any other character.
 }
+
 \examples{
 data = read.morphodata("infile.txt")
 data = read.morphodata("clipboard")

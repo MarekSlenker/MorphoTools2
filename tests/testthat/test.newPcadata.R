@@ -7,5 +7,10 @@ test_that("check class of new object",  {
 
   expect_is(newObject, "pcadata")
 
-  expect_output(str(newObject), "List of 8")
+  expect_named(newObject, c('objects', 'eigenVectors', 'eigenValues', 'axesVariance', 'cumulativeAxesVariance', 'groupMeans', 'rank', 'sdev', 'center', 'scale'))
+
+  expect_named(newObject$objects, c('ID', 'Population', 'Taxon', 'scores'))
+
+
+  expect_output(str(newObject), "List of 10")
 })

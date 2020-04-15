@@ -16,6 +16,7 @@ export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "
   export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
 
+
 #' @rdname export.res
 #' @export
 export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
@@ -24,6 +25,11 @@ export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "
 
   write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = row.names, col.names = col.names, na = "")
 }
+
+
+
+#  DOLE  NETESTOVANE
+
 
 #' @rdname export.res
 #' @export
@@ -36,6 +42,7 @@ export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t",
   export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
 
+
 #' @rdname export.res
 #' @export
 export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t") {
@@ -46,6 +53,7 @@ export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t"
 
   export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = F, col.names = F)
 }
+
 
 #' @rdname export.res
 #' @export

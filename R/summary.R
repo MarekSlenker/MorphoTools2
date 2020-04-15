@@ -1,4 +1,4 @@
-#' Summarize a structure of a morphodata object.
+#' @rdname read.morphodata
 #' @export
 summary.morphodata <- function(object) {
   #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
@@ -10,23 +10,23 @@ summary.morphodata <- function(object) {
   cat(paste(" - contains ", length(levels(object$Population)), " populations\n", sep = ""))
   cat(paste(" - contains ", length(levels(object$Taxon)), " defined groups (taxa)\n", sep = ""))
   cat("\n")
-  cat(paste("* Populations: ", paste(levels(object$Population), collapse = ", "), "\n", sep = ""))
-  cat(paste("* Groups (taxa): ", paste(levels(object$Taxon), collapse = ", "), "\n", sep = ""))
+  cat(paste("Populations: ", paste(levels(object$Population), collapse = ", "), "\n", sep = ""))
+  cat(paste("Groups (taxa): ", paste(levels(object$Taxon), collapse = ", "), "\n", sep = ""))
 }
 
 
 
 
-#' Summarize a structure of a pcadata object.
-#'
-#' @description This function summarizes the information contained in the a 'pcadata' object.
-#' @usage
-#' ## S3 method for class 'pcadata'
-#' summary(object)
-#' @param object an object of class 'pcadata'.
-#' @examples
-#' summary(object)
-#' @export
+# Summarize a structure of a pcadata object.
+#
+# @description This function summarizes the information contained in the a 'pcadata' object.
+# @usage
+# ## S3 method for class 'pcadata'
+# summary(object)
+# @param object an object of class 'pcadata'.
+# @examples
+# summary(object)
+# @export
 summary.pcadata <- function(object) {
   checkClass(object, "pcadata")
 
@@ -50,16 +50,16 @@ summary.pcadata <- function(object) {
 }
 
 
-#' Summarize a structure of a cdadata object.
-#'
-#' @description This function summarizes the information contained in the a 'cdadata' object.
-#' @usage
-#' ## S3 method for class 'cdadata'
-#' summary(object)
-#' @param object an object of class 'cdadata'.
-#' @examples
-#' summary(object)
-#' @export
+# Summarize a structure of a cdadata object.
+#
+# @description This function summarizes the information contained in the a 'cdadata' object.
+# @usage
+# ## S3 method for class 'cdadata'
+# summary(object)
+# @param object an object of class 'cdadata'.
+# @examples
+# summary(object)
+# @export
 summary.cdadata <- function(object) {
   checkClass(object, "cdadata")
 
@@ -87,16 +87,16 @@ summary.cdadata <- function(object) {
 }
 
 
-#' Summarize a structure of a classifdata object.
-#'
-#' @description This function summarizes the information contained in the a 'classifdata' object.
-#' @usage
-#' ## S3 method for class 'classifdata'
-#' summary(object)
-#' @param object an object of class 'classifdata'.
-#' @examples
-#' summary(object)
-#' @export
+# Summarize a structure of a classifdata object.
+#
+# @description This function summarizes the information contained in the a 'classifdata' object.
+# @usage
+# ## S3 method for class 'classifdata'
+# summary(object)
+# @param object an object of class 'classifdata'.
+# @examples
+# summary(object)
+# @export
 summary.classifdata <- function(object) {
   checkClass(object, "classifdata")
 

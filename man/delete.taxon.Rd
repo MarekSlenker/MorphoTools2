@@ -11,7 +11,7 @@ delete.population(object, populationName)
 delete.charecter(object, charecterName)
 }
 \arguments{
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}}'.}
 
 \item{taxonName}{vector of taxa to be removed.}
 
@@ -20,7 +20,7 @@ delete.charecter(object, charecterName)
 \item{charecterName}{vector of characters to be removed.}
 }
 \value{
-object of class 'morphodata'
+object of class '\code{\link{morphodata}}'
 }
 \description{
 This functions remove particular taxa, populations or morphological characters from morphodata object.

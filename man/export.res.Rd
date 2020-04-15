@@ -1,10 +1,6 @@
 \name{export.res}
 \alias{export.res}
-\alias{export.res.morphodata}
-\alias{export.res.data.frame}
-\alias{export.res.matrix}
-\alias{export.res.numeric}
-\alias{export.res.classifdata}
+
 
 \title{Export data}
 

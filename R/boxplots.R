@@ -1,4 +1,4 @@
-#' Box Plots
+#' @rdname boxplot.character
 #' @export
 boxplot.character <- function(object, ...) {
   UseMethod("boxplot.character")

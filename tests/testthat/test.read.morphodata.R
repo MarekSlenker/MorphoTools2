@@ -9,6 +9,17 @@ test_that("input file contains NaN", {
   expect_error(read.morphodata("../testFiles/sample_NaNs.txt"), "input contains non-numeric data")
 })
 
+test_that("decimal point character is \",\" - UNcorrectly stated",  {
+  expect_error(read.morphodata("../testFiles/sample_NaNs.txt"), "input contains non-numeric data")
+})
+
+test_that("numeric names of pops and taxa",  {
+  expect_error(read.morphodata("../testFiles/sample_numericNames.txt"), "input do not contains required columns")
+})
+
+
+context("read.morphodata: valid input")
+
 test_that("decimal point character is \",\" - correctly stated",  {
   data = read.morphodata("../testFiles/sample_decComa.txt", dec=",")
 
@@ -16,17 +27,9 @@ test_that("decimal point character is \",\" - correctly stated",  {
   expect_is(data, "morphodata")
 })
 
-test_that("decimal point character is \",\" - UNcorrectly stated",  {
-  expect_error(read.morphodata("../testFiles/sample_NaNs.txt"), "input contains non-numeric data")
-})
-
 test_that("collums delimited by space",  {
   data = read.morphodata("../testFiles/sample_whitespaceDelim.txt", sep = " ")
 
   expect_output(str(data), "List of 4")
   expect_is(data, "morphodata")
-})
-
-test_that("numeric names of pops and taxa",  {
-  expect_error(read.morphodata("../testFiles/sample_numericNames.txt"), "input do not contains required columns")
 })

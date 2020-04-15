@@ -19,7 +19,7 @@ boxplot.all(object, folderName = "boxplots", outliers = T,
             varwidth = F, ...)
 }
 \arguments{
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}}'.}
 
 \item{character}{a morphological character used for plotting boxplot.}
 
@@ -41,7 +41,7 @@ boxplot.all(object, folderName = "boxplots", outliers = T,
 
 \item{cex.main}{a magnification to be used for the main title.}
 
-\item{pch = 8}{a plotting symbol of the outliers.}
+\item{pch}{a plotting symbol of the outliers.}
 
 \item{xlab, ylab}{a title of the respective axes.}
 
@@ -63,9 +63,9 @@ The \code{boxplot.all} function produce boxplot for each morphological character
 \examples{
 data(centaurea)
 
-boxplot.character(centaurea, "ST", col = "orange", border = "red")
+boxplot.character(centaurea, character= "ST", col = "orange", border = "red")
 
-boxplot.character(centaurea, "ST", outliers = FALSE, 
+boxplot.character(centaurea, character= "ST", outliers = FALSE, 
           lowerWhisker = 0.1, upperWhisker = 0.9)
 
 boxplot.character(centaurea, "ST", varwidth = T, notch = T, 

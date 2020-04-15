@@ -5,10 +5,10 @@
 popul.otu(object)
 }
 \arguments{
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}}'.}
 }
 \value{
-object of class 'morphodata'
+object of class '\code{\link{morphodata}}'
 }
 \description{
 This function calculates the average value for each character in each population, with the pairwise deletion of missing data.

@@ -19,6 +19,7 @@ classif = classifda.lda(data)
 
 head(objectNoPassiveSamples)
 
+cd = delete.taxon( centaurea)
 
 
 cdaRes
