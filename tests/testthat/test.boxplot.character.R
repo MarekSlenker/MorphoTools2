@@ -13,9 +13,6 @@ test_that("characters",  {
 
   expect_error(boxplot.character(morphoMockup, "X_char", 0.95, 0.05), "character X_char was not found in attached data.")
 
-  jpeg(filename = "boxplot.jpeg")
-  boxplot.character(morphoMockup, "data.Ch1", 0.95, 0.05)
-  dev.off()
 })
 
 test_that("visual",  {

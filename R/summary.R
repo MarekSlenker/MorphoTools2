@@ -16,17 +16,8 @@ summary.morphodata <- function(object) {
 
 
 
-
-# Summarize a structure of a pcadata object.
-#
-# @description This function summarizes the information contained in the a 'pcadata' object.
-# @usage
-# ## S3 method for class 'pcadata'
-# summary(object)
-# @param object an object of class 'pcadata'.
-# @examples
-# summary(object)
-# @export
+#' @rdname pca.calc
+#' @export
 summary.pcadata <- function(object) {
   checkClass(object, "pcadata")
 
@@ -50,16 +41,8 @@ summary.pcadata <- function(object) {
 }
 
 
-# Summarize a structure of a cdadata object.
-#
-# @description This function summarizes the information contained in the a 'cdadata' object.
-# @usage
-# ## S3 method for class 'cdadata'
-# summary(object)
-# @param object an object of class 'cdadata'.
-# @examples
-# summary(object)
-# @export
+#' @rdname cda.calc
+#' @export
 summary.cdadata <- function(object) {
   checkClass(object, "cdadata")
 

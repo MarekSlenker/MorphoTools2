@@ -14,6 +14,8 @@ pca.calc(object)
 
 ## S3 method for class 'pcadata'
 
+summary(object)
+
 plot.points(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", labels = FALSE,
       legend = FALSE, legend.pos = "topright", ncol = 1, ...)
@@ -58,6 +60,8 @@ centaurea = na.meanSubst(centaurea)
 centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
+
+summary(pcaRes)
 
 plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=T, legend.pos="bottomright")

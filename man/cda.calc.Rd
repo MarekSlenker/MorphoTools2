@@ -14,6 +14,8 @@ cda.calc(object, passiveSamples = NULL)
 
 ## S3 methods for class 'cdadata'
 
+summary(object)
+
 plot.points(cdaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", breaks = NULL,
       ylim = NULL, labels = FALSE, legend = FALSE,
@@ -68,6 +70,11 @@ centaurea = na.meanSubst(centaurea)
 centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
 
 cdaRes = cda.calc(centaurea)
+
+summary(cdaRes)
+
+plot.points(cdaRes, col = c("red","green","blue","red"),
+  pch=c(20,17,8,21), pt.bg = "orange", legend=T)
 
 
 }

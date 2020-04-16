@@ -1,12 +1,6 @@
 context("summary.morphodata")
 
 
-test_that("input of different class", {
-  data = read.delim("../testFiles/sample.txt")
-  expect_error(summary.morphodata(data), "object is not of class 'morphodata'")
-})
-
-
 test_that("correct info about class structure", {
   data = read.morphodata("../testFiles/sample.txt")
   output = capture.output(summary(data))
