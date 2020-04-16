@@ -10,8 +10,6 @@ cda.calc <- function(object, passiveSamples = NULL) {
     if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
   }
 
-  TRUE || TRUE
-
   # vypocitaj na zaklade skratenej matice (bez pop alebo taxa)
   # ak NULL, matica sa nezmeni
 
@@ -19,8 +17,8 @@ cda.calc <- function(object, passiveSamples = NULL) {
   objectNoPassiveSamples = object
 
   for (groupName in passiveSamples) {
-    if (groupName %in% object$Taxon) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Taxon", groupName)
-    if (groupName %in% object$Population) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Population", groupName)
+    if (groupName %in% objectNoPassiveSamples$Taxon) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Taxon", groupName)
+    if (groupName %in% objectNoPassiveSamples$Population) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Population", groupName)
   }
 
   candisc_MK <- function (mod, term, type = "2", manova, ndim = rank, ...)
