@@ -1,14 +1,4 @@
-# generic function
-
-
 #' The default scatterplot function
-#'
-#' @description A generic function for ploting ordination scores stored in 'pcadata' and 'cdadata' objects.
-#'
-#' @usage plot.points(object, ...)
-#'
-#' @param object object of class 'pcadata' or 'cdadata'.
-#' @param ... further arguments passed to or from other methods.
 #' @export
 plot.points <- function(object, ...) {
   UseMethod("plot.points")
@@ -19,7 +9,10 @@ plot.points <- function(object, ...) {
 #' @method plot.points pcadata
 #' @export
 plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
-                         pch = 16, col = "black", pt.bg = "white", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+                         pch = 16, col = "black", pt.bg = "white",
+                         labels = FALSE,
+                         legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+
   checkClass(pcaResult, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
@@ -44,6 +37,9 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
        xlab = xlab, ylab = ylab, pch = pcaResult$pch, col = pcaResult$col, bg = pcaResult$pt.bg, ... )
 
 
+
+
+
   # legend
   if (legend == TRUE) {
     legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
@@ -52,6 +48,7 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
     plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
   }
 
+  # labels
   if (labels == TRUE) plot2DLabels(pcaResult, axes)
 
 }
@@ -61,7 +58,10 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
 #' @method plot.points cdadata
 #' @export
 plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
-                                pch = 16, col = "black", breaks = NULL, ylim = NULL, pt.bg = "white", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+                          pch = 16, col = "black", pt.bg = "white",
+                          breaks = NULL, ylim = NULL,
+                          labels = FALSE,
+                          legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   checkClass(cdaResult, "cdadata")
 
@@ -80,6 +80,9 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
     # nastav pch, col a pt.bg spravne podla taxonu
     cdaResult$col = setValuesForVector(cdaResult$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
+    if (col == "black" && pt.bg != "white") {
+      col = pt.bg
+    }
     cdaResult$pt.bg = setValuesForVector(cdaResult$objects$Taxon, col)
 
     ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bude skupin
@@ -152,7 +155,7 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     }
 
 
-
+    # labels
     if (labels == TRUE) plot2DLabels(cdaResult, axes)
 
     }

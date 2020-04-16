@@ -36,7 +36,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     dfh <- manova$df[[term]]
     Sp <- E/dfe
     tdecomp <- function(m) {
-      wm <- eigen(m, symmetric = F)  # povodne symetric T
+      wm <- eigen(m, symmetric = T)  # povodne symmetric T
       p <- ncol(m)
       wmd <- wm$values
       out <- t(wm$vectors %*% diag(sqrt(wmd)))
@@ -45,7 +45,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     Tm <- tdecomp(E)
     eInv <- solve(Tm)
     eHe <- t(eInv) %*% H %*% eInv
-    dc <- eigen(eHe, symmetric = TRUE)
+    dc <- eigen(eHe, symmetric = T)  # povodne symmetric T
     rank <- min(dfh, sum(dc$values > 0))
     pct <- 100 * dc$values/sum(dc$values)
     if (ndim > rank) {

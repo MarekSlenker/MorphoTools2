@@ -21,20 +21,11 @@ The cdadata class is designed for storing results of Canonical discriminant anal
 	\item{cumulativeAxesVariance}{cumulative percentage of eigenvalues. }
 	\item{groupMeans}{a data.frame containing the means for the taxa.}
 	\item{rank}{a number of non-zero eigenvalues.}
-	
-	
 	\item{coeffs.raw}{a matrix containing the raw canonical coefficients.}
-	
 	\item{coeffs.std}{a matrix containing the standardized canonical coefficients.}
-	
 	\item{totalCanonicalStructure}{a matrix containing the total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables.}
-
 	\item{canrsq}{a squared canonical correlations.}
 
-	
-	
-
-	
 	}
 }
 

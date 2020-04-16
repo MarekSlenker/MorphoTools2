@@ -41,6 +41,13 @@ test_that("correctness of calculation",  {
 
   expect_equal(cdaRes$objects$scores$Can1, candisc_cda$scores$Can1)
 
+  expect_true(is.numeric(cdaRes$axesVariance) )
+  expect_true(is.numeric(cdaRes$cumulativeAxesVariance) )
+  expect_true(is.numeric(cdaRes$groupMeans$Can1) )
+
+
+
+
 })
 
 
