@@ -17,3 +17,17 @@ test_that("characters",  {
   boxplot.character(morphoMockup, "data.Ch1", 0.95, 0.05)
   dev.off()
 })
+
+test_that("visual",  {
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  boxplot.character(morphoMockup, "data.Ch1", 0.95, 0.05)
+  dev.off()
+
+  expect_true(  visualTest::isSimilar(tmp,  visualTest::getFingerprint("../testFiles/figs/boxplot.png"), threshold = 1)  )
+})
+
+
+
+

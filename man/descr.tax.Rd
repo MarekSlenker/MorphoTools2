@@ -6,11 +6,11 @@
 \title{Descriptive statistics}
 
 \usage{
-descr.tax(object, format, decimalPlaces)
+descr.tax(object, format = NULL, decimalPlaces = 3)
 
-descr.pop(object, format, decimalPlaces)
+descr.pop(object, format = NULL, decimalPlaces = 3)
 
-descr.all(object, format, decimalPlaces)
+descr.all(object, format = NULL, decimalPlaces = 3)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}

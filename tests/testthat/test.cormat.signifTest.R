@@ -1,4 +1,4 @@
-context("clust")
+context("cormat.signifTest")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -9,14 +9,10 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
 
 morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
-test_that("clustering",  {
+test_that("correctness of calculation",  {
 
-  clustRes = clust(morphoMockup, method = "average")
+  cormatRes = cormat.signifTest(morphoMockup)
 
-  expect_equal(clustRes$method, "average")
-  expect_equal(paste(clustRes$labels, collapse = " "), "id1 id2 id3 id4 id5 id6 id7 id8")
-
-  clustRes = clust(morphoMockup, method = "ward")
-
-  expect_equal(clustRes$method, "ward.D")
+  expect_equal(as.character(cormatRes[2,2]), "-0.119;p-value=0.7797")
+  expect_equal(as.character(cormatRes[2,3]), "1;p-value=0")
 })

@@ -1,21 +1,4 @@
 #' Canonical discriminant analysis (CDA)
-#'
-#' @description This function performs generalized canonical discriminant analysis.
-#'
-#' @usage cda.calc(object)
-#'
-#' @param object an object of class 'morphodata'.
-#'
-#' @details
-#'
-#'
-#' @return object of class 'cdadata' containing the following components:
-#'
-#' \item{totalCanonicalStructure}{totalCanonicalStructuretotalCanonicalStructuretotalCanonicalStructuretotalCanonicalStructure}
-#'
-#' @examples
-#' cdaResult = cda.calc(myMorphoData)
-#'
 #' @export
 cda.calc <- function(object, passiveSamples = NULL) {
   checkClass(object, "morphodata")
@@ -24,10 +7,10 @@ cda.calc <- function(object, passiveSamples = NULL) {
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
 
   for (pasSample in passiveSamples) {
-    if (!(pasSample %in% levels(object$Taxon))) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
+    if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
   }
 
-
+  TRUE || TRUE
 
   # vypocitaj na zaklade skratenej matice (bez pop alebo taxa)
   # ak NULL, matica sa nezmeni
