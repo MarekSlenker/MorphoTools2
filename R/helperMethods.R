@@ -57,8 +57,7 @@ plotLegend <- function(legend.pos, legend, pch, col, pt.bg, ncol = 1, ...) {
                                       bty="o", pt.bg = pt.bg, ncol = ncol, ...)
 }
 
-plot2DLabels <- function(object, axes) {
-  text(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]],
-       labels = object$objects$ID, cex = 0.7, pos = 4, offset = 0.5)
-
-}
+#plot2DLabels <- function(object, axes) {
+#  text(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]],
+#       labels = object$objects$ID, cex = 0.7, pos = 4, offset = 0.5)
+#}

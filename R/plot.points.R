@@ -49,7 +49,8 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
   }
 
   # labels
-  if (labels == TRUE) plot2DLabels(pcaResult, axes)
+  if (labels == TRUE) plot.addLabels.points(pcaResult, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+    #plot2DLabels(pcaResult, axes)
 
 }
 
@@ -156,7 +157,8 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
 
     # labels
-    if (labels == TRUE) plot2DLabels(cdaResult, axes)
+    if (labels == TRUE) plot.addLabels.points(cdaResult, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+      # plot2DLabels(cdaResult, axes)
 
     }
 }

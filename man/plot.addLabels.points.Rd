@@ -1,0 +1,49 @@
+\name{plot.addLabels.points}
+\alias{plot.addLabels.points}
+
+\title{Add labels to a plot}
+\usage{
+
+plot.addLabels.points(result, labels = result$objects$ID, include = T,
+      axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...)
+
+}
+\arguments{
+
+\item{result}{an result of \code{\link{pca.calc}} or \code{\link{cda.calc}}, has to by ploted at first.}
+\item{labels}{a vector of label names, which should be included / excluded from ploting, see \code{include}.}
+\item{include}{logical, specifi if lalels in \code{labels} argument should be ploted or excluded from plotiing.}
+\item{axes}{x, y axes of plot.}
+
+
+\item{pos}{a position specifier for the text. Values of 1, 2, 3 and 4, respectively indicate positions below, to the left of, above and to the right of the point.}
+\item{offset}{when pos is specified, this value controls the distance (‘offset’) of the text label from the point in fractions of a character width.}
+\item{cex}{numeric character expansion factor.}
+\item{col}{the colors for labels.}
+\item{...}{further arguments to be passed to \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
+
+
+}
+\description{
+This is a generic function for drawing labels to the data points of \code{pcadata} and \code{cdadata} objects.
+}
+
+\examples{
+data(centaurea)
+centaurea = na.meanSubst(centaurea)
+centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+pops = popul.otu(centaurea)
+
+
+pcaRes = pca.calc(pops)
+plot.points(pcaRes, col = c("red","green","blue","red"),
+            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+
+plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = T)
+
+plot.points(pcaRes, col = c("red","green","blue","red"),
+            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+
+plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = F)
+
+}
