@@ -39,11 +39,20 @@ cda.calc <- function(object, passiveSamples = NULL) {
       wm <- eigen(m, symmetric = T)  # povodne symmetric T
       p <- ncol(m)
       wmd <- wm$values
-      out <- t(wm$vectors %*% diag(sqrt(wmd)))
+
+      # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
+      options(warn=-1) # MK
+      malaBlbost = replace(diag(sqrt(wmd)), is.na(diag(sqrt(wmd))), -1.4-44)  # MK
+      options(warn=0) # MK
+
+      out <- t(wm$vectors %*% malaBlbost)  # MK
+      #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
       out
     }
     Tm <- tdecomp(E)
+
     eInv <- solve(Tm)
+
     eHe <- t(eInv) %*% H %*% eInv
     dc <- eigen(eHe, symmetric = T)  # povodne symmetric T
     rank <- min(dfh, sum(dc$values > 0))
