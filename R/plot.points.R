@@ -42,10 +42,11 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
   # legend
   if (legend == TRUE) {
-    legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
-    legendTable = unique(legendTable)
+    #legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
+    #legendTable = unique(legendTable)
 
-    plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
+    #plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
+    plot.addLegend(pcaResult, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
   }
 
   # labels
@@ -119,10 +120,8 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
-    legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pt.bg)
-    legendTable = unique(legendTable)
+    if (legend == TRUE) plot.addLegend(cdaResult, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
 
-    if (legend == TRUE) plotLegend(legend.pos, legend = legendTable[,1],  pch = 22, col = "black", pt.bg = legendTable[,2], ncol)
 
     # labels neplotujem
 
@@ -148,17 +147,11 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
 
     # legend
-    if (legend == TRUE) {
-      legendTable = cbind(as.character(cdaResult$objects$Taxon), cdaResult$pch, cdaResult$col, cdaResult$pt.bg)
-      legendTable = unique(legendTable)
-
-      plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
-    }
+    if (legend == TRUE) plot.addLegend(cdaResult, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
 
 
     # labels
     if (labels == TRUE) plot.addLabels.points(cdaResult, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
-      # plot2DLabels(cdaResult, axes)
 
     }
 }

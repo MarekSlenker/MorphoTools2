@@ -5,7 +5,7 @@ plot.addLabels.points <- function(result, labels = result$objects$ID, include = 
 }
 
 
-#' @rdname pca.calc
+#' @rdname plot.addLabels.points
 #' @method plot.addLabels.points pcadata
 #' @export
 plot.addLabels.points.pcadata <- function(pcaResult, labels = pcaResult$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
@@ -13,7 +13,7 @@ plot.addLabels.points.pcadata <- function(pcaResult, labels = pcaResult$objects$
   labels_points_internal(pcaResult, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
-#' @rdname cda.calc
+#' @rdname plot.addLabels.points
 #' @method plot.addLabels.points cdadata
 #' @export
 plot.addLabels.points.cdadata <- function(cdaResult, labels = cdaResult$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {

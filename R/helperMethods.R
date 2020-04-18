@@ -45,17 +45,6 @@ setValuesForVector <- function(vector, symbols) {
 
 
 
-plotLegend <- function(legend.pos, legend, pch, col, pt.bg, ncol = 1, ...) {
-  if (length(legend.pos) == 1) legend(legend.pos,
-                                      legend =legend,
-                                      pch = pch,
-                                      col = col,
-                                      bty="o", pt.bg = pt.bg, ncol = ncol, ...)
-  if (length(legend.pos) == 2) legend(legend.pos[1], legend.pos[2], legend = legend,
-                                      pch = pch,
-                                      col = col,
-                                      bty="o", pt.bg = pt.bg, ncol = ncol, ...)
-}
 
 #plot2DLabels <- function(object, axes) {
 #  text(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]],

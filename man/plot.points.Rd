@@ -24,8 +24,8 @@ plot.points(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 \arguments{
 
-\item{pcaResult}{object of class 'pcadata'.}
-\item{cdaResult}{object of class 'cdadata'.}
+\item{pcaResult}{object of class 'pcadata', result of \code{\link{pca.calc}}.}
+\item{cdaResult}{object of class 'cdadata', result of \code{\link{cda.calc}}.}
 
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
@@ -36,7 +36,7 @@ plot.points(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{ylim}{the range of y axis.}
 \item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{XXXXXXXXXXXXX____labels.points}} directly.}
 \item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{XXXXXXXXX______-plot.legend}} directly.}
-\item{legend.pos}{the x and y co-ordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
+\item{legend.pos}{a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
 
 \item{...}{further arguments to be passed to \code{\link{plot.default}} or other graphical parameters in \code{\link{par}}.}

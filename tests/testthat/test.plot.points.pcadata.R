@@ -58,7 +58,7 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(pcaRes, pch = c(19,18),labels = T, legend = T,ncol = 2, legend.pos = c(-1,0), col = c("green", "red") , cex = 1.4 )
+  plot.points(pcaRes, pch = c(19,18),labels = T, legend = T,ncol = 2, legend.pos = "center", col = c("green", "red") , cex = 1.4 )
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.pca.col2.png"), threshold = 1)  )
 
