@@ -8,7 +8,7 @@ plot.characters <- function(result, ...) {
 #' @rdname plot.characters
 #' @method plot.characters pcadata
 #' @export
-plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                             col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
   checkClass(result, "pcadata")
 
@@ -16,8 +16,9 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
   if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
 
-  if (is.null(xlab)) xlab = ""
-  if (is.null(ylab)) ylab = ""
+  if (is.null(xlab)) xlab = paste("PC ", axes[1], sep = "")
+  if (is.null(ylab)) ylab = paste("PC ", axes[2], sep = "")
+  if (is.null(main)) main = "Eigenvectors"
 
   if (is.null(xlim)) xlim = c(max(abs(result$eigenVectors[ ,axes[1]]))*-1, max(abs(result$eigenVectors[ ,axes[1]])))* 1.05 # + 5%
   if (is.null(ylim)) ylim = c(max(abs(result$eigenVectors[ ,axes[2]]))*-1, max(abs(result$eigenVectors[ ,axes[2]])))* 1.05 # + 5%
@@ -26,7 +27,7 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
   # main plot
 
   plot(x = result$eigenVectors[ ,axes[1]], y = result$eigenVectors[ ,axes[2]],
-         type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim)
+         type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, main = main)
   abline(h = 0,v = 0,lty = 2,col = "grey")
   arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
          col = col, length = length, angle = angle, ...)
@@ -50,11 +51,12 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
 #' @rdname plot.characters
 #' @method plot.characters cdadata
 #' @export
-plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                                     col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
 
   checkClass(result, "cdadata")
 
+    if (is.null(main)) main = "Total canonical structure coefficients"
 
   if (result$rank == 1) {
     # HISTOGRAMOVE
@@ -65,10 +67,10 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
 
     # main plot
 
-    y = seq(5, (length(result$totalCanonicalStructure[,1]))*5, 5)
+    y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
 
     plot(x = result$totalCanonicalStructure[,1], y = y, xlab = xlab, ylab = ylab, xlim = xlim,
-         ylim = c(0,(length(result$totalCanonicalStructure[,1])+1)*5),type = "n", yaxt = "n")
+         ylim = c(0,length(result$totalCanonicalStructure[,1])+1),type = "n", yaxt = "n", main = main)
 
     abline(v = 0,lty = 2,col = "grey")
     arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
@@ -93,8 +95,8 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = F)
 
 
-    if (is.null(xlab)) xlab = ""
-    if (is.null(ylab)) ylab = ""
+    if (is.null(xlab)) xlab = paste("discrim. axis ", axes[1], sep = "")
+    if (is.null(ylab)) ylab = paste("discrim. axis ", axes[2], sep = "")
 
     if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[ ,axes[1]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[1]])))* 1.05 # + 5%
     if (is.null(ylim)) ylim = c(max(abs(result$totalCanonicalStructure[ ,axes[2]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[2]])))* 1.05 # + 5%
@@ -103,7 +105,7 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     # main plot
 
     plot(x = result$totalCanonicalStructure[,axes[1]], y = result$totalCanonicalStructure[,axes[2]],
-         xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n")
+         xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n", main = main)
 
     abline(h = 0,v = 0,lty = 2,col = "grey")
     arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],
