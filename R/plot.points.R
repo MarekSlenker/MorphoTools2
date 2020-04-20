@@ -1,6 +1,6 @@
 #' The default scatterplot function
 #' @export
-plot.points <- function(object, ...) {
+plot.points <- function(result, ...) {
   UseMethod("plot.points")
 }
 
@@ -8,33 +8,33 @@ plot.points <- function(object, ...) {
 #' @rdname pca.calc
 #' @method plot.points pcadata
 #' @export
-plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
+plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          pch = 16, col = "black", pt.bg = "white",
                          labels = FALSE,
                          legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  checkClass(pcaResult, "pcadata")
+  checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > length(pcaResult$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(pcaResult$eigenValues), " axes.", sep = "" ), call. = F)
+  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
 
   if (is.null(xlab))
-    xlab = paste("PC",axes[1], " (", round(pcaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    xlab = paste("PC",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
 
   if (is.null(ylab))
-    ylab = paste("PC",axes[2], " (", round(pcaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    ylab = paste("PC",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
 
   # nastav pch a col spravne podla taxonu
-  pcaResult$pch = as.numeric( setValuesForVector(pcaResult$objects$Taxon, pch))
-  pcaResult$col = setValuesForVector(pcaResult$objects$Taxon, col)
-  pcaResult$pt.bg = setValuesForVector(pcaResult$objects$Taxon, pt.bg)
+  result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
+  result$col = setValuesForVector(result$objects$Taxon, col)
+  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
 
   # main plot
 
-  plot(x = pcaResult$objects$scores[ ,axes[1]], y = pcaResult$objects$scores[ ,axes[2]],
-       xlab = xlab, ylab = ylab, pch = pcaResult$pch, col = pcaResult$col, bg = pcaResult$pt.bg, ... )
+  plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
+       xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
 
 
 
@@ -42,16 +42,16 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
 
   # legend
   if (legend == TRUE) {
-    #legendTable = cbind(as.character(pcaResult$objects$Taxon), pcaResult$pch, pcaResult$col, pcaResult$pt.bg)
+    #legendTable = cbind(as.character(result$objects$Taxon), result$pch, result$col, result$pt.bg)
     #legendTable = unique(legendTable)
 
     #plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
-    plot.addLegend(pcaResult, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
   }
 
   # labels
-  if (labels == TRUE) plot.addLabels.points(pcaResult, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
-    #plot2DLabels(pcaResult, axes)
+  if (labels == TRUE) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+    #plot2DLabels(result, axes)
 
 }
 
@@ -59,33 +59,33 @@ plot.points.pcadata <- function(pcaResult, axes = c(1,2), xlab = NULL, ylab = NU
 #' @rdname cda.calc
 #' @method plot.points cdadata
 #' @export
-plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NULL,
+plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                           pch = 16, col = "black", pt.bg = "white",
                           breaks = NULL, ylim = NULL,
                           labels = FALSE,
                           legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  checkClass(cdaResult, "cdadata")
+  checkClass(result, "cdadata")
 
 
-  if (cdaResult$rank == 1) {
+  if (result$rank == 1) {
     # HISTOGRAM
 
-    taxlev = levels(cdaResult$objects$Taxon)
+    taxlev = levels(result$objects$Taxon)
 
     # musim to vyhodit z data.frame
-    cdaResult$objects$scores = as.numeric(cdaResult$objects$scores[,])
+    result$objects$scores = as.numeric(result$objects$scores[,])
 
-    xhist = hist(cdaResult$objects$scores, plot = F)
+    xhist = hist(result$objects$scores, plot = F)
 
     if (is.null(breaks)) breaks = xhist$breaks
 
     # nastav pch, col a pt.bg spravne podla taxonu
-    cdaResult$col = setValuesForVector(cdaResult$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
+    result$col = setValuesForVector(result$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
     if (col == "black" && pt.bg != "white") {
       col = pt.bg
     }
-    cdaResult$pt.bg = setValuesForVector(cdaResult$objects$Taxon, col)
+    result$pt.bg = setValuesForVector(result$objects$Taxon, col)
 
     ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bude skupin
 
@@ -93,8 +93,8 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     histograms = list(list(list(),list(),list(),list(),list(),list()))
 
     for (i in 1:length(taxlev)) {
-      histograms[[i]] = hist(cdaResult$objects$scores[cdaResult$objects$Taxon == taxlev[i]], plot = F, breaks = breaks )
-      histograms[[i]]$pt.bg = cdaResult$pt.bg[cdaResult$objects$Taxon == taxlev[i]][1]
+      histograms[[i]] = hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = breaks )
+      histograms[[i]]$pt.bg = result$pt.bg[result$objects$Taxon == taxlev[i]][1]
     }
 
     #   MAX porovnanaj v cykle, na konci cyklu budes mat max zo vsetkych - na nastavien ylim
@@ -120,38 +120,38 @@ plot.points.cdadata <- function(cdaResult, axes = c(1,2), xlab = NULL, ylab = NU
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
-    if (legend == TRUE) plot.addLegend(cdaResult, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
+    if (legend == TRUE) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
 
 
     # labels neplotujem
 
 
-  } else if (cdaResult$rank > 1)  {
+  } else if (result$rank > 1)  {
     # SCATTERPLOT
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > length(cdaResult$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(cdaResult$eigenValues), " axes.", sep = "" ), call. = F)
+    if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
 
-    if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(cdaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
-    if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(cdaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
-    cdaResult$pch = as.numeric( setValuesForVector(cdaResult$objects$Taxon, pch))
-    cdaResult$col = setValuesForVector(cdaResult$objects$Taxon, col)
-    cdaResult$pt.bg = setValuesForVector(cdaResult$objects$Taxon, pt.bg)
+    result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
+    result$col = setValuesForVector(result$objects$Taxon, col)
+    result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
 
     # main plot
-    plot(x = cdaResult$objects$scores[ ,axes[1]], y = cdaResult$objects$scores[ ,axes[2]],
-         xlab = xlab, ylab = ylab, pch = cdaResult$pch, col = cdaResult$col, bg = cdaResult$pt.bg, ... )
+    plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
+         xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
 
 
     # legend
-    if (legend == TRUE) plot.addLegend(cdaResult, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    if (legend == TRUE) plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
 
 
     # labels
-    if (labels == TRUE) plot.addLabels.points(cdaResult, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+    if (labels == TRUE) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
 
     }
 }

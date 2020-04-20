@@ -1,6 +1,5 @@
 \name{read.morphodata}
 \alias{read.morphodata}
-\alias{summary.morphodata}
 \alias{samples}
 \alias{populations}
 \alias{taxa}

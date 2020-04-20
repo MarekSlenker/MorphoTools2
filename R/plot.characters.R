@@ -1,0 +1,128 @@
+#' Draws characters contribution as arrows
+#' @export
+plot.characters <- function(result, ...) {
+  UseMethod("plot.characters")
+}
+
+
+#' @rdname plot.characters
+#' @method plot.characters pcadata
+#' @export
+plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+                            col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
+  checkClass(result, "pcadata")
+
+  # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
+  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
+  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
+
+  if (is.null(xlab)) xlab = ""
+  if (is.null(ylab)) ylab = ""
+
+  if (is.null(xlim)) xlim = c(max(abs(result$eigenVectors[ ,axes[1]]))*-1, max(abs(result$eigenVectors[ ,axes[1]])))* 1.05 # + 5%
+  if (is.null(ylim)) ylim = c(max(abs(result$eigenVectors[ ,axes[2]]))*-1, max(abs(result$eigenVectors[ ,axes[2]])))* 1.05 # + 5%
+
+
+  # main plot
+
+  plot(x = result$eigenVectors[ ,axes[1]], y = result$eigenVectors[ ,axes[2]],
+         type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim)
+  abline(h = 0,v = 0,lty = 2,col = "grey")
+  arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
+         col = col, length = length, angle = angle, ...)
+
+  if (labels == T) {
+    labs = row.names(result$eigenVectors)
+    for (ch in 1:nrow(result$eigenVectors)) {
+      # hore
+      if (result$eigenVectors[ ,axes[2]][ch] > 0) text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+               labels = labs[ch], cex = 0.7, pos = 3, offset = 0.5)
+      # dole
+      else text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+             labels = labs[ch], cex = 0.7, pos = 1, offset = 0.5)
+      }
+  }
+
+}
+
+
+
+#' @rdname plot.characters
+#' @method plot.characters cdadata
+#' @export
+plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+                                    col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
+
+  checkClass(result, "cdadata")
+
+
+  if (result$rank == 1) {
+    # HISTOGRAMOVE
+
+    if (is.null(xlab)) xlab = "Contribution of characters"
+    if (is.null(ylab)) ylab = "Characters"
+    if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[,1]))*-1, max(abs(result$totalCanonicalStructure[,1])))* 1.05 # + 5%
+
+    # main plot
+
+    y = seq(5, (length(result$totalCanonicalStructure[,1]))*5, 5)
+
+    plot(x = result$totalCanonicalStructure[,1], y = y, xlab = xlab, ylab = ylab, xlim = xlim,
+         ylim = c(0,(length(result$totalCanonicalStructure[,1])+1)*5),type = "n", yaxt = "n")
+
+    abline(v = 0,lty = 2,col = "grey")
+    arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
+
+    if (labels == T) {
+      labs = row.names(result$totalCanonicalStructure)
+      for (ch in 1:nrow(result$totalCanonicalStructure)) {
+        # hore
+        if (result$totalCanonicalStructure[ch] > 0) text(x = result$totalCanonicalStructure[ch], y = y[ch],
+                                                            labels = labs[ch], cex = 0.7, pos = 4, offset = 0.5)
+        # dole
+        else text(x = result$totalCanonicalStructure[ch], y = y[ch],
+                  labels = labs[ch], cex = 0.7, pos = 2, offset = 0.5)
+      }
+    }
+
+
+  } else if (result$rank > 1)  {
+
+    # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
+    if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
+    if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = F)
+
+
+    if (is.null(xlab)) xlab = ""
+    if (is.null(ylab)) ylab = ""
+
+    if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[ ,axes[1]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[1]])))* 1.05 # + 5%
+    if (is.null(ylim)) ylim = c(max(abs(result$totalCanonicalStructure[ ,axes[2]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[2]])))* 1.05 # + 5%
+
+
+    # main plot
+
+    plot(x = result$totalCanonicalStructure[,axes[1]], y = result$totalCanonicalStructure[,axes[2]],
+         xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n")
+
+    abline(h = 0,v = 0,lty = 2,col = "grey")
+    arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],
+           col = col, length = length, angle = angle, ...)
+
+    if (labels == T) {
+      labs = row.names(result$totalCanonicalStructure)
+      for (ch in 1:nrow(result$totalCanonicalStructure)) {
+        # hore
+        if (result$totalCanonicalStructure[ ,axes[2]][ch] > 0)
+          text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
+                                                            labels = labs[ch], cex = 0.7, pos = 3, offset = 0.5)
+        # dole
+        else text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
+                  labels = labs[ch], cex = 0.7, pos = 1, offset = 0.5)
+      }
+    }
+
+  }
+}
+
+

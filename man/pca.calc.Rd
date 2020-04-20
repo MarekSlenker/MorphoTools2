@@ -1,7 +1,7 @@
 \name{pca.calc}
 
 \alias{pca.calc}
-\alias{summary.pcadata}
+
 
 \title{Principal component analysis (PCA)}
 

@@ -1,7 +1,7 @@
 \name{cda.calc}
 
 \alias{cda.calc}
-\alias{summary.cdadata}
+
 
 
 \title{Canonical discriminant analysis (CDA)}
