@@ -22,6 +22,6 @@ Note that when using populations as OTUs they are handled with the same weight i
 \examples{
 data(centaurea)
 
-centaurea.pop = popul.otu(centaurea)
+pops = popul.otu(centaurea)
 
 }
