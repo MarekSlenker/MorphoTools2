@@ -30,6 +30,9 @@ plot.addLabels.characters.cdadata <- function(cdaResult, labels = rownames(cdaRe
   # hist
   if (cdaResult$rank == 1) {
 
+    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
+
+
     y = seq(length(cdaResult$totalCanonicalStructure[,1]), 1, -1)
 
     for (lab in labels) {
@@ -42,13 +45,13 @@ plot.addLabels.characters.cdadata <- function(cdaResult, labels = rownames(cdaRe
     if (include) {
 
       if (length(labelsToPlot) == 0) { stop(paste("No labels to plot"), call. = F) }
-      text(x = cdaResult$totalCanonicalStructure[,1][labelsToPlot], y = y, labels = rownames(cdaResult$totalCanonicalStructure)[labelsToPlot],
+      text(x = cdaResult$totalCanonicalStructure[,1][labelsToPlot], y = y[labelsToPlot], labels = rownames(cdaResult$totalCanonicalStructure)[labelsToPlot],
            pos = pos, offset = offset, cex = cex, col = col, ...)
 
     } else{
 
-      if (length(labelsToPlot) == length(rownames(labelTable))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F) }
-      text(x = cdaResult$totalCanonicalStructure[,1][-labelsToPlot], y = y, labels = rownames(cdaResult$totalCanonicalStructure)[-labelsToPlot],
+      if (length(labelsToPlot) == length(rownames(cdaResult$totalCanonicalStructure))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F) }
+      text(x = cdaResult$totalCanonicalStructure[,1][-labelsToPlot], y = y[-labelsToPlot], labels = rownames(cdaResult$totalCanonicalStructure)[-labelsToPlot],
            pos = pos, offset = offset, cex = cex, col = col, ...)
 
     }
@@ -56,11 +59,11 @@ plot.addLabels.characters.cdadata <- function(cdaResult, labels = rownames(cdaRe
 
 
   # scatter
-  if (result$rank > 1)  {
+  if (cdaResult$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > pcaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", pcaResult$rank, " axes.", sep = "" ), call. = F)
+    if (max(axes) > cdaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", cdaResult$rank, " axes.", sep = "" ), call. = F)
 
     labels_characters_internal(labelTable = cdaResult$totalCanonicalStructure, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }

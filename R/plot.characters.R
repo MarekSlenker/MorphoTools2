@@ -61,6 +61,10 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
   if (result$rank == 1) {
     # HISTOGRAMOVE
 
+    # odlisne od default, alebo nie 1
+    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
+
+
     if (is.null(xlab)) xlab = "Contribution of characters"
     if (is.null(ylab)) ylab = "Characters"
     if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[,1]))*-1, max(abs(result$totalCanonicalStructure[,1])))* 1.05 # + 5%

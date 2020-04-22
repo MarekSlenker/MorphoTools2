@@ -71,6 +71,8 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   if (result$rank == 1) {
     # HISTOGRAM
 
+    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
+
     taxlev = levels(result$objects$Taxon)
 
     # musim to vyhodit z data.frame

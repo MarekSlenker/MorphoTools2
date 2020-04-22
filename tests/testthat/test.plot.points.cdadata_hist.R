@@ -21,10 +21,14 @@ test_that("visual 2 skupiny",  {
 
   expect_is(cdaRes, "cdadata")
 
+  expect_warning(plot.points(cdaRes, axes = c(1,3)), "The object has only one axis, which will be plotted")
+
+  expect_warning(plot.points(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
+
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes)
+  plot.points(cdaRes, axes = 1)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.hist.default.png"), threshold = 1)  )
 
@@ -55,9 +59,13 @@ test_that("visual 2+ skupiny pasivne",  {
 
   cdaRes = cda.calc(centaurea, passiveSamples = c("hybr", "ph"))
 
+  expect_warning(plot.points(cdaRes, axes = c(1,3)), "The object has only one axis, which will be plotted")
+
+  expect_warning(plot.points(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
+
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes,  pt.bg =  c("green", "red", "yellow", "navy"), breaks = seq(-6,4,0.2))
+  plot.points(cdaRes,  pt.bg =  c("green", "red", "yellow", "navy"), breaks = seq(-6,4,0.2) ,axes = 1)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.hist.centaturea.png"), threshold = 1)  )
 

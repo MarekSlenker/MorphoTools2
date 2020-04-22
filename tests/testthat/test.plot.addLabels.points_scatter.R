@@ -1,4 +1,4 @@
-context("plot.addLabels.points")
+context("plot.addLabels.points_scatter")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -8,7 +8,7 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
 
 morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
-test_that("cda visual 1",  {
+test_that("cda visual scatter",  {
 
   cdaRes = cda.calc(morphoMockup)
 
@@ -18,12 +18,6 @@ test_that("cda visual 1",  {
   plot.addLabels.points(cdaRes)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_default.png"), threshold = 1)  )
-})
-
-
-test_that("cda visual 2",  {
-
-  cdaRes = cda.calc(morphoMockup)
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
@@ -31,11 +25,6 @@ test_that("cda visual 2",  {
   plot.addLabels.points(cdaRes, labels = c("id5", "id8"),pos = 2, cex = 2,  offset = 2, col = "red")
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_include.png"), threshold = 1)  )
-})
-
-test_that("cda visual 3",  {
-
-  cdaRes = cda.calc(morphoMockup)
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)

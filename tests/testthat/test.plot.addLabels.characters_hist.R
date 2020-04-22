@@ -1,0 +1,50 @@
+context("plot.addLabels.characters_hist")
+
+options(warn=-1)
+data(centaurea)
+centaurea = na.meanSubst(centaurea)
+centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+options(warn=0)
+
+cdaRes = cda.calc(centaurea, passiveSamples = c("hybr", "ph"))
+
+test_that("cda wrong input",  {
+
+  plot.characters(cdaRes, labels = F)
+
+  expect_warning(plot.addLabels.characters(cdaRes, axes = 2), "The object has only one axis, which will be plotted", fixed = TRUE)
+
+
+  expect_warning(plot.addLabels.characters(cdaRes, axes = c(2,26)), "The object has only one axis, which will be plotted")
+
+  expect_error(plot.addLabels.characters(cdaRes, labels = "eeee", pos = 4, cex = 1), "label eeee does not exist")
+
+  expect_error(plot.addLabels.characters(cdaRes, include = F), "No labels to plot. You specified to exclude (include = FALSE) all labels", fixed = TRUE)
+
+})
+
+
+test_that("cda visual hist",  {
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  plot.characters(cdaRes, labels = F)
+  plot.addLabels.characters(cdaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 4, cex = 1, axes = 1)
+  plot.addLabels.characters(cdaRes, labels = c("LLW", "ILW", "LBA"), pos = 2, cex = 1)
+  plot.addLabels.characters(cdaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)
+  dev.off()
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels.characters.hist1.png"), threshold = 1)  )
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  plot.characters(cdaRes, labels = F)
+  plot.addLabels.characters(cdaRes, axes = 1, cex = 1,  col = "darkgreen")
+  dev.off()
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels.characters.hist2.png"), threshold = 1)  )
+
+})
+
+
+
+
+

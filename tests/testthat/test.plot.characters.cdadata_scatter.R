@@ -13,9 +13,9 @@ cdaRes = cda.calc(centaurea)
 
 test_that("ploting with error parameters",  {
 
-  expect_error(plot.characters(cdaRes, axes = c(3,5)), "specfiied axes are out of bounds. Object has only 3 axes." )
+  expect_error(plot.characters(cdaRes, axes = c(3,5)), "specified axes are out of bounds. Object has only 3 axes.", fixed = TRUE)
 
-  expect_error(plot.characters(cdaRes, axes = c(1,1,2))) # "you have to specifi 2 axes (e.g., axes = c(1,2))"
+  expect_error(plot.characters(cdaRes, axes = c(1,1,2)), "you have to specifi 2 axes (e.g., axes = c(1,2))", fixed = TRUE) #
 })
 
 test_that("visual hist",  {

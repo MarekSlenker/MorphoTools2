@@ -17,8 +17,14 @@ plot.addLabels.points.pcadata <- function(pcaResult, labels = pcaResult$objects$
 #' @method plot.addLabels.points cdadata
 #' @export
 plot.addLabels.points.cdadata <- function(cdaResult, labels = cdaResult$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+  # todo ak je rank 1, vyhod chybu  + testuj s rank 1
 
-  labels_points_internal(cdaResult, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  if (cdaResult$rank == 1){ stop("Unable to plot labels for histogram", call. = F)  }
+  else {
+    labels_points_internal(cdaResult, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  }
+
+
 }
 
 

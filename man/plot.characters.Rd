@@ -24,7 +24,7 @@ plot.characters(result, axes = c(1,2), xlab , ylab, xlim, ylim, main,
 \item{col}{the color for arrows.}
 \item{length}{length of the edges of the arrow head (in inches).}
 \item{angle}{angle from the shaft of the arrow to the edge of the arrow head.}
-\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{labels.charactersXXXXXXXXXXXX}} directly.}
+\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plot.addLabels.characters}} directly.}
 \item{...}{further arguments to be passed to \code{\link{arrows}} or other graphical parameters in \code{\link{par}}.}
 
 }
