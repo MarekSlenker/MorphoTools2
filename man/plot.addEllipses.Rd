@@ -26,38 +26,24 @@ plot.addEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 
 \details{
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+Confidence ellipses with given \code{probability} cover areas where will fall any new independent observation from the respective populations. Confidence ellipses are calculated from the estimated means and covariance matrices using chi-squared distribution and given level of probability.
 
 }
-
-
 
 \examples{
 data(centaurea)
 centaurea = na.meanSubst(centaurea)
 centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
-pops = popul.otu(centaurea)
 
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-pcaRes = pca.calc(pops)
-plot.points(pcaRes, col = c("red","green","blue","red"),
-            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+pcaRes = pca.calc(centaurea)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = T)
+plot.points(pcaRes, col = c(rgb(255,0,0,max=255,alpha=150), # red
+                            rgb(0,255,0,max=255,alpha=150), # green
+                            rgb(0,0,255,max=255,alpha=150), # blue
+                            rgb(0,0,0,max=255,alpha=150)), # black
+            legend=F, xlim=c(-5,7.5), ylim = c(-5,5.5))
 
-plot.points(pcaRes, col = c("red","green","blue","red"),
-            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+plot.addLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = F)
-
+plot.addEllipses(pcaRes, col = c("red","green","blue","black"), lwd = 3)
 }
