@@ -10,7 +10,7 @@ This function is designed for exporting results, stored in objects of MorphoTool
 
 
 \usage{
-export.res(object, file = "clipboard", dec = ".", sep = "\\t", row.names = F, col.names = T)
+export.res(object, file = "clipboard", dec = ".", sep = "\\t", row.names = FALSE, col.names = TRUE)
 }
 
 \arguments{
@@ -23,7 +23,7 @@ export.res(object, file = "clipboard", dec = ".", sep = "\\t", row.names = F, co
 \item{sep}{the column separator character.}
 
 \item{row.names}{logical, if \code{TRUE}, row names of the \code{object} are to be written.}
-	
+
 \item{col.names}{logical, if \code{TRUE}, column names of the \code{object} are to be written.}
 }
 

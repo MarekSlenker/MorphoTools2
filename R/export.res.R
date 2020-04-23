@@ -8,7 +8,7 @@ export.res <- function(object, ...) {
 
 #' @rdname export.res
 #' @export
-export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
+export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
   checkClass(object, "morphodata")
 
   objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
@@ -19,7 +19,7 @@ export.res.morphodata <- function(object, file = "clipboard", dec = ".", sep = "
 
 #' @rdname export.res
 #' @export
-export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
+export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = F)
 
@@ -33,7 +33,7 @@ export.res.data.frame <- function(object, file = "clipboard", dec = ".", sep = "
 
 #' @rdname export.res
 #' @export
-export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
+export.res.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   if (!(is.matrix(object))) stop("object is not of class 'matrix'", call. = F)
 
@@ -51,13 +51,13 @@ export.res.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t"
 
   objToWrite = as.data.frame(object)
 
-  export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = F, col.names = F)
+  export.res(objToWrite, file = file, dec = dec, sep = sep, row.names = FALSE, col.names = FALSE)
 }
 
 
 #' @rdname export.res
 #' @export
-export.res.classifdata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = F, col.names = T) {
+export.res.classifdata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   checkClass(object, "classifdata")
 

@@ -16,11 +16,11 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "average") {
   distances = dist(object$data, method = distMethod)
 
   # v parametri method mozme dostat akukolvek metodu, ktora je platna pre hclust
-  if (clustMethod=="UPGMA") clustMethod = "average"
-  if (clustMethod=="ward") clustMethod = "ward.D"
-  if (clustMethod=="WPGMA") clustMethod = "mcquitty"
-  if (clustMethod=="WPGMC") clustMethod = "median"
-  if (clustMethod=="UPGMC") clustMethod = "centroid"
+  if (clustMethod == "UPGMA") clustMethod = "average"
+  if (clustMethod == "ward") clustMethod = "ward.D"
+  if (clustMethod == "WPGMA") clustMethod = "mcquitty"
+  if (clustMethod == "WPGMC") clustMethod = "median"
+  if (clustMethod == "UPGMC") clustMethod = "centroid"
 
   clustering = hclust(distances, method = clustMethod)
 

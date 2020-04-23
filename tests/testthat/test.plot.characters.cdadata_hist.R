@@ -25,7 +25,7 @@ test_that("visual hist",  {
 
   expect_warning(plot.characters(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
 
-  tmp  = tempfile(fileext = ".png")
+    tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
   plot.characters(cdaRes, axes = 1)
   dev.off()

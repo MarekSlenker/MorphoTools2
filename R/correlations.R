@@ -8,9 +8,9 @@ cormat <- function (object, method = "pearson") {
   corelations = data.frame(corelations)
 
   corelations = data.frame(attr(corelations,"row.names"), corelations ,row.names=NULL)
-  if (method=="pearson") names(corelations)[1]<-"Pearson"
-  if (method=="spearman") names(corelations)[1]<-"Spearman"
-  if (method=="kendall") names(corelations)[1]<-"Kendall"
+  if (method == "pearson") names(corelations)[1] = "Pearson"
+  if (method == "spearman") names(corelations)[1] = "Spearman"
+  if (method == "kendall") names(corelations)[1] = "Kendall"
 
   return(corelations)
 }
@@ -36,9 +36,9 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
     corelations = data.frame(table)
 
     corelations = data.frame(attr(corelations,"row.names"), corelations ,row.names=NULL)
-    if (method=="pearson") names(corelations)[1]<-"Pearson"
-    if (method=="spearman") names(corelations)[1]<-"Spearman"
-    if (method=="kendall") names(corelations)[1]<-"Kendall"
+    if (method == "pearson") names(corelations)[1] = "Pearson"
+    if (method == "spearman") names(corelations)[1] = "Spearman"
+    if (method == "kendall") names(corelations)[1] = "Kendall"
 
     return(corelations)
 

@@ -41,7 +41,7 @@ plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
   # legend
-  if (legend == TRUE) {
+  if (legend) {
     #legendTable = cbind(as.character(result$objects$Taxon), result$pch, result$col, result$pt.bg)
     #legendTable = unique(legendTable)
 
@@ -50,7 +50,7 @@ plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   }
 
   # labels
-  if (labels == TRUE) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+  if (labels) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
     #plot2DLabels(result, axes)
 
 }
@@ -122,10 +122,12 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
-    if (legend == TRUE) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
+    if (legend) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
+	
+	# labels neplotujem
+	if (labels)  warning("Labels = TRUE is not supported for histograms.")
 
-
-    # labels neplotujem
+    
 
 
   } else if (result$rank > 1)  {
@@ -149,11 +151,11 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
     # legend
-    if (legend == TRUE) plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    if (legend) plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
 
 
     # labels
-    if (labels == TRUE) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+    if (labels) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
 
     }
 }

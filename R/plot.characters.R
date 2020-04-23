@@ -32,7 +32,7 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
   arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
          col = col, length = length, angle = angle, ...)
 
-  if (labels == T) {
+  if (labels) {
     labs = row.names(result$eigenVectors)
     for (ch in 1:nrow(result$eigenVectors)) {
       # hore
@@ -79,7 +79,7 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     abline(v = 0,lty = 2,col = "grey")
     arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
 
-    if (labels == T) {
+    if (labels) {
       labs = row.names(result$totalCanonicalStructure)
       for (ch in 1:nrow(result$totalCanonicalStructure)) {
         # hore
@@ -115,7 +115,7 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],
            col = col, length = length, angle = angle, ...)
 
-    if (labels == T) {
+    if (labels) {
       labs = row.names(result$totalCanonicalStructure)
       for (ch in 1:nrow(result$totalCanonicalStructure)) {
         # hore

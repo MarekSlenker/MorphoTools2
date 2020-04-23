@@ -25,6 +25,7 @@ test_that("visual 2 skupiny",  {
 
   expect_warning(plot.points(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
 
+  expect_warning(plot.points(cdaRes, labels = T), "Labels = TRUE is not supported for histograms.")
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
@@ -62,6 +63,8 @@ test_that("visual 2+ skupiny pasivne",  {
   expect_warning(plot.points(cdaRes, axes = c(1,3)), "The object has only one axis, which will be plotted")
 
   expect_warning(plot.points(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
+
+  expect_warning(plot.points(cdaRes, labels = T), "Labels = TRUE is not supported for histograms.")
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
