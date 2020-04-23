@@ -45,6 +45,7 @@ plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lw
   result$col = setValuesForVector(result$objects$Taxon, col)
 
   T = sqrt(qchisq(probability, 2)) # kvantil rozdelenia
+  if (is.infinite(T)) stop(paste("Probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = F)
 
   for (taxon in levels(result$objects$Taxon)) {
     taxData = data.frame(result$objects$scores[which(taxon == result$objects$Taxon),  axes[1]],
