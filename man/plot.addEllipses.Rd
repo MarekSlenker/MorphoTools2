@@ -26,8 +26,11 @@ plot.addEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 
 \details{
-Confidence ellipses with given \code{probability} cover areas where will fall any new independent observation from the respective populations. Confidence ellipses are calculated from the estimated means and covariance matrices using chi-squared distribution and given level of probability.
+Confidence ellipses with given \code{probability} define the regions where will fall any new independent observation from the respective taxa. The confidence ellipses are quantified using covariance matrices of taxa scores and chi-squared distribution with two degrees of freedom (Friendly et al. 2013).
+}
 
+\references{
+Friendly, M., Monette, G., & Fox, J. (2013). Elliptical insights: understanding statistical methods through elliptical geometry. Statistical Science, 28(1), 1-39.
 }
 
 \examples{

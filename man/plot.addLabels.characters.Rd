@@ -5,11 +5,11 @@
 \usage{
 ## S3 method for class 'pcadata'
 plot.addLabels.characters(result, labels = rownames(result$eigenVectors),
-    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...))
+    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 ## S3 method for class 'cdadata'
 plot.addLabels.characters(result, labels = rownames(result$totalCanonicalStructure),
-    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...))
+    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 }
 \arguments{

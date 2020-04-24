@@ -11,9 +11,9 @@ boxplot.all <- function(object, ...) {
 }
 
 #' @rdname boxplot.character
-#' @method boxplot.character default
+#' @method boxplot.character morphodata
 #' @export
-boxplot.character.default <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+boxplot.character.morphodata <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
                                       main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
                                       varwidth = FALSE, ...) {
 
@@ -30,9 +30,9 @@ boxplot.character.default <- function(object, character, outliers = TRUE, lowerW
 
 
 #' @rdname boxplot.character
-#' @method boxplot.all default
+#' @method boxplot.all morphodata
 #' @export
-boxplot.all.default <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+boxplot.all.morphodata <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
                                 main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
                                 varwidth = FALSE, ...)
 {
