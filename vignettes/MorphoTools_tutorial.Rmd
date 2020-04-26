@@ -1,11 +1,10 @@
 ---
-title: "MorphoTools_tutorial"
+title: "MorphoTools version 1.0.0 tutorial"
 author: | 
   | Marek Šlenker \<marek.slenker@savba.sk\>
   | Plant Science and Biodiversity Center
-  | Institute of Botany
-  | https://github.com/MarekSlenker/MorphoTools/wiki
-  
+  | Bratislava, Slovakia
+  | https://github.com/MarekSlenker/MorphoTools
 date: "April 26, 2020"
 output:
   pdf_document: default
@@ -23,26 +22,141 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+\tableofcontents
+
+## 1. Introduction
+
+The R package MorphoTools provides useful tools for
+
+
+## 2. Obtaining and installing MorphoTools package
+
+The R console and base system can be obtained at <http://www.r-project.org/>. Once R is installed, MorphoTools can be installed and loaded by typing the following commands into the R console:
+
+
+```{r eval=FALSE, include=T}
+install.packages(MorphoTools)
+library(MorphoTools)
+```
+```{r include=F}
 library(MorphoTools)
 ```
 
-## R Markdown
+If you quit and restart R, you will not have to re-install the package but you will need to load it again (using the library function as shown above).
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## 3. Data import and control
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### 3.1 Data import
 
-```{r cars}
-summary(cars)
+As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. For this tutorial, go into the "extdata" directory of the MorphoTools package installation, and find a file called "centaurea.txt". To find the paths to the package locations run `path.package(package = "MorphoTools")`. Open this file in a text editor and inspect its contents. This file contains 25 morphological characters of three diploid species of the *Centaurea phrygia* complex, abbreviated "ph", "ps" and "st" and the putative hybrid of the last two species abbreviated as "hybr". For details run `?centaurea`.
+
+As you find in centaurea.txt file, following structure of input data is required: 
+
+* the first row contains variable names.
+* the next rows contains individuals, single individual per row.
+* the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon”.
+* fourth and next columns stores morphological characters.
+
+Avoidi spaces and special characters for column names. Missing values have to be represented as empty cells or by the text `NA` (not quoted).
+
+Read the centaurea.txt file using the `read.morphodata` function, and assign the dataset a name of your choice (centaurea in this example) by typing:
+
+```{r eval = TRUE, echo = TRUE}
+centaurea = read.morphodata(file = system.file("extdata", "centaurea.txt", package = "MorphoTools"),
+                            dec = ".",
+                            sep = "\t")
 ```
 
-## Including Plots
+Alternatively, you can use build-in data running `data(centaurea)`. The dataset now exists as a `morphodata` object in R. The following commands display, some basic information about the dataset.
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r echo = TRUE, eval=T}
+summary(centaurea)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r echo = TRUE, eval=T}
+head( samples(centaurea) , n = 60) # show only first 60 samles
+```
+
+```{r echo = TRUE, eval=T}
+populations(centaurea)
+```
+
+```{r echo = TRUE, eval=T}
+taxa(centaurea)
+```
+
+
+### 3.2 Data control
+
+Row data can contain typos in decimal points, missing values, 
+, 
+
+pouzijeme boxploty
+- identifikacia outlierov
+- rozdiely medzi znakmi
+
+boxplot.character
+boxplot.all
+
+
+descr. tabulka - less comprehensive vay, but can be used for reporting Descriptive statistics of measured morphological characters in your paper. 
+
+
+descr.tax
+descr.pop
+descr.all
+
+
+correlations - vyhodit korelovane znaky
+
+
+cormat
+cormat.signifTest
+
+
+
+na.meanSubst
+
+
+
+Remove items
+
+delete.taxon
+delete.population
+delete.charecter
+
+
+popul.otu
+
+
+Now that you have your dataset completed, it is not a bad idea to save a copy of it using `export.res` function. 
+
+export.res
+
+
+
+
+## 4. clust
+
+
+
+## 5. pca
+
+
+
+## 6. cda
+
+
+
+
+
+
+
+
+
+
+## How to cite MorphoTools
+
+sssssssssssssssssssssssssssssssssssssss
+
+Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
