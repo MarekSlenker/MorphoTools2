@@ -1,0 +1,23 @@
+---
+title: "MorphoTools Version 1.0.0 Tutorial Manual"
+author: "Marek Šlenker"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MorphoTools Version 1.0.0 Tutorial Manual}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MorphoTools)
+```
+
+#### MorphoTools Version 1.0.0 Tutorial Manual

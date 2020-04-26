@@ -28,7 +28,6 @@ complete) from 33 populations (31 complete).
 
 \keyword{datasets}
 
-\source{
-{Koutecký, P. Folia Geobot (2007) 42: 77.\cr
-Koutecký P., Štěpánek J. & Baďurová T. Preslia (2012) 84. 1-32.}
-}
+\references{
+Koutecký, P. (2007). Morphological and ploidy level variation ofCentaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. Folia Geobotanica, 42: 77-102.\cr
+Koutecký, P., Štěpánek, J., & Baďurová, T. (2012). Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. Preslia, 84: 1-32.}

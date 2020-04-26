@@ -1,2 +1,4 @@
 ^MorphoTools\.Rproj$
 ^\.Rproj\.user$
+^doc$
+^Meta$
