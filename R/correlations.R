@@ -3,6 +3,8 @@
 cormat <- function (object, method = "pearson") {
   checkClass(object, "morphodata")
 
+  if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = F)
+
   corelations = cor(object$data, use="pairwise.complete.obs", method = method)
   corelations = round(corelations, digits = 3)
   corelations = data.frame(corelations)
@@ -10,7 +12,7 @@ cormat <- function (object, method = "pearson") {
   corelations = data.frame(attr(corelations,"row.names"), corelations ,row.names=NULL)
   if (method == "pearson") names(corelations)[1] = "Pearson"
   if (method == "spearman") names(corelations)[1] = "Spearman"
-  if (method == "kendall") names(corelations)[1] = "Kendall"
+
 
   return(corelations)
 }
@@ -18,6 +20,8 @@ cormat <- function (object, method = "pearson") {
 #' @rdname cormat
 #' @export
 cormat.signifTest <- function(object, method = "pearson", alternative = "two.sided") {
+
+  if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = F)
 
   table = matrix(data = numeric(), nrow = ncol(object$data), ncol = ncol(object$data))
   colnames(table) = colnames(object$data)
@@ -38,7 +42,6 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
     corelations = data.frame(attr(corelations,"row.names"), corelations ,row.names=NULL)
     if (method == "pearson") names(corelations)[1] = "Pearson"
     if (method == "spearman") names(corelations)[1] = "Spearman"
-    if (method == "kendall") names(corelations)[1] = "Kendall"
 
     return(corelations)
 

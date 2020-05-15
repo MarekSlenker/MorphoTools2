@@ -17,7 +17,7 @@ cormat.signifTest(object, method = "pearson", alternative = "two.sided")
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
 \item{method}{a character string indicating which correlation coefficient is to be used for the test.
-One of "pearson" (default), "spearman", or "kendall" can be abbreviated.}
+One of "pearson" (default), or "spearman" can be applied.}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "two.sided" (default),
 "greater" (positive association) or "less" (negative association).}

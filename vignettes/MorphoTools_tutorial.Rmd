@@ -1,6 +1,6 @@
 ---
 title: "MorphoTools version 1.0.0 tutorial"
-author: | 
+author: |
   | Marek Šlenker \<marek.slenker@savba.sk\>
   | Plant Science and Biodiversity Center
   | Bratislava, Slovakia
@@ -8,11 +8,10 @@ author: |
 date: "April 26, 2020"
 output:
   pdf_document: default
+  word_document: default
   html_document: default
-vignette: >
-  %\VignetteIndexEntry{MorphoTools_tutorial}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
+vignette: |
+  %\VignetteIndexEntry{MorphoTools_tutorial} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}
@@ -24,31 +23,32 @@ knitr::opts_chunk$set(
 
 \tableofcontents
 
-## 1. Introduction
+# 1. Introduction
 
 The R package MorphoTools provides useful tools for
 
 
-## 2. Obtaining and installing MorphoTools package
+# 2. Obtaining and installing MorphoTools package
 
 The R console and base system can be obtained at <http://www.r-project.org/>. Once R is installed, MorphoTools can be installed and loaded by typing the following commands into the R console:
 
 
-```{r eval=FALSE, include=T}
+```{r eval=FALSE, include=TRUE}
 install.packages(MorphoTools)
 library(MorphoTools)
+
 ```
-```{r include=F}
+```{r include=FALSE, eval=TRUE}
 library(MorphoTools)
 ```
 
-If you quit and restart R, you will not have to re-install the package but you will need to load it again (using the library function as shown above).
+If you quit and restart R, you will need to load it again (using the library function as shown above).
 
-## 3. Data import and control
+# 3. Data import, control and manipulation
 
-### 3.1 Data import
+## 3.1 Data import
 
-As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. For this tutorial, go into the "extdata" directory of the MorphoTools package installation, and find a file called "centaurea.txt". To find the paths to the package locations run `path.package(package = "MorphoTools")`. Open this file in a text editor and inspect its contents. This file contains 25 morphological characters of three diploid species of the *Centaurea phrygia* complex, abbreviated "ph", "ps" and "st" and the putative hybrid of the last two species abbreviated as "hybr". For details run `?centaurea`.
+As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. For this tutorial, go into the "extdata" directory of the MorphoTools package installation, and find a file called "centaurea.txt". To find the path to the package location run `path.package(package = "MorphoTools")`. Open this file in a text editor and inspect its contents. This file contains 25 morphological characters of three diploid species of the *Centaurea phrygia* complex, abbreviated "ph", "ps" and "st" and the putative hybrid of the last two species abbreviated as "hybr". For details run `?centaurea`.
 
 As you find in centaurea.txt file, following structure of input data is required: 
 
@@ -61,90 +61,128 @@ Avoidi spaces and special characters for column names. Missing values have to be
 
 Read the centaurea.txt file using the `read.morphodata` function, and assign the dataset a name of your choice (centaurea in this example) by typing:
 
+
 ```{r eval = TRUE, echo = TRUE}
 centaurea = read.morphodata(file = system.file("extdata", "centaurea.txt", package = "MorphoTools"),
                             dec = ".",
                             sep = "\t")
 ```
 
-Alternatively, you can use build-in data running `data(centaurea)`. The dataset now exists as a `morphodata` object in R. The following commands display, some basic information about the dataset.
+Argument `dec` stands for the character used in the file for decimal points, `sep` is a column delimiter character, usualy whitespace `" "`, coma `","` or tab `"\t"`. Alternatively, you can use build-in data running `data(centaurea)`. The dataset now exists as a `morphodata` object in R. The following commands display, some basic information about the dataset.
 
-```{r echo = TRUE, eval=T}
+```{r echo = TRUE, eval=TRUE}
 summary(centaurea)
 ```
 
-```{r echo = TRUE, eval=T}
-head( samples(centaurea) , n = 60) # show only first 60 samles
+```{r include=F}
+options(max.print = 60)
+```
+```{r echo = TRUE, eval=TRUE}
+samples(centaurea)
 ```
 
-```{r echo = TRUE, eval=T}
+```{r echo = TRUE, eval=TRUE}
 populations(centaurea)
 ```
 
-```{r echo = TRUE, eval=T}
+```{r echo = TRUE, eval=TRUE}
 taxa(centaurea)
 ```
 
 
-### 3.2 Data control
+## 3.2 Data control and manipulation
 
-Row data can contain typos in decimal points, missing values, 
-, 
+Row data can contain errors (e.g., typos in numbers or in decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. Discriminant analyses generally require a multivariate normal distribution of quantitative (not binary) characters within-groups; nevertheless, they have been shown to be considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980). Following steps go through these issues and at the end, we will have cleared data ready for exploring the morphological differentiation among the taxa (or any defined groups).
 
-pouzijeme boxploty
-- identifikacia outlierov
-- rozdiely medzi znakmi
+### 3.2.1 Shapiro-Wilk normality test
 
-boxplot.character
-boxplot.all
+As the first step, the Shapiro-Wilk statistic for the test of normality of distribution was computed for each character  
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+### 3.2.2 Box Plots
 
-descr. tabulka - less comprehensive vay, but can be used for reporting Descriptive statistics of measured morphological characters in your paper. 
-
-
-descr.tax
-descr.pop
-descr.all
+Boxplots are handy tools for detecting outlier values (potential typos). In the later stages, we can use them for detecting between-species dissimilarities and critical morphological values discriminating among species. Exactly these values should be transformed into identification key enabling the correct identification of taxa.  
+Boxplots can be calculated for particular character using `boxplot.character()` or for all characters at once running `boxplot.all()` function. In both functions, you can extend whiskers to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. 
 
 
-correlations - vyhodit korelovane znaky
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+boxplot.character(centaurea, character = "AL", lowerWhisker = 0.05,
+                   upperWhisker = 0.95, col = c("red","green","blue","orange"))
+```
+
+The default behaviour is to plot outliers. As you can see in the above figure, hybrids contain one markedly different value, which will require examination.
+
+### 3.2.3 Descriptive statistics
+
+The table of descriptive statistics is a less comfortable way of detecting outlier values, but it can be used for reporting descriptive statistics of morphological characters in your paper. This statistics can be calculated on the levels of populations, taxa or for the whole dataset, using `descr.pop()`, `descr.tax()` or `descr.all()`, respectively. Using argument `format` you can specify the desired output format. Keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%`, `$MAX` will be replaced by actual values. Run `?descr.tax` for more details.
+
+```{r echo = TRUE, eval=TRUE}
+descr.tax(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
+```
+
+The results can be assigned to a variable and copied to the clipboard (fails for large data) or exported to file using the `export.res()` function.
+```{r eval=FALSE, include=TRUE}
+descr_tax = descr.tax(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
+export.res(descr_tax, file = "clipboard")
+export.res(descr_tax, file = "descr_tax.txt")
+```
+
+### 3.2.4 Correlations of characters
+
+Highly correlated characters (r > |0.95|) should not be used in principal component analysis and especially in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s. The results can be exported with the `export.res()` function. One from the pair of highly correlated character can be removed from dataset using `delete.charecter()` function, see below.
+
+```{r echo = TRUE, eval=TRUE}
+correlations.s = cormat(centaurea, method = "spearman")
+export.res(correlations.s, file="correlations.spearman.txt")
+```
+
+Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the `cormat.signifTest()` function.
+
+### 3.2.5 Populations as the taxonomic units
+
+To simplify the overall structure, we can consider the use of populations as operational taxonomic units. This means that the whole population will be represented by a single individual, whose morphological values will be calculated as an average of the individuals' values. Missing values will be removed.
+
+```{r echo = TRUE, eval=TRUE}
+pops = popul.otu(centaurea)
+```
+We received a warning that the values of some characters are `NA`. How to deal with missing data, we will discuss in the following section.
 
 
-cormat
-cormat.signifTest
+### 3.2.6 Missing data
+
+Missing values are not accepted in morphological analyses, and MorphoTools do not edit user's data in the background. User has to do his own decision, what to do with missing values. Basically, there are two options: remove or replace.
+
+#### Replace missing values    
+
+Missing values can be substituted by the average value of the respective character in the respective population. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); and removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute missing values by average value, run:
+
+```{r echo = TRUE, eval=TRUE}
+centaurea = na.meanSubst(centaurea)
+```
+
+#### Remove items  
+
+After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contains only `NA` values. We have to decide between deleting characters using `delete.charecter()` or populations using `delete.population()` function. As character AP looks promising for delimitation of "ps" and "st" taxa, we will keep the characters and remove the populations.
+
+```{r echo = TRUE, eval=TRUE}
+centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+```
+
+
+We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed.  
+
+Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `export.res()` function. 
+
+
+## 4. Cluster analysis
 
 
 
-na.meanSubst
+## 5. Principal component analysis (PCA)
 
 
 
-Remove items
-
-delete.taxon
-delete.population
-delete.charecter
-
-
-popul.otu
-
-
-Now that you have your dataset completed, it is not a bad idea to save a copy of it using `export.res` function. 
-
-export.res
-
-
-
-
-## 4. clust
-
-
-
-## 5. pca
-
-
-
-## 6. cda
+## 6. Canonical discriminant analysis (CDA)
 
 
 
@@ -160,3 +198,9 @@ export.res
 sssssssssssssssssssssssssssssssssssssss
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
+
+## References
+
+**Klecka WR. 1980**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
+
+**Thorpe RS. 1976.** Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* **51**: 407–425.

@@ -66,7 +66,7 @@ pcaRes = pca.calc(centaurea)
 
 summary(pcaRes)
 
-plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
+plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","black"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=T, legend.pos="bottomright")
 
 }

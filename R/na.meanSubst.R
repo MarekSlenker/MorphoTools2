@@ -16,11 +16,11 @@ na.meanSubst <- function(object){
   # R passes arguments by value
   for (pop in populs) {
     popPositions = which( object$Population %in% pop)
-    object$data[popPositions,] = sapply(object$data[popPositions,],meansubst)
+    object$data[popPositions,] = sapply(object$data[popPositions,], meansubst)
 
     if (any(is.na(object$data[popPositions,])))
-      warning("unable to replace NAs in population ", pop,
-              ". Probably all values for that characters are NA.", call. = FALSE)
+      warning("Unable to replace NAs in characters ", toString(colnames(object$data)[c(is.na(object$data[popPositions[1],]))]),
+      " in population ", pop, ". Probably all values of that character are NA.", call. = FALSE)
   }
   return(object)
 }

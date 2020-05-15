@@ -31,7 +31,7 @@ The \code{format} argument brings a handy way how to receive only what is wanted
 Otherways, if format remains NULL, output table is overwhelmed by all calculated descriptors. 
 The format argument is a single string, where keywords will be replaced by particular values.
 
-Keywords: "$MEAN" = mean; "$SD" = standard deviation"; "$MIN" = minimum; "$5\%" =  5th percentile;
+Keywords: "$MEAN" = mean; "$SD" = standard deviation; "$MIN" = minimum; "$5\%" =  5th percentile;
 "$25\%" = 25th percentile (lower quartile); "$MEDIAN" = median (50th percentile); "$75\%" = 75th percentile (upper quartile);
 "$95\%" = 95th percentile; "$MAX" = maximum.
 }

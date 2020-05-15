@@ -2,7 +2,7 @@
 
 #' Export data
 #' @export
-export.res <- function(object, ...) {
+export.res <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
   UseMethod("export.res")
 }
 
