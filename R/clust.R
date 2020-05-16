@@ -9,8 +9,10 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "average") {
 
 
   # skontroluj argumenty
-  if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod", distMethod , "is not supported"), call. = F)
-  if (! (clustMethod %in% supportedClustMethods)) stop(paste("clustMethod", clustMethod , "is not supported"), call. = F)
+  if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod", distMethod , "is not supported."), call. = F)
+  if (! (clustMethod %in% supportedClustMethods)) stop(paste("clustMethod", clustMethod , "is not supported."), call. = F)
+
+  if (any(is.na(object$data))) warning("Values of some characters are NA.", call. = FALSE)
 
   object$data = scale(object$data)
   distances = dist(object$data, method = distMethod)

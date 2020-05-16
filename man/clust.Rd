@@ -10,7 +10,7 @@ Hierarchical cluster analysis of objects.
 clust(object, distMethod = "euclidean", clustMethod = "average", p = 2)
 
 ## S3 method for class 'hclust'
-plot(x, hang = 0.1, main = "Cluster Dendrogram", ...)
+plot(x, hang = -1, main = "Cluster Dendrogram", ...)
 }
 
 \arguments{

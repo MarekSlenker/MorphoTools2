@@ -166,6 +166,7 @@ After the execution of the previous code, we received warnings. Characters AL, A
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+pops = delete.population(pops, populationName = c("LIP", "PREL"))
 ```
 
 
@@ -174,17 +175,41 @@ We examined outlier value in "hybr" group and ensured that data do not contain h
 Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `export.res()` function. 
 
 
-## 4. Cluster analysis
+
+## 4. Hierarchical clustering
+
+Hierarchical classification is one of the methods that do not require \emph{a priori} specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first in order to be able to get an insight on the existence of group structure in your data. Typically, populations are used as OTUs. Characters are standardised to a zero mean and a unit standard deviation using the scale function. Various measures of distance between the observations (rows) are applicable, and various procedures of clustering based on pre-computed distances are available. For further details, run `?clust`.
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "ward")
+plot(pops_hierClust, hang = -1, cex = 0.8, sub = "", xlab = "", ylab = "distance")
+```
+
+Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, BUK, and NSED) were “incorrectly” clustered, what will require further examination.
 
 
 
 ## 5. Principal component analysis (PCA)
 
+Principal components analysis (PCA). Raw data are read to compute cross-products, covariances or correlations
+between variables. After eigenanalysis of this matrix, the eigenvectors are used to find coordinates of objects in a new
+coordinate system (axes are called the components). Correlations between components and the original variables are
+also computed and visualized. The ordination of objects, the component correlations and a biplot (in which arrows
+point to the variables) may be shown by pressing the respective button. In the biplot, the variable scores are rescaled
+to allow for a clearer display. Note, therefore, that in interpreting biplot diagrams the directions of these arrows
+rather than the actual positions of their endpoints are important. Object and variable scores are saved in separate files,
+the save of correlation matrix is optional.
 
 
 ## 6. Canonical discriminant analysis (CDA)
 
-
+Canonical variates analysis (CVA). The method is also known as multigroup discriminant analysis. In this case there
+is an a priori grouping of objects and the problem is to find linearly uncorrelated axes by maximizing the distinction
+among groups and minimizing the variance within groups in the new space. There is an option to normalize the
+eigenvectors such that the resulting group dispersions will be spherical. If the eigenvectors are normalized to unit
+length, the scatter of objects will be elliptical in the canonical space. The data must be provided such that the
+variables are columns and objects rows, and the size of group is specified before the first object of each group. The
+scores are saved in a new file. Each group will appear in a different color when the ordination results are displayed.
 
 
 
