@@ -42,7 +42,7 @@ plot.addLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
 plot.addSpiders(pcaRes, col = c("red","green","blue","black"))
 
 
-plot.points(pcaRes, col = c("red", "green", "blue","black",legend=T), cex = 0.4)
+plot.points(pcaRes, col = c("red", "green", "blue","black"), legend=T, cex = 0.4)
 
 plot.addSpiders(pcaRes,  col = c(rgb(255,0,0,max=255,alpha=150), # red
                                   rgb(0,255,0,max=255,alpha=150), # green

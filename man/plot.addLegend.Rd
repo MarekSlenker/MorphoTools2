@@ -17,7 +17,7 @@ plot.addLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 
 \arguments{
 \item{result}{an result of \code{\link{pca.calc}} or \code{\link{cda.calc}}, has to by ploted at first.}
-\item{x, y}{the x and y co-ordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
+\item{x, y}{the x and y coordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
 \item{pch}{the  plotting symbols of points appearing in the legend.}
 \item{col}{the color of points appearing in the legend.}
 \item{pt.bg}{the background color for the \code{\link{points}}, corresponding to its argument bg.}

@@ -11,8 +11,8 @@
 \contentsline {subsubsection}{3.2.6 Missing data}{5}{section*.12}%
 \contentsline {paragraph}{Replace missing values}{5}{section*.13}%
 \contentsline {paragraph}{Remove items}{5}{section*.14}%
-\contentsline {subsection}{4. Hierarchical clustering}{6}{section*.15}%
-\contentsline {subsection}{5. Principal component analysis (PCA)}{6}{section*.16}%
-\contentsline {subsection}{6. Canonical discriminant analysis (CDA)}{7}{section*.17}%
-\contentsline {subsection}{How to cite MorphoTools}{7}{section*.18}%
-\contentsline {subsection}{References}{7}{section*.19}%
+\contentsline {section}{4. Hierarchical clustering}{6}{section*.15}%
+\contentsline {section}{5. Principal component analysis (PCA)}{6}{section*.16}%
+\contentsline {section}{6. Canonical discriminant analysis (CDA)}{9}{section*.17}%
+\contentsline {subsection}{How to cite MorphoTools}{9}{section*.18}%
+\contentsline {subsection}{References}{9}{section*.19}%

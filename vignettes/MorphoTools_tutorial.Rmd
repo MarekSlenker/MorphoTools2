@@ -176,7 +176,8 @@ Our dataset is now prepared for further analyses. It is not a bad idea to save a
 
 
 
-## 4. Hierarchical clustering
+
+# 4. Hierarchical clustering
 
 Hierarchical classification is one of the methods that do not require \emph{a priori} specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first in order to be able to get an insight on the existence of group structure in your data. Typically, populations are used as OTUs. Characters are standardised to a zero mean and a unit standard deviation using the scale function. Various measures of distance between the observations (rows) are applicable, and various procedures of clustering based on pre-computed distances are available. For further details, run `?clust`.
 
@@ -185,23 +186,73 @@ pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "ward")
 plot(pops_hierClust, hang = -1, cex = 0.8, sub = "", xlab = "", ylab = "distance")
 ```
 
-Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, BUK, and NSED) were “incorrectly” clustered, what will require further examination.
+Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, BUK, and NSED) were “incorrectly” clustered, what will require further inspection.
 
 
 
-## 5. Principal component analysis (PCA)
+# 5. Principal component analysis (PCA)
 
-Principal components analysis (PCA). Raw data are read to compute cross-products, covariances or correlations
-between variables. After eigenanalysis of this matrix, the eigenvectors are used to find coordinates of objects in a new
-coordinate system (axes are called the components). Correlations between components and the original variables are
-also computed and visualized. The ordination of objects, the component correlations and a biplot (in which arrows
-point to the variables) may be shown by pressing the respective button. In the biplot, the variable scores are rescaled
-to allow for a clearer display. Note, therefore, that in interpreting biplot diagrams the directions of these arrows
-rather than the actual positions of their endpoints are important. Object and variable scores are saved in separate files,
-the save of correlation matrix is optional.
+Principal components analysis (PCA) is another method without the requirement of \emph{a priori} specification of the samples' membership in taxa (groups). PCA reduce the measured variables into a number of principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function, the result is object of class `pcadata` (run `?pcadata` for details). 
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+pca.centaurea = pca.calc(centaurea)
+```
+
+Now we can plot the result by typing following command. As you can see, the first two plotted components extract altogether 53.07% of the overall variability in data.
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.points(pca.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), legend = T, 
+             ncol = 2, legend.pos="bottomright")
+
+```
+
+The `plot.points()` is a default ploting function. You can add simple legend and point's labels using arguments `labels = TRUE, legend = TRUE`. If you need more precise control about plotting or want to add another elements, use some of the following functions:  
+
+* `plot.addLabels.points()` allows you to inclde or exclude labels, speciffy label's position, offset, colors, etc. 
+* `plot.addLegend()` allows you to specify exact coordinates, expansion and interspacing factors, line width, borders parameters, etc. 
+* `plot.addEllipses()` draws confidence (prediction) ellipses around taxa.
+* `plot.addSpiders()`  connects taxa's points with its centroids, thus forms a "spider" diagram.
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+pca.pops = pca.calc(pops)
+
+plot.points(pca.pops, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+            legend = F, labels = F)
+
+plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
+                      "CERM","DOM" ,"KOZH","KOT"), include = FALSE, pos = 4, cex=0.7)
+plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
+                      pos = 2,cex = 0.75)
+plot.addLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
+plot.addLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
+```
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.points(pca.centaurea, col = c("red", "green", "blue","black"), cex = 0.5)
+plot.addLegend(pca.centaurea, col = c("red", "green", "blue","black"), x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
+
+plot.addSpiders(pca.centaurea,  col = c(rgb(255,0,0,max=255,alpha=130), # red
+                                  rgb(0,255,0,max=255,alpha=130), # green
+                                  rgb(0,0,255,max=255,alpha=130), # blue
+                                  rgb(0,0,0,max=255,alpha=130))) # black
+```
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.points(pca.centaurea, col = c("red", "green", "blue","black"), cex = 0.7)
+plot.addLegend(pca.centaurea, col = c("red", "green", "blue","black"), 
+               x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
+
+plot.addEllipses(pca.centaurea, col = c("red","green","blue","black"), lwd = 2)
+
+```
 
 
-## 6. Canonical discriminant analysis (CDA)
+
+
+
+
+
+# 6. Canonical discriminant analysis (CDA)
 
 Canonical variates analysis (CVA). The method is also known as multigroup discriminant analysis. In this case there
 is an a priori grouping of objects and the problem is to find linearly uncorrelated axes by maximizing the distinction
@@ -211,10 +262,8 @@ length, the scatter of objects will be elliptical in the canonical space. The da
 variables are columns and objects rows, and the size of group is specified before the first object of each group. The
 scores are saved in a new file. Each group will appear in a different color when the ordination results are displayed.
 
-
-
-
-
+On
+the basis of the groupings revealed by PCA
 
 
 
@@ -228,4 +277,6 @@ Feel free to email me at marek.slenker@savba.sk with any questions, comments, or
 
 **Klecka WR. 1980**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
 
-**Thorpe RS. 1976.** Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* **51**: 407–425.
+**Krzanowski W. 1990**. *Principles of multivariate analysis*. Oxford: Oxford University Press.
+
+**Thorpe RS. 1976**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* **51**: 407–425.

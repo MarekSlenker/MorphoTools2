@@ -53,7 +53,7 @@ plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lw
                          result$col[which(taxon == result$objects$Taxon)]                         )
     covMat = cov.wt(taxData[,-3])
 
-    elip = ellipse(covMat$cov, centre = covMat$center, t = T, FUN = lines) # predikcna elipsa
+    elip = ellipse::ellipse(covMat$cov, centre = covMat$center, t = T, FUN = lines) # predikcna elipsa
     taxCol = unique(taxData[,3])
 
     lines(elip, col = as.character(taxCol), type = type, lty = lty, lwd = lwd, ...)
