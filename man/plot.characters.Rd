@@ -9,7 +9,7 @@ The character's contribution to separation of objects are visualised as arrows.
 
 \usage{
 plot.characters(result, axes = c(1,2), xlab , ylab, xlim, ylim, main,
-            col = "red", length = 0.1, angle = 15, labels = TRUE, ...)
+   col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...)
 }
 
 
@@ -25,6 +25,7 @@ plot.characters(result, axes = c(1,2), xlab , ylab, xlim, ylim, main,
 \item{length}{length of the edges of the arrow head (in inches).}
 \item{angle}{angle from the shaft of the arrow to the edge of the arrow head.}
 \item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plot.addLabels.characters}} directly.}
+\item{cex}{character expansion factor for labels.}
 \item{...}{further arguments to be passed to \code{\link{arrows}} or other graphical parameters in \code{\link{par}}.}
 
 }

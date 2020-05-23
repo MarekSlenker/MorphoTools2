@@ -26,7 +26,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     if (!inherits(mod, "mlm"))
       stop("Not an mlm object")
     if (missing(manova))
-      manova <- Anova(mod, type = as.character(type))
+      manova <- car::Anova(mod, type = as.character(type))
     terms <- manova$terms
     if (missing(term))
       term <- terms[1]

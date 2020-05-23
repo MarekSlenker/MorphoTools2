@@ -1,4 +1,4 @@
-\contentsline {section}{1. Introduction}{1}{section*.2}%
+\contentsline {section}{1. Introduction}{2}{section*.2}%
 \contentsline {section}{2. Obtaining and installing MorphoTools package}{2}{section*.3}%
 \contentsline {section}{3. Data import, control and manipulation}{2}{section*.4}%
 \contentsline {subsection}{3.1 Data import}{2}{section*.5}%
@@ -10,9 +10,12 @@
 \contentsline {subsubsection}{3.2.5 Populations as the taxonomic units}{5}{section*.11}%
 \contentsline {subsubsection}{3.2.6 Missing data}{5}{section*.12}%
 \contentsline {paragraph}{Replace missing values}{5}{section*.13}%
-\contentsline {paragraph}{Remove items}{5}{section*.14}%
+\contentsline {paragraph}{Remove items}{6}{section*.14}%
 \contentsline {section}{4. Hierarchical clustering}{6}{section*.15}%
 \contentsline {section}{5. Principal component analysis (PCA)}{6}{section*.16}%
-\contentsline {section}{6. Canonical discriminant analysis (CDA)}{9}{section*.17}%
-\contentsline {subsection}{How to cite MorphoTools}{9}{section*.18}%
-\contentsline {subsection}{References}{9}{section*.19}%
+\contentsline {section}{3D}{10}{section*.17}%
+\contentsline {section}{3D}{10}{section*.18}%
+\contentsline {section}{3D}{10}{section*.19}%
+\contentsline {section}{6. Canonical discriminant analysis (CDA)}{10}{section*.20}%
+\contentsline {subsection}{How to cite MorphoTools}{11}{section*.21}%
+\contentsline {subsection}{References}{12}{section*.22}%

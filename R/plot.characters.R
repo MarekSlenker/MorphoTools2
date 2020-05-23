@@ -9,7 +9,7 @@ plot.characters <- function(result, ...) {
 #' @method plot.characters pcadata
 #' @export
 plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
-                            col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
+                            col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
   checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
@@ -37,10 +37,10 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     for (ch in 1:nrow(result$eigenVectors)) {
       # hore
       if (result$eigenVectors[ ,axes[2]][ch] > 0) text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
-               labels = labs[ch], cex = 0.7, pos = 3, offset = 0.5)
+               labels = labs[ch], cex = cex, pos = 3, offset = 0.5)
       # dole
       else text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
-             labels = labs[ch], cex = 0.7, pos = 1, offset = 0.5)
+             labels = labs[ch], cex = cex, pos = 1, offset = 0.5)
       }
   }
 
@@ -52,7 +52,7 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
 #' @method plot.characters cdadata
 #' @export
 plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
-                                    col = "red", length = 0.1, angle = 15, labels = TRUE, ...) {
+                                    col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
 
   checkClass(result, "cdadata")
 
@@ -84,10 +84,10 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
       for (ch in 1:nrow(result$totalCanonicalStructure)) {
         # hore
         if (result$totalCanonicalStructure[ch] > 0) text(x = result$totalCanonicalStructure[ch], y = y[ch],
-                                                            labels = labs[ch], cex = 0.7, pos = 4, offset = 0.5)
+                                                            labels = labs[ch], cex = cex, pos = 4, offset = 0.5)
         # dole
         else text(x = result$totalCanonicalStructure[ch], y = y[ch],
-                  labels = labs[ch], cex = 0.7, pos = 2, offset = 0.5)
+                  labels = labs[ch], cex = cex, pos = 2, offset = 0.5)
       }
     }
 
@@ -121,10 +121,10 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
         # hore
         if (result$totalCanonicalStructure[ ,axes[2]][ch] > 0)
           text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
-                                                            labels = labs[ch], cex = 0.7, pos = 3, offset = 0.5)
+                                                            labels = labs[ch], cex = cex, pos = 3, offset = 0.5)
         # dole
         else text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
-                  labels = labs[ch], cex = 0.7, pos = 1, offset = 0.5)
+                  labels = labs[ch], cex = cex, pos = 1, offset = 0.5)
       }
     }
 

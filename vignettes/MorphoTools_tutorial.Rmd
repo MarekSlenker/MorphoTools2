@@ -198,17 +198,29 @@ Principal components analysis (PCA) is another method without the requirement of
 pca.centaurea = pca.calc(centaurea)
 ```
 
-Now we can plot the result by typing following command. As you can see, the first two plotted components extract altogether 53.07% of the overall variability in data.
+Now we can plot the result by typing following commands: 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), legend = T, 
-             ncol = 2, legend.pos="bottomright")
+plot.points(pca.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+            legend = T, ncol = 2, legend.pos="bottomright")
 
 ```
 
-The `plot.points()` is a default ploting function. You can add simple legend and point's labels using arguments `labels = TRUE, legend = TRUE`. If you need more precise control about plotting or want to add another elements, use some of the following functions:  
+Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` (the dollar sign, `$`, lets you access variables within a object) and can be exported by `pca.centaurea$eigenVectors`.
 
-* `plot.addLabels.points()` allows you to inclde or exclude labels, speciffy label's position, offset, colors, etc. 
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
+plot.characters(pca.centaurea, cex = 1.2)
+
+export.res(pca.centaurea$eigenVectors, file="eigenVectors.centaurea.txt")
+
+```
+
+
+As you can see in the figures above, ordination diagrams of PCA showed relatively compact groupings corresponding to taxa with partial overlaps. First two components (axes) extracted 20.65% and 14.26% of the overall variability in data. Characters ILW, IW, are strongly correlated with the direction of separation of taxa “ps” and “st” and their putative hybrid “hybr”. The "ph" is separated in the diagonal direction, highly correlated with MW, ML, IV, and MLW characters.
+
+The `plot.points()` and `plot.characters()` are a default plotting functions. You can add simple labels using argument `labels = TRUE`, or point's legend using `legend = TRUE`. If you need more precise control about plotting or want to add other elements to points, use some of the following functions:  
+
+* `plot.addLabels.points()`, `plot.addLabels.characters()` allows you to inclde or exclude labels, speciffy label's position, offset, colors, etc. 
 * `plot.addLegend()` allows you to specify exact coordinates, expansion and interspacing factors, line width, borders parameters, etc. 
 * `plot.addEllipses()` draws confidence (prediction) ellipses around taxa.
 * `plot.addSpiders()`  connects taxa's points with its centroids, thus forms a "spider" diagram.
@@ -226,6 +238,14 @@ plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DO
 plot.addLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
 plot.addLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
 ```
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.characters(pca.pops, labels = F)
+
+plot.addLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
+plot.addLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex=0.75)
+```
+
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 plot.points(pca.centaurea, col = c("red", "green", "blue","black"), cex = 0.5)
@@ -247,23 +267,47 @@ plot.addEllipses(pca.centaurea, col = c("red","green","blue","black"), lwd = 2)
 ```
 
 
-
+# 3D
+# 3D
+# 3D
 
 
 
 
 # 6. Canonical discriminant analysis (CDA)
 
-Canonical variates analysis (CVA). The method is also known as multigroup discriminant analysis. In this case there
-is an a priori grouping of objects and the problem is to find linearly uncorrelated axes by maximizing the distinction
-among groups and minimizing the variance within groups in the new space. There is an option to normalize the
-eigenvectors such that the resulting group dispersions will be spherical. If the eigenvectors are normalized to unit
+The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among \emph{a priori} defined groups (`Taxon` column in input data). CDA can be calculated by `cda.calc()` function. A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables. These coefficients are roughly equivalent to eigenvectors of PCA ane we used them to interpret the character's contribution to group separation.
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+cda.centaurea = cda.calc(centaurea)
+
+plot.points(cda.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+            legend = T, ncol = 2, legend.pos="bottomright")
+
+plot.characters(cda.centaurea, cex = 1.2)
+
+```
+
+
+
+Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. 
+
+
+
+
+ normalized to unit
 length, the scatter of objects will be elliptical in the canonical space. The data must be provided such that the
 variables are columns and objects rows, and the size of group is specified before the first object of each group. The
 scores are saved in a new file. Each group will appear in a different color when the ordination results are displayed.
 
 On
 the basis of the groupings revealed by PCA
+
+
+
+ Total canonical structure, giving total-sample correlations between the canonical variables and the
+original variables
+
 
 
 
