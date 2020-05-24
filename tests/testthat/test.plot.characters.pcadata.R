@@ -41,7 +41,7 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.characters(pcaRes, axes = c(2,4), xlab = "eee", main = "mmmmm", xlim = c(-1,1), ylim = c(-0.3,0),
+  plot.characters(pcaRes, axes = c(2,4), xlab = "eee", main = "mmmmm", xlim = c(-1,1), ylim = c(-0.3,0), cex = 1.7,
                   col = "green")
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.characters_2.png"), threshold = 1)  )

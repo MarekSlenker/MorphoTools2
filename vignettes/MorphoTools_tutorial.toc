@@ -4,18 +4,19 @@
 \contentsline {subsection}{3.1 Data import}{2}{section*.5}%
 \contentsline {subsection}{3.2 Data control and manipulation}{3}{section*.6}%
 \contentsline {subsubsection}{3.2.1 Shapiro-Wilk normality test}{3}{section*.7}%
-\contentsline {subsubsection}{3.2.2 Box Plots}{3}{section*.8}%
+\contentsline {subsubsection}{3.2.2 Box Plots}{4}{section*.8}%
 \contentsline {subsubsection}{3.2.3 Descriptive statistics}{4}{section*.9}%
 \contentsline {subsubsection}{3.2.4 Correlations of characters}{5}{section*.10}%
 \contentsline {subsubsection}{3.2.5 Populations as the taxonomic units}{5}{section*.11}%
 \contentsline {subsubsection}{3.2.6 Missing data}{5}{section*.12}%
-\contentsline {paragraph}{Replace missing values}{5}{section*.13}%
+\contentsline {paragraph}{Replace missing values}{6}{section*.13}%
 \contentsline {paragraph}{Remove items}{6}{section*.14}%
 \contentsline {section}{4. Hierarchical clustering}{6}{section*.15}%
-\contentsline {section}{5. Principal component analysis (PCA)}{6}{section*.16}%
+\contentsline {section}{5. Principal component analysis (PCA)}{7}{section*.16}%
 \contentsline {section}{3D}{10}{section*.17}%
 \contentsline {section}{3D}{10}{section*.18}%
 \contentsline {section}{3D}{10}{section*.19}%
 \contentsline {section}{6. Canonical discriminant analysis (CDA)}{10}{section*.20}%
-\contentsline {subsection}{How to cite MorphoTools}{11}{section*.21}%
-\contentsline {subsection}{References}{12}{section*.22}%
+\contentsline {paragraph}{Passive prediction of samples.}{14}{section*.21}%
+\contentsline {subsection}{How to cite MorphoTools}{14}{section*.22}%
+\contentsline {subsection}{References}{14}{section*.23}%

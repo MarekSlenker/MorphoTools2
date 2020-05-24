@@ -18,7 +18,7 @@ checkClass <- function(object, class) {
 
 setValuesForVector <- function(vector, symbols) {
 
-  uniques = unique(vector)
+  uniques = levels(vector)  # uniques = unique(vector)  levels
 
   for (uniq in uniques) {
 

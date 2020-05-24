@@ -41,7 +41,7 @@ test_that("plot.addEllipses visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5)
+  plot.points(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5, legend = T)
   plot.addEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"))
   plot.addEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"), probability = 0.70, lty = 2)
   plot.addEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"), probability = 0.999, type = "p",lwd = 3)

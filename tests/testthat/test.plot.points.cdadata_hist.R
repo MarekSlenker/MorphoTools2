@@ -47,7 +47,7 @@ test_that("visual 2 skupiny",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes,  pt.bg =  c("green", "red"), breaks = seq(-2,2, 0.2) )
+  plot.points(cdaRes,  pt.bg =  c("green", "red"), breaks = 0.2 )
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.hist.breaks.png"), threshold = 1)  )
 
@@ -68,7 +68,7 @@ test_that("visual 2+ skupiny pasivne",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes,  pt.bg =  c("green", "red", "yellow", "navy"), breaks = seq(-6,4,0.2) ,axes = 1)
+  plot.points(cdaRes,  pt.bg =  c("green", "red", "yellow", "navy"), breaks = 0.2 ,axes = 1)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.hist.centaturea.png"), threshold = 1)  )
 
@@ -77,7 +77,7 @@ test_that("visual 2+ skupiny pasivne",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes,  pt.bg =  c("green", "red", "yellow", "navy"), legend = T, pch = c(1,3,4,6,7,8), breaks = seq(-6,4,0.2))
+  plot.points(cdaRes,  col =  c("green", "red", "yellow", "navy"), legend = T, pch = c(1,3,4,6,7,8), breaks = (0.2))
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.hist.centaturea2.png"), threshold = 1)  )
   })

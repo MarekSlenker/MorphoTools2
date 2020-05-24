@@ -48,10 +48,11 @@ plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, pt.lwd, 
   object$pt.bg = setValuesForVector(object$objects$Taxon, pt.bg)
 
 
-  legendTable = cbind(as.character(object$objects$Taxon), object$pch, object$col, object$pt.bg)
+  legendTable = cbind(as.character(object$objects$Taxon), object$pch, object$col, object$pt.bg )
   legendTable = unique(legendTable)
+  colnames(legendTable) = c("Taxon", "pch", "col", "pt.bg")
 
-
+  legendTable = legendTable[order(legendTable[,1]),]
 
   if (is.null(y) && x %in% c("bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", "center"))
               legend(x, legend = legendTable[,1],

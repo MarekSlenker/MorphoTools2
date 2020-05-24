@@ -61,7 +61,7 @@ plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 #' @export
 plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                           pch = 16, col = "black", pt.bg = "white",
-                          breaks = NULL, ylim = NULL,
+                          breaks = 1, ylim = NULL,
                           labels = FALSE,
                           legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -75,12 +75,12 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     taxlev = levels(result$objects$Taxon)
 
+    # breaks
     # musim to vyhodit z data.frame
     result$objects$scores = as.numeric(result$objects$scores[,])
-
     xhist = hist(result$objects$scores, plot = F)
 
-    if (is.null(breaks)) breaks = xhist$breaks
+    hist_breaks = seq(from = min(xhist$breaks), to = max(xhist$breaks), by = breaks )
 
     # nastav pch, col a pt.bg spravne podla taxonu
     result$col = setValuesForVector(result$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
@@ -95,7 +95,7 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     histograms = list(list(list(),list(),list(),list(),list(),list()))
 
     for (i in 1:length(taxlev)) {
-      histograms[[i]] = hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = breaks )
+      histograms[[i]] = hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = hist_breaks )
       histograms[[i]]$pt.bg = result$pt.bg[result$objects$Taxon == taxlev[i]][1]
     }
 
@@ -118,16 +118,16 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     ########### ENDREGION
 
-    axis(1, at = breaks, labels = breaks, tcl = -0.5)
+    axis(1, at = hist_breaks, labels = hist_breaks, tcl = -0.5)
     axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
     if (legend) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
-	
+
 	# labels neplotujem
 	if (labels)  warning("Labels = TRUE is not supported for histograms.")
 
-    
+
 
 
   } else if (result$rank > 1)  {

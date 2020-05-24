@@ -10,7 +10,7 @@ A generic function for ploting ordination scores stored in '\code{\link{pcadata}
 
 \usage{
 plot.points(result, axes = c(1,2), xlab = NULL, ylab = NULL,
-      pch = 16, col = "black", pt.bg = "white", breaks = NULL,
+      pch = 16, col = "black", pt.bg = "white", breaks = 1,
       ylim = NULL, labels = FALSE, legend = FALSE,
       legend.pos = "topright", ncol = 1, ...)
 
@@ -25,7 +25,7 @@ plot.points(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
 \item{col}{the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
 \item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
-\item{breaks}{a vector giving the breakpoints between histogram cells.}
+\item{breaks}{a numeric, giving the lenght of one histogram bar.}
 \item{ylim}{the range of y axis.}
 \item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plot.addLabels.points}} directly.}
 \item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plot.addLegend}} directly.}

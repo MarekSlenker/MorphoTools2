@@ -48,9 +48,7 @@ If you quit and restart R, you will need to load it again (using the library fun
 
 ## 3.1 Data import
 
-As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. For this tutorial, go into the "extdata" directory of the MorphoTools package installation, and find a file called "centaurea.txt". To find the path to the package location run `path.package(package = "MorphoTools")`. Open this file in a text editor and inspect its contents. This file contains 25 morphological characters of three diploid species of the *Centaurea phrygia* complex, abbreviated "ph", "ps" and "st" and the putative hybrid of the last two species abbreviated as "hybr". For details run `?centaurea`.
-
-As you find in centaurea.txt file, following structure of input data is required: 
+As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. For this tutorial, go into the "extdata" directory of the MorphoTools package installation, and find a file called "centaurea.txt". To find the path to the package location run `path.package(package = "MorphoTools")`. Open this file in a text editor and inspect its contents. This sample data include portions of data sets analysed by Koutecký (2007) and Koutecký et al. (2012), and contains 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: \emph{C. phrygia} s.str. (abbreviated "ph"), \emph{C. pseudophrygia} ("ps") and \emph{C. stenolepis} ("st") and the putative hybrid of the last two species abbreviated as "hybr". As you find in centaurea.txt file, following structure of input data is required: 
 
 * the first row contains variable names.
 * the next rows contains individuals, single individual per row.
@@ -64,11 +62,14 @@ Read the centaurea.txt file using the `read.morphodata` function, and assign the
 
 ```{r eval = TRUE, echo = TRUE}
 centaurea = read.morphodata(file = system.file("extdata", "centaurea.txt", package = "MorphoTools"),
-                            dec = ".",
-                            sep = "\t")
+                            dec = ".",  sep = "\t")
 ```
 
-Argument `dec` stands for the character used in the file for decimal points, `sep` is a column delimiter character, usualy whitespace `" "`, coma `","` or tab `"\t"`. Alternatively, you can use build-in data running `data(centaurea)`. The dataset now exists as a `morphodata` object in R. The following commands display, some basic information about the dataset.
+Argument `dec` stands for the character used in the file for decimal points, `sep` is a column delimiter character, usualy whitespace `" "`, coma `","` or tab `"\t"`. Alternatively, you can use build-in data running `data(centaurea)`. The dataset now exists as a `morphodata` object in R. 
+
+The `morphodata` object, as well as other objects used later, is defined as a `list`. In R lists act as containers for data. Elements stored in `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see contained elements. Command `centaurea$Taxon` print values on R console. Run `?morphodata` to see what a `morphodata` object contains. 
+
+Alternatively, the following commands display basic information about the dataset or show data in data viewer.
 
 ```{r echo = TRUE, eval=TRUE}
 summary(centaurea)
@@ -89,10 +90,13 @@ populations(centaurea)
 taxa(centaurea)
 ```
 
+```{r echo = TRUE, eval=FALSE}
+viewMorphodata(centaurea)
+```
 
 ## 3.2 Data control and manipulation
 
-Row data can contain errors (e.g., typos in numbers or in decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. Discriminant analyses generally require a multivariate normal distribution of quantitative (not binary) characters within-groups; nevertheless, they have been shown to be considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980). Following steps go through these issues and at the end, we will have cleared data ready for exploring the morphological differentiation among the taxa (or any defined groups).
+Row data can contain errors (e.g., typos in numbers or in decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. Discriminant analyses generally require a multivariate normal distribution of quantitative (not binary) characters within-groups; nevertheless, they have been shown to be considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980). Following steps go through these issues and at the end, we will have cleaned data ready for exploring the morphological differentiation among the taxa (or any defined groups).
 
 ### 3.2.1 Shapiro-Wilk normality test
 
@@ -101,13 +105,14 @@ As the first step, the Shapiro-Wilk statistic for the test of normality of distr
 
 ### 3.2.2 Box Plots
 
-Boxplots are handy tools for detecting outlier values (potential typos). In the later stages, we can use them for detecting between-species dissimilarities and critical morphological values discriminating among species. Exactly these values should be transformed into identification key enabling the correct identification of taxa.  
-Boxplots can be calculated for particular character using `boxplot.character()` or for all characters at once running `boxplot.all()` function. In both functions, you can extend whiskers to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. 
+Boxplots are handy tools for detecting outlier values (potential typos, missing decimal points, etc.) and for detection between-species dissimilarities and critical morphological values discriminating among species. Exactly these values should be transformed into identification key enabling the correct identification of taxa.  
+
+Boxplots can be calculated for particular character using `boxplot.character()` or for all characters at once running `boxplot.all()` function, that saves all boxplots to a new folder in your working directory. The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted.
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 boxplot.character(centaurea, character = "AL", lowerWhisker = 0.05,
-                   upperWhisker = 0.95, col = c("red","green","blue","orange"))
+                   upperWhisker = 0.95, col = c("blue","green","red","orange"))
 ```
 
 The default behaviour is to plot outliers. As you can see in the above figure, hybrids contain one markedly different value, which will require examination.
@@ -192,7 +197,8 @@ Four main clusters were formed in the histogram above, however, some populations
 
 # 5. Principal component analysis (PCA)
 
-Principal components analysis (PCA) is another method without the requirement of \emph{a priori} specification of the samples' membership in taxa (groups). PCA reduce the measured variables into a number of principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function, the result is object of class `pcadata` (run `?pcadata` for details). 
+Principal components analysis (PCA) is another method without the requirement of \emph{a priori} specification of the samples' membership in taxa (groups). PCA reduce the measured variables into a number of principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function, the result is object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
+
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 pca.centaurea = pca.calc(centaurea)
@@ -201,12 +207,12 @@ pca.centaurea = pca.calc(centaurea)
 Now we can plot the result by typing following commands: 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+plot.points(pca.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18),
             legend = T, ncol = 2, legend.pos="bottomright")
 
 ```
 
-Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` (the dollar sign, `$`, lets you access variables within a object) and can be exported by `pca.centaurea$eigenVectors`.
+Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `export.res()` function. The dollar sign, `$`, lets you access elements within a object, same as above.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
 plot.characters(pca.centaurea, cex = 1.2)
@@ -216,7 +222,7 @@ export.res(pca.centaurea$eigenVectors, file="eigenVectors.centaurea.txt")
 ```
 
 
-As you can see in the figures above, ordination diagrams of PCA showed relatively compact groupings corresponding to taxa with partial overlaps. First two components (axes) extracted 20.65% and 14.26% of the overall variability in data. Characters ILW, IW, are strongly correlated with the direction of separation of taxa “ps” and “st” and their putative hybrid “hybr”. The "ph" is separated in the diagonal direction, highly correlated with MW, ML, IV, and MLW characters.
+As you can see in the figures above, ordination diagrams of PCA showed relatively compact groupings corresponding to taxa with partial overlaps. First two components (axes) extracted 20.65% and 14.26% of the overall variability in data. Characters ILW, IW, are strongly correlated with the direction of separation of taxa \emph{C. pseudophrygia}, \emph{C. stenolepis} (“ps”, “st”) and their putative hybrid “hybr”. The \emph{C. phrygia} s.str. ("ph") is separated in the diagonal direction, highly correlated with MW, ML, IV, and MLW characters.
 
 The `plot.points()` and `plot.characters()` are a default plotting functions. You can add simple labels using argument `labels = TRUE`, or point's legend using `legend = TRUE`. If you need more precise control about plotting or want to add other elements to points, use some of the following functions:  
 
@@ -228,7 +234,7 @@ The `plot.points()` and `plot.characters()` are a default plotting functions. Yo
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 pca.pops = pca.calc(pops)
 
-plot.points(pca.pops, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+plot.points(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = F, labels = F)
 
 plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
@@ -239,7 +245,7 @@ plot.addLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex
 plot.addLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
 plot.characters(pca.pops, labels = F)
 
 plot.addLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
@@ -248,22 +254,21 @@ plot.addLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,ce
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("red", "green", "blue","black"), cex = 0.5)
-plot.addLegend(pca.centaurea, col = c("red", "green", "blue","black"), x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
+plot.points(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
+plot.addLegend(pca.centaurea, col = c("blue","green","red","orange"), x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
 
-plot.addSpiders(pca.centaurea,  col = c(rgb(255,0,0,max=255,alpha=130), # red
-                                  rgb(0,255,0,max=255,alpha=130), # green
-                                  rgb(0,0,255,max=255,alpha=130), # blue
-                                  rgb(0,0,0,max=255,alpha=130))) # black
+plot.addSpiders(pca.centaurea,  col = c(rgb(0,0,255,max=255,alpha=130), # blue
+                                        rgb(0,255,0,max=255,alpha=130), # green
+                                        rgb(255,0,0,max=255,alpha=130), # red
+                                        rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("red", "green", "blue","black"), cex = 0.7)
-plot.addLegend(pca.centaurea, col = c("red", "green", "blue","black"), 
+plot.points(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
+plot.addLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
 
-plot.addEllipses(pca.centaurea, col = c("red","green","blue","black"), lwd = 2)
-
+plot.addEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 
 
@@ -276,42 +281,90 @@ plot.addEllipses(pca.centaurea, col = c("red","green","blue","black"), lwd = 2)
 
 # 6. Canonical discriminant analysis (CDA)
 
-The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among \emph{a priori} defined groups (`Taxon` column in input data). CDA can be calculated by `cda.calc()` function. A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables. These coefficients are roughly equivalent to eigenvectors of PCA ane we used them to interpret the character's contribution to group separation.
+The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among \emph{a priori} defined groups (`Taxon` column in input data). CDA can be calculated by `cda.calc()` function. A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables. These coefficients are roughly equivalent to eigenvectors of PCA and we used them to interpret the character's contribution to group separation.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 cda.centaurea = cda.calc(centaurea)
 
-plot.points(cda.centaurea, col = c("red","green","blue","orange"), pch = c(20,17,8,18), 
+plot.points(cda.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = T, ncol = 2, legend.pos="bottomright")
 
-plot.characters(cda.centaurea, cex = 1.2)
 
+```
+
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
+plot.characters(cda.centaurea, cex = 1.2)
+```
+
+
+The CDA ordination diagram unequivocally support morphological differentiation of \emph{C. phrygia} s.str. ("ph") along the first axis. Characters ML, MLW, IV and MW are oriented in the direction of separation, thus these characters contributed the most significantly, which is in accordance with the results of PCA. The values of correlation of characters with the first canonical axis (toatal canonical structure coefficients) are one of the elements of the object of class `cdadata` and can be accesed by the `$` notation. Results can be exported using the `export.res()` function. 
+
+```{r include=F}
+options(max.print = 100)
+```
+```{r echo = TRUE, eval=TRUE}
+cda.centaurea.TCS = cda.centaurea$totalCanonicalStructure
+
+export.res(cda.centaurea.TCS, "clipboard")
+
+cda.centaurea.TCS
+```
+
+As you can see, the above mentioned characters received highest scores at the firs canonical axis (regardless of plus or minus sign).   
+
+&nbsp;  
+&nbsp;  
+&nbsp;  
+
+  
+To gain better insight into the differentiation of \emph{C. pseudophrygia}, \emph{C. stenolepis} and their putative hybrid, we will analyse them separately. The new dataset will be created by removing \emph{C. phrygia} from the original dataset. 
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+stPsHybr = delete.taxon(centaurea, taxonName = "ph")
+
+cda.stPsHybr = cda.calc(stPsHybr)
+
+plot.points(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
+            legend = T, ncol = 2, legend.pos="bottomright")
+
+cda.stPsHybr$totalCanonicalStructure
+```
+
+Taxa are separated along the first axis which extracts the majority of variation. Characters IW, ILW, LS, MW and MLW shows the highest correlation with the direction of separation of groups, thus these characters are the most suitable for taxonomic delimitation and identification key. On the other hand, the second axis represents the variation within taxa and to overall separation contribute only marginally. Thus, characters with a high score on the second axis are variable within, not among taxa (eg., IV).
+
+&nbsp;  
+&nbsp;  
+
+
+
+#### Passive prediction of samples. 
+Sometimes is desirable to passively display (or predict) the position of some samples in the canonical space formed by other samples. This approach is applicable for displaying the position of hybrids, type specimens, "atypical" populations, etc. Passive samples can be specified using `passiveSamples` argument (accepting both populations and taxa). These samples will be excluded from computing discriminant function, and only passively predicted in multidimensional space. If there are only two groups (except passive samples), there is only one canonical axis, and canonical scores are plotted as a histogram.
+
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+
+cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
+
+plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
+                col = c(rgb(0,0,255,max=255,alpha=255), # blue
+                        rgb(255,0,0,max=255,alpha=160), # red
+                        rgb(255,102,0,max=255,alpha=160))) # orange, 
 ```
 
 
 
-Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. 
 
 
 
 
- normalized to unit
-length, the scatter of objects will be elliptical in the canonical space. The data must be provided such that the
-variables are columns and objects rows, and the size of group is specified before the first object of each group. The
-scores are saved in a new file. Each group will appear in a different color when the ordination results are displayed.
-
-On
-the basis of the groupings revealed by PCA
-
-
-
- Total canonical structure, giving total-sample correlations between the canonical variables and the
-original variables
-
+# 3D
+# 3D
 
 
 
 ## How to cite MorphoTools
+
+\emph{C. phrygia} s.str. (abbreviated "ph"), \emph{C. pseudophrygia} ("ps") and \emph{C. stenolepis} ("st") 
 
 sssssssssssssssssssssssssssssssssssssss
 
@@ -320,6 +373,10 @@ Feel free to email me at marek.slenker@savba.sk with any questions, comments, or
 ## References
 
 **Klecka WR. 1980**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
+
+**Koutecký, P. (2007)**. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica*, **42**: 77-102.
+
+**Koutecký, P., Štěpánek, J. & Baďurová, T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia*, **84**: 1-32.
 
 **Krzanowski W. 1990**. *Principles of multivariate analysis*. Oxford: Oxford University Press.
 
