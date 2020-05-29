@@ -55,9 +55,9 @@ As with any software, the first thing you want to do is import your raw data. Da
 * the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon”.
 * fourth and next columns stores morphological characters.
 
-Avoidi spaces and special characters for column names. Missing values have to be represented as empty cells or by the text `NA` (not quoted).
+Avoid spaces and special characters for column names. Missing values have to be represented as empty cells or by the text `NA` (not quoted).
 
-Read the centaurea.txt file using the `read.morphodata` function, and assign the dataset a name of your choice (centaurea in this example) by typing:
+Read the centaurea.txt file using the `read.morphodata()` function, and assign the dataset a name of your choice (centaurea in this example) by typing:
 
 
 ```{r eval = TRUE, echo = TRUE}
@@ -100,8 +100,17 @@ Row data can contain errors (e.g., typos in numbers or in decimal points) and mi
 
 ### 3.2.1 Shapiro-Wilk normality test
 
-As the first step, the Shapiro-Wilk statistic for the test of normality of distribution was computed for each character  
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+As the first step, the Shapiro-Wilk statistic for the test of normality of distribution was computed for each character. We are not interested in exact p-values, what we need is just a brief overview to know, which correlation coefficient (Pearson's or Spearman's nonparametric correlation coefficient), and which classificatory discriminant analyses (linear discriminant function or non-parametric k-nearest neighbours) to favour. Thus we set argument `p.value = 0.05`. If calculated p-value of certain character is bellow `p.value`, we can reject the null hypothesis that a characters are normally distributed.
+
+```{r include=F}
+options(max.print = 40)
+```
+```{r echo = TRUE, eval=TRUE}
+shapiroWilk.test(centaurea, p.value = 0.05)
+
+```
+
+As a majority of characters have a non normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory DA.
 
 ### 3.2.2 Box Plots
 
@@ -134,7 +143,7 @@ export.res(descr_tax, file = "descr_tax.txt")
 
 ### 3.2.4 Correlations of characters
 
-Highly correlated characters (r > |0.95|) should not be used in principal component analysis and especially in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s. The results can be exported with the `export.res()` function. One from the pair of highly correlated character can be removed from dataset using `delete.charecter()` function, see below.
+Highly correlated characters (r > |0.95|) should not be used in principal component analysis and especially in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (do not require normally distributed data). The results can be exported with the `export.res()` function. One from the pair of highly correlated character can be removed from dataset using `delete.charecter()` function, see below.
 
 ```{r echo = TRUE, eval=TRUE}
 correlations.s = cormat(centaurea, method = "spearman")
@@ -167,7 +176,7 @@ centaurea = na.meanSubst(centaurea)
 
 #### Remove items  
 
-After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contains only `NA` values. We have to decide between deleting characters using `delete.charecter()` or populations using `delete.population()` function. As character AP looks promising for delimitation of "ps" and "st" taxa, we will keep the characters and remove the populations.
+After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contains only `NA` values. We have to decide between deleting characters using `delete.charecter()` or populations using `delete.population()` function. As character AP looks promising for delimitation of \emph{C. pseudophrygia} and \emph{C. stenolepis}, we will keep the characters and remove the populations.
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
@@ -175,9 +184,9 @@ pops = delete.population(pops, populationName = c("LIP", "PREL"))
 ```
 
 
-We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed.  
 
-Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `export.res()` function. 
+***
+We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed. Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `export.res()` function. 
 
 
 
@@ -191,7 +200,7 @@ pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "ward")
 plot(pops_hierClust, hang = -1, cex = 0.8, sub = "", xlab = "", ylab = "distance")
 ```
 
-Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, BUK, and NSED) were “incorrectly” clustered, what will require further inspection.
+Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, OLE1, and OLE2) were “incorrectly” clustered, what will require further inspection.
 
 
 
@@ -200,7 +209,7 @@ Four main clusters were formed in the histogram above, however, some populations
 Principal components analysis (PCA) is another method without the requirement of \emph{a priori} specification of the samples' membership in taxa (groups). PCA reduce the measured variables into a number of principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function, the result is object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+```{r echo = TRUE, eval=TRUE}
 pca.centaurea = pca.calc(centaurea)
 ```
 
@@ -316,6 +325,7 @@ As you can see, the above mentioned characters received highest scores at the fi
 &nbsp;  
 &nbsp;  
 
+---
   
 To gain better insight into the differentiation of \emph{C. pseudophrygia}, \emph{C. stenolepis} and their putative hybrid, we will analyse them separately. The new dataset will be created by removing \emph{C. phrygia} from the original dataset. 
 
@@ -336,7 +346,7 @@ Taxa are separated along the first axis which extracts the majority of variation
 &nbsp;  
 
 
-
+---
 #### Passive prediction of samples. 
 Sometimes is desirable to passively display (or predict) the position of some samples in the canonical space formed by other samples. This approach is applicable for displaying the position of hybrids, type specimens, "atypical" populations, etc. Passive samples can be specified using `passiveSamples` argument (accepting both populations and taxa). These samples will be excluded from computing discriminant function, and only passively predicted in multidimensional space. If there are only two groups (except passive samples), there is only one canonical axis, and canonical scores are plotted as a histogram.
 
@@ -365,6 +375,9 @@ plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
 ## How to cite MorphoTools
 
 \emph{C. phrygia} s.str. (abbreviated "ph"), \emph{C. pseudophrygia} ("ps") and \emph{C. stenolepis} ("st") 
+
+&nbsp;  
+
 
 sssssssssssssssssssssssssssssssssssssss
 

@@ -29,5 +29,5 @@ complete) from 33 populations (31 complete).
 \keyword{datasets}
 
 \references{
-\strong{Koutecký, P. (2007)}. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. \emph{Folia Geobotanica}, \strong{42}: 77-102.\cr
-\strong{Koutecký, P., Štěpánek, J. & Baďurová, T. (2012)}. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. \emph{Preslia}, \strong{84}: 1-32.}
+\strong{Koutecký, P. 2007}. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. \emph{Folia Geobotanica}, \strong{42}: 77-102.\cr
+\strong{Koutecký, P., Štěpánek, J. & Baďurová, T. 2012}. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. \emph{Preslia}, \strong{84}: 1-32.}
