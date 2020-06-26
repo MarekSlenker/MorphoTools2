@@ -9,7 +9,7 @@ popul.otu <- function(object) {
 
   if (any(is.na(populData[, -c(1:2)]))) {
     naChars = colnames(populData)[apply(populData, 2, function(x) any(is.na(x)))]
-    naPops = populData$Group.2[apply(populData, 2, function(x) any(is.na(x)))]
+    naPops = populData$Group.2[apply(populData, 1, function(x) any(is.na(x)))]
     warning(paste("Unable to calculate the means of characters ", paste(naChars, collapse = " "), " in populations ", paste(naPops, collapse = " "), ". Values are NA.", sep = ""), call. = FALSE)
   }
 

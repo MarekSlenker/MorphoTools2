@@ -5,7 +5,7 @@ author: |
   | Plant Science and Biodiversity Center
   | Bratislava, Slovakia
   | https://github.com/MarekSlenker/MorphoTools
-date: "April 26, 2020"
+date: "June 18, 2020"
 output:
   pdf_document: default
   word_document: default
@@ -281,10 +281,16 @@ plot.addEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 
 
-# 3D
-# 3D
-# 3D
+A 3D scatterplot can be produced using the `plot.3Dpoints` function. Use `phi` and `theta` arguments to define slope and viewing direction.
 
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
+```
+
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.3Dpoints(pca.pops, col = c("blue","green","red","orange"), phi = 10, theta = 25, labels = T )
+```
 
 
 
@@ -363,12 +369,18 @@ plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
 
 
 
+To draw a 3D scatterplot, use the `plot.3Dpoints` function. Slope and viewing direction can be seted by `phi` and `theta` parameters.
+
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+plot.3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
+```
 
 
 
 
-# 3D
-# 3D
+# 7. Classificatory discriminant analysis
+
+
 
 
 
@@ -379,9 +391,11 @@ plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
 &nbsp;  
 
 
-sssssssssssssssssssssssssssssssssssssss
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
+
+
+
 
 ## References
 
