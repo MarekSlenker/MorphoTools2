@@ -14,7 +14,7 @@
 \contentsline {section}{4. Hierarchical clustering}{7}{section*.15}%
 \contentsline {section}{5. Principal component analysis (PCA)}{7}{section*.16}%
 \contentsline {section}{6. Canonical discriminant analysis (CDA)}{12}{section*.17}%
-\contentsline {paragraph}{Passive prediction of samples.}{15}{section*.18}%
-\contentsline {section}{7. Classificatory discriminant analysis}{16}{section*.19}%
-\contentsline {subsection}{How to cite MorphoTools}{16}{section*.20}%
-\contentsline {subsection}{References}{17}{section*.21}%
+\contentsline {paragraph}{Passive prediction of samples.}{16}{section*.18}%
+\contentsline {section}{7. Classificatory discriminant analysis}{17}{section*.19}%
+\contentsline {subsection}{How to cite MorphoTools}{18}{section*.20}%
+\contentsline {subsection}{References}{18}{section*.21}%
