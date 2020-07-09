@@ -1,22 +1,19 @@
 \name{boxplot.character}
 \alias{boxplot.character}
+
 \alias{boxplot.all}
 
 \title{Box Plots}
 \usage{
-boxplot.character(object, character, outliers = T, 
-                  lowerWhisker = 0.05, upperWhisker = 0.95,
-                  col = "white", border = "black", frame = T,
-                  main = character, cex.main = 2, pch = 8,
-                  xlab = NULL, ylab = NULL, horizontal = F,
-                  varwidth = F, ...)
-				  
-boxplot.all(object, folderName = "boxplots", outliers = T,
-            lowerWhisker = 0.05, upperWhisker = 0.95, 
-            col = "white", border = "black", frame = T,
-            main = character, cex.main = 2, pch = 8,
-            xlab = NULL, ylab = NULL,  horizontal = F,
-            varwidth = F, ...)
+boxplot.character(object, character, outliers = TRUE, lowerWhisker = 0.05,
+          upperWhisker = 0.95, col = "white", border = "black", main = character,
+          cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
+          horizontal = FALSE, varwidth = FALSE, ...)
+
+boxplot.all(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05,
+          upperWhisker = 0.95, col = "white", border = "black", main = character,
+          cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
+          horizontal = FALSE, varwidth = FALSE, ...)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -65,13 +62,13 @@ data(centaurea)
 
 boxplot.character(centaurea, character= "ST", col = "orange", border = "red")
 
-boxplot.character(centaurea, character= "ST", outliers = FALSE, 
+boxplot.character(centaurea, character= "ST", outliers = FALSE,
           lowerWhisker = 0.1, upperWhisker = 0.9)
 
-boxplot.character(centaurea, "ST", varwidth = T, notch = T, 
-          boxwex = 0.4, staplewex = 1.3, horizontal = T)
+boxplot.character(centaurea, "ST", varwidth = TRUE, notch = TRUE,
+          boxwex = 0.4, staplewex = 1.3, horizontal = TRUE)
 
-boxplot.character(centaurea, "ST", boxlty = 1, medlwd = 5, 
+boxplot.character(centaurea, "ST", boxlty = 1, medlwd = 5,
           whisklty = 2, whiskcol = "red", staplecol = "red",
           outcol = "grey30", pch = "-")
 

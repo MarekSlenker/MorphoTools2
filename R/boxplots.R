@@ -1,12 +1,16 @@
 #' Box Plots
 #' @export
-boxplot.character <- function(object, ...) {
+boxplot.character <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+                              main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                              varwidth = FALSE, ...) {
   UseMethod("boxplot.character")
 }
 
 #' @rdname boxplot.character
 #' @export
-boxplot.all <- function(object, ...) {
+boxplot.all <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+                        main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                        varwidth = FALSE, ...) {
   UseMethod("boxplot.all")
 }
 
@@ -24,8 +28,8 @@ boxplot.character.morphodata <- function(object, character, outliers = TRUE, low
 
   bxPlot = giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
-  bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
-  title(main, cex.main = cex.main)
+  graphics::bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
+  graphics::title(main, cex.main = cex.main)
 }
 
 
@@ -49,13 +53,13 @@ boxplot.all.morphodata <- function(object, folderName = "boxplots", outliers = T
 
     bxPlot = giveMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
-    jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ))
+    grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ))
 
-    bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
+    graphics::bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
 
-    title(char, cex.main = cex.main)
+    graphics::title(char, cex.main = cex.main)
 
-    dev.off()
+    grDevices::dev.off()
   }
 }
 
@@ -63,7 +67,7 @@ boxplot.all.morphodata <- function(object, folderName = "boxplots", outliers = T
 # internal
 giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   # vyrataj klasicky bxplot
-  bxPlot = boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = F)
+  bxPlot = graphics::boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = F)
 
   # a teraz ho zmen
   taxa = levels(object$Taxon)
@@ -75,8 +79,8 @@ giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   for (tax in taxa)   {
     dataTaxon = object$data[which( object$Taxon %in% tax), ][character]
 
-    upWhisker = as.numeric( quantile(dataTaxon, probs = upperWhisker, na.rm = T)  )
-    loWhisker = as.numeric( quantile(dataTaxon, probs = lowerWhisker, na.rm = T)  )
+    upWhisker = as.numeric( stats::quantile(dataTaxon, probs = upperWhisker, na.rm = T)  )
+    loWhisker = as.numeric( stats::quantile(dataTaxon, probs = lowerWhisker, na.rm = T)  )
 
     bxPlot$stats[1, which(tax == taxa)] = loWhisker
     bxPlot$stats[5, which(tax == taxa)] = upWhisker

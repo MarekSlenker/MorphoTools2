@@ -44,7 +44,7 @@ plot.points(pcaRes, col = c(rgb(255,0,0,max=255,alpha=150), # red
                             rgb(0,255,0,max=255,alpha=150), # green
                             rgb(0,0,255,max=255,alpha=150), # blue
                             rgb(0,0,0,max=255,alpha=150)), # black
-            legend=F, xlim=c(-5,7.5), ylim = c(-5,5.5))
+            legend=FALSE, xlim=c(-5,7.5), ylim = c(-5,5.5))
 
 plot.addLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
 

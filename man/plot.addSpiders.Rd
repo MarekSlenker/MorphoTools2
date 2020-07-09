@@ -10,7 +10,7 @@ This function connects taxa's points with its centroids, thus forms a "spider" d
 \usage{
 
 plot.addSpiders(result, axes = c(1,2), col = "black",
-                  type = "l", lty = 1, lwd = 1, ...)
+                lty = 1, lwd = 1, ...)
 
 }
 \arguments{
@@ -35,14 +35,14 @@ plot.points(pcaRes, col = c(rgb(255,0,0,max=255,alpha=150), # red
                             rgb(0,255,0,max=255,alpha=150), # green
                             rgb(0,0,255,max=255,alpha=150), # blue
                             rgb(0,0,0,max=255,alpha=150)), # black
-            legend=F, xlim=c(-5,7.5), ylim = c(-5,5.5))
+            legend=FALSE, xlim=c(-5,7.5), ylim = c(-5,5.5))
 
 plot.addLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
 
 plot.addSpiders(pcaRes, col = c("red","green","blue","black"))
 
 
-plot.points(pcaRes, col = c("red", "green", "blue","black"), legend=T, cex = 0.4)
+plot.points(pcaRes, col = c("red", "green", "blue","black"), legend=TRUE, cex = 0.4)
 
 plot.addSpiders(pcaRes,  col = c(rgb(255,0,0,max=255,alpha=150), # red
                                   rgb(0,255,0,max=255,alpha=150), # green

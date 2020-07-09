@@ -37,13 +37,13 @@ pops = popul.otu(centaurea)
 
 pcaRes = pca.calc(pops)
 plot.points(pcaRes, col = c("red","green","blue","red"),
-            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+            pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = T)
+plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = TRUE)
 
 plot.points(pcaRes, col = c("red","green","blue","red"),
-            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+            pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = F)
+plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = FALSE)
 
 }

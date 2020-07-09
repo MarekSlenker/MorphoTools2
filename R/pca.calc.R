@@ -18,7 +18,7 @@ pca.calc <- function(object) {
 
   pcaResult = newPcadata()
 
-  prcompRes = prcomp(object$data, center=T, scale.=T)
+  prcompRes = stats::prcomp(object$data, center=T, scale.=T)
   prcompSummary = summary(prcompRes)
 
   pcaResult$sdev = prcompRes$sdev
@@ -43,7 +43,7 @@ pca.calc <- function(object) {
 
 
   # group centroid locations
-  pcaResult$groupMeans = aggregate(prcompRes$x ~ object$Taxon, FUN = mean)
+  pcaResult$groupMeans = stats::aggregate(prcompRes$x ~ object$Taxon, FUN = mean)
   colnames(pcaResult$groupMeans)[1] = "Taxon"
 
   return(pcaResult)

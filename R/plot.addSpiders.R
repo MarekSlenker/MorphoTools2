@@ -2,7 +2,7 @@
 
 #' Add spiders to a plot
 #' @export
-plot.addSpiders <- function(result, ...) {
+plot.addSpiders <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
   UseMethod("plot.addSpiders")
 }
 
@@ -10,32 +10,32 @@ plot.addSpiders <- function(result, ...) {
 #' @rdname plot.addSpiders
 #' @method plot.addSpiders pcadata
 #' @export
-plot.addSpiders.pcadata <- function(pcaResult, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
+plot.addSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > pcaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", pcaResult$rank, " axes.", sep = "" ), call. = F)
+  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
 
-  plot_spiders_internal(pcaResult, axes = axes, col = col, lty = lty, lwd = lwd, ...)
+  plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
 }
 
 #' @rdname plot.addSpiders
 #' @method plot.addSpiders cdadata
 #' @export
-plot.addSpiders.cdadata <- function(cdaResult, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
+plot.addSpiders.cdadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
   # hist
-  if (cdaResult$rank == 1) {
+  if (result$rank == 1) {
 
     stop("The method plot.addSpiders() is not applicable to histogram.", call. = F)
   }
 
-  if (cdaResult$rank > 1)  {
+  if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > cdaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", cdaResult$rank, " axes.", sep = "" ), call. = F)
+    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
 
-    plot_spiders_internal(cdaResult, axes = axes, col = col, lty = lty, lwd = lwd, ...)
+    plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
   }
 }
 
@@ -55,7 +55,7 @@ plot_spiders_internal <- function(result, axes, col, lty, lwd, ...) {
 
   taxData = merge(scores, centroids, by="Taxon")
 
-  segments(x0=taxData$cen1, y0=taxData$cen2, x1=taxData$score1 , y1=taxData$score2, col = as.character(taxData$col), lwd = lwd, lty = lty, ...)
+  graphics::segments(x0=taxData$cen1, y0=taxData$cen2, x1=taxData$score1 , y1=taxData$score2, col = as.character(taxData$col), lwd = lwd, lty = lty, ...)
 
 
 

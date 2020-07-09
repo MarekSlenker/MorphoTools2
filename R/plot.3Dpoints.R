@@ -1,6 +1,10 @@
 #' The default scatterplot 3D function
 #' @export
-plot.3Dpoints <- function(result, ...) {
+plot.3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
+                          zlab = NULL, pch = 16, col = "black", pt.bg = "white",
+                          phi = 10, theta = 2, ticktype = "detailed", bty = "u",
+                          type = "p", labels = FALSE, legend = FALSE, legend.pos
+                          = "topright", ncol = 1, ...) {
   UseMethod("plot.3Dpoints")
 }
 
@@ -8,16 +12,16 @@ plot.3Dpoints <- function(result, ...) {
 #' @rdname plot.3Dpoints
 #' @method plot.3Dpoints pcadata
 #' @export
-plot.3Dpoints.pcadata <- function(pcaResult, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
+plot.3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste("PC",axes[1], " (", round(pcaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste("PC",axes[2], " (", round(pcaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste("PC",axes[3], " (", round(pcaResult$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste("PC",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste("PC",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste("PC",axes[3], " (", round(result$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
-  plot3D_internal(pcaResult, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+  plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                   pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                   ticktype = ticktype, bty = bty, type = type,
                   labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)
@@ -27,18 +31,18 @@ plot.3Dpoints.pcadata <- function(pcaResult, axes = c(1,2,3), xlab = NULL, ylab 
 #' @rdname plot.3Dpoints
 #' @method plot.3Dpoints cdadata
 #' @export
-plot.3Dpoints.cdadata <- function(cdaResult, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
+plot.3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (cdaResult$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", cdaResult$rank, " axes.", sep = "" ), call. = F)
+  if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = F)
 
-  if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(cdaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(cdaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste("Canonical axis",axes[3], " (", round(cdaResult$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste("Canonical axis",axes[3], " (", round(result$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
-  plot3D_internal(cdaResult, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+  plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                   pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                   ticktype = ticktype, bty = bty, type = type,
                   labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)

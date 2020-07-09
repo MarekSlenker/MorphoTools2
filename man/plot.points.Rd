@@ -50,14 +50,14 @@ centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
 pcaRes = pca.calc(centaurea)
 
 plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=T, legend.pos="bottomright")
+  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
 
-plot.points(pcaRes, main = "My PCA plot", frame.plot = F, cex = 0.8)
+plot.points(pcaRes, main = "My PCA plot", frame.plot = FALSE, cex = 0.8)
 
 cdaRes = cda.calc(centaurea)
 
 plot.points(cdaRes, col = c("red","green","blue","red"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=T)
+  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE)
 }
 
 

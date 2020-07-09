@@ -19,7 +19,7 @@ shapiroWilk.test <- function(object, p.value = 0.05) {
                                         function(x) {
                                           out <- tryCatch(
                                             {
-                                              shapiro.test(x)$p.value
+                                              stats::shapiro.test(x)$p.value
                                             },
                                             error=function(cond) {
                                               return(NaN)

@@ -1,6 +1,7 @@
-#' @rdname read.morphodata
+#' @name summary
+#' @title Object Summaries
 #' @export
-summary.morphodata <- function(object) {
+summary.morphodata <- function(object, ...) {
   #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
   checkClass(object, "morphodata")
 
@@ -16,9 +17,9 @@ summary.morphodata <- function(object) {
 
 
 
-#' @rdname pca.calc
+#' @rdname summary
 #' @export
-summary.pcadata <- function(object) {
+summary.pcadata <- function(object, ...) {
   checkClass(object, "pcadata")
 
   cat("object of class 'pcadata'; storing original data and results of Principal Component Analysis\n")
@@ -41,9 +42,9 @@ summary.pcadata <- function(object) {
 }
 
 
-#' @rdname cda.calc
+#' @rdname summary
 #' @export
-summary.cdadata <- function(object) {
+summary.cdadata <- function(object, ...) {
   checkClass(object, "cdadata")
 
   cat("object of class 'cdadata'; storing original data and results of Canonical Discriminant Analysis\n")

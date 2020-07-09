@@ -1,6 +1,7 @@
 #' Draws characters contribution as arrows
 #' @export
-plot.characters <- function(result, ...) {
+plot.characters <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
+                            col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
   UseMethod("plot.characters")
 }
 
@@ -28,18 +29,18 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
 
   plot(x = result$eigenVectors[ ,axes[1]], y = result$eigenVectors[ ,axes[2]],
          type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, main = main)
-  abline(h = 0,v = 0,lty = 2,col = "grey")
-  arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
+  graphics::abline(h = 0,v = 0,lty = 2,col = "grey")
+  graphics::arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
          col = col, length = length, angle = angle, ...)
 
   if (labels) {
     labs = row.names(result$eigenVectors)
     for (ch in 1:nrow(result$eigenVectors)) {
       # hore
-      if (result$eigenVectors[ ,axes[2]][ch] > 0) text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+      if (result$eigenVectors[ ,axes[2]][ch] > 0) graphics::text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
                labels = labs[ch], cex = cex, pos = 3, offset = 0.5)
       # dole
-      else text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+      else graphics::text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
              labels = labs[ch], cex = cex, pos = 1, offset = 0.5)
       }
   }
@@ -76,17 +77,17 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     plot(x = result$totalCanonicalStructure[,1], y = y, xlab = xlab, ylab = ylab, xlim = xlim,
          ylim = c(0,length(result$totalCanonicalStructure[,1])+1),type = "n", yaxt = "n", main = main)
 
-    abline(v = 0,lty = 2,col = "grey")
-    arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
+    graphics::abline(v = 0,lty = 2,col = "grey")
+    graphics::arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
 
     if (labels) {
       labs = row.names(result$totalCanonicalStructure)
       for (ch in 1:nrow(result$totalCanonicalStructure)) {
         # hore
-        if (result$totalCanonicalStructure[ch] > 0) text(x = result$totalCanonicalStructure[ch], y = y[ch],
+        if (result$totalCanonicalStructure[ch] > 0) graphics::text(x = result$totalCanonicalStructure[ch], y = y[ch],
                                                             labels = labs[ch], cex = cex, pos = 4, offset = 0.5)
         # dole
-        else text(x = result$totalCanonicalStructure[ch], y = y[ch],
+        else graphics::text(x = result$totalCanonicalStructure[ch], y = y[ch],
                   labels = labs[ch], cex = cex, pos = 2, offset = 0.5)
       }
     }
@@ -111,8 +112,8 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
     plot(x = result$totalCanonicalStructure[,axes[1]], y = result$totalCanonicalStructure[,axes[2]],
          xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n", main = main)
 
-    abline(h = 0,v = 0,lty = 2,col = "grey")
-    arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],
+    graphics::abline(h = 0,v = 0,lty = 2,col = "grey")
+    graphics::arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],
            col = col, length = length, angle = angle, ...)
 
     if (labels) {
@@ -120,10 +121,10 @@ plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
       for (ch in 1:nrow(result$totalCanonicalStructure)) {
         # hore
         if (result$totalCanonicalStructure[ ,axes[2]][ch] > 0)
-          text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
+          graphics::text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
                                                             labels = labs[ch], cex = cex, pos = 3, offset = 0.5)
         # dole
-        else text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
+        else graphics::text(x = result$totalCanonicalStructure[ ,axes[1]][ch], y = result$totalCanonicalStructure[ ,axes[2]][ch],
                   labels = labs[ch], cex = cex, pos = 1, offset = 0.5)
       }
     }

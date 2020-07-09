@@ -17,12 +17,11 @@ test_that("correct input", {
 })
 
 test_that("correctness of calculation",  {
-
   library(candisc)
 
   d = as.matrix(morphoDataFrame[,4:5])
   x = lm(d ~ morphoDataFrame$Taxon)
-  candisc_cda = candisc(x, term="morphoDataFrame$Taxon")
+  candisc_cda = candisc::candisc(x, term="morphoDataFrame$Taxon")
 
   cdaRes = cda.calc(morphoMockup)
 
@@ -52,12 +51,11 @@ test_that("correctness of calculation",  {
 
 
 test_that("correctness of calculation - passive sample",  {
-
   library(candisc)
   d = as.matrix(morphoDataFrame[1:6,4:5])
   m = morphoDataFrame$Taxon[1:6]
   x = lm(d ~ m)
-  candisc_cda = candisc(x, term="m")
+  candisc_cda = candisc::candisc(x, term="m")
 
   cdaRes = cda.calc(morphoMockup, passiveSamples = "Pop4")
 

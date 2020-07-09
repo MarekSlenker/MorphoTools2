@@ -33,6 +33,6 @@ centaurea.PsSt = delete.taxon(centaurea, c("ph", "hybr"))
 
 centaurea.short = delete.population(centaurea, c("LIP", "PREL"))
 
-centaurea.short = delete.charecter(centaurea, "StemHeight")
+centaurea.short = delete.charecter(centaurea, "LL")
 
 }

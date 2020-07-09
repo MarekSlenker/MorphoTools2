@@ -1,6 +1,10 @@
 #' The default scatterplot function
 #' @export
-plot.points <- function(result, ...) {
+plot.points <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+                        pch = 16, col = "black", pt.bg = "white",
+                        breaks = 1, ylim = NULL,
+                        labels = FALSE,
+                        legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
   UseMethod("plot.points")
 }
 
@@ -10,6 +14,7 @@ plot.points <- function(result, ...) {
 #' @export
 plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          pch = 16, col = "black", pt.bg = "white",
+                         breaks = 1, ylim = NULL,
                          labels = FALSE,
                          legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -78,7 +83,7 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     # breaks
     # musim to vyhodit z data.frame
     result$objects$scores = as.numeric(result$objects$scores[,])
-    xhist = hist(result$objects$scores, plot = F)
+    xhist = graphics::hist(result$objects$scores, plot = F)
 
     hist_breaks = seq(from = min(xhist$breaks), to = max(xhist$breaks), by = breaks )
 
@@ -95,7 +100,7 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     histograms = list(list(list(),list(),list(),list(),list(),list()))
 
     for (i in 1:length(taxlev)) {
-      histograms[[i]] = hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = hist_breaks )
+      histograms[[i]] = graphics::hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = hist_breaks )
       histograms[[i]]$pt.bg = result$pt.bg[result$objects$Taxon == taxlev[i]][1]
     }
 
@@ -118,8 +123,8 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     ########### ENDREGION
 
-    axis(1, at = hist_breaks, labels = hist_breaks, tcl = -0.5)
-    axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
+    graphics::axis(1, at = hist_breaks, labels = hist_breaks, tcl = -0.5)
+    graphics::axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
     if (legend) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)

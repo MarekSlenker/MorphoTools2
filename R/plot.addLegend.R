@@ -1,6 +1,9 @@
 #' Add legends to plot
 #' @export
-plot.addLegend <- function(result, ...) {
+plot.addLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+                           pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
+                           y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                           box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
   UseMethod("plot.addLegend")
 }
 
@@ -8,35 +11,35 @@ plot.addLegend <- function(result, ...) {
 #' @rdname plot.addLegend
 #' @method plot.addLegend pcadata
 #' @export
-plot.addLegend.pcadata <- function(pcaResult, x = "topright", y = NULL, pch = 16, col = "black",
-                                   pt.bg = "white", pt.cex = cex, pt.lwd = par("lwd"), x.intersp = 1, y.intersp = 1,
-                                   box.type = "o", box.bg = "white", box.lwd = par("lwd"), box.lty = par("lty"), box.col = par("fg"),
-                                   cex = 1, ncol = 1, horiz = FALSE, ...) {
+plot.addLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+                                   pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
+                                   y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                                      box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
 
 
-  checkClass(pcaResult, "pcadata")
+  checkClass(result, "pcadata")
 
-  plot_legend_internal(pcaResult, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd,
-                       x.intersp = x.intersp, y.intersp = y.intersp,
-                       bty = box.type, bg = box.bg, box.lwd = box.lwd, box.lty = box.lty, box.col = box.col,
-                       cex = cex, ncol = ncol, horiz = horiz, ...)
+  plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
+                       pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
+                        y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
+                       box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
 
 }
 
 #' @rdname plot.addLegend
 #' @method plot.addLegend cdadata
 #' @export
-plot.addLegend.cdadata <- function(cdaResult, x = "topright", y = NULL, pch = 16, col = "black",
-                                   pt.bg = "white", pt.cex = cex, pt.lwd = par("lwd"), x.intersp = 1, y.intersp = 1,
-                                   box.type = "o", box.bg = "white", box.lwd = par("lwd"), box.lty = par("lty"), box.col = par("fg"),
-                                   cex = 1, ncol = 1, horiz = FALSE, ...) {
+plot.addLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+                                   pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
+                                   y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                                   box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
 
-  checkClass(cdaResult, "cdadata")
+  checkClass(result, "cdadata")
 
-  plot_legend_internal(cdaResult, x = x, y = y, pch = pch, col = col, pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd,
-                       x.intersp = x.intersp, y.intersp = y.intersp,
-                       bty = box.type, bg = box.bg, box.lwd = box.lwd, box.lty = box.lty, box.col = box.col,
-                       cex = cex, ncol = ncol, horiz = horiz, ...)
+  plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
+                        pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
+                        y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
+                        box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
 
 }
 
@@ -55,7 +58,7 @@ plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, pt.lwd, 
   legendTable = legendTable[order(legendTable[,1]),]
 
   if (is.null(y) && x %in% c("bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", "center"))
-              legend(x, legend = legendTable[,1],
+    graphics::legend(x, legend = legendTable[,1],
                      pch = as.numeric(legendTable[,2]),
                      col = legendTable[,3],
                      pt.bg = legendTable[,4],
@@ -65,7 +68,7 @@ plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, pt.lwd, 
                      cex = cex, ncol = ncol, horiz = horiz, ...)
 
   if (is.numeric(x) && is.numeric(y))
-              legend(x, y, legend = legendTable[,1],
+    graphics::legend(x, y, legend = legendTable[,1],
                      pch = as.numeric(legendTable[,2]),
                      col = legendTable[,3],
                      pt.bg = legendTable[,4],

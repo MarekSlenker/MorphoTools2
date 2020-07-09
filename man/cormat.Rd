@@ -35,12 +35,14 @@ Significance tests are usually unnecessary for morphometric analysis. Anyway,
 if tests are needed, they can be computed using the \code{\link{cormat.signifTest}} function.
 }
 \examples{
-correlations.p = cormat(myMorphodata, method="pearson")
-correlations.s = cormat(myMorphodata, method="spearman")
+data(centaurea)
+
+correlations.p = cormat(centaurea, method="pearson")
+correlations.s = cormat(centaurea, method="spearman")
 
 export.res(correlations.p, file="correlations.pearson.txt")
 export.res(correlations.s, file="correlations.spearman.txt")
 
-correlations.p = cormat.signifTest(myMorphodata, method="pearson")
+correlations.p = cormat.signifTest(centaurea, method="pearson")
 
 }

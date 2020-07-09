@@ -10,9 +10,9 @@ This function can be used to add legends to plots.
 
 \usage{
 plot.addLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
-    pt.bg = "white", pt.cex = cex, pt.lwd = par("lwd"), x.intersp = 1,
-    y.intersp = 1, box.type = "o", box.lty = par("lty"), box.lwd = par("lwd"),
-    box.col = par("fg"), box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...)
+    pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
+    y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+    box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...)
 }
 
 \arguments{
@@ -22,6 +22,7 @@ plot.addLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 \item{col}{the color of points appearing in the legend.}
 \item{pt.bg}{the background color for the \code{\link{points}}, corresponding to its argument bg.}
 \item{pt.cex}{character expansion factor for the points.}
+\item{lwd}{the line width.}
 \item{pt.lwd}{the line width for the points.}
 \item{x.intersp, y.intersp}{character interspacing factor for horizontal (x) and vertical (y) line distances.}
 \item{box.type}{the type of box to be drawn around the legend. The allowed values are "o" (the default) and "n".}
@@ -40,7 +41,7 @@ centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
 pcaRes = pca.calc(centaurea)
 
 plot.points(pcaRes, col = c("red","green","blue","red"),
-            pch=c(20,17,8,21), pt.bg = "orange", legend=F)
+            pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
 plot.addLegend(pcaRes, x = "bottomright", col = c("red","green","blue","red"),
                pch=c(20,17,8,21), pt.bg = "orange", ncol = 2)

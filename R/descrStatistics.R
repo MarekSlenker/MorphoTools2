@@ -90,28 +90,28 @@ descrByGroup <- function(object, column, digits) {
     descrStatistic[ , "Mean", group] = sapply(object$data[groupPositions, ], mean, na.rm=T)
 
     # SD
-    descrStatistic[ , "SD", group] = sapply(object$data[groupPositions, ], sd, na.rm=T)
+    descrStatistic[ , "SD", group] = sapply(object$data[groupPositions, ], stats::sd, na.rm=T)
 
     # Min
-    descrStatistic[ , "Min", group] = sapply(object$data[groupPositions, ], quantile, probs=0, na.rm=T)
+    descrStatistic[ , "Min", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0, na.rm=T)
 
     # 5%
-    descrStatistic[ , "5%", group] = sapply(object$data[groupPositions, ], quantile, probs=0.05, na.rm=T)
+    descrStatistic[ , "5%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.05, na.rm=T)
 
     # 25%
-    descrStatistic[ , "25%", group] = sapply(object$data[groupPositions, ], quantile, probs=0.25, na.rm=T)
+    descrStatistic[ , "25%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.25, na.rm=T)
 
     # Median
-    descrStatistic[ , "Median", group] = sapply(object$data[groupPositions, ], quantile, probs=0.5, na.rm=T)
+    descrStatistic[ , "Median", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.5, na.rm=T)
 
     # 75%
-    descrStatistic[ , "75%", group] = sapply(object$data[groupPositions, ], quantile, probs=0.75, na.rm=T)
+    descrStatistic[ , "75%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.75, na.rm=T)
 
     # 95%
-    descrStatistic[ , "95%", group] = sapply(object$data[groupPositions, ], quantile, probs=0.95, na.rm=T)
+    descrStatistic[ , "95%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.95, na.rm=T)
 
     # Max
-    descrStatistic[ , "Max", group] = sapply(object$data[groupPositions, ], quantile, probs=1, na.rm=T)
+    descrStatistic[ , "Max", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=1, na.rm=T)
   }
 
   descrStatistic = round(descrStatistic, digits = digits)

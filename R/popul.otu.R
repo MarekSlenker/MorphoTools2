@@ -3,7 +3,7 @@
 popul.otu <- function(object) {
   checkClass(object, "morphodata")
 
-  populData = aggregate(object$data, by =  list( object$Taxon, object$Population), mean, na.rm=TRUE)
+  populData = stats::aggregate(object$data, by =  list( object$Taxon, object$Population), mean, na.rm=TRUE)
 
   populData[, -c(1:2)] = data.frame(sapply(populData[, -c(1:2)], function(x) ifelse(is.nan(x), NA, x)))
 

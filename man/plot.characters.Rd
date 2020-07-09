@@ -8,8 +8,9 @@ The character's contribution to separation of objects are visualised as arrows.
 
 
 \usage{
-plot.characters(result, axes = c(1,2), xlab , ylab, xlim, ylim, main,
-   col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...)
+plot.characters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
+    main = NULL, xlim = NULL, ylim = NULL, col = "red", length = 0.1,
+    angle = 15, labels = TRUE, cex = 0.7, ...)
 }
 
 

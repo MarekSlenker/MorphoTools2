@@ -40,7 +40,7 @@ centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.characters(pcaRes, labels = F)
+plot.characters(pcaRes, labels = FALSE)
 plot.addLabels.characters(pcaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 2, cex = 1)
 plot.addLabels.characters(pcaRes, labels = c("LLW", "ILW", "LBA"), pos = 4, cex = 1)
 plot.addLabels.characters(pcaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)

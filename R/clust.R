@@ -15,7 +15,7 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "average") {
   if (any(is.na(object$data))) warning("Values of some characters are NA.", call. = FALSE)
 
   object$data = scale(object$data)
-  distances = dist(object$data, method = distMethod)
+  distances = stats::dist(object$data, method = distMethod)
 
   # v parametri method mozme dostat akukolvek metodu, ktora je platna pre hclust
   if (clustMethod == "UPGMA") clustMethod = "average"
@@ -24,7 +24,7 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "average") {
   if (clustMethod == "WPGMC") clustMethod = "median"
   if (clustMethod == "UPGMC") clustMethod = "centroid"
 
-  clustering = hclust(distances, method = clustMethod)
+  clustering = stats::hclust(distances, method = clustMethod)
 
   return(clustering)
 }

@@ -8,20 +8,20 @@ plot.addLabels.points <- function(result, labels = result$objects$ID, include = 
 #' @rdname plot.addLabels.points
 #' @method plot.addLabels.points pcadata
 #' @export
-plot.addLabels.points.pcadata <- function(pcaResult, labels = pcaResult$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+plot.addLabels.points.pcadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
 
-  labels_points_internal(pcaResult, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
 #' @rdname plot.addLabels.points
 #' @method plot.addLabels.points cdadata
 #' @export
-plot.addLabels.points.cdadata <- function(cdaResult, labels = cdaResult$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+plot.addLabels.points.cdadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
   # todo ak je rank 1, vyhod chybu  + testuj s rank 1
 
-  if (cdaResult$rank == 1){ stop("Unable to plot labels for histogram", call. = F)  }
+  if (result$rank == 1){ stop("Unable to plot labels for histogram", call. = F)  }
   else {
-    labels_points_internal(cdaResult, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+    labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }
 
 
@@ -46,7 +46,7 @@ labels_points_internal <- function(object, labels, include, axes, pos = pos, off
   if (include) {
 
     if (length(labelsToPlot) == 0) { stop(paste("No labels to plot"), call. = F) }
-    text(x = object$objects$scores[ ,axes[1]][labelsToPlot], y = object$objects$scores[ ,axes[2]][labelsToPlot],
+    graphics::text(x = object$objects$scores[ ,axes[1]][labelsToPlot], y = object$objects$scores[ ,axes[2]][labelsToPlot],
          labels = object$objects$ID[labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)
 
 
@@ -55,7 +55,7 @@ labels_points_internal <- function(object, labels, include, axes, pos = pos, off
     if (length(labelsToPlot) == length(unlist(lapply(object$objects$ID, as.character))))
         stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F)
 
-    text(x = object$objects$scores[ ,axes[1]][-labelsToPlot], y = object$objects$scores[ ,axes[2]][-labelsToPlot],
+    graphics::text(x = object$objects$scores[ ,axes[1]][-labelsToPlot], y = object$objects$scores[ ,axes[2]][-labelsToPlot],
          labels = object$objects$ID[-labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)
 
   }

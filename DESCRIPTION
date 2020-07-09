@@ -1,19 +1,28 @@
 Package: MorphoTools
 Title: Morphometric analysis
 Version: 1.0.0
-Authors@R: 
-    person(given = "Marek",
+Authors@R: c(person(given = "Marek",
            family = "Šlenker",
            role = c("aut", "cre"),
            email = "marek.slenker@savba.sk",
-           comment = c(ORCID = "0000-0002-5919-890X"))
-Description: What the package does (one paragraph).
+           comment = c(ORCID = "0000-0002-5919-890X")),
+           person(given = "Petr",
+           family = "Koutecký",
+           role = "ctb",
+           email = "kouta@prf.jcu.cz",
+           comment = c(ORCID = "0000-0002-3455-850X"))
+           )
+Author: Marek Šlenker [aut, cre],
+  Petr Koutecký [ctb]
+Maintainer: Marek Šlenker <marek.slenker@savba.sk>
+Description: _____________________________________________
+Depends: R (>= 2.10)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
 Imports:
-    candisc, MASS, class, ellipse, plot3D
+    stats, car, candisc, MASS, class, ellipse, plot3D
 Suggests: 
     testthat,
     knitr,

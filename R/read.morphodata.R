@@ -1,7 +1,7 @@
 #' Data input
 #' @export
 read.morphodata <- function(file, dec = ".", sep = "\t", ...){
-  data = read.delim(file, header = T, dec = dec, sep = sep, ...)
+  data = utils::read.delim(file, header = T, dec = dec, sep = sep, ...)
 
   if (dim(data)[2] <= 3) stop("incorrect data format", call.=F)
 

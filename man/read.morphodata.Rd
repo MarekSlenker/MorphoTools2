@@ -13,8 +13,7 @@ Imports data from text file and produces a '\code{\link{morphodata}}' object fro
 \usage{
 read.morphodata(file, dec=".", sep = "\t", ...)
 
-## S3 methods for class 'morphodata'
-summary(object)
+\method{summary}{morphodata}(object, ...)
 
 samples(object)
 
@@ -51,8 +50,10 @@ If there are missing values in the data, they must be represented as empty cells
 }
 
 \examples{
-data = read.morphodata("infile.txt")
-data = read.morphodata("clipboard")
+data = read.morphodata(file = system.file("extdata", "centaurea.txt",
+    package = "MorphoTools"),dec = ".", sep = "\t")
+
+# data = read.morphodata("clipboard")
 
 summary(data)
 samples(data)

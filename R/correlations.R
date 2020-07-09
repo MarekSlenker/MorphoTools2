@@ -5,7 +5,7 @@ cormat <- function (object, method = "pearson") {
 
   if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = F)
 
-  corelations = cor(object$data, use="pairwise.complete.obs", method = method)
+  corelations = stats::cor(object$data, use="pairwise.complete.obs", method = method)
   corelations = round(corelations, digits = 3)
   corelations = data.frame(corelations)
 
@@ -30,7 +30,7 @@ cormat.signifTest <- function(object, method = "pearson", alternative = "two.sid
   for (row in colnames(object$data)) {
     for (col in colnames(object$data)) {
 
-      cc = cor.test(x = object$data[, row], y = object$data[, col], method = method,
+      cc = stats::cor.test(x = object$data[, row], y = object$data[, col], method = method,
                     use="pairwise.complete.obs", alternative = alternative)
 
       table[row, col] = paste( round(cc$estimate, digits = 3), ";p-value=", round(cc$p.value, digits = 5), sep = "")

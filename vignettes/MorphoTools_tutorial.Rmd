@@ -7,11 +7,12 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools
 date: "June 18, 2020"
 output:
-  html_document: default
-  word_document: default
   pdf_document: default
+  word_document: default
+  html_document: default
 vignette: |
-  %\VignetteIndexEntry{MorphoTools_tutorial} %\VignetteEncoding{UTF-8} %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{MorphoTools_tutorial} %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r, include = FALSE}

@@ -10,7 +10,8 @@ This function is designed for exporting results, stored in objects of MorphoTool
 
 
 \usage{
-export.res(object, file = "clipboard", dec = ".", sep = "\\t", row.names = FALSE, col.names = TRUE)
+export.res(object, file = "clipboard", dec= ".", sep = "\\t",
+          row.names = FALSE, col.names = TRUE)
 }
 
 \arguments{

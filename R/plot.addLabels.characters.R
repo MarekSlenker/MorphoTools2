@@ -2,7 +2,9 @@
 
 #' Add labels to a plot
 #' @export
-plot.addLabels.characters <- function(result, ...) {
+plot.addLabels.characters <- function(result, labels,
+                                      include = T, axes = c(1, 2), pos = NULL, offset = 0.5,
+                                      cex = 0.7, col = NULL, ...) {
   UseMethod("plot.addLabels.characters")
 }
 
@@ -10,48 +12,48 @@ plot.addLabels.characters <- function(result, ...) {
 #' @rdname plot.addLabels.characters
 #' @method plot.addLabels.characters pcadata
 #' @export
-plot.addLabels.characters.pcadata <- function(pcaResult, labels = rownames(pcaResult$eigenVectors), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
-  checkClass(pcaResult, "pcadata")
+plot.addLabels.characters.pcadata <- function(result, labels = rownames(result$eigenVectors), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
+  checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > pcaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", pcaResult$rank, " axes.", sep = "" ), call. = F)
+  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
 
-  labels_characters_internal(labelTable = pcaResult$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
 #' @rdname plot.addLabels.characters
 #' @method plot.addLabels.characters cdadata
 #' @export
-plot.addLabels.characters.cdadata <- function(cdaResult, labels = rownames(cdaResult$totalCanonicalStructure), include = T, axes = c(1,2),
+plot.addLabels.characters.cdadata <- function(result, labels = rownames(result$totalCanonicalStructure), include = T, axes = c(1,2),
                                               pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
-  checkClass(cdaResult, "cdadata")
+  checkClass(result, "cdadata")
 
   # hist
-  if (cdaResult$rank == 1) {
+  if (result$rank == 1) {
 
     if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
 
 
-    y = seq(length(cdaResult$totalCanonicalStructure[,1]), 1, -1)
+    y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
 
     for (lab in labels) {
-      if (! (lab %in% rownames(cdaResult$totalCanonicalStructure))) stop(paste("label", lab , "does not exist"), call. = F)
+      if (! (lab %in% rownames(result$totalCanonicalStructure))) stop(paste("label", lab , "does not exist"), call. = F)
     }
 
-    labelsToPlot = which(rownames(cdaResult$totalCanonicalStructure) %in% labels)
+    labelsToPlot = which(rownames(result$totalCanonicalStructure) %in% labels)
 
 
     if (include) {
 
       if (length(labelsToPlot) == 0) { stop(paste("No labels to plot"), call. = F) }
-      text(x = cdaResult$totalCanonicalStructure[,1][labelsToPlot], y = y[labelsToPlot], labels = rownames(cdaResult$totalCanonicalStructure)[labelsToPlot],
+      graphics::text(x = result$totalCanonicalStructure[,1][labelsToPlot], y = y[labelsToPlot], labels = rownames(result$totalCanonicalStructure)[labelsToPlot],
            pos = pos, offset = offset, cex = cex, col = col, ...)
 
     } else{
 
-      if (length(labelsToPlot) == length(rownames(cdaResult$totalCanonicalStructure))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F) }
-      text(x = cdaResult$totalCanonicalStructure[,1][-labelsToPlot], y = y[-labelsToPlot], labels = rownames(cdaResult$totalCanonicalStructure)[-labelsToPlot],
+      if (length(labelsToPlot) == length(rownames(result$totalCanonicalStructure))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F) }
+      graphics::text(x = result$totalCanonicalStructure[,1][-labelsToPlot], y = y[-labelsToPlot], labels = rownames(result$totalCanonicalStructure)[-labelsToPlot],
            pos = pos, offset = offset, cex = cex, col = col, ...)
 
     }
@@ -59,13 +61,13 @@ plot.addLabels.characters.cdadata <- function(cdaResult, labels = rownames(cdaRe
 
 
   # scatter
-  if (cdaResult$rank > 1)  {
+  if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > cdaResult$rank) stop(paste("specified axes are out of bounds. Object has only ", cdaResult$rank, " axes.", sep = "" ), call. = F)
+    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
 
-    labels_characters_internal(labelTable = cdaResult$totalCanonicalStructure, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+    labels_characters_internal(labelTable = result$totalCanonicalStructure, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }
 }
 
@@ -83,13 +85,13 @@ labels_characters_internal <- function(labelTable, labels = labels, include = in
   if (include) {
 
     if (length(labelsToPlot) == 0) { stop(paste("No labels to plot"), call. = F) }
-    text(x = labelTable[ ,axes[1]][labelsToPlot], y = labelTable[ ,axes[2]][labelsToPlot],
+    graphics::text(x = labelTable[ ,axes[1]][labelsToPlot], y = labelTable[ ,axes[2]][labelsToPlot],
          labels = rownames(labelTable)[labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)
 
   } else{
 
     if (length(labelsToPlot) == length(rownames(labelTable))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = F) }
-    text(x = labelTable[ ,axes[1]][-labelsToPlot], y = labelTable[ ,axes[2]][-labelsToPlot],
+    graphics::text(x = labelTable[ ,axes[1]][-labelsToPlot], y = labelTable[ ,axes[2]][-labelsToPlot],
          labels = rownames(labelTable)[-labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)
 
   }

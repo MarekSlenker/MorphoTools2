@@ -7,10 +7,7 @@ Hierarchical cluster analysis of objects.
 }
 
 \usage{
-clust(object, distMethod = "euclidean", clustMethod = "average", p = 2)
-
-## S3 method for class 'hclust'
-plot(x, hang = -1, main = "Cluster Dendrogram", ...)
+clust(object, distMethod = "euclidean", clustMethod = "average")
 }
 
 \arguments{
@@ -20,15 +17,9 @@ plot(x, hang = -1, main = "Cluster Dendrogram", ...)
 
 \item{clustMethod}{the agglomeration method to be used: "average" (= UPGMA; default), "complete",
 "ward.D" (= Ward), "ward.D2", "single", "mcquitty" (= WPGMA), "median" (= WPGMC) or "centroid" (= UPGMC). See \code{\link{hclust}} for details.}
-
-\item{p}{The power of the Minkowski distance.}
-
-\item{x}{an object of the type \code{hclust} produced by \code{clust}.}
-
-\item{hang}{The fraction of the plot height by which labels should hang below the rest of the plot. A negative value will cause the labels to hang down from 0.}
-
-\item{...}{further arguments to be passed to \code{\link{plot.default}} or other graphical parameters in \code{\link{par}}.}
 }
+
+
 \value{
 object of class 'hclust'
 }
@@ -44,9 +35,9 @@ Dendrograms are produced using plot function.
 \examples{
 data(centaurea)
 
-clustering.UPGMA = clust(data)
+clustering.UPGMA = clust(centaurea)
 
-plot(clustering.UPGMA, cex=0.6, frame.plot=T, hang=-1,
+plot(clustering.UPGMA, cex=0.6, frame.plot=TRUE, hang=-1,
         main="", sub="", xlab="", ylab="distance")
 
 }

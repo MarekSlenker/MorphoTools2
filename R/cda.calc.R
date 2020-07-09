@@ -70,8 +70,8 @@ cda.calc <- function(object, passiveSamples = NULL) {
     coeffs.std <- diag(sqrt(diag(Sp))) %*% coeffs.raw
     rownames(coeffs.std) <- rownames(H)
     colnames(coeffs.std) <- cn
-    data <- model.frame(mod)
-    Y <- model.response(data)
+    data <- stats::model.frame(mod)
+    Y <- stats::model.response(data)
     Y <- scale(Y, center = TRUE, scale = FALSE)
     scores <- Y %*% coeffs.raw
     scores <- as.matrix(scores[, 1:ndim])
@@ -79,11 +79,11 @@ cda.calc <- function(object, passiveSamples = NULL) {
     all.factors <- data[, sapply(data, is.factor), drop = FALSE]
     factor.names <- unlist(strsplit(term, ":"))
     factors <- data[factor.names]
-    means <- aggregate(scores, factors, mean)
+    means <- stats::aggregate(scores, factors, mean)
     rownames(means) <- do.call(paste, c(means[factor.names],
                                         sep = ":"))
     means <- means[, -(1:length(factor.names))]
-    structure <- cor(Y, scores)
+    structure <- stats::cor(Y, scores)
     canrsq <- dc$values[1:ndim]/(1 + dc$values[1:ndim])
     #scores <- cbind(model.frame(mod)[predictor.names(mod)], as.data.frame(scores))
     scores <- as.data.frame(scores)
@@ -98,7 +98,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
 
   # calculate with objectNoPassiveSamples
   d_NoPassiveSamples = as.matrix(objectNoPassiveSamples$data)
-  x_NoPassiveSamples = lm(d_NoPassiveSamples ~ objectNoPassiveSamples$Taxon)
+  x_NoPassiveSamples = stats::lm(d_NoPassiveSamples ~ objectNoPassiveSamples$Taxon)
   # cda = candisc(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
   cda = candisc_MK(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
 
@@ -139,7 +139,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
   #colnames(cdaResult$objects$scores) = colnames(cda$scores)[-1]  // stare, ked este som neupravil candisc, tak to tam pchalo jeden stlpec navyse
 
   #  predict na zaklade plnej matice = novych dat
-  cdaResult$groupMeans = aggregate(cdaResult$objects$scores, by = list("Taxon" = cdaResult$objects$Taxon), mean)
+  cdaResult$groupMeans = stats::aggregate(cdaResult$objects$scores, by = list("Taxon" = cdaResult$objects$Taxon), mean)
 
   return(cdaResult)
 }
