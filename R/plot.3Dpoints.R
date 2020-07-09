@@ -10,7 +10,7 @@ plot.3Dpoints <- function(result, ...) {
 #' @export
 plot.3Dpoints.pcadata <- function(pcaResult, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
-         ticktype = "detailed", bty = "u", type = "n", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   if (is.null(xlab)) xlab = paste("PC",axes[1], " (", round(pcaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
   if (is.null(ylab)) ylab = paste("PC",axes[2], " (", round(pcaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
@@ -28,10 +28,10 @@ plot.3Dpoints.pcadata <- function(pcaResult, axes = c(1,2,3), xlab = NULL, ylab 
 #' @method plot.3Dpoints cdadata
 #' @export
 plot.3Dpoints.cdadata <- function(cdaResult, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
-                            pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
-                            ticktype = "detailed", bty = "u", type = "n", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+        pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
+        ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (cdaResult$rank < 3) stop(paste("3D plot requires at least 3 axes. ", cdaResult$rank, " axes.", sep = "" ), call. = F)
+  if (cdaResult$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", cdaResult$rank, " axes.", sep = "" ), call. = F)
 
   if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(cdaResult$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
   if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(cdaResult$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
