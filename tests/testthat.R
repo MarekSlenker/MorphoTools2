@@ -1,5 +1,6 @@
 library(testthat)
-library(candisc)
+library(visualTest)
+library(png)
 library(MorphoTools)
 
 test_check("MorphoTools")

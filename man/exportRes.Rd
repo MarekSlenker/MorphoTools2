@@ -32,7 +32,7 @@ exportRes(object, file = "clipboard", dec= ".", sep = "\\t",
 data(centaurea)
 
 descr = descrTaxon(centaurea, format = "($MEAN ± $SD)")
-exportRes(descr, file = "centaurea_descrTax.txt")
+exportRes(descr, file = "~/centaurea_descrTax.txt")
 }
 
 

@@ -2,7 +2,7 @@
 
 #' Add labels to a plot
 #' @export
-plotAddLabels.characters <- function(result, labels,
+plotAddLabels.characters <- function(result, labels = characters(result),
                                       include = T, axes = c(1, 2), pos = NULL, offset = 0.5,
                                       cex = 0.7, col = NULL, ...) {
   UseMethod("plotAddLabels.characters")
@@ -12,7 +12,7 @@ plotAddLabels.characters <- function(result, labels,
 #' @rdname plotAddLabels.characters
 #' @method plotAddLabels.characters pcadata
 #' @export
-plotAddLabels.characters.pcadata <- function(result, labels = rownames(result$eigenVectors), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
+plotAddLabels.characters.pcadata <- function(result, labels = characters(result), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
   checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
@@ -25,7 +25,7 @@ plotAddLabels.characters.pcadata <- function(result, labels = rownames(result$ei
 #' @rdname plotAddLabels.characters
 #' @method plotAddLabels.characters cdadata
 #' @export
-plotAddLabels.characters.cdadata <- function(result, labels = rownames(result$totalCanonicalStructure), include = T, axes = c(1,2),
+plotAddLabels.characters.cdadata <- function(result, labels = characters(result), include = T, axes = c(1,2),
                                               pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
   checkClass(result, "cdadata")
 

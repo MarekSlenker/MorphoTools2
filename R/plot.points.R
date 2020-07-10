@@ -76,7 +76,13 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   if (result$rank == 1) {
     # HISTOGRAM
 
-    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
+    if (length(axes) > 1){
+             if (!(all(axes == c(1,2)))) warning("The object has only one axis, which will be plotted", call. = F)
+    }
+
+    if (length(axes) == 1){
+            if (axes != 1) warning("The object has only one axis, which will be plotted", call. = F)
+    }
 
     taxlev = levels(result$objects$Taxon)
 
@@ -89,9 +95,22 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     # nastav pch, col a pt.bg spravne podla taxonu
     result$col = setValuesForVector(result$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
-    if (col == "black" && pt.bg != "white") {
-      col = pt.bg
+
+    if (length(col) == 1) {
+      if (col == "black") {
+
+        if ((length(pt.bg) == 1)) {
+          if (pt.bg != "white") {
+            col = pt.bg
+          }
+        }
+
+        if ((length(pt.bg) > 1)) {
+          col = pt.bg
+        }
+      }
     }
+
     result$pt.bg = setValuesForVector(result$objects$Taxon, col)
 
     ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bude skupin
@@ -135,7 +154,8 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
 
-  } else if (result$rank > 1)  {
+  }
+  else if (result$rank > 1)  {
     # SCATTERPLOT
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu

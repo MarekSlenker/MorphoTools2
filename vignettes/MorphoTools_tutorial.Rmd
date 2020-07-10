@@ -11,7 +11,8 @@ output:
   word_document: default
   html_document: default
 vignette: |
-  %\VignetteIndexEntry{MorphoTools_tutorial} %\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{MorphoTools_tutorial}
+  %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 

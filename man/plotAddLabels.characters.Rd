@@ -4,12 +4,12 @@
 \title{Add labels to a plot}
 \usage{
 ## S3 method for class 'pcadata'
-plotAddLabels.characters(result, labels = rownames(result$eigenVectors),
-    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
+plotAddLabels.characters(result, labels = characters(result), include = T,
+      axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 ## S3 method for class 'cdadata'
-plotAddLabels.characters(result, labels = rownames(result$totalCanonicalStructure),
-    include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
+plotAddLabels.characters(result, labels = characters(result), include = T,
+      axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 }
 \arguments{

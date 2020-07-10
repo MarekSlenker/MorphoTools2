@@ -13,7 +13,7 @@ Imports data from text file and produces a '\code{\link{morphodata}}' object fro
 \usage{
 read.morphodata(file, dec=".", sep = "\t", ...)
 
-\method{summary}{morphodata}(object, ...)
+## S3 method for class 'morphodata'
 
 samples(object)
 
