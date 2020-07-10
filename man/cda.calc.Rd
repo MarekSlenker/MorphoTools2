@@ -36,14 +36,14 @@ specimens).
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 cdaRes = cda.calc(centaurea)
 
 summary(cdaRes)
 
-plot.points(cdaRes, col = c("red","green","blue","red"),
+plotPoints(cdaRes, col = c("red","green","blue","red"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE)
 
 }

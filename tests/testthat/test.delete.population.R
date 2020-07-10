@@ -1,13 +1,13 @@
-context("delete.population")
+context("deletePopulation")
 
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("remove unexisting population",  {
-  expect_error(delete.population(data, "unexisting"), "population unexisting does not exist" )
+  expect_error(deletePopulation(data, "unexisting"), "population unexisting does not exist" )
 })
 
 test_that("remove one population",  {
-  subData = delete.population(data, "BABL")
+  subData = deletePopulation(data, "BABL")
 
   expect_equal(length(levels(data$Population)) -1, length(levels(subData$Population)))
 

@@ -1,22 +1,22 @@
 #' Add labels to a plot
 #' @export
-plot.addLabels.points <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
-  UseMethod("plot.addLabels.points")
+plotAddLabels.points <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+  UseMethod("plotAddLabels.points")
 }
 
 
-#' @rdname plot.addLabels.points
-#' @method plot.addLabels.points pcadata
+#' @rdname plotAddLabels.points
+#' @method plotAddLabels.points pcadata
 #' @export
-plot.addLabels.points.pcadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+plotAddLabels.points.pcadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
 
   labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
-#' @rdname plot.addLabels.points
-#' @method plot.addLabels.points cdadata
+#' @rdname plotAddLabels.points
+#' @method plotAddLabels.points cdadata
 #' @export
-plot.addLabels.points.cdadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
   # todo ak je rank 1, vyhod chybu  + testuj s rank 1
 
   if (result$rank == 1){ stop("Unable to plot labels for histogram", call. = F)  }

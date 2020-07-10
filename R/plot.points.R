@@ -1,18 +1,18 @@
 #' The default scatterplot function
 #' @export
-plot.points <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+plotPoints <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                         pch = 16, col = "black", pt.bg = "white",
                         breaks = 1, ylim = NULL,
                         labels = FALSE,
                         legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
-  UseMethod("plot.points")
+  UseMethod("plotPoints")
 }
 
 
 #' @rdname pca.calc
-#' @method plot.points pcadata
+#' @method plotPoints pcadata
 #' @export
-plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          pch = 16, col = "black", pt.bg = "white",
                          breaks = 1, ylim = NULL,
                          labels = FALSE,
@@ -51,20 +51,20 @@ plot.points.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     #legendTable = unique(legendTable)
 
     #plotLegend(legend.pos, legend = legendTable[,1],  pch = as.numeric(legendTable[,2]), col = legendTable[,3], pt.bg = legendTable[,4], ncol)
-    plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    plotAddLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
   }
 
   # labels
-  if (labels) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+  if (labels) plotAddLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
     #plot2DLabels(result, axes)
 
 }
 
 
 #' @rdname cda.calc
-#' @method plot.points cdadata
+#' @method plotPoints cdadata
 #' @export
-plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                           pch = 16, col = "black", pt.bg = "white",
                           breaks = 1, ylim = NULL,
                           labels = FALSE,
@@ -127,7 +127,7 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     graphics::axis(2, at = seq(ylim[1], ylim[2], 10), labels = seq(ylim[1], ylim[2], 10), tcl=-0.5)
 
     # legend
-    if (legend) plot.addLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
+    if (legend) plotAddLegend(result, x = legend.pos, pch = 22, col = "black", pt.bg = col, ncol = ncol)
 
 	# labels neplotujem
 	if (labels)  warning("Labels = TRUE is not supported for histograms.")
@@ -156,11 +156,11 @@ plot.points.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
     # legend
-    if (legend) plot.addLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    if (legend) plotAddLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
 
 
     # labels
-    if (labels) plot.addLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+    if (labels) plotAddLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
 
     }
 }

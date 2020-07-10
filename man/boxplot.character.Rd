@@ -1,16 +1,16 @@
-\name{boxplot.character}
-\alias{boxplot.character}
+\name{boxplotCharacter}
+\alias{boxplotCharacter}
 
-\alias{boxplot.all}
+\alias{boxplotAll}
 
 \title{Box Plots}
 \usage{
-boxplot.character(object, character, outliers = TRUE, lowerWhisker = 0.05,
+boxplotCharacter(object, character, outliers = TRUE, lowerWhisker = 0.05,
           upperWhisker = 0.95, col = "white", border = "black", main = character,
           cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
           horizontal = FALSE, varwidth = FALSE, ...)
 
-boxplot.all(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05,
+boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05,
           upperWhisker = 0.95, col = "white", border = "black", main = character,
           cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
           horizontal = FALSE, varwidth = FALSE, ...)
@@ -55,22 +55,22 @@ These functions produce a box-and-whisker plot(s) of the given morphological cha
 \details{
 These functions are wrappers above classical R \code{\link{boxplot}} {graphics} function, allowing the user to extend whiskers to desired percentiles. By default, the whiskers are extended to the 5\% and 95\% percentiles, because of the trimmed range (without the most extreme 10% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle defines 25th and 75th percentiles, bold horizontal line show median. The missing values are ignored.
 
-The \code{boxplot.all} function produce boxplot for each morphological character and save them to a folder named in the folderName parameter. If it does not exist, a new folder is created.
+The \code{boxplotAll} function produce boxplot for each morphological character and save them to a folder named in the folderName parameter. If it does not exist, a new folder is created.
 }
 \examples{
 data(centaurea)
 
-boxplot.character(centaurea, character= "ST", col = "orange", border = "red")
+boxplotCharacter(centaurea, character= "ST", col = "orange", border = "red")
 
-boxplot.character(centaurea, character= "ST", outliers = FALSE,
+boxplotCharacter(centaurea, character= "ST", outliers = FALSE,
           lowerWhisker = 0.1, upperWhisker = 0.9)
 
-boxplot.character(centaurea, "ST", varwidth = TRUE, notch = TRUE,
+boxplotCharacter(centaurea, "ST", varwidth = TRUE, notch = TRUE,
           boxwex = 0.4, staplewex = 1.3, horizontal = TRUE)
 
-boxplot.character(centaurea, "ST", boxlty = 1, medlwd = 5,
+boxplotCharacter(centaurea, "ST", boxlty = 1, medlwd = 5,
           whisklty = 2, whiskcol = "red", staplecol = "red",
           outcol = "grey30", pch = "-")
 
-boxplot.all(centaurea, folderName = "boxplots")
+boxplotAll(centaurea, folderName = "boxplots")
 }

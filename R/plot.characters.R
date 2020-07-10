@@ -1,15 +1,15 @@
 #' Draws characters contribution as arrows
 #' @export
-plot.characters <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
+plotCharacters <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                             col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
-  UseMethod("plot.characters")
+  UseMethod("plotCharacters")
 }
 
 
-#' @rdname plot.characters
-#' @method plot.characters pcadata
+#' @rdname plotCharacters
+#' @method plotCharacters pcadata
 #' @export
-plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
+plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                             col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
   checkClass(result, "pcadata")
 
@@ -49,10 +49,10 @@ plot.characters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = N
 
 
 
-#' @rdname plot.characters
-#' @method plot.characters cdadata
+#' @rdname plotCharacters
+#' @method plotCharacters cdadata
 #' @export
-plot.characters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
+plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                                     col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
 
   checkClass(result, "cdadata")

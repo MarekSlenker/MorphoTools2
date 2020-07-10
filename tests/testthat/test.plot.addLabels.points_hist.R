@@ -1,4 +1,4 @@
-context("plot.addLabels.points")
+context("plotAddLabels.points")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -12,8 +12,8 @@ test_that("cda scatter - no labels allowed",  {
 
   cdaRes = cda.calc(morphoMockup)
 
-  plot.points(cdaRes)
-  expect_error(plot.addLabels.points(cdaRes), "Unable to plot labels for histogram")
+  plotPoints(cdaRes)
+  expect_error(plotAddLabels.points(cdaRes), "Unable to plot labels for histogram")
 
   })
 

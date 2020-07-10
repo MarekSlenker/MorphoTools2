@@ -1,4 +1,4 @@
-context("plot.addLabels.points_scatter")
+context("plotAddLabels.points_scatter")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -14,22 +14,22 @@ test_that("cda visual scatter",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes)
-  plot.addLabels.points(cdaRes)
+  plotPoints(cdaRes)
+  plotAddLabels.points(cdaRes)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_default.png"), threshold = 1)  )
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes)
-  plot.addLabels.points(cdaRes, labels = c("id5", "id8"),pos = 2, cex = 2,  offset = 2, col = "red")
+  plotPoints(cdaRes)
+  plotAddLabels.points(cdaRes, labels = c("id5", "id8"),pos = 2, cex = 2,  offset = 2, col = "red")
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_include.png"), threshold = 1)  )
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(cdaRes)
-  plot.addLabels.points(cdaRes, include = F, labels = c("id5", "id8"),pos = 2, cex = 2,  offset = 2, col = c("red", "green"))
+  plotPoints(cdaRes)
+  plotAddLabels.points(cdaRes, include = F, labels = c("id5", "id8"),pos = 2, cex = 2,  offset = 2, col = c("red", "green"))
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_exclude.png"), threshold = 1)  )
 })
@@ -40,15 +40,15 @@ test_that("pca visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(pcaRes)
-  plot.addLabels.points(pcaRes)
+  plotPoints(pcaRes)
+  plotAddLabels.points(pcaRes)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_pca_default.png"), threshold = 1)  )
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.points(pcaRes)
-  plot.addLabels.points(pcaRes, labels = c("id5", "id8"))
+  plotPoints(pcaRes)
+  plotAddLabels.points(pcaRes, labels = c("id5", "id8"))
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.addLabels_pca_include.png"), threshold = 1)  )
 

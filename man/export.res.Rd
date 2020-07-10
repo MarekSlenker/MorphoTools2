@@ -1,5 +1,5 @@
-\name{export.res}
-\alias{export.res}
+\name{exportRes}
+\alias{exportRes}
 
 
 \title{Export data}
@@ -10,7 +10,7 @@ This function is designed for exporting results, stored in objects of MorphoTool
 
 
 \usage{
-export.res(object, file = "clipboard", dec= ".", sep = "\\t",
+exportRes(object, file = "clipboard", dec= ".", sep = "\\t",
           row.names = FALSE, col.names = TRUE)
 }
 
@@ -31,8 +31,8 @@ export.res(object, file = "clipboard", dec= ".", sep = "\\t",
 \examples{
 data(centaurea)
 
-descr = descr.tax(centaurea, format = "($MEAN ± $SD)")
-export.res(descr, file = "centaurea_descrTax.txt")
+descr = descrTaxon(centaurea, format = "($MEAN ± $SD)")
+exportRes(descr, file = "centaurea_descrTax.txt")
 }
 
 

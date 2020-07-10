@@ -2,15 +2,15 @@
 
 #' Add spiders to a plot
 #' @export
-plot.addSpiders <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
-  UseMethod("plot.addSpiders")
+plotAddSpiders <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
+  UseMethod("plotAddSpiders")
 }
 
 
-#' @rdname plot.addSpiders
-#' @method plot.addSpiders pcadata
+#' @rdname plotAddSpiders
+#' @method plotAddSpiders pcadata
 #' @export
-plot.addSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
+plotAddSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
@@ -19,14 +19,14 @@ plot.addSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 
   plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
 }
 
-#' @rdname plot.addSpiders
-#' @method plot.addSpiders cdadata
+#' @rdname plotAddSpiders
+#' @method plotAddSpiders cdadata
 #' @export
-plot.addSpiders.cdadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
+plotAddSpiders.cdadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
   # hist
   if (result$rank == 1) {
 
-    stop("The method plot.addSpiders() is not applicable to histogram.", call. = F)
+    stop("The method plotAddSpiders() is not applicable to histogram.", call. = F)
   }
 
   if (result$rank > 1)  {

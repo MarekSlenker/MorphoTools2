@@ -1,18 +1,18 @@
 #' The default scatterplot 3D function
 #' @export
-plot.3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
+plot3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
                           zlab = NULL, pch = 16, col = "black", pt.bg = "white",
                           phi = 10, theta = 2, ticktype = "detailed", bty = "u",
                           type = "p", labels = FALSE, legend = FALSE, legend.pos
                           = "topright", ncol = 1, ...) {
-  UseMethod("plot.3Dpoints")
+  UseMethod("plot3Dpoints")
 }
 
 
-#' @rdname plot.3Dpoints
-#' @method plot.3Dpoints pcadata
+#' @rdname plot3Dpoints
+#' @method plot3Dpoints pcadata
 #' @export
-plot.3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
+plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -28,10 +28,10 @@ plot.3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = N
 }
 
 
-#' @rdname plot.3Dpoints
-#' @method plot.3Dpoints cdadata
+#' @rdname plot3Dpoints
+#' @method plot3Dpoints cdadata
 #' @export
-plot.3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
+plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -73,7 +73,7 @@ plot3D_internal <- function(object, axes = axes, xlab = xlab, ylab = ylab, zlab 
   # legend
   if (legend) {
 
-    plot.addLegend(object, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+    plotAddLegend(object, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
 
    }
 

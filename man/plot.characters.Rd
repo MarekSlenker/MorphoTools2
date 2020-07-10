@@ -1,5 +1,5 @@
-\name{plot.characters}
-\alias{plot.characters}
+\name{plotCharacters}
+\alias{plotCharacters}
 \title{Draws character's contribution as arrows}
 
 \description{
@@ -8,7 +8,7 @@ The character's contribution to separation of objects are visualised as arrows.
 
 
 \usage{
-plot.characters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
+plotCharacters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
     main = NULL, xlim = NULL, ylim = NULL, col = "red", length = 0.1,
     angle = 15, labels = TRUE, cex = 0.7, ...)
 }
@@ -25,7 +25,7 @@ plot.characters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
 \item{col}{the color for arrows.}
 \item{length}{length of the edges of the arrow head (in inches).}
 \item{angle}{angle from the shaft of the arrow to the edge of the arrow head.}
-\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plot.addLabels.characters}} directly.}
+\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plotAddLabels.characters}} directly.}
 \item{cex}{character expansion factor for labels.}
 \item{...}{further arguments to be passed to \code{\link{arrows}} or other graphical parameters in \code{\link{par}}.}
 
@@ -38,12 +38,12 @@ The separation of samples in ordination space is driven by morphological charact
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.characters(pcaRes)
+plotCharacters(pcaRes)
 
 
 

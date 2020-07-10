@@ -1,4 +1,4 @@
-context("boxplot.character")
+context("boxplotCharacter")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -11,7 +11,7 @@ morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
 test_that("characters",  {
 
-  expect_error(boxplot.character(morphoMockup, "X_char", 0.95, 0.05), "character X_char was not found in attached data.")
+  expect_error(boxplotCharacter(morphoMockup, "X_char", 0.95, 0.05), "character X_char was not found in attached data.")
 
 })
 
@@ -19,7 +19,7 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  boxplot.character(morphoMockup, "data.Ch1", 0.95, 0.05)
+  boxplotCharacter(morphoMockup, "data.Ch1", 0.95, 0.05)
   dev.off()
 
   expect_true(  visualTest::isSimilar(tmp,  visualTest::getFingerprint("../testFiles/figs/boxplot.png"), threshold = 1)  )

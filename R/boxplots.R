@@ -1,23 +1,6 @@
 #' Box Plots
 #' @export
-boxplot.character <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
-                              main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
-                              varwidth = FALSE, ...) {
-  UseMethod("boxplot.character")
-}
-
-#' @rdname boxplot.character
-#' @export
-boxplot.all <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
-                        main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
-                        varwidth = FALSE, ...) {
-  UseMethod("boxplot.all")
-}
-
-#' @rdname boxplot.character
-#' @method boxplot.character morphodata
-#' @export
-boxplot.character.morphodata <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
                                       main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
                                       varwidth = FALSE, ...) {
 
@@ -33,10 +16,9 @@ boxplot.character.morphodata <- function(object, character, outliers = TRUE, low
 }
 
 
-#' @rdname boxplot.character
-#' @method boxplot.all morphodata
+#' @rdname boxplotCharacter
 #' @export
-boxplot.all.morphodata <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
+boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
                                 main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
                                 varwidth = FALSE, ...)
 {

@@ -1,8 +1,8 @@
-\name{na.meanSubst}
-\alias{na.meanSubst}
+\name{naMeanSubst}
+\alias{naMeanSubst}
 \title{Replace missing data by population average}
 \usage{
-na.meanSubst(object)
+naMeanSubst(object)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -25,5 +25,5 @@ The preferred approach is to reduce the data set to complete observations only (
 \examples{
 data(centaurea)
 
-centaurea = na.meanSubst(centaurea)
+centaurea = naMeanSubst(centaurea)
 }

@@ -1,5 +1,5 @@
-\name{plot.addSpiders}
-\alias{plot.addSpiders}
+\name{plotAddSpiders}
+\alias{plotAddSpiders}
 
 \title{Add spiders to a plot}
 
@@ -9,7 +9,7 @@ This function connects taxa's points with its centroids, thus forms a "spider" d
 
 \usage{
 
-plot.addSpiders(result, axes = c(1,2), col = "black",
+plotAddSpiders(result, axes = c(1,2), col = "black",
                 lty = 1, lwd = 1, ...)
 
 }
@@ -26,25 +26,25 @@ plot.addSpiders(result, axes = c(1,2), col = "black",
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.points(pcaRes, col = c(rgb(255,0,0,max=255,alpha=150), # red
+plotPoints(pcaRes, col = c(rgb(255,0,0,max=255,alpha=150), # red
                             rgb(0,255,0,max=255,alpha=150), # green
                             rgb(0,0,255,max=255,alpha=150), # blue
                             rgb(0,0,0,max=255,alpha=150)), # black
             legend=FALSE, xlim=c(-5,7.5), ylim = c(-5,5.5))
 
-plot.addLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
+plotAddLegend(pcaRes, col = c("red","green","blue","black"), ncol = 2)
 
-plot.addSpiders(pcaRes, col = c("red","green","blue","black"))
+plotAddSpiders(pcaRes, col = c("red","green","blue","black"))
 
 
-plot.points(pcaRes, col = c("red", "green", "blue","black"), legend=TRUE, cex = 0.4)
+plotPoints(pcaRes, col = c("red", "green", "blue","black"), legend=TRUE, cex = 0.4)
 
-plot.addSpiders(pcaRes,  col = c(rgb(255,0,0,max=255,alpha=150), # red
+plotAddSpiders(pcaRes,  col = c(rgb(255,0,0,max=255,alpha=150), # red
                                   rgb(0,255,0,max=255,alpha=150), # green
                                   rgb(0,0,255,max=255,alpha=150), # blue
                                   rgb(0,0,0,max=255,alpha=150))) # black

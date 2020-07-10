@@ -1,6 +1,6 @@
 #' Remove items (Taxa, Populations, morphological characters) from an morphodata object
 #' @export
-delete.taxon <- function(object, taxonName) {
+deleteTaxon <- function(object, taxonName) {
   checkClass(object, "morphodata")
 
   # skontroluj ci object ma taxName
@@ -12,9 +12,9 @@ delete.taxon <- function(object, taxonName) {
 }
 
 
-#' @rdname delete.taxon
+#' @rdname deleteTaxon
 #' @export
-delete.population <- function(object, populationName) {
+deletePopulation <- function(object, populationName) {
   checkClass(object, "morphodata")
 
   # skontroluj ci object ma popname
@@ -26,9 +26,9 @@ delete.population <- function(object, populationName) {
 }
 
 
-#' @rdname delete.taxon
+#' @rdname deleteTaxon
 #' @export
-delete.charecter <- function(object, charecterName) {
+deleteCharecter <- function(object, charecterName) {
   checkClass(object, "morphodata")
 
   # check existence of CH

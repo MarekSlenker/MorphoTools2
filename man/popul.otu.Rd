@@ -1,8 +1,8 @@
-\name{popul.otu}
-\alias{popul.otu}
+\name{populOTU}
+\alias{populOTU}
 \title{Population means}
 \usage{
-popul.otu(object)
+populOTU(object)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -22,6 +22,6 @@ Note that when using populations as OTUs they are handled with the same weight i
 \examples{
 data(centaurea)
 
-pops = popul.otu(centaurea)
+pops = populOTU(centaurea)
 
 }

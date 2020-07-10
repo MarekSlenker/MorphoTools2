@@ -1,6 +1,6 @@
 #' Population means
 #' @export
-popul.otu <- function(object) {
+populOTU <- function(object) {
   checkClass(object, "morphodata")
 
   populData = stats::aggregate(object$data, by =  list( object$Taxon, object$Population), mean, na.rm=TRUE)

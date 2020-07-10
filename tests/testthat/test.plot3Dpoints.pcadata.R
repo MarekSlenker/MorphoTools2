@@ -1,4 +1,4 @@
-context("plot.3Dpoints.pcadata")
+context("plot3Dpoints.pcadata")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -11,18 +11,18 @@ morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 # locally suppress warnings
 options(warn=-1)
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 options(warn=0)
 
-pops=popul.otu(centaurea)
+pops=populOTU(centaurea)
 
 
 test_that("ploting with error parameters",  {
 
   pcaRes = pca.calc(morphoMockup)
 
-  expect_error(plot.3Dpoints(pcaRes), "specified axes are out of bounds. Object has only 2 axes." )
+  expect_error(plot3Dpoints(pcaRes), "specified axes are out of bounds. Object has only 2 axes." )
 })
 
 test_that("visual",  {
@@ -31,7 +31,7 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.3Dpoints(pcaRes, col = c("red", "green"), phi = 10, theta = 22, pch = c(1,11), bty = "b2", legend = T)
+  plot3Dpoints(pcaRes, col = c("red", "green"), phi = 10, theta = 22, pch = c(1,11), bty = "b2", legend = T)
   dev.off()
   testthat::expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points1.png"), threshold = 1)  )
 
@@ -40,7 +40,7 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.3Dpoints(popsRes, col = c("red", "green"), phi = 20, theta = 2, labels = T)
+  plot3Dpoints(popsRes, col = c("red", "green"), phi = 20, theta = 2, labels = T)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points2.png"), threshold = 1)  )
 

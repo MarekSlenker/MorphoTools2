@@ -19,7 +19,7 @@ cormat <- function (object, method = "pearson") {
 
 #' @rdname cormat
 #' @export
-cormat.signifTest <- function(object, method = "pearson", alternative = "two.sided") {
+cormatSignifTest <- function(object, method = "pearson", alternative = "two.sided") {
 
   if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = F)
 

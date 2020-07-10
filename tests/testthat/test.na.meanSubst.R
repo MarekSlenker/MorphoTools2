@@ -1,4 +1,4 @@
-context("na.meanSubst")
+context("naMeanSubst")
 
 test_that("correctnes of repacement",  {
   morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
@@ -9,7 +9,7 @@ test_that("correctnes of repacement",  {
                                  "Ch2" = c(11, NA, 13, NA, 15, NA, 17, 18)))
   morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
-  meanMockup = na.meanSubst(morphoMockup)
+  meanMockup = naMeanSubst(morphoMockup)
 
   expect_is(meanMockup, "morphodata")
 
@@ -27,12 +27,12 @@ test_that("some NAs remains",  {
 
   # locally suppress warnings
   options(warn=-1)
-  meanMockup = na.meanSubst(morphoMockup)
+  meanMockup = naMeanSubst(morphoMockup)
   options(warn=0)
 
   expect_is(meanMockup, "morphodata")
 
   expect_equal(paste(meanMockup$data, collapse = " "), "c(1, 2, 2.333, 4, 5, 6, NA, NA) c(11, 12, 13, 12, 15, 15, 17, 18)")
 
-  expect_warning(na.meanSubst(morphoMockup), "Unable to replace NAs in characters Ch1 in population Pop4. Probably all values of that character are NA.")
+  expect_warning(naMeanSubst(morphoMockup), "Unable to replace NAs in characters Ch1 in population Pop4. Probably all values of that character are NA.")
 })

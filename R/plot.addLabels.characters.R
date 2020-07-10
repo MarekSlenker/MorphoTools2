@@ -2,17 +2,17 @@
 
 #' Add labels to a plot
 #' @export
-plot.addLabels.characters <- function(result, labels,
+plotAddLabels.characters <- function(result, labels,
                                       include = T, axes = c(1, 2), pos = NULL, offset = 0.5,
                                       cex = 0.7, col = NULL, ...) {
-  UseMethod("plot.addLabels.characters")
+  UseMethod("plotAddLabels.characters")
 }
 
 
-#' @rdname plot.addLabels.characters
-#' @method plot.addLabels.characters pcadata
+#' @rdname plotAddLabels.characters
+#' @method plotAddLabels.characters pcadata
 #' @export
-plot.addLabels.characters.pcadata <- function(result, labels = rownames(result$eigenVectors), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
+plotAddLabels.characters.pcadata <- function(result, labels = rownames(result$eigenVectors), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
   checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
@@ -22,10 +22,10 @@ plot.addLabels.characters.pcadata <- function(result, labels = rownames(result$e
   labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
-#' @rdname plot.addLabels.characters
-#' @method plot.addLabels.characters cdadata
+#' @rdname plotAddLabels.characters
+#' @method plotAddLabels.characters cdadata
 #' @export
-plot.addLabels.characters.cdadata <- function(result, labels = rownames(result$totalCanonicalStructure), include = T, axes = c(1,2),
+plotAddLabels.characters.cdadata <- function(result, labels = rownames(result$totalCanonicalStructure), include = T, axes = c(1,2),
                                               pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
   checkClass(result, "cdadata")
 

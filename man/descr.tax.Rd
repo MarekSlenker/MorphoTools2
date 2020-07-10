@@ -1,16 +1,16 @@
-\name{descr.tax}
-\alias{descr.tax}
-\alias{descr.pop}
-\alias{descr.all}
+\name{descrTaxon}
+\alias{descrTaxon}
+\alias{descrPopulation}
+\alias{descrAll}
 
 \title{Descriptive statistics}
 
 \usage{
-descr.tax(object, format = NULL, decimalPlaces = 3)
+descrTaxon(object, format = NULL, decimalPlaces = 3)
 
-descr.pop(object, format = NULL, decimalPlaces = 3)
+descrPopulation(object, format = NULL, decimalPlaces = 3)
 
-descr.all(object, format = NULL, decimalPlaces = 3)
+descrAll(object, format = NULL, decimalPlaces = 3)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -39,11 +39,11 @@ Keywords: "$MEAN" = mean; "$SD" = standard deviation; "$MIN" = minimum; "$5\%" =
 \examples{
 data(centaurea, decimalPlaces = 3)
 
-descr.tax(centaurea)
+descrTaxon(centaurea)
 
-descr.tax(centaurea, format = "($MEAN ± $SD)")
+descrTaxon(centaurea, format = "($MEAN ± $SD)")
 
-descr.pop(centaurea, format = "$MEAN ($MIN - $MAX)")
+descrPopulation(centaurea, format = "$MEAN ($MIN - $MAX)")
 
-descr.all(centaurea, format = "$MEAN ± $SD ($5\% - $95\%)")
+descrAll(centaurea, format = "$MEAN ± $SD ($5\% - $95\%)")
 }

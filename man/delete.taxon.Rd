@@ -1,14 +1,14 @@
-\name{delete.taxon}
-\alias{delete.taxon}
-\alias{delete.population}
-\alias{delete.charecter}
+\name{deleteTaxon}
+\alias{deleteTaxon}
+\alias{deletePopulation}
+\alias{deleteCharecter}
 \title{Remove items (Taxa, Populations, morphological characters) from an morphodata object}
 \usage{
-delete.taxon(object, taxonName)
+deleteTaxon(object, taxonName)
 
-delete.population(object, populationName)
+deletePopulation(object, populationName)
 
-delete.charecter(object, charecterName)
+deleteCharecter(object, charecterName)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -28,11 +28,11 @@ This functions remove particular taxa, populations or morphological characters f
 \examples{
 data(centaurea)
 
-centaurea.3tax = delete.taxon(centaurea, "hybr")
-centaurea.PsSt = delete.taxon(centaurea, c("ph", "hybr"))
+centaurea.3tax = deleteTaxon(centaurea, "hybr")
+centaurea.PsSt = deleteTaxon(centaurea, c("ph", "hybr"))
 
-centaurea.short = delete.population(centaurea, c("LIP", "PREL"))
+centaurea.short = deletePopulation(centaurea, c("LIP", "PREL"))
 
-centaurea.short = delete.charecter(centaurea, "LL")
+centaurea.short = deleteCharecter(centaurea, "LL")
 
 }

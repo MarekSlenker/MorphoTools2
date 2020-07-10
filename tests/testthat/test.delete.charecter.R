@@ -1,14 +1,14 @@
-context("delete.charecter")
+context("deleteCharecter")
 
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("trying to remove unexisting character",  {
-  expect_error(delete.charecter(data, "unexistingCh"), "charecter unexistingCh does not exist")
+  expect_error(deleteCharecter(data, "unexistingCh"), "charecter unexistingCh does not exist")
 })
 
 
 test_that("remove one character",  {
-  subData = delete.charecter(data, "LL")
+  subData = deleteCharecter(data, "LL")
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -21,7 +21,7 @@ test_that("remove one character",  {
 })
 
 test_that("remove more characters",  {
-  subData = delete.charecter(data, c("LL", "LLW", "MLW"))
+  subData = deleteCharecter(data, c("LL", "LLW", "MLW"))
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 

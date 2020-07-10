@@ -1,6 +1,6 @@
 #' Shapiro-Wilk Normality Test
 #' @export
-shapiroWilk.test <- function(object, p.value = 0.05) {
+shapiroWilkTest <- function(object, p.value = 0.05) {
   checkClass(object, "morphodata")
 
 

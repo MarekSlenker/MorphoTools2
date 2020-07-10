@@ -1,6 +1,6 @@
 #' Descriptive statistics
 #' @export
-descr.tax <- function(object, format = NULL, decimalPlaces = 3) {
+descrTaxon <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   # calculate descr stat
@@ -19,9 +19,9 @@ descr.tax <- function(object, format = NULL, decimalPlaces = 3) {
   }
 }
 
-#' @rdname descr.tax
+#' @rdname descrTaxon
 #' @export
-descr.pop <- function(object, format = NULL, decimalPlaces = 3) {
+descrPopulation <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   # calculate descr stat
@@ -40,9 +40,9 @@ descr.pop <- function(object, format = NULL, decimalPlaces = 3) {
   }
 }
 
-#' @rdname descr.tax
+#' @rdname descrTaxon
 #' @export
-descr.all <- function(object, format = NULL, decimalPlaces = 3) {
+descrAll <- function(object, format = NULL, decimalPlaces = 3) {
   checkClass(object, "morphodata")
 
   object$all = as.factor( rep("all", length(object$Taxon)))

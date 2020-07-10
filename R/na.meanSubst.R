@@ -1,7 +1,7 @@
 #' Replace missing data by population average
 #' @export
 
-na.meanSubst <- function(object){
+naMeanSubst <- function(object){
   checkClass(object, "morphodata")
 
    meansubst<-function(x){

@@ -1,10 +1,10 @@
-\name{plot.addLabels.points}
-\alias{plot.addLabels.points}
+\name{plotAddLabels.points}
+\alias{plotAddLabels.points}
 
 \title{Add labels to a plot}
 \usage{
 
-plot.addLabels.points(result, labels = result$objects$ID, include = T,
+plotAddLabels.points(result, labels = result$objects$ID, include = T,
       axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...)
 
 }
@@ -30,20 +30,20 @@ This is a generic function for drawing labels to the data points of \code{pcadat
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
-pops = popul.otu(centaurea)
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+pops = populOTU(centaurea)
 
 
 pcaRes = pca.calc(pops)
-plot.points(pcaRes, col = c("red","green","blue","red"),
+plotPoints(pcaRes, col = c("red","green","blue","red"),
             pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = TRUE)
+plotAddLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = TRUE)
 
-plot.points(pcaRes, col = c("red","green","blue","red"),
+plotPoints(pcaRes, col = c("red","green","blue","red"),
             pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
-plot.addLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = FALSE)
+plotAddLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = FALSE)
 
 }

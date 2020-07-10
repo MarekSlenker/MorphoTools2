@@ -28,14 +28,14 @@ Principal components analysis, wrapper over \code{\link{prcomp}} method.
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
 summary(pcaRes)
 
-plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","black"),
+plotPoints(pcaRes, axes = c(1,2), col = c("red","green","blue","black"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
 
 }

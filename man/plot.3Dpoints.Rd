@@ -1,7 +1,7 @@
-\name{plot.3Dpoints}
-\alias{plot.3Dpoints}
-\alias{plot.3Dpoints.pcadata}
-\alias{plot.3Dpoints.cdadata}
+\name{plot3Dpoints}
+\alias{plot3Dpoints}
+\alias{plot3Dpoints.pcadata}
+\alias{plot3Dpoints.cdadata}
 \title{The default scatterplot 3D function}
 
 \description{
@@ -10,7 +10,7 @@ A generic function for ploting ordination scores stored in 'pcadata' and 'cdadat
 
 
 \usage{
-plot.3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
+plot3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
   pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
   ticktype = "detailed", bty = "u", type = "p", labels = FALSE,
  legend = FALSE, legend.pos = "topright", ncol = 1, ...)
@@ -29,7 +29,7 @@ plot.3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
 \item{bty}{The type of the box. One of \code{"g", "b2", "bl" "f" "u"} can be specified.}
 \item{type}{the type of plot points, \code{"p"} for points, or \code{"h"} for vertical spikes.}
 \item{labels}{logical, defines if point's labels are displayed.}
-\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plot.addLegend}} directly.}
+\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plotAddLegend}} directly.}
 \item{legend.pos}{a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
 \item{...}{further arguments to be passed to \code{\link{plot3D}}, \code{\link{persp}}, \code{\link{par}}.}
@@ -40,12 +40,12 @@ plot.3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.3Dpoints(pcaRes,col = c("red","green","blue","black"), pch=c(20,17,8,21), pt.bg = "orange")
+plot3Dpoints(pcaRes,col = c("red","green","blue","black"), pch=c(20,17,8,21), pt.bg = "orange")
 }
 
 

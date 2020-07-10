@@ -1,5 +1,5 @@
-\name{plot.addLegend}
-\alias{plot.addLegend}
+\name{plotAddLegend}
+\alias{plotAddLegend}
 
 
 \title{Add legends to plot}
@@ -9,7 +9,7 @@ This function can be used to add legends to plots.
 }
 
 \usage{
-plot.addLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
+plotAddLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
     pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
     y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
     box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...)
@@ -35,15 +35,15 @@ plot.addLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.points(pcaRes, col = c("red","green","blue","red"),
+plotPoints(pcaRes, col = c("red","green","blue","red"),
             pch=c(20,17,8,21), pt.bg = "orange", legend=FALSE)
 
-plot.addLegend(pcaRes, x = "bottomright", col = c("red","green","blue","red"),
+plotAddLegend(pcaRes, x = "bottomright", col = c("red","green","blue","red"),
                pch=c(20,17,8,21), pt.bg = "orange", ncol = 2)
 
 }

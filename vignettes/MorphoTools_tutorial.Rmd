@@ -116,7 +116,7 @@ As the first step, we will test the normality of distribution of each character 
 options(max.print = 40)
 ```
 ```{r echo = TRUE, eval=TRUE}
-shapiroWilk.test(centaurea, p.value = 0.05)
+shapiroWilkTest(centaurea, p.value = 0.05)
 
 ```
 
@@ -126,11 +126,11 @@ As most characters have a non-normal distribution, we will prefer Spearman's cor
 
 Boxplots are handy tools for detecting outlier values (potential typos, missing decimal points, etc.) and for detection between-species dissimilarities and critical morphological values discriminating among species. Exactly these values should be transformed into identification key enabling the correct identification of taxa.  
 
-Boxplots can be calculated for particular character using `boxplot.character()` or for all characters at once running `boxplot.all()` function, that saves all boxplots to a new folder in your working directory. The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted.
+Boxplots can be calculated for particular character using `boxplot.character()` or for all characters at once running `boxplotAll()` function, that saves all boxplots to a new folder in your working directory. The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted.
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-boxplot.character(centaurea, character = "AL", lowerWhisker = 0.05,
+boxplotCharacter(centaurea, character = "AL", lowerWhisker = 0.05,
                    upperWhisker = 0.95, col = c("blue","green","red","orange"))
 ```
 
@@ -138,36 +138,36 @@ The default behaviour is to plot outliers. As you can see in the above figure, h
 
 ### 3.2.3 Descriptive statistics
 
-The table of descriptive statistics is a less comfortable way of detecting outlier values, but it can be used for reporting descriptive statistics of morphological characters in your paper. This statistics can be calculated on the levels of populations, taxa or for the whole dataset, using `descr.pop()`, `descr.tax()` or `descr.all()`, respectively. Using argument `format`, you can specify the desired output format. Keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%`, `$MAX` will be replaced by actual values. Run `?descr.tax` for more details.
+The table of descriptive statistics is a less comfortable way of detecting outlier values, but it can be used for reporting descriptive statistics of morphological characters in your paper. This statistics can be calculated on the levels of populations, taxa or for the whole dataset, using `descrPopulation()`, `descrTaxon()` or `descrAll()`, respectively. Using argument `format`, you can specify the desired output format. Keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%`, `$MAX` will be replaced by actual values. Run `?descrTaxon` for more details.
 
 ```{r echo = TRUE, eval=TRUE}
-descr.tax(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
+descrTaxon(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
 ```
 
-The results can be assigned to a variable and copied to the clipboard (fails for large data) or exported to file, both using the `export.res()` function.
+The results can be assigned to a variable and copied to the clipboard (fails for large data) or exported to file, both using the `exportRes()` function.
 ```{r eval=FALSE, include=TRUE}
-descr_tax = descr.tax(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
-export.res(descr_tax, file = "clipboard")
-export.res(descr_tax, file = "descr_tax.txt")
+descr_tax = descrTaxon(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
+exportRes(descr_tax, file = "clipboard")
+exportRes(descr_tax, file = "descr_tax.txt")
 ```
 
 ### 3.2.4 Correlations of characters
 
-Highly correlated characters (r > |0.95|) should not be used in principal component analysis and especially in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (do not require normally distributed data). The results can be exported with the `export.res()` function. One from the pair of highly correlated character can be removed from dataset using `delete.charecter()` function, see below.
+Highly correlated characters (r > |0.95|) should not be used in principal component analysis and especially in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (do not require normally distributed data). The results can be exported with the `exportRes()` function. One from the pair of highly correlated character can be removed from dataset using `deleteCharecter()` function, see below.
 
 ```{r echo = TRUE, eval=TRUE}
 correlations.s = cormat(centaurea, method = "spearman")
-export.res(correlations.s, file="correlations.spearman.txt")
+exportRes(correlations.s, file="correlations.spearman.txt")
 ```
 
-Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the `cormat.signifTest()` function.
+Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the `cormatSignifTest()` function.
 
 ### 3.2.5 Populations as the taxonomic units
 
 To simplify the overall structure, we can consider the use of populations as operational taxonomic units. This means that the whole population will be represented by a single individual, whose morphological values will be calculated as an average of the individuals' values. Missing values will be removed.
 
 ```{r echo = TRUE, eval=TRUE}
-pops = popul.otu(centaurea)
+pops = populOTU(centaurea)
 ```
 We received a warning that the values of some characters are `NA`. How to deal with missing data, we will discuss in the following section.
 
@@ -178,25 +178,25 @@ Missing values are not accepted in morphological analyses, and MorphoTools do no
 
 #### Replace missing values    
 
-Missing values can be substituted by the average value of the respective character in the respective population. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute missing values by average value, use method `na.meanSubst()`.
+Missing values can be substituted by the average value of the respective character in the respective population. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute missing values by average value, use method `naMeanSubst()`.
 
 ```{r echo = TRUE, eval=TRUE}
-centaurea = na.meanSubst(centaurea)
+centaurea = naMeanSubst(centaurea)
 ```
 
 #### Remove items  
 
-After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contains only `NA` values. We have to decide between deleting characters using `delete.charecter()` or populations using `delete.population()` function. As character AP looks promising for delimitation of *C. pseudophrygia* and *C. stenolepis*, we will keep the characters and remove the populations.
+After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contains only `NA` values. We have to decide between deleting characters using `deleteCharecter()` or populations using `deletePopulation()` function. As character AP looks promising for delimitation of *C. pseudophrygia* and *C. stenolepis*, we will keep the characters and remove the populations.
 
 ```{r echo = TRUE, eval=TRUE}
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
-pops = delete.population(pops, populationName = c("LIP", "PREL"))
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
 
 
 ***
-We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed. Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `export.res()` function. 
+We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed. Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `exportRes()` function. 
 
 
 
@@ -226,58 +226,58 @@ pca.centaurea = pca.calc(centaurea)
 The result can be plotted by typing the following commands: 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18),
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18),
             legend = T, ncol = 2, legend.pos="bottomright")
 
 ```
 
-Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `export.res()` function. The dollar sign, `$`, lets you access elements within an object, same as above.
+Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `exportRes()` function. The dollar sign, `$`, lets you access elements within an object, same as above.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
-plot.characters(pca.centaurea, cex = 1.2)
+plotCharacters(pca.centaurea, cex = 1.2)
 
-export.res(pca.centaurea$eigenVectors, file="eigenVectors.centaurea.txt")
+exportRes(pca.centaurea$eigenVectors, file="eigenVectors.centaurea.txt")
 
 ```
 
 
 As you can see in the figures above, ordination diagrams of PCA showed relatively compact groupings corresponding to taxa with partial overlaps. First two components (axes) extracted 20.65% and 14.26% of the overall variability in data. Characters ILW, IW, are strongly correlated with the direction of separation of taxa *C. pseudophrygia*, *C. stenolepis* (“ps”, “st”) and their putative hybrid “hybr”. The *C. phrygia* s.str. ("ph") is separated in the diagonal direction, highly correlated with MW, ML, IV, and MLW characters.
 
-The `plot.points()` and `plot.characters()` are a default plotting functions. You can add simple labels using argument `labels = TRUE`, or point's legend using `legend = TRUE`. If you need more precise control about plotting or want to add other elements to points, use some of the following functions:  
+The `plotPoints()` and `plotCharacters()` are a default plotting functions. You can add simple labels using argument `labels = TRUE`, or point's legend using `legend = TRUE`. If you need more precise control about plotting or want to add other elements to points, use some of the following functions:  
 
-* `plot.addLabels.points()`, `plot.addLabels.characters()` allows you to include or exclude labels, specify the label's position, offset, colours, etc. 
-* `plot.addLegend()` allows you to specify exact coordinates, expansion and interspacing factors, line width, borders parameters, etc. 
-* `plot.addEllipses()` draws confidence (prediction) ellipses around taxa. Ellipses with given probability define the regions where will fall any new independent observation from the respective taxa.
-* `plot.addSpiders()` connects taxa's points with its centroids, thus forms a "spider" diagram.
+* `plotAddLabels.points()`, `plotAddLabels.characters()` allows you to include or exclude labels, specify the label's position, offset, colours, etc. 
+* `plotAddLegend()` allows you to specify exact coordinates, expansion and interspacing factors, line width, borders parameters, etc. 
+* `plotAddEllipses()` draws confidence (prediction) ellipses around taxa. Ellipses with given probability define the regions where will fall any new independent observation from the respective taxa.
+* `plotAddSpiders()` connects taxa's points with its centroids, thus forms a "spider" diagram.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 pca.pops = pca.calc(pops)
 
-plot.points(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
+plotPoints(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = F, labels = F)
 
-plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
+plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
                       "CERM","DOM" ,"KOZH","KOT"), include = FALSE, pos = 4, cex=0.7)
-plot.addLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
+plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
                       pos = 2,cex = 0.75)
-plot.addLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
-plot.addLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
+plotAddLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
+plotAddLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
-plot.characters(pca.pops, labels = F)
+plotCharacters(pca.pops, labels = F)
 
-plot.addLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
-plot.addLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex=0.75)
+plotAddLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
+plotAddLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex=0.75)
 ```
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
-plot.addLegend(pca.centaurea, col = c("blue","green","red","orange"), 
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
 
-plot.addSpiders(pca.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
+plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                         rgb(0,255,0,max=255,alpha=130), # green
                                         rgb(255,0,0,max=255,alpha=130), # red
                                         rgb(255,102,0,max=255,alpha=130))) # orange
@@ -287,9 +287,9 @@ plot.addSpiders(pca.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
 To highlight only some groups, use `NA` for other colours.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
-plot.addSpiders(pca.centaurea, col = c(NA, NA, NA,
+plotAddSpiders(pca.centaurea, col = c(NA, NA, NA,
                                         rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
@@ -297,23 +297,23 @@ plot.addSpiders(pca.centaurea, col = c(NA, NA, NA,
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.points(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
-plot.addLegend(pca.centaurea, col = c("blue","green","red","orange"), 
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 
-plot.addEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
+plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 
 
-A 3D scatterplot can be produced using the `plot.3Dpoints` function. Use `phi` and `theta` arguments to define slope and viewing direction.
+A 3D scatterplot can be produced using the `plot3Dpoints` function. Use `phi` and `theta` arguments to define slope and viewing direction.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
+plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
 ```
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
+plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 ```
 
 
@@ -325,18 +325,18 @@ The Canonical discriminant analysis finds linear combinations of the original va
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 cda.centaurea = cda.calc(centaurea)
 
-plot.points(cda.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
+plotPoints(cda.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = T, ncol = 2, legend.pos="bottomright")
 
 
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, fig.align='center'}
-plot.characters(cda.centaurea, cex = 1.2)
+plotCharacters(cda.centaurea, cex = 1.2)
 ```
 
 
-The CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis. Characters ML, MLW, IV and MW are oriented in the direction of separation, thus these characters contributed the most significantly, which is in accordance with the results of PCA. The values of correlation of characters with the first canonical axis (total canonical structure coefficients) are one of the elements of the object of class `cdadata` and can be accessed by the `$` notation. Results can be exported using the `export.res()` function. 
+The CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis. Characters ML, MLW, IV and MW are oriented in the direction of separation, thus these characters contributed the most significantly, which is in accordance with the results of PCA. The values of correlation of characters with the first canonical axis (total canonical structure coefficients) are one of the elements of the object of class `cdadata` and can be accessed by the `$` notation. Results can be exported using the `exportRes()` function. 
 
 ```{r include=F}
 options(max.print = 100)
@@ -344,7 +344,7 @@ options(max.print = 100)
 ```{r echo = TRUE, eval=TRUE}
 cda.centaurea.TCS = cda.centaurea$totalCanonicalStructure
 
-export.res(cda.centaurea.TCS, "clipboard")
+exportRes(cda.centaurea.TCS, "clipboard")
 
 cda.centaurea.TCS
 ```
@@ -360,11 +360,11 @@ As you can see, the above mentioned characters received highest scores at the fi
 To gain better insight into the differentiation among remaining taxa, (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), we will analyse them separately. The new subdataset will we create by removing *C. phrygia* from the original dataset. 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-stPsHybr = delete.taxon(centaurea, taxonName = "ph")
+stPsHybr = deleteTaxon(centaurea, taxonName = "ph")
 
 cda.stPsHybr = cda.calc(stPsHybr)
 
-plot.points(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
+plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
             legend = T, ncol = 2, legend.pos="bottomright")
 
 cda.stPsHybr$totalCanonicalStructure
@@ -385,7 +385,7 @@ Sometimes is desirable to passively display (or predict) the position of some sa
 
 cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
 
-plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
+plotPoints(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
                 col = c(rgb(0,0,255,max=255,alpha=255), # blue
                         rgb(255,0,0,max=255,alpha=160), # red
                         rgb(255,102,0,max=255,alpha=160))) # orange, 
@@ -393,16 +393,16 @@ plot.points(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 
-plot.points(cda.stPs_passiveHybr, breaks = 0.2,
+plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0,max=255,alpha=255), # hybr - black
                         rgb(255,255,255,max=255,alpha=80), # ps - white
                         rgb(255,255,255,max=255,alpha=80))) # st - white 
 ```
 
-To draw a 3D scatterplot, use the `plot.3Dpoints` function. Slope and viewing direction can be set by `phi` and `theta` parameters.
+To draw a 3D scatterplot, use the `plot3Dpoints` function. Slope and viewing direction can be set by `phi` and `theta` parameters.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
-plot.3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
+plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
 ```
 
 

@@ -1,5 +1,5 @@
-\name{shapiroWilk.test}
-\alias{shapiroWilk.test}
+\name{shapiroWilkTest}
+\alias{shapiroWilkTest}
 \title{Shapiro-Wilk Normality Test}
 
 \description{
@@ -7,7 +7,7 @@ Calculates the Shapiro-Wilk normality test of characters for taxa .
 }
 
 \usage{
-shapiroWilk.test(object, p.value = 0.05)
+shapiroWilkTest(object, p.value = 0.05)
 }
 
 \arguments{
@@ -23,13 +23,13 @@ The normality of within-group distribution is the assumption of Pearson correlat
 \examples{
 data(centaurea)
 
-sW = shapiroWilk.test(centaurea, p.value = 0.05)
+sW = shapiroWilkTest(centaurea, p.value = 0.05)
 
-export.res(sW)
+exportRes(sW)
 
-sW = shapiroWilk.test(centaurea, p.value = NA)
+sW = shapiroWilkTest(centaurea, p.value = NA)
 
-export.res(sW)
+exportRes(sW)
 }
 
 

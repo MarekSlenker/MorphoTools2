@@ -1,14 +1,14 @@
-\name{plot.addLabels.characters}
-\alias{plot.addLabels.characters}
+\name{plotAddLabels.characters}
+\alias{plotAddLabels.characters}
 
 \title{Add labels to a plot}
 \usage{
 ## S3 method for class 'pcadata'
-plot.addLabels.characters(result, labels = rownames(result$eigenVectors),
+plotAddLabels.characters(result, labels = rownames(result$eigenVectors),
     include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 ## S3 method for class 'cdadata'
-plot.addLabels.characters(result, labels = rownames(result$totalCanonicalStructure),
+plotAddLabels.characters(result, labels = rownames(result$totalCanonicalStructure),
     include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 
 }
@@ -34,15 +34,15 @@ This is a generic function for drawing labels to the character arrows of \code{p
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 
 pcaRes = pca.calc(centaurea)
 
-plot.characters(pcaRes, labels = FALSE)
-plot.addLabels.characters(pcaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 2, cex = 1)
-plot.addLabels.characters(pcaRes, labels = c("LLW", "ILW", "LBA"), pos = 4, cex = 1)
-plot.addLabels.characters(pcaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)
+plotCharacters(pcaRes, labels = FALSE)
+plotAddLabels.characters(pcaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 2, cex = 1)
+plotAddLabels.characters(pcaRes, labels = c("LLW", "ILW", "LBA"), pos = 4, cex = 1)
+plotAddLabels.characters(pcaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)
 
 }

@@ -1,11 +1,11 @@
-context("export.res")
+context("exportRes")
 
 
 test_that("class morphodata: read and export same data",  {
 
   data = read.morphodata("../testFiles/sample_mockup.txt")
 
-  export.res(data, file = "../testFiles/sample_mockup.exported.txt")
+  exportRes(data, file = "../testFiles/sample_mockup.exported.txt")
 
   exportedData = read.morphodata("../testFiles/sample_mockup.exported.txt")
 
@@ -22,7 +22,7 @@ test_that("class data.frame: read and export same data",  {
                                  "Ch1" = 1:8,
                                  "Ch2" = 11:18))
 
-  export.res(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
+  exportRes(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
 
   morphoDataFrame.imported = read.morphodata("../testFiles/morphoDataFrame.exported.txt")
 
@@ -40,7 +40,7 @@ test_that("class data.frame: compare as tables",  {
                                  "Ch1" = 1:8,
                                  "Ch2" = 11:18))
 
-  export.res(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
+  exportRes(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
 
   DFImported = read.delim("../testFiles/morphoDataFrame.exported.txt")
 

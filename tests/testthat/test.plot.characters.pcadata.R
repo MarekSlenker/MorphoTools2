@@ -1,4 +1,4 @@
-context("plot.characters.pcadata")
+context("plotCharacters.pcadata")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -11,8 +11,8 @@ morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 # locally suppress warnings
 options(warn=-1)
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 options(warn=0)
 
 
@@ -21,11 +21,11 @@ test_that("ploting with error parameters",  {
   pcaRes = pca.calc(centaurea)
 
 
-  expect_error(plot.characters(centaurea, axes = c(3,5)), "no applicable method for 'plot.characters' applied to an object of class \"morphodata\"" )
+  expect_error(plotCharacters(centaurea, axes = c(3,5)), "no applicable method for 'plotCharacters' applied to an object of class \"morphodata\"" )
 
-  expect_error(plot.characters(pcaRes, axes = c(1,1,2))) # "you have to specifi 2 axes (e.g., axes = c(1,2))"
+  expect_error(plotCharacters(pcaRes, axes = c(1,1,2))) # "you have to specifi 2 axes (e.g., axes = c(1,2))"
 
-  expect_error(plot.characters(pcaRes, axes = c(3,55)), "specified axes are out of bounds. Object has only 25 axes." )
+  expect_error(plotCharacters(pcaRes, axes = c(3,55)), "specified axes are out of bounds. Object has only 25 axes." )
 
 })
 
@@ -35,14 +35,14 @@ test_that("visual",  {
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.characters(pcaRes)
+  plotCharacters(pcaRes)
   dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.characters_default.png"), threshold = 1)  )
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_default.png"), threshold = 1)  )
 
   tmp  = tempfile(fileext = ".png")
   png(filename = tmp, width = 400, height = 400)
-  plot.characters(pcaRes, axes = c(2,4), xlab = "eee", main = "mmmmm", xlim = c(-1,1), ylim = c(-0.3,0), cex = 1.7,
+  plotCharacters(pcaRes, axes = c(2,4), xlab = "eee", main = "mmmmm", xlim = c(-1,1), ylim = c(-0.3,0), cex = 1.7,
                   col = "green")
   dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.characters_2.png"), threshold = 1)  )
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_2.png"), threshold = 1)  )
 })

@@ -1,6 +1,6 @@
 \name{cormat}
 \alias{cormat}
-\alias{cormat.signifTest}
+\alias{cormatSignifTest}
 \title{Correlations of characters}
 
 \description{
@@ -11,7 +11,7 @@ cormat calculates the matrix of the correlation coefficients of the characters.
 \usage{
 cormat(object, method = "pearson")
 
-cormat.signifTest(object, method = "pearson", alternative = "two.sided")
+cormatSignifTest(object, method = "pearson", alternative = "two.sided")
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -29,10 +29,10 @@ object of class 'data.frame'
 
 \details{
 This functions return table with pairwise correlation coefficients for each pair of
-morphological characters. The results are formatted as data frames to allow export with the \code{\link{export.res}} function.
+morphological characters. The results are formatted as data frames to allow export with the \code{\link{exportRes}} function.
 
 Significance tests are usually unnecessary for morphometric analysis. Anyway,
-if tests are needed, they can be computed using the \code{\link{cormat.signifTest}} function.
+if tests are needed, they can be computed using the \code{\link{cormatSignifTest}} function.
 }
 \examples{
 data(centaurea)
@@ -40,9 +40,9 @@ data(centaurea)
 correlations.p = cormat(centaurea, method="pearson")
 correlations.s = cormat(centaurea, method="spearman")
 
-export.res(correlations.p, file="correlations.pearson.txt")
-export.res(correlations.s, file="correlations.spearman.txt")
+exportRes(correlations.p, file="correlations.pearson.txt")
+exportRes(correlations.s, file="correlations.spearman.txt")
 
-correlations.p = cormat.signifTest(centaurea, method="pearson")
+correlations.p = cormatSignifTest(centaurea, method="pearson")
 
 }

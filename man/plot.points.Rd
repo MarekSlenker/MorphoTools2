@@ -1,6 +1,6 @@
-\name{plot.points}
+\name{plotPoints}
 
-\alias{plot.points}
+\alias{plotPoints}
 
 \title{The default scatterplot function}
 
@@ -9,7 +9,7 @@ A generic function for ploting ordination scores stored in '\code{\link{pcadata}
 }
 
 \usage{
-plot.points(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", breaks = 1,
       ylim = NULL, labels = FALSE, legend = FALSE,
       legend.pos = "topright", ncol = 1, ...)
@@ -27,8 +27,8 @@ plot.points(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
 \item{breaks}{a numeric, giving the lenght of one histogram bar.}
 \item{ylim}{the range of y axis.}
-\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plot.addLabels.points}} directly.}
-\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plot.addLegend}} directly.}
+\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plotAddLabels.points}} directly.}
+\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plotAddLegend}} directly.}
 \item{legend.pos}{a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
 
@@ -44,19 +44,19 @@ for \code{pcadata} and \code{cdadata} objects.
 
 \examples{
 data(centaurea)
-centaurea = na.meanSubst(centaurea)
-centaurea = delete.population(centaurea, populationName = c("LIP", "PREL"))
+centaurea = naMeanSubst(centaurea)
+centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot.points(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
+plotPoints(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
 
-plot.points(pcaRes, main = "My PCA plot", frame.plot = FALSE, cex = 0.8)
+plotPoints(pcaRes, main = "My PCA plot", frame.plot = FALSE, cex = 0.8)
 
 cdaRes = cda.calc(centaurea)
 
-plot.points(cdaRes, col = c("red","green","blue","red"),
+plotPoints(cdaRes, col = c("red","green","blue","red"),
   pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE)
 }
 

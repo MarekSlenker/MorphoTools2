@@ -1,4 +1,4 @@
-context("popul.otu")
+context("populOTU")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -11,7 +11,7 @@ morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 
 test_that("correct calculations",  {
 
-    pop = popul.otu(morphoMockup)
+    pop = populOTU(morphoMockup)
 
     expect_equal(levels(pop$ID) , levels(pop$Population))
 

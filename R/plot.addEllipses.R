@@ -2,15 +2,15 @@
 
 #' Add confidence ellipses to a plot
 #' @export
-plot.addEllipses <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
-  UseMethod("plot.addEllipses")
+plotAddEllipses <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
+  UseMethod("plotAddEllipses")
 }
 
 
-#' @rdname plot.addEllipses
-#' @method plot.addEllipses pcadata
+#' @rdname plotAddEllipses
+#' @method plotAddEllipses pcadata
 #' @export
-plot.addEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
+plotAddEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
@@ -19,14 +19,14 @@ plot.addEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, 
   plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
 
-#' @rdname plot.addEllipses
-#' @method plot.addEllipses cdadata
+#' @rdname plotAddEllipses
+#' @method plotAddEllipses cdadata
 #' @export
-plot.addEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
+plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
   # hist
   if (result$rank == 1) {
 
-    stop("The method plot.addEllipses() is not applicable to histogram.", call. = F)
+    stop("The method plotAddEllipses() is not applicable to histogram.", call. = F)
   }
 
   if (result$rank > 1)  {

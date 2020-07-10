@@ -1,17 +1,17 @@
 #' Add legends to plot
 #' @export
-plot.addLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+plotAddLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
                            pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
                            y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
                            box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
-  UseMethod("plot.addLegend")
+  UseMethod("plotAddLegend")
 }
 
 
-#' @rdname plot.addLegend
-#' @method plot.addLegend pcadata
+#' @rdname plotAddLegend
+#' @method plotAddLegend pcadata
 #' @export
-plot.addLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+plotAddLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
                                    pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
                                    y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
                                       box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
@@ -26,10 +26,10 @@ plot.addLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, c
 
 }
 
-#' @rdname plot.addLegend
-#' @method plot.addLegend cdadata
+#' @rdname plotAddLegend
+#' @method plotAddLegend cdadata
 #' @export
-plot.addLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+plotAddLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
                                    pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
                                    y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
                                    box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
