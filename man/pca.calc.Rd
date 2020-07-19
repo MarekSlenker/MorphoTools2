@@ -23,7 +23,7 @@ object of class '\code{\link{pcadata}}'.
 
 
 \details{
-Principal components analysis, wrapper over \code{\link{prcomp}} method.
+The \code{pca.calc} function performs principal component analysis using the R base \code{\link{prcomp}} function. Principal component analysis is a variable reduction procedure. It reduces original variables into a smaller number of principal components (artificial variables) that will account for most of the variance in the observed variables.
 }
 
 \examples{
