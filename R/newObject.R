@@ -4,7 +4,13 @@
 # internal
 # returns new morphodata object
 newMorphodata <- function() {
-  newMorphodata <- list(ID = NULL, Population = NULL, Taxon = NULL, data = data.frame())
+  newMorphodata <- list(
+                      ID = NULL,
+                      Population = NULL,
+                      Taxon = NULL,
+                      data = data.frame()
+                      )
+
   attr(newMorphodata, "class") <- "morphodata"
   return(newMorphodata)
 }
@@ -35,6 +41,7 @@ newPcadata <- function() {
   return(newPcadata)
 }
 
+
 # internal
 # returns new pcadata object
 newCdadata <- function() {
@@ -60,4 +67,21 @@ newCdadata <- function() {
   return(newCdadata)
 }
 
+
+# internal
+# returns new classifdata object
+newClassifdata <- function() {
+  newClassifdata <- list(
+    ID = character(),
+    Population = character(),
+    Taxon = character(),
+    classif = character(),
+    prob = numeric(),
+    correct = logical()
+
+  )
+
+  attr(newClassifdata, "class") <- "classifdata"
+  return(newClassifdata)
+}
 

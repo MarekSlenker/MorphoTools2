@@ -4,7 +4,7 @@
 \title{Class cdadata}
 
 \description{
-The cdadata class is designed for storing results of Canonical discriminant analysis (CDA) and input morphological data.}
+The cdadata class is designed for storing results of Canonical discriminant analysis (CDA) and original morphological data.}
 
 \format{Class \code{cdadata}.
 \describe{

@@ -4,7 +4,7 @@
 \title{Class pcadata}
 
 \description{
-The pcadata class is designed for storing results of Principal component analysis (PCA) and input morphological data.}
+The pcadata class is designed for storing results of Principal component analysis (PCA) and original morphological data.}
 
 \format{Class \code{pcadata}.
 \describe{
@@ -24,7 +24,7 @@ The pcadata class is designed for storing results of Principal component analysi
 	\item{rank}{a number of principal components.}
 	\item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
 	\item{center, scale}{the centering and scaling of the input data.}
-	
+
 	}
 }
 
