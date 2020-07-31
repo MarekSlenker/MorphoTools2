@@ -18,10 +18,10 @@ classif.lda <- function(object, crossval="indiv") {
   {
     lda.res = MASS::lda(stats::as.formula(paste("object$Taxon ~ ", paste(char, collapse="+"))), data=object$data, CV=TRUE, prior = rep(1/ntax,ntax))
 
-    res$ID = object$ID
-    res$Population = object$Population
-    res$Taxon = object$Taxon
-    res$classif = lda.res$class
+    res$ID = as.character(object$ID)
+    res$Population = as.character(object$Population)
+    res$Taxon = as.character(object$Taxon)
+    res$classif = as.character(lda.res$class)
     res$prob = round(lda.res$posterior, digits = 4)
 
   }
@@ -43,7 +43,12 @@ classif.lda <- function(object, crossval="indiv") {
 
   }
 
-  res$correct = as.character(res$Taxon) == as.character(res$classif)
+  res$correct = as.data.frame( as.character( res$Taxon) == as.character(res$classif))
+  rownames(res$correct) = res$ID
+
+  res$classif = data.frame("class" = res$classif)
+  rownames(res$classif) = res$ID
+
   attr(res, "method") <- "lda"
 
   return(res)
