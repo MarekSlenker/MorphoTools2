@@ -42,7 +42,16 @@ deleteCharecter <- function(object, charecterName) {
     toRemove = c(toRemove, which(colnames(object$data) == ch) )
   }
 
-  object$data = object$data[ ,-toRemove]
+
+  if (length(toRemove) == dim(object$data)[2]-1) {
+
+    colName = colnames(object$data)[-toRemove]
+    object$data = data.frame(object$data[ ,-toRemove])
+    colnames(object$data) = colName
+
+  } else {
+    object$data = object$data[ ,-toRemove]
+  }
 
   return(object)
 }
@@ -58,7 +67,7 @@ removeByColumn <- function(object, column, groupName) {
   # groupName moze byt i viac
   toRemove = array(data = NA, dim = 0)
   for (name in groupName) {
-    toRemove = c(toRemove, which( unlist(object[column]) %in% groupName) )
+    toRemove = c(toRemove, which( unlist(object[column]) %in% name) )
   }
 
   newObject = newMorphodata()
@@ -66,25 +75,6 @@ removeByColumn <- function(object, column, groupName) {
   newObject$Population = droplevels( object$Population[-toRemove] )
   newObject$Taxon = droplevels( object$Taxon[-toRemove] )
   newObject$data = object$data[-toRemove, ]
-
-  return(newObject)
-}
-
-# internal
-keepByColumn <- function(object, column, groupName) {
-  # obj je triedy morfodata, skontrolovane vyssie
-
-  # groupName moze byt i viac
-  toKeep = array(data = NA, dim = 0)
-  for (name in groupName) {
-    toKeep = c(toKeep, which( unlist(object[column]) %in% groupName) )
-  }
-
-  newObject = newMorphodata()
-  newObject$ID = droplevels( object$ID[toKeep] )
-  newObject$Population = droplevels( object$Population[toKeep] )
-  newObject$Taxon = droplevels( object$Taxon[toKeep] )
-  newObject$data = object$data[toKeep, ]
 
   return(newObject)
 }

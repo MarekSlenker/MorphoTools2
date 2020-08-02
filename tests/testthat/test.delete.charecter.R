@@ -33,3 +33,24 @@ test_that("remove more characters",  {
   expect_is(subData, "morphodata")
 })
 
+test_that("remove all but one characters",  {
+  subData = deleteCharecter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","AW","ALW"))
+
+  expect_equal(dim(data$data)[1], dim(subData$data)[1])
+
+  expect_equal(1, dim(subData$data)[2])
+
+  expect_equal("AP", colnames(subData$data))
+
+
+  expect_equal(subData$data[12,], 1.2)
+
+  expect_output(str(subData), "List of 4")
+  expect_is(subData, "morphodata")
+})
+
+
+
+
+
+

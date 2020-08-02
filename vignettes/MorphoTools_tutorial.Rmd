@@ -412,6 +412,11 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 # 7. Classificatory discriminant analysis
 
 
+
+KNN: For each row of the sample set, the k nearest (in Euclidean distance) training set vectors are found, and the classification is decided by majority vote, with ties broken at random. If there are ties for the kth nearest vector, all candidates are included in the vote.
+
+
+
 &nbsp;  
 &nbsp;
 &nbsp;  

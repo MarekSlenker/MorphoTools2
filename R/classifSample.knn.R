@@ -20,8 +20,8 @@ classifSample.knn <- function(sampleData, trainingData, k){
   # trainingData$data = scale(trainingData$data, center = TRUE, scale = TRUE)
 
   # kontrolujem, ci variabilita v ramci znaku je nenulova, inak by to hodil NaN
-  sampleData$data = apply(sampleData$data, 2, function(x) (scale(x, center = TRUE, scale = var(x) != 0) ))
-  trainingData$data = apply(trainingData$data, 2, function(x) (scale(x, center = TRUE, scale = var(x) != 0) ))
+  sampleData$data = apply(sampleData$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
+  trainingData$data = apply(trainingData$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
 
 
   res = newClassifdata()
