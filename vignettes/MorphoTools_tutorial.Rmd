@@ -194,6 +194,7 @@ centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
+Here is the right place to mention also `deleteTaxon()` and another trio of methods with reversed logic  which will return only mentioned populations, taxa or characters: `keepPopulation()`, `keepTaxon()`, and `keepCharecter()`.
 
 
 ***

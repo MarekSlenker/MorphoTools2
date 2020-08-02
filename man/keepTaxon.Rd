@@ -39,7 +39,7 @@ data(centaurea)
 centaurea.hybr = keepTaxon(centaurea, "hybr")
 centaurea.PhHybr = keepTaxon(centaurea, c("ph", "hybr"))
 
-centaurea_PREL = keepPopulation(centaurea, "PREL"))
+centaurea_PREL = keepPopulation(centaurea, "PREL")
 
 centaurea.stem = keepCharecter(centaurea, c("SN", "SF", "ST"))
 

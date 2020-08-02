@@ -36,7 +36,8 @@ knn.select<-function(object, crossval="indiv"){
                                     samp = keepByColumn(object, "Population", pop)
                                     train = removeByColumn(object, "Population", pop)
 
-                                    knn.samp = class::knn(train = train$data, test = samp$data, cl = train$Taxon, k = k)
+                                    knn.samp = class::knn(train = train$data, test = samp$data,
+                                                          cl = train$Taxon, k = k, use.all = T)
 
                                     resPop = sum(as.character(samp$Taxon) == as.character(knn.samp))
                                     res<-sum(res,resPop)
