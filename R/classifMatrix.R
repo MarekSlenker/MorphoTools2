@@ -1,5 +1,3 @@
-
-
 #' @rdname classifda.lda
 #' @export
 classif.matrix <- function(object, level = "Taxon") {
@@ -15,61 +13,28 @@ classif.matrix <- function(object, level = "Taxon") {
     classif = table(object$Taxon, object$classif$classification)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("classif.as:", colnames(classif), sep = "")
-
-
-
     classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
-
-
     classif = rbind(classif, c("Total", colSums(classif[2:ncol(classif)])))
-
-
-
-
-
     NofCorrect = aggregate(object$correct$correct, list(Category=object$Taxon), sum)
-
     classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
+    classif = cbind(classif, "percent.correct" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
 
-
-    POKRACUJ:
-
-
-
-    percentCorrect = classif$correct / classif$N
-
-    with(classif,(correct/N)*100)
-
-    last = classif[1,]
-    last[1] = "Total"
-    last[2:length(last)] = colSums(classif[2:ncol(classif)])
-    classif = rbind(classif, last)
-
-    names(classif)[ncol(classif)] = "percent.correct"
-    classif$percent.correct = with(classif,(percent.correct/N)*100)
-
-
-    Taxon  ph  ps st   N percent.correct
-    1    ph 119   6  0 125        95.20000
-    2    ps   5 159  5 169        94.08284
-    3    st   0   9 65  74        87.83784
-    4 Total 124 174 70 368        93.20652
 
   } else if (level == "Population")
   {
-    classif = table(object$Population, object$Classif)
-
+    classif = table(object$Population, object$classif$classification)
     classif = data.frame(unclass(classif))
-
-    classif = data.frame(Population=attr(classif,"row.names"),classif,row.names=NULL)
-
-    tax = unique(object[,c(2,3)])
-    classif = merge(tax, classif)
-    classif$N = rowSums(classif[3:ncol(classif)])
-    ncor = aggregate(Correct ~ Population, data = object, sum)
-    classif = merge(classif, ncor)
-    names(classif)[ncol(classif)]<-"percent.correct"
-    classif$percent.correct<-with(classif,(percent.correct/N)*100)
+    colnames(classif) = paste("classif.as:", colnames(classif), sep = "")
+    classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
+    tax = data.frame(
+      "Population" = object$Population[ ! duplicated(object$Population, object$Taxon)],
+          "Taxon" = object$Taxon[ ! duplicated(object$Population, object$Taxon)]
+    )
+    classif = merge(tax, classif, by = "Population" )
+    classif = rbind(classif, c("Total", "", colSums(classif[3:ncol(classif)])))
+    NofCorrect = aggregate(object$correct$correct, list(Category=object$Population), sum)
+    classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
+    classif = cbind(classif, "percent.correct" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
   }
 
   return(classif)
