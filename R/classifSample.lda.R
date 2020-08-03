@@ -29,15 +29,15 @@ classifSample.lda <- function(sampleData,trainingData) {
   res$Population = as.character(sampleData$Population)
   res$Taxon = as.character(sampleData$Taxon)
 
-  res$classif = data.frame("class" = as.character(lda.samp$class))
+  res$classif = data.frame("classification" = as.character(lda.samp$class))
   rownames(res$classif) = res$ID
 
   res$prob = round(lda.samp$posterior, digits = 4)
-
+  res$prob = as.data.frame(res$prob)
 
 
   res$correct = NULL
-  attr(res, "method") <- "lda"
+  # attr(res, "method") <- "lda"
 
   return(res)
 }

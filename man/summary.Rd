@@ -12,6 +12,8 @@
 \method{summary}{pcadata}(object, ...)
 
 \method{summary}{cdadata}(object, ...)
+
+\method{summary}{classifdata}(object, ...)
 }
 
 \arguments{

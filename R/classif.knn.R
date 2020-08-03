@@ -5,9 +5,9 @@ classif.knn <- function(object, k, crossval = "indiv"){
   checkClass(object, "morphodata")
 
 
-  if (any(is.na(object$data))) stop("NA values in \"object\" ", call. = FALSE)  # matica musi byt plna
-  if (missing(k)) stop("argument \"k\" is missing, with no default", call. = FALSE)
-  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\"")
+  if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)  # matica musi byt plna
+  if (missing(k)) stop("argument \"k\" is missing, with no default.", call. = FALSE)
+  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".")
 
 
   ntax<-length(levels(object$Taxon))
@@ -50,10 +50,10 @@ classif.knn <- function(object, k, crossval = "indiv"){
     }
   }
 
-  res$correct = as.data.frame( as.character( res$Taxon) == as.character(res$classif))
+  res$correct = data.frame("correct" = as.character( res$Taxon) == as.character(res$classif))
   rownames(res$correct) = res$ID
 
-  res$classif = data.frame("class" = res$classif)
+  res$classif = data.frame("classification" = res$classif)
   rownames(res$classif) = res$ID
 
   res$prob = data.frame("Proportion of the votes for the winning class" = res$prob)
@@ -61,7 +61,7 @@ classif.knn <- function(object, k, crossval = "indiv"){
 
 
   attr(res$classif, "prob") = NULL
-  attr(res, "method") <- "knn"
+  # attr(res, "method") <- "knn"
 
   return(res)
 }

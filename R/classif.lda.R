@@ -5,8 +5,8 @@ classif.lda <- function(object, crossval="indiv") {
   checkClass(object, "morphodata")
 
   # matica musi byt plna
-  if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
-  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\"")
+  if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
+  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".")
 
 
   ntax<-length(levels(object$Taxon))
@@ -43,13 +43,15 @@ classif.lda <- function(object, crossval="indiv") {
 
   }
 
-  res$correct = as.data.frame( as.character( res$Taxon) == as.character(res$classif))
+  res$correct = data.frame("correct" = as.character( res$Taxon) == as.character(res$classif))
   rownames(res$correct) = res$ID
 
-  res$classif = data.frame("class" = res$classif)
+  res$classif = data.frame("classification" = res$classif)
   rownames(res$classif) = res$ID
 
-  attr(res, "method") <- "lda"
+  res$prob = as.data.frame(res$prob)
+
+  # attr(res, "method") <- "lda"
 
   return(res)
 }

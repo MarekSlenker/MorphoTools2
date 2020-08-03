@@ -35,7 +35,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
   res$prob = round(attr(knn.samp,"prob"), digits = 4)
 
 
-  res$classif = data.frame("class" = res$classif)
+  res$classif = data.frame("classification" = res$classif)
   rownames(res$classif) = res$ID
 
   res$prob = data.frame("Proportion of the votes for the winning class" = res$prob)
@@ -49,7 +49,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
 
   res$correct = NULL
   attr(res$classif, "prob") = NULL
-  attr(res, "method") <- "knn"
+  # attr(res, "method") <- "knn"
 
   return(res)
 }

@@ -71,24 +71,22 @@ summary.cdadata <- function(object, ...) {
 }
 
 
-# Summarize a structure of a classifdata object.
-#
-# @description This function summarizes the information contained in the a 'classifdata' object.
-# @usage
-# ## S3 method for class 'classifdata'
-# summary(object)
-# @param object an object of class 'classifdata'.
-# @examples
-# summary(object)
-# @export
+#' @rdname summary
+#' @export
 summary.classifdata <- function(object) {
   checkClass(object, "classifdata")
 
   cat("object of class 'classifdata'; storing results of Classificatory Discriminant Analysis\n\n")
 
-  attr(object, "class") <- "data.frame"
+  descrTable = data.frame("ID" = object$ID,
+                          "Population" = object$Population,
+                          "Taxon" = object$Taxon,
+                          "classification" = object$classif,
+                          "probability" = object$prob,
+                          "correct" = object$correct)
+  rownames(descrTable) = NULL
 
-  print(object)
+    print(descrTable)
 }
 
 
