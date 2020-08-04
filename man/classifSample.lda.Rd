@@ -33,7 +33,10 @@ The \code{classifSample.lda} performs classification using linear discriminant f
 
 The mode of crossvalidation is the standard one-leave-out method ("\code{indiv}").
 
-The \code{classifSample} methods allow you to store sample data and training data in separate objects. But whether you do it this way or you have a hybrid population or sample along with training observations as part of a single object and use the \code{classif.lda} or \code{classif.knn} with \code{crossval = "pop"} or \code{crossval = "indiv"}, the result is the same.
+The \code{classifSample} methods allow you to store sample data and training data in separate objects. 
+But whether you do it this way or you have a hybrid population or sample along with training observations
+ as part of a single object and use the \code{classif.lda} or \code{classif.knn} with
+ \code{crossval = "pop"}, the result is the same.
 }
 
 

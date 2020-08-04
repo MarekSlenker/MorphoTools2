@@ -10,14 +10,14 @@ classif.matrix <- function(object, level = "taxon") {
   {
     classif = table(object$Taxon, object$classif$classification)
     classif = data.frame(unclass(classif))
-    colnames(classif) = paste("classif.as:", colnames(classif), sep = "")
+    colnames(classif) = paste("as.", colnames(classif), sep = "")
     classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
     classif = rbind(classif, c("Total", colSums(classif[2:ncol(classif)])))
 
   if (! is.null(object$correct)) {
     NofCorrect = stats::aggregate(object$correct$correct, list(Category=object$Taxon), sum)
     classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
-    classif = cbind(classif, "percent.correct" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
+    classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
   }
 
 
@@ -25,7 +25,7 @@ classif.matrix <- function(object, level = "taxon") {
   {
     classif = table(object$Population, object$classif$classification)
     classif = data.frame(unclass(classif))
-    colnames(classif) = paste("classif.as:", colnames(classif), sep = "")
+    colnames(classif) = paste("as.", colnames(classif), sep = "")
     classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
     tax = data.frame(
       "Population" = object$Population[ ! duplicated(object$Population, object$Taxon)],
@@ -37,7 +37,7 @@ classif.matrix <- function(object, level = "taxon") {
     if (! is.null(object$correct)) {
       NofCorrect = stats::aggregate(object$correct$correct, list(Category=object$Population), sum)
       classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
-      classif = cbind(classif, "percent.correct" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
+      classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
     }
 
   } else if (level == "indiv")

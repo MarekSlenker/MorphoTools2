@@ -8,22 +8,22 @@
 
 
 \description{
-These functions computes discriminant function for classifying observations. Linear discriminant function (\code{classif.lda}) or nonparametric k-nearest-neighbor classification method (\code{classif.knn}) can be used.
+These functions computes discriminant function for classifying observations. Linear discriminant function (\code{classif.lda}) or nonparametric k-nearest neighbours classification method (\code{classif.knn}) can be used.
 }
 
 
 \usage{
 classif.lda(object, crossval = "indiv")
 
-knn.select(object, crossval = "indiv")
-classif.knn(object, k, crossval = "indiv")
+knn.select(object, crossval = "pop")
+classif.knn(object, k, crossval = "pop")
 
 classif.matrix(object, level = "taxon")
 }
 
 \arguments{
 \item{object}{an object of class 'morphodata'.}
-\item{crossval}{crossvalidation mode, sets individual ("\code{indiv}"; default) or whole populations ("\code{pop}") as leave-out unit.}
+\item{crossval}{crossvalidation mode, sets individual ("\code{indiv}"; default, leave-one-out method) or whole populations ("\code{pop}") as leave-out unit.}
 \item{k}{number of neighbours considered.}
 \item{level}{level of gruping of classification matrix, "\code{taxon}" (default), populations ("\code{pop}"), or individuals ("\code{indiv}")}
 }

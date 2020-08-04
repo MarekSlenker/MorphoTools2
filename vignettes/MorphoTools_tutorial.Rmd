@@ -121,7 +121,7 @@ shapiroWilkTest(centaurea, p.value = 0.05)
 
 ```
 
-As most characters have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory DA.
+As most characters have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis.
 
 ### 3.2.2 Box Plots
 
@@ -212,13 +212,13 @@ pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "ward")
 plot(pops_hierClust, hang = -1, cex = 0.8, sub = "", xlab = "", ylab = "distance")
 ```
 
-Four main clusters were formed in the histogram above, however, some populations (BABL, LES, PROS, OLE1, and OLE2) were “incorrectly” clustered, what will require further inspection.
+Four main clusters were formed in the histogram above, however, some populations (BABL, LES, OLE1, OLE2, and PROS) were “incorrectly” clustered, what will require further inspection.
 
 
 
 # 5. Principal component analysis (PCA)
 
-Principal components analysis (PCA) is another method without the requirement of *a priori* specification of the samples' membership in taxa (groups). PCA reduces the measured variables into principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function, the result is an object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
+Principal components analysis (PCA) is another method without the requirement of *a priori* specification of the samples' membership in taxa (groups). PCA reduces the measured variables into principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. PCA is calculated by `pca.calc()` function (based on package `stats`), the result is an object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -322,7 +322,7 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 # 6. Canonical discriminant analysis (CDA)
 
-The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). CDA can be calculated by `cda.calc()` function. A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables. These coefficients are roughly equivalent to eigenvectors of PCA and we used them to interpret the character's contribution to group separation.
+The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). CDA can be calculated by `cda.calc()` function (using the `candisc` package). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables. These coefficients are roughly equivalent to eigenvectors of PCA and we used them to interpret the character's contribution to group separation.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
 cda.centaurea = cda.calc(centaurea)
@@ -412,38 +412,58 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 
 # 7. Classificatory discriminant analysis
 
+Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations into known groups, based on knowledge of the morphological characters only. The procedure develops a discriminant criterion to classify each observation into one of the groups (Taxa). The discriminant criterion is developed from the part of the original dataset (training data set) as the standard leave-one-out cross validation (default) or leaving out the whole population of classified observation (individuals from a population are not completely independent observations, usually are morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` method formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `export.res()` function.
+&nbsp;   
+&nbsp;  
+Linear discriminant function (`classif.lda()`) can be used for data with approximately multivariate normal within-class distributions. Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about these distributions. 
+
+```{r include=F}
+options(max.print = 460)
+```
+```{r echo = TRUE, eval=TRUE}
+classifRes.lda = classif.lda(centaurea)
+classif.matrix(classifRes.lda ,level = "taxon")
+classif.matrix(classifRes.lda ,level = "pop")
+```
+
+The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. The most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification.
+
+&nbsp;   
+&nbsp;  
+
+The k-nearest neighbour method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variation. The crossvalidation mode can be seted as `"indiv"` or `"pop"`, same as above.
+
+The `knn.select()` search for the optimal k for the given data set. The functions can use two crossvalidation methods (by individuals and populations) in a similar way as the classificatory discriminant analysis functions. The functions compute number of correctly classified individuals for k values from 1 to 30 and highlight the value with the highest success rate. Ties (i.e., when there are the same numbers of votes for two or more groups) are broken at random, and thus several iterations may yield different results. Therefore, the functions compute 10 iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered. 
 
 
-KNN: For each row of the sample set, the k nearest (in Euclidean distance) training set vectors are found, and the classification is decided by majority vote, with ties broken at random. If there are ties for the kth nearest vector, all candidates are included in the vote.
+```{r echo = TRUE, eval=TRUE, out.width = '280px', dpi=300, fig.align='center'}
+knn.select(centaurea, crossval = "pop")
+```
+```{r echo = TRUE, eval=TRUE}
+classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 11)
+popClassifMatrix = classif.matrix(classifRes.knn, level = "pop")
+exportRes(popClassifMatrix, file = "clipboard")
 
+```
 
-
-&nbsp;  
-&nbsp;
-&nbsp;  
-&nbsp;
-&nbsp;  
-&nbsp;
-&nbsp;  
-&nbsp;
-&nbsp;  
-&nbsp;
-&nbsp;  
-&nbsp;
+The `classifSample.lda()` and `classifSample.knn()` methods allow you to store sample data and training data in separate objects. But whether you do it this way or you have a hybrid population or sample along with training observations as part of a single object and use the `classif.lda` or `classif.knn` with `crossval = "pop"`, the result is the same.
 
 
 
 ## How to cite MorphoTools
 
-*C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") 
 
+Šlenker, M., Koutecký, P. (2020). MorphoTools: an R package for morphometric analysis. PSE
+
+
+&nbsp;  
 &nbsp;  
 
 
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
-
+## Acknowledgements
 
 
 ## References
@@ -454,6 +474,9 @@ Feel free to email me at marek.slenker@savba.sk with any questions, comments, or
 
 **Koutecký, P., Štěpánek, J. & Baďurová, T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia*, **84**: 1-32.
 
-**Krzanowski W. 1990**. *Principles of multivariate analysis*. Oxford: Oxford University Press.
-
 **Thorpe RS. 1976**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* **51**: 407–425.
+
+**Venables WN, Ripley BD. 2002**. *Modern Applied Statistics with S, Fourth edition*. New York: Springer. 
+
+
+

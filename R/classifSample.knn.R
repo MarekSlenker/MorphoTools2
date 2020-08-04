@@ -38,7 +38,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
   res$classif = data.frame("classification" = res$classif)
   rownames(res$classif) = res$ID
 
-  res$prob = data.frame("Proportion of the votes for the winning class" = res$prob)
+  res$prob = data.frame("Proportion.of.the.votes.for.the.winning.class" = res$prob)
   rownames(res$prob) = res$ID
 
 
