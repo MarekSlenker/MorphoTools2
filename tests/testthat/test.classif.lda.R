@@ -26,6 +26,8 @@ test_that("correctness of calculation",  {
   expect_is( c$prob, "data.frame")
   expect_is( c$correct, "data.frame")
 
+  expect_equal( attr(c, "method"), "lda")
+
   expect_equal(paste(c$prob, collapse = ","), "c(0.7523, 0.6484, 3e-04, 0.4131, 0.9992, 0.5057, 0.1279, 0.3524),c(0.2477, 0.3516, 0.9997, 0.5869, 8e-04, 0.4943, 0.8721, 0.6476)")
   expect_equal(paste(c$correct, collapse = ","), "c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE)")
   expect_equal(paste(c$classif, collapse = ","), "c(\"TaxA\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\", \"TaxA\", \"TaxB\", \"TaxB\")")

@@ -3,6 +3,7 @@
 \alias{summary.morphodata}
 \alias{summary.pcadata}
 \alias{summary.cdadata}
+\alias{summary.classifdata}
 
 \title{Object Summaries}
 

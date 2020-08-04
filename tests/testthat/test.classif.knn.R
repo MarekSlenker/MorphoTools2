@@ -29,6 +29,8 @@ test_that("correctness of calculation",  {
   expect_is( c$prob, "data.frame")
   expect_is( c$correct, "data.frame")
 
+  expect_equal( attr(c, "method"), "knn")
+
   expect_equal(paste(c$prob, collapse = ","), "c(1, 1, 1, 1, 1, 0.5, 1, 0.5)")
   #expect_equal(paste(c$correct, collapse = ","), "c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE)")
   #expect_equal(paste(c$classif, collapse = ","), "c(\"TaxA\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\")")

@@ -61,7 +61,7 @@ classif.knn <- function(object, k, crossval = "indiv"){
 
 
   attr(res$classif, "prob") = NULL
-  # attr(res, "method") <- "knn"
+  attr(res, "method") <- "knn"
 
   return(res)
 }

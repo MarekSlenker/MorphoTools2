@@ -73,7 +73,7 @@ summary.cdadata <- function(object, ...) {
 
 #' @rdname summary
 #' @export
-summary.classifdata <- function(object) {
+summary.classifdata <- function(object, ...) {
   checkClass(object, "classifdata")
 
   cat("object of class 'classifdata'; storing results of Classificatory Discriminant Analysis\n\n")

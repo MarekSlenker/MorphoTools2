@@ -18,14 +18,14 @@ classif.lda(object, crossval = "indiv")
 knn.select(object, crossval = "indiv")
 classif.knn(object, k, crossval = "indiv")
 
-classif.matrix(object, level = "Taxon")
+classif.matrix(object, level = "taxon")
 }
 
 \arguments{
 \item{object}{an object of class 'morphodata'.}
 \item{crossval}{crossvalidation mode, sets individual ("\code{indiv}"; default) or whole populations ("\code{pop}") as leave-out unit.}
 \item{k}{number of neighbours considered.}
-\item{level}{level of gruping of classification matrix, "\code{Taxon}" (default) or populations ("\code{Population}")}
+\item{level}{level of gruping of classification matrix, "\code{taxon}" (default), populations ("\code{pop}"), or individuals ("\code{indiv}")}
 }
 
 
@@ -39,7 +39,7 @@ The \code{classif.lda} performs classification using linear discriminant functio
 
 The mode of crossvalidation is set by the parameter \code{crossval}. The default "\code{indiv}" uses the standard one-leave-out method. However, as some hierarchical structure is usually present in the data (individuals from a population are not completely independent observations, as they are closer to each other than to individuals from other populations), the value "\code{pop}" sets whole populations as leave-out units. The latter method does not allow classification if there is only one population for a taxon and is more sensitive to “atypical” populations, which usually leads to a somewhat lower classification success rate.
 
-The \code{classif.matrix} method formats the results of the above functions as a summary classification table of taxa or populations.
+The \code{classif.matrix} method formats the results of the above functions as a summary classification table of taxa, populations or individuals.
 
 }
 
@@ -58,7 +58,7 @@ knn.select(centaurea, crossval = "pop") # The optimal K is: 12
 classifRes.knn = classif.knn(centaurea, 12, crossval = "pop")
 
 # exporting results
-classif.lda.tax = classif.matrix(classifRes.lda, level = "Taxon")
+classif.lda.tax = classif.matrix(classifRes.lda, level = "taxon")
 
 
 

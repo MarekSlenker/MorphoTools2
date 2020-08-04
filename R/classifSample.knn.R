@@ -49,7 +49,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
 
   res$correct = NULL
   attr(res$classif, "prob") = NULL
-  # attr(res, "method") <- "knn"
+  attr(res, "method") <- "knn"
 
   return(res)
 }

@@ -37,7 +37,7 @@ classifSample.lda <- function(sampleData,trainingData) {
 
 
   res$correct = NULL
-  # attr(res, "method") <- "lda"
+  attr(res, "method") <- "lda"
 
   return(res)
 }

@@ -51,7 +51,7 @@ classif.lda <- function(object, crossval="indiv") {
 
   res$prob = as.data.frame(res$prob)
 
-  # attr(res, "method") <- "lda"
+  attr(res, "method") <- "lda"
 
   return(res)
 }
