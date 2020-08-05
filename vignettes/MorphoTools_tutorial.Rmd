@@ -7,9 +7,10 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools
 date: "June 18, 2020"
 output:
-  pdf_document: default
   word_document: default
   html_document: default
+  pdf_document: default
+  fig_caption: yes
 vignette: |
   %\VignetteIndexEntry{MorphoTools_tutorial}
   %\VignetteEncoding{UTF-8}
@@ -412,9 +413,8 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 
 # 7. Classificatory discriminant analysis
 
-Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations into known groups, based on knowledge of the morphological characters only. The procedure develops a discriminant criterion to classify each observation into one of the groups (Taxa). The discriminant criterion is developed from the part of the original dataset (training data set) as the standard leave-one-out cross validation (default) or leaving out the whole population of classified observation (individuals from a population are not completely independent observations, usually are morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` method formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `export.res()` function.
-&nbsp;   
-&nbsp;  
+Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations into known groups, based on knowledge of the morphological characters only. Observations are classified using discriminant criterion, developed from the part of the original dataset (training data set) as standard leave-one-out cross validation (default; the criterion is based on n – 1 individuals, and applied for the individual left out) or leaving out the whole population of classified observation (individuals from a population are not completely independent observations, usually are morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` method formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `export.res()` function.
+
 Linear discriminant function (`classif.lda()`) can be used for data with approximately multivariate normal within-class distributions. Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about these distributions. 
 
 ```{r include=F}
@@ -426,12 +426,12 @@ classif.matrix(classifRes.lda ,level = "taxon")
 classif.matrix(classifRes.lda ,level = "pop")
 ```
 
-The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. The most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification.
+The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. The most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. 
 
 &nbsp;   
 &nbsp;  
 
-The k-nearest neighbour method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variation. The crossvalidation mode can be seted as `"indiv"` or `"pop"`, same as above.
+The **k-nearest neighbour** method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variation. The crossvalidation mode can be seted as `"indiv"` or `"pop"`, in the same manner as above.
 
 The `knn.select()` search for the optimal k for the given data set. The functions can use two crossvalidation methods (by individuals and populations) in a similar way as the classificatory discriminant analysis functions. The functions compute number of correctly classified individuals for k values from 1 to 30 and highlight the value with the highest success rate. Ties (i.e., when there are the same numbers of votes for two or more groups) are broken at random, and thus several iterations may yield different results. Therefore, the functions compute 10 iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered. 
 
@@ -449,11 +449,32 @@ exportRes(popClassifMatrix, file = "clipboard")
 The `classifSample.lda()` and `classifSample.knn()` methods allow you to store sample data and training data in separate objects. But whether you do it this way or you have a hybrid population or sample along with training observations as part of a single object and use the `classif.lda` or `classif.knn` with `crossval = "pop"`, the result is the same.
 
 
+# Further reading
 
-## How to cite MorphoTools
+A brief account of the multivariate methods used in taxonomy:  
+
+**Marhold K. (2011)**. Multivariate morphometrics and its application to monography at specific and infraspecific levels. In: Stuessy TF, Lack HW, eds. *Monographic plant systematics: fundamental assessment of plant biodiversity*. Ruggell: A.R.G. Gantner Verlag K. G., 73–99.
+
+&nbsp;  
+
+Selection of papers employing the methods of multivariate morphometrics:
+
+**Lihová J, Kudoh H, Marhold K. (2010).** Morphometric studies of polyploid *Cardamine* species (Brassicaceae) from Japan: solving a long-standing taxonomic and nomenclatural controversy. *Australian Systematic Botany* 23, 94-111
+
+**Melichárková A, Španiel S, Marhold K, Hurdu BI, Drescher A, Zozomová‐Lihová J. (2019)**. Diversification and independent polyploid origins in the disjunct species *Alyssum repens* from the Southeastern Alps and the Carpathians. *American Journal of Botany* 106, 1499-1518.
+
+**Šlenker M, Zozomová-Lihová J, Mandáková T, Kudoh H, Zhao Y, Soejima A, et al. (2018)**. Morphology and genome size of the widespread weed *Cardamine occulta*: how it differs from cleistogamic *C. kokaiensis* and other closely related taxa in Europe and Asia. *Botanical Journal of the Linnean Society* 187, 456-482.
+
+**Španiel S, Marhold K, Passalacqua NG, Zozomová‐Lihová J. (2011)**. Intricate variation patterns in the diploid‐polyploid complex of *Alyssum montanum‐A. repens* (Brassicaceae) in the Apennine Peninsula: Evidence for long‐term persistence and diversification. *American Journal of Botany* 98, 1887-1904.
+
+**Šrámková G, Kolář F, Záveská E, Lučanová M, Španiel S, Kolník M, et al. (2019)**. Phylogeography and taxonomic reassessment of *Arabidopsis halleri* - a montane species from Central Europe. *Plant Systematics and Evolution* 305, 885-898.
 
 
-Šlenker, M., Koutecký, P. (2020). MorphoTools: an R package for morphometric analysis. PSE
+
+# How to cite MorphoTools
+
+
+**Šlenker M, Koutecký P. (2020)**. MorphoTools: an R package for morphometric analysis. *Plant Systematics and Evolution*
 
 
 &nbsp;  
@@ -463,20 +484,20 @@ The `classifSample.lda()` and `classifSample.knn()` methods allow you to store s
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
-## Acknowledgements
+# Acknowledgements
 
 
-## References
+# References
 
-**Klecka WR. 1980**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
+**Klecka WR. (1980)**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
 
-**Koutecký, P. (2007)**. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica*, **42**: 77-102.
+**Koutecký P. (2007)**. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica*, 42, 77-102.
 
-**Koutecký, P., Štěpánek, J. & Baďurová, T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia*, **84**: 1-32.
+**Koutecký P, Štěpánek J, Baďurová T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
 
-**Thorpe RS. 1976**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* **51**: 407–425.
+**Thorpe RS. (1976)**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* 51, 407–425.
 
-**Venables WN, Ripley BD. 2002**. *Modern Applied Statistics with S, Fourth edition*. New York: Springer. 
+**Venables WN, Ripley BD. (2002)**. *Modern Applied Statistics with S, Fourth edition*. New York: Springer. 
 
 
 
