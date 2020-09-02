@@ -26,12 +26,12 @@ test_that("classif.lda",  {
   options(warn=0)
 
   m = classif.matrix(c, level = "taxon")
-  expect_equal(colnames(m), c("Taxon", "N","classif.as.hybr","classif.as.ph","classif.as.ps","classif.as.st","correct","percent.correct"))
+  expect_equal(colnames(m), c("Taxon", "N","as.hybr","as.ph","as.ps","as.st","correct","correct[%]"))
   expect_equal(rownames(m), c("1", "2", "3", "4", "5"))
   expect_equal(m[,1], c("hybr", "ph", "ps", "st", "Total"))
 
   m = classif.matrix(c, level = "pop")
-  expect_equal(colnames(m), c("Population", "Taxon", "N","classif.as.hybr","classif.as.ph","classif.as.ps","classif.as.st","correct","percent.correct"))
+  expect_equal(colnames(m), c("Population", "Taxon", "N","as.hybr","as.ph","as.ps","as.st","correct","correct[%]"))
   expect_equal(rownames(m)[1:5], c("1", "2", "3", "4", "5"))
   expect_equal(m[,1][1:5], c("BABL","BABU","BOL", "BRT", "BUK" ))
   expect_equal(m[,1][30:32], c("VIT",   "VOL",   "Total"))
@@ -51,12 +51,12 @@ test_that("classif.knn",  {
   options(warn=0)
 
   m = classif.matrix(c, level = "taxon")
-  expect_equal(colnames(m), c("Taxon", "N","classif.as.hybr","classif.as.ph","classif.as.ps","classif.as.st","correct","percent.correct"))
+  expect_equal(colnames(m), c("Taxon", "N","as.hybr","as.ph","as.ps","as.st","correct","correct[%]"))
   expect_equal(rownames(m), c("1", "2", "3", "4", "5"))
   expect_equal(m[,1], c("hybr", "ph", "ps", "st", "Total"))
 
   m = classif.matrix(c, level = "pop")
-  expect_equal(colnames(m), c("Population", "Taxon", "N","classif.as.hybr","classif.as.ph","classif.as.ps","classif.as.st","correct","percent.correct"))
+  expect_equal(colnames(m), c("Population", "Taxon", "N","as.hybr","as.ph","as.ps","as.st","correct","correct[%]"))
   expect_equal(rownames(m)[1:5], c("1", "2", "3", "4", "5"))
   expect_equal(m[,1][1:5], c("BABL","BABU","BOL", "BRT", "BUK" ))
   expect_equal(m[,1][30:32], c("VIT",   "VOL",   "Total"))
@@ -75,12 +75,12 @@ test_that("classifSamp.lda",  {
   options(warn=0)
 
   m = classif.matrix(c, level = "taxon")
-  expect_equal(colnames(m), c("Taxon", "N","classif.as.hybr","classif.as.ps"))
+  expect_equal(colnames(m), c("Taxon", "N","as.hybr","as.ps"))
   expect_equal(rownames(m), c("1", "2"))
   expect_equal(m[,1], c("ps","Total"))
 
   m = classif.matrix(c, level = "pop")
-  expect_equal(colnames(m), c("Population", "Taxon", "N","classif.as.hybr","classif.as.ps"))
+  expect_equal(colnames(m), c("Population", "Taxon", "N","as.hybr","as.ps"))
   expect_equal(rownames(m), c("1", "2"))
   expect_equal(m[,1], c("SOK","Total" ))
 
@@ -98,12 +98,12 @@ test_that("classifSamp.knn",  {
   options(warn=0)
 
   m = classif.matrix(c, level = "taxon")
-  expect_equal(colnames(m), c("Taxon", "N","classif.as.hybr","classif.as.ph", "classif.as.ps", "classif.as.st"))
+  expect_equal(colnames(m), c("Taxon", "N","as.hybr","as.ph", "as.ps", "as.st"))
   expect_equal(rownames(m), c("1", "2"))
   expect_equal(m[,1], c("ps","Total"))
 
   m = classif.matrix(c, level = "pop")
-  expect_equal(colnames(m), c("Population", "Taxon", "N","classif.as.hybr", "classif.as.ph", "classif.as.ps", "classif.as.st" ))
+  expect_equal(colnames(m), c("Population", "Taxon", "N","as.hybr", "as.ph", "as.ps", "as.st" ))
   expect_equal(rownames(m), c("1", "2"))
   expect_equal(m[,1], c("SOK","Total" ))
 

@@ -3,12 +3,12 @@ context("keepCharecter")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("trying to remove unexisting character",  {
-  expect_error(keepCharecter(data, "unexistingCh"), "charecter unexistingCh does not exist")
+  expect_error(keepCharacter(data, "unexistingCh"), "character unexistingCh does not exist")
 })
 
 
 test_that("keep one character",  {
-  subData = keepCharecter(data, "LL")
+  subData = keepCharacter(data, "LL")
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -24,7 +24,7 @@ test_that("keep one character",  {
 
 
 test_that("keep more characters",  {
-  subData = keepCharecter(data, c("LL", "LLW", "MLW"))
+  subData = keepCharacter(data, c("LL", "LLW", "MLW"))
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -37,7 +37,7 @@ test_that("keep more characters",  {
 })
 
 test_that("keep all characters",  {
-  subData = keepCharecter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","AW","ALW","AP"))
+  subData = keepCharacter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","AW","ALW","AP"))
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -49,7 +49,7 @@ test_that("keep all characters",  {
 
 
 test_that("keep all but one characters",  {
-  subData = keepCharecter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","ALW","AP")) # AW
+  subData = keepCharacter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","ALW","AP")) # AW
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 

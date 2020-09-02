@@ -31,7 +31,7 @@ test_that("correctness of calculation",  {
 
   expect_equal( attr(c, "method"), "knn")
 
-  expect_equal(paste(c$prob, collapse = ","), "c(1, 1, 1, 1, 1, 0.5, 1, 0.5)")
+  expect_equal(paste(c$prob, collapse = ","), "c(1, 1, 1, 0.5, 0.5, 1, 0.5, 0.5)")
   #expect_equal(paste(c$correct, collapse = ","), "c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE)")
   #expect_equal(paste(c$classif, collapse = ","), "c(\"TaxA\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\")")
   expect_equal(paste(c$ID, collapse = ","), "id1,id2,id3,id4,id5,id6,id7,id8")
