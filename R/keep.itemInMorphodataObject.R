@@ -28,6 +28,36 @@ keepPopulation <- function(object, populationName) {
 
 #' @rdname keepTaxon
 #' @export
+keepSample <- function(object, sampleName = NA, missingPercentage = NA) {
+  checkClass(object, "morphodata")
+
+  if (!is.na(sampleName)) {
+    # skontroluj ci object ma popname
+    for (samp in sampleName) {
+      if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = F)
+    }
+
+    return(keepByColumn(object, "ID", sampleName))
+  }
+
+  if (!is.na(missingPercentage)) {
+
+    toKeep = rowMeans(is.na(object$data)) <= missingPercentage # ponecham tie, ktore maju max missingPercentage
+
+    newObject = newMorphodata()
+    newObject$ID = droplevels( object$ID[toKeep] )
+    newObject$Population = droplevels( object$Population[toKeep] )
+    newObject$Taxon = droplevels( object$Taxon[toKeep] )
+    newObject$data = object$data[toKeep, ]
+
+    return(newObject)
+  }
+
+}
+
+
+#' @rdname keepTaxon
+#' @export
 keepCharacter <- function(object, characterName) {
   checkClass(object, "morphodata")
 
