@@ -18,7 +18,8 @@ classif.knn <- function(object, k, crossval = "indiv"){
 
   if (crossval=="indiv")
   {
-    object$data = scale(object$data, center = TRUE, scale = TRUE)
+    # SCALE????
+    # object$data = scale(object$data, center = TRUE, scale = TRUE)
 
     knn.samp = class::knn.cv(train = object$data, cl = object$Taxon, k = k, prob = T, use.all = T)
 
@@ -37,9 +38,11 @@ classif.knn <- function(object, k, crossval = "indiv"){
       # samp$data = scale(samp$data, center = TRUE, scale = TRUE)
       # train$data = scale(train$data, center = TRUE, scale = TRUE)
 
+      # ***************
+      # SCALE?????
       # kontrolujem, ci variabilita v ramci znaku je nenulova, inak by to hodil NaN. Ak je nulova, nepouzijem scale.
-      samp$data = apply(samp$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
-      train$data = apply(train$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
+      # samp$data = apply(samp$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
+      # train$data = apply(train$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
 
       knn.samp = class::knn(train = train$data, test = samp$data, cl = train$Taxon, k = k, prob = TRUE, use.all = TRUE)
       res$ID = c(res$ID, as.character(object$ID[which(i == object$Population)]))

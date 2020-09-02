@@ -1,4 +1,4 @@
-Package: MorphoTools
+Package: MorphoTools2
 Type: Package
 Title: Morphometric analysis
 Version: 1.0.0
@@ -9,8 +9,8 @@ Authors@R: c(
 Author: Marek Šlenker [aut, cre], Petr Koutecký [ctb]
 Maintainer: Marek Šlenker <marek.slenker@savba.sk>
 Description: An R package for morphometric analysis.
-URL: https://github.com/MarekSlenker/MorphoTools
-BugReports: https://github.com/MarekSlenker/MorphoTools/issues
+URL: https://github.com/MarekSlenker/MorphoTools2
+BugReports: https://github.com/MarekSlenker/MorphoTools2/issues
 Depends: R (>= 2.10)
 License: GPL-3
 Encoding: UTF-8

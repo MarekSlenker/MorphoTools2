@@ -28,17 +28,17 @@ deletePopulation <- function(object, populationName) {
 
 #' @rdname deleteTaxon
 #' @export
-deleteCharecter <- function(object, charecterName) {
+deleteCharacter <- function(object, characterName) {
   checkClass(object, "morphodata")
 
   # check existence of CH
-  for (ch in charecterName) {
-    if (! (ch %in% colnames(object$data))) stop(paste("charecter", ch , "does not exist"), call. = F)
+  for (ch in characterName) {
+    if (! (ch %in% colnames(object$data))) stop(paste("character", ch , "does not exist"), call. = F)
   }
 
-  # charecter - moze byt i viac
+  # character - moze byt i viac
   toRemove = array(data = NA, dim = 0)
-  for (ch in charecterName) {
+  for (ch in characterName) {
     toRemove = c(toRemove, which(colnames(object$data) == ch) )
   }
 

@@ -28,17 +28,17 @@ keepPopulation <- function(object, populationName) {
 
 #' @rdname keepTaxon
 #' @export
-keepCharecter <- function(object, charecterName) {
+keepCharacter <- function(object, characterName) {
   checkClass(object, "morphodata")
 
   # check existence of CH
-  for (ch in charecterName) {
-    if (! (ch %in% colnames(object$data))) stop(paste("charecter", ch , "does not exist"), call. = F)
+  for (ch in characterName) {
+    if (! (ch %in% colnames(object$data))) stop(paste("character", ch , "does not exist"), call. = F)
   }
 
-  # charecter - moze byt i viac
+  # character - moze byt i viac
   toKeep = array(data = NA, dim = 0)
-  for (ch in charecterName) {
+  for (ch in characterName) {
     toKeep = c(toKeep, which(colnames(object$data) == ch) )
   }
 
@@ -46,7 +46,7 @@ keepCharecter <- function(object, charecterName) {
     object$data = object$data[ ,toKeep]
   } else {
     object$data = data.frame(object$data[ ,toKeep])
-    colnames(object$data) = charecterName
+    colnames(object$data) = characterName
   }
 
 

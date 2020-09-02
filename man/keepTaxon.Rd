@@ -1,7 +1,7 @@
 \name{keepTaxon}
 \alias{keepTaxon}
 \alias{keepPopulation}
-\alias{keepCharecter}
+\alias{keepCharacter}
 
 \title{Keep items (Taxa, Populations, morphological characters) in an morphodata object (and remove other)}
 
@@ -10,7 +10,7 @@ keepTaxon(object, taxonName)
 
 keepPopulation(object, populationName)
 
-keepCharecter(object, charecterName)
+keepCharacter(object, characterName)
 }
 
 
@@ -22,7 +22,7 @@ keepCharecter(object, charecterName)
 
 \item{populationName}{vector of populations to be removed.}
 
-\item{charecterName}{vector of characters to be removed.}
+\item{characterName}{vector of characters to be removed.}
 }
 
 \value{
@@ -39,8 +39,8 @@ data(centaurea)
 centaurea.hybr = keepTaxon(centaurea, "hybr")
 centaurea.PhHybr = keepTaxon(centaurea, c("ph", "hybr"))
 
-centaurea_PREL = keepPopulation(centaurea, "PREL")
+centaurea.PREL = keepPopulation(centaurea, "PREL")
 
-centaurea.stem = keepCharecter(centaurea, c("SN", "SF", "ST"))
+centaurea.stem = keepCharacter(centaurea, c("SN", "SF", "ST"))
 
 }
