@@ -41,7 +41,8 @@ missingCharactersTable <- function(object, level) {
 
   missingTable = merge(t, missingTable, by=level)
   missingTable = merge(header, missingTable, by=level)
-  missingTable = missingTable[order(-missingTable$missing.percentage),]
+  # SORT??
+  # missingTable = missingTable[order(-missingTable$missing.percentage),]
 
   return(missingTable)
 }

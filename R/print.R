@@ -20,8 +20,6 @@ print.morphodata <- function(x, ...) {
 }
 
 
-
-
 #' @importFrom utils head
 #' @export
 head.classifdata <- function(x, n = 6, ...) {
@@ -37,9 +35,6 @@ tail.classifdata <- function(x, n = 6, ...) {
 
   utils::tail(toPrint, n = n, ...)
 }
-
-
-
 
 #' @importFrom utils head
 #' @export

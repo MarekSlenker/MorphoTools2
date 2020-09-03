@@ -18,19 +18,19 @@ test_that("wrong input",  {
 
 test_that("missingCharactersTable",  {
   t = missingCharactersTable(data, "taxon")
-  expect_equal(paste(t[1,], collapse = ";"), "4;132;0.07;232")
+  expect_equal(paste(t[1,], collapse = ";"), "1;120;0.05;139")
   expect_equal(paste(dim(t), collapse = ";"), "4;4")
 
   t = missingCharactersTable(data, "pop")
-  expect_equal(paste(t[1,], collapse = ";"), "18;4;20;0.16;80")
+  expect_equal(paste(t[1,], collapse = ";"), "1;3;20;0.03;16")
   expect_equal(paste(dim(t), collapse = ";"), "33;5")
 
   t = missingCharactersTable(data, "indiv")
-  expect_equal(paste(t[1,], collapse = ";"), "4;1;3;1;0.16;4")
+  expect_equal(paste(t[1,], collapse = ";"), "1;1;3;1;0;0")
   expect_equal(paste(dim(t), collapse = ";"), "652;6")
 
   t = missingCharactersTable(morphoMockup, "pop")
-  expect_equal(paste(t[1,], collapse = ";"), "4;2;4;0.5;6")
+  expect_equal(paste(t[1,], collapse = ";"), "1;1;2;0;0")
   expect_equal(paste(dim(t), collapse = ";"), "4;5")
 })
 

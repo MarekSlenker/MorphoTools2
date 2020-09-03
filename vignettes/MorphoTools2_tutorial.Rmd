@@ -20,7 +20,8 @@ vignette: |
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  rownames = FALSE
 )
 ```
 
@@ -190,30 +191,60 @@ We received a warning that the values of some characters are `NA`. How to deal w
 
 ### 3.2.6 Missing data
 
-Missing values are not accepted in morphological analyses, and MorphoTools2 do not edit user's data in the background. The user has to do his own decision, what to do with missing values. There are two options: remove or replace.
+Missing values are not accepted in morphological analyses, and MorphoTools2 do not edit user's data in the background. The user has to do his own decision, what to do with missing values. There are two options: remove or replace. But before we do anything else, let's look at the descriptive statistic about missing data using `missingCharactersTable()` and `missingSamplesTable()` functions. The amount of missing data can be summarized on various levels, namely "`taxon`", populations ("`pop`"), or individuals ("`indiv`"). 
 
-#### Replace missing values    
-
-Missing values can be substituted by the average value of the respective character in the respective population. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute missing values by average value, use function `naMeanSubst()`.
-
-```{r echo = TRUE, eval=TRUE}
-centaurea = naMeanSubst(centaurea)
+```{r include=F}
+options(max.print = 800)
 ```
+```{r echo = TRUE, eval=TRUE}
+missingCharactersTable(centaurea, level = "pop")
+
+```
+
+
+
+```{r include=F}
+centaurea$data = centaurea$data[-seq(4,10,1)]
+```
+
+```{r echo = TRUE, eval = TRUE}
+# only for demonstration. Not all morphological characters are displayed.
+missingSamplesTable(centaurea, level = "pop")
+```
+
+```{r include=F}
+data("centaurea")
+options(max.print = 60)
+```
+
+
+As previous warnings indicated, populations LIP and PREL have the highest percentage of missing values in morphological characters (16%; 80 characters per population are missing). The latter table shows that characters AL, AW, ALW, and AP are completely missing in these populations and 95% samples of population KOZH lack values of these characters.
+
 
 #### Remove items  
 
-After the execution of the previous code, we received warnings. Characters AL, AW, ALW, AP in populations LIP and PREL contain only `NA` values. We have to decide between deleting characters using `deleteCharacter()` or populations using `deletePopulation()` function. As character AP looks promising for delimitation of *C. pseudophrygia* and *C. stenolepis*, we will keep the characters and remove the populations.
+As four characters in two populations are completely missing, the next step is to decide between deleting characters using `deleteCharacter()` or populations using `deletePopulation()` function. As character AP looks promising for delimitation of *C. pseudophrygia* and *C. stenolepis*, we will keep the characters and remove the populations.
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
-Here is the right place to mention also `deleteTaxon()` and another trio of functions with reversed logic  which will return only mentioned populations, taxa or characters: `keepPopulation()`, `keepTaxon()`, and `keepCharacter()`.
+Another available option is to delete samples with a high portion of missing data using `deleteSample()` function. Command `deleteSample(centaurea, missingPercentage = 0.1)` will return samples having no more than 10% of missing data. To remove specific samples, enumerate them in 'sampleName' argument in these function.  
+
+Here is the right place to mention also `deleteTaxon()` and another quartet of functions with reversed logic  which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()`, and `keepCharacter()`.
+
+#### Replace missing values    
+
+Missing values can be substituted by the average value of the respective character in the respective population. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute remaining missing values by average value, use function `naMeanSubst()`.
+
+```{r echo = TRUE, eval=TRUE}
+centaurea = naMeanSubst(centaurea)
+```
 
 
 ***
-We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Missing values were replaced by the average values, and populations containing only NAs in some characters were removed. Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `exportRes()` function. 
+We examined outlier value in "hybr" group and ensured that data do not contain highly correlated characters. Populations containing only NAs in some characters were removed and remaining missing values were replaced by the average values. Our dataset is now prepared for further analyses. It is not a bad idea to save a copy of it using `exportRes()` function. 
 
 
 
@@ -460,13 +491,13 @@ exportRes(popClassifMatrix, file = "clipboard")
 
 ```
 
-The `classifSample.lda()` and `classifSample.knn()` functions are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applyed to the specific sample (set).  
+The another functions, `classifSample.lda()` and `classifSample.knn()` are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applyed to the specific sample (set).  
 
 &nbsp;  
 
 Let's remove population PRIS and pretend that sample PRIS418 is a type herbarium specimen of *Centaurea pseudophrygia*. To classify PRIS418, run the following code:
 
-```{r echo = TRUE, eval=FALSE}
+```{r echo = TRUE, eval=TRUE}
 trainingSet = deletePopulation(centaurea, populationName = "PRIS")
 typeSpecimen = keepSample(centaurea, "PRIS418")
 
