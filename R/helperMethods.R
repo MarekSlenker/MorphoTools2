@@ -1,12 +1,12 @@
 #' List morphological characters
 #' @export
-
 characters <- function(object) {
   switch (class(object),
     "cdadata" = return(rownames(object$totalCanonicalStructure)),
-    "pcadata" = return(rownames(object$eigenVectors))
+    "pcadata" = return(rownames(object$eigenVectors)),
+    "morphodata" = return(colnames(object$data))
   )
-  stop(paste("Not implemented for class '", class(object), sep = ""), call. = F)
+  stop(paste("Not implemented for class '", class(object), "'", sep = ""), call. = F)
 }
 
 

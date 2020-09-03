@@ -21,6 +21,8 @@ populations(object)
 
 taxa(object)
 
+# characters(object)
+
 }
 
 \arguments{

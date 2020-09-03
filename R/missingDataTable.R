@@ -2,55 +2,79 @@
 
 #' Summarize percentage and number of missing characters on the desired grouping level.
 #' @export
-missingDataTable <- function(object, level) {
+missingCharactersTable <- function(object, level) {
   checkClass(object, "morphodata")
 
   if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
 
-
-
   switch(level,
-         taxon={
-           aggLevel = list(object$Taxon)
-           header = data.frame(unique(object$Taxon))
-           colnames(header) = level
+     taxon={
+         aggLevel = list(object$Taxon)
+         header = data.frame(unique(object$Taxon))
+         colnames(header) = level
 
-        },
-        pop={
+      },
+     pop={
            aggLevel = list(object$Population)
           header = data.frame(object$Population, object$Taxon)
           header = header[! duplicated(header[,1]),]
            colnames(header) = c(level, "Taxon")
-        },
-        indiv={
+      },
+     indiv={
            aggLevel = list(object$ID)
           header = data.frame(object$ID, object$Population, object$Taxon)
           colnames(header) = c(level, "Population", "Taxon")
-        }
-    )
+      }
+  )
 
-    missingTable = data.frame(
+  missingTable = data.frame(
                     aggregate( apply(object$data, 1, function(x) mean(is.na(x))),  # MEAN
-                                aggLevel, mean),
+                                aggLevel, function(x) round(mean(x), digits = 2)),
                     aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
                                 aggLevel, sum)$x
+  )
 
-    )
+  t = as.data.frame(table(aggLevel))
 
-    t = as.data.frame(table(aggLevel))
+  colnames(missingTable) = c(level, "missing.percentage", "numb.of.missing.characters")
+  colnames(t) = c(level, "N")
 
-    colnames(missingTable) = c(level, "missing.percentage", "numb.of.missing.characters")
-    colnames(t) = c(level, "N")
+  missingTable = merge(t, missingTable, by=level)
+  missingTable = merge(header, missingTable, by=level)
+  missingTable = missingTable[order(-missingTable$missing.percentage),]
+
+  return(missingTable)
+}
 
 
+#' Summarize percentage of missing samples in characters on the desired grouping level.
+#' @export
+missingSamplesTable <- function(object, level) {
+  checkClass(object, "morphodata")
 
-    missingTable = merge(t, missingTable, by=level)
-    missingTable = merge(header, missingTable, by=level)
+  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
+
+  switch(level,
+         taxon={
+           aggLevel = list(object$Taxon)
+         },
+         pop={
+           aggLevel = list(object$Population)
+         },
+         indiv={
+           aggLevel = list(object$ID)
+         }
+  )
 
 
-    missingTable = missingTable[order(-missingTable$missing.percentage),]
+  missingTable = aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2))
 
-    # missingTable = missingTable[, c(level, "N", "missing.percentage", "numb.of.missing.characters")]
+  t = as.data.frame(table(aggLevel))
 
-    return(missingTable)
+  colnames(missingTable)[1] = level
+  colnames(t) = c(level, "N")
+
+  missingTable = merge(t, missingTable, by=level)
+
+  return(missingTable)
 }

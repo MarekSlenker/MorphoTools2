@@ -27,10 +27,16 @@ deletePopulation <- function(object, populationName) {
 
 #' @rdname deleteTaxon
 #' @export
-deleteSample <- function(object, sampleName = NA, missingPercentage = NA) {
+deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
   checkClass(object, "morphodata")
 
-  if (!is.na(sampleName)) {
+  # nemozu byt oba nenulova
+  if (!is.na(missingPercentage) && !is.null(sampleName)) stop("Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs.", call. = FALSE)
+
+  if (!is.null(sampleName)) {
+
+    if (!all(is.character(sampleName))) stop("'missingPercentage' is not a string", call. = FALSE)
+
     # skontroluj ci object ma popname
     for (samp in sampleName) {
       if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = F)
@@ -40,6 +46,8 @@ deleteSample <- function(object, sampleName = NA, missingPercentage = NA) {
   }
 
   if (!is.na(missingPercentage)) {
+
+    if (!is.numeric(missingPercentage)) stop("'missingPercentage' is not numeric.", call. = FALSE)
 
     aboveTreshold = rowMeans(is.na(object$data)) > missingPercentage
 
@@ -51,6 +59,9 @@ deleteSample <- function(object, sampleName = NA, missingPercentage = NA) {
 
     return(newObject)
   }
+
+  # nemozu byt oba nulove
+  if (is.na(missingPercentage) && is.null(sampleName)) stop("One of the arguments: 'sampleName' or 'missingPercentage' has to be specified.", call. = FALSE)
 
 
 }
