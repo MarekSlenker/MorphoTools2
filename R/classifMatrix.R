@@ -46,7 +46,7 @@ classif.matrix <- function(object, level = "taxon") {
                          "classification" = object$classif)
 
     if (attr(object, "method" ) == "lda") {
-      colnames(object$prob) =  paste("probability.of:", colnames(object$prob), sep = "")
+      colnames(object$prob) =  paste("as.", colnames(object$prob), sep = "")
     }
 
     classif = cbind(classif,object$prob)

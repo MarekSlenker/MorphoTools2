@@ -56,7 +56,7 @@ knn.select<-function(object, crossval="indiv"){
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 
-  cat("\nThe optimal K is:", which(kselmean==max(kselmean)), "\n")
+  cat("\nThe highest number of correct classifications is at k = ", which(kselmean==max(kselmean)), "\n")
 }
 
 

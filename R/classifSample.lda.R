@@ -1,6 +1,6 @@
 #' Classificatory discriminant analysis
 #' @export
-classifSample.lda <- function(sampleData,trainingData) {
+classifSample.lda <- function(sampleData, trainingData) {
 
   checkClass(sampleData, "morphodata")
   checkClass(trainingData, "morphodata")

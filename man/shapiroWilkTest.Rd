@@ -23,7 +23,7 @@ The normality of within-group distribution is the assumption of Pearson correlat
 \examples{
 data(centaurea)
 
-sW = shapiroWilkTest(centaurea, p.value = 0.05)
+sW = shapiroWilkTest(centaurea)
 
 exportRes(sW)
 
