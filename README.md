@@ -1,6 +1,12 @@
 # MorphoTools
 
 
+## TODO list
+
+problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to nejaka divna hlaska z vnutra
+
+
+
 ### morphodata
 **S3** class  implementovane ako list
 
