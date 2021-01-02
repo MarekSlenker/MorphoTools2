@@ -4,13 +4,9 @@
 ## TODO list
 
 problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to nejaka divna hlaska z vnutra
++  upozorni ze znak je identicky vo vnutri taxonov
 
 
-
-
-> plotPoints(cdaIndiv, col = c("blue", "brown"))
-Error in seq.default(from = min(xhist$breaks), to = max(xhist$breaks),  : 
-  'by' argument is much too small
 
 
 
