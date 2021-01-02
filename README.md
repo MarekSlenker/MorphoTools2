@@ -7,6 +7,13 @@ problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to neja
 
 
 
+
+> plotPoints(cdaIndiv, col = c("blue", "brown"))
+Error in seq.default(from = min(xhist$breaks), to = max(xhist$breaks),  : 
+  'by' argument is much too small
+
+
+
 ### morphodata
 **S3** class  implementovane ako list
 
