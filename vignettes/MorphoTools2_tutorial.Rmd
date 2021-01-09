@@ -564,7 +564,7 @@ classif.matrix(classifRes.lda, level = "pop")
 The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
 
 
-The results can be exported to the clipboard or file using the `exportRes()` function.
+The results can be exported to the clipboard or file using the `exportRes()` function. 
 
 ```{r echo = TRUE, eval=FALSE}
 classif_lda = classif.matrix(classifRes.lda, level = "indiv")
