@@ -1,6 +1,15 @@
 # MorphoTools
 
 
+## TODO list
+
+problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to nejaka divna hlaska z vnutra
++  upozorni ze znak je identicky vo vnutri taxonov
+
+
+
+
+
 ### morphodata
 **S3** class  implementovane ako list
 
