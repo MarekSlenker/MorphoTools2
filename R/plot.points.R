@@ -2,7 +2,7 @@
 #' @export
 plotPoints <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                         pch = 16, col = "black", pt.bg = "white",
-                        breaks = 1, ylim = NULL,
+                        breaks = 1, ylim = NULL, xlim = NULL,
                         labels = FALSE,
                         legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
   UseMethod("plotPoints")
@@ -14,7 +14,7 @@ plotPoints <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 #' @export
 plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          pch = 16, col = "black", pt.bg = "white",
-                         breaks = 1, ylim = NULL,
+                         breaks = 1, ylim = NULL, xlim = NULL,
                          labels = FALSE,
                          legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -66,7 +66,7 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 #' @export
 plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                           pch = 16, col = "black", pt.bg = "white",
-                          breaks = 1, ylim = NULL,
+                          breaks = 1, ylim = NULL, xlim = NULL,
                           labels = FALSE,
                           legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 

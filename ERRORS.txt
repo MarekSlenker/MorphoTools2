@@ -1,0 +1,6 @@
+boxplot ma problem, ked je tam len jeden znak
+
+problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to nejaka divna hlaska z vnutra
+
+upozorni ze znak je identicky vo vnutri taxonov
+

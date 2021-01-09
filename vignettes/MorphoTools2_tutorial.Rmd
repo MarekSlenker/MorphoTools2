@@ -7,9 +7,9 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
   fig_caption: yes
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
@@ -144,7 +144,7 @@ shapiroWilkTest(centaurea)
 
 ```
 
-As the results are rather extensive (depending on number of groups and characters), they can be set assigned an object and exported  to the clipboard or file using the exportRes() function. This function is designed to export the spreadsheet-like results. If needed, default decimal separator (`dec`) and column delimiter character (`sep`) can be changed by particular arguments. See `exportRes` documentation for details.  
+As the results are rather extensive (depending on number of groups and characters), they can be set assigned an object and exported  to the clipboard or file using the exportRes() function. This function is designed to export the spreadsheet-like results. If needed, default decimal separator (`dec`) and column delimiter character (`sep`) can be changed by particular arguments. See `exportRes()` documentation for details.  
 
 ```{r echo = TRUE, eval=FALSE}
 swTest = shapiroWilkTest(centaurea)
@@ -301,7 +301,7 @@ pca.centaurea = pca.calc(centaurea)
 ```
 
 
-The summary statistics (variation explained by individual axes, eigenvectors) of the data is available using the function summary.
+The summary statistics (variation explained by individual axes, eigenvectors) of the data is available using the function `summary()`.
 
 ```{r echo = FALSE, eval=TRUE }
 summary <- function(object) {
@@ -497,7 +497,8 @@ plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18),
 cda.stPsHybr$totalCanonicalStructure
 ```
 
-Taxa are separated along the first axis which extracts most of the variation. Characters IW, ILW, LS, MW and MLW show the highest correlations with the direction of separation of groups, thus these characters are the most suitable for taxonomic delimitation and identification key. On the other hand, the second axis represents the variation within taxa and to overall separation contributes only marginally. Thus, characters with a high score on the second axis are variable within, not among taxa (e.g., IV).
+The first axis extract most of the variation. Characters correlated with this axis (IW, ILW, LS, MW, and MLW) are the most suitable for taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibit middle values in these particular characters.The characters correlated with the second axis (IV, ML, and LW) contributes to the separation of hybrid from parental species.
+
 
 &nbsp;  
 &nbsp;  
@@ -536,6 +537,7 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
                         rgb(255,255,255, alpha=80, max=255), # ps - white
                         rgb(255,255,255, alpha=80, max=255))) # st - white 
+
 ```
 
 
@@ -565,7 +567,8 @@ The detailed classification of populations is very useful, as it can reveal some
 The results can be exported to the clipboard or file using the `exportRes()` function.
 
 ```{r echo = TRUE, eval=FALSE}
-exportRes(object = classif.matrix(classifRes.lda, level = "taxon"),
+classif_lda = classif.matrix(classifRes.lda, level = "indiv")
+exportRes(object = classif_lda,
           file = "lda_classifMatrix.txt")
 ```
 
@@ -583,7 +586,7 @@ The optimal number of neighbours to consider is unknown, but it is empirically e
 knn.select(centaurea, crossval = "pop")
 ```
 ```{r echo = TRUE, eval=TRUE}
-classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 12)
+classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 11)
 popClassifMatrix = classif.matrix(classifRes.knn, level = "pop")
 exportRes(popClassifMatrix, file = "clipboard")
 
