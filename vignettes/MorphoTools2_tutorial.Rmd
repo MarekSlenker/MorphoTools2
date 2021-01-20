@@ -9,8 +9,11 @@ date: "June 18, 2020"
 output:
   pdf_document: 
   html_document: default
+<<<<<<< HEAD
   fig_caption: yes
   fig.align: 'center'
+=======
+>>>>>>> deb1802f9446c5dfe32cc45997c6030d46c35bce
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
   %\VignetteEncoding{UTF-8}
@@ -21,7 +24,12 @@ vignette: |
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  rownames = FALSE
+  rownames = FALSE, 
+  fig.width   = 10,       # the width for plots created by code chunk
+  fig.height  = 10,       # the height for plots created by code chunk
+  fig.align   = 'center', # how to align graphics in the final doc. 'left', 'right', 'center'
+  fig.path    = 'figs/',  # file path to the directory where knitr shall store the graphics files
+  strip.white = TRUE     # if FALSE knitr will not remove white spaces at the beg or end of code chunk
 )
 ```
 
