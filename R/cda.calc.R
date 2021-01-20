@@ -6,6 +6,12 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
 
+  # find and report constant columns
+  constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
+  if (length(constantColumns)>0) {
+    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are constant."), call. = FALSE)
+  }
+
   for (pasSample in passiveSamples) {
     if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
   }
