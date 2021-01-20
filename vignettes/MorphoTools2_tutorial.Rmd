@@ -10,6 +10,7 @@ output:
   pdf_document: default
   html_document: default
   fig_caption: yes
+  fig.align: 'center'
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
   %\VignetteEncoding{UTF-8}
