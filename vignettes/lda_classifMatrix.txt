@@ -1,6 +1,0 @@
-Taxon	N	as.hybr	as.ph	as.ps	as.st	correct	correct[%]
-hybr	120	92	0	23	5	92	76.67
-ph	160	0	154	6	0	154	96.25
-ps	240	31	8	201	0	201	83.75
-st	92	13	0	2	77	77	83.7
-Total	612	136	162	232	82	524	85.62
