@@ -13,7 +13,7 @@ boxplotCharacter(object, character, outliers = TRUE, lowerWhisker = 0.05,
 boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05,
           upperWhisker = 0.95, col = "white", border = "black", main = character,
           cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
-          horizontal = FALSE, varwidth = FALSE, ...)
+          horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
@@ -45,6 +45,12 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 \item{horizontal}{logical, indicating if the boxplot should be horizontal.}
 
 \item{varwidth}{logical, if \code{TRUE}, the boxes are drawn with widths proportional to the square-roots of the number of observations in the groups.}
+
+\item{width}{the width of the figure.}
+
+\item{height}{the height of the figure.}
+
+\item{units}{The units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
 
 \item{...}{further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}} {graphics}.}
 

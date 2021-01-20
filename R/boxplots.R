@@ -19,7 +19,7 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
 #' @rdname boxplotCharacter
 #' @export
 boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
-                                main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                                main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE, width = 480, height = 480, units = "px",
                                 varwidth = FALSE, ...)
 {
   checkClass(object, "morphodata")
@@ -35,7 +35,7 @@ boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWh
 
     bxPlot = giveMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
-    grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ))
+    grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ), width = width, height = height, units = units)
 
     graphics::bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
 
@@ -60,6 +60,10 @@ giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
 
   for (tax in taxa)   {
     dataTaxon = object$data[which( object$Taxon %in% tax), ][character]
+    if (is.na(dataTaxon)) {
+      eval( parse (text= paste("dataTaxon = data.frame(",character,"= object$data[which( object$Taxon %in% tax), ])",  sep = "") ))
+
+    }
 
     upWhisker = as.numeric( stats::quantile(dataTaxon, probs = upperWhisker, na.rm = T)  )
     loWhisker = as.numeric( stats::quantile(dataTaxon, probs = lowerWhisker, na.rm = T)  )
