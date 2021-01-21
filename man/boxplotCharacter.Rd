@@ -11,9 +11,9 @@ boxplotCharacter(object, character, outliers = TRUE, lowerWhisker = 0.05,
           horizontal = FALSE, varwidth = FALSE, ...)
 
 boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05,
-          upperWhisker = 0.95, col = "white", border = "black", main = character,
-          cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
-          horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
+      upperWhisker = 0.95, col = "white", border = "black", main = character,
+      cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8,
+      horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
 }
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}

@@ -53,7 +53,7 @@ If there are missing values in the data, they must be represented as empty cells
 
 \examples{
 data = read.morphodata(file = system.file("extdata", "centaurea.txt",
-    package = "MorphoTools"),dec = ".", sep = "\t")
+    package = "MorphoTools2"),dec = ".", sep = "\t")
 
 # data = read.morphodata("clipboard")
 

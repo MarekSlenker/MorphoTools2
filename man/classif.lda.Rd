@@ -15,8 +15,8 @@ These functions computes discriminant function for classifying observations. Lin
 \usage{
 classif.lda(object, crossval = "indiv")
 
-knn.select(object, crossval = "pop")
-classif.knn(object, k, crossval = "pop")
+knn.select(object, crossval = "indiv")
+classif.knn(object, k, crossval = "indiv")
 
 classif.matrix(object, level = "taxon")
 }

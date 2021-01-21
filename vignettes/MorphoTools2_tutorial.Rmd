@@ -7,13 +7,9 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  pdf_document: 
+  pdf_document: default
   html_document: default
-<<<<<<< HEAD
   fig_caption: yes
-  fig.align: 'center'
-=======
->>>>>>> deb1802f9446c5dfe32cc45997c6030d46c35bce
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
   %\VignetteEncoding{UTF-8}

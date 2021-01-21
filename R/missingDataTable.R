@@ -1,6 +1,7 @@
 
 
 #' Summarize percentage and number of missing characters on the desired grouping level.
+#' @importFrom stats aggregate
 #' @export
 missingCharactersTable <- function(object, level) {
   checkClass(object, "morphodata")
@@ -28,9 +29,9 @@ missingCharactersTable <- function(object, level) {
   )
 
   missingTable = data.frame(
-                    aggregate( apply(object$data, 1, function(x) mean(is.na(x))),  # MEAN
+    stats::aggregate( apply(object$data, 1, function(x) mean(is.na(x))),  # MEAN
                                 aggLevel, function(x) round(mean(x), digits = 2)),
-                    aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
+    stats::aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
                                 aggLevel, sum)$x
   )
 
@@ -49,6 +50,7 @@ missingCharactersTable <- function(object, level) {
 
 
 #' Summarize percentage of missing samples in characters on the desired grouping level.
+#' @importFrom stats aggregate
 #' @export
 missingSamplesTable <- function(object, level) {
   checkClass(object, "morphodata")
@@ -68,7 +70,7 @@ missingSamplesTable <- function(object, level) {
   )
 
 
-  missingTable = aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2))
+  missingTable = stats::aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2))
 
   t = as.data.frame(table(aggLevel))
 

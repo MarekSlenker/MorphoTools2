@@ -1,6 +1,7 @@
 library(testthat)
-library(visualTest)
-library(png)
-library(MorphoTools)
+library(MorphoTools2)
+#library(visualTest)
+#library(png)
 
-test_check("MorphoTools")
+test_check("MorphoTools2")
+
