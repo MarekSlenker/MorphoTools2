@@ -54,8 +54,8 @@ classifRes.lda = classif.lda(centaurea, crossval = "indiv")
 
 
 # classification by nonparametric k-nearest neighbour method
-knn.select(centaurea, crossval = "pop") # The optimal K is: 12
-classifRes.knn = classif.knn(centaurea, 12, crossval = "pop")
+# USE knn.select(centaurea, crossval = "pop") to find the optimal K.
+classifRes.knn = classif.knn(centaurea, k = 12, crossval = "pop")
 
 # exporting results
 classif.lda.tax = classif.matrix(classifRes.lda, level = "taxon")

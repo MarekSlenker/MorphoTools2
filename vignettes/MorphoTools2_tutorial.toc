@@ -6,17 +6,17 @@
 \contentsline {subsubsection}{3.2.1 Shapiro-Wilk normality test}{4}{section*.7}%
 \contentsline {subsubsection}{3.2.2 Box Plots}{5}{section*.8}%
 \contentsline {subsubsection}{3.2.3 Descriptive statistics}{6}{section*.9}%
-\contentsline {subsubsection}{3.2.4 Correlations of characters}{6}{section*.10}%
+\contentsline {subsubsection}{3.2.4 Correlations of characters}{7}{section*.10}%
 \contentsline {subsubsection}{3.2.5 Populations as operational taxonomic units}{7}{section*.11}%
 \contentsline {subsubsection}{3.2.6 Missing data}{7}{section*.12}%
 \contentsline {paragraph}{Remove items}{8}{section*.13}%
-\contentsline {paragraph}{Replace missing values}{8}{section*.14}%
+\contentsline {paragraph}{Replace missing values}{9}{section*.14}%
 \contentsline {section}{4. Hierarchical clustering}{9}{section*.15}%
-\contentsline {section}{5. Principal component analysis (PCA)}{9}{section*.16}%
-\contentsline {section}{6. Canonical discriminant analysis (CDA)}{15}{section*.17}%
-\contentsline {paragraph}{Passive prediction of samples.}{20}{section*.18}%
-\contentsline {section}{7. Classificatory discriminant analysis}{21}{section*.19}%
-\contentsline {section}{Further reading}{24}{section*.20}%
-\contentsline {section}{How to cite MorphoTools2}{25}{section*.21}%
-\contentsline {section}{Acknowledgements}{25}{section*.22}%
-\contentsline {section}{References}{25}{section*.23}%
+\contentsline {section}{5. Principal component analysis (PCA)}{10}{section*.16}%
+\contentsline {section}{6. Canonical discriminant analysis (CDA)}{19}{section*.17}%
+\contentsline {paragraph}{Passive prediction of samples.}{24}{section*.18}%
+\contentsline {section}{7. Classificatory discriminant analysis}{26}{section*.19}%
+\contentsline {section}{Further reading}{30}{section*.20}%
+\contentsline {section}{How to cite MorphoTools2}{30}{section*.21}%
+\contentsline {section}{Acknowledgements}{30}{section*.22}%
+\contentsline {section}{References}{30}{section*.23}%

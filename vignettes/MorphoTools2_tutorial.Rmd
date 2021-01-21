@@ -7,7 +7,8 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  pdf_document: default
+  pdf_document: 
+    keep_tex: yes
   html_document: default
   fig_caption: yes
 vignette: |
@@ -22,7 +23,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   rownames = FALSE, 
   fig.width   = 10,       # the width for plots created by code chunk
-  fig.height  = 10,       # the height for plots created by code chunk
+  fig.height  = 6,       # the height for plots created by code chunk
   fig.align   = 'center', # how to align graphics in the final doc. 'left', 'right', 'center'
   fig.path    = 'figs/',  # file path to the directory where knitr shall store the graphics files
   strip.white = TRUE     # if FALSE knitr will not remove white spaces at the beg or end of code chunk
@@ -629,11 +630,11 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 **Lihová J, Kudoh H, Marhold K. (2010).** Morphometric studies of polyploid *Cardamine* species (Brassicaceae) from Japan: solving a long-standing taxonomic and nomenclatural controversy. *Australian Systematic Botany* 23, 94-111
 
-**Melichárková A, Španiel S, Marhold K, Hurdu BI, Drescher A, Zozomová‐Lihová J. (2019)**. Diversification and independent polyploid origins in the disjunct species *Alyssum repens* from the Southeastern Alps and the Carpathians. *American Journal of Botany* 106, 1499-1518.
+**Melichárková A, Španiel S, Marhold K, Hurdu BI, Drescher A, Zozomová-Lihová J. (2019)**. Diversification and independent polyploid origins in the disjunct species *Alyssum repens* from the Southeastern Alps and the Carpathians. *American Journal of Botany* 106, 1499-1518.
 
 **Šlenker M, Zozomová-Lihová J, Mandáková T, Kudoh H, Zhao Y, Soejima A, et al. (2018)**. Morphology and genome size of the widespread weed *Cardamine occulta*: how it differs from cleistogamic *C. kokaiensis* and other closely related taxa in Europe and Asia. *Botanical Journal of the Linnean Society* 187, 456-482.
 
-**Španiel S, Marhold K, Passalacqua NG, Zozomová‐Lihová J. (2011)**. Intricate variation patterns in the diploid‐polyploid complex of *Alyssum montanum‐A. repens* (Brassicaceae) in the Apennine Peninsula: Evidence for long‐term persistence and diversification. *American Journal of Botany* 98, 1887-1904.
+**Španiel S, Marhold K, Passalacqua NG, Zozomová-Lihová J. (2011)**. Intricate variation patterns in the diploid-polyploid complex of *Alyssum montanum-A. repens* (Brassicaceae) in the Apennine Peninsula: Evidence for long-term persistence and diversification. *American Journal of Botany* 98, 1887-1904.
 
 **Šrámková G, Kolář F, Záveská E, Lučanová M, Španiel S, Kolník M, et al. (2019)**. Phylogeography and taxonomic reassessment of *Arabidopsis halleri* - a montane species from Central Europe. *Plant Systematics and Evolution* 305, 885-898.
 

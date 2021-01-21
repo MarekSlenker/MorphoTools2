@@ -1,14 +1,14 @@
 Package: MorphoTools2
 Type: Package
-Title: Morphometric analysis
+Title: Morphometric Analysis
 Version: 1.0.0
 Authors@R: c(
   person("Marek", "Šlenker", role = c("aut", "cre"), email = "marek.slenker@savba.sk", comment = c(ORCID = "0000-0002-5919-890X")),
   person("Petr", "Koutecký", role = "ctb", email = "kouta@prf.jcu.cz",  comment = c(ORCID = "0000-0002-3455-850X"))
   )
-Author: Marek Šlenker [aut, cre], Petr Koutecký [ctb]
+Author: Marek Šlenker [aut, cre] (<https://orcid.org/0000-0002-5919-890X>), Petr Koutecký [ctb] (<https://orcid.org/0000-0002-3455-850X>)
 Maintainer: Marek Šlenker <marek.slenker@savba.sk>
-Description: An R package for morphometric analysis.
+Description: An R package for analysing multivariate morphological data.
 URL: https://github.com/MarekSlenker/MorphoTools2
 BugReports: https://github.com/MarekSlenker/MorphoTools2/issues
 Depends: R (>= 2.10)

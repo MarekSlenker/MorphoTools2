@@ -33,7 +33,7 @@ The \code{classifSample.lda} performs classification using linear discriminant f
 
 The mode of crossvalidation is the standard one-leave-out method ("\code{indiv}").
 
-The \code{classifSample} methods allow you to store sample data and training data in separate objects. These functions are designed to classify hybrid populations, 
+The \code{classifSample} methods allow you to store sample data and training data in separate objects. These functions are designed to classify hybrid populations,
 type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original
  (training) dataset and applyed to the specific sample (set).
 }
@@ -53,7 +53,7 @@ classif.lda.SOK = classifSample.lda(SOK, trainingSet)
 
 
 # classification by nonparametric k-nearest neighbour method
-knn.select(trainingSet, crossval = "pop") # The optimal K is: 15
+# USE knn.select(trainingSet, crossval = "pop") to find the optimal K.
 classif.knn.SOK = classifSample.knn(SOK, trainingSet, k = 15)
 }
 
