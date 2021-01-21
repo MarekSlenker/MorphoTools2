@@ -36,26 +36,7 @@ test_that("clustering",  {
   expect_equal(paste(clustRes$labels, collapse = " "), "id1 id2 id3 id4 id5 id6 id7 id8")
 })
 
-test_that("visual",  {
 
-  clustRes = clust(morphoMockup, clustMethod = "UPGMA")
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot(clustRes)
-  dev.off()
-
-  expect_true(  visualTest::isSimilar(tmp,  visualTest::getFingerprint("../testFiles/figs/clust_default.png"), threshold = 1)  )
-
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot(clustRes, cex=0.6, frame.plot=T, hang=-1, main="", sub="", xlab="", ylab="distance")
-  dev.off()
-
-  expect_true(  visualTest::isSimilar(tmp,  visualTest::getFingerprint("../testFiles/figs/clust_2.png"), threshold = 1)  )
-
-})
 
 
 

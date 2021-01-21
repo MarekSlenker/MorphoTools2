@@ -19,5 +19,5 @@ RoxygenNote: 7.1.0
 Imports:
     stats, utils, car, candisc, methods, MASS, class, ellipse, plot3D
 Suggests: 
-    testthat, visualTest, knitr, rmarkdown, png
+    testthat, knitr, rmarkdown
 VignetteBuilder: knitr

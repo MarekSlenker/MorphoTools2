@@ -24,24 +24,3 @@ test_that("ploting with error parameters",  {
 
   expect_error(plot3Dpoints(pcaRes), "specified axes are out of bounds. Object has only 2 axes." )
 })
-
-test_that("visual",  {
-
-  pcaRes = pca.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot3Dpoints(pcaRes, col = c("red", "green"), phi = 10, theta = 22, pch = c(1,11), bty = "b2", legend = T)
-  dev.off()
-  testthat::expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points1.png"), threshold = 1)  )
-
-
-  popsRes= pca.calc(pops)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot3Dpoints(popsRes, col = c("red", "green"), phi = 20, theta = 2, labels = T)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points2.png"), threshold = 1)  )
-
-})

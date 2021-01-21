@@ -19,22 +19,10 @@ options(warn=0)
 cdaRes = cda.calc(centaurea)
 
 
-test_that("visual hist",  {
+test_that("hist",  {
 
   expect_warning(plotCharacters(cdaRes, axes = c(1,3)), "The object has only one axis, which will be plotted")
 
   expect_warning(plotCharacters(cdaRes, axes = 4), "The object has only one axis, which will be plotted")
 
-    tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(cdaRes, axes = 1)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_hist_1.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(cdaRes, axes = c(1), xlab = "eee", main = "mmmmm", xlim = c(-2,0), ylim = c(-0.3,0),
-                  col = "green")
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_hist_2.png"), threshold = 1)  )
 })

@@ -22,29 +22,3 @@ test_that("cda wrong input",  {
   expect_error(plotAddLabels.characters(cdaRes, include = F), "No labels to plot. You specified to exclude (include = FALSE) all labels", fixed = TRUE)
 
 })
-
-
-test_that("cda visual hist",  {
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(cdaRes, labels = F)
-  plotAddLabels.characters(cdaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 4, cex = 1, axes = 1)
-  plotAddLabels.characters(cdaRes, labels = c("LLW", "ILW", "LBA"), pos = 2, cex = 1)
-  plotAddLabels.characters(cdaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddLabels.characters.hist1.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(cdaRes, labels = F)
-  plotAddLabels.characters(cdaRes, axes = 1, cex = 1,  col = "darkgreen")
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddLabels.characters.hist2.png"), threshold = 1)  )
-
-})
-
-
-
-
-

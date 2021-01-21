@@ -28,21 +28,3 @@ test_that("ploting with error parameters",  {
   expect_error(plotCharacters(pcaRes, axes = c(3,55)), "specified axes are out of bounds. Object has only 25 axes." )
 
 })
-
-test_that("visual",  {
-
-  pcaRes = pca.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(pcaRes)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_default.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotCharacters(pcaRes, axes = c(2,4), xlab = "eee", main = "mmmmm", xlim = c(-1,1), ylim = c(-0.3,0), cex = 1.7,
-                  col = "green")
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotCharacters_2.png"), threshold = 1)  )
-})

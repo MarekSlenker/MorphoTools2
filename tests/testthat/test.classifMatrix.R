@@ -37,8 +37,8 @@ test_that("classif.lda",  {
   expect_equal(m[,1][30:32], c("VIT",   "VOL",   "Total"))
 
   m = classif.matrix(c, level = "indiv")
-  expect_equal(colnames(m), c("ID", "Population", "Taxon", "classification", "probability.of:hybr", "probability.of:ph",
-                              "probability.of:ps", "probability.of:st", "correct"))
+  expect_equal(colnames(m), c("ID", "Population", "Taxon", "classification", "as.hybr", "as.ph",
+                              "as.ps", "as.st", "correct"))
   expect_equal(rownames(m)[1:5], c("1", "2", "3", "4", "5"))
   expect_equal(m[,1][1:5], c("RTE1", "RTE2", "RTE3", "RTE4", "RTE5" ))
   expect_equal(m[,1][612], "KOT2295")
@@ -85,8 +85,8 @@ test_that("classifSamp.lda",  {
   expect_equal(m[,1], c("SOK","Total" ))
 
   m = classif.matrix(c, level = "indiv")
-  expect_equal(colnames(m), c("ID", "Population", "Taxon", "classification", "probability.of:hybr", "probability.of:ph",
-                              "probability.of:ps", "probability.of:st"  ))
+  expect_equal(colnames(m), c("ID", "Population", "Taxon", "classification", "as.hybr", "as.ph",
+                              "as.ps", "as.st"  ))
   expect_equal(rownames(m)[1:5], c("1", "2", "3", "4", "5"))
   expect_equal(m[,1][1:5], c("SOK388", "SOK389", "SOK390", "SOK391", "SOK392"))
 

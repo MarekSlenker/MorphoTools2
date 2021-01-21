@@ -23,24 +23,3 @@ test_that("ploting with error parameters",  {
 
   expect_error(plot3Dpoints(cdaRes), "3D plot requires at least 3 axes. Object has 1 axes." )
 })
-
-test_that("visual",  {
-
-  cdaRes = cda.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot3Dpoints(cdaRes, col = c("red", "green"), phi = 10, theta = 22, pch = c(1,11), bty = "b2", legend = T)
-  dev.off()
-  testthat::expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points.cda1.png"), threshold = 1)  )
-
-
-  popsRes= cda.calc(pops)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plot3Dpoints(popsRes, col = c("red", "green"), phi = 20, theta = 2, labels = T)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot3D.points.cda2.png"), threshold = 1)  )
-
-})

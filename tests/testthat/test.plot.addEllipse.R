@@ -35,27 +35,4 @@ test_that("plotAddEllipses error input",  {
 })
 
 
-test_that("plotAddEllipses visual",  {
-
-  cdaRes = cda.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5, legend = T)
-  plotAddEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"))
-  plotAddEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"), probability = 0.70, lty = 2)
-  plotAddEllipses(cdaRes, col = c("red", "green", "blue", "black", "yellow"), probability = 0.999, type = "p",lwd = 3)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddEllipses1.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch =c(18,16), cex = 0.5, col = c("red", "green"))
-  plotAddEllipses(cdaRes, col = c("red", "green"), lwd = 3)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddEllipses2.png"), threshold = 1)  )
-})
-
-
-
 

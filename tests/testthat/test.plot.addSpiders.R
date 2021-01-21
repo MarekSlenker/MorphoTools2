@@ -34,35 +34,4 @@ test_that("plotAddSpiders error input",  {
 })
 
 
-test_that("plotAddSpiders visual",  {
-
-  cdaRes = cda.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5)
-  plotAddSpiders(cdaRes, col = c("red", "green", "blue", "black", "yellow"), lty = 2, lwd = 2)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders1.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch =c(18,16), cex = 0.5, col = c("red", "green"))
-  plotAddSpiders(cdaRes, col = c("green", "red"))
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders2.png"), threshold = 1)  )
-
-  pcaRes = pca.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(pcaRes, pch =c(18,16), cex = 0.5, col = c("red", "green", "blue", "black", "yellow"))
-  plotAddSpiders(pcaRes, col=c(rgb(255,0,0,max=255,alpha=100),  rgb(0, 0, 255, max = 255, alpha = 100)), lwd = 3)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders3.png"), threshold = 1)  )
-
-})
-
-
-
 

@@ -60,7 +60,7 @@ giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
 
   for (tax in taxa)   {
     dataTaxon = object$data[which( object$Taxon %in% tax), ][character]
-    if (is.na(dataTaxon)) {
+    if (! is.data.frame(dataTaxon)) {
       eval( parse (text= paste("dataTaxon = data.frame(",character,"= object$data[which( object$Taxon %in% tax), ])",  sep = "") ))
 
     }

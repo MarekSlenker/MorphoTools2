@@ -26,35 +26,3 @@ test_that("ploting with error parameters",  {
 
   expect_error(plotPoints(cdaRes, axes = c(1,1,2)), "you have to specifi 2 axes (e.g., axes = c(1,2))", fixed = TRUE) #
 })
-
-test_that("visual",  {
-
-  cdaRes = cda.calc(morphoMockup)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.scatter.default.png"), threshold = 1)  )
-
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch = c(15,17), axes = c(2,1),  col = c("green", "red", "navy"), cex = 1.4, legend = T, labels = T)
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.scatter.colCexLabLeg.png"), threshold = 1)  )
-
-  cdaRes = cda.calc(centaurea)
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch = c(19,18), legend = T, col = c("green", "red", "orange", "navy") , cex = 0.7, labels = T )
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.scatter.centaurea1.png"), threshold = 1)  )
-
-  tmp  = tempfile(fileext = ".png")
-  png(filename = tmp, width = 400, height = 400)
-  plotPoints(cdaRes, pch = c(22), legend = T, pt.bg = c("green", "red"), col = c("green", "red", "orange", "navy"), cex = 1.4 )
-  dev.off()
-  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plot.cda.scatter.centaurea2.png"), threshold = 1)  )
-})
