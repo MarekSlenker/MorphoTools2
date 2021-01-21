@@ -25,11 +25,11 @@ data(centaurea)
 
 sW = shapiroWilkTest(centaurea)
 
-exportRes(sW)
+exportRes(sW, file = "~/sW_test.txt")
 
 sW = shapiroWilkTest(centaurea, p.value = NA)
 
-exportRes(sW)
+exportRes(sW, file = "~/sW_test.txt")
 }
 
 
