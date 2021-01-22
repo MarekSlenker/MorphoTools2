@@ -3,8 +3,16 @@
 
 ## TODO list
 
-problem je ked rata CDA a je nejaky znak identicky, vyhodi chybu, ale je to nejaka divna hlaska z vnutra
-+  upozorni ze znak je identicky vo vnutri taxonov
+Running 'testthat.R' [11s] (10.9s)
+   Running the tests in 'tests/testthat.R' failed.
+   Last 13 lines of output:
+     -- 1. Failure: classifSamp.knn (@test.classifMatrix.R#101)  ---------------------------------------
+     colnames(m) not equal to c("Taxon", "N", "as.hybr", "as.ph", "as.ps", "as.st").
+     Lengths differ: 5 is not 6
+     
+     -- 2. Failure: classifSamp.knn (@test.classifMatrix.R#106)  ---------------------------------------
+     colnames(m) not equal to c("Population", "Taxon", "N", "as.hybr", "as.ph", "as.ps", "as.st").
+     Lengths differ: 6 is not 7
 
 
 
