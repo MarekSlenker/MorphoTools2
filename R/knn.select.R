@@ -52,7 +52,7 @@ knn.select<-function(object, crossval="indiv"){
   kselmean = apply(ksel, MARGIN = 2, FUN = mean)
   kselmax = apply(ksel, MARGIN = 2, FUN = max)
   kselmin = apply(ksel, MARGIN = 2, FUN = min)
-  plot(kselmean,type="p",pch=16,xlab="K",ylab="correct classifications", ylim=c(min(kselmin),max(kselmax)))
+  graphics::plot(kselmean,type="p",pch=16,xlab="K",ylab="correct classifications", ylim=c(min(kselmin),max(kselmax)))
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 

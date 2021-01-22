@@ -7,7 +7,7 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
 
   checkClass(object, "morphodata")
 
-  if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = F)
+  if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
   bxPlot = giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
@@ -48,7 +48,7 @@ boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWh
 # internal
 giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   # vyrataj klasicky bxplot
-  bxPlot = graphics::boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = F)
+  bxPlot = graphics::boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = FALSE)
 
   # a teraz ho zmen
   taxa = levels(object$Taxon)
@@ -64,8 +64,8 @@ giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
 
     }
 
-    upWhisker = as.numeric( stats::quantile(dataTaxon, probs = upperWhisker, na.rm = T)  )
-    loWhisker = as.numeric( stats::quantile(dataTaxon, probs = lowerWhisker, na.rm = T)  )
+    upWhisker = as.numeric( stats::quantile(dataTaxon, probs = upperWhisker, na.rm = TRUE)  )
+    loWhisker = as.numeric( stats::quantile(dataTaxon, probs = lowerWhisker, na.rm = TRUE)  )
 
     bxPlot$stats[1, which(tax == taxa)] = loWhisker
     bxPlot$stats[5, which(tax == taxa)] = upWhisker

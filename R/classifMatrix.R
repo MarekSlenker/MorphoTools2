@@ -11,7 +11,7 @@ classif.matrix <- function(object, level = "taxon") {
     classif = table(object$Taxon, object$classif$classification)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
-    classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
+    classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     classif = rbind(classif, c("Total", colSums(classif[2:ncol(classif)])))
 
   if (! is.null(object$correct)) {
@@ -26,10 +26,11 @@ classif.matrix <- function(object, level = "taxon") {
     classif = table(object$Population, object$classif$classification)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
-    classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL)
+    classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     tax = data.frame(
       "Population" = object$Population[ ! duplicated(object$Population, object$Taxon)],
-          "Taxon" = object$Taxon[ ! duplicated(object$Population, object$Taxon)]
+      "Taxon" = object$Taxon[ ! duplicated(object$Population, object$Taxon)],
+      stringsAsFactors = FALSE
     )
     classif = merge(tax, classif, by = "Population" )
     classif = rbind(classif, c("Total", "", colSums(classif[3:ncol(classif)])))
@@ -43,7 +44,7 @@ classif.matrix <- function(object, level = "taxon") {
   } else if (level == "indiv")
   {
     classif = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon,
-                         "classification" = object$classif)
+                         "classification" = object$classif, stringsAsFactors = FALSE)
 
     if (attr(object, "method" ) == "lda") {
       colnames(object$prob) =  paste("as.", colnames(object$prob), sep = "")

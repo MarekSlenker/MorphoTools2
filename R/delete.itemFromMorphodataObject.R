@@ -5,7 +5,7 @@ deleteTaxon <- function(object, taxonName) {
 
   # skontroluj ci object ma taxName
   for (tax in taxonName) {
-    if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist"), call. = F)
+    if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist"), call. = FALSE)
   }
 
   return(removeByColumn(object, "Taxon", taxonName))
@@ -19,7 +19,7 @@ deletePopulation <- function(object, populationName) {
 
   # skontroluj ci object ma popname
   for (pop in populationName) {
-    if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist"), call. = F)
+    if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist"), call. = FALSE)
   }
 
   return(removeByColumn(object, "Population", populationName))
@@ -39,7 +39,7 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 
     # skontroluj ci object ma popname
     for (samp in sampleName) {
-      if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = F)
+      if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = FALSE)
     }
 
     return(removeByColumn(object, "ID", sampleName))
@@ -74,7 +74,7 @@ deleteCharacter <- function(object, characterName) {
 
   # check existence of CH
   for (ch in characterName) {
-    if (! (ch %in% colnames(object$data))) stop(paste("character", ch , "does not exist"), call. = F)
+    if (! (ch %in% colnames(object$data))) stop(paste("character", ch , "does not exist"), call. = FALSE)
   }
 
   # character - moze byt i viac

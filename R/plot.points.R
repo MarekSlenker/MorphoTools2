@@ -21,8 +21,8 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
+  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
     xlab = paste("PC",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
@@ -38,7 +38,7 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
   # main plot
 
-  plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
+  graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
        xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
 
 
@@ -77,11 +77,11 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     # HISTOGRAM
 
     if (length(axes) > 1){
-             if (!(all(axes == c(1,2)))) warning("The object has only one axis, which will be plotted", call. = F)
+             if (!(all(axes == c(1,2)))) warning("The object has only one axis, which will be plotted", call. = FALSE)
     }
 
     if (length(axes) == 1){
-            if (axes != 1) warning("The object has only one axis, which will be plotted", call. = F)
+            if (axes != 1) warning("The object has only one axis, which will be plotted", call. = FALSE)
     }
 
     taxlev = levels(result$objects$Taxon)
@@ -89,7 +89,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     # breaks
     # musim to vyhodit z data.frame
     result$objects$scores = as.numeric(result$objects$scores[,])
-    xhist = graphics::hist(result$objects$scores, plot = F)
+    xhist = graphics::hist(result$objects$scores, plot = FALSE)
 
     hist_breaks = seq(from = min(xhist$breaks), to = max(xhist$breaks), by = breaks )
 
@@ -119,7 +119,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     histograms = list(list(list(),list(),list(),list(),list(),list()))
 
     for (i in 1:length(taxlev)) {
-      histograms[[i]] = graphics::hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = F, breaks = hist_breaks )
+      histograms[[i]] = graphics::hist(result$objects$scores[result$objects$Taxon == taxlev[i]], plot = FALSE, breaks = hist_breaks )
       histograms[[i]]$pt.bg = result$pt.bg[result$objects$Taxon == taxlev[i]][1]
     }
 
@@ -135,9 +135,9 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     }
 
     #   plotni v cykle
-    plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, axes = F, ...)
+    graphics::plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, axes = FALSE, ...)
     for (i in 2:length(taxlev)) {
-      plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = F, add = T)
+      graphics::plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = F, add = TRUE)
     }
 
     ########### ENDREGION
@@ -160,7 +160,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
+    if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
     if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
     if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
@@ -171,7 +171,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
 
     # main plot
-    plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
+    graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
          xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
 
 

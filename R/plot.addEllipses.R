@@ -44,8 +44,8 @@ plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lw
 
   result$col = setValuesForVector(result$objects$Taxon, col)
 
-  T = sqrt(stats::qchisq(probability, 2)) # kvantil rozdelenia
-  if (is.infinite(T)) stop(paste("Probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = F)
+  tt = sqrt(stats::qchisq(probability, 2)) # kvantil rozdelenia
+  if (is.infinite(tt)) stop(paste("Probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = FALSE)
 
   for (taxon in levels(result$objects$Taxon)) {
     taxData = data.frame(result$objects$scores[which(taxon == result$objects$Taxon),  axes[1]],
@@ -53,7 +53,7 @@ plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lw
                          result$col[which(taxon == result$objects$Taxon)]                         )
     covMat = stats::cov.wt(taxData[,-3])
 
-    elip = ellipse::ellipse(covMat$cov, centre = covMat$center, t = T, FUN = graphics::lines) # predikcna elipsa
+    elip = ellipse::ellipse(covMat$cov, centre = covMat$center, t = tt, FUN = graphics::lines) # predikcna elipsa
     taxCol = unique(taxData[,3])
 
     graphics::lines(elip, col = as.character(taxCol), type = type, lty = lty, lwd = lwd, ...)

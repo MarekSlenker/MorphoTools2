@@ -12,5 +12,6 @@ test_that("correctness of calculation",  {
 
   cormatRes = cormat(morphoMockup)
 
-  expect_equal(paste(cormatRes, collapse = " "), "c(\"Ch1\", \"Ch2\") c(1, -0.119) c(-0.119, 1)")
+  expect_equal(cormatRes[1,3], -0.119)
+  expect_equal(cormatRes[2,3], 1)
 })

@@ -7,8 +7,7 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  pdf_document: 
-    keep_tex: yes
+  pdf_document: default
   html_document: default
   fig_caption: yes
 vignette: |
@@ -479,7 +478,7 @@ options(max.print = 100)
 ```{r echo = TRUE, eval=TRUE}
 cda.centaurea.TCS = cda.centaurea$totalCanonicalStructure
 
-exportRes(cda.centaurea.TCS, "clipboard")
+exportRes(cda.centaurea.TCS, file = "centaurea_TCS.txt")
 
 cda.centaurea.TCS
 ```
@@ -590,7 +589,7 @@ The optimal number of neighbours to consider is unknown, but it is empirically e
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 knn.select(centaurea, crossval = "pop")
 ```
-```{r echo = TRUE, eval=TRUE}
+```{r echo = TRUE, eval=FALSE}
 classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 11)
 popClassifMatrix = classif.matrix(classifRes.knn, level = "pop")
 exportRes(popClassifMatrix, file = "clipboard")

@@ -13,7 +13,7 @@ test_that("correctnes of repacement",  {
 
   expect_is(meanMockup, "morphodata")
 
-  expect_equal(paste(meanMockup$data, collapse = " "), "c(1, 2, 2.333, 4, 5, 6, 8, 8) c(11, 12, 13, 12, 15, 15, 17, 18)")
+  expect_equal(paste(unlist(meanMockup$data), collapse = ","), "1,2,2.333,4,5,6,8,8,11,12,13,12,15,15,17,18")
 
 })
 
@@ -32,7 +32,7 @@ test_that("some NAs remains",  {
 
   expect_is(meanMockup, "morphodata")
 
-  expect_equal(paste(meanMockup$data, collapse = " "), "c(1, 2, 2.333, 4, 5, 6, NA, NA) c(11, 12, 13, 12, 15, 15, 17, 18)")
+  expect_equal(paste(unlist(meanMockup$data), collapse = ","), "1,2,2.333,4,5,6,NA,NA,11,12,13,12,15,15,17,18")
 
   expect_warning(naMeanSubst(morphoMockup), "Unable to replace NAs in characters Ch1 in population Pop4. Probably all values of that character are NA.")
 })

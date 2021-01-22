@@ -1,4 +1,5 @@
 #' Canonical discriminant analysis (CDA)
+#' @importFrom candisc candisc
 #' @export
 cda.calc <- function(object, passiveSamples = NULL) {
   checkClass(object, "morphodata")
@@ -105,7 +106,8 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # calculate with objectNoPassiveSamples
   d_NoPassiveSamples = as.matrix(objectNoPassiveSamples$data)
   x_NoPassiveSamples = stats::lm(d_NoPassiveSamples ~ objectNoPassiveSamples$Taxon)
-  # cda = candisc(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
+
+  # cda = candisc::candisc(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
   cda = candisc_MK(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
 
 

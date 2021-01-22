@@ -29,7 +29,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
 
   res = newClassifdata()
 
-  knn.samp = class::knn(train = trainingData$data, test = sampleData$data, cl = trainingData$Taxon, k = k, prob = T, use.all = T)
+  knn.samp = class::knn(train = trainingData$data, test = sampleData$data, cl = trainingData$Taxon, k = k, prob = TRUE, use.all = TRUE)
 
   res$ID = as.character(sampleData$ID)
   res$Population = as.character(sampleData$Population)

@@ -1,9 +1,9 @@
 #' Data input
 #' @export
 read.morphodata <- function(file, dec = ".", sep = "\t", ...){
-  data = utils::read.delim(file, header = T, dec = dec, sep = sep, ...)
+  data = utils::read.delim(file, header = TRUE, dec = dec, sep = sep, ...)
 
-  if (dim(data)[2] <= 3) stop("incorrect data format", call.=F)
+  if (dim(data)[2] <= 3) stop("incorrect data format", call.=FALSE)
 
   return(morphodataFromDataFrame(data))
 }
@@ -14,7 +14,7 @@ morphodataFromDataFrame <- function(indata) {
 
   # check for required columns
   if(!("ID" %in% colnames(indata)) | !("Population" %in% colnames(indata)) | !("Taxon" %in% colnames(indata)))
-    stop("input do not contains required columns", call. = F)
+    stop("input do not contains required columns", call. = FALSE)
 
 
   data = list(
@@ -29,7 +29,7 @@ morphodataFromDataFrame <- function(indata) {
   }
 
   #testuj ci tam nie je nejaky nezmysel .. slovo v cislach etc   .  cislo ako pop?
-  if (!(is.numeric(as.matrix(data$data)))) stop("input contains non-numeric data", call. = F)
+  if (!(is.numeric(as.matrix(data$data)))) stop("input contains non-numeric data", call. = FALSE)
 
   attr(data, "class") <- "morphodata"
   return(data)
