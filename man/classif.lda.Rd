@@ -25,12 +25,12 @@ classif.matrix(object, level = "taxon")
 \item{object}{an object of class 'morphodata'.}
 \item{crossval}{crossvalidation mode, sets individual ("\code{indiv}"; default, leave-one-out method) or whole populations ("\code{pop}") as leave-out unit.}
 \item{k}{number of neighbours considered.}
-\item{level}{level of gruping of classification matrix, "\code{taxon}" (default), populations ("\code{pop}"), or individuals ("\code{indiv}")}
+\item{level}{level of grouping of classification matrix, "\code{taxon}" (default), populations ("\code{pop}"), or individuals ("\code{indiv}")}
 }
 
 
 \value{
-object of class '\code{\link{classifdata}}'.
+an object of class '\code{\link{classifdata}}'.
 }
 
 

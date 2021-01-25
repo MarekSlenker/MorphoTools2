@@ -16,10 +16,10 @@ plotAddLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 }
 
 \arguments{
-\item{result}{an result of \code{\link{pca.calc}} or \code{\link{cda.calc}}, has to by ploted at first.}
+\item{result}{an result of \code{\link{pca.calc}} or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{x, y}{the x and y coordinates or a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
-\item{pch}{the  plotting symbols of points appearing in the legend.}
-\item{col}{the color of points appearing in the legend.}
+\item{pch}{the plotting symbols of points appearing in the legend.}
+\item{col}{the colors of points appearing in the legend.}
 \item{pt.bg}{the background color for the \code{\link{points}}, corresponding to its argument bg.}
 \item{pt.cex}{character expansion factor for the points.}
 \item{lwd}{the line width.}
@@ -28,7 +28,7 @@ plotAddLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 \item{box.type}{the type of box to be drawn around the legend. The allowed values are "o" (the default) and "n".}
 \item{box.lty, box.lwd, box.col, box.bg}{the line type, width color and background color for the legend box (if box.type = "o").}
 \item{cex}{character expansion factor for text.}
-\item{ncol}{the number of columns in which to set the legend items.}
+\item{ncol}{the number of columns in which to set the legend item.}
 \item{horiz}{logical; if TRUE, set the legend horizontally rather than vertically (specifying horiz overrides the ncol specification).}
 \item{...}{further arguments to be passed to \code{\link{legend}} or other graphical parameters in \code{\link{par}}.}
 }

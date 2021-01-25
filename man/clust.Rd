@@ -21,14 +21,14 @@ clust(object, distMethod = "euclidean", clustMethod = "average")
 
 
 \value{
-object of class 'hclust'
+an object of class 'hclust'
 }
 
 \details{
-This functions performs agglomerative hierarchical clustering.
+This function performs agglomerative hierarchical clustering.
 Typically, populations are used as OTUs. Characters are standardised to a zero mean and a unit standard deviation.
 
-Note that the other then default methods for clustering and distance measurement are rarely used in morphometric analyses.
+Note that the other than default methods for clustering and distance measurement are rarely used in morphometric analyses.
 
 Dendrograms are produced using plot function.
 }

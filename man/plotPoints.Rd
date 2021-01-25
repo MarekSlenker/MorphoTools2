@@ -5,7 +5,7 @@
 \title{The default scatterplot function}
 
 \description{
-A generic function for ploting ordination scores stored in '\code{\link{pcadata}}' and '\code{\link{cdadata}}' objects.
+A generic function for plotting ordination scores stored in '\code{\link{pcadata}}' and '\code{\link{cdadata}}' objects.
 }
 
 \usage{
@@ -19,18 +19,18 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 \arguments{
 
-\item{result}{object of class '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
+\item{result}{an object of class '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
-\item{col}{the colors for points. Multiple colors can be specified so that each Taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
+\item{col}{the colors for points. Multiple colors can be specified so that each taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
 \item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
-\item{breaks}{a numeric, giving the lenght of one histogram bar.}
+\item{breaks}{a numeric, giving the width of one histogram bar.}
 \item{xlim, ylim}{the range of x and y axes.}
-\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels ploting, use \code{\link{plotAddLabels.points}} directly.}
-\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend ploting, use \code{\link{plotAddLegend}} directly.}
+\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels plotting, use \code{\link{plotAddLabels.points}} directly.}
+\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend plotting, use \code{\link{plotAddLegend}} directly.}
 \item{legend.pos}{a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
-\item{ncol}{the number of columns in which to set the legend items (default is 1, a vertical legend).}
+\item{ncol}{the number of columns in which to set the legend items.}
 
 \item{...}{further arguments to be passed to \code{\link{plot.default}} or other graphical parameters in \code{\link{par}}.}
 

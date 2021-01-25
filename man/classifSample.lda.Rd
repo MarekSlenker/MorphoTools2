@@ -5,7 +5,7 @@
 \title{Classificatory discriminant analysis}
 
 \description{
-These functions computes discriminant function based on an independent training set and classify observations in sample set.
+These functions compute discriminant function based on an independent training set and classify observations in sample set.
 Linear discriminant function (\code{classif.lda}) or nonparametric k-nearest-neighbor classification method (\code{classif.knn}) can be used.
 }
 
@@ -23,7 +23,7 @@ classifSample.knn(sampleData, trainingData, k)
 }
 
 \value{
-object of class '\code{\link{classifdata}}'.
+an object of class '\code{\link{classifdata}}'.
 }
 
 

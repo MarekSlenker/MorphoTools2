@@ -22,7 +22,7 @@ cda.calc(object, passiveSamples = NULL)
 
 
 \value{
-object of class '\code{\link{cdadata}}'.
+an object of class '\code{\link{cdadata}}'.
 }
 
 \details{

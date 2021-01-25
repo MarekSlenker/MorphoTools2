@@ -22,7 +22,7 @@ In four characters of achenes, there are missing data because fruits were not av
 complete) from 33 populations (31 complete).
 }
 
-\format{An object of class \code{\link{morphodata}}.
+\format{an object of class \code{\link{morphodata}}.
 }
 
 

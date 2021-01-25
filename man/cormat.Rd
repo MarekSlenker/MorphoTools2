@@ -24,11 +24,11 @@ One of "pearson" (default), or "spearman" can be applied.}
 }
 
 \value{
-object of class 'data.frame'
+an object of class 'data.frame'
 }
 
 \details{
-This functions return table with pairwise correlation coefficients for each pair of
+This function returns table with pairwise correlation coefficients for each pair of
 morphological characters. The results are formatted as data frames to allow export with the \code{\link{exportRes}} function.
 
 Significance tests are usually unnecessary for morphometric analysis. Anyway,

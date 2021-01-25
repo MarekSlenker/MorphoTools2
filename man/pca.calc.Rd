@@ -17,7 +17,7 @@ pca.calc(object)
 }
 
 \value{
-object of class '\code{\link{pcadata}}'.
+an object of class '\code{\link{pcadata}}'.
 }
 
 

@@ -19,7 +19,7 @@ exportRes(object, file = "clipboard", dec= ".", sep = "\\t",
 
 \item{file}{either a character string naming a file or a \code{\link{connection}} open for writing. "" indicates output to the console.}
 
-\item{dec}{the string to use for decimal points in numeric or complex columns: must be a single character.}
+\item{dec}{the character used in the file for decimal points.}
 
 \item{sep}{the column separator character.}
 

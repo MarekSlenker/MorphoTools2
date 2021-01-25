@@ -17,7 +17,7 @@ shapiroWilkTest(object, p.value = 0.05)
 }
 
 \details{
-The normality of within-group distribution is the assumption of Pearson correlation coefficients. Similarly, discriminant analyses require a normal distribution of characters; nevertheless, they have been shown to be considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980).
+The normality of within-group distribution is the assumption for calculating Pearson correlation coefficients. Similarly, discriminant analyses require a normal distribution of characters; nevertheless, they have been shown to be considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980).
 }
 
 \examples{

@@ -20,7 +20,7 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{character}{a morphological character used for plotting boxplot.}
 
-\item{folderName}{the name of folder, where to save produces boxplot}
+\item{folderName}{the name of folder, where to save produces boxplot.}
 
 \item{outliers}{logical, if \code{TRUE}, the outliers are drawn.}
 
@@ -28,9 +28,9 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{upperWhisker}{a percentile to which the upper whisker is extended.}
 
-\item{col}{fill colour, background colour for the boxes.}
+\item{col}{fill colors, background colors for the boxes.}
 
-\item{border}{a colour of outliers and the boxplots.}
+\item{border}{a color of outliers and the boxplots.}
 
 \item{frame}{logical, if \code{TRUE}, a 'frame' (box around the plot) should be drawn.}
 
@@ -50,16 +50,16 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{height}{the height of the figure.}
 
-\item{units}{The units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
+\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
 
-\item{...}{further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}} {graphics}.}
+\item{...}{further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}}.}
 
 }
 \description{
 These functions produce a box-and-whisker plot(s) of the given morphological characters.
 }
 \details{
-These functions are wrappers above classical R \code{\link{boxplot}} {graphics} function, allowing the user to extend whiskers to desired percentiles. By default, the whiskers are extended to the 5\% and 95\% percentiles, because of the trimmed range (without the most extreme 10% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle defines 25th and 75th percentiles, bold horizontal line show median. The missing values are ignored.
+These functions are wrappers above classical R \code{\link{boxplot}} {graphics} function, allowing the user to extend whiskers to desired percentiles. By default, the whiskers are extended to the 5\% and 95\% percentiles, because of the trimmed range (without the most extreme 10\% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle defines 25th and 75th percentiles, bold horizontal line show median. The missing values are ignored.
 
 The \code{boxplotAll} function produce boxplot for each morphological character and save them to a folder named in the folderName parameter. If it does not exist, a new folder is created.
 }

@@ -35,7 +35,7 @@ keepCharacter(object, characterName)
 }
 
 \value{
-object of class '\code{\link{morphodata}}'
+an object of class '\code{\link{morphodata}}'
 }
 
 \description{

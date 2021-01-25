@@ -23,7 +23,7 @@ The pcadata class is designed for storing results of Principal component analysi
 	\item{groupMeans}{a data.frame containing the means for the taxa.}
 	\item{rank}{a number of principal components.}
 	\item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
-	\item{center, scale}{the centering and scaling of the input data.}
+	\item{center, scale}{the centring and scaling of the input data.}
 
 	}
 }
