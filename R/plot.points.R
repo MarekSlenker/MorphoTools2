@@ -39,7 +39,7 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   # main plot
 
   graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
-       xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
+       xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, xlim = xlim, ylim = ylim, ... )
 
 
 
@@ -135,7 +135,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     }
 
     #   plotni v cykle
-    graphics::plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, axes = FALSE, ...)
+    graphics::plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, xlim = xlim, axes = FALSE, ...)
     for (i in 2:length(taxlev)) {
       graphics::plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = F, add = TRUE)
     }
@@ -172,7 +172,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     # main plot
     graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
-         xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, ... )
+         xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, xlim = xlim, ylim = ylim, ... )
 
 
     # legend

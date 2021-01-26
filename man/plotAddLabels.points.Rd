@@ -4,7 +4,7 @@
 \title{Add labels to a plot}
 \usage{
 
-plotAddLabels.points(result, labels = result$objects$ID, include = T,
+plotAddLabels.points(result, labels = result$objects$ID, include = TRUE,
       axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...)
 
 }
