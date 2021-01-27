@@ -134,6 +134,10 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       ylim = c(0, upperLim)
     }
 
+    if (is.null(xlim)) {
+      xlim = c(min(hist_breaks), max(hist_breaks))
+    }
+
     #   plotni v cykle
     graphics::plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, xlim = xlim, axes = FALSE, ...)
     for (i in 2:length(taxlev)) {

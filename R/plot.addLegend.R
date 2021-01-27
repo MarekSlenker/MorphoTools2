@@ -20,7 +20,7 @@ plotAddLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, co
   checkClass(result, "pcadata")
 
   plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
-                       pt.bg = pt.bg, pt.cex = pt.cex, lwd = lwd, pt.lwd = pt.lwd, x.intersp = x.intersp,
+                       pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
                         y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
                        box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
 
@@ -37,13 +37,13 @@ plotAddLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, co
   checkClass(result, "cdadata")
 
   plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
-                        pt.bg = pt.bg, pt.cex = pt.cex, lwd = lwd, pt.lwd = pt.lwd, x.intersp = x.intersp,
+                        pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
                         y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
                         box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
 
 }
 
-plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, lwd, pt.lwd, x.intersp, y.intersp, bty, box.lty, box.lwd, box.col, bg, cex, ncol, horiz, ...) {
+plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, pt.lwd, x.intersp, y.intersp, bty, box.lty, box.lwd, box.col, bg, cex, ncol, horiz, ...) {
   # nastav pch a col spravne podla taxonu
   object$pch = as.numeric( setValuesForVector(object$objects$Taxon, pch))
   object$col = setValuesForVector(object$objects$Taxon, col)
@@ -61,11 +61,11 @@ plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, lwd, pt.
                      pch = as.numeric(legendTable[,2]),
                      col = legendTable[,3],
                      pt.bg = legendTable[,4],
-                     pt.cex = pt.cex, lwd = lwd,
-					 pt.lwd = pt.lwd,
+                     pt.cex = pt.cex,
+					           pt.lwd = pt.lwd,
                      x.intersp = x.intersp, y.intersp = y.intersp,
                      bty = bty,
-					 box.lty = box.lty, box.lwd = box.lwd, box.col = box.col, bg = bg,  
+					           box.lty = box.lty, box.lwd = box.lwd, box.col = box.col, bg = bg,
                      cex = cex, ncol = ncol, horiz = horiz, ...)
 
   if (is.numeric(x) && is.numeric(y))
@@ -73,11 +73,10 @@ plot_legend_internal <- function(object, x, y, pch, col, pt.bg, pt.cex, lwd, pt.
                      pch = as.numeric(legendTable[,2]),
                      col = legendTable[,3],
                      pt.bg = legendTable[,4],
-                     pt.cex = pt.cex, lwd = lwd, 
-					 pt.lwd = pt.lwd,
-                     x.intersp = x.intersp, y.intersp = y.intersp,
-					 bty = bty, 
-					 box.lty = box.lty, box.lwd = box.lwd, box.col = box.col, bg = bg, 
+                     pt.cex = pt.cex,
+			               pt.lwd = pt.lwd,
+                     x.intersp = x.intersp, y.intersp = y.intersp, bty = bty,
+					 box.lty = box.lty, box.lwd = box.lwd, box.col = box.col, bg = bg,
 					 cex = cex, ncol = ncol, horiz = horiz, ...)
 
 }
