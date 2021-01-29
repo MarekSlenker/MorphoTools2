@@ -13,7 +13,6 @@ plotAddLabels.characters <- function(result, labels = characters(result),
 #' @method plotAddLabels.characters pcadata
 #' @export
 plotAddLabels.characters.pcadata <- function(result, labels = characters(result), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
-  checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
@@ -27,7 +26,6 @@ plotAddLabels.characters.pcadata <- function(result, labels = characters(result)
 #' @export
 plotAddLabels.characters.cdadata <- function(result, labels = characters(result), include = T, axes = c(1,2),
                                               pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
-  checkClass(result, "cdadata")
 
   # hist
   if (result$rank == 1) {

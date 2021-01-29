@@ -18,32 +18,33 @@ pca.calc <- function(object) {
 
   pcaResult = newPcadata()
 
-  prcompRes = stats::prcomp(object$data, center=T, scale.=T)
-  prcompSummary = summary(prcompRes)
+  princompRes = stats::princomp(object$data, cor = TRUE)
 
-  pcaResult$sdev = prcompRes$sdev
-  pcaResult$center = prcompRes$center
-  pcaResult$scale = prcompRes$scale
-  pcaResult$rank = length(prcompRes$sdev)
+  pcaResult$sdev = princompRes$sdev
+  pcaResult$center = princompRes$center
+  pcaResult$scale = princompRes$scale
+  pcaResult$rank = length(princompRes$sdev)
 
   # Koutecky 2014
-  #pcaResult$scores = predict(prcompRes,object$data)
-  pcaResult$objects$scores = prcompRes$x
+  #pcaResult$scores = predict(princompRes,object$data)
+  pcaResult$objects$scores = princompRes$scores
   pcaResult$objects$ID = object$ID
   pcaResult$objects$Population = object$Population
   pcaResult$objects$Taxon = object$Taxon
 
   # Koutecky 2014
   #pcaResult$eigenVectors = apply(prcompRes$rotation,1,function(x) x*prcompRes$sdev)
-  pcaResult$eigenVectors = prcompRes$rotation
+  pcaResult$eigenVectors = princompRes$loadings[,1:length(princompRes$sdev)]
 
-  pcaResult$eigenValues = sapply(prcompRes$sdev,function(x) x^2)
-  pcaResult$axesVariance = prcompSummary$importance[2,]
-  pcaResult$cumulativeAxesVariance = prcompSummary$importance[3,]
+
+  vars <- princompRes$sdev^2
+  pcaResult$eigenValues = vars # sapply(princompRes$sdev,function(x) x^2)
+  pcaResult$axesVariance = round(vars/sum(vars), 5)
+  pcaResult$cumulativeAxesVariance = round(cumsum(vars/sum(vars)), 5)
 
 
   # group centroid locations
-  pcaResult$groupMeans = stats::aggregate(prcompRes$x ~ object$Taxon, FUN = mean)
+  pcaResult$groupMeans = stats::aggregate(princompRes$scores ~ object$Taxon, FUN = mean)
   colnames(pcaResult$groupMeans)[1] = "Taxon"
 
   return(pcaResult)

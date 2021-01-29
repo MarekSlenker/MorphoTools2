@@ -16,20 +16,21 @@ morphoMockup = morphodataFromDataFrame(morphoDataFrame)
 constantMockup = morphodataFromDataFrame(morphoDataFrameConstant)
 
 test_that("correctness of calculation",  {
-  pca_prconp = prcomp(morphoDataFrame[,4:5], center=T, scale.=T)
+  pca_princomp = princomp(morphoDataFrame[,4:5], cor = TRUE)
+  #pca_prcomp = prcomp(morphoDataFrame[,4:5])
 
   pcaRes = pca.calc(morphoMockup)
 
   expect_is(pcaRes, "pcadata")
 
-  expect_equal(pcaRes$sdev, pca_prconp$sdev)
+  expect_equal(pcaRes$sdev, pca_princomp$sdev)
 
 
-  expect_equal(pcaRes$center, pca_prconp$center)
-  expect_equal(pcaRes$scale, pca_prconp$scale)
-  expect_equal(as.data.frame(pcaRes$objects$scores, row.names = 1), as.data.frame(pca_prconp$x, row.names = 1))
-  expect_equal(pcaRes$eigenVectors, pca_prconp$rotation)
-  expect_equal(pcaRes$eigenValues, sapply(pca_prconp$sdev,function(x) x^2))
+  expect_equal(pcaRes$center, pca_princomp$center)
+  expect_equal(pcaRes$scale, pca_princomp$scale)
+  expect_equal(as.data.frame(pcaRes$objects$scores, row.names = 1), as.data.frame(pca_princomp$scores, row.names = 1))
+  expect_equal(pcaRes$eigenVectors, pca_princomp$loadings[,])
+  expect_equal(pcaRes$eigenValues, sapply(pca_princomp$sdev,function(x) x^2))
   expect_true(is.numeric(pcaRes$axesVariance))
   expect_true(is.numeric(pcaRes$cumulativeAxesVariance))
 })
