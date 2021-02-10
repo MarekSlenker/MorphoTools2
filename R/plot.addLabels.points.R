@@ -31,14 +31,14 @@ plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, inc
 # suitable for "pcadata" or "cdadata", as both stores XY coordinates in $scores
 labels_points_internal <- function(object, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...) {
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (object$rank == 1) stop("this method is not applicable to histograms", call. = FALSE)
   if (max(axes) > object$rank) stop(paste("specified axes are out of bounds. Object has only ", object$rank, " axes.", sep = "" ), call. = FALSE)
 
   #skontroluj ci labels patria
   # check existence of CH
   for (lab in labels) {
-    if (! (lab %in% object$objects$ID)) stop(paste("label", lab , "does not exist"), call. = F)
+    if (! (lab %in% object$objects$ID)) stop(paste("label", lab , "does not exist"), call. = FALSE)
   }
 
   labelsToPlot = which(unlist(lapply(object$objects$ID, as.character)) %in% labels)

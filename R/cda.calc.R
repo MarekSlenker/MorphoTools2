@@ -14,7 +14,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
   }
 
   for (pasSample in passiveSamples) {
-    if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = F)
+    if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon", pasSample, "was not found in attached data."), call. = FALSE)
   }
 
   # vypocitaj na zaklade skratenej matice (bez pop alebo taxa)
@@ -116,10 +116,10 @@ cda.calc <- function(object, passiveSamples = NULL) {
   cdaResult$rank = cda$rank
   cdaResult$eigenValues = cda$eigenvalues
   cdaResult$canrsq = cda$canrsq
-  cdaResult$axesVariance = cda$pct / 100
+  cdaResult$eigenvaluesAsPercent = cda$pct / 100
 
   for (i in cdaResult$rank:1) {
-    cdaResult$cumulativeAxesVariance[i] = sum(cdaResult$axesVariance[1:i])
+    cdaResult$cumulativePercentageOfEigenvalues[i] = sum(cdaResult$eigenvaluesAsPercent[1:i])
   }
 
   cdaResult$coeffs.raw = cda$coeffs.raw

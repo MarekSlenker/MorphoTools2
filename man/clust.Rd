@@ -7,7 +7,7 @@ Hierarchical cluster analysis of objects.
 }
 
 \usage{
-clust(object, distMethod = "euclidean", clustMethod = "average")
+clust(object, distMethod = "euclidean", clustMethod = "UPGMA")
 }
 
 \arguments{
@@ -15,10 +15,10 @@ clust(object, distMethod = "euclidean", clustMethod = "average")
 
 \item{distMethod}{the distance measure to be used. This must be one of "euclidean" (default), "maximum", "manhattan", "canberra", "binary" or "minkowski". See \code{\link{dist}} for details.}
 
-\item{clustMethod}{the agglomeration method to be used: "average" (= UPGMA; default), "complete",
-"ward.D" (= Ward), "ward.D2", "single", "mcquitty" (= WPGMA), "median" (= WPGMC) or "centroid" (= UPGMC). See \code{\link{hclust}} for details.}
+\item{clustMethod}{the agglomeration method to be used: "average" (= "UPGMA"; default), "complete",
+"ward.D" (= "Ward"), "ward.D2", "single", "mcquitty" (= "WPGMA"), "median" (= "WPGMC") or "centroid" (= "UPGMC"). See \code{\link{hclust}} for details.
 }
-
+}
 
 \value{
 an object of class 'hclust'

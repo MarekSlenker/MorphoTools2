@@ -16,9 +16,9 @@ plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste("PC",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste("PC",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste("PC",axes[3], " (", round(result$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste("PC",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste("PC",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste("PC",axes[3], " (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -35,11 +35,11 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = F)
+  if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(result$axesVariance[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(result$axesVariance[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste("Canonical axis",axes[3], " (", round(result$axesVariance[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste("Canonical axis",axes[3], " (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -55,8 +55,8 @@ plot3D_internal <- function(object, axes = axes, xlab = xlab, ylab = ylab, zlab 
                             labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...) {
 
   # skontroluj ci axes = 3; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 3) stop("you have to specifi 3 axes (e.g., axes = c(1,2,3))", call. = F)
-  if (max(axes) > object$rank) stop(paste("specified axes are out of bounds. Object has only ", object$rank, " axes.", sep = "" ), call. = F)
+  if (length(axes) != 3) stop("you have to specify 3 axes (e.g., axes = c(1,2,3))", call. = FALSE)
+  if (max(axes) > object$rank) stop(paste("specified axes are out of bounds. Object has only ", object$rank, " axes.", sep = "" ), call. = FALSE)
 
 
   # nastav pch a col spravne podla taxonu

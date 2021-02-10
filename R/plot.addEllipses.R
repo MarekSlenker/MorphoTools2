@@ -13,8 +13,8 @@ plotAddEllipses <- function(result, axes = c(1,2), probability = 0.95, col = "bl
 plotAddEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
+  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
@@ -26,14 +26,14 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
   # hist
   if (result$rank == 1) {
 
-    stop("The method plotAddEllipses() is not applicable to histogram.", call. = F)
+    stop("The method plotAddEllipses() is not applicable to histogram.", call. = FALSE)
   }
 
   if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-    if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = F)
+    if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
     plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
   }

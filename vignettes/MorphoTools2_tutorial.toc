@@ -15,8 +15,8 @@
 \contentsline {section}{5. Principal component analysis (PCA)}{9}{section*.16}%
 \contentsline {section}{6. Canonical discriminant analysis (CDA)}{15}{section*.17}%
 \contentsline {paragraph}{Passive prediction of samples.}{19}{section*.18}%
-\contentsline {section}{7. Classificatory discriminant analysis}{20}{section*.19}%
-\contentsline {section}{Further reading}{23}{section*.20}%
+\contentsline {section}{7. Classificatory discriminant analysis}{21}{section*.19}%
+\contentsline {section}{Further reading}{24}{section*.20}%
 \contentsline {section}{How to cite MorphoTools2}{24}{section*.21}%
 \contentsline {section}{Acknowledgements}{24}{section*.22}%
 \contentsline {section}{References}{24}{section*.23}%

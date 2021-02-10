@@ -35,7 +35,7 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 
   if (!is.null(sampleName)) {
 
-    if (!all(is.character(sampleName))) stop("'missingPercentage' is not a string", call. = FALSE)
+    if (!all(is.character(sampleName))) stop("'sampleName' is not a string", call. = FALSE)
 
     # skontroluj ci object ma popname
     for (samp in sampleName) {

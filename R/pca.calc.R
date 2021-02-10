@@ -39,8 +39,8 @@ pca.calc <- function(object) {
 
   vars <- princompRes$sdev^2
   pcaResult$eigenValues = vars # sapply(princompRes$sdev,function(x) x^2)
-  pcaResult$axesVariance = round(vars/sum(vars), 5)
-  pcaResult$cumulativeAxesVariance = round(cumsum(vars/sum(vars)), 5)
+  pcaResult$eigenvaluesAsPercent = round(vars/sum(vars), 5)
+  pcaResult$cumulativePercentageOfEigenvalues = round(cumsum(vars/sum(vars)), 5)
 
 
   # group centroid locations

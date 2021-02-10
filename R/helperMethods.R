@@ -6,7 +6,7 @@ characters <- function(object) {
     "pcadata" = return(rownames(object$eigenVectors)),
     "morphodata" = return(colnames(object$data))
   )
-  stop(paste("Not implemented for class '", class(object), "'", sep = ""), call. = F)
+  stop(paste("Not implemented for class '", class(object), "'", sep = ""), call. = FALSE)
 }
 
 
@@ -15,7 +15,7 @@ characters <- function(object) {
 
 
 checkClass <- function(object, class) {
-  if (! (methods::is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = F)
+  if (! (methods::is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = FALSE)
 }
 
 

@@ -1,6 +1,6 @@
 #' Hierarchical clustering
 #' @export
-clust <- function(object, distMethod = "euclidean", clustMethod = "average") {
+clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA") {
   checkClass(object, "morphodata")
 
   supportedDistMethods = c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")

@@ -14,8 +14,8 @@ plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
   checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = F)
+  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab)) xlab = paste("PC ", axes[1], sep = "")
   if (is.null(ylab)) ylab = paste("PC ", axes[2], sep = "")
@@ -63,7 +63,7 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
     # HISTOGRAMOVE
 
     # odlisne od default, alebo nie 1
-    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = F)
+    if (!(all(axes == c(1,2)) ||  (length(axes) == 1  && axes == 1))) warning("The object has only one axis, which will be plotted", call. = FALSE)
 
 
     if (is.null(xlab)) xlab = "Contribution of characters"
@@ -96,8 +96,8 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
   } else if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-    if (length(axes) != 2) stop("you have to specifi 2 axes (e.g., axes = c(1,2))", call. = F)
-    if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = F)
+    if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+    if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = FALSE)
 
 
     if (is.null(xlab)) xlab = paste("discrim. axis ", axes[1], sep = "")

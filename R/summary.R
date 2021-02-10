@@ -25,17 +25,17 @@ summary.pcadata <- function(object, ...) {
   cat("object of class 'pcadata'; storing original data and results of Principal Component Analysis\n")
   cat("\nVariation explained by individual axes:\n")
 
-  descrTable = data.frame(row.names = names(object$axesVariance),
-                          "Standard deviation" = round(object$sdev, digits = 4),
-                          "Proportion of Variance" = round(object$axesVariance, digits = 4),
-                          "Cumulative Proportion" = round(object$cumulativeAxesVariance, digits = 4)
+  descrTable = data.frame(row.names = names(object$eigenvaluesAsPercent),
+                          "Eigenvalues" = round(object$eigenValues, digits = 4),
+                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent, digits = 4),
+                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues, digits = 4)
                           )
   names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
   descrTable = t(descrTable)
 
   print(descrTable)
 
-  cat("\nEigenvectors, i.e. correlation of the characters and ordination axes:\n")
+  cat("\nEigenvectors:\n")
 
   print(object$eigenVectors[,1:4])
 
@@ -52,10 +52,9 @@ summary.cdadata <- function(object, ...) {
 
 
   descrTable = data.frame(row.names = c(1: object$rank),
-                          "CanRsq" = round(object$canrsq[1:object$rank], digits = 4),
-                          "Eigenvalue" = round(object$eigenValues[1:object$rank], digits = 4),
-                          "Proportion of Variance" = round(object$axesVariance[1:object$rank], digits = 4),
-                          "Cumulative Proportion" = round(object$cumulativeAxesVariance[1:object$rank], digits = 4)
+                          "Eigenvalues" = round(object$eigenValues[1:object$rank], digits = 4),
+                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent[1:object$rank], digits = 4),
+                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1:object$rank], digits = 4)
   )
   names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
 
@@ -64,7 +63,7 @@ summary.cdadata <- function(object, ...) {
   print(descrTable)
 
 
-  cat("\nTotal canonical structure, i.e. correlation of the characters and ordination axes:\n")
+  cat("\nTotal canonical structure coefficients:\n")
 
   print(object$totalCanonicalStructure[,1:object$rank])
 

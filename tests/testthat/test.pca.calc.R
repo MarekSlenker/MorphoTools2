@@ -31,8 +31,8 @@ test_that("correctness of calculation",  {
   expect_equal(as.data.frame(pcaRes$objects$scores, row.names = 1), as.data.frame(pca_princomp$scores, row.names = 1))
   expect_equal(pcaRes$eigenVectors, pca_princomp$loadings[,])
   expect_equal(pcaRes$eigenValues, sapply(pca_princomp$sdev,function(x) x^2))
-  expect_true(is.numeric(pcaRes$axesVariance))
-  expect_true(is.numeric(pcaRes$cumulativeAxesVariance))
+  expect_true(is.numeric(pcaRes$eigenvaluesAsPercent))
+  expect_true(is.numeric(pcaRes$cumulativePercentageOfEigenvalues))
 })
 
 test_that("constant values",  {
