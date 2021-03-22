@@ -7,9 +7,9 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
   fig_caption: no
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
@@ -19,15 +19,18 @@ vignette: |
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  highlight = TRUE,
+  dpi = 300,
   collapse = TRUE,
   comment = "#>",
   rownames = FALSE, 
-  fig.width   = 10,       # the width for plots created by code chunk
-  fig.height  = 6,       # the height for plots created by code chunk
+  fig.width   = 6,       # the width for plots created by code chunk
+  fig.height  = 5,       # the height for plots created by code chunk
   fig.align   = 'center', # how to align graphics in the final doc. 'left', 'right', 'center'
   #fig.path    = 'figs/',  # file path to the directory where knitr shall store the graphics files
   strip.white = TRUE     # if FALSE knitr will not remove white spaces at the beg or end of code chunk
-)
+  #out.width='\\textwidth'
+  )
 ```
 
 \tableofcontents
@@ -306,7 +309,7 @@ pca.centaurea = pca.calc(centaurea)
 ```
 
 
-The summary statistics (variation explained by individual axes, eigenvectors) of the data is available using the function `summary()`.
+The summary statistics (eigenvalues, eigenvalues as percent (i.e., variation explained by individual axes), eigenvectors) of the data is available using the function `summary()`.
 
 ```{r echo = FALSE, eval=TRUE }
 summary <- function(object) {
@@ -600,7 +603,7 @@ The optimal number of neighbours to consider is unknown, but it is empirically e
 knn.select(centaurea, crossval = "pop")
 ```
 ```{r echo = TRUE, eval=FALSE}
-classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 11)
+classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 12)
 popClassifMatrix = classif.matrix(classifRes.knn, level = "pop")
 exportRes(popClassifMatrix, file = "clipboard")
 
@@ -650,14 +653,9 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 # How to cite MorphoTools2
 
-
-**Šlenker M, Koutecký P. (2020)**. MorphoTools2: an R package for morphometric analysis. *Plant Systematics and Evolution*
-
+**Šlenker M. & Koutecký P. 2020**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*
 
 &nbsp;  
-&nbsp;  
-
-
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 

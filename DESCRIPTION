@@ -2,6 +2,7 @@ Package: MorphoTools2
 Type: Package
 Title: Multivariate Morphometric Analysis
 Version: 1.0.0
+Date: 2020-26-12
 Authors@R: c(
   person("Marek", "Šlenker", role = c("aut", "cre"), email = "marek.slenker@savba.sk", comment = c(ORCID = "0000-0002-5919-890X")),
   person("Petr", "Koutecký", role = "ctb", email = "kouta@prf.jcu.cz",  comment = c(ORCID = "0000-0002-3455-850X"))
