@@ -5,7 +5,7 @@
 \title{Principal component analysis (PCA)}
 
 \description{
-This function performs principal component analysis.
+This function performs Principal Component Analysis.
 }
 
 \usage{

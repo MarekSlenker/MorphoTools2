@@ -7,10 +7,11 @@ author: |
   | https://github.com/MarekSlenker/MorphoTools2
 date: "June 18, 2020"
 output:
-  word_document: default
-  html_document: default
   pdf_document: default
+  html_document: default
+  word_document: default
   fig_caption: no
+css: test.css
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
   %\VignetteEncoding{UTF-8}
@@ -32,6 +33,7 @@ knitr::opts_chunk$set(
   #out.width='\\textwidth'
   )
 ```
+
 
 \tableofcontents
 
@@ -60,13 +62,15 @@ If you quit and restart R, you will need to load it again (using the `library` f
 
 ## 3.1 Data import
 
-As with any software, the first thing you want to do is import your raw data. Data can be imported from text files, import from Excel spreadsheets through the clipboard in Windows also usually works well. Following structure of input data is required: 
+As with any statistical software, the first thing you want to do is import your raw data. Data can be imported from: (1) plain text files (tab, comma, or whitespace delimited, see below); (2) from Excel spreadsheets through the clipboard in Windows. Following structure of input data is required: 
 
 * the first row contains variable names.
 * the next rows contain individuals (samples, or any other kind of sampling units), single individual per row.
 * the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon”.
-* fourth and next columns stores morphological characters. The characters can be numeric, binary (coded as 0/1), or multi-state additive categorial characters  (e.g., 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2. On the other hand, character describing colouration: 1 = red, 2 = green, 3 = blue are unordered and not applicable for morphological analysis).
+* fourth and next columns stores morphological characters [^1].
 
+
+[^1]: **The morphological characters** can be numeric, binary (coded as 0/1), or multi-state additive categorial characters  (e.g., 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2). On the other hand, character describing colouration: 1 = red, 2 = green, 3 = blue are unordered and not applicable for morphological analysis. If there is a reason to include such unordered multistate characters, these characters have to be coded as binary characters, as follow: redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1).
 
 
 
@@ -83,26 +87,27 @@ As with any software, the first thing you want to do is import your raw data. Da
 | STGH310 	| STGH       	| ps    	| 35.6 	| 19.2 	| 54.8 	| 0.35 	| 9.5  	|     	| *NA* 	|
 
 
-Avoid spaces and special characters for variable names, use e.g. underscore (_) instead. Missing values have to be represented as empty cells or by the text `NA` (not quoted).
+Use underscores (_) instead of spaces, and avoid special characters (e..g punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (not quoted).
 
-Example dataset in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `path.package("MorphoTools2")`. The sample data include portions of data sets analysed by Koutecký (2007) and Koutecký et al. (2012), and contain measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr". Data can be imported using the `read.morphodata()` function. 
+In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is built-in in this package. Execute command `data(centaurea)` to load this data to your workspace.
+
+```{r eval = TRUE, echo = TRUE}
+data(centaurea)
+```
+
+
+In genereal, morphological data can be imported using the `read.morphodata()` function, providing path to your data [^2]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
+
+[^2]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `path.package("MorphoTools2")`.
 
 ```{r eval = FALSE, echo = TRUE}
 centaurea = read.morphodata(file = "<PATH TO centaurea.txt>", dec = ".", sep = "\t")
 ```
 
-Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`
-
 ```{r eval = FALSE, echo = TRUE}
 centaurea = read.morphodata(file = "clipboard")
 ```
 
-
-
-The third option is to use built-in data. Execute command `data(centaurea)` to load the data to your workspace.
-```{r eval = TRUE, echo = TRUE}
-data(centaurea)
-```
 
 The dataset now exists as a `morphodata` object in R. The `morphodata` object, as well as other objects used later, is defined as a `list`. In R lists act as containers for data. Elements stored in `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see contained elements. Command `centaurea$Taxon` print values on R console. Run `?morphodata` to see what a `morphodata` object contains. 
 
@@ -162,21 +167,30 @@ exportRes(swTest, file = "D:/Projects/Centaurea_morphoPaper/dataAnalysis/shapiro
 
 ```
 
-As most characters have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis.
+As most characters in our dataset have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis.
 
 ### 3.2.2 Box Plots
 
 Boxplots are handy tools for detection of outlier values (potential typos, missing decimal points, etc.), between-species dissimilarities and critical morphological values discriminating among species.  
 
-Boxplots can be calculated for a particular character using `boxplotCharacter()` or for all characters at once running `boxplotAll()` function, that saves all boxplots to a new folder in your working directory (or to any location). The box is drawn from first to third quartile (25th - 75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted. Many graphic parameters can be set, run `?boxplotCharacter` for details, the `col` is shown here as an example. 
+Boxplots can be calculated for a particular character using `boxplotCharacter()` or for all characters at once running `boxplotAll()` function, that saves all boxplots to a new folder in your working directory (or to any location). The box is drawn from first to third quartile (25th - 75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted. Many graphic parameters can be set, run `?boxplotCharacter` for details. 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-boxplotCharacter(centaurea, character = "AL", lowerWhisker = 0.05,
-                   upperWhisker = 0.95, col = c("blue","green","red","orange"))
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"))
 ```
 
-The default behaviour is to plot outliers (asterisks) and to show the trimmed range (omitting 10% most extreme values) using whiskers. As you can see in the above figure, hybrids contain one markedly different value, which will require examination.
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+boxplotCharacter(centaurea, character = "AL", lowerWhisker = 0.1, upperWhisker = 1, pch = 1)
+```
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
+                 frame = FALSE, horizontal = T, notch = TRUE)
+```
+
+
+The default behaviour is to plot outliers (asterisks, can be changed by `pch` argument, or use `outliers = FALSE` to suppress plotting outliers) and to show the trimmed range (omitting 10% most extreme values) using whiskers. As you can see in the above figures, hybrids contain one markedly different value, which will require examination.
 
 
 To plot boxplots for all characters with default settings:
@@ -215,7 +229,7 @@ Significance tests are usually unnecessary for morphometric analysis. Anyway, if
 
 ### 3.2.5 Populations as operational taxonomic units
 
-To simplify the overall structure especially in large datasets, one can consider the use of populations as operational taxonomic units (OTUs) instead of individuals. This means that each population will be represented by averages of the individuals' values. Missing values will be ignored.
+To simplify the overall structure especially in large datasets, one can consider the use of populations instead of individuals. This means that each population will be represented by averages of the individuals' values. Missing values will be ignored.
 
 ```{r echo = TRUE, eval=TRUE}
 pops = populOTU(centaurea)
@@ -286,7 +300,7 @@ We examined outlier value in "hybr" group and ensured that data do not contain h
 
 # 4. Hierarchical clustering
 
-Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used as OTUs, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable (Euclidean is the most often used (default), but maximum, manhattan, canberra, binary or minkowski can be used as well), and various procedures of clustering based on these distances are available (UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC). The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
+Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable (Euclidean is the most often used (default), but maximum, manhattan, canberra, binary or minkowski can be used as well), and various procedures of clustering based on these distances are available (UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC). The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
 
 The dengrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
 
@@ -309,50 +323,23 @@ pca.centaurea = pca.calc(centaurea)
 ```
 
 
-The summary statistics (eigenvalues, eigenvalues as percent (i.e., variation explained by individual axes), eigenvectors) of the data is available using the function `summary()`.
+The summary statistics of the data is available using the function `summary()`. The eigenvalues indicate the proportion of variation of the original dataset expressed by individual axes, usually are presented as a percentage of their total sum (eigenvalues as percent). The eigenvectors express the direction of vectors characterizing the influence of the original characters on the principal component axes. The output of summary() function is usually truncated. To get a full listing, execute a `pca.centaurea$eigenValues`, `pca.centaurea$eigenvaluesAsPercent`, `pca.centaurea$cumulativePercentageOfEigenvalues`, and `pca.centaurea$eigenVectors` (values will be printed to console).
 
-```{r echo = FALSE, eval=TRUE }
-summary <- function(object) {
-  writeLines("object of class 'pcadata'; storing original data and results of Principal Component Analysis\n")
-  writeLines("Variation explained by individual axes:")
 
-  descrTable = data.frame(row.names = names(object$axesVariance),
-                          "Eigenvalues" = round(object$eigenValues, digits = 4),
-                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent, digits = 4),
-                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues, digits = 4)
-                          )
-  
-  descrTable[5,] = c("...", "...", "...")
-  descrTable[6,] = c("...", "...", "...")
-  descrTable[7,] = descrTable[25,]
-  dp = row.names(descrTable)[25] 
-  descrTable = descrTable[1:7,]
-  row.names(descrTable)[7] = dp
-  
-  names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
-  names(descrTable) = gsub(pattern = '\\\\.' , replacement = " ", x = names(descrTable))
-  descrTable = t(descrTable)
-  colnames(descrTable)[5] ="..."
-  colnames(descrTable)[6] = "..."
-  
-  print(descrTable, quote = F)
-
-  writeLines("\nEigenvectors:\n")
-
-  print(object$eigenVectors[,1:4])
-  
-}
-```
 ```{r echo = TRUE, eval=TRUE}
-# for demonstration only
 summary(pca.centaurea)
 ```
-```{r echo = FALSE, eval=TRUE}
-# for demonstration only
-rm(summary)
-```
 
-The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch` control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentaitons for details.
+The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch` [^3] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentaitons for details.  
+
+&nbsp;  
+
+
+
+[^3]: **Plotting symbols commonly used in R**  
+![](./pch.png){width=100%}
+
+
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -361,13 +348,16 @@ plotPoints(pca.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,2
 
 ```
 
-The sample scores are stored in `pca.centaurea$objects$scores` and can be exported by `exportRes()` function. The dollar sign (`$`), lets you access elements within an object, same as above.
+
+The coordinates of the individuals (populations) on the principal components (sample scores) are stored in `pca.centaurea$objects$scores` and can be exported by `exportRes()` function. The dollar sign (`$`), lets you access elements within an object, same as above.
 
 ```{r echo = TRUE, eval=FALSE}
 exportRes(pca.centaurea$objects$scores, file="scoresPCA.centaurea.txt")
 ```
 
-Arrows (eigenvectors) in the next figure shows the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `exportRes()` function.
+The character loadings (eigenvectors) express the influence of the original characters to the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `exportRes()` function.
+Function `plotCharacters()` draws character loadings as arrows. 
+
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
 plotCharacters(pca.centaurea, cex = 1.2)
@@ -398,7 +388,7 @@ plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB",
 plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
                       pos = 2,cex = 0.75)
 plotAddLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
-plotAddLabels.points(pca.pops, labels=c("DUB","KOT"), pos=1, offset=0.7, cex=0.75)
+plotAddLabels.points(pca.pops,labels=c("DUB","KOT"), pos=1,offset=0.7, cex=0.75)
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
@@ -651,13 +641,6 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 
 
-# How to cite MorphoTools2
-
-**Šlenker M. & Koutecký P. 2020**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*
-
-&nbsp;  
-
-Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
 # Acknowledgements
 
@@ -670,6 +653,8 @@ Feel free to email me at marek.slenker@savba.sk with any questions, comments, or
 **Klecka WR. (1980)**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
 
 **Koutecký P. (2007)**. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica*, 42, 77-102.
+
+**Koutecký P. (2015)**. MorphoTools: a set of R functions for morphometric analysis. *Plant Systematics and Evolution*, 301, 1115-1121.
 
 **Koutecký P, Štěpánek J, Baďurová T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
 

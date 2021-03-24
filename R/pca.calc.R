@@ -20,21 +20,26 @@ pca.calc <- function(object) {
 
   princompRes = stats::princomp(object$data, cor = TRUE)
 
+  newNames = NULL
+  for (i in 1:length(princompRes$sdev)) {
+    newNames = c(newNames, paste("PC", i, sep = ""))
+  }
+
+  colnames(princompRes$loadings) = newNames
+  names(princompRes$sdev) = newNames
+  colnames(princompRes$scores) = newNames
+
   pcaResult$sdev = princompRes$sdev
   pcaResult$center = princompRes$center
   pcaResult$scale = princompRes$scale
   pcaResult$rank = length(princompRes$sdev)
 
-  # Koutecky 2014
-  #pcaResult$scores = predict(princompRes,object$data)
   pcaResult$objects$scores = princompRes$scores
   pcaResult$objects$ID = object$ID
   pcaResult$objects$Population = object$Population
   pcaResult$objects$Taxon = object$Taxon
 
-  # Koutecky 2014
-  #pcaResult$eigenVectors = apply(prcompRes$rotation,1,function(x) x*prcompRes$sdev)
-  pcaResult$eigenVectors = princompRes$loadings[,1:length(princompRes$sdev)]
+  pcaResult$eigenVectors = princompRes$loadings #[,1:length(princompRes$sdev)]
 
 
   vars <- princompRes$sdev^2

@@ -8,15 +8,14 @@
 \contentsline {subsubsection}{3.2.3 Descriptive statistics}{6}{section*.9}%
 \contentsline {subsubsection}{3.2.4 Correlations of characters}{7}{section*.10}%
 \contentsline {subsubsection}{3.2.5 Populations as operational taxonomic units}{7}{section*.11}%
-\contentsline {subsubsection}{3.2.6 Missing data}{7}{section*.12}%
-\contentsline {paragraph}{Remove items}{8}{section*.13}%
+\contentsline {subsubsection}{3.2.6 Missing data}{8}{section*.12}%
+\contentsline {paragraph}{Remove items}{9}{section*.13}%
 \contentsline {paragraph}{Replace missing values}{9}{section*.14}%
 \contentsline {section}{4. Hierarchical clustering}{9}{section*.15}%
 \contentsline {section}{5. Principal component analysis (PCA)}{10}{section*.16}%
 \contentsline {section}{6. Canonical discriminant analysis (CDA)}{18}{section*.17}%
-\contentsline {paragraph}{Passive prediction of samples.}{22}{section*.18}%
-\contentsline {section}{7. Classificatory discriminant analysis}{24}{section*.19}%
-\contentsline {section}{Further reading}{27}{section*.20}%
-\contentsline {section}{How to cite MorphoTools2}{28}{section*.21}%
-\contentsline {section}{Acknowledgements}{28}{section*.22}%
-\contentsline {section}{References}{28}{section*.23}%
+\contentsline {paragraph}{Passive prediction of samples.}{23}{section*.18}%
+\contentsline {section}{7. Classificatory discriminant analysis}{25}{section*.19}%
+\contentsline {section}{Further reading}{28}{section*.20}%
+\contentsline {section}{Acknowledgements}{29}{section*.21}%
+\contentsline {section}{References}{29}{section*.22}%

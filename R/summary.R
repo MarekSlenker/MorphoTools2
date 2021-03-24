@@ -23,21 +23,31 @@ summary.pcadata <- function(object, ...) {
   checkClass(object, "pcadata")
 
   cat("object of class 'pcadata'; storing original data and results of Principal Component Analysis\n")
-  cat("\nVariation explained by individual axes:\n")
+  cat("\nVariation explained by individual axes")
+  if (object$rank>4) {
+    cat(" (output is truncated):\n")
+  } else {
+    cat(":\n")
+  }
 
-  descrTable = data.frame(row.names = names(object$eigenvaluesAsPercent),
-                          "Eigenvalues" = round(object$eigenValues, digits = 4),
-                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent, digits = 4),
-                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues, digits = 4)
+  descrTable = data.frame(row.names = names(object$eigenvaluesAsPercent[1: min(object$rank, 4)]),
+                          "Eigenvalues" = round(object$eigenValues[1: min(object$rank, 4)], digits = 4),
+                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent[1: min(object$rank, 4)], digits = 4),
+                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1: min(object$rank, 4)], digits = 4)
                           )
   names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
   descrTable = t(descrTable)
 
   print(descrTable)
 
-  cat("\nEigenvectors:\n")
+  cat("\nEigenvectors")
+  if (object$rank>4) {
+    cat(" (output is truncated):\n")
+  } else {
+    cat(":\n")
+  }
 
-  print(object$eigenVectors[,1:4])
+  print(object$eigenVectors[,1:min(object$rank, 4)])
 
 }
 
@@ -48,24 +58,31 @@ summary.cdadata <- function(object, ...) {
   checkClass(object, "cdadata")
 
   cat("object of class 'cdadata'; storing original data and results of Canonical Discriminant Analysis\n")
+  cat("\nVariation explained by individual axes")
+  if (object$rank>4) {
+    cat(" (output is truncated):\n")
+  } else {
+    cat(":\n")
+  }
 
-
-
-  descrTable = data.frame(row.names = c(1: object$rank),
-                          "Eigenvalues" = round(object$eigenValues[1:object$rank], digits = 4),
-                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent[1:object$rank], digits = 4),
-                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1:object$rank], digits = 4)
+  descrTable = data.frame(row.names = colnames(object$objects$scores[,1: min(object$rank, 4)]),
+                          "Eigenvalues" = round(object$eigenValues[1: min(object$rank, 4)], digits = 4),
+                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent[1: min(object$rank, 4)], digits = 4),
+                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1: min(object$rank, 4)], digits = 4)
   )
   names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
+  descrTable = t(descrTable)
 
-
-  cat("\nVariation explained by individual axes:\n")
   print(descrTable)
 
+  cat("\nTotal canonical structure coefficients")
+  if (object$rank>4) {
+    cat(" (output is truncated):\n")
+  } else {
+    cat(":\n")
+  }
 
-  cat("\nTotal canonical structure coefficients:\n")
-
-  print(object$totalCanonicalStructure[,1:object$rank])
+  print(object$totalCanonicalStructure[,1: min(object$rank, 4)])
 
 }
 
