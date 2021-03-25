@@ -166,8 +166,8 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
     if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
-    if (is.null(xlab)) xlab = paste("Canonical axis ",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-    if (is.null(ylab)) ylab = paste("Canonical axis ",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(xlab)) xlab = paste("Can",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(ylab)) ylab = paste("Can",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
     result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
