@@ -22,10 +22,10 @@ summary.morphodata <- function(object, ...) {
 summary.pcadata <- function(object, ...) {
   checkClass(object, "pcadata")
 
-  cat("object of class 'pcadata'; storing original data and results of Principal Component Analysis\n")
+  cat("object of class 'pcadata'; storing results of Principal Component Analysis\n")
   cat("\nVariation explained by individual axes")
   if (object$rank>4) {
-    cat(" (output is truncated):\n")
+    cat(" (listing of axes is truncated):\n")
   } else {
     cat(":\n")
   }
@@ -42,7 +42,7 @@ summary.pcadata <- function(object, ...) {
 
   cat("\nEigenvectors")
   if (object$rank>4) {
-    cat(" (output is truncated):\n")
+    cat(" (listing of axes is truncated):\n")
   } else {
     cat(":\n")
   }
@@ -57,10 +57,10 @@ summary.pcadata <- function(object, ...) {
 summary.cdadata <- function(object, ...) {
   checkClass(object, "cdadata")
 
-  cat("object of class 'cdadata'; storing original data and results of Canonical Discriminant Analysis\n")
+  cat("object of class 'cdadata'; storing results of Canonical Discriminant Analysis\n")
   cat("\nVariation explained by individual axes")
   if (object$rank>4) {
-    cat(" (output is truncated):\n")
+    cat(" (listing of axes is truncated):\n")
   } else {
     cat(":\n")
   }
@@ -77,7 +77,7 @@ summary.cdadata <- function(object, ...) {
 
   cat("\nTotal canonical structure coefficients")
   if (object$rank>4) {
-    cat(" (output is truncated):\n")
+    cat(" (listing of axes is truncated):\n")
   } else {
     cat(":\n")
   }

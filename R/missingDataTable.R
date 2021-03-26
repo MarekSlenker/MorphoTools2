@@ -37,7 +37,7 @@ missingCharactersTable <- function(object, level) {
 
   t = as.data.frame(table(aggLevel))
 
-  colnames(missingTable) = c(level, "missing.percentage", "numb.of.missing.characters")
+  colnames(missingTable) = c(level, "missing.percentage", "numb.of.missing.values")
   colnames(t) = c(level, "N")
 
   missingTable = merge(t, missingTable, by=level)
