@@ -13,7 +13,7 @@ shapiroWilkTest(object, p.value = 0.05)
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
-\item{p.value}{a number or '\code{NA}' are acceptable. In the case of number, the output will be formatted as "normally distributed" or "NOT normally distributed". In the case of '\code{NA}', exact p-values will be returned.}
+\item{p.value}{a number or \code{NA} are acceptable. In the case of number, the output will be formatted as "normally distributed" or "NOT normally distributed". In the case of \code{NA}, exact p-values will be returned.}
 }
 
 \details{
@@ -34,8 +34,8 @@ exportRes(sW, file = "~/sW_test.txt")
 
 
 \references{
-\strong{Klecka WR. 1980}. \emph{Discriminant analysis (No. 19)}. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.\cr
-\strong{Thorpe RS. 1976}. Biometric analysis of geographic variation and racial affinities. \emph{Biological Reviews of the Cambridge Philosophical Society}, \strong{51}: 407–425.}
+\strong{Klecka, W. R. (1980)}. \emph{Discriminant analysis (No. 19)}. Sage University Paper Series on Quantitative Applications in the Social Sciences 7-19.\cr
+\strong{Thorpe, R. S. (1976)}. Biometric analysis of geographic variation and racial affinities. \emph{Biological Reviews of the Cambridge Philosophical Society} \strong{51}: 407–425.}
 
 
 

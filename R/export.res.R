@@ -2,16 +2,15 @@
 
 #' Export data
 #' @export
-exportRes <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
+exportRes <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
   UseMethod("exportRes")
 }
 
 #' @rdname exportRes
 #' @export
-exportRes.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
-  checkClass(object, "morphodata")
+exportRes.morphodata <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
-  objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
+    objToWrite = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon, object$data)
 
   exportRes(objToWrite, file = file, dec = dec, sep = sep, row.names = row.names, col.names = col.names)
 }
@@ -19,9 +18,7 @@ exportRes.morphodata <- function(object, file = "clipboard", dec = ".", sep = "\
 
 #' @rdname exportRes
 #' @export
-exportRes.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
-
-  if (!(is.data.frame(object))) stop("object is not of class 'data.frame'", call. = FALSE)
+exportRes.data.frame <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   utils::write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = row.names, col.names = col.names, na = "")
 }
@@ -33,9 +30,7 @@ exportRes.data.frame <- function(object, file = "clipboard", dec = ".", sep = "\
 
 #' @rdname exportRes
 #' @export
-exportRes.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
-
-  if (!(is.matrix(object))) stop("object is not of class 'matrix'", call. = FALSE)
+exportRes.matrix <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   objToWrite = data.frame("character" = rownames(object), object)
 
@@ -45,9 +40,7 @@ exportRes.matrix <- function(object, file = "clipboard", dec = ".", sep = "\t", 
 
 #' @rdname exportRes
 #' @export
-exportRes.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
-
-  if (!(is.numeric(object))) stop("object is not of class 'numeric'", call. = FALSE)
+exportRes.numeric <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   objToWrite = as.data.frame(object)
 
@@ -57,9 +50,7 @@ exportRes.numeric <- function(object, file = "clipboard", dec = ".", sep = "\t",
 
 #' @rdname exportRes
 #' @export
-exportRes.classifdata <- function(object, file = "clipboard", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
-
-  checkClass(object, "classifdata")
+exportRes.classifdata <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
   attr(object, "class") <- "data.frame"
 

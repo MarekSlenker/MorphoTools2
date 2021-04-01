@@ -1,4 +1,4 @@
-#' @rdname classif.lda
+#' @rdname knn.select
 #' @export
 knn.select<-function(object, crossval="indiv"){
 

@@ -3,7 +3,7 @@
 \title{Invoke a Data Viewer}
 
 \description{
-Invoke a spreadsheet-style data viewer on a data stored in '\code{morphodata}' class.
+Invoke a spreadsheet-style data viewer on a data stored in '\code{\link{morphodata}}' class.
 }
 
 \usage{

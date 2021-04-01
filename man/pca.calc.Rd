@@ -13,7 +13,7 @@ pca.calc(object)
 }
 
 \arguments{
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}'.}
 }
 
 \value{

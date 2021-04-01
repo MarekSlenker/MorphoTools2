@@ -1,8 +1,8 @@
 #' Add legends to plot
 #' @export
 plotAddLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
-                           pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
-                           y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                           pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,
+                           y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = 1,
                            box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
   UseMethod("plotAddLegend")
 }
@@ -12,8 +12,8 @@ plotAddLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "bla
 #' @method plotAddLegend pcadata
 #' @export
 plotAddLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
-                            pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
-                            y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                            pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,
+                            y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = 1,
                             box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
 
 
@@ -30,8 +30,8 @@ plotAddLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, co
 #' @method plotAddLegend cdadata
 #' @export
 plotAddLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
-                                   pt.bg = "white", pt.cex = cex, lwd = 1, pt.lwd = lwd, x.intersp = 1,
-                                   y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = lwd,
+                                   pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,
+                                   y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = 1,
                                    box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
 
   checkClass(result, "cdadata")

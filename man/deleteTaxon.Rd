@@ -4,7 +4,7 @@
 \alias{deleteSample}
 \alias{deleteCharacter}
 
-\title{Remove items (Taxa, Populations, morphological characters) from an morphodata object}
+\title{Remove items (Taxa, Populations, morphological characters) from morphodata object}
 \usage{
 deleteTaxon(object, taxonName)
 
@@ -15,7 +15,7 @@ deleteSample(object, sampleName = NULL, missingPercentage = NA)
 deleteCharacter(object, characterName)
 }
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{object of class '\code{\link{morphodata}}'.}
 
 \item{taxonName}{vector of taxa to be removed.}
 
@@ -23,7 +23,7 @@ deleteCharacter(object, characterName)
 
 \item{sampleName}{vector of samples to be removed.}
 
-\item{missingPercentage}{a numeric, samples holding more missing data than specified by '\code{missingPercentage}' will be removed.}
+\item{missingPercentage}{a numeric, samples holding more missing data than specified by \code{missingPercentage} will be removed.}
 
 \item{characterName}{vector of characters to be removed.}
 }
@@ -34,7 +34,7 @@ an object of class '\code{\link{morphodata}}'
 }
 
 \description{
-These functions remove particular taxa, populations, samples or morphological characters from morphodata object. The samples can be deleted by names using '\code{sampleName}' argument, or each sample above the desired threshold '\code{missingPercentage}' will be deleted. Only one parameter can be specified in one run.
+These functions remove particular taxa, populations, samples or morphological characters from morphodata object. The samples can be deleted by names using \code{sampleName} argument, or each sample above the desired threshold \code{missingPercentage} will be deleted. Only one parameter can be specified in one run.
 
 
 }

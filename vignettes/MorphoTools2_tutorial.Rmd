@@ -1,16 +1,15 @@
 ---
-title: "MorphoTools2 version 1.0.0 tutorial"
-author: |
-  | Marek Šlenker \<marek.slenker@savba.sk\>
-  | Plant Science and Biodiversity Center
-  | Bratislava, Slovakia
-  | https://github.com/MarekSlenker/MorphoTools2
+title: \vspace{-1.5cm} MorphoTools2 version 1.0.0 tutorial \vspace{-0.3cm}  
+author: | 
+  | **Marek Šlenker** \vspace*{0.5pc}
+  | Slovak Academy of Sciences, Bratislava, Slovakia
+  | &
+  | Charles University, Prague, Czechia \vspace*{0.5pc}
+  | *https://github.com/MarekSlenker/MorphoTools2*
+  | *<marek.slenker@savba.sk>*
 date: "June 18, 2020"
 output:
   pdf_document: default
-  html_document: default
-  word_document: default
-  fig_caption: no
 
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
@@ -34,8 +33,8 @@ knitr::opts_chunk$set(
   )
 ```
 
+\tableofcontents \vspace*{-1pc}
 
-\tableofcontents
 
 # 1. Introduction
 
@@ -73,8 +72,8 @@ As with any statistical software, the first thing you want to do is import your 
 
 * the first row contains variable names.
 * the next rows contain individuals (samples, or any other kind of sampling units), single individual per row.
-* the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon” [^1].
-* fourth and next columns stores morphological characters [^2].
+* the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon”[^1].
+* fourth and next columns stores morphological characters[^2].
 
 [^1]: In case the **population level is missing or inapplicable** (e.g. more than one individual only in some populations and/or very low number of individuals per population), copy the values from the"ID" column to "Population" column; this will allow analysing such data by most methods but any analyses considering population level are meaningless.
 
@@ -104,9 +103,9 @@ data(centaurea)
 ```
 
 
-In genereal, morphological data can be imported using the `read.morphodata()` function, providing path to your data [^3. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
+In genereal, morphological data can be imported using the `read.morphodata()` function, providing path to your data[^3]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
 
-[^3: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `path.package("MorphoTools2")`.
+[^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `path.package("MorphoTools2")`.
 
 ```{r eval = FALSE, echo = TRUE}
 centaurea = read.morphodata(file = "<PATH TO centaurea.txt>", dec = ".", sep = "\t")
@@ -196,16 +195,15 @@ Boxplots are handy tools for detection of outlier values (potential typos, missi
 
 Boxplots can be calculated for a particular character using `boxplotCharacter()` or for all characters at once running `boxplotAll()` function, that saves all boxplots to a new folder in your working directory (or to any location). The box is drawn from first to third quartile (25th - 75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted. Many graphic parameters can be set, run `?boxplotCharacter` for details. 
 
-
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300, out.extra='trim={0 1cm 0 0.7cm},clip'}
 boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"))
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300, out.extra='trim={0 1cm 0 0.7cm},clip'}
 boxplotCharacter(centaurea, character = "AL", lowerWhisker = 0.1, upperWhisker = 1, pch = 1)
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300, out.extra='trim={0 1cm 0 0.7cm},clip'}
 boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
                  frame = FALSE, horizontal = T, notch = TRUE)
 ```
@@ -337,7 +335,7 @@ Hierarchical classification is one of the methods that do not require *a priori*
 
 The dengrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 2cm 0 0.7cm},clip'}
 pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "UPGMA")
 plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
 ```
@@ -363,7 +361,7 @@ The summary statistics of the data is available using the function `summary()`. 
 summary(pca.centaurea)
 ```
 
-The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch` [^4] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentaitons for details.  
+The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch`[^4] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentaitons for details.  
 
 &nbsp;  
 
@@ -374,8 +372,7 @@ The result can be plotted by `plotPoints()` function. The parameter `axes` defin
 
 
 
-
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
            pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
 
@@ -392,7 +389,7 @@ The character loadings (eigenvectors) express the influence of the original char
 Function `plotCharacters()` draws character loadings as arrows. 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotCharacters(pca.centaurea, cex = 1.2)
 
 ```
@@ -407,7 +404,7 @@ The `plotPoints()` and `plotCharacters()` are a default plotting functions. You 
 
 * `plotAddLabels.points()`, `plotAddLabels.characters()` allows you to include or exclude specified labels (`include`), specify the label's position (`pos`), offset (`offset`), colours (`col`), magnification (`cex`), etc.
 
-* `plotAddLegend()` allows you to specify position using keyword (`x` [^5]), number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc.
+* `plotAddLegend()` allows you to specify position using keyword (`x`[^5]), number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc.
 
 * `plotAddEllipses()` draws prediction ellipses around taxa. Ellipses with given probability (`probability`) define the regions where will fall any new independent observation from the respective taxa.
 
@@ -420,7 +417,7 @@ The `plotPoints()` and `plotCharacters()` are a default plotting functions. You 
 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 pca.pops = pca.calc(pops)
 
 plotPoints(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
@@ -434,7 +431,8 @@ plotAddLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=
 plotAddLabels.points(pca.pops,labels=c("DUB","KOT"), pos=1,offset=0.7, cex=0.75)
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
+
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotCharacters(pca.pops, labels = F)
 
 plotAddLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
@@ -442,7 +440,7 @@ plotAddLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
@@ -457,7 +455,8 @@ plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
 
 To highlight only some groups, use `NA` for other colours.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
 plotAddSpiders(pca.centaurea, col = c(NA, # blue
@@ -469,7 +468,7 @@ plotAddSpiders(pca.centaurea, col = c(NA, # blue
 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
@@ -477,7 +476,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
@@ -488,12 +487,12 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 
 A 3D scatterplot can be produced using the `plot3Dpoints` function. Use `phi` and `theta` arguments to define slope and viewing direction.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 ```
 
@@ -503,7 +502,8 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). CDA can be calculated by `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variates. Thus, we use them to interpret the character's contribution to group separation. The function `summary()` print summaries of the results of `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 cda.centaurea = cda.calc(centaurea)
 
 summary(cda.centaurea)
@@ -514,7 +514,7 @@ plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2)
 
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       NA, # green
@@ -523,14 +523,14 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
 
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.4)
 plotAddEllipses(cda.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
@@ -540,8 +540,7 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
 ```
 
 
-
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotCharacters(cda.centaurea, cex = 1.2)
 ```
 
@@ -564,7 +563,8 @@ As you can see, the above mentioned characters (ML, MLW, IV and MW) received hig
 
 To gain better insight into the differentiation among remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), we will analyse them separately. The new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 stPsHybr = deleteTaxon(centaurea, taxonName = "ph")
 
 cda.stPsHybr = cda.calc(stPsHybr)
@@ -583,7 +583,7 @@ The first axis extract most of the variation. Characters correlated with this ax
 
 To draw a 3D scatterplot, use the `plot3Dpoints` function. Slope and viewing direction can be set by `phi` and `theta` parameters.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
 ```
 
@@ -595,7 +595,7 @@ Sometimes it is desirable to passively display (or predict) the position of some
 Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note use of semi-transparent colours to show the overlap of the groups. The colours are defined using `rgb()` function in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 
 cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
 
@@ -605,13 +605,11 @@ plotPoints(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
                         rgb(255,102,0, alpha=160, max=255))) # orange, 
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
                         rgb(255,255,255, alpha=80, max=255), # ps - white
                         rgb(255,255,255, alpha=80, max=255))) # st - white 
-
 ```
 
 
@@ -710,7 +708,7 @@ knn.select<-function(object, crossval="indiv"){
 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}
 knn.select(centaurea, crossval = "pop")
 ```
 
@@ -776,6 +774,11 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 
 
+# How to cite MorphoTools2
+
+**Šlenker M. & Koutecký P. 2020**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*  
+
+Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
 # Acknowledgements
 

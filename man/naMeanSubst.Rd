@@ -15,7 +15,7 @@ This function substitutes missing data using the average value of the respective
 }
 \details{
 Generally, most of the multivariate analyses require a full data matrix.
-The preferred approach is to reduce the data set to complete observations only (i.e. perform the casewise deletion of
+The preferred approach is to reduce the data set to complete observations only (i.e., perform the casewise deletion of
  missing data) or to remove characters for which there are missing values.
  The use of mean substitution, which introduces values that are not present in the original data, is justified only if
   (1) there are relatively few missing values, (2) these missing values are scattered throughout many characters

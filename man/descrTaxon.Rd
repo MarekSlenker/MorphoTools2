@@ -24,16 +24,15 @@ descrAll(object, format = NULL, decimalPlaces = 3)
 These functions calculate the descriptive statistics of each character in the whole dataset, each taxon and each population.
 }
 \details{
-The following statistics are computed: number of observations, mean, standard deviation, and the percentiles 0\%
+The following statistics are computed: number of observations, mean, standard deviation, and the percentiles: 0\%
  (minimum), 5\%, 25\% (lower quartile), 50\% (median), 75\% (upper quartile), 95\% and 100\% (maximum).
 
-The \code{format} argument brings a handy way how to receive only what is wanted and in format what is desired. 
-Otherways, if format remains NULL, output table is overwhelmed by all calculated descriptors. 
+The \code{format} argument brings a handy way how to receive only what is wanted and in format what is desired.
+Otherways, if format remains NULL, output table contains all calculated descriptors.
 The format argument is a single string, where keywords will be replaced by particular values.
 
-Keywords: "$MEAN" = mean; "$SD" = standard deviation; "$MIN" = minimum; "$5\%" = 5th percentile;
-"$25\%" = 25th percentile (lower quartile); "$MEDIAN" = median (50th percentile); "$75\%" = 75th percentile (upper quartile);
-"$95\%" = 95th percentile; "$MAX" = maximum.
+Keywords: \code{"$MEAN"} = mean; \code{"$SD"} = standard deviation; \code{"$MIN"} = minimum; \code{"$5\%"} = 5th percentile;
+\code{"$25\%"} = 25th percentile (lower quartile); \code{"$MEDIAN"} = median (50th percentile); \code{"$75\%"} = 75th percentile (upper quartile); \code{"$95\%"} = 95th percentile; \code{"$MAX"} = maximum.
 }
 
 \examples{

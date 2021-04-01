@@ -1,4 +1,4 @@
-\name{head.classifdata}
+\name{head.morphodata}
 \alias{head.classifdata}
 \alias{tail.classifdata}
 \alias{head.morphodata}

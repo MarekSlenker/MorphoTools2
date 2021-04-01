@@ -3,7 +3,7 @@
 \title{Draws character's contribution as arrows}
 
 \description{
-The character's contribution to separation of objects are visualised as arrows.
+The character's contribution to ordination axes are visualised as arrows.
 }
 
 
@@ -32,7 +32,7 @@ plotCharacters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
 }
 
 \details{
-The separation of samples in ordination space is driven by morphological characters. Each character has its own contribution to separation of objects. These contributions are visualised as arrows. The direction and length of the arrows characterize the impact of the morphological characters to the separation of objects along a given axis. This information is stored in eigenvectors or total canonical structure coefficients for Principal component analysis of Canonical discriminant analysis, respectively.
+The distribution of samples in ordination space is driven by morphological characters. Each character has its own contribution to ordination axes. These contributions are visualised as arrows. The direction and length of the arrows characterize the impact of the morphological characters on the separation of objects along a given axis. This information is stored in eigenvectors or total canonical structure coefficients for Principal component analysis of Canonical discriminant analysis, respectively.
 }
 
 

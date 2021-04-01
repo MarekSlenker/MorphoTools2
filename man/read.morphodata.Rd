@@ -4,7 +4,7 @@
 \alias{populations}
 \alias{taxa}
 
-\title{Data input & description}
+\title{Data input and description}
 
 \description{
 Imports data from text file and produces a '\code{\link{morphodata}}' object from it.
@@ -28,7 +28,7 @@ taxa(object)
 \arguments{
 \item{file}{the name of the file which the data are to be read from.}
 
-\item{object}{an object of class 'morphodata'.}
+\item{object}{an object of class '\code{\link{morphodata}}'.}
 
 \item{dec}{the character used in the file for decimal points.}
 

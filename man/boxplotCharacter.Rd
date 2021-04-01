@@ -18,29 +18,29 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
-\item{character}{a morphological character used for plotting boxplot.}
+\item{character}{a morphological character used to plot boxplot.}
 
-\item{folderName}{the name of folder, where to save produces boxplot.}
+\item{folderName}{folder to save produces boxplots.}
 
 \item{outliers}{logical, if \code{TRUE}, the outliers are drawn.}
 
-\item{lowerWhisker}{a percentile to which the lower whisker is extended.}
+\item{lowerWhisker}{percentile to which the lower whisker is extended.}
 
-\item{upperWhisker}{a percentile to which the upper whisker is extended.}
+\item{upperWhisker}{percentile to which the upper whisker is extended.}
 
-\item{col}{fill colors, background colors for the boxes.}
+\item{col}{background color for the boxes.}
 
-\item{border}{a color of outliers and the boxplots.}
+\item{border}{color of outliers and the lines.}
 
-\item{frame}{logical, if \code{TRUE}, a 'frame' (box around the plot) should be drawn.}
+\item{frame}{logical, if \code{TRUE}, a 'frame' (box around the plot) is drawn.}
 
-\item{main}{a main title for the plot.}
+\item{main}{main title for the plot.}
 
-\item{cex.main}{a magnification to be used for the main title.}
+\item{cex.main}{magnification to be used for the main title.}
 
-\item{pch}{a plotting symbol of the outliers.}
+\item{pch}{plotting symbol of the outliers.}
 
-\item{xlab, ylab}{a title of the respective axes.}
+\item{xlab, ylab}{title of the respective axes.}
 
 \item{horizontal}{logical, indicating if the boxplot should be horizontal.}
 
@@ -56,12 +56,12 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 }
 \description{
-These functions produce a box-and-whisker plot(s) of the given morphological characters.
+These functions produce a box-and-whisker plot(s) of the given morphological character(s).
 }
 \details{
-These functions are wrappers above classical R \code{\link{boxplot}} {graphics} function, allowing the user to extend whiskers to desired percentiles. By default, the whiskers are extended to the 5\% and 95\% percentiles, because of the trimmed range (without the most extreme 10\% of values) use to be used in taxa descriptions, determination keys, etc. Rectangle defines 25th and 75th percentiles, bold horizontal line show median. The missing values are ignored.
+These functions modify the classical \code{\link{boxplot}} function to allow whiskers to be extended to the desired percentiles. By default, the whiskers are extended to the 5th and 95th percentiles, because of the trimmed range (without the most extreme 10\% of values) use to be used in taxa descriptions, determination keys, etc. Box defines 25th and 75th percentiles, bold horizontal line shows median (50th percentile). Missing values are ignored.
 
-The \code{boxplotAll} function produce boxplot for each morphological character and save them to a folder named in the folderName parameter. If it does not exist, a new folder is created.
+The \code{boxplotAll} function produces boxplots for each morphological character and saves them to a folder defined by the \code{folderName} argument. If it does not exist, a new folder is created.
 }
 \examples{
 data(centaurea)

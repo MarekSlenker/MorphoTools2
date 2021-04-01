@@ -13,24 +13,24 @@ clust(object, distMethod = "euclidean", clustMethod = "UPGMA")
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
-\item{distMethod}{the distance measure to be used. This must be one of "euclidean" (default), "maximum", "manhattan", "canberra", "binary" or "minkowski". See \code{\link{dist}} for details.}
+\item{distMethod}{the distance measure to be used. This must be one of \code{"euclidean"} (default), \code{"maximum"}, \code{"manhattan"}, \code{"canberra"}, \code{"binary"}, or \code{"minkowski"}. See \code{\link{dist}} for details.}
 
-\item{clustMethod}{the agglomeration method to be used: "average" (= "UPGMA"; default), "complete",
-"ward.D" (= "Ward"), "ward.D2", "single", "mcquitty" (= "WPGMA"), "median" (= "WPGMC") or "centroid" (= "UPGMC"). See \code{\link{hclust}} for details.
+\item{clustMethod}{the agglomeration method to be used: \code{"average"} (= \code{"UPGMA"}; default), \code{"complete"},
+\code{"ward.D"} (= \code{"Ward"}), \code{"ward.D2"}, \code{"single"}, \code{"mcquitty"} (= \code{"WPGMA"}), \code{"median"} (= \code{"WPGMC"}) or \code{"centroid"} (= \code{"UPGMC"}). See \code{\link{hclust}} for details.
 }
 }
 
 \value{
-an object of class 'hclust'
+an object of class '\code{\link{hclust}}'
 }
 
 \details{
 This function performs agglomerative hierarchical clustering.
-Typically, populations are used as OTUs. Characters are standardised to a zero mean and a unit standard deviation.
+Typically, populations are used as OTUs (operational taxonomic units). Characters are standardised to a zero mean and a unit standard deviation.
 
 Note that the other than default methods for clustering and distance measurement are rarely used in morphometric analyses.
 
-Dendrograms are produced using plot function.
+Dendrograms are produced using \code{plot} function.
 }
 \examples{
 data(centaurea)

@@ -23,13 +23,13 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
-\item{col}{the colors for points. Multiple colors can be specified so that each taxon can be given its own color. If there are fewer colors than points they are recycled in the standard fashion.}
+\item{col}{the colors for points. Multiple colors can be specified so that each taxon can be given its own color. If there are fewer colors than taxa, they are recycled in the standard fashion.}
 \item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
 \item{breaks}{a numeric, giving the width of one histogram bar.}
 \item{xlim, ylim}{the range of x and y axes.}
 \item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels plotting, use \code{\link{plotAddLabels.points}} directly.}
 \item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend plotting, use \code{\link{plotAddLegend}} directly.}
-\item{legend.pos}{a single keyword from the list "bottomright", "bottom", "bottomleft", "left", "topleft", "top", "topright", "right", and "center", to be used to position the legend.}
+\item{legend.pos}{a single keyword from the list \code{"bottomright"}, \code{"bottom"}, \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, \code{"topright"}, \code{"right"}, and \code{"center"}, to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items.}
 
 \item{...}{further arguments to be passed to \code{\link{plot.default}} or other graphical parameters in \code{\link{par}}.}
@@ -38,8 +38,8 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
 \details{
-This generic method holds separate implementations of plotting points
-for \code{pcadata} and \code{cdadata} objects.
+This generic method holds separate implementations of plotting points for \code{\link{pcadata}} and \code{\link{cdadata}} objects.
+If only one axis exists, sample scores are displayed as a histogram.
 }
 
 \examples{

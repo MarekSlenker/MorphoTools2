@@ -4,7 +4,7 @@
 \title{Class pcadata}
 
 \description{
-The pcadata class is designed for storing results of Principal component analysis (PCA) and original morphological data.}
+The pcadata class is designed for storing results of Principal component analysis (PCA).}
 
 \format{Class \code{pcadata}.
 \describe{
@@ -17,11 +17,11 @@ The pcadata class is designed for storing results of Principal component analysi
 			}
 	}
 	\item{eigenVectors}{matrix of eigenvectors (i.e., a matrix of characters loadings).}
-	\item{eigenValues}{eigenvalues of principal components.}
-	\item{axesVariance}{eigenvalues as percent. }
-	\item{cumulativeAxesVariance}{cumulative percentage of eigenvalues. }
-	\item{groupMeans}{a data.frame containing the means for the taxa.}
-	\item{rank}{a number of principal components.}
+	\item{eigenValues}{eigenvalues of principal components, i.e., proportion of variation of the original dataset expressed by individual axes.}
+	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
+	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
+	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{rank}{number of principal components.}
 	\item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
 	\item{center, scale}{the centring and scaling of the input data.}
 

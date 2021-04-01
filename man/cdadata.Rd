@@ -4,7 +4,7 @@
 \title{Class cdadata}
 
 \description{
-The cdadata class is designed for storing results of Canonical discriminant analysis (CDA) and original morphological data.}
+The cdadata class is designed for storing results of Canonical discriminant analysis (CDA).}
 
 \format{Class \code{cdadata}.
 \describe{
@@ -16,15 +16,16 @@ The cdadata class is designed for storing results of Canonical discriminant anal
 				\item{scores}{ordination scores of cases (objects, OTUs), centred and scaled.}
 			}
 	}
-	\item{eigenValues}{eigenvalues.}
-	\item{axesVariance}{eigenvalues as percent. }
-	\item{cumulativeAxesVariance}{cumulative percentage of eigenvalues. }
-	\item{groupMeans}{a data.frame containing the means for the taxa.}
-	\item{rank}{a number of non-zero eigenvalues.}
-	\item{coeffs.raw}{a matrix containing the raw canonical coefficients.}
-	\item{coeffs.std}{a matrix containing the standardized canonical coefficients.}
-	\item{totalCanonicalStructure}{a matrix containing the total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables.}
-	\item{canrsq}{a squared canonical correlations.}
+	
+	\item{eigenValues}{eigenvalues, i.e., proportion of variation of the original dataset expressed by individual axes.}
+	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
+	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
+	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{rank}{number of non-zero eigenvalues.}
+	\item{coeffs.raw}{matrix containing the raw canonical coefficients.}
+	\item{coeffs.std}{matrix containing the standardized canonical coefficients.}
+	\item{totalCanonicalStructure}{matrix containing the total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variables.}
+	\item{canrsq}{squared canonical correlations.}
 
 	}
 }
