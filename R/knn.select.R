@@ -1,4 +1,4 @@
-#' @rdname knn.select
+#' Search for the optimal k-nearest neighbours
 #' @export
 knn.select<-function(object, crossval="indiv"){
 

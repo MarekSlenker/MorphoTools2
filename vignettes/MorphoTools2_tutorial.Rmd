@@ -166,9 +166,14 @@ viewMorphodata(centaurea)
 
 Raw data can contain errors (e.g., typos in numbers or decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. Discriminant analyses generally require a multivariate normal distribution of quantitative (not binary) characters within-groups; nevertheless, they are considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980). The following steps go through these issues and end up with the cleaned data ready for exploring the morphological differentiation among the taxa (or any defined groups).
 
-### 3.2.1 Shapiro-Wilk normality test
+### 3.2.1 Distribution of characters, transformations
 
-As the first step, we will test the normality of distribution of each character on the level of taxon/group using the Shapiro-Wilk statistic. We are usually not interested in exact p-values, what we need is just a brief overview to know, which correlation coefficient (Pearson's or Spearman's nonparametric correlation coefficient), and which classificatory discriminant analyses (linear discriminant function or non-parametric k-nearest neighbours) to favour. If the calculated p-value of a certain character is bellow a threshold, we can reject the null hypothesis that characters are normally distributed. The default value is 0.05 but can be changed using the parameter `p.value`; setting `p.value = NA` displays the exact p-values.
+To test or not to test? An assessment of the normality of data is a prerequisite for many statistical tests, but on the other hand, many statistical methods are robust to deviations in this respect. There are two main methods of assessing normality: numerically or graphically.
+
+#### 3.2.1.1 Shapiro-Wilk normality test  
+&nbsp;  
+
+Normality of distribution of each character on the level of taxon/group can be tested using the Shapiro-Wilk statistic. We are usually not interested in exact p-values, what we need only a brief summary of whether the data are normally distributed or not. If the calculated p-value of a certain character is bellow a threshold, we can reject the null hypothesis that characters are normally distributed. The default value is 0.05 but can be changed using the parameter `p.value`; setting `p.value = NA` displays the exact p-values.
 
 
 ```{r include=F}
@@ -179,7 +184,7 @@ shapiroWilkTest(centaurea)
 
 ```
 
-As the results are rather extensive (depending on number of groups and characters), they can be set assigned an object and exported  to the clipboard or file using the exportRes() function. This function is designed to export the spreadsheet-like results. If needed, default decimal separator (`dec`) and column delimiter character (`sep`) can be changed by particular arguments. See `exportRes()` documentation for details.  
+As the results are rather extensive (depending on number of groups and characters), they can be set assigned an object and exported  to the clipboard or file using the `exportRes()` function. This function is designed to export the spreadsheet-like results. If needed, default decimal separator (`dec`) and column delimiter character (`sep`) can be changed by particular arguments. See `exportRes()` documentation for details.  
 
 ```{r echo = TRUE, eval=FALSE}
 swTest = shapiroWilkTest(centaurea)
@@ -187,7 +192,62 @@ exportRes(swTest, file = "clipboard")
 exportRes(swTest, file = "D:/Projects/Centaurea_PSE/dataAnalysis/shapiroWilkTest.txt")
 ```
 
+#### 3.2.1.2 Histograms  
+&nbsp;  
+
+The histograms are a traditional way of displaying the shape of the distribution of a data. Function `histCharacter()` displays a within-group distribution of each taxon for particullar character. A density curve smoothing out the histogram (black) and the normal distribution curve (red) are drawn as default but can be removed using `densityLine = FALSE`, and `normDistLine = FALSE` arguments. Missing data are omitted.  
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px'}
+histCharacter(centaurea, character = "IW")
+```
+
+
+To plot boxplots for all characters with default settings to new folder:
+
+```{r echo = TRUE, eval=FALSE}
+histAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/histograms", width = 480, height = 480)
+```
+
+
+
+#### 3.2.1.3 Normal Q-Q plot  
+&nbsp;  
+
+
+
+
 As most characters in our dataset have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis.
+
+
+
+
+
+
+
+
+
+
+
+
+ which correlation coefficient (Pearson's or Spearman's nonparametric correlation coefficient), and which classificatory discriminant analyses (linear discriminant function or non-parametric k-nearest neighbours) to favour.
+
+
+
+
+
+If a variable fails a normality test, it is critical to look at the histogram and the normal probability plot to see if an
+outlier or a small subset of outliers has caused the non-normality. If there are no outliers, you might try a
+transformation (such as, the log or square root) to make the data normal. If a transformation is not a viable
+alternative, nonparametric methods that do not require normality may be used.
+
+
+
+
+
+
+
+
+
 
 ### 3.2.2 Box Plots
 
@@ -212,7 +272,7 @@ boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
 The default behaviour is to plot outliers (asterisks, can be changed by `pch` argument, or use `outliers = FALSE` to suppress plotting outliers) and to show the trimmed range (omitting 10% most extreme values) using whiskers. As you can see in the above figures, hybrids contain one markedly different value, which will require examination.
 
 
-To plot boxplots for all characters with default settings:
+To plot boxplots for all characters with default settings to new folder:
 
 ```{r echo = TRUE, eval=FALSE}
 boxplotAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/boxplots")
@@ -500,7 +560,9 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 # 6. Canonical discriminant analysis (CDA)
 
-The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). CDA can be calculated by `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variates. Thus, we use them to interpret the character's contribution to group separation. The function `summary()` print summaries of the results of `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
+The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). We use this analysis to find to what extent can be predefined groups of objects distinguished based on available characters and to identify characters, which contributes the most to this differentiation. Note, that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analysed, only a single axis is computed and the sample scores are displayed as a histogram.  
+
+CDA can be calculated by `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variates. Thus, we use them to interpret the character's contribution to group separation. The function `summary()` print summaries of the results of `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300, out.extra='trim={0 0.5cm 0 1.7cm},clip'}

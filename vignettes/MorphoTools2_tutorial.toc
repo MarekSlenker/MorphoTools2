@@ -3,20 +3,23 @@
 \contentsline {section}{3. Data import, control and manipulation}{2}{section*.4}%
 \contentsline {subsection}{3.1 Data import}{2}{section*.5}%
 \contentsline {subsection}{3.2 Data control and manipulation}{4}{section*.6}%
-\contentsline {subsubsection}{3.2.1 Shapiro-Wilk normality test}{4}{section*.7}%
-\contentsline {subsubsection}{3.2.2 Box Plots}{5}{section*.8}%
-\contentsline {subsubsection}{3.2.3 Descriptive statistics}{7}{section*.9}%
-\contentsline {subsubsection}{3.2.4 Correlations of characters}{8}{section*.10}%
-\contentsline {subsubsection}{3.2.5 Populations as operational taxonomic units}{8}{section*.11}%
-\contentsline {subsubsection}{3.2.6 Missing data}{8}{section*.12}%
-\contentsline {paragraph}{Remove items}{9}{section*.13}%
-\contentsline {paragraph}{Replace missing values}{10}{section*.14}%
-\contentsline {section}{4. Hierarchical clustering}{10}{section*.15}%
-\contentsline {section}{5. Principal component analysis (PCA)}{11}{section*.16}%
-\contentsline {section}{6. Canonical discriminant analysis (CDA)}{17}{section*.17}%
-\contentsline {paragraph}{Passive prediction of samples.}{23}{section*.18}%
-\contentsline {section}{7. Classificatory discriminant analysis}{25}{section*.19}%
-\contentsline {section}{Further reading}{28}{section*.20}%
-\contentsline {section}{How to cite MorphoTools2}{29}{section*.21}%
-\contentsline {section}{Acknowledgements}{29}{section*.22}%
-\contentsline {section}{References}{29}{section*.23}%
+\contentsline {subsubsection}{3.2.1 Distribution of characters, transformations}{4}{section*.7}%
+\contentsline {paragraph}{3.2.1.1 Shapiro-Wilk normality test}{4}{section*.8}%
+\contentsline {paragraph}{3.2.1.2 Histograms}{5}{section*.9}%
+\contentsline {paragraph}{3.2.1.3 Normal Q-Q plot}{6}{section*.10}%
+\contentsline {subsubsection}{3.2.2 Box Plots}{6}{section*.11}%
+\contentsline {subsubsection}{3.2.3 Descriptive statistics}{8}{section*.12}%
+\contentsline {subsubsection}{3.2.4 Correlations of characters}{9}{section*.13}%
+\contentsline {subsubsection}{3.2.5 Populations as operational taxonomic units}{9}{section*.14}%
+\contentsline {subsubsection}{3.2.6 Missing data}{9}{section*.15}%
+\contentsline {paragraph}{Remove items}{10}{section*.16}%
+\contentsline {paragraph}{Replace missing values}{11}{section*.17}%
+\contentsline {section}{4. Hierarchical clustering}{11}{section*.18}%
+\contentsline {section}{5. Principal component analysis (PCA)}{12}{section*.19}%
+\contentsline {section}{6. Canonical discriminant analysis (CDA)}{18}{section*.20}%
+\contentsline {paragraph}{Passive prediction of samples.}{24}{section*.21}%
+\contentsline {section}{7. Classificatory discriminant analysis}{26}{section*.22}%
+\contentsline {section}{Further reading}{29}{section*.23}%
+\contentsline {section}{How to cite MorphoTools2}{30}{section*.24}%
+\contentsline {section}{Acknowledgements}{30}{section*.25}%
+\contentsline {section}{References}{30}{section*.26}%
