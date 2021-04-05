@@ -43,7 +43,7 @@ The package `MorphoTools2` is dedicated to multivariate analyses of morphologica
 
 # 2. Obtaining and installing MorphoTools2 package
 
-The R console and base system can be obtained at <http://www.r-project.org/>. Once R is installed, MorphoTools2 can be installed and loaded by typing the following commands into the R console:
+The R console and base system can be obtained at <http://www.r-project.org/>. Once R is installed, `MorphoTools2` can be installed and loaded by typing the following commands into the R console:
 
 
 ```{r eval=FALSE, include=TRUE}
@@ -242,17 +242,65 @@ Transformation of data is discussed in next section, but in the all of subsequen
 
 ### 3.2.2 Data transformation
 
-The characters that deviate most from the normal distribution can be transformed to fit normal distribution.
+The characters that deviate most from the normal distribution can be transformed to fit normal distribution. From the wide palette of applicable transformations (e.g., logarithmic, square root, cube root, arcsine) you should choose the one that improves the data the most. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation (if there are zero values in the data), because the argument of the logarithm can be only positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
 
+Transformation can be done by `transformCharacter()` function, which in addition to data, the name of the character which should be transformed (`character`), and new name of transformed character (`newName`; not required) takes as argument a `FUN`. The `FUN` is an Anonymous function (also known as a lambda expression), but without a long explanation, this is where to place the function that will transforms the data.
+
+As the `transformCharacter()` function takes as argument another function (`FUN` argument), there is an inexhaustible amount of potential transformations. Here we will mention some of them:  
+
+For a right-skewed (positive) distribution can be used:  
+* logarithmic transformation (natural): `FUN = function(x) log(x+1)`  
+* logarithmic transformation (common): `FUN = function(x) log10(x+1)`  
+* square root transformation: `FUN = sqrt`   
+* cube root transformation: `FUN = function(x) x^(1/3)`   
+* arcsine transformation: `FUN = function(x) asin(sqrt(x))`  
+
+For a left-skewed (negative) distribution can be used:   
+* logarithmic transformation (natural): `FUN = function(x) log((max(x)+1)-x)`  
+* logarithmic transformation (common): `FUN = function(x) log10((max(x)+1)-x)`  
+* square root transformation: `FUN = function(x) sqrt((max(x)+1)-x)`    
+* cube root transformation: `FUN = function(x) ((max(x)+1)-x)^(1/3)`    
+* arcsine transformation: `FUN = function(x) asin(sqrt((max(x))-x))`  
+
+In the above examples, we use a number 1 as constant, but note, the chosen constant affect the result, as shown in the figure below.
+
+
+```{r echo = FALSE, eval=TRUE, fig.width=8, fig.height=2}
+par(mfrow=c(1,3))
+par(mar=c(4,4,2,1))
+par(mgp=c(2,0.8,0))
+
+
+c1 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+0.001))
+c2 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+10))
+c3 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1000))
+
+stats::qqnorm(as.matrix( na.omit(c1$data["SF"])), main = "function(x) log(x+0.001)", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(c1$data["SF"])), lwd=2)
+
+stats::qqnorm(as.matrix( na.omit(c2$data["SF"])), main = "function(x) log(x+10)", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(c2$data["SF"])), lwd=2)
+
+stats::qqnorm(as.matrix( na.omit(c3$data["SF"])), main = "function(x) log(x+1000)", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(c3$data["SF"])), lwd=2)
+
+
+par(mfrow=c(1,1))
+par(mgp=c(3, 1, 0))
+par(mar=c(5, 4, 4, 2) + 0.1)
+
+```
+
+The following figure depicts the effect of various transformation on the same data. 
 
 ```{r echo = FALSE, eval=TRUE, out.width = '420px', out.height= '300px'}
 par(mfrow=c(2,2))
 par(mar=c(4,4,2,1))
 par(mgp=c(2,0.8,0))
 
-centSqrt = transformCharacter(centaurea, character = "SF", FUN = sqrt)
-centLog = transformCharacter(centaurea, character = "SF", FUN = log)
-centAsin = transformCharacter(centaurea, character = "SF", FUN = function (x) asin(sqrt(x/100)))
+centSquareRoot = transformCharacter(centaurea, character = "SF", FUN = sqrt)
+centLog = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
+centCubeRoot = transformCharacter(centaurea, character = "SF", FUN = function(x) x^(1/3))
 
 
 
@@ -260,14 +308,14 @@ stats::qqnorm(as.matrix( na.omit(centaurea$data["SF"])), main = "original data",
 stats::qqline(as.matrix( na.omit(centaurea$data["SF"])), lwd=2)
 
 
-stats::qqnorm(as.matrix( na.omit(centSqrt$data["SF"])), main = "sqrt transformed", cex = 0.9, bty="n")
-stats::qqline(as.matrix( na.omit(centSqrt$data["SF"])), lwd=2)
+stats::qqnorm(as.matrix( na.omit(centSquareRoot$data["SF"])), main = "sqrt transformed", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centSquareRoot$data["SF"])), lwd=2)
 
-stats::qqnorm(as.matrix( na.omit(centLog$data["SF"])), main = "log transformed",cex = 0.9, bty="n")
+stats::qqnorm(as.matrix( na.omit(centLog$data["SF"])), main = "log(x+1) transformed",cex = 0.9, bty="n")
 stats::qqline(as.matrix( na.omit(centLog$data["SF"])), lwd=2)
 
-stats::qqnorm(as.matrix( na.omit(centAsin$data["SF"])), main = "asin(sqrt(x/100)) transformed", cex = 0.9, bty="n")
-stats::qqline(as.matrix( na.omit(centAsin$data["SF"])), lwd=2)
+stats::qqnorm(as.matrix( na.omit(centCubeRoot$data["SF"])), main = "x^(1/3) transformed", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centCubeRoot$data["SF"])), lwd=2)
 
 
 
@@ -277,47 +325,13 @@ par(mar=c(5, 4, 4, 2) + 0.1)
 
 ```
 
+So finally, but just for illustration (as we will prefer nonparametric methods), to apply square root transformation on character `SF`, use the following code.
 
 
-Logarithmic, both natural (log) and common (log10), and square root (sqrt) transformations are
-the most often used. If there are zero values in the data, it is necessary to add some constant (for
-common logarithmic transformation, a value of 1 is often used, as this value becomes 0 after
-transformation). In case of frequency (percentage) data (such as portion of certain type of trichomes
-among all trichomes), sometimes no transformation is needed (if the span of values is not too big and
-the values are generally between 30 and 70%) or simple arcsin (angular) transformation is often
-sufficient. Examples are as follows:
-data$character<-sqrt(data$character) 
-data$character<-log(data$character) 
-data$character<-log10(data$character+1) 
-data$character<-log10(10*data$character+1) 
-data$character<-asin(sqrt(data$character/100)) 
-data$character<-asin(sqrt(data$character))  # as above for frequency from 0 to 1, not % 
-Using the same character names on the left side as on the right side, the function will overwrite
-the original values. Using different names, the function creates a new column and retains the original
-values in the data. I prefer the former option. In this case, it is useful to rename the transformed
-characters. First, use the colnames function to see the (ordered) column names. Alternatively, you
-can find the index of the requested character using which. Then, rename the columns using subscripts
-to colnames with the position (index) of each character. For example, renaming Char2 and Char5
-from data:
-
-
-This section describes different transformation methods, depending to the type of normality violation.
-
-Some common heuristics transformations for non-normal data include:
-
-square-root for moderate skew:
-sqrt(x) for positively skewed data,
-sqrt(max(x+1) - x) for negatively skewed data
-log for greater skew:
-log10(x) for positively skewed data,
-log10(max(x+1) - x) for negatively skewed data
-inverse for severe skew:
-1/x for positively skewed data
-1/(max(x+1) - x) for negatively skewed data
-
-Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation.
-
-
+```{r echo = TRUE, eval = FALSE}
+centaurea = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt(x), 
+                               newName = "SF.sqrt")
+```
 
 
 
@@ -911,7 +925,7 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 # How to cite MorphoTools2
 
-**Šlenker M. & Koutecký P. 2020**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*  
+**Šlenker, M., Koutecký, P. & Marhold, K. (2021)**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*  
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
