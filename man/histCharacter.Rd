@@ -31,3 +31,11 @@ histAll(
 \description{
 Histograms of characters.
 }
+
+\examples{
+data(centaurea)
+
+histCharacter(centaurea, character = "IW", breaks = seq(0.5, 2.5, 0.1))
+
+
+}

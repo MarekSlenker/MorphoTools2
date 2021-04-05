@@ -2,9 +2,9 @@ citHeader("To cite MorphoTools2 in publications use:")
 
 citEntry(
   entry    = "unpublished",
-  note     = "Preparing manuscript for publication",    
+  note     = "Preparing manuscript for publication",
   title    = "MorphoTools2: an R package for the multivariate morphometric analysis.",
   author   = personList(as.person("M. Šlenker"), as.person("P. Koutecký")),
-  
-  textVersion = "Šlenker M. & Koutecký P. 2020. MorphoTools2: an R package for the multivariate morphometric analysis. https://github.com/MarekSlenker/MorphoTools2"
+
+  textVersion = "Šlenker, M., Koutecký, P. & Marhold, K. (2020). MorphoTools2: an R package for the multivariate morphometric analysis. https://github.com/MarekSlenker/MorphoTools2"
 )

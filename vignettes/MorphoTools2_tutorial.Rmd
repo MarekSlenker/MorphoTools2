@@ -166,18 +166,21 @@ viewMorphodata(centaurea)
 
 Raw data can contain errors (e.g., typos in numbers or decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. Discriminant analyses generally require a multivariate normal distribution of quantitative (not binary) characters within-groups; nevertheless, they are considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980). The following steps go through these issues and end up with the cleaned data ready for exploring the morphological differentiation among the taxa (or any defined groups).
 
-### 3.2.1 Distribution of characters, transformations
+### 3.2.1 Assessing normality of data
 
-To test or not to test? An assessment of the normality of data is a prerequisite for many statistical tests, but on the other hand, many statistical methods are robust to deviations in this respect. There are two main methods of assessing normality: numerically or graphically.
+To test or not to test? An assessment of the normality of data is a prerequisite for many statistical tests, but on the other hand, many statistical methods are robust to deviations in this respect. There are two main methods of assessing normality: numerically or graphically.  
+Please note, although all methods available in `MorphoTools2` package are presented here, there is no need to use all of these methods at once. What we need is only a brief summary of whether the data are normally distributed or not.  
 
 #### 3.2.1.1 Shapiro-Wilk normality test  
 &nbsp;  
 
-Normality of distribution of each character on the level of taxon/group can be tested using the Shapiro-Wilk statistic. We are usually not interested in exact p-values, what we need only a brief summary of whether the data are normally distributed or not. If the calculated p-value of a certain character is bellow a threshold, we can reject the null hypothesis that characters are normally distributed. The default value is 0.05 but can be changed using the parameter `p.value`; setting `p.value = NA` displays the exact p-values.
+Normality of distribution of each character on the level of taxon/group can be tested using the Shapiro-Wilk statistic. We are usually not interested in exact p-values (0.05 is default, but can be changed using the `p.value` argument). 
+
+If the calculated p-value of a certain character is below a threshold, we can reject the null hypothesis that characters are normally distributed. The default behaviour is to print only *normally distributed* or *NOT normally distributed* as result, but setting `p.value = NA` displays the exact p-values.
 
 
 ```{r include=F}
-options(max.print = 40)
+options(max.print = 30)
 ```
 ```{r echo = TRUE, eval=TRUE}
 shapiroWilkTest(centaurea)
@@ -198,14 +201,14 @@ exportRes(swTest, file = "D:/Projects/Centaurea_PSE/dataAnalysis/shapiroWilkTest
 The histograms are a traditional way of displaying the shape of the distribution of a data. Function `histCharacter()` displays a within-group distribution of each taxon for particullar character. A density curve smoothing out the histogram (black) and the normal distribution curve (red) are drawn as default but can be removed using `densityLine = FALSE`, and `normDistLine = FALSE` arguments. Missing data are omitted.  
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px'}
-histCharacter(centaurea, character = "IW")
+histCharacter(centaurea, character = "SF")
 ```
 
 
-To plot boxplots for all characters with default settings to new folder:
+To plot histograms for all characters with default settings to new folder:
 
 ```{r echo = TRUE, eval=FALSE}
-histAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/histograms", width = 480, height = 480)
+histAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/histograms")
 ```
 
 
@@ -213,43 +216,113 @@ histAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/histogra
 #### 3.2.1.3 Normal Q-Q plot  
 &nbsp;  
 
+The normal Q-Q plot is another graphical method of assessing normality. The points should lie as close to the line as possible with no obvious pattern coming away from the line. Deviations from this line correspond to various types of non-normality.
+
+Function `qqnormCharacter()` draws Q-Q plot for each taxon for a particular character, function `qqnormAll()` do the same for all of the characters (and save images to a new folder). Missing data are omitted.  
 
 
 
-As most characters in our dataset have a non-normal distribution, we will prefer Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis.
+```{r echo = TRUE, eval=TRUE, out.width = '420px', out.height= '300px'}
+qqnormCharacter(centaurea, character = "SF")
+```
+
+
+To plot histograms for all characters with default settings to new folder:
+
+```{r echo = TRUE, eval=FALSE}
+qqnormAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/qqnormPlots")
+```
+
+
+
+---
+
+We find that the most of the characters in our dataset have a non-normal distribution. In general we have two options: we might try a transformation to make the data normal, or prefer nonparametric methods that do not require normality (Spearman's correlation coefficient and k-nearest neighbours classificatory discriminant analysis).
+Transformation of data is discussed in next section, but in the all of subsequent analysis we will use original data.
+
+### 3.2.2 Data transformation
+
+The characters that deviate most from the normal distribution can be transformed to fit normal distribution.
+
+
+```{r echo = FALSE, eval=TRUE, out.width = '420px', out.height= '300px'}
+par(mfrow=c(2,2))
+par(mar=c(4,4,2,1))
+par(mgp=c(2,0.8,0))
+
+centSqrt = transformCharacter(centaurea, character = "SF", FUN = sqrt)
+centLog = transformCharacter(centaurea, character = "SF", FUN = log)
+centAsin = transformCharacter(centaurea, character = "SF", FUN = function (x) asin(sqrt(x/100)))
+
+
+
+stats::qqnorm(as.matrix( na.omit(centaurea$data["SF"])), main = "original data", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centaurea$data["SF"])), lwd=2)
+
+
+stats::qqnorm(as.matrix( na.omit(centSqrt$data["SF"])), main = "sqrt transformed", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centSqrt$data["SF"])), lwd=2)
+
+stats::qqnorm(as.matrix( na.omit(centLog$data["SF"])), main = "log transformed",cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centLog$data["SF"])), lwd=2)
+
+stats::qqnorm(as.matrix( na.omit(centAsin$data["SF"])), main = "asin(sqrt(x/100)) transformed", cex = 0.9, bty="n")
+stats::qqline(as.matrix( na.omit(centAsin$data["SF"])), lwd=2)
+
+
+
+par(mfrow=c(1,1))
+par(mgp=c(3, 1, 0))
+par(mar=c(5, 4, 4, 2) + 0.1)
+
+```
+
+
+
+Logarithmic, both natural (log) and common (log10), and square root (sqrt) transformations are
+the most often used. If there are zero values in the data, it is necessary to add some constant (for
+common logarithmic transformation, a value of 1 is often used, as this value becomes 0 after
+transformation). In case of frequency (percentage) data (such as portion of certain type of trichomes
+among all trichomes), sometimes no transformation is needed (if the span of values is not too big and
+the values are generally between 30 and 70%) or simple arcsin (angular) transformation is often
+sufficient. Examples are as follows:
+data$character<-sqrt(data$character) 
+data$character<-log(data$character) 
+data$character<-log10(data$character+1) 
+data$character<-log10(10*data$character+1) 
+data$character<-asin(sqrt(data$character/100)) 
+data$character<-asin(sqrt(data$character))  # as above for frequency from 0 to 1, not % 
+Using the same character names on the left side as on the right side, the function will overwrite
+the original values. Using different names, the function creates a new column and retains the original
+values in the data. I prefer the former option. In this case, it is useful to rename the transformed
+characters. First, use the colnames function to see the (ordered) column names. Alternatively, you
+can find the index of the requested character using which. Then, rename the columns using subscripts
+to colnames with the position (index) of each character. For example, renaming Char2 and Char5
+from data:
+
+
+This section describes different transformation methods, depending to the type of normality violation.
+
+Some common heuristics transformations for non-normal data include:
+
+square-root for moderate skew:
+sqrt(x) for positively skewed data,
+sqrt(max(x+1) - x) for negatively skewed data
+log for greater skew:
+log10(x) for positively skewed data,
+log10(max(x+1) - x) for negatively skewed data
+inverse for severe skew:
+1/x for positively skewed data
+1/(max(x+1) - x) for negatively skewed data
+
+Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation.
 
 
 
 
 
 
-
-
-
-
-
-
- which correlation coefficient (Pearson's or Spearman's nonparametric correlation coefficient), and which classificatory discriminant analyses (linear discriminant function or non-parametric k-nearest neighbours) to favour.
-
-
-
-
-
-If a variable fails a normality test, it is critical to look at the histogram and the normal probability plot to see if an
-outlier or a small subset of outliers has caused the non-normality. If there are no outliers, you might try a
-transformation (such as, the log or square root) to make the data normal. If a transformation is not a viable
-alternative, nonparametric methods that do not require normality may be used.
-
-
-
-
-
-
-
-
-
-
-### 3.2.2 Box Plots
+### 3.2.3 Box Plots
 
 Boxplots are handy tools for detection of outlier values (potential typos, missing decimal points, etc.), between-species dissimilarities and critical morphological values discriminating among species.  
 
@@ -280,7 +353,7 @@ boxplotAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/boxpl
 
 
 
-### 3.2.3 Descriptive statistics
+### 3.2.4 Descriptive statistics
 
 The table of descriptive statistics is a less comfortable way of detecting outlier values, but it can be used for reporting descriptive statistics of morphological characters. This statistics can be calculated on the levels of populations, taxa/groups or for the whole dataset, using `descrPopulation()`, `descrTaxon()` or `descrAll()`, respectively. Using argument `format`, you can specify the desired output format. Keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%`, `$MAX` will be replaced by actual values. The default behaviour (`format = NULL`) is to produces a table with all values. Run `?descrTaxon` for more details.
 
@@ -295,7 +368,7 @@ exportRes(descr_tax, file = "clipboard")
 exportRes(descr_tax, file = "descr_tax.txt")
 ```
 
-### 3.2.4 Correlations of characters
+### 3.2.5 Correlations of characters
 
 Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One from the pair of highly correlated character can be removed from a dataset using `deleteCharacter()` function, see below.
 
@@ -306,7 +379,7 @@ exportRes(correlations.s, file="correlations.spearman.txt")
 
 Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the `cormatSignifTest()` function.
 
-### 3.2.5 Populations as operational taxonomic units
+### 3.2.6 Populations as operational taxonomic units
 
 To simplify the overall structure especially in large datasets, one can consider the use of populations instead of individuals. This means that each population will be represented by averages of the individuals' values. Missing values will be ignored.
 
@@ -328,7 +401,7 @@ pops = populOTU(centaurea)
 We received a warning that the values of some characters are `NA`. How to deal with missing data, we will discuss in the following section.
 
 
-### 3.2.6 Missing data
+### 3.2.7 Missing data
 
 Missing values are not accepted in morphological analyses, and MorphoTools2 do not edit user's data in the background. The user has to do his/her own decision, what to do with missing values. There are two options: remove or replace. But before we do anything else, let's look at the descriptive statistic about missing data using `missingCharactersTable()` and `missingSamplesTable()` functions. The amount of missing data can be summarized on various levels, namely "`taxon`", populations ("`pop`"), or individuals ("`indiv`"). 
 
