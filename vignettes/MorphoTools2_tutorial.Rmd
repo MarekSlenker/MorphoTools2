@@ -204,10 +204,10 @@ histCharacter(centaurea, character = "SF")
 ```
 
 
-To plot histograms for all characters with default settings to a new folder:
+To plot histograms for all characters with default settings to a new folder (in the working directory):
 
 ```{r echo = TRUE, eval=FALSE}
-histAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/histograms")
+histAll(centaurea, folderName = "histograms")
 ```
 
 
@@ -220,16 +220,15 @@ The normal Q-Q plot is another graphical method of assessing normality. The poin
 Function `qqnormCharacter()` draws Q-Q plot for each taxon for a particular character, function `qqnormAll()` do the same for all of the characters (and save images to a new folder). Missing data are omitted.  
 
 
-
 ```{r echo = TRUE, eval=TRUE, out.width = '420px', out.height= '300px'}
 qqnormCharacter(centaurea, character = "SF")
 ```
 
 
-To plot histograms for all characters with default settings to a new folder:
+To plot histograms for all characters with default settings to a new folder (in the working directory):
 
 ```{r echo = TRUE, eval=FALSE}
-qqnormAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/qqnormPlots")
+qqnormAll(centaurea, folderName = "qqnormPlots")
 ```
 
 
@@ -362,10 +361,10 @@ boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
 The default behaviour is to plot outliers (asterisks, can be changed by `pch` argument, or use `outliers = FALSE` to suppress plotting outliers) and to show the trimmed range (omitting 10% most extreme values) using whiskers. As you can see in the above figures, hybrids contain one markedly different value, which will require examination.
 
 
-To plot boxplots for all characters with default settings to new folder:
+To plot boxplots for all characters with default settings to new folder (in the working directory):
 
 ```{r echo = TRUE, eval=FALSE}
-boxplotAll(centaurea, folderName = "D:/Projects/Centaurea_PSE/dataAnalysis/boxplots")
+boxplotAll(centaurea, folderName = "boxplots")
 ```
 
 
@@ -932,9 +931,6 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
-# Acknowledgements
-
-
 # References
 
 **Friendly M, Fox J. (2020)**. candisc: Visualizing Generalized Canonical Discriminant and Canonical
@@ -948,9 +944,7 @@ Feel free to email me at marek.slenker@savba.sk with any questions, comments, or
 
 **Koutecký P, Štěpánek J, Baďurová T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
 
-
 **Shlens, J. (2014)**. A tutorial on principal component analysis. *ArXiv* preprint arXiv:1404.1100
-
 
 **Thorpe RS. (1976)**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* 51, 407–425.
 

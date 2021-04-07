@@ -1,6 +1,6 @@
 #' Histograms of characters.
 #' @export
-histCharacter <- function(object, character, taxon = levels(object$Taxon), histogram = TRUE, col = "grey90",  main = NULL,
+histCharacter <- function(object, character, taxon = levels(object$Taxon), histogram = TRUE, col = "lightgray",  main = NULL,
                           densityLine = TRUE, normDistLine = TRUE, ...) {
   checkClass(object, "morphodata")
 
@@ -19,7 +19,7 @@ histCharacter <- function(object, character, taxon = levels(object$Taxon), histo
 
 #' @rdname histCharacter
 #' @export
-histAll <- function(object,  folderName = "histograms", taxon = levels(object$Taxon), histogram = TRUE, col = "grey90", main = NULL,
+histAll <- function(object,  folderName = "histograms", taxon = levels(object$Taxon), histogram = TRUE, col = "lightgray", main = NULL,
                     densityLine = TRUE, normDistLine = TRUE, width = 480, height = 480, units = "px", ...) {
 
   checkClass(object, "morphodata")

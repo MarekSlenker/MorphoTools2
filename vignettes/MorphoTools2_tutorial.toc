@@ -22,5 +22,4 @@
 \contentsline {section}{7. Classificatory discriminant analysis}{29}{section*.23}%
 \contentsline {section}{Further reading}{32}{section*.24}%
 \contentsline {section}{How to cite MorphoTools2}{33}{section*.25}%
-\contentsline {section}{Acknowledgements}{33}{section*.26}%
-\contentsline {section}{References}{33}{section*.27}%
+\contentsline {section}{References}{33}{section*.26}%

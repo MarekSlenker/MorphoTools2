@@ -20,7 +20,7 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{character}{a morphological character used to plot boxplot.}
 
-\item{folderName}{folder to save produces boxplots.}
+\item{folderName}{folder to save produced boxplots.}
 
 \item{outliers}{logical, if \code{TRUE}, the outliers are drawn.}
 
@@ -78,5 +78,5 @@ boxplotCharacter(centaurea, "ST", boxlty = 1, medlwd = 5,
           whisklty = 2, whiskcol = "red", staplecol = "red",
           outcol = "grey30", pch = "-")
 
-boxplotAll(centaurea, folderName = "../boxplots")
+boxplotAll(centaurea, folderName = "boxplots")
 }
