@@ -1,7 +1,7 @@
 \name{plotAddSpiders}
 \alias{plotAddSpiders}
 
-\title{Add spiders to a plot}
+\title{Add Spiders to a Plot}
 
 \description{
 This function connects taxa's points with its centroids, thus forms a "spider" diagram.

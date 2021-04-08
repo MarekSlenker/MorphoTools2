@@ -1,7 +1,7 @@
 \docType{data}
 \name{classifdata}
 \alias{classifdata}
-\title{Class classifdata}
+\title{Class Classifdata}
 
 \description{
 The classifdata class is designed for storing results of Classificatory discriminant analysis.}

@@ -1,7 +1,7 @@
 \docType{data}
 \name{centaurea}
 \alias{centaurea}
-\title{25 morphological characters of three species of the \emph{Centaurea phrygia} complex}
+\title{25 Morphological Characters of Three Species of the \emph{Centaurea phrygia} Complex}
 
 
 \usage{

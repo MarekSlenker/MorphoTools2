@@ -2,7 +2,7 @@
 \alias{classifSample.knn}
 \alias{classifSample.lda}
 
-\title{Classificatory discriminant analysis}
+\title{Classificatory Discriminant Analysis}
 
 \description{
 These functions compute discriminant function based on an independent training set and classify observations in sample set.

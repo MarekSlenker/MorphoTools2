@@ -1,6 +1,6 @@
 \name{plotCharacters}
 \alias{plotCharacters}
-\title{Draws character's contribution as arrows}
+\title{Draws Character's Contribution as Arrows}
 
 \description{
 The character's contribution to ordination axes are visualised as arrows.
@@ -25,7 +25,7 @@ plotCharacters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
 \item{col}{the color for arrows.}
 \item{length}{length of the edges of the arrow head (in inches).}
 \item{angle}{angle from the shaft of the arrow to the edge of the arrow head.}
-\item{labels}{logical, defines if labels are displayed. Only restricted number of parameters are supported. For more precise labels plotting, use \code{\link{plotAddLabels.characters}} directly.}
+\item{labels}{logical, if \code{TRUE}, labels are displayed. Only restricted number of parameters are supported. For more precise labels plotting, use \code{\link{plotAddLabels.characters}} directly.}
 \item{cex}{character expansion factor for labels.}
 \item{...}{further arguments to be passed to \code{\link{arrows}} or other graphical parameters in \code{\link{par}}.}
 

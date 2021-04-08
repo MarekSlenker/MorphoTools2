@@ -3,7 +3,7 @@
 \alias{descrPopulation}
 \alias{descrAll}
 
-\title{Descriptive statistics}
+\title{Descriptive Statistics}
 
 \usage{
 descrTaxon(object, format = NULL, decimalPlaces = 3)

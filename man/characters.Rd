@@ -1,6 +1,6 @@
 \name{characters}
 \alias{characters}
-\title{List morphological characters}
+\title{List Morphological Characters}
 \usage{
 characters(object)
 }
@@ -16,4 +16,12 @@ characters(object)
 
 \description{
 Returns list morphological characters of object.
+}
+
+
+\examples{
+data(centaurea)
+
+characters(centaurea)
+
 }

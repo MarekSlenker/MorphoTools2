@@ -3,7 +3,7 @@
 \alias{classif.knn}
 \alias{classif.matrix}
 
-\title{Classificatory discriminant analysis}
+\title{Classificatory Discriminant Analysis}
 
 
 \description{

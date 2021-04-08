@@ -1,7 +1,7 @@
 \name{plotAddEllipses}
 \alias{plotAddEllipses}
 
-\title{Add confidence ellipses to a plot}
+\title{Add Confidence Ellipses to a Plot}
 
 \description{
 This function draws confidence (prediction) ellipses around taxa.

@@ -18,11 +18,11 @@
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{cdadata}}' or '\code{\link{classifdata}}'.}
+\item{object}{an object of class '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{cdadata}}', or '\code{\link{classifdata}}'.}
 \item{...}{additional arguments affecting the summary produced.}
 
 }
 
 \description{
-\code{summary} methods for classes '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{cdadata}}' and '\code{\link{classifdata}}'.
+\code{summary} methods for classes '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{cdadata}}', and '\code{\link{classifdata}}'.
 }

@@ -1,7 +1,7 @@
 \name{plotAddLabels.points}
 \alias{plotAddLabels.points}
 
-\title{Add labels to a plot}
+\title{Add Labels to a Plot}
 \usage{
 
 plotAddLabels.points(result, labels = result$objects$ID, include = TRUE,

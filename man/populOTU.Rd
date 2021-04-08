@@ -1,6 +1,6 @@
 \name{populOTU}
 \alias{populOTU}
-\title{Population means}
+\title{Population Means}
 \usage{
 populOTU(object)
 }
@@ -15,7 +15,7 @@ This function calculates the average value for each character in each population
 }
 \details{
 This function returns morphodata object, where each population is used as the operational taxonomic unit (OTUs),
- thus is represented by single row with average values for each character.
+ thus is represented by single "individual" (row) with average values for each character.
 Note that when using populations as OTUs, they are handled with the same weight in all analyses
 (disregarding population size, within-population variation, etc.)
 }

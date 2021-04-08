@@ -4,14 +4,14 @@
 \alias{populations}
 \alias{taxa}
 
-\title{Data input and description}
+\title{Data Input and Description}
 
 \description{
 Imports data from text file and produces a '\code{\link{morphodata}}' object from it.
 }
 
 \usage{
-read.morphodata(file, dec=".", sep = "\t", ...)
+read.morphodata(file, dec= ".", sep = "\t", ...)
 
 ## S3 method for class 'morphodata'
 
@@ -20,8 +20,6 @@ samples(object)
 populations(object)
 
 taxa(object)
-
-# characters(object)
 
 }
 
@@ -34,7 +32,7 @@ taxa(object)
 
 \item{sep}{the column separator character.}
 
-\item{...}{further arguments to be passed to read.table.}
+\item{...}{further arguments to be passed to \code{\link{read.table}}.}
 }
 
 \value{
@@ -51,9 +49,14 @@ The function expects the following data structure: \cr
 If there are missing values in the data, they must be represented as empty cells or by the text NA (not quoted), not zero, space or any other character.
 }
 
+\seealso{
+\code{\link{characters}}
+}
+
+
 \examples{
 data = read.morphodata(file = system.file("extdata", "centaurea.txt",
-    package = "MorphoTools2"),dec = ".", sep = "\t")
+    package = "MorphoTools2"), dec = ".", sep = "\t")
 
 # data = read.morphodata("clipboard")
 

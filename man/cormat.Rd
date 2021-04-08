@@ -1,7 +1,7 @@
 \name{cormat}
 \alias{cormat}
 \alias{cormatSignifTest}
-\title{Correlations of characters}
+\title{Correlations of Characters}
 
 \description{
 The cormat function calculates the matrix of the correlation coefficients of the characters.

@@ -2,7 +2,7 @@
 \alias{plotAddLegend}
 
 
-\title{Add legends to plot}
+\title{Add Legends to a Plot}
 
 \description{
 This function can be used to add legends to plots.

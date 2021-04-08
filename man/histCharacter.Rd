@@ -1,14 +1,14 @@
 \name{histCharacter}
 \alias{histCharacter}
 \alias{histAll}
-\title{Histograms of characters.}
+\title{Histograms of Characters}
 \usage{
 histCharacter(object, character, taxon = levels(object$Taxon), histogram = TRUE,
-              col = "lightgray",  densityLine = TRUE, normDistLine = TRUE, ...)
+        col = "lightgray", main = NULL, densityLine = TRUE, normDistLine = TRUE, ...)
 
 histAll(object, folderName = "histograms", taxon = levels(object$Taxon), histogram = TRUE,
-        col = "lightgray", densityLine = TRUE, normDistLine = TRUE,
-         width = 480, height = 480, units = "px", ...)
+        col = "lightgray", main = NULL, densityLine = TRUE, normDistLine = TRUE,
+        width = 480, height = 480, units = "px", ...)
 }
 
 \arguments{
@@ -20,9 +20,9 @@ histAll(object, folderName = "histograms", taxon = levels(object$Taxon), histogr
 
 \item{col}{colour to be used to fill the bars.}
 
-
 \item{taxon}{taxa which should be plotted, default is to plot all of the taxa.}
 
+\item{main}{a main title for the plot.}
 
 \item{histogram}{logical, if \code{TRUE}, the histograms will be drawn.}
 
@@ -34,7 +34,7 @@ histAll(object, folderName = "histograms", taxon = levels(object$Taxon), histogr
 
 \item{height}{the height of the figure.}
 
-\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
+\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{"px"} (pixels, the default), \code{"in"} (inches), \code{"cm"} or \code{"mm"}.}
 
 \item{...}{further arguments to be passed to \code{\link{hist}} or graphical parameters \code{\link{par}}.}
 
@@ -50,5 +50,5 @@ data(centaurea)
 
 histCharacter(centaurea, character = "IW", breaks = seq(0.5, 2.5, 0.1))
 
-histAll(centaurea, folderName = "histograms")
+histAll(centaurea, folderName = "../histograms")
 }

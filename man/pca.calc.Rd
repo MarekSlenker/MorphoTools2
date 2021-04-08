@@ -2,7 +2,7 @@
 
 \alias{pca.calc}
 
-\title{Principal component analysis (PCA)}
+\title{Principal Component Analysis}
 
 \description{
 This function performs Principal Component Analysis.

@@ -17,8 +17,6 @@ qqnormAll(object, folderName = "qqnormPlots", taxon = levels(object$Taxon),
 
 \item{folderName}{folder to save produced Q-Q plots.}
 
-\item{col}{colour to be used to fill the bars.}
-
 \item{taxon}{taxa which should be plotted, default is to plot all of the taxa.}
 
 \item{main}{main title for the plot.}
@@ -27,7 +25,7 @@ qqnormAll(object, folderName = "qqnormPlots", taxon = levels(object$Taxon),
 
 \item{height}{the height of the figure.}
 
-\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
+\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{"px"} (pixels, the default), \code{"in"} (inches), \code{"cm"} or \code{"mm"}.}
 
 \item{...}{further arguments to be passed to \code{\link{qqnorm}} or graphical parameters \code{\link{par}}.}
 }
@@ -44,5 +42,5 @@ data(centaurea)
 
 qqnormCharacter(centaurea, character = "SF")
 
-qqnormAll(centaurea, folderName = "qqnormPlots")
+qqnormAll(centaurea, folderName = "../qqnormPlots")
 }

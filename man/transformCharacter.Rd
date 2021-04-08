@@ -1,9 +1,13 @@
 \name{transformCharacter}
 \alias{transformCharacter}
-\title{Transformation of character.}
+\title{Transformation of Character}
 
 \usage{
 transformCharacter(object, character, FUN, newName = NULL)
+}
+
+\description{
+This function transforms morphological characters by applying another function passed in the argument.
 }
 
 \arguments{
@@ -11,30 +15,41 @@ transformCharacter(object, character, FUN, newName = NULL)
 
 \item{character}{a morphological character that should be transformed.}
 
-\item{FUN}{the transforming function to be applied to character.}
+\item{FUN}{the transforming function to be applyed to character.}
 
 \item{newName}{a name to rename the original character. If \code{NULL}, the name of the transformed character remains the same.}
 }
 
-\description{
-Transformation is applyed to characters to improve their distribution (to become normally distributed or at least to achieve less deviation from normality). The \code{FUN} argument takes any function. In the examples bellow, we used a number 1 as constant, but note, the chosen constant affect the result. See MorphoTools2 tutorial for details.
+\details{
+Transformation is applyed to characters to improve their distribution (to become normally distributed or at least to achieve less deviation from normality). The \code{FUN} argument takes any function, able to accept as input any of the character specified by \code{character} argument.
+
+Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation (if there are zero values in the data), because the argument of the logarithm can be only positive numbers. The arcsine transformation is applicable for proportions and percentages (for values ranging from 0 to 1). In the examples bellow, we used a number 1 as constant, but note, the chosen constant affect the result. See MorphoTools2 tutorial for details.
 }
 
 \examples{
 data(centaurea)
 
 # For a right-skewed (positive) distribution can be used:
+# Logarithmic transformation
+cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log10(x+1))
+# Square root transformation
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt(x))
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) xˆ(1/3))
+# Cube root transformation
+cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) x^(1/3))
+# Arcsine transformation
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) asin(sqrt(x)))
 
 # For a left-skewed (negative) distribution can be used:
+# Logarithmic transformation
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log((max(x)+1)-x))
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log10((max(x)+1)-x))
+# Square root transformation
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt((max(x)+1)-x))
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) ((max(x)+1)-x)ˆ(1/3))
+# Cube root transformation
+cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) ((max(x)+1)-x)^(1/3))
+# Arcsine transformation
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) asin(sqrt((max(x))-x)))
 
 

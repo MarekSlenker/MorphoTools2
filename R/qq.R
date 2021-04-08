@@ -8,12 +8,12 @@ qqnormCharacter <- function(object, character, taxon = levels(object$Taxon), mai
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
-  opar <- par(no.readonly = TRUE)
+  opar <- graphics::par(no.readonly = TRUE)
 
 
   qqnormInternal(object, character, taxon, main, ...)
 
-  par(opar)
+  graphics::par(opar)
 }
 
 #' @rdname qqnormCharacter
@@ -22,7 +22,7 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
 
   checkClass(object, "morphodata")
 
-  opar <- par(no.readonly = TRUE)
+  opar <- graphics::par(no.readonly = TRUE)
 
 
   # check for dir existence. if not, make a new dir
@@ -40,7 +40,7 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
     grDevices::dev.off()
   }
 
-  par(opar)
+  graphics::par(opar)
 
 
 }
@@ -66,13 +66,13 @@ qqnormInternal <- function(object, character, taxon, main, ...) {
     }
   }
 
-  par(mfrow=dims)
-  par(mar=c(4,4,2,1))
-  par(mgp=c(2,0.8,0))
+  graphics::par(mfrow=dims)
+  graphics::par(mar=c(4,4,2,1))
+  graphics::par(mgp=c(2,0.8,0))
 
   for (tax in taxon)   {
     dataTaxon = as.matrix(object$data[which( object$Taxon %in% tax), ][character])
-    dataTaxon = na.omit(dataTaxon)
+    dataTaxon = stats::na.omit(dataTaxon)
 
     if (is.null(main)) {
       main = paste(character, tax, sep = ": ")

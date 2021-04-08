@@ -1,21 +1,21 @@
 #' @rdname classif.lda
 #' @export
-classif.matrix <- function(object, level = "taxon") {
+classif.matrix <- function(result, level = "taxon") {
 
-  checkClass(object, "classifdata")
+  checkClass(result, "classifdata")
 
   if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
 
   if (level == "taxon" )
   {
-    classif = table(object$Taxon, object$classif$classification)
+    classif = table(result$Taxon, result$classif$classification)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
     classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     classif = rbind(classif, c("Total", colSums(classif[2:ncol(classif)])))
 
-  if (! is.null(object$correct)) {
-    NofCorrect = stats::aggregate(object$correct$correct, list(Category=object$Taxon), sum)
+  if (! is.null(result$correct)) {
+    NofCorrect = stats::aggregate(result$correct$correct, list(Category=result$Taxon), sum)
     classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
     classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
   }
@@ -23,37 +23,37 @@ classif.matrix <- function(object, level = "taxon") {
 
   } else if (level == "pop")
   {
-    classif = table(object$Population, object$classif$classification)
+    classif = table(result$Population, result$classif$classification)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
     classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     tax = data.frame(
-      "Population" = object$Population[ ! duplicated(object$Population, object$Taxon)],
-      "Taxon" = object$Taxon[ ! duplicated(object$Population, object$Taxon)],
+      "Population" = result$Population[ ! duplicated(result$Population, result$Taxon)],
+      "Taxon" = result$Taxon[ ! duplicated(result$Population, result$Taxon)],
       stringsAsFactors = FALSE
     )
     classif = merge(tax, classif, by = "Population" )
     classif = rbind(classif, c("Total", "", colSums(classif[3:ncol(classif)])))
 
-    if (! is.null(object$correct)) {
-      NofCorrect = stats::aggregate(object$correct$correct, list(Category=object$Population), sum)
+    if (! is.null(result$correct)) {
+      NofCorrect = stats::aggregate(result$correct$correct, list(Category=result$Population), sum)
       classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
       classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
     }
 
   } else if (level == "indiv")
   {
-    classif = data.frame("ID" = object$ID, "Population" = object$Population, "Taxon" = object$Taxon,
-                         "classification" = object$classif, stringsAsFactors = FALSE)
+    classif = data.frame("ID" = result$ID, "Population" = result$Population, "Taxon" = result$Taxon,
+                         "classification" = result$classif, stringsAsFactors = FALSE)
 
-    if (attr(object, "method" ) == "lda") {
-      colnames(object$prob) =  paste("as.", colnames(object$prob), sep = "")
+    if (attr(result, "method" ) == "lda") {
+      colnames(result$prob) =  paste("as.", colnames(result$prob), sep = "")
     }
 
-    classif = cbind(classif,object$prob)
+    classif = cbind(classif,result$prob)
 
-    if (! is.null(object$correct)) {
-         classif = cbind(classif, "correct" = object$correct)
+    if (! is.null(result$correct)) {
+         classif = cbind(classif, "correct" = result$correct)
     }
 
     rownames(classif) = NULL

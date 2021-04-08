@@ -2,7 +2,7 @@
 \alias{plot3Dpoints}
 \alias{plot3Dpoints.pcadata}
 \alias{plot3Dpoints.cdadata}
-\title{The default scatterplot 3D function}
+\title{The Default Scatterplot 3D Function}
 
 \description{
 A generic function for plotting ordination scores stored in '\code{\link{pcadata}}' and '\code{\link{cdadata}}' objects.
@@ -28,8 +28,8 @@ plot3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
 \item{ticktype}{character: \code{"simple"} draws just an arrow parallel to the axis to indicate direction of increase; \code{"detailed"} draws normal ticks as per 2D plots.}
 \item{bty}{the type of the box. One of \code{"g", "b2", "bl", "f", "u"} can be specified.}
 \item{type}{the type of plot points, \code{"p"} for points, or \code{"h"} for vertical spikes.}
-\item{labels}{logical, defines if point's labels are displayed.}
-\item{legend}{logical, defines if legend is displayed. Only restricted number of legend parameters are supported. For more precise legend plotting, use \code{\link{plotAddLegend}} directly.}
+\item{labels}{logical, if \code{TRUE}, point's labels are displayed.}
+\item{legend}{logical, if \code{TRUE}, legend is displayed. Only restricted number of legend parameters are supported. For more precise legend plotting, use \code{\link{plotAddLegend}} directly.}
 \item{legend.pos}{a single keyword from the list \code{"bottomright"}, \code{"bottom"}, \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, \code{"topright"}, \code{"right"}, and \code{"center"}, to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items.}
 \item{...}{further arguments to be passed to \code{\link{plot3D}}, \code{\link{persp}}, \code{\link{par}}.}

@@ -1,10 +1,10 @@
 \docType{data}
 \name{cdadata}
 \alias{cdadata}
-\title{Class cdadata}
+\title{Class Cdadata}
 
 \description{
-The cdadata class is designed for storing results of Canonical discriminant analysis (CDA).}
+The cdadata class is designed for storing results of Canonical discriminant analysis.}
 
 \format{Class \code{cdadata}.
 \describe{
@@ -16,7 +16,7 @@ The cdadata class is designed for storing results of Canonical discriminant anal
 				\item{scores}{ordination scores of cases (objects, OTUs), centred and scaled.}
 			}
 	}
-	
+
 	\item{eigenValues}{eigenvalues, i.e., proportion of variation of the original dataset expressed by individual axes.}
 	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
 	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }

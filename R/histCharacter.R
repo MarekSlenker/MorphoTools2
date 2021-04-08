@@ -6,12 +6,12 @@ histCharacter <- function(object, character, taxon = levels(object$Taxon), histo
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
-  opar <- par(no.readonly = TRUE)
+  opar <- graphics::par(no.readonly = TRUE)
 
   histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
 
 
-  par(opar)
+  graphics::par(opar)
 
 
 
@@ -24,7 +24,7 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
 
   checkClass(object, "morphodata")
 
-  opar <- par(no.readonly = TRUE)
+  opar <- graphics::par(no.readonly = TRUE)
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
@@ -34,8 +34,6 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
   # hists plot for characters
   for (character in colnames(object$data))
   {
-    main = paste(character, tax, sep = ": ")
-
     grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", character, ".jpg", sep = "" ), width = width, height = height, units = units)
 
     histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
@@ -43,7 +41,7 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
     grDevices::dev.off()
   }
 
-  par(opar)
+  graphics::par(opar)
 
 
 }
@@ -64,8 +62,8 @@ histInternal <- function(object, character, taxon, histogram, col, main, density
     }
   }
 
-  par(mfrow=dims)
-  par(mar=c(2,1,2,1))
+  graphics::par(mfrow=dims)
+  graphics::par(mar=c(2,1,2,1))
 
   if (! histogram) {
     lty = "blank"; col = NA
@@ -75,14 +73,18 @@ histInternal <- function(object, character, taxon, histogram, col, main, density
 
   for (tax in taxon)   {
     dataTaxon = as.matrix(object$data[which( object$Taxon %in% tax), ][character])
-    dataTaxon = na.omit(dataTaxon)
+    dataTaxon = stats::na.omit(dataTaxon)
 
     if (is.null(main)) {
       main = paste(character, tax, sep = ": ")
     }
 
     graphics::hist(dataTaxon, freq=FALSE, main = main, ylab="", xlab="", yaxt="n", col = col, lty=lty, ...)
-    if (densityLine) { graphics::lines(density(dataTaxon), lwd=2) }
-    if (normDistLine) { graphics::curve(dnorm(x, mean=mean(dataTaxon), sd=sqrt(var(dataTaxon))), col="red", lwd=2, add=TRUE) }
+    if (densityLine) { graphics::lines(stats::density(dataTaxon), lwd=2) }
+    if (normDistLine) {
+      graphics::lines(seq(min(dataTaxon),max(dataTaxon),(max(dataTaxon)-min(dataTaxon))/1000),
+            stats::dnorm(seq(min(dataTaxon),max(dataTaxon),(max(dataTaxon)-min(dataTaxon))/1000), mean=mean(dataTaxon), sd=sqrt(stats::var(dataTaxon))),
+            col="red", lwd=2)
+     }
   }
 }

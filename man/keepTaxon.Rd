@@ -5,7 +5,7 @@
 \alias{keepSample}
 
 
-\title{Keep items (Taxa, Populations, Samples, morphological characters) in an morphodata object (and remove other)}
+\title{Keep Items (Taxa, Populations, Samples, Morphological Characters) in an Morphodata Object (and Remove Others)}
 
 \usage{
 keepTaxon(object, taxonName)

@@ -50,7 +50,7 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{height}{the height of the figure.}
 
-\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{px} (pixels, the default), \code{in} (inches), \code{cm} or \code{mm}.}
+\item{units}{the units in which \code{height} and \code{width} are given. Can be \code{"px"} (pixels, the default), \code{"in"} (inches), \code{"cm"} or \code{"mm"}.}
 
 \item{...}{further arguments to be passed to \code{\link{boxplot}} or \code{\link{bxp}}.}
 
@@ -78,5 +78,5 @@ boxplotCharacter(centaurea, "ST", boxlty = 1, medlwd = 5,
           whisklty = 2, whiskcol = "red", staplecol = "red",
           outcol = "grey30", pch = "-")
 
-boxplotAll(centaurea, folderName = "boxplots")
+boxplotAll(centaurea, folderName = "../boxplots")
 }

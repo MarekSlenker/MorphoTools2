@@ -1,7 +1,7 @@
 \name{plotAddLabels.characters}
 \alias{plotAddLabels.characters}
 
-\title{Add labels to a plot}
+\title{Add Labels to a Plot}
 \usage{
 ## S3 method for class 'pcadata'
 plotAddLabels.characters(result, labels = characters(result), include = T,

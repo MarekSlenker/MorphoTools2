@@ -39,7 +39,7 @@ pca.calc <- function(object) {
   pcaResult$objects$Population = object$Population
   pcaResult$objects$Taxon = object$Taxon
 
-  pcaResult$eigenVectors = princompRes$loadings #[,1:length(princompRes$sdev)]
+  pcaResult$eigenVectors = princompRes$loadings[,] #[,1:length(princompRes$sdev)]
 
 
   vars <- princompRes$sdev^2

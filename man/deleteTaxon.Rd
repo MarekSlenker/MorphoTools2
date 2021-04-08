@@ -4,7 +4,7 @@
 \alias{deleteSample}
 \alias{deleteCharacter}
 
-\title{Remove items (Taxa, Populations, morphological characters) from morphodata object}
+\title{Remove Items (Taxa, Populations, Morphological Characters) from Morphodata Object}
 \usage{
 deleteTaxon(object, taxonName)
 

@@ -1,7 +1,7 @@
 \name{knn.select}
 \alias{knn.select}
 
-\title{Search for the optimal k-nearest neighbours}
+\title{Search for the Optimal K-nearest Neighbours}
 
 
 \description{

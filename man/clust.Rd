@@ -1,6 +1,6 @@
 \name{clust}
 \alias{clust}
-\title{Hierarchical clustering}
+\title{Hierarchical Clustering}
 
 \description{
 Hierarchical cluster analysis of objects.

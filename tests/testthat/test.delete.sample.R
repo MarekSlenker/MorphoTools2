@@ -9,7 +9,7 @@ test_that("wrong input",  {
 
   expect_error(deleteSample(data, sampleName = "ds", missingPercentage = 2), "Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs." )
 
-  expect_error(deleteSample(data, sampleName = 2), "'missingPercentage' is not a string" )
+  expect_error(deleteSample(data, sampleName = 2), "sample 2 does not exist" )
 
   expect_error(deleteSample(data, missingPercentage = "ds"), "'missingPercentage' is not numeric." )
 })

@@ -19,7 +19,7 @@ test_that("pca wrong input",  {
 
   plotCharacters(pcaRes, labels = F)
 
-  expect_error(plotAddLabels.characters(pcaRes, axes = 2), "you have to specifi 2 axes (e.g., axes = c(1,2))", fixed = TRUE)
+  expect_error(plotAddLabels.characters(pcaRes, axes = 2), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)
   expect_error(plotAddLabels.characters(pcaRes, axes = c(2,26)), "specified axes are out of bounds. Object has only 25 axes.")
 
   expect_error(plotAddLabels.characters(pcaRes, labels = "eeee", pos = 4, cex = 1), "label eeee does not exist")

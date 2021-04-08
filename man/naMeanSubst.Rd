@@ -1,6 +1,6 @@
 \name{naMeanSubst}
 \alias{naMeanSubst}
-\title{Replace missing data by population average}
+\title{Replace Missing Data by Population Average}
 \usage{
 naMeanSubst(object)
 }
