@@ -17,8 +17,8 @@ plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
-  if (is.null(xlab)) xlab = paste("PC ", axes[1], sep = "")
-  if (is.null(ylab)) ylab = paste("PC ", axes[2], sep = "")
+  if (is.null(xlab)) xlab = paste("PC", axes[1], sep = "")
+  if (is.null(ylab)) ylab = paste("PC", axes[2], sep = "")
   if (is.null(main)) main = "Eigenvectors"
 
   if (is.null(xlim)) xlim = c(max(abs(result$eigenVectors[ ,axes[1]]))*-1, max(abs(result$eigenVectors[ ,axes[1]])))* 1.05 # + 5%
@@ -100,8 +100,8 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
     if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = FALSE)
 
 
-    if (is.null(xlab)) xlab = paste("discrim. axis ", axes[1], sep = "")
-    if (is.null(ylab)) ylab = paste("discrim. axis ", axes[2], sep = "")
+    if (is.null(xlab)) xlab = paste("Can", axes[1], sep = "")
+    if (is.null(ylab)) ylab = paste("Can", axes[2], sep = "")
 
     if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[ ,axes[1]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[1]])))* 1.05 # + 5%
     if (is.null(ylim)) ylim = c(max(abs(result$totalCanonicalStructure[ ,axes[2]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[2]])))* 1.05 # + 5%

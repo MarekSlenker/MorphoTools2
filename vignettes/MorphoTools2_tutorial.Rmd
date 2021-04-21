@@ -1,5 +1,5 @@
 ---
-title: \vspace{-1.5cm} MorphoTools2 version 1.0.0 tutorial \vspace{-0.3cm}  
+title: \vspace{-1.5cm} MorphoTools2 version 1.0.0 tutorial
 author: | 
   | **Marek Šlenker** \vspace*{0.5pc}
   | Slovak Academy of Sciences, Bratislava, Slovakia
@@ -105,7 +105,7 @@ data(centaurea)
 
 In genereal, morphological data can be imported using the `read.morphodata()` function, providing path to your data[^3]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
 
-[^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `path.package("MorphoTools2")`.
+[^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.
 
 ```{r eval = FALSE, echo = TRUE}
 centaurea = read.morphodata(file = "<PATH TO centaurea.txt>", dec = ".", sep = "\t")

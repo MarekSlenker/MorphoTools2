@@ -2,15 +2,10 @@ Package: MorphoTools2
 Type: Package
 Title: Multivariate Morphometric Analysis
 Version: 1.0.0
-Date: 2020-12-26
-Authors@R: c(
-  person("Marek", "Šlenker", role = c("aut", "cre"), email = "marek.slenker@savba.sk", comment = c(ORCID = "0000-0002-5919-890X")),
-  person("Petr", "Koutecký", role = "ctb", email = "kouta@prf.jcu.cz",  comment = c(ORCID = "0000-0002-3455-850X")),
-  person("Karol", "Marhold", role = "ctb", email = "karol.marhold@savba.sk",  comment = c(ORCID = "0000-0002-7658-0844"))
-  )
-Author: Marek Šlenker [aut, cre] (<https://orcid.org/0000-0002-5919-890X>),
-        Petr Koutecký [ctb] (<https://orcid.org/0000-0002-3455-850X>),
-        Karol Marhold [ctb] (<https://orcid.org/0000-0002-7658-0844>)
+Date: 2021-03-26
+Author: Marek Šlenker [aut, cre] (https://orcid.org/0000-0002-5919-890X)
+        Petr Koutecký [ctb] (https://orcid.org/0000-0002-3455-850X)
+        Karol Marhold [ctb] (https://orcid.org/0000-0002-7658-0844)
 Maintainer: Marek Šlenker <marek.slenker@savba.sk>
 Description: An R package for analysing multivariate morphological data.
 URL: https://github.com/MarekSlenker/MorphoTools2

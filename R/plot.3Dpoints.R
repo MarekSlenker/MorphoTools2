@@ -37,9 +37,9 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
 
   if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  if (is.null(xlab)) xlab = paste("Canonical axis",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste("Canonical axis",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste("Canonical axis",axes[3], " (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste("Can",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste("Can",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste("Can",axes[3], " (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,

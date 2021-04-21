@@ -17,9 +17,9 @@
 \contentsline {paragraph}{Replace missing values}{13}{section*.18}%
 \contentsline {section}{4. Hierarchical clustering}{14}{section*.19}%
 \contentsline {section}{5. Principal component analysis (PCA)}{15}{section*.20}%
-\contentsline {section}{6. Canonical discriminant analysis (CDA)}{21}{section*.21}%
-\contentsline {paragraph}{Passive prediction of samples.}{27}{section*.22}%
-\contentsline {section}{7. Classificatory discriminant analysis}{29}{section*.23}%
-\contentsline {section}{Further reading}{32}{section*.24}%
-\contentsline {section}{How to cite MorphoTools2}{33}{section*.25}%
-\contentsline {section}{References}{33}{section*.26}%
+\contentsline {section}{6. Canonical discriminant analysis (CDA)}{24}{section*.21}%
+\contentsline {paragraph}{Passive prediction of samples.}{30}{section*.22}%
+\contentsline {section}{7. Classificatory discriminant analysis}{32}{section*.23}%
+\contentsline {section}{Further reading}{36}{section*.24}%
+\contentsline {section}{How to cite MorphoTools2}{36}{section*.25}%
+\contentsline {section}{References}{37}{section*.26}%

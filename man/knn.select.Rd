@@ -39,7 +39,7 @@ centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 
 # classification by nonparametric k-nearest neighbour method
-knn.select(centaurea, crossval = "pop")
-classifRes.knn = classif.knn(centaurea, k = 12, crossval = "pop")
+knn.select(centaurea, crossval = "indiv")
+classifRes.knn = classif.knn(centaurea, k = 12, crossval = "indiv")
 
 }
