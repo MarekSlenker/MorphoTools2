@@ -70,11 +70,17 @@ qqnormInternal <- function(object, character, taxon, main, ...) {
   graphics::par(mar=c(4,4,2,1))
   graphics::par(mgp=c(2,0.8,0))
 
+  setMain = FALSE
+  if (is.null(main)) {
+    setMain = TRUE
+  }
+
   for (tax in taxon)   {
     dataTaxon = as.matrix(object$data[which( object$Taxon %in% tax), ][character])
     dataTaxon = stats::na.omit(dataTaxon)
 
-    if (is.null(main)) {
+
+    if (setMain) {
       main = paste(character, tax, sep = ": ")
     }
 

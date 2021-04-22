@@ -71,11 +71,16 @@ histInternal <- function(object, character, taxon, histogram, col, main, density
     lty = "solid"
   }
 
+  setMain = FALSE
+  if (is.null(main)) {
+    setMain = TRUE
+  }
+
   for (tax in taxon)   {
     dataTaxon = as.matrix(object$data[which( object$Taxon %in% tax), ][character])
     dataTaxon = stats::na.omit(dataTaxon)
 
-    if (is.null(main)) {
+    if (setMain) {
       main = paste(character, tax, sep = ": ")
     }
 
