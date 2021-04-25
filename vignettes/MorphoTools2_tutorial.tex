@@ -1,0 +1,1819 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={ MorphoTools2 version 1.0.0 tutorial},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{\vspace{-1.5cm} MorphoTools2 version 1.0.0 tutorial}
+\author{\textbf{Marek Šlenker} \vspace*{0.5pc}\\
+Slovak Academy of Sciences, Bratislava, Slovakia\\
+\&\\
+Charles University, Prague, Czechia \vspace*{0.5pc}\\
+\emph{\url{https://github.com/MarekSlenker/MorphoTools2}}~\\
+\emph{\href{mailto:marek.slenker@savba.sk}{\nolinkurl{marek.slenker@savba.sk}}}}
+\date{June 18, 2020}
+
+\begin{document}
+\maketitle
+
+\tableofcontents \vspace*{-1pc}
+
+\hypertarget{introduction}{%
+\section{1. Introduction}\label{introduction}}
+
+The package \texttt{MorphoTools2} is dedicated to multivariate analyses
+of morphological data. The needed tools are at the moment scattered over
+several R libraries. This package wraps available statistical and
+graphical tools and provides a comprehensive framework for control and
+manipulation of the input data, core statistical analysis and the wide
+palette of functions designed to visualize results, to make the workflow
+convenient and fast.
+
+\hypertarget{obtaining-and-installing-morphotools2-package}{%
+\section{2. Obtaining and installing MorphoTools2
+package}\label{obtaining-and-installing-morphotools2-package}}
+
+The R console and base system can be obtained at
+\url{http://www.r-project.org/}. Once R is installed,
+\texttt{MorphoTools2} can be installed and loaded by typing the
+following commands into the R console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(MorphoTools2)}
+\KeywordTok{library}\NormalTok{(MorphoTools2)}
+\end{Highlighting}
+\end{Shaded}
+
+To get the latest version of \texttt{MorphoTools2} package, install it
+using the \texttt{devtools::install\_github()} function from the
+\texttt{devtools} package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"MarekSlenker/MorphoTools2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you quit and restart R, you will need to load it again (using the
+\texttt{library} function as shown above).
+
+\hypertarget{data-import-control-and-manipulation}{%
+\section{3. Data import, control and
+manipulation}\label{data-import-control-and-manipulation}}
+
+\hypertarget{data-import}{%
+\subsection{3.1 Data import}\label{data-import}}
+
+As with any statistical software, the first thing you want to do is
+import your raw data. Data can be imported from: (1) plain text files
+(tab, comma, or whitespace delimited, see below); (2) from Excel
+spreadsheets through the clipboard in Windows. Following structure of
+input data is required:
+
+\begin{itemize}
+\tightlist
+\item
+  the first row contains variable names.
+\item
+  the next rows contain individuals (samples, or any other kind of
+  sampling units), single individual per row.
+\item
+  the first three columns include unique identifiers for individuals,
+  populations and taxa/groups, respectively. Columns have to be named as
+  ``ID'', ``Population'' and ``Taxon''\footnote{In case the
+    \textbf{population level is missing or inapplicable} (e.g.~more than
+    one individual only in some populations and/or very low number of
+    individuals per population), copy the values from the``ID'' column
+    to ``Population'' column; this will allow analysing such data by
+    most methods but any analyses considering population level are
+    meaningless.}.
+\item
+  fourth and next columns stores morphological characters\footnote{\textbf{The
+    morphological characters} can be numeric, binary (coded as 0/1), or
+    multi-state ordered categorial characters (e.g., 1 = small, 2 =
+    medium, 3 = large, where change from state 1 to 3 is more costly
+    than change from 1 to 2). On the other hand, unordered categorial
+    characters (e.g.~describing colouration: 1 = red, 2 = green, 3 =
+    blue) are not applicable in discriminant analyses. If there is a
+    reason to include such unordered multistate characters, these
+    characters have to be coded as binary characters, as follow:
+    redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1).}.
+\end{itemize}
+
+\begin{longtable}[]{@{}llllllllll@{}}
+\toprule
+ID & Population & Taxon & SN & SF & ST & SFT & LL & LW &
+LLW\tabularnewline
+\midrule
+\endhead
+RTE1 & RTE & hybr & 35.2 & 23.6 & 58.8 & 0.4 & 11.2 & 3.9 &
+2.87\tabularnewline
+RTE2 & RTE & hybr & 39 & 11.8 & 50.8 & 0.23 & 7.2 & 2.6 &
+2.77\tabularnewline
+RUS112 & RUS & hybr & 24.8 & 23.4 & 48.2 & 0.49 & 7.1 & 2.8 &
+2.54\tabularnewline
+RUS113 & RUS & hybr & 30 & 25.5 & 55.5 & 0.46 & 10.2 & 3.7 &
+2.76\tabularnewline
+OLE1272 & OLE1 & ps & 48.6 & 6.3 & 54.9 & 0.11 & 8.6 & 3.8 &
+2.26\tabularnewline
+OLE1273 & OLE1 & ps & 58.1 & 10 & 68.1 & 0.15 & 11.2 & 3.7 &
+3.03\tabularnewline
+OLE1274 & OLE1 & ps & 30.7 & 26.6 & 57.3 & 0.46 & 7.9 & 3.1 &
+2.55\tabularnewline
+STGH309 & STGH & ps & 77.1 & 15.5 & 92.6 & 0.17 & 11.6 & 3.9 &
+2.97\tabularnewline
+STGH310 & STGH & ps & 35.6 & 19.2 & 54.8 & 0.35 & 9.5 & &
+\emph{NA}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Use underscores (\_) instead of spaces, and avoid special characters
+(e..g punctuation marks). Missing values have to be represented as empty
+cells or by the text \texttt{NA} (not quoted).
+
+In this tutorial, we will use the centaurea dataset, containing
+measurements of 25 morphological characters of three diploid species of
+the \emph{Centaurea phrygia} complex: \emph{C. phrygia} s.str.
+(abbreviated ``ph''), \emph{C. pseudophrygia} (``ps'') and \emph{C.
+stenolepis} (``st'') and the putative hybrid of the last two species
+abbreviated as ``hybr'' (for details, see Koutecký, 2015). The centaurea
+dataset is built-in in this package. Execute command
+\texttt{data(centaurea)} to load this data to your workspace.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(centaurea)}
+\end{Highlighting}
+\end{Shaded}
+
+In genereal, morphological data can be imported using the
+\texttt{read.morphodata()} function, providing path to your
+data\footnote{\textbf{Example dataset} in txt and xlsx formats are
+  stored in the ``extdata'' directory of the MorphoTools2 package
+  installation directory. To find the path to the package location run
+  \texttt{system.file("extdata",\ package\ =\ "MorphoTools2")}.}.
+Argument \texttt{dec} stands for the character used in the file for
+decimal separator, \texttt{sep} is a column delimiter character, usually
+whitespace \texttt{""}, comma \texttt{","} or tab
+\texttt{"\textbackslash{}t"}. The default values are a dot and tab
+(\texttt{"\textbackslash{}t"}), respectively, and these may be omitted
+from the function call. To read data from clipboard (select cells in the
+Excel spreadsheet, press Ctrl+C ), set \texttt{file\ =\ "clipboard"}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centaurea =}\StringTok{ }\KeywordTok{read.morphodata}\NormalTok{(}\DataTypeTok{file =} \StringTok{"<PATH TO centaurea.txt>"}\NormalTok{, }\DataTypeTok{dec =} \StringTok{"."}\NormalTok{, }\DataTypeTok{sep =} \StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centaurea =}\StringTok{ }\KeywordTok{read.morphodata}\NormalTok{(}\DataTypeTok{file =} \StringTok{"clipboard"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The dataset now exists as a \texttt{morphodata} object in R. The
+\texttt{morphodata} object, as well as other objects used later, is
+defined as a \texttt{list}. In R lists act as containers for data.
+Elements stored in \texttt{morphodata} object can be referenced by the
+\texttt{\$} notation. Type \texttt{centaurea\$} and press the tab key to
+see contained elements. Command \texttt{centaurea\$Taxon} print values
+on R console. Run \texttt{?morphodata} to see what a \texttt{morphodata}
+object contains.
+
+Alternatively, the following commands display basic information about
+the dataset or show data in the data viewer.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(centaurea)}
+\CommentTok{#> object of class 'morphodata'}
+\CommentTok{#> - contains 33 populations}
+\CommentTok{#> - contains 4 defined groups (taxa)}
+\CommentTok{#> }
+\CommentTok{#> Populations: BABL, BABU, BOL, BRT, BUK, CERM, CERV, CZLE, DEB, DOM, DUB, HVLT, KASH,}
+\CommentTok{#>  KOT, KOZH, KRO, LES, LIP, MIL, NEJ, NSED, OLE1, OLE2, PREL, PRIS, PROS, RTE, RUS,}
+\CommentTok{#>  SOK, STCV, STGH, VIT, VOL}
+\CommentTok{#> Groups (taxa): hybr, ph, ps, st}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{samples}\NormalTok{(centaurea)}
+\CommentTok{#>  [1] "BABL1146" "BABL1147" "BABL1148" "BABL1149" "BABL1150" "BABL1151"}
+\CommentTok{#>  [7] "BABL1152" "BABL1153" "BABL1154" "BABL1155" "BABL1156" "BABL1157"}
+\CommentTok{#> [13] "BABL1158" "BABL1159" "BABL1164" "BABL1165" "BABL1166" "BABL1170"}
+\CommentTok{#> [19] "BABL1171" "BABL1174" "BABU834"  "BABU835"  "BABU836"  "BABU837" }
+\CommentTok{#> [25] "BABU838"  "BABU839"  "BABU840"  "BABU841"  "BABU842"  "BABU843" }
+\CommentTok{#> [31] "BABU845"  "BABU848"  "BABU851"  "BABU852"  "BABU854"  "BABU855" }
+\CommentTok{#> [37] "BABU856"  "BABU857"  "BABU859"  "BABU860"  "BOL1176"  "BOL1177" }
+\CommentTok{#> [43] "BOL1178"  "BOL1179"  "BOL1180"  "BOL1181"  "BOL1182"  "BOL1183" }
+\CommentTok{#> [49] "BOL1184"  "BOL1185"  "BOL1186"  "BOL1187"  "BOL1188"  "BOL1189" }
+\CommentTok{#> [55] "BOL1190"  "BOL1191"  "BOL1192"  "BOL1193"  "BOL1194"  "BOL1200" }
+\CommentTok{#>  [ reached getOption("max.print") -- omitted 592 entries ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{populations}\NormalTok{(centaurea)}
+\CommentTok{#>  [1] "BABL" "BABU" "BOL"  "BRT"  "BUK"  "CERM" "CERV" "CZLE" "DEB"  "DOM" }
+\CommentTok{#> [11] "DUB"  "HVLT" "KASH" "KOT"  "KOZH" "KRO"  "LES"  "LIP"  "MIL"  "NEJ" }
+\CommentTok{#> [21] "NSED" "OLE1" "OLE2" "PREL" "PRIS" "PROS" "RTE"  "RUS"  "SOK"  "STCV"}
+\CommentTok{#> [31] "STGH" "VIT"  "VOL"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{taxa}\NormalTok{(centaurea)}
+\CommentTok{#> [1] "hybr" "ph"   "ps"   "st"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{characters}\NormalTok{(centaurea)}
+\CommentTok{#>  [1] "SN"  "SF"  "ST"  "SFT" "LL"  "LW"  "LLW" "LM"  "LBA" "LBS" "LS"  "IL" }
+\CommentTok{#> [13] "IW"  "ILW" "CG"  "ML"  "MW"  "MLW" "MF"  "IS"  "IV"  "AL"  "AW"  "ALW"}
+\CommentTok{#> [25] "AP"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{viewMorphodata}\NormalTok{(centaurea)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-control-and-manipulation}{%
+\subsection{3.2 Data control and
+manipulation}\label{data-control-and-manipulation}}
+
+Raw data can contain errors (e.g., typos in numbers or decimal points)
+and missing values which should be corrected or removed. We should also
+consider removing significantly correlated characters, that could
+potentially distort the results of some of the multivariate analyses. An
+assessment of the normality of distribution is a prerequisite for some
+statistical tests. If this assumption is not met, we can try to improve
+distribution by transformation, or prefer nonparametric methods that do
+not require normality.\\
+The following steps go through these issues and end up with the cleaned
+data ready for exploring the morphological differentiation among the
+taxa (or any defined groups).
+
+\hypertarget{assessing-normality-of-data}{%
+\subsubsection{3.2.1 Assessing normality of
+data}\label{assessing-normality-of-data}}
+
+An assessment of the normality of data is a prerequisite for many
+statistical tests. There are two main methods of assessing normality:
+numerically or graphically.\\
+Please note, although all methods available in \texttt{MorphoTools2}
+package are presented here, there is no need to use all of these methods
+at once. What we need is only a brief summary of whether the data are
+normally distributed or not.
+
+\hypertarget{shapiro-wilk-normality-test}{%
+\paragraph{3.2.1.1 Shapiro-Wilk normality
+test}\label{shapiro-wilk-normality-test}}
+
+~
+
+The normality of distribution of each character on the level of
+taxon/group can be tested using the Shapiro-Wilk statistic. If the
+calculated p-value of a certain character is below a threshold (0.05 is
+the default, but can be changed using the \texttt{p.value} argument), we
+can reject the null hypothesis that characters are normally distributed.
+The default behaviour is to print only
+\emph{\texttt{normally\ distributed}} or
+\emph{\texttt{NOT\ normally\ distributed}} as result, but setting
+\texttt{p.value\ =\ NA} displays the exact p-values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiroWilkTest}\NormalTok{(centaurea)}
+\CommentTok{#>     hybr                       ph                        }
+\CommentTok{#> SN  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> SF  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> ST  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> SFT "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> LL  "normally distributed"     "normally distributed"    }
+\CommentTok{#> LW  "normally distributed"     "normally distributed"    }
+\CommentTok{#> LLW "normally distributed"     "NOT normally distributed"}
+\CommentTok{#>     ps                         st                        }
+\CommentTok{#> SN  "normally distributed"     "NOT normally distributed"}
+\CommentTok{#> SF  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> ST  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> SFT "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> LL  "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#> LW  "normally distributed"     "NOT normally distributed"}
+\CommentTok{#> LLW "NOT normally distributed" "NOT normally distributed"}
+\CommentTok{#>  [ reached getOption("max.print") -- omitted 18 rows ]}
+\end{Highlighting}
+\end{Shaded}
+
+As the results are rather extensive (depending on number of groups and
+characters), they can be set assigned an object and exported to the
+clipboard or file using the \texttt{exportRes()} function. This function
+is designed to export the spreadsheet-like results. If needed, default
+decimal separator (\texttt{dec}) and column delimiter character
+(\texttt{sep}) can be changed by particular arguments. See
+\texttt{exportRes()} documentation for details.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{swTest =}\StringTok{ }\KeywordTok{shapiroWilkTest}\NormalTok{(centaurea)}
+\KeywordTok{exportRes}\NormalTok{(swTest, }\DataTypeTok{file =} \StringTok{"clipboard"}\NormalTok{)}
+\KeywordTok{exportRes}\NormalTok{(swTest, }\DataTypeTok{file =} \StringTok{"D:/Projects/Centaurea_PSE/dataAnalysis/shapiroWilkTest.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{histograms}{%
+\paragraph{3.2.1.2 Histograms}\label{histograms}}
+
+~
+
+The histograms are a traditional way of displaying the shape of the
+distribution of data. Function \texttt{histCharacter()} displays a
+within-group distribution of each taxon for particular character. A
+density curve smoothing out the histogram (black) and the normal
+distribution curve (red) are drawn as default but can be removed using
+\texttt{densityLine\ =\ FALSE}, and \texttt{normDistLine\ =\ FALSE}
+arguments. Missing data are omitted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{histCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"SF"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-20-1} \end{center}
+
+To plot histograms for all characters with default settings to a new
+folder (in the working directory):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{histAll}\NormalTok{(centaurea, }\DataTypeTok{folderName =} \StringTok{"histograms"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{normal-q-q-plot}{%
+\paragraph{3.2.1.3 Normal Q-Q plot}\label{normal-q-q-plot}}
+
+~
+
+The normal Q-Q plot is another graphical method of assessing normality.
+The points should lie as close to the line as possible with no obvious
+pattern coming away from the line. Deviations from this line correspond
+to various types of non-normality.
+
+Function \texttt{qqnormCharacter()} draws Q-Q plot for each taxon for a
+particular character, function \texttt{qqnormAll()} do the same for all
+of the characters (and save images to a new folder). Missing data are
+omitted.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnormCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"SF"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=420px,height=300px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-22-1} \end{center}
+
+To plot histograms for all characters with default settings to a new
+folder (in the working directory):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnormAll}\NormalTok{(centaurea, }\DataTypeTok{folderName =} \StringTok{"qqnormPlots"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+We find that most of the characters in our dataset have a non-normal
+distribution. In general, we have two options: we might try a
+transformation to make the data more like normal or prefer nonparametric
+methods that do not require normality (Spearman's correlation
+coefficient instead of Pearson's, and k-nearest neighbours
+classificatory discriminant analysis instead of Linear DA). The
+normality of data is not an assumption of Principal component analysis
+(Shlens, 2014). Canonical discriminant analysis generally requires a
+multivariate normal distribution of characters within-groups
+(quantitative, not binary); nevertheless, they are considerably robust
+to deviations in this respect (Thorpe, 1976; Klecka, 1980).
+
+Transformation of data is the matter of the next section, but in all of
+the subsequent analysis, we will use original data and prefer
+nonparametric methods.
+
+\hypertarget{data-transformation}{%
+\subsubsection{3.2.2 Data transformation}\label{data-transformation}}
+
+The characters that deviate most from the normal distribution can be
+transformed to improve their distribution (to become normally
+distributed or at least to achieve less deviation from normality). From
+the wide palette of applicable transformations (e.g., logarithmic,
+square root, cube root, arcsine) you should choose the one that improves
+the data the most. Note that, when using a log transformation, a
+constant should be added to all values to make them all positive before
+transformation (if there are zero values in the data), because the
+argument of the logarithm can be only positive numbers. The arcsine
+transformation is often used for proportions and percentages (for values
+ranging from 0 to 1).
+
+Transformation can be done by \texttt{transformCharacter()} function,
+which in addition to data, the name of the character which should be
+transformed (\texttt{character}), and new name of transformed character
+(\texttt{newName}; not required) takes as argument a \texttt{FUN}. The
+\texttt{FUN} is an Anonymous function (also known as a lambda
+expression), but without a long explanation, this is where to place the
+function that will transforms the data.
+
+As the \texttt{transformCharacter()} takes as argument another function
+(\texttt{FUN} argument), there is an inexhaustible amount of potential
+transformations. Here we will mention some of them:
+
+For a right-skewed (positive) distribution can be used:\\
+* logarithmic transformation (natural):
+\texttt{FUN\ =\ function(x)\ log(x+1)}\\
+* logarithmic transformation (common):
+\texttt{FUN\ =\ function(x)\ log10(x+1)}\\
+* square root transformation: \texttt{FUN\ =\ function(x)\ sqrt(x)}\\
+* cube root transformation: \texttt{FUN\ =\ function(x)\ x\^{}(1/3)}\\
+* arcsine transformation: \texttt{FUN\ =\ function(x)\ asin(sqrt(x))}
+
+For a left-skewed (negative) distribution can be used:\\
+* logarithmic transformation (natural):
+\texttt{FUN\ =\ function(x)\ log((max(x)+1)-x)}\\
+* logarithmic transformation (common):
+\texttt{FUN\ =\ function(x)\ log10((max(x)+1)-x)}\\
+* square root transformation:
+\texttt{FUN\ =\ function(x)\ sqrt((max(x)+1)-x)}\\
+* cube root transformation:
+\texttt{FUN\ =\ function(x)\ ((max(x)+1)-x)\^{}(1/3)}\\
+* arcsine transformation:
+\texttt{FUN\ =\ function(x)\ asin(sqrt((max(x))-x))}
+
+In the above examples, we use a number 1 as constant, but note, the
+chosen constant affect the result, as shown in the figure below.
+
+\begin{center}\includegraphics{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-24-1} \end{center}
+
+The following figure depicts the effect of various transformation on the
+same data.
+
+\begin{center}\includegraphics[width=420px,height=300px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-25-1} \end{center}
+
+So finally, but just for illustration (as we will prefer nonparametric
+methods), to apply square root transformation on character \texttt{SF},
+use the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centaurea =}\StringTok{ }\KeywordTok{transformCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"SF"}\NormalTok{, }\DataTypeTok{FUN =} \ControlFlowTok{function}\NormalTok{(x) }\KeywordTok{sqrt}\NormalTok{(x), }
+                               \DataTypeTok{newName =} \StringTok{"SF.sqrt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{box-plots}{%
+\subsubsection{3.2.3 Box Plots}\label{box-plots}}
+
+Boxplots are handy tools for detection of outlier values (potential
+typos, missing decimal points, etc.), between-species dissimilarities
+and critical morphological values discriminating among species.
+
+Boxplots can be calculated for a particular character using
+\texttt{boxplotCharacter()} or for all characters at once running
+\texttt{boxplotAll()} function, that saves all boxplots to a new folder
+in your working directory (or to any location). The box is drawn from
+first to third quartile (25th - 75th percentiles), a horizontal line
+drawn inside denotes the median (50th percentile). The whiskers can be
+extended to desired percentiles using \texttt{lowerWhisker} and
+\texttt{upperWhisker} arguments. Missing data are omitted. Many graphic
+parameters can be set, run \texttt{?boxplotCharacter} for details.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplotCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"AL"}\NormalTok{, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px,height=200px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-27-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplotCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"AL"}\NormalTok{, }\DataTypeTok{lowerWhisker =} \FloatTok{0.1}\NormalTok{, }\DataTypeTok{upperWhisker =} \DecValTok{1}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px,height=200px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-28-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplotCharacter}\NormalTok{(centaurea, }\DataTypeTok{character =} \StringTok{"AL"}\NormalTok{, }\DataTypeTok{outliers =} \OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{frame =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{horizontal =}\NormalTok{ T, }\DataTypeTok{notch =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px,height=200px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-29-1} \end{center}
+
+The default behaviour is to plot outliers (asterisks, can be changed by
+\texttt{pch} argument, or use \texttt{outliers\ =\ FALSE} to suppress
+plotting outliers) and to show the trimmed range (omitting 10\% most
+extreme values) using whiskers. As you can see in the above figures,
+hybrids contain one markedly different value, which will require
+examination.
+
+To plot boxplots for all characters with default settings to new folder
+(in the working directory):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxplotAll}\NormalTok{(centaurea, }\DataTypeTok{folderName =} \StringTok{"boxplots"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{descriptive-statistics}{%
+\subsubsection{3.2.4 Descriptive
+statistics}\label{descriptive-statistics}}
+
+The table of descriptive statistics is a less comfortable way of
+detecting outlier values, but it can be used for reporting descriptive
+statistics of morphological characters. This statistics can be
+calculated on the levels of populations, taxa/groups or for the whole
+dataset, using \texttt{descrPopulation()}, \texttt{descrTaxon()} or
+\texttt{descrAll()}, respectively. Using argument \texttt{format}, you
+can specify the desired output format. Keywords \texttt{\$MEAN},
+\texttt{\$SD}, \texttt{\$MIN}, \texttt{\$5\%}, \texttt{\$25\%},
+\texttt{\$MEDIAN}, \texttt{\$75\%}, \texttt{\$95\%}, \texttt{\$MAX} will
+be replaced by actual values. The default behaviour
+(\texttt{format\ =\ NULL}) is to produces a table with all values. Run
+\texttt{?descrTaxon} for more details.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{descrTaxon}\NormalTok{(centaurea, }\DataTypeTok{format =} \StringTok{"($MEAN ± $SD)"}\NormalTok{, }\DataTypeTok{decimalPlaces =} \DecValTok{2}\NormalTok{)}
+\CommentTok{#>    group            hybr              ph              ps              st}
+\CommentTok{#> 1 format     (MEAN ± SD)     (MEAN ± SD)     (MEAN ± SD)     (MEAN ± SD)}
+\CommentTok{#> 2      N             120             160             240             132}
+\CommentTok{#> 3     SN (48.32 ± 23.07) (45.22 ± 17.03) (49.07 ± 19.13)  (55.47 ± 14.8)}
+\CommentTok{#> 4     SF  (16.33 ± 9.83) (20.12 ± 10.21)  (18.85 ± 9.08)   (9.64 ± 7.96)}
+\CommentTok{#> 5     ST (64.65 ± 23.13) (65.34 ± 17.63) (67.93 ± 20.93) (65.11 ± 17.17)}
+\CommentTok{#> 6    SFT   (0.27 ± 0.16)   (0.31 ± 0.14)   (0.29 ± 0.14)    (0.14 ± 0.1)}
+\CommentTok{#>  [ reached 'max' / getOption("max.print") -- omitted 21 rows ]}
+\end{Highlighting}
+\end{Shaded}
+
+The results can be assigned to an object and copied to the clipboard
+(fails for large data) or exported to file, both using the
+\texttt{exportRes()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{descr_tax =}\StringTok{ }\KeywordTok{descrTaxon}\NormalTok{(centaurea, }\DataTypeTok{format =} \StringTok{"($MEAN ± $SD)"}\NormalTok{, }\DataTypeTok{decimalPlaces =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{exportRes}\NormalTok{(descr_tax, }\DataTypeTok{file =} \StringTok{"clipboard"}\NormalTok{)}
+\KeywordTok{exportRes}\NormalTok{(descr_tax, }\DataTypeTok{file =} \StringTok{"descr_tax.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{correlations-of-characters}{%
+\subsubsection{3.2.5 Correlations of
+characters}\label{correlations-of-characters}}
+
+Highly correlated characters (r \textgreater{} \textbar0.95\textbar)
+should not be used in discriminant analysis, as this could potentially
+distort the results. Function \texttt{cormat} calculates the correlation
+coefficients of the characters, Pearson's (default) or Spearman's (does
+not require normally distributed data). The results can be exported with
+the \texttt{exportRes()} function. One from the pair of highly
+correlated character can be removed from a dataset using
+\texttt{deleteCharacter()} function, see below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlations.s =}\StringTok{ }\KeywordTok{cormat}\NormalTok{(centaurea, }\DataTypeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\KeywordTok{exportRes}\NormalTok{(correlations.s, }\DataTypeTok{file=}\StringTok{"correlations.spearman.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Significance tests are usually unnecessary for morphometric analysis.
+Anyway, if tests are needed, they can be computed using the
+\texttt{cormatSignifTest()} function.
+
+\hypertarget{populations-as-operational-taxonomic-units}{%
+\subsubsection{3.2.6 Populations as operational taxonomic
+units}\label{populations-as-operational-taxonomic-units}}
+
+To simplify the overall structure especially in large datasets, one can
+consider the use of populations instead of individuals. This means that
+each population will be represented by averages of the individuals'
+values. Missing values will be ignored.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pops =}\StringTok{ }\KeywordTok{populOTU}\NormalTok{(centaurea)}
+\CommentTok{#> Warning: Unable to calculate the means of characters AL AW ALW AP in}
+\CommentTok{#> populations LIP PREL. Values are NA.}
+\end{Highlighting}
+\end{Shaded}
+
+We received a warning that the values of some characters are
+\texttt{NA}. How to deal with missing data, we will discuss in the
+following section.
+
+\hypertarget{missing-data}{%
+\subsubsection{3.2.7 Missing data}\label{missing-data}}
+
+Missing values are not accepted in morphological analyses, and
+MorphoTools2 do not edit user's data in the background. The user has to
+do his/her own decision, what to do with missing values. There are two
+options: remove or replace. But before we do anything else, let's look
+at the descriptive statistic about missing data using
+\texttt{missingCharactersTable()} and \texttt{missingSamplesTable()}
+functions. The amount of missing data can be summarized on various
+levels, namely ``\texttt{taxon}'', populations (``\texttt{pop}''), or
+individuals (``\texttt{indiv}'').
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# for demonstration only. Not all populations are displayed.}
+\KeywordTok{missingCharactersTable}\NormalTok{(centaurea, }\DataTypeTok{level =} \StringTok{"pop"}\NormalTok{)}
+\CommentTok{#>     pop Taxon  N missing.percentage numb.of.missing.values}
+\CommentTok{#> 1  BABL    ps 20               0.03                     16}
+\CommentTok{#> 2  BABU  hybr 20               0.03                     16}
+\CommentTok{#> 3   BOL    ps 20               0.12                     60}
+\CommentTok{#> 4   BUK    ph 20               0.00                      0}
+\CommentTok{#> 5  CERM    ps 20               0.05                     24}
+\CommentTok{#> 6   DEB  hybr 20               0.00                      0}
+\CommentTok{#> 7   DUB    st 20               0.08                     40}
+\CommentTok{#> 8   KOT    ph 20               0.00                      0}
+\CommentTok{#> 9  KOZH    ps 20               0.15                     76}
+\CommentTok{#> 10  LES    st 20               0.00                      0}
+\CommentTok{#> 11  LIP    st 20               0.16                     80}
+\CommentTok{#> 12  NEJ    ph 20               0.01                      4}
+\CommentTok{#> 13 PREL    st 20               0.16                     80}
+\CommentTok{#> 14  RTE  hybr 20               0.09                     47}
+\CommentTok{#> 15  RUS  hybr 20               0.00                      0}
+\CommentTok{#> 16 STCV    ph 20               0.11                     56}
+\CommentTok{#> 17  VIT  hybr 20               0.05                     24}
+\CommentTok{#> 18  VOL    st 20               0.02                      8}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# for demonstration only. Not all populations and morphological characters are displayed.}
+\KeywordTok{missingSamplesTable}\NormalTok{(centaurea, }\DataTypeTok{level =} \StringTok{"pop"}\NormalTok{)}
+\CommentTok{#>     pop  N SN SF ST LS IL IW ILW CG ML MW MLW MF IS IV   AL   AW  ALW   AP}
+\CommentTok{#> 1  BABL 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.20 0.20 0.20 0.20}
+\CommentTok{#> 2  BABU 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.20 0.20 0.20 0.20}
+\CommentTok{#> 3   BOL 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.75 0.75 0.75 0.75}
+\CommentTok{#> 4   BUK 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.00 0.00 0.00 0.00}
+\CommentTok{#> 5  CERM 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.30 0.30 0.30 0.30}
+\CommentTok{#> 6   DEB 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.00 0.00 0.00 0.00}
+\CommentTok{#> 7   DUB 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.50 0.50 0.50 0.50}
+\CommentTok{#> 8   KOT 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.00 0.00 0.00 0.00}
+\CommentTok{#> 9  KOZH 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.95 0.95 0.95 0.95}
+\CommentTok{#> 10  LES 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.00 0.00 0.00 0.00}
+\CommentTok{#> 11  LIP 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 1.00 1.00 1.00 1.00}
+\CommentTok{#> 12  NEJ 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.05 0.05 0.05 0.05}
+\CommentTok{#> 13 PREL 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 1.00 1.00 1.00 1.00}
+\CommentTok{#> 14  RTE 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.55 0.60 0.60 0.60}
+\CommentTok{#> 15  RUS 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.00 0.00 0.00 0.00}
+\CommentTok{#> 16 STCV 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.70 0.70 0.70 0.70}
+\CommentTok{#> 17  VIT 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.30 0.30 0.30 0.30}
+\CommentTok{#> 18  VOL 20  0  0  0  0  0  0   0  0  0  0   0  0  0  0 0.10 0.10 0.10 0.10}
+\end{Highlighting}
+\end{Shaded}
+
+As previous warnings indicated, populations LIP and PREL have the
+highest percentage of missing values in morphological characters (16\%;
+80 values per population are missing). The latter table shows that
+characters AL, AW, ALW, and AP are completely missing in these
+populations and 95\% samples of population KOZH lack values of these
+characters.
+
+\hypertarget{remove-items}{%
+\paragraph{Remove items}\label{remove-items}}
+
+As four characters in two populations are completely missing, the next
+step is to decide between deleting characters using
+\texttt{deleteCharacter()} or populations using
+\texttt{deletePopulation()} function. As character AP looks promising
+for delimitation of \emph{C. pseudophrygia} and \emph{C. stenolepis}, we
+will keep the characters and remove the populations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centaurea =}\StringTok{ }\KeywordTok{deletePopulation}\NormalTok{(centaurea, }\DataTypeTok{populationName =} \KeywordTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{, }\StringTok{"PREL"}\NormalTok{))}
+\NormalTok{pops =}\StringTok{ }\KeywordTok{deletePopulation}\NormalTok{(pops, }\DataTypeTok{populationName =} \KeywordTok{c}\NormalTok{(}\StringTok{"LIP"}\NormalTok{, }\StringTok{"PREL"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Another available option is to delete samples with a high portion of
+missing data using \texttt{deleteSample()} function. Command
+\texttt{deleteSample(centaurea,\ missingPercentage\ =\ 0.1)} will return
+samples having no more than 10\% of missing data. To remove specific
+samples, enumerate them in `sampleName' argument in these function.
+
+Here is the right place to mention also \texttt{deleteTaxon()} and
+another quartet of functions with reversed logic which will return only
+mentioned samples, populations, taxa or characters:
+\texttt{keepSample()}, \texttt{keepPopulation()}, \texttt{keepTaxon()},
+and \texttt{keepCharacter()}.
+
+\hypertarget{replace-missing-values}{%
+\paragraph{Replace missing values}\label{replace-missing-values}}
+
+Missing values can be substituted by the average value of the respective
+character in the respective population. However, the mean substitution
+introduces values that are not present in the original dataset. This
+approach is acceptable only if: there are relatively few missing values;
+these missing values are scattered throughout many characters (each
+character includes only a few missing values); removing all individuals
+or all characters with missing data would unacceptably reduce the data
+set. To substitute remaining missing values by average value, use
+function \texttt{naMeanSubst()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{centaurea =}\StringTok{ }\KeywordTok{naMeanSubst}\NormalTok{(centaurea)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+We examined outlier value in ``hybr'' group and ensured that data do not
+contain highly correlated characters. Populations containing only NAs in
+some characters were removed and remaining missing values were replaced
+by the average values. Our dataset is now prepared for further analyses.
+It is not a bad idea to save a copy of it using \texttt{exportRes()}
+function.
+
+\hypertarget{hierarchical-clustering}{%
+\section{4. Hierarchical clustering}\label{hierarchical-clustering}}
+
+Hierarchical classification is one of the methods that do not require
+\emph{a priori} specification of the samples' membership in taxa
+(groups). Therefore, this method is recommended to use first to be able
+to get an insight into the existence of group structure in your data.
+Both individuals and populations can be used, but in large datasets
+(hundreds of specimens or more) the dendrograms for individuals may be
+somewhat messy and populations are better choice. Various measures of
+distance between the observations (rows) are applicable (Euclidean is
+the most often used (default), but maximum, Manhattan, Canberra, binary
+or Minkowski distance can be used as well), and various procedures of
+clustering based on these distances are available (UPGMA (default),
+Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC).
+The function includes standardization of the characters to a zero mean
+and a unit standard deviation. For further details, run \texttt{?clust}.
+
+The dengrogram is displayed using \texttt{plot} function with usual
+graphical parameters. The parameter \texttt{hang} controls distance of
+the labels from the plot, negative values causing labels aligned at
+zero.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pops_hierClust =}\StringTok{ }\KeywordTok{clust}\NormalTok{(pops, }\DataTypeTok{distMethod =} \StringTok{"euclidean"}\NormalTok{, }\DataTypeTok{clustMethod =} \StringTok{"UPGMA"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(pops_hierClust, }\DataTypeTok{hang =} \DecValTok{-1}\NormalTok{, }\DataTypeTok{sub =} \StringTok{""}\NormalTok{, }\DataTypeTok{xlab =} \StringTok{""}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{"distance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-45-1} \end{center}
+
+Four main clusters were formed in the histogram above, however, some
+populations (BABL, LES, OLE1, OLE2, and PROS) were ``incorrectly''
+clustered, what will require further inspection.
+
+\hypertarget{principal-component-analysis-pca}{%
+\section{5. Principal component analysis
+(PCA)}\label{principal-component-analysis-pca}}
+
+Principal components analysis (PCA) is another method without the
+requirement of \emph{a priori} specification of the samples' membership
+in taxa (groups). PCA reduces the measured variables into principal
+components (artificial variables). The first few of them extracts most
+of the variance in the measured variables. The standardized PCA based on
+correlation matrix is calculated by \texttt{pca.calc()} function (based
+on package \texttt{stats}; R Core Team, 2020), the result is an object
+of class \texttt{pcadata}. Run \texttt{?pcadata} for the help page about
+the elements of this object.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca.centaurea =}\StringTok{ }\KeywordTok{pca.calc}\NormalTok{(centaurea)}
+\end{Highlighting}
+\end{Shaded}
+
+The summary statistics of the data is available using the function
+\texttt{summary()}. The eigenvalues indicate the proportion of variation
+of the original dataset expressed by individual axes, usually are
+presented as a percentage of their total sum (eigenvalues as percent).
+The eigenvectors express the direction of vectors characterizing the
+influence of the original characters on the principal component axes.
+The output of summary() function is usually truncated. To get a full
+listing, execute a \texttt{pca.centaurea\$eigenValues},
+\texttt{pca.centaurea\$eigenvaluesAsPercent},
+\texttt{pca.centaurea\$cumulativePercentageOfEigenvalues}, and
+\texttt{pca.centaurea\$eigenVectors} (values will be printed to
+console).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(pca.centaurea)}
+\CommentTok{#> object of class 'pcadata'; storing results of Principal Component Analysis}
+\CommentTok{#> }
+\CommentTok{#> Variation explained by individual axes (listing of axes is truncated):}
+\CommentTok{#>                                         PC1    PC2    PC3    PC4}
+\CommentTok{#> Eigenvalues                          5.1628 3.5660 2.6634 1.7359}
+\CommentTok{#> Eigenvalues as Percent               0.2065 0.1426 0.1065 0.0694}
+\CommentTok{#> Cumulative Percentage of Eigenvalues 0.2065 0.3492 0.4557 0.5251}
+\CommentTok{#> }
+\CommentTok{#> Eigenvectors (listing of axes is truncated):}
+\CommentTok{#>             PC1         PC2          PC3          PC4}
+\CommentTok{#> SN   0.10771859  0.09373031  0.533139126  0.173265222}
+\CommentTok{#> SF  -0.26900856  0.08099386  0.059673923 -0.462177220}
+\CommentTok{#> ST  -0.02956541  0.12948462  0.538957839 -0.062077155}
+\CommentTok{#> SFT -0.27145559  0.02321041 -0.244805653 -0.411793361}
+\CommentTok{#> LL  -0.07372490  0.19206329  0.383723626 -0.232003396}
+\CommentTok{#> LW  -0.20896559  0.21922418  0.152923297 -0.218305082}
+\CommentTok{#> LLW  0.20543544 -0.11181134  0.188443414  0.037332596}
+\CommentTok{#> LM  -0.07506076 -0.13142341  0.065759045 -0.102072769}
+\CommentTok{#> LBA  0.27729432 -0.03899012 -0.004432443 -0.089885703}
+\CommentTok{#> LBS -0.16210200  0.23562860 -0.130667743  0.042490929}
+\CommentTok{#> LS   0.27249981 -0.04295413  0.111132394  0.048352730}
+\CommentTok{#> IL  -0.19760433  0.22449890 -0.018527821  0.225092141}
+\CommentTok{#> IW  -0.36011332  0.06964662  0.053343011  0.247319193}
+\CommentTok{#> ILW  0.34334276  0.04623376 -0.072130258 -0.164859081}
+\CommentTok{#> CG  -0.06830949  0.13736296  0.084854346 -0.328948291}
+\CommentTok{#>  [ reached getOption("max.print") -- omitted 10 rows ]}
+\end{Highlighting}
+\end{Shaded}
+
+The result can be plotted by \texttt{plotPoints()} function. The
+parameter \texttt{axes} define principal components to plot (1st and 2nd
+being default) and \texttt{col} and \texttt{pch}\footnote{\textbf{Plotting
+  symbols commonly used in R}\\
+  \includegraphics[width=1\textwidth,height=\textheight]{./pch.png}}
+control colour and type of plotting character, respectively (the same
+for each points or specific for each group (Taxon)). Usual graphical
+parameters control axes, size of point, etc., several parameters define
+the appearance and position of a legend; see \texttt{plotPoints()}
+documentations for details.
+
+~
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{axes =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{17}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{), }\DataTypeTok{legend =}\NormalTok{ T, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{, }\DataTypeTok{legend.pos=}\StringTok{"bottomright"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-48-1} \end{center}
+
+The coordinates of the individuals (populations) on the principal
+components (sample scores) are stored in
+\texttt{pca.centaurea\$objects\$scores} and can be exported by
+\texttt{exportRes()} function. The dollar sign (\texttt{\$}), lets you
+access elements within an object, same as above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{exportRes}\NormalTok{(pca.centaurea}\OperatorTok{$}\NormalTok{objects}\OperatorTok{$}\NormalTok{scores, }\DataTypeTok{file=}\StringTok{"scoresPCA.centaurea.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The character loadings (eigenvectors) express the influence of the
+original characters to the main components. Eigenvectors are stored in
+\texttt{pca.centaurea\$eigenVectors} and can be exported by
+\texttt{exportRes()} function. Function \texttt{plotCharacters()} draws
+character loadings as arrows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotCharacters}\NormalTok{(pca.centaurea, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=220px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-50-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{exportRes}\NormalTok{(pca.centaurea}\OperatorTok{$}\NormalTok{eigenVectors, }\DataTypeTok{file=}\StringTok{"eigenVectors.centaurea.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+As you can see in the figures above, ordination diagrams of PCA showed
+relatively compact groupings corresponding to taxa with partial
+overlaps. First two components (axes) extracted 20.65\% and 14.26\% of
+the overall variability in data. Characters ILW, IW, are strongly
+correlated with the direction of separation of taxa \emph{C.
+pseudophrygia}, \emph{C. stenolepis} (``ps'', ``st'') and their putative
+hybrid ``hybr''. The \emph{C. phrygia} s.str. (``ph'') is separated in
+the diagonal direction, highly correlated with MW, ML, IV, and MLW
+characters.
+
+The \texttt{plotPoints()} and \texttt{plotCharacters()} are a default
+plotting functions. You can add simple labels using argument
+\texttt{labels\ =\ TRUE}, or point's legend using
+\texttt{legend\ =\ TRUE}. If you need more precise control about
+plotting or want to add other elements to points, use some of the
+following functions:
+
+\begin{itemize}
+\item
+  \texttt{plotAddLabels.points()}, \texttt{plotAddLabels.characters()}
+  allows you to include or exclude specified labels (\texttt{include}),
+  specify the label's position (\texttt{pos}), offset (\texttt{offset}),
+  colours (\texttt{col}), magnification (\texttt{cex}), etc.
+\item
+  \texttt{plotAddLegend()} allows you to specify position using keyword
+  (\texttt{x}\footnote{\textbf{legend position}: \texttt{"topleft"},
+    \texttt{"topright"}, \texttt{"bottomleft"}, \texttt{"bottomright"},
+    \texttt{"top"}, \texttt{"left"}, \texttt{"bottom"},
+    \texttt{"right"}, and \texttt{"center"}.}), number of columns
+  (\texttt{ncol}), expansion and interspacing factors (\texttt{cex},
+  \texttt{pt.cex}, \texttt{x.intersp}, \texttt{y.intersp}), line width
+  (\texttt{lwd}), borders parameters (e.g., \texttt{box.type},
+  \texttt{box.lty}, \texttt{box.lwd}), etc.
+\item
+  \texttt{plotAddEllipses()} draws prediction ellipses around taxa.
+  Ellipses with given probability (\texttt{probability}) define the
+  regions where will fall any new independent observation from the
+  respective taxa.
+\item
+  \texttt{plotAddSpiders()} connects points with its group centroid,
+  thus forms a ``spider'' diagram.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca.pops =}\StringTok{ }\KeywordTok{pca.calc}\NormalTok{(pops)}
+
+\KeywordTok{plotPoints}\NormalTok{(pca.pops, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{17}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{), }
+            \DataTypeTok{legend =}\NormalTok{ F, }\DataTypeTok{labels =}\NormalTok{ F)}
+
+\KeywordTok{plotAddLabels.points}\NormalTok{(pca.pops, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"PROS"}\NormalTok{,}\StringTok{"SOK"}\NormalTok{,}\StringTok{"KASH"}\NormalTok{,}\StringTok{"BOL"}\NormalTok{,}\StringTok{"KRO"}\NormalTok{,}\StringTok{"DUB"}\NormalTok{,}\StringTok{"MIL"}\NormalTok{,}
+                      \StringTok{"CERM"}\NormalTok{,}\StringTok{"DOM"}\NormalTok{ ,}\StringTok{"KOZH"}\NormalTok{,}\StringTok{"KOT"}\NormalTok{), }\DataTypeTok{include =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{pos =} \DecValTok{4}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.7}\NormalTok{)}
+\KeywordTok{plotAddLabels.points}\NormalTok{(pca.pops, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"PROS"}\NormalTok{,}\StringTok{"SOK"}\NormalTok{,}\StringTok{"KASH"}\NormalTok{,}\StringTok{"BOL"}\NormalTok{,}\StringTok{"CERM"}\NormalTok{, }\StringTok{"DOM"}\NormalTok{), }
+                      \DataTypeTok{pos =} \DecValTok{2}\NormalTok{,}\DataTypeTok{cex =} \FloatTok{0.75}\NormalTok{)}
+\KeywordTok{plotAddLabels.points}\NormalTok{(pca.pops,}\DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"KRO"}\NormalTok{,}\StringTok{"MIL"}\NormalTok{,}\StringTok{"KOZH"}\NormalTok{),}\DataTypeTok{pos=}\DecValTok{3}\NormalTok{,}\DataTypeTok{offset=}\FloatTok{0.7}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\KeywordTok{plotAddLabels.points}\NormalTok{(pca.pops,}\DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"DUB"}\NormalTok{,}\StringTok{"KOT"}\NormalTok{), }\DataTypeTok{pos=}\DecValTok{1}\NormalTok{,}\DataTypeTok{offset=}\FloatTok{0.7}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-52-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotCharacters}\NormalTok{(pca.pops, }\DataTypeTok{labels =}\NormalTok{ F)}
+
+\KeywordTok{plotAddLabels.characters}\NormalTok{(pca.pops, }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"ILW"}\NormalTok{,}\StringTok{"MLW"}\NormalTok{, }\StringTok{"LBA"}\NormalTok{), }\DataTypeTok{pos =} \DecValTok{4}\NormalTok{,}\DataTypeTok{cex =} \FloatTok{0.75}\NormalTok{)}
+\KeywordTok{plotAddLabels.characters}\NormalTok{(pca.pops,}\DataTypeTok{labels=}\KeywordTok{c}\NormalTok{(}\StringTok{"IW"}\NormalTok{,}\StringTok{"SFT"}\NormalTok{,}\StringTok{"MW"}\NormalTok{),}\DataTypeTok{pos=}\DecValTok{2}\NormalTok{,}\DataTypeTok{offset=}\FloatTok{0.7}\NormalTok{,}\DataTypeTok{cex=}\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=220px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-53-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+\KeywordTok{plotAddLegend}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }
+               \DataTypeTok{x =} \StringTok{"bottomright"}\NormalTok{, }\DataTypeTok{pt.cex =} \FloatTok{1.3}\NormalTok{, }\DataTypeTok{box.type =} \StringTok{"n"}\NormalTok{ ,}\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{# semi-transparent spider}
+\KeywordTok{plotAddSpiders}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# blue}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# green}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# red}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{102}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{))) }\CommentTok{# orange}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-54-1} \end{center}
+
+To highlight only some groups, use \texttt{NA} for other colours.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.5}\NormalTok{)}
+
+\KeywordTok{plotAddSpiders}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\CommentTok{# blue}
+                                      \OtherTok{NA}\NormalTok{, }\CommentTok{# green}
+                                      \OtherTok{NA}\NormalTok{, }\CommentTok{# red}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{102}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{))) }\CommentTok{# orange}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-55-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.7}\NormalTok{)}
+\KeywordTok{plotAddLegend}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }
+               \DataTypeTok{x =} \StringTok{"bottomright"}\NormalTok{, }\DataTypeTok{pt.cex =} \FloatTok{1.3}\NormalTok{, }\DataTypeTok{box.type =} \StringTok{"n"}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+
+\KeywordTok{plotAddEllipses}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-56-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(pca.centaurea, }\DataTypeTok{type =} \StringTok{"n"}\NormalTok{, }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\FloatTok{7.5}\NormalTok{), }\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{4}\NormalTok{))}
+
+\KeywordTok{plotAddEllipses}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\KeywordTok{plotAddLegend}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }
+              \DataTypeTok{x =} \StringTok{"bottomright"}\NormalTok{, }\DataTypeTok{pt.cex =} \FloatTok{1.3}\NormalTok{, }\DataTypeTok{box.type =} \StringTok{"n"}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-57-1} \end{center}
+
+A 3D scatterplot can be produced using the \texttt{plot3Dpoints}
+function. Use \texttt{phi} and \texttt{theta} arguments to define slope
+and viewing direction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot3Dpoints}\NormalTok{(pca.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{phi =} \DecValTok{20}\NormalTok{, }\DataTypeTok{theta =} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-58-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot3Dpoints}\NormalTok{(pca.pops, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{labels =}\NormalTok{ T )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-59-1} \end{center}
+
+\hypertarget{principal-coordinate-analysis-pcoa}{%
+\section{6. Principal Coordinate Analysis
+(PCoA)}\label{principal-coordinate-analysis-pcoa}}
+
+Výsledky PCoA sa interpretujú rovnakým spôsobom ako výsledky PCA.
+Jediným
+
+The main difference between PCA and PCoA is that the relationship
+between the original characters and principal coordinates is not linear,
+and therefore we do not have information on the influence of particular
+characters on coordinate axes. For quantitative characters we can get at
+least some information in this respect by computing the correlation
+coefficients between given character values and score on the coordinate
+axes.
+
+In this case the problem is formulated differently: given a distance
+matrix of objects a coordinate system is sought in which the original
+distances are preserved completely such that the first few axes usually
+provide a fairly good representation of distances. Starting from raw
+data the distances are to be calculated first. The input matrices should
+be provided in the same way as for most clustering methods. It is
+assumed, however, that semimatrices contain dissimilarities or squared
+distances. The coordinates are saved in a new file.
+
+\hypertarget{non-metric-multidimensional-scaling-nmds}{%
+\section{7. Non-metric multidimensional scaling
+(NMDS)}\label{non-metric-multidimensional-scaling-nmds}}
+
+The metric information in the data or distances is not preserved by the
+ordination. The method of non-metric multidimensional scaling considers
+the rank order of distances, rather than their actual magnitudes. The
+objective is to arrange the objects in a few (usually two) dimensions
+such that the rank order of distances in the new space follows the
+original rank order as closely as possible. The ``goodness'' of the
+non-metric solution is measured by the stress between the original and
+the new distances. The procedure is iterative, the initial configuration
+is random or read from disk file in form of data with objects as rows,
+in free format. You may start immediately requesting two dimensions; if
+you choose, say, 3 for start, the two-dimensional solution will be
+obtained from the three-dimensional. Maximum starting dimensionality is
+5. A stress of 0.1-0.2 is considered fairly good, but there is no
+general rule since the stress is greatly influenced by the number of
+points. The Shepard diagram gives a visual comparison of original and
+new distances. In an ideal case the distances increase monotonically
+over the original distances. The worse the solution, the more scattered
+the points in the Shepard diagram. After computations, the ordination of
+objects and the Shepard diagram can be displayed.
+
+\hypertarget{canonical-discriminant-analysis-cda}{%
+\section{8. Canonical discriminant analysis
+(CDA)}\label{canonical-discriminant-analysis-cda}}
+
+The Canonical discriminant analysis finds linear combinations of the
+original variables that provide maximal separation among \emph{a priori}
+defined groups (by \texttt{Taxon} column in input data). We use this
+analysis to find to what extent can be predefined groups of objects
+distinguished based on available characters and to identify characters,
+which contributes the most to this differentiation. Note, that the
+Canonical discriminant analysis finds n-1 canonical axes, where n is a
+number of groups (taxa). If two groups are analysed, only a single axis
+is computed and the sample scores are displayed as a histogram.
+
+CDA can be calculated by \texttt{cda.calc()} function (using the
+\texttt{candisc} package; Friendly \& Fox, 2020). A result is an object
+of class \texttt{cdadata}, and among other elements (run
+\texttt{?cdadata} for details) it stores total canonical structure
+coefficients, i.e., total-sample correlations between the original
+variables and the canonical variates. Thus, we use them to interpret the
+character's contribution to group separation. The function
+\texttt{summary()} print summaries of the results of \texttt{cda.calc()}
+function (variation explained by individual axes, total canonical
+structure coefficients).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cda.centaurea =}\StringTok{ }\KeywordTok{cda.calc}\NormalTok{(centaurea)}
+
+\KeywordTok{summary}\NormalTok{(cda.centaurea)}
+\CommentTok{#> object of class 'cdadata'; storing results of Canonical Discriminant Analysis}
+\CommentTok{#> }
+\CommentTok{#> Variation explained by individual axes:}
+\CommentTok{#>                                        Can1   Can2   Can3}
+\CommentTok{#> Eigenvalues                          4.4194 2.0049 0.3647}
+\CommentTok{#> Eigenvalues as Percent               0.6515 0.2956 0.0538}
+\CommentTok{#> Cumulative Percentage of Eigenvalues 0.6515 0.9471 1.0008}
+\CommentTok{#> }
+\CommentTok{#> Total canonical structure coefficients:}
+\CommentTok{#>             Can1         Can2         Can3}
+\CommentTok{#> SN  -0.145905291 -0.143820071  0.187446717}
+\CommentTok{#> SF   0.226719447  0.288948819 -0.088309973}
+\CommentTok{#> ST  -0.027765120  0.004883579  0.135653239}
+\CommentTok{#> SFT  0.233159338  0.331672879 -0.213795111}
+\CommentTok{#> LL  -0.067843561  0.057468347 -0.252875809}
+\CommentTok{#> LW   0.007404962  0.296609347 -0.354584342}
+\CommentTok{#> LLW -0.051697329 -0.350145429  0.279507573}
+\CommentTok{#> LM   0.297463454 -0.045009362 -0.047078365}
+\CommentTok{#> LBA -0.318778094 -0.539202777 -0.294264249}
+\CommentTok{#> LBS -0.163214379  0.469973590  0.277373927}
+\CommentTok{#> LS  -0.251889023 -0.640679116  0.197855575}
+\CommentTok{#> IL  -0.058484540  0.488340257  0.343069292}
+\CommentTok{#> IW   0.389239321  0.685339935  0.239991480}
+\CommentTok{#> ILW -0.525181687 -0.611784805 -0.002541299}
+\CommentTok{#> CG  -0.157798961  0.163326602  0.015718224}
+\CommentTok{#> ML  -0.831038839  0.379514738  0.079785332}
+\CommentTok{#> MW   0.735479254  0.267972743 -0.012135822}
+\CommentTok{#> MLW -0.867777425 -0.282448838  0.009070526}
+\CommentTok{#> MF  -0.347280596  0.504543863  0.175527742}
+\CommentTok{#> IS  -0.508744545  0.113697036  0.012459746}
+\CommentTok{#>  [ reached getOption("max.print") -- omitted 5 rows ]}
+
+\KeywordTok{plotPoints}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{axes =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+           \DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{17}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{), }\DataTypeTok{legend =}\NormalTok{ T, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{, }\DataTypeTok{legend.pos=}\StringTok{"bottomright"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-60-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\OtherTok{NA}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
+\KeywordTok{plotAddSpiders}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# blue}
+                                      \OtherTok{NA}\NormalTok{, }\CommentTok{# green}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# red}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{102}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{))) }\CommentTok{# orange}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-61-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\OtherTok{NA}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\OtherTok{NA}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.8}\NormalTok{)}
+\KeywordTok{plotAddEllipses}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\OtherTok{NA}\NormalTok{, }\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{), }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-62-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{cex =} \FloatTok{0.4}\NormalTok{)}
+\KeywordTok{plotAddEllipses}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{plotAddSpiders}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# blue}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# green}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{), }\CommentTok{# red}
+                                      \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{102}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DataTypeTok{max=}\DecValTok{255}\NormalTok{,}\DataTypeTok{alpha=}\DecValTok{130}\NormalTok{))) }\CommentTok{# orange}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-63-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotCharacters}\NormalTok{(cda.centaurea, }\DataTypeTok{cex =} \FloatTok{1.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=220px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-64-1} \end{center}
+
+The CDA ordination diagram unequivocally supports the morphological
+differentiation of \emph{C. phrygia} s.str. (``ph'') along the first
+axis. Characters ML, MLW, IV and MW are oriented in the direction of
+separation, thus these characters contributed the most significantly,
+which is in accordance with the results of PCA. The values of
+correlation of characters with the first canonical axis (total canonical
+structure coefficients) are one of the elements of the object of class
+\texttt{cdadata} and can be accessed by the \texttt{\$} notation.
+Results can be exported using the \texttt{exportRes()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{exportRes}\NormalTok{(cda.centaurea}\OperatorTok{$}\NormalTok{totalCanonicalStructure, }\DataTypeTok{file =} \StringTok{"centaurea_TCS.txt"}\NormalTok{)}
+
+\NormalTok{cda.centaurea}\OperatorTok{$}\NormalTok{totalCanonicalStructure}
+\CommentTok{#>             Can1         Can2         Can3}
+\CommentTok{#> SN  -0.145905291 -0.143820071  0.187446717}
+\CommentTok{#> SF   0.226719447  0.288948819 -0.088309973}
+\CommentTok{#> ST  -0.027765120  0.004883579  0.135653239}
+\CommentTok{#> SFT  0.233159338  0.331672879 -0.213795111}
+\CommentTok{#> LL  -0.067843561  0.057468347 -0.252875809}
+\CommentTok{#> LW   0.007404962  0.296609347 -0.354584342}
+\CommentTok{#> LLW -0.051697329 -0.350145429  0.279507573}
+\CommentTok{#> LM   0.297463454 -0.045009362 -0.047078365}
+\CommentTok{#> LBA -0.318778094 -0.539202777 -0.294264249}
+\CommentTok{#> LBS -0.163214379  0.469973590  0.277373927}
+\CommentTok{#> LS  -0.251889023 -0.640679116  0.197855575}
+\CommentTok{#> IL  -0.058484540  0.488340257  0.343069292}
+\CommentTok{#> IW   0.389239321  0.685339935  0.239991480}
+\CommentTok{#> ILW -0.525181687 -0.611784805 -0.002541299}
+\CommentTok{#> CG  -0.157798961  0.163326602  0.015718224}
+\CommentTok{#> ML  -0.831038839  0.379514738  0.079785332}
+\CommentTok{#> MW   0.735479254  0.267972743 -0.012135822}
+\CommentTok{#> MLW -0.867777425 -0.282448838  0.009070526}
+\CommentTok{#> MF  -0.347280596  0.504543863  0.175527742}
+\CommentTok{#> IS  -0.508744545  0.113697036  0.012459746}
+\CommentTok{#> IV  -0.735244321  0.270554318 -0.229699765}
+\CommentTok{#> AL  -0.014053761  0.326312832 -0.008420114}
+\CommentTok{#> AW   0.124084168  0.210514371  0.067441011}
+\CommentTok{#> ALW -0.183216081  0.102614196 -0.134701510}
+\CommentTok{#> AP   0.117451381  0.528786582 -0.006020908}
+\end{Highlighting}
+\end{Shaded}
+
+As you can see, the above mentioned characters (ML, MLW, IV and MW)
+received highest scores at the first canonical axis (regardless of plus
+or minus sign).
+
+~\\
+\hspace*{0.333em}
+
+To gain better insight into the differentiation among remaining taxa
+(\emph{C. pseudophrygia}, \emph{C. stenolepis} and their putative
+hybrid), we will analyse them separately. The new subdataset (stPsHybr)
+will be created by removing \emph{C. phrygia} from the original dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stPsHybr =}\StringTok{ }\KeywordTok{deleteTaxon}\NormalTok{(centaurea, }\DataTypeTok{taxonName =} \StringTok{"ph"}\NormalTok{)}
+
+\NormalTok{cda.stPsHybr =}\StringTok{ }\KeywordTok{cda.calc}\NormalTok{(stPsHybr)}
+
+\KeywordTok{plotPoints}\NormalTok{(cda.stPsHybr, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{pch =} \KeywordTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{), }
+            \DataTypeTok{legend =}\NormalTok{ T, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{, }\DataTypeTok{legend.pos=}\StringTok{"bottomright"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-67-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{cda.stPsHybr}\OperatorTok{$}\NormalTok{totalCanonicalStructure}
+\CommentTok{#>             Can1         Can2}
+\CommentTok{#> SN  -0.184060229  0.140729352}
+\CommentTok{#> SF   0.380685926 -0.045311134}
+\CommentTok{#> ST   0.001661422  0.112106806}
+\CommentTok{#> SFT  0.413332646 -0.162634321}
+\CommentTok{#> LL   0.038953631 -0.265634161}
+\CommentTok{#> LW   0.332488605 -0.380540862}
+\CommentTok{#> LLW -0.379824050  0.278389296}
+\CommentTok{#> LM   0.048811155  0.103057725}
+\CommentTok{#> LBA -0.644983671 -0.296127557}
+\CommentTok{#> LBS  0.437841099  0.138703090}
+\CommentTok{#> LS  -0.705219959  0.166523413}
+\CommentTok{#> IL   0.515834335  0.238410156}
+\CommentTok{#> IW   0.797627723  0.248437287}
+\CommentTok{#> ILW -0.759008837 -0.091588297}
+\CommentTok{#> CG   0.129352318 -0.050925559}
+\CommentTok{#> ML   0.311426180 -0.358590686}
+\CommentTok{#> MW   0.699934603  0.275940062}
+\CommentTok{#> MLW -0.659822961 -0.289017875}
+\CommentTok{#> MF   0.499559997 -0.005854128}
+\CommentTok{#> IS  -0.007715440 -0.188181984}
+\CommentTok{#> IV   0.113766105 -0.544282887}
+\CommentTok{#> AL   0.340820227 -0.048742382}
+\CommentTok{#> AW   0.272345410  0.079949564}
+\CommentTok{#> ALW  0.058836906 -0.187449402}
+\CommentTok{#> AP   0.604687608 -0.030108718}
+\end{Highlighting}
+\end{Shaded}
+
+The first axis extract most of the variation. Characters correlated with
+this axis (IW, ILW, LS, MW, and MLW) are the most suitable for taxonomic
+delimitation of \emph{C. pseudophrygia} (``ps'') and \emph{C.
+stenolepis} (``st''), while their hybrid exhibit middle values in these
+particular characters. The characters correlated with the second axis
+(IV, ML, and LW) contributes to the separation of hybrid from parental
+species.
+
+~\\
+\hspace*{0.333em}
+
+To draw a 3D scatterplot, use the \texttt{plot3Dpoints} function. Slope
+and viewing direction can be set by \texttt{phi} and \texttt{theta}
+parameters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot3Dpoints}\NormalTok{(cda.centaurea, }\DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}\StringTok{"orange"}\NormalTok{), }\DataTypeTok{phi =} \DecValTok{12}\NormalTok{, }\DataTypeTok{theta =} \DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-68-1} \end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{passive-prediction-of-samples.}{%
+\paragraph{Passive prediction of
+samples.}\label{passive-prediction-of-samples.}}
+
+Sometimes it is desirable to passively display (or predict) the position
+of some samples in the canonical space formed by other samples. This
+approach is applicable for displaying the position of hybrids, type
+specimens, ``atypical'' populations (that could not be assigned reliably
+to any of the predefined groups), etc. Passive samples can be specified
+using \texttt{passiveSamples} argument (accepting both populations and
+taxa). These samples will be excluded from computing discriminant
+function, and only passively predicted in multidimensional space.
+
+Note that in the following example, in which hybrids are passively
+projected into the analysis of parental species, only two ``active''
+groups are present, ``ps'' and ``st''. In such a case, there is only one
+canonical axis and the sample scores are displayed as a histogram
+instead of a scatterplot by the \texttt{plotPoints()} function. The
+additional parameter \texttt{breaks} allows to define the width of
+intervals (histogram columns). Also note use of semi-transparent colours
+to show the overlap of the groups. The colours are defined using
+\texttt{rgb()} function in which the argument \texttt{alpha} defines
+opacity, in the example below on a scale 0 (fully transparent) to 255
+(solid).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\NormalTok{cda.stPs_passiveHybr =}\StringTok{ }\KeywordTok{cda.calc}\NormalTok{(stPsHybr, }\DataTypeTok{passiveSamples =} \StringTok{"hybr"}\NormalTok{)}
+
+\KeywordTok{plotPoints}\NormalTok{(cda.stPs_passiveHybr, }\DataTypeTok{legend =}\NormalTok{ T, }\DataTypeTok{breaks =} \FloatTok{0.2}\NormalTok{,}
+                \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{255}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{255}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{), }\CommentTok{# blue}
+                        \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{160}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{), }\CommentTok{# red}
+                        \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{102}\NormalTok{,}\DecValTok{0}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{160}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{))) }\CommentTok{# orange, }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-69-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plotPoints}\NormalTok{(cda.stPs_passiveHybr, }\DataTypeTok{breaks =} \FloatTok{0.2}\NormalTok{,}
+                \DataTypeTok{col =} \KeywordTok{c}\NormalTok{(}\KeywordTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{255}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{), }\CommentTok{# hybr - black}
+                        \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DecValTok{255}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{80}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{), }\CommentTok{# ps - white}
+                        \KeywordTok{rgb}\NormalTok{(}\DecValTok{255}\NormalTok{,}\DecValTok{255}\NormalTok{,}\DecValTok{255}\NormalTok{, }\DataTypeTok{alpha=}\DecValTok{80}\NormalTok{, }\DataTypeTok{max=}\DecValTok{255}\NormalTok{))) }\CommentTok{# st - white }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-70-1} \end{center}
+
+\hypertarget{classificatory-discriminant-analysis}{%
+\section{9. Classificatory discriminant
+analysis}\label{classificatory-discriminant-analysis}}
+
+Classificatory discriminant analysis (based on packages \texttt{MASS}
+and \texttt{class}; Venables \& Ripley, 2002) is used to classify
+observations (sample dataset) into known groups, using criteria
+(discriminant functions) based on other observations with known group
+membership (training dataset). The group membership should be defined
+using some independent data, i.e.~other than morphology itself (such as
+ploidy levels, geographic origin, or genetic groups), to avoid circular
+reasoning. If a morphological character has to be used to define groups,
+it should be excluded from further analysis. The results than indicate
+if the retained characters are able to separate the groups in addition
+to the defining character. Often, we do not have two independent
+datasets (training and sample). In that case, we use a cross validation
+procedure, in which part of the dataset is used for computing the
+criteria that are applied on the remaining observations and the
+procedure is repeated until all observations are classified. The default
+is leave-one-out cross validation (the criterion is based on n -- 1
+individuals, and applied for the individual left out) but it is also
+possible to use whole populations as leave-out units (as individuals
+from a population are not completely independent observations and may be
+morphologically closer to each other than to individuals from other
+populations). The cross-validation mode can be specified by argument
+\texttt{crossval} as \texttt{"indiv"} or \texttt{"pop"} (the former,
+which is the default option, is applied in the example below). The
+resulting classification is then compared with the original (\emph{a
+priori}) classification of individuals into groups. The result of
+classificatory DA is stored in an object of class \texttt{classifdata}.
+The \texttt{classif.matrix} function formats the results of the above
+functions as a summary classification table of taxa, populations or
+individuals. The results (classification tables) can be exported using
+the \texttt{exportRes()} function.
+
+Linear discriminant function (\texttt{classif.lda()}) can be used for
+data with approximately multivariate normal within-class distributions.
+Nonparametric k-nearest neighbours method (\texttt{classif.knn()}) can
+be used without making any assumptions about these distributions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classifRes.lda =}\StringTok{ }\KeywordTok{classif.lda}\NormalTok{(centaurea)}
+\CommentTok{#> Warning in lda.default(x, grouping, ...): variables are collinear}
+
+\KeywordTok{classif.matrix}\NormalTok{(classifRes.lda, }\DataTypeTok{level =} \StringTok{"taxon"}\NormalTok{)}
+\CommentTok{#>   Taxon   N as.hybr as.ph as.ps as.st correct correct[%]}
+\CommentTok{#> 1  hybr 120      92     0    23     5      92      76.67}
+\CommentTok{#> 2    ph 160       0   154     6     0     154      96.25}
+\CommentTok{#> 3    ps 240      31     8   201     0     201      83.75}
+\CommentTok{#> 4    st  92      13     0     2    77      77      83.70}
+\CommentTok{#> 5 Total 612     136   162   232    82     524      85.62}
+
+\KeywordTok{classif.matrix}\NormalTok{(classifRes.lda, }\DataTypeTok{level =} \StringTok{"pop"}\NormalTok{)}
+\CommentTok{#>    Population Taxon   N as.hybr as.ph as.ps as.st correct correct[%]}
+\CommentTok{#> 1        BABL    ps  20       9     0    11     0      11      55.00}
+\CommentTok{#> 2        BABU  hybr  20      18     0     0     2      18      90.00}
+\CommentTok{#> 3         BOL    ps  20       3     0    17     0      17      85.00}
+\CommentTok{#> 4         BRT    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 5         BUK    ph  20       0    15     5     0      15      75.00}
+\CommentTok{#> 6        CERM    ps  20      10     0    10     0      10      50.00}
+\CommentTok{#> 7        CERV    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 8        CZLE    ps  20       0     1    19     0      19      95.00}
+\CommentTok{#> 9         DEB  hybr  20      14     0     5     1      14      70.00}
+\CommentTok{#> 10        DOM    st  12       1     0     0    11      11      91.67}
+\CommentTok{#> 11        DUB    st  20       4     0     0    16      16      80.00}
+\CommentTok{#> 12       HVLT    ps  20       1     0    19     0      19      95.00}
+\CommentTok{#> 13       KASH    ps  20       0     1    19     0      19      95.00}
+\CommentTok{#> 14        KOT    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 15       KOZH    ps  20       0     0    20     0      20     100.00}
+\CommentTok{#> 16        KRO    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 17        LES    st  20       5     0     2    13      13      65.00}
+\CommentTok{#> 18        MIL    st  20       2     0     0    18      18      90.00}
+\CommentTok{#> 19        NEJ    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 20       NSED    ph  20       0    19     1     0      19      95.00}
+\CommentTok{#> 21       OLE1    ps  20       1     0    19     0      19      95.00}
+\CommentTok{#> 22       OLE2    ps  20       1     6    13     0      13      65.00}
+\CommentTok{#> 23       PRIS    ps  20       3     0    17     0      17      85.00}
+\CommentTok{#> 24       PROS  hybr  20       7     0    13     0       7      35.00}
+\CommentTok{#> 25        RTE  hybr  20      20     0     0     0      20     100.00}
+\CommentTok{#> 26        RUS  hybr  20      18     0     1     1      18      90.00}
+\CommentTok{#> 27        SOK    ps  20       1     0    19     0      19      95.00}
+\CommentTok{#> 28       STCV    ph  20       0    20     0     0      20     100.00}
+\CommentTok{#> 29       STGH    ps  20       2     0    18     0      18      90.00}
+\CommentTok{#> 30        VIT  hybr  20      15     0     4     1      15      75.00}
+\CommentTok{#> 31        VOL    st  20       1     0     0    19      19      95.00}
+\CommentTok{#> 32      Total       612     136   162   232    82     524      85.62}
+\end{Highlighting}
+\end{Shaded}
+
+The detailed classification of populations is very useful, as it can
+reveal some atypical or incorrectly assigned populations. Most of the
+populations from the sample data are successfully classified (generally
+over 70\% correct classifications and often 100\%), but some populations
+(BABL, CERM, LES, OLE2, PROS) have a maximum of 65\% of correct
+classifications. Moreover, almost all of them were ``incorrectly''
+clustered by hierarchical classification, and positions of these
+populations in the PCA ordination plot are within clusters of different
+taxa. Such populations require further attention. For example, these
+results may indicate previously unrecognized hybridization.
+
+The results can be exported to the clipboard or file using the
+\texttt{exportRes()} function. In the example below, posterior
+probabilities of classification of an individual into each group are
+exported.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classif_lda =}\StringTok{ }\KeywordTok{classif.matrix}\NormalTok{(classifRes.lda, }\DataTypeTok{level =} \StringTok{"indiv"}\NormalTok{)}
+\KeywordTok{exportRes}\NormalTok{(}\DataTypeTok{object =}\NormalTok{ classif_lda,}
+          \DataTypeTok{file =} \StringTok{"lda_classifMatrix.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~\\
+\hspace*{0.333em}
+
+The \textbf{k-nearest neighbour} method classifies an individual
+according to the \emph{a priori} classification of its k neighbours (by
+Euclidean distance) using a majority vote. As this method uses Euclidean
+distance, the characters are standardised to a zero mean and a unit
+variance. The cross-validation mode can be set as \texttt{"indiv"} or
+\texttt{"pop"}, in the same manner as above.
+
+The optimal number of neighbours to consider is unknown, but it is
+empirically estimated from the data. The \texttt{knn.select()} searches
+for the optimal k for the given data set. The function can use two
+cross-validation methods (by individuals and populations) in a similar
+way as the classificatory discriminant analysis functions (the latter is
+used in the example below). The function compute the number of correctly
+classified individuals for k values from 1 to 30 and highlight the value
+with the highest success rate. Ties (i.e., when there are the same
+numbers of votes for two or more groups) are broken at random, and thus
+several iterations may yield different results. Therefore, the functions
+compute 10 iterations, and the average success rates for each k are
+used; the minimum and maximum success rates for each k are also
+displayed as error bars. Note that several k values may have nearly the
+same success rates; if this is the case, the similarity of iterations
+may also be considered.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{knn.select}\NormalTok{(centaurea, }\DataTypeTok{crossval =} \StringTok{"pop"}\NormalTok{)}
+\CommentTok{#> Tested  10 % of Ks }
+\CommentTok{#> Tested  20 % of Ks }
+\CommentTok{#> Tested  30 % of Ks }
+\CommentTok{#> Tested  40 % of Ks }
+\CommentTok{#> Tested  50 % of Ks }
+\CommentTok{#> Tested  60 % of Ks }
+\CommentTok{#> Tested  70 % of Ks }
+\CommentTok{#> Tested  80 % of Ks }
+\CommentTok{#> Tested  90 % of Ks }
+\CommentTok{#> Tested  100 % of Ks}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=320px]{C:/Users/HP/Documents/MorphoTools2/vignettes/MorphoTools2_tutorial_files/figure-latex/unnamed-chunk-75-1} \end{center}
+
+\begin{verbatim}
+#> 
+#> The highest number of correct classifications is at k = 12)
+\end{verbatim}
+
+The highest number of correct classifications is at k = 12, thus we set
+\texttt{k\ =\ 12} in the \texttt{classif.knn()} function (to classify
+individual according its 12 nearest neighbours).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classifRes.knn =}\StringTok{ }\KeywordTok{classif.knn}\NormalTok{(centaurea, }\DataTypeTok{crossval =} \StringTok{"pop"}\NormalTok{, }\DataTypeTok{k =} \DecValTok{12}\NormalTok{)}
+
+\KeywordTok{classif.matrix}\NormalTok{(classifRes.knn, }\DataTypeTok{level =} \StringTok{"taxon"}\NormalTok{)}
+\CommentTok{#>   Taxon   N as.hybr as.ph as.ps as.st correct correct[%]}
+\CommentTok{#> 1  hybr 120      10     7    82    21      10       8.33}
+\CommentTok{#> 2    ph 160       2   126    32     0     126      78.75}
+\CommentTok{#> 3    ps 240      48    25   153    14     153      63.75}
+\CommentTok{#> 4    st  92      35     0    37    20      20      21.74}
+\CommentTok{#> 5 Total 612      95   158   304    55     309      50.49}
+\end{Highlighting}
+\end{Shaded}
+
+The results can be exported with the \texttt{exportRes()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{popClassifMatrix =}\StringTok{ }\KeywordTok{classif.matrix}\NormalTok{(classifRes.knn, }\DataTypeTok{level =} \StringTok{"taxon"}\NormalTok{)}
+
+\KeywordTok{exportRes}\NormalTok{(popClassifMatrix, }\DataTypeTok{file =} \StringTok{"clipboard"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The another functions, \texttt{classifSample.lda()} and
+\texttt{classifSample.knn()} are designed to classify hybrid
+populations, type herbarium specimens, atypical samples, entirely new
+data, etc. Discriminant criterion is developed from the original
+(training) dataset and applied to the specific sample (set).
+
+~
+
+Let's remove population PRIS and pretend that sample PRIS418 is a type
+herbarium specimen of \emph{Centaurea pseudophrygia} and we want to show
+its similarity with other populations of the species (typically, we have
+only morphology for old herbarium collections while we have other data
+for recently studied populations -- but to assess their taxonomic
+identity, we should compare them with types ). To classify PRIS418, run
+the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingSet =}\StringTok{ }\KeywordTok{deletePopulation}\NormalTok{(centaurea, }\DataTypeTok{populationName =} \StringTok{"PRIS"}\NormalTok{)}
+\NormalTok{typeSpecimen =}\StringTok{ }\KeywordTok{keepSample}\NormalTok{(centaurea, }\StringTok{"PRIS418"}\NormalTok{)}
+
+\KeywordTok{classifSample.lda}\NormalTok{(typeSpecimen, trainingSet)}
+\CommentTok{#> Warning in lda.default(x, grouping, ...): variables are collinear}
+\CommentTok{#>        ID Population Taxon classification as.hybr  as.ph  as.ps as.st}
+\CommentTok{#> 1 PRIS418       PRIS    ps             ps  0.0742 0.0034 0.9215 9e-04}
+\end{Highlighting}
+\end{Shaded}
+
+The probability, that sample PRIS418 is \emph{C. pseudophrygia} is over
+90\%.
+
+\hypertarget{further-reading}{%
+\section{Further reading}\label{further-reading}}
+
+A brief account of the multivariate methods used in taxonomy:
+
+\textbf{Marhold K. (2011)}. Multivariate morphometrics and its
+application to monography at specific and infraspecific levels. In:
+Stuessy TF, Lack HW, eds.~\emph{Monographic plant systematics:
+fundamental assessment of plant biodiversity}. Ruggell: A.R.G. Gantner
+Verlag K. G., 73--99.
+
+~
+
+Selection of papers employing the methods of multivariate morphometrics:
+
+\textbf{Lihová J, Kudoh H, Marhold K. (2010).} Morphometric studies of
+polyploid \emph{Cardamine} species (Brassicaceae) from Japan: solving a
+long-standing taxonomic and nomenclatural controversy. \emph{Australian
+Systematic Botany} 23, 94-111. doi: 10.1071/sb09038
+
+\textbf{Melichárková A, Španiel S, Marhold K, Hurdu BI, Drescher A,
+Zozomová-Lihová J. (2019)}. Diversification and independent polyploid
+origins in the disjunct species \emph{Alyssum repens} from the
+Southeastern Alps and the Carpathians. \emph{American Journal of Botany}
+106, 1499-1518. doi: 10.1002/ajb2.1370
+
+\textbf{Skokanová K, Hodálová I, Mereďa P, Slovák M, Kučera, J. (2019)}.
+The \emph{Cyanus tuberosus} group (Asteraceae) in the Balkans:
+biological entities require correct names. \emph{Plant Systematics and
+Evolution} 305, 569--596. doi: 10.1007/s00606-019-01576-4
+
+\textbf{Šlenker M, Zozomová-Lihová J, Mandáková T, Kudoh H, Zhao Y,
+Soejima A, et al.~(2018)}. Morphology and genome size of the widespread
+weed \emph{Cardamine occulta}: how it differs from cleistogamic \emph{C.
+kokaiensis} and other closely related taxa in Europe and Asia.
+\emph{Botanical Journal of the Linnean Society} 187, 456-482. doi:
+10.1093/botlinnean/boy030
+
+\textbf{Španiel S, Marhold K, Passalacqua NG, Zozomová-Lihová J.
+(2011)}. Intricate variation patterns in the diploid-polyploid complex
+of \emph{Alyssum montanum-A. repens} (Brassicaceae) in the Apennine
+Peninsula: Evidence for long-term persistence and diversification.
+\emph{American Journal of Botany} 98, 1887-1904. doi:
+10.3732/ajb.1100147
+
+\textbf{Šrámková G, Kolář F, Záveská E, Lučanová M, Španiel S, Kolník M,
+et al.~(2019)}. Phylogeography and taxonomic reassessment of
+\emph{Arabidopsis halleri} - a montane species from Central Europe.
+\emph{Plant Systematics and Evolution} 305, 885-898. doi:
+10.1007/s00606-019-01625-y
+
+\hypertarget{how-to-cite-morphotools2}{%
+\section{How to cite MorphoTools2}\label{how-to-cite-morphotools2}}
+
+\textbf{Šlenker, M., Koutecký, P. \& Marhold, K. (2021)}. MorphoTools2:
+an R package for the multivariate morphometric analysis.
+\emph{\url{https://github.com/MarekSlenker/MorphoTools2}}
+
+Feel free to email me at
+\href{mailto:marek.slenker@savba.sk}{\nolinkurl{marek.slenker@savba.sk}}
+with any questions, comments, or bug reports!
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\textbf{Friendly M, Fox J. (2020)}. candisc: Visualizing Generalized
+Canonical Discriminant and Canonical Correlation Analysis. R package
+version 0.8-3. \url{https://CRAN.R-project.org/package=candisc}
+
+\textbf{Klecka WR. (1980)}. \emph{Discriminant analysis (No.~19)}. Sage
+University Paper Series on Quantitative Applications in the Social
+Sciences 07-019.
+
+\textbf{Koutecký P. (2007)}. Morphological and ploidy level variation of
+Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and
+Ukraine. \emph{Folia Geobotanica}, 42, 77-102.
+
+\textbf{Koutecký P. (2015)}. MorphoTools: a set of R functions for
+morphometric analysis. \emph{Plant Systematics and Evolution}, 301,
+1115-1121.
+
+\textbf{Koutecký P, Štěpánek J, Baďurová T. (2012)}. Differentiation
+between diploid and tetraploid Centaurea phrygia: mating barriers,
+morphology and geographic distribution. \emph{Preslia} 84, 1-32.
+
+\textbf{Shlens, J. (2014)}. A tutorial on principal component analysis.
+\emph{ArXiv} preprint arXiv:1404.1100
+
+\textbf{Thorpe RS. (1976)}. Biometric analysis of geographic variation
+and racial affinities. \emph{Biological Reviews of the Cambridge
+Philosophical Society} 51, 407--425.
+
+\textbf{Venables WN, Ripley BD. (2002)}. \emph{Modern Applied Statistics
+with S, Fourth edition}. New York: Springer.
+
+\end{document}

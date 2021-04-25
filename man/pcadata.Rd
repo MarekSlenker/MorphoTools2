@@ -22,7 +22,6 @@ The pcadata class is designed for storing results of Principal component analysi
 	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
 	\item{groupMeans}{data.frame containing the means for the taxa.}
 	\item{rank}{number of principal components.}
-	\item{sdev}{the standard deviations of the principal components (i.e., the square roots of the eigenvalues). }
 	\item{center, scale}{the centring and scaling of the input data.}
 
 	}

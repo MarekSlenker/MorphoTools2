@@ -29,7 +29,6 @@ pca.calc <- function(object) {
   names(princompRes$sdev) = newNames
   colnames(princompRes$scores) = newNames
 
-  pcaResult$sdev = princompRes$sdev
   pcaResult$center = princompRes$center
   pcaResult$scale = princompRes$scale
   pcaResult$rank = length(princompRes$sdev)

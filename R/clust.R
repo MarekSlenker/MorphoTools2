@@ -3,19 +3,19 @@
 clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA") {
   checkClass(object, "morphodata")
 
-  supportedDistMethods = c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski")
+
   supportedClustMethods = c("ward.D", "ward.D2", "ward", "single", "complete", "average", "UPGMA",
                             "mcquitty", "WPGMA", "median", "WPGMC", "centroid", "UPGMC")
 
 
   # skontroluj argumenty
-  if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod", distMethod , "is not supported."), call. = FALSE)
+  # if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod", distMethod , "is not supported."), call. = FALSE)
   if (! (clustMethod %in% supportedClustMethods)) stop(paste("clustMethod", clustMethod , "is not supported."), call. = FALSE)
 
   if (any(is.na(object$data))) warning("Values of some characters are NA.", call. = FALSE)
 
-  object$data = scale(object$data)
-  distances = stats::dist(object$data, method = distMethod)
+
+  distances = calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE)
 
   # v parametri method mozme dostat akukolvek metodu, ktora je platna pre hclust
   if (clustMethod == "UPGMA") clustMethod = "average"

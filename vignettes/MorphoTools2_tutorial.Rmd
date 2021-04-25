@@ -1,5 +1,5 @@
 ---
-title: \vspace{-1.5cm} MorphoTools2 version 1.0.0 tutorial
+title: \vspace{-2.0cm} MorphoTools2 version 1.0.0 tutorial 
 author: | 
   | **Marek Šlenker** \vspace*{0.5pc}
   | Slovak Academy of Sciences, Bratislava, Slovakia
@@ -7,7 +7,6 @@ author: |
   | Charles University, Prague, Czechia \vspace*{0.5pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
   | *<marek.slenker@savba.sk>*
-date: "June 18, 2020"
 output:
   pdf_document: default
 
@@ -16,6 +15,8 @@ vignette: |
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 ---
+&nbsp;  
+ 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -33,7 +34,13 @@ knitr::opts_chunk$set(
   )
 ```
 
-\tableofcontents \vspace*{-1pc}
+```{=latex}
+\renewcommand{\baselinestretch}{0.5}
+\tableofcontents
+\renewcommand{\baselinestretch}{1.0}\normalsize
+```
+
+
 
 
 # 1. Introduction
@@ -650,7 +657,26 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 
 
-# 6. Canonical discriminant analysis (CDA)
+
+# 6. Principal Coordinate Analysis (PCoA)
+
+Výsledky PCoA sa interpretujú rovnakým spôsobom ako výsledky PCA. Jediným
+The main difference between PCA and PCoA is that the relationship between
+the original characters and principal coordinates is not linear, and therefore we
+do not have information on the influence of particular characters on coordinate
+axes. For quantitative characters we can get at least some information in this
+respect by computing the correlation coefficients between given character values
+and score on the coordinate axes.
+
+In this case the problem is formulated differently: given a distance matrix of objects a coordinate system is sought in which the original distances are preserved completely such that the first few axes usually provide a fairly good representation of distances. Starting from raw data the distances are to be calculated first. The input matrices should be provided in the same way as for most clustering methods. It is assumed, however, that semimatrices contain dissimilarities or squared distances. The coordinates are saved in a new file.
+
+
+
+# 7. Non-metric multidimensional scaling (NMDS)
+
+The metric information in the data or distances is not preserved by the ordination. The method of non-metric multidimensional scaling considers the rank order of distances, rather than their actual magnitudes. The objective is to arrange the objects in a few (usually two) dimensions such that the rank order of distances in the new space follows the original rank order as closely as possible. The "goodness" of the non-metric solution is measured by the stress between the original and the new distances. The procedure is iterative, the initial configuration is random or read from disk file in form of data with objects as rows, in free format. You may start immediately requesting two dimensions; if you choose, say, 3 for start, the two-dimensional solution will be obtained from the three-dimensional. Maximum starting dimensionality is 5. A stress of 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points. The Shepard diagram gives a visual comparison of original and new distances. In an ideal case the distances increase monotonically over the original distances. The worse the solution, the more scattered the points in the Shepard diagram. After computations, the ordination of objects and the Shepard diagram can be displayed.
+
+# 8. Canonical discriminant analysis (CDA)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). We use this analysis to find to what extent can be predefined groups of objects distinguished based on available characters and to identify characters, which contributes the most to this differentiation. Note, that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analysed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
@@ -770,7 +796,7 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 
 
-# 7. Classificatory discriminant analysis
+# 9. Classificatory discriminant analysis
 
 Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analysis. The results than indicate if the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 

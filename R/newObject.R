@@ -32,7 +32,6 @@ newPcadata <- function() {
                      cumulativePercentageOfEigenvalues = numeric(),
                      groupMeans = data.frame(),
                      rank = numeric(),
-                     sdev = numeric(),
                      center = numeric(),
                      scale = numeric()
                      )
@@ -41,9 +40,32 @@ newPcadata <- function() {
   return(newPcadata)
 }
 
+# internal
+# returns new pcoadata object
+newPcoadata <- function() {
+
+  newPcoadata <- list(
+    objects = list(
+      ID = numeric(),
+      Population = numeric(),
+      Taxon = numeric(),
+      scores = numeric()),
+    eigenVectors = numeric(),
+    eigenValues = numeric(),
+    eigenvaluesAsPercent = numeric(),
+    cumulativePercentageOfEigenvalues = numeric(),
+    groupMeans = data.frame(),
+    rank = numeric()
+  )
+
+  attr(newPcoadata, "class") <- "pcoadata"
+  return(newPcoadata)
+}
+
+
 
 # internal
-# returns new pcadata object
+# returns new cdadata object
 newCdadata <- function() {
 
   newCdadata <- list(
