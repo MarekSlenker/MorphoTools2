@@ -3,11 +3,6 @@
 
 \title{Add Labels to a Plot}
 \usage{
-## S3 method for class 'pcadata'
-plotAddLabels.characters(result, labels = characters(result), include = T,
-      axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
-
-## S3 method for class 'cdadata'
 plotAddLabels.characters(result, labels = characters(result), include = T,
       axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
 

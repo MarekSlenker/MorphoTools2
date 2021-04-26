@@ -1,11 +1,9 @@
 \name{plot3Dpoints}
 \alias{plot3Dpoints}
-\alias{plot3Dpoints.pcadata}
-\alias{plot3Dpoints.cdadata}
 \title{The Default Scatterplot 3D Function}
 
 \description{
-A generic function for plotting ordination scores stored in '\code{\link{pcadata}}' and '\code{\link{cdadata}}' objects.
+A generic function for plotting ordination scores stored in '\code{\link{pcadata}}', '\code{\link{pcoadata}}', and '\code{\link{cdadata}}' objects.
 }
 
 
@@ -18,7 +16,7 @@ plot3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
 
 
 \arguments{
-\item{result}{an object of class '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
+\item{result}{an object of class '\code{\link{pcadata}}', '\code{\link{pcoadata}}', or '\code{\link{cdadata}}'.}
 \item{axes}{x, y, z axes of plot.}
 \item{xlab, ylab, zlab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols, see \code{\link{points}}.}

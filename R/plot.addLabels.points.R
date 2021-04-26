@@ -13,6 +13,17 @@ plotAddLabels.points.pcadata <- function(result, labels = result$objects$ID, inc
   labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
+
+#' @rdname plotAddLabels.points
+#' @method plotAddLabels.points pcoadata
+#' @export
+plotAddLabels.points.pcoadata <- function(result, labels = result$objects$ID, include = TRUE, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
+
+  labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+}
+
+
+
 #' @rdname plotAddLabels.points
 #' @method plotAddLabels.points cdadata
 #' @export

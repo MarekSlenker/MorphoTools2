@@ -24,12 +24,9 @@ test_that("correctness of calculation",  {
   expect_is(pcaRes, "pcadata")
 
 
-  names(pca_princomp$sdev) = names(pcaRes$sdev)
-  colnames(pca_princomp$loadings) = names(pcaRes$sdev)
-  colnames(pca_princomp$scores) = names(pcaRes$sdev)
-  colnames(pca_princomp$loadings) = names(pcaRes$sdev)
-
-  expect_equal(pcaRes$sdev[1], pca_princomp$sdev[1])
+  names(pca_princomp$sdev) = colnames(pcaRes$eigenVectors)
+  colnames(pca_princomp$loadings) = colnames(pcaRes$eigenVectors)
+  colnames(pca_princomp$scores) = colnames(pcaRes$eigenVectors)
 
 
   expect_equal(pcaRes$center, pca_princomp$center)

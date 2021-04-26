@@ -6,18 +6,18 @@ pcoa.calc <- function(object, distMethod = "euclidean") {
   # miesto toho testujem na NA a vyhodim vynimku
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
 
-  # find and report constant columns
-  #constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
-  #if (length(constantColumns)>0) {
-  #  stop(paste("Characters", paste(constantColumns, collapse = ", "), "are constant."), call. = FALSE)
-  #}
-
+  # find and report constant columns - EE
 
   pcoaResult = newPcoadata()
-  rank = length(colnames(object$data))-1
+  rank = min(length(colnames(object$data)), length(rownames(object$data)))-1 # maximum dimension of the space must be in {1, 2, …, n-1}.
+
+  xRes = stats::cmdscale(calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
+                                eig = TRUE) # only to find numb of possitive eigenvalues
+  rank = length(xRes$eig[which(xRes$eig > 0)])
 
   princompRes = stats::cmdscale(calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
                                 k = rank, eig = TRUE, x.ret = TRUE)
+
 
   newNames = NULL
   for (i in 1:rank) {
@@ -25,19 +25,19 @@ pcoa.calc <- function(object, distMethod = "euclidean") {
   }
 
   colnames(princompRes$points) = newNames
-  #names(princompRes$sdev) = newNames
-  #colnames(princompRes$scores) = newNames
+  names(princompRes$eig) = newNames
 
   pcoaResult$rank = rank
+  pcoaResult$distMethod = distMethod
 
   pcoaResult$objects$scores = princompRes$points
   pcoaResult$objects$ID = object$ID
   pcoaResult$objects$Population = object$Population
   pcoaResult$objects$Taxon = object$Taxon
 
-  pcoaResult$eigenValues = princompRes$eig
-  pcoaResult$eigenvaluesAsPercent = round(princompRes$eig/sum(princompRes$eig), 5)
-  pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(princompRes$eig/sum(princompRes$eig)), 5)
+  pcoaResult$eigenValues = princompRes$eig[1:rank]
+  pcoaResult$eigenvaluesAsPercent = round(princompRes$eig/sum(princompRes$eig[1:rank]), 5)[1:rank]
+  pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(princompRes$eig[1:rank]/sum(princompRes$eig[1:rank])), 5)[1:rank]
 
   # group centroid locations
   pcoaResult$groupMeans = stats::aggregate(princompRes$points ~ object$Taxon, FUN = mean)

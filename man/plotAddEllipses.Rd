@@ -15,7 +15,7 @@ plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 \arguments{
 
-\item{result}{an result of \code{\link{pca.calc}} or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{probability}{probability, that a new independent observation from the same population will fall in that ellipse.}
 \item{col}{the colors for labels.}

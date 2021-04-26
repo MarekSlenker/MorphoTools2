@@ -7,7 +7,9 @@ plot.pcadata <- function(x, ...) {
   plotPoints(x, ...)
 }
 
-
+plot.pcoadata <- function(x, ...) {
+  plotPoints(x, ...)
+}
 
 
 #' @export

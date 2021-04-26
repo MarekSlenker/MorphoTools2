@@ -110,13 +110,20 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # cda = candisc::candisc(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
   cda = candisc_MK(x_NoPassiveSamples, term="objectNoPassiveSamples$Taxon")
 
+  newNames = NULL
+  for (i in 1:cda$rank) {
+    newNames = c(newNames, paste("Can", i, sep = ""))
+  }
+
+  names(cda$eigenvalues) = newNames
+  names(cda$pct) = newNames
 
   cdaResult = newCdadata()
 
   cdaResult$rank = cda$rank
-  cdaResult$eigenValues = cda$eigenvalues
+  cdaResult$eigenValues = cda$eigenvalues[1:cda$rank]
   cdaResult$canrsq = cda$canrsq
-  cdaResult$eigenvaluesAsPercent = cda$pct / 100
+  cdaResult$eigenvaluesAsPercent = cda$pct[1:cda$rank] / 100
 
   for (i in cdaResult$rank:1) {
     cdaResult$cumulativePercentageOfEigenvalues[i] = sum(cdaResult$eigenvaluesAsPercent[1:i])

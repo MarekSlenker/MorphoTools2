@@ -18,17 +18,15 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          labels = FALSE,
                          legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  checkClass(result, "pcadata")
-
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
-    xlab = paste("PC",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
 
   if (is.null(ylab))
-    ylab = paste("PC",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
 
   # nastav pch a col spravne podla taxonu
@@ -61,6 +59,54 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 }
 
 
+#' @rdname pcoa.calc
+#' @method plotPoints pcoadata
+#' @export
+plotPoints.pcoadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+                               pch = 16, col = "black", pt.bg = "white",
+                               breaks = 1, ylim = NULL, xlim = NULL,
+                               labels = FALSE,
+                               legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+
+    # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
+  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
+  if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
+
+  if (is.null(xlab))
+    xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+
+  if (is.null(ylab))
+    ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+
+
+  # nastav pch a col spravne podla taxonu
+  result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
+  result$col = setValuesForVector(result$objects$Taxon, col)
+  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
+
+  # main plot
+
+  graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],
+                 xlab = xlab, ylab = ylab, pch = result$pch, col = result$col, bg = result$pt.bg, xlim = xlim, ylim = ylim, ... )
+
+
+
+
+
+  # legend
+  if (legend) {
+    plotAddLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
+  }
+
+  # labels
+  if (labels) plotAddLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
+
+}
+
+
+
+
+
 #' @rdname cda.calc
 #' @method plotPoints cdadata
 #' @export
@@ -69,8 +115,6 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                           breaks = 1, ylim = NULL, xlim = NULL,
                           labels = FALSE,
                           legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
-
-  checkClass(result, "cdadata")
 
 
   if (result$rank == 1) {
@@ -166,8 +210,8 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
     if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
-    if (is.null(xlab)) xlab = paste("Can",axes[1], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-    if (is.null(ylab)) ylab = paste("Can",axes[2], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
     result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))

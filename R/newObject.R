@@ -50,11 +50,11 @@ newPcoadata <- function() {
       Population = numeric(),
       Taxon = numeric(),
       scores = numeric()),
-    eigenVectors = numeric(),
     eigenValues = numeric(),
     eigenvaluesAsPercent = numeric(),
     cumulativePercentageOfEigenvalues = numeric(),
     groupMeans = data.frame(),
+    distMethod = character(),
     rank = numeric()
   )
 

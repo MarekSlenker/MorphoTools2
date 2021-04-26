@@ -27,10 +27,14 @@ test_that("correctness of calculation",  {
 
   expect_is(cdaRes, "cdadata")
 
+  names(candisc_cda$eigenvalues) = names(cdaRes$eigenvalues)
+  names(candisc_cda$pct) = names(cdaRes$eigenvalues)
+
+
   expect_equal(cdaRes$rank, candisc_cda$rank)
-  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues)
+  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues[1:cdaRes$rank])
   expect_equal(cdaRes$canrsq, candisc_cda$canrsq)
-  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct / 100)
+  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct[1:cdaRes$rank] / 100)
   expect_equal(cdaRes$coeffs.raw, candisc_cda$coeffs.raw)
   expect_equal(cdaRes$coeffs.std, candisc_cda$coeffs.std)
   expect_equal(cdaRes$totalCanonicalStructure, candisc_cda$structure)
@@ -59,10 +63,13 @@ test_that("correctness of calculation - passive sample",  {
 
   cdaRes = cda.calc(morphoMockup, passiveSamples = "Pop4")
 
+  names(candisc_cda$eigenvalues) = names(cdaRes$eigenvalues)
+  names(candisc_cda$pct) = names(cdaRes$eigenvalues)
+
   expect_equal(cdaRes$rank, candisc_cda$rank)
-  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues)
+  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues[1:cdaRes$rank])
   expect_equal(cdaRes$canrsq, candisc_cda$canrsq)
-  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct / 100)
+  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct[1:cdaRes$rank] / 100)
   expect_equal(cdaRes$coeffs.raw, candisc_cda$coeffs.raw)
   expect_equal(cdaRes$coeffs.std, candisc_cda$coeffs.std)
   expect_equal(cdaRes$totalCanonicalStructure, candisc_cda$structure)

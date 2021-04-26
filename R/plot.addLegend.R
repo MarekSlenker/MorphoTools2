@@ -17,11 +17,25 @@ plotAddLegend.pcadata <- function(result, x = "topright", y = NULL, pch = 16, co
                             box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
 
 
-  checkClass(result, "pcadata")
-
   plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
                        pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
                         y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
+                       box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
+
+}
+
+#' @rdname plotAddLegend
+#' @method plotAddLegend pcoadata
+#' @export
+plotAddLegend.pcoadata <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
+                                  pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,
+                                  y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = 1,
+                                  box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
+
+
+  plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
+                       pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,
+                       y.intersp = y.intersp, bty = box.type, box.lty = box.lty, box.lwd = box.lwd,
                        box.col = box.col, bg = box.bg, cex = cex, ncol = ncol, horiz = horiz, ...)
 
 }
@@ -33,8 +47,6 @@ plotAddLegend.cdadata <- function(result, x = "topright", y = NULL, pch = 16, co
                                    pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,
                                    y.intersp = 1, box.type = "o", box.lty = "solid", box.lwd = 1,
                                    box.col = "black", box.bg = "white", cex = 1, ncol = 1, horiz = FALSE, ...) {
-
-  checkClass(result, "cdadata")
 
   plot_legend_internal(result, x = x, y = y, pch = pch, col = col,
                         pt.bg = pt.bg, pt.cex = pt.cex, pt.lwd = pt.lwd, x.intersp = x.intersp,

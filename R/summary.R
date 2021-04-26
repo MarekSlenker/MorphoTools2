@@ -2,11 +2,8 @@
 #' @title Object Summaries
 #' @export
 summary.morphodata <- function(object, ...) {
-  #  is of morphodata class?  (keby tuto genericku metodu chel pouzit niekto priamo)
-  checkClass(object, "morphodata")
 
   # cat summary
-
   cat("object of class 'morphodata'\n")
   cat(paste(" - contains ", length(levels(object$Population)), " populations\n", sep = ""))
   cat(paste(" - contains ", length(levels(object$Taxon)), " defined groups (taxa)\n", sep = ""))
@@ -20,7 +17,6 @@ summary.morphodata <- function(object, ...) {
 #' @rdname summary
 #' @export
 summary.pcadata <- function(object, ...) {
-  checkClass(object, "pcadata")
 
   cat("object of class 'pcadata'; storing results of Principal Component Analysis\n")
   cat("\nVariation explained by individual axes")
@@ -54,8 +50,35 @@ summary.pcadata <- function(object, ...) {
 
 #' @rdname summary
 #' @export
+summary.pcoadata <- function(object, ...) {
+
+  cat("object of class 'pcoadata'; storing results of Principal Coordinates Analysis\n")
+  cat("resemblance coefficient: ", object$distMethod,"\n")
+  cat("\nVariation explained by individual axes")
+  if (object$rank>4) {
+    cat(" (listing of axes is truncated):\n")
+  } else {
+    cat(":\n")
+  }
+
+  descrTable = data.frame(row.names = names(object$eigenvaluesAsPercent[1: min(object$rank, 4)]),
+                          "Eigenvalues" = round(object$eigenValues[1: min(object$rank, 4)], digits = 4),
+                          "Eigenvalues as Percent" = round(object$eigenvaluesAsPercent[1: min(object$rank, 4)], digits = 4),
+                          "Cumulative Percentage of Eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1: min(object$rank, 4)], digits = 4)
+  )
+  names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
+  descrTable = t(descrTable)
+
+  print(descrTable)
+}
+
+
+
+
+
+#' @rdname summary
+#' @export
 summary.cdadata <- function(object, ...) {
-  checkClass(object, "cdadata")
 
   cat("object of class 'cdadata'; storing results of Canonical Discriminant Analysis\n")
   cat("\nVariation explained by individual axes")
@@ -90,7 +113,6 @@ summary.cdadata <- function(object, ...) {
 #' @rdname summary
 #' @export
 summary.classifdata <- function(object, ...) {
-  checkClass(object, "classifdata")
 
   cat("object of class 'classifdata'; storing results of Classificatory Discriminant Analysis\n\n")
 

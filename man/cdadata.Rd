@@ -13,7 +13,7 @@ The cdadata class is designed for storing results of Canonical discriminant anal
 				\item{ID}{IDs of each row of \code{scores} object.}
 				\item{Population}{population membership of each row of \code{scores} object.}
 				\item{Taxon}{taxon membership of each row of \code{scores} object.}
-				\item{scores}{ordination scores of cases (objects, OTUs), centred and scaled.}
+				\item{scores}{ordination scores of cases (objects, OTUs).}
 			}
 	}
 

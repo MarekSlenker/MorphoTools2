@@ -13,7 +13,7 @@ The pcadata class is designed for storing results of Principal component analysi
 				\item{ID}{IDs of each row of \code{scores} object.}
 				\item{Population}{population membership of each row of \code{scores} object.}
 				\item{Taxon}{taxon membership of each row of \code{scores} object.}
-				\item{scores}{ordination scores of cases (objects, OTUs), centred and scaled.}
+				\item{scores}{ordination scores of cases (objects, OTUs).}
 			}
 	}
 	\item{eigenVectors}{matrix of eigenvectors (i.e., a matrix of characters loadings).}
