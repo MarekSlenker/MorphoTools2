@@ -1,34 +1,34 @@
 #' Remove items (Taxa, Populations, morphological characters) from an morphodata object
 #' @export
 deleteTaxon <- function(object, taxonName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # skontroluj ci object ma taxName
   for (tax in taxonName) {
     if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist"), call. = FALSE)
   }
 
-  return(removeByColumn(object, "Taxon", taxonName))
+  return(.removeByColumn(object, "Taxon", taxonName))
 }
 
 
 #' @rdname deleteTaxon
 #' @export
 deletePopulation <- function(object, populationName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # skontroluj ci object ma popname
   for (pop in populationName) {
     if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist"), call. = FALSE)
   }
 
-  return(removeByColumn(object, "Population", populationName))
+  return(.removeByColumn(object, "Population", populationName))
 }
 
 #' @rdname deleteTaxon
 #' @export
 deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # nemozu byt oba nenulova
   if (!is.na(missingPercentage) && !is.null(sampleName)) stop("Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs.", call. = FALSE)
@@ -42,7 +42,7 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
       if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = FALSE)
     }
 
-    return(removeByColumn(object, "ID", sampleName))
+    return(.removeByColumn(object, "ID", sampleName))
   }
 
   if (!is.na(missingPercentage)) {
@@ -51,7 +51,7 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 
     aboveTreshold = rowMeans(is.na(object$data)) > missingPercentage
 
-    newObject = newMorphodata()
+    newObject = .newMorphodata()
     newObject$ID = droplevels( object$ID[!aboveTreshold] )
     newObject$Population = droplevels( object$Population[!aboveTreshold] )
     newObject$Taxon = droplevels( object$Taxon[!aboveTreshold] )
@@ -70,7 +70,7 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 #' @rdname deleteTaxon
 #' @export
 deleteCharacter <- function(object, characterName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # check existence of CH
   for (ch in characterName) {
@@ -102,7 +102,7 @@ deleteCharacter <- function(object, characterName) {
 # @param object object of class morphodata
 # @param column column where to look for groupName
 # @param groupName name of particular Population or Taxon, which should be removed
-removeByColumn <- function(object, column, groupName) {
+.removeByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 
   # groupName moze byt i viac
@@ -111,7 +111,7 @@ removeByColumn <- function(object, column, groupName) {
     toRemove = c(toRemove, which( unlist(object[column]) %in% name) )
   }
 
-  newObject = newMorphodata()
+  newObject = .newMorphodata()
   newObject$ID = droplevels( object$ID[-toRemove] )
   newObject$Population = droplevels( object$Population[-toRemove] )
   newObject$Taxon = droplevels( object$Taxon[-toRemove] )

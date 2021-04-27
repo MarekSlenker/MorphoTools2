@@ -2,13 +2,13 @@
 #' @export
 histCharacter <- function(object, character, taxon = levels(object$Taxon), histogram = TRUE, col = "lightgray",  main = NULL,
                           densityLine = TRUE, normDistLine = TRUE, ...) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
   opar <- graphics::par(no.readonly = TRUE)
 
-  histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
+  .histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
 
 
   graphics::par(opar)
@@ -22,7 +22,7 @@ histCharacter <- function(object, character, taxon = levels(object$Taxon), histo
 histAll <- function(object,  folderName = "histograms", taxon = levels(object$Taxon), histogram = TRUE, col = "lightgray", main = NULL,
                     densityLine = TRUE, normDistLine = TRUE, width = 480, height = 480, units = "px", ...) {
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   opar <- graphics::par(no.readonly = TRUE)
 
@@ -36,7 +36,7 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
   {
     grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", character, ".jpg", sep = "" ), width = width, height = height, units = units)
 
-    histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
+    .histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
 
     grDevices::dev.off()
   }
@@ -48,7 +48,7 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
 
 
 # internal
-histInternal <- function(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...) {
+.histInternal <- function(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...) {
   # set mfrow
   dims=c(1,1)
   addRow=FALSE

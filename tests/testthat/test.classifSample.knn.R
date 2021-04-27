@@ -6,7 +6,7 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
                                "Ch1" = c(1,3,4,6,1,7,12,8),
                                "Ch2" = c(11, 12,42,12,32,11,22,18))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 
 test_that("correct input - NA values", {
@@ -24,8 +24,8 @@ test_that("correct input - NA values", {
                                "Ch1" = c(11,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.knn(sampMockup, trainingMockup, k = 6), "NA values in 'trainingData'.")
 
@@ -45,8 +45,8 @@ test_that("correct input - NA values", {
                                "Ch1" = c(NA,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.knn(sampMockup, trainingMockup, k = 4), "NA values in 'sampleData'.")
 
@@ -69,8 +69,8 @@ test_that("correct input - different characters", {
                                "ChX" = c(11,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.knn(sampMockup, trainingMockup, k = 5), "Characters of 'sampleData' and 'trainingData' are not the same.")
 

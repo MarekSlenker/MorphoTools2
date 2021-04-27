@@ -6,7 +6,7 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
                                "Ch1" = c(1,3,4,6,1,7,12,8),
                                "Ch2" = c(11, 12,42,12,32,11,22,18))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 # locally suppress warnings
 options(warn=-1)

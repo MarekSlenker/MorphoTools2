@@ -14,8 +14,8 @@ morphoDataFrame_NA = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id
                                "Ch1" = c(1,3,NA,6,1,7,12,8),
                                "Ch2" = c(11, 12,42,12,32,11,22,18)))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
-morphoMockup_NA = morphodataFromDataFrame(morphoDataFrame_NA)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
+morphoMockup_NA = .morphodataFromDataFrame(morphoDataFrame_NA)
 
 test_that("notsupported methods",  {
   expect_error(clust(morphoMockup, distMethod = "notsupported"), "distMethod notsupported is not supported")

@@ -4,7 +4,7 @@
 #' @importFrom stats aggregate
 #' @export
 missingCharactersTable <- function(object, level) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
 
@@ -53,7 +53,7 @@ missingCharactersTable <- function(object, level) {
 #' @importFrom stats aggregate
 #' @export
 missingSamplesTable <- function(object, level) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
 

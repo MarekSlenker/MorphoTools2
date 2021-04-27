@@ -1,65 +1,65 @@
 #' Descriptive statistics
 #' @export
 descrTaxon <- function(object, format = NULL, decimalPlaces = 3) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "Taxon", decimalPlaces)
+  descrStatistic = .descrByGroup(object, "Taxon", decimalPlaces)
 
   taxa =  levels(object$Taxon)
   characters = colnames(object$data)
 
   if ( !(is.null(format))){
     # format output according to user specification
-    return(formatDescrStatistic(taxa, characters, descrStatistic, format))
+    return(.formatDescrStatistic(taxa, characters, descrStatistic, format))
   }
   else{
     # do not format descr stat for export ~ row data
-    return(unFormatDescrStatistic(taxa, characters, descrStatistic, format))
+    return(.un.formatDescrStatistic(taxa, characters, descrStatistic, format))
   }
 }
 
 #' @rdname descrTaxon
 #' @export
 descrPopulation <- function(object, format = NULL, decimalPlaces = 3) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "Population", decimalPlaces)
+  descrStatistic = .descrByGroup(object, "Population", decimalPlaces)
 
   populs =  levels(object$Population)
   characters = colnames(object$data)
 
   if ( !(is.null(format))){
     # format output according to user specification
-    return(formatDescrStatistic(populs, characters, descrStatistic, format))
+    return(.formatDescrStatistic(populs, characters, descrStatistic, format))
   }
   else{
     # do not format descr stat for export ~ row data
-    return(unFormatDescrStatistic(populs, characters, descrStatistic, format))
+    return(.un.formatDescrStatistic(populs, characters, descrStatistic, format))
   }
 }
 
 #' @rdname descrTaxon
 #' @export
 descrAll <- function(object, format = NULL, decimalPlaces = 3) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   object$all = as.factor( rep("all", length(object$Taxon)))
 
   # calculate descr stat
-  descrStatistic = descrByGroup(object, "all", decimalPlaces)
+  descrStatistic = .descrByGroup(object, "all", decimalPlaces)
 
   #alls =  levels(object$all)
   characters = colnames(object$data)
 
   if ( !(is.null(format))){
     # format output according to user specification
-    return(formatDescrStatistic("all", characters, descrStatistic, format))
+    return(.formatDescrStatistic("all", characters, descrStatistic, format))
   }
   else{
     # do not format descr stat for export ~ row data
-    return(unFormatDescrStatistic("all", characters, descrStatistic, format))
+    return(.un.formatDescrStatistic("all", characters, descrStatistic, format))
   }
 }
 
@@ -70,7 +70,7 @@ descrAll <- function(object, format = NULL, decimalPlaces = 3) {
 # @param object object of class morphodata
 # @param column Population, Taxon, or whole dataset - levels for calculating descriptive statistics
 
-descrByGroup <- function(object, column, digits) {
+.descrByGroup <- function(object, column, digits) {
   # obj je triedy morfodata, skontrolovane vyssie
 
   characters = colnames(object$data)
@@ -124,10 +124,10 @@ descrByGroup <- function(object, column, digits) {
 # internal
 
 # @param object object of class morphodata
-# @param descrStatistic object retrived from mthod descrByGroup()
+# @param descrStatistic object retrived from mthod .descrByGroup()
 # @param format form to which will be formated descriptive characters
 
-formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
+.formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
   outputTable = as.data.frame(matrix(NA, nrow = length(characters) + 2, ncol = length(groups) + 1))
 
   outputTable[ , 1] = c("format", "N", characters)
@@ -171,10 +171,9 @@ formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
 # internal
 
 # @param object object of class morphodata
-# @param descrStatistic object retrived from mthod descrByGroup()
+# @param descrStatistic object retrived from mthod .descrByGroup()
 # @param format form to which will be formated descriptive characters
-
-unFormatDescrStatistic <- function(groups, characters, descrStatistic, format) {
+.un.formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
 
   outputTable = data.frame("characters" = c("Taxon",  characters))
 

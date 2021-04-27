@@ -4,14 +4,14 @@
 #' Quantile-Quantile Plots
 #' @export
 qqnormCharacter <- function(object, character, taxon = levels(object$Taxon), main = NULL, ...) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
   opar <- graphics::par(no.readonly = TRUE)
 
 
-  qqnormInternal(object, character, taxon, main, ...)
+  .qqnormInternal(object, character, taxon, main, ...)
 
   graphics::par(opar)
 }
@@ -20,7 +20,7 @@ qqnormCharacter <- function(object, character, taxon = levels(object$Taxon), mai
 #' @export
 qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object$Taxon), main = NULL, width = 480, height = 480, units = "px", ...) {
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   opar <- graphics::par(no.readonly = TRUE)
 
@@ -35,7 +35,7 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
   {
     grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", character, ".jpg", sep = "" ), width = width, height = height, units = units)
 
-    qqnormInternal(object, character, taxon, main, ...)
+    .qqnormInternal(object, character, taxon, main, ...)
 
     grDevices::dev.off()
   }
@@ -51,7 +51,7 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
 
 
 
-qqnormInternal <- function(object, character, taxon, main, ...) {
+.qqnormInternal <- function(object, character, taxon, main, ...) {
 
   # set mfrow
   dims=c(1,1)

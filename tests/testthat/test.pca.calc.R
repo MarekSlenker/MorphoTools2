@@ -12,8 +12,8 @@ morphoDataFrameConstant = data.frame("ID" = c("id1","id2","id3","id4","id5","id6
                              "Ch1" = c(1,3,4,6,1,7,12,8),
                              "Ch2" = c(11, 11,11,11,11,11,11,11))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
-constantMockup = morphodataFromDataFrame(morphoDataFrameConstant)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
+constantMockup = .morphodataFromDataFrame(morphoDataFrameConstant)
 
 test_that("correctness of calculation",  {
   pca_princomp = princomp(morphoDataFrame[,4:5], cor = TRUE)

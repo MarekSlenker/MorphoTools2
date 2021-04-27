@@ -21,7 +21,7 @@ plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
   if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
-  plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+  .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                   pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                   ticktype = ticktype, bty = bty, type = type,
                   labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)
@@ -40,7 +40,7 @@ plot3Dpoints.pcoadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = N
   if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
-  plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+  .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                   pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                   ticktype = ticktype, bty = bty, type = type,
                   labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)
@@ -61,14 +61,17 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
   if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
-  plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+  .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                   pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                   ticktype = ticktype, bty = bty, type = type,
                   labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)
 }
 
 
-plot3D_internal <- function(object, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+
+
+
+.plot3D_internal <- function(object, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
                             pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
                             ticktype = ticktype, bty = bty, type = type,
                             labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...) {
@@ -79,9 +82,9 @@ plot3D_internal <- function(object, axes = axes, xlab = xlab, ylab = ylab, zlab 
 
 
   # nastav pch a col spravne podla taxonu
-  object$pch = as.numeric( setValuesForVector(object$objects$Taxon, pch))
-  object$col = setValuesForVector(object$objects$Taxon, col)
-  object$pt.bg = setValuesForVector(object$objects$Taxon, pt.bg)
+  object$pch = as.numeric( .setValuesForVector(object$objects$Taxon, pch))
+  object$col = .setValuesForVector(object$objects$Taxon, col)
+  object$pt.bg = .setValuesForVector(object$objects$Taxon, pt.bg)
 
   # main plot
   plot3D::scatter3D(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]], z = object$objects$scores[ ,axes[3]],

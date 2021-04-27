@@ -1,9 +1,9 @@
-context("newPcoadata")
+context(".newPcoadata")
 
 test_that("check class of new object",  {
 
 
-  newObject = newPcoadata()
+  newObject = .newPcoadata()
 
   expect_is(newObject, "pcoadata")
 

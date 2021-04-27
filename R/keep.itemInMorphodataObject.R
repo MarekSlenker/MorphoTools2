@@ -1,35 +1,35 @@
 #' Keep items (Taxa, Populations, morphological characters) in an morphodata object (and remove other)
 #' @export
 keepTaxon <- function(object, taxonName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # skontroluj ci object ma taxName
   for (tax in taxonName) {
     if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist"), call. = FALSE)
   }
 
-  return(keepByColumn(object, "Taxon", taxonName))
+  return(.keepByColumn(object, "Taxon", taxonName))
 }
 
 
 #' @rdname keepTaxon
 #' @export
 keepPopulation <- function(object, populationName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # skontroluj ci object ma popname
   for (pop in populationName) {
     if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist"), call. = FALSE)
   }
 
-  return(keepByColumn(object, "Population", populationName))
+  return(.keepByColumn(object, "Population", populationName))
 }
 
 
 #' @rdname keepTaxon
 #' @export
 keepSample <- function(object, sampleName = NULL, missingPercentage = NA) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # nemozu byt oba nenulova
   if (!is.na(missingPercentage) && !is.null(sampleName)) stop("Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs.", call. = FALSE)
@@ -44,7 +44,7 @@ keepSample <- function(object, sampleName = NULL, missingPercentage = NA) {
       if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist"), call. = FALSE)
     }
 
-    return(keepByColumn(object, "ID", sampleName))
+    return(.keepByColumn(object, "ID", sampleName))
   }
 
   if (!is.na(missingPercentage)) {
@@ -53,7 +53,7 @@ keepSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 
     toKeep = rowMeans(is.na(object$data)) <= missingPercentage # ponecham tie, ktore maju max missingPercentage
 
-    newObject = newMorphodata()
+    newObject = .newMorphodata()
     newObject$ID = droplevels( object$ID[toKeep] )
     newObject$Population = droplevels( object$Population[toKeep] )
     newObject$Taxon = droplevels( object$Taxon[toKeep] )
@@ -72,7 +72,7 @@ keepSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 #' @rdname keepTaxon
 #' @export
 keepCharacter <- function(object, characterName) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # check existence of CH
   for (ch in characterName) {
@@ -101,8 +101,7 @@ keepCharacter <- function(object, characterName) {
 # @param object object of class morphodata
 # @param column column where to look for groupName
 # @param groupName name of particular Population or Taxon, which should be keeped
-# internal
-keepByColumn <- function(object, column, groupName) {
+.keepByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 
   # groupName moze byt i viac
@@ -111,7 +110,7 @@ keepByColumn <- function(object, column, groupName) {
     toKeep = c(toKeep, which( unlist(object[column]) %in% name) )
   }
 
-  newObject = newMorphodata()
+  newObject = .newMorphodata()
   newObject$ID = droplevels( object$ID[toKeep] )
   newObject$Population = droplevels( object$Population[toKeep] )
   newObject$Taxon = droplevels( object$Taxon[toKeep] )

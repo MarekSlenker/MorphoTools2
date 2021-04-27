@@ -14,7 +14,7 @@ characters <- function(object) {
 # internal
 
 
-checkClass <- function(object, class) {
+.checkClass <- function(object, class) {
   if (! (methods::is(object, class))) stop(paste("object is not of class '", class, "' ", sep = ""), call. = FALSE)
 }
 
@@ -29,7 +29,7 @@ checkClass <- function(object, class) {
 # vector aj symbols su oba vektory. hodnoty vo vektore nahradi postupne symbolmi.
 # ak je symbolov menej, tak ich zrecykluje, ak ich je viace, kasle na ne
 
-setValuesForVector <- function(vector, symbols) {
+.setValuesForVector <- function(vector, symbols) {
 
   uniques = levels(vector)  # uniques = unique(vector)  levels
 

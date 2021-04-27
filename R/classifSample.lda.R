@@ -2,8 +2,8 @@
 #' @export
 classifSample.lda <- function(sampleData, trainingData) {
 
-  checkClass(sampleData, "morphodata")
-  checkClass(trainingData, "morphodata")
+  .checkClass(sampleData, "morphodata")
+  .checkClass(trainingData, "morphodata")
 
   # matica musi byt plna
   if (any(is.na(sampleData$data))) stop("NA values in 'sampleData'.", call. = FALSE)
@@ -17,7 +17,7 @@ classifSample.lda <- function(sampleData, trainingData) {
   char<-colnames(trainingData$data)
 
 
-  res = newClassifdata()
+  res = .newClassifdata()
 
   lda.train = MASS::lda(stats::as.formula(paste("trainingData$Taxon ~ ", paste(char, collapse="+"))),
                         data=trainingData$data, prior = rep(1/ntax,ntax))

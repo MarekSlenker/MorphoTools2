@@ -2,8 +2,8 @@
 #' @export
 classifSample.knn <- function(sampleData, trainingData, k){
 
-  checkClass(sampleData, "morphodata")
-  checkClass(trainingData, "morphodata")
+  .checkClass(sampleData, "morphodata")
+  .checkClass(trainingData, "morphodata")
 
   # matica musi byt plna
   if (any(is.na(sampleData$data))) stop("NA values in 'sampleData'.", call. = FALSE)
@@ -27,7 +27,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
   # trainingData$data = apply(trainingData$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
 
 
-  res = newClassifdata()
+  res = .newClassifdata()
 
   knn.samp = class::knn(train = trainingData$data, test = sampleData$data, cl = trainingData$Taxon, k = k, prob = TRUE, use.all = TRUE)
 

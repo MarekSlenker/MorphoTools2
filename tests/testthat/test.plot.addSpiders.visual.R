@@ -7,8 +7,9 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
                                "Ch1" = c(1,3,4,6,1,7,12,8),
                                "Ch2" = c(11, 12,42,12,32,11,22,18)))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
+bin = read.morphodata("../testFiles/bin.txt")
 
 options(warn=-1)
 data(centaurea)
@@ -43,6 +44,35 @@ test_that("plotAddSpiders visual",  {
   plotAddSpiders(pcaRes, col=c(rgb(255,0,0,max=255,alpha=100),  rgb(0, 0, 255, max = 255, alpha = 100)), lwd = 3)
   dev.off()
   expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders3.png"), threshold = 1)  )
+
+
+  pcoaRes = pcoa.calc(centaurea)
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  plotPoints(pcoaRes, pch =c(18,16), cex = 0.5, col = c("red", "green", "blue", "black", "yellow"))
+  plotAddSpiders(pcoaRes, col=c(rgb(1,0,0),  rgb(0, 0, 1)), lwd = 3)
+  dev.off()
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders4.png"), threshold = 1)  )
+
+
+  pcoaRes = pcoa.calc(bin, distMethod = "jaccard")
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  plotPoints(pcoaRes, pch =c(18,16), cex = 1.5, col = c("red", "green", "blue", "black", "yellow"))
+  plotAddSpiders(pcoaRes, col=c(rgb(1,0,0),  rgb(0, 0, 1)), lwd = 3)
+  dev.off()
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders5.png"), threshold = 1)  )
+
+  pcoaRes = pcoa.calc(bin, distMethod = "simpleMatching")
+
+  tmp  = tempfile(fileext = ".png")
+  png(filename = tmp, width = 400, height = 400)
+  plotPoints(pcoaRes, pch =c(18,16), cex = 1.5, col = c("red", "green", "blue", "black", "yellow"))
+  plotAddSpiders(pcoaRes, col=c(rgb(1,0,0),  rgb(0, 0, 1)), lwd = 3)
+  dev.off()
+  expect_true(visualTest::isSimilar(tmp,visualTest::getFingerprint("../testFiles/figs/plotAddSpiders6.png"), threshold = 1)  )
 
 })
 

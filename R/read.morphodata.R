@@ -5,12 +5,12 @@ read.morphodata <- function(file, dec = ".", sep = "\t", ...){
 
   if (dim(data)[2] <= 3) stop("incorrect data format", call.=FALSE)
 
-  return(morphodataFromDataFrame(data))
+  return(.morphodataFromDataFrame(data))
 }
 
 
 # Class "morphodata"
-morphodataFromDataFrame <- function(indata) {
+.morphodataFromDataFrame <- function(indata) {
 
   # check for required columns
   if(!("ID" %in% colnames(indata)) | !("Population" %in% colnames(indata)) | !("Taxon" %in% colnames(indata)))

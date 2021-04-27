@@ -2,7 +2,7 @@
 #' @export
 classif.knn <- function(object, k, crossval = "indiv"){
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
 
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)  # matica musi byt plna
@@ -14,7 +14,7 @@ classif.knn <- function(object, k, crossval = "indiv"){
   char<-colnames(object$data)
   # object$data = scale(object$data, center = TRUE, scale = TRUE)
 
-  res = newClassifdata()
+  res = .newClassifdata()
 
   if (crossval=="indiv")
   {
@@ -32,8 +32,8 @@ classif.knn <- function(object, k, crossval = "indiv"){
   else if (crossval=="pop")
   {
     for (i in levels(object$Population)) {
-      samp = keepByColumn(object, "Population", i)
-      train = removeByColumn(object, "Population", i)
+      samp = .keepByColumn(object, "Population", i)
+      train = .removeByColumn(object, "Population", i)
 
       # samp$data = scale(samp$data, center = TRUE, scale = TRUE)
       # train$data = scale(train$data, center = TRUE, scale = TRUE)

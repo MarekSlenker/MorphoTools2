@@ -13,7 +13,9 @@ clust(object, distMethod = "euclidean", clustMethod = "UPGMA")
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
-\item{distMethod}{the distance measure to be used. This must be one of \code{"euclidean"} (default), \code{"maximum"}, \code{"manhattan"}, \code{"canberra"}, \code{"binary"}, or \code{"minkowski"}. See \code{\link{dist}} for details.}
+\item{distMethod}{the distance measure to be used. This must be one of \code{"euclidean"} (default)
+
+............................... See details.}
 
 \item{clustMethod}{the agglomeration method to be used: \code{"average"} (= \code{"UPGMA"}; default), \code{"complete"},
 \code{"ward.D"} (= \code{"Ward"}), \code{"ward.D2"}, \code{"single"}, \code{"mcquitty"} (= \code{"WPGMA"}), \code{"median"} (= \code{"WPGMC"}) or \code{"centroid"} (= \code{"UPGMC"}). See \code{\link{hclust}} for details.

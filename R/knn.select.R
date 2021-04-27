@@ -2,7 +2,7 @@
 #' @export
 knn.select<-function(object, crossval="indiv"){
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
@@ -33,8 +33,8 @@ knn.select<-function(object, crossval="indiv"){
       kselj = sapply(k, FUN = function(k){
                                   res = numeric()
                                   for (pop in levels(object$Population)) {
-                                    samp = keepByColumn(object, "Population", pop)
-                                    train = removeByColumn(object, "Population", pop)
+                                    samp = .keepByColumn(object, "Population", pop)
+                                    train = .removeByColumn(object, "Population", pop)
 
                                     knn.samp = class::knn(train = train$data, test = samp$data,
                                                           cl = train$Taxon, k = k, use.all = T)

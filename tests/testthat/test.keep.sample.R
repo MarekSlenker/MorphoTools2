@@ -41,7 +41,7 @@ test_that("keep sample by %",  {
                                "Ch2" = c(11, 12,42,12,32,11,11,2,NA,NA),
                                "Ch4" = c(11, 12,42,12,32,11,NA,2,NA,18))
 
-  morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+  morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
   subData = keepSample(morphoMockup, missingPercentage = 1)
   expect_equal(length(levels(morphoMockup$Population)), length(levels(subData$Population)))

@@ -7,7 +7,7 @@ test_that("correctnes of repacement",  {
                                "data" = data.frame(
                                  "Ch1" = c(1, 2, NA, 4, 5, 6, NA, 8),
                                  "Ch2" = c(11, NA, 13, NA, 15, NA, 17, 18)))
-  morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+  morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
   meanMockup = naMeanSubst(morphoMockup)
 
@@ -23,7 +23,7 @@ test_that("some NAs remains",  {
                                "Taxon" = c("TaxA", "TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB", "TaxB"),
                                  "Ch1" = c(1, 2, NA, 4, 5, 6, NA, NA),
                                  "Ch2" = c(11, NA, 13, NA, 15, NA, 17, 18))
-  morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+  morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
   # locally suppress warnings
   options(warn=-1)

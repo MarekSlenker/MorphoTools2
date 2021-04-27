@@ -30,9 +30,9 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
   # nastav pch a col spravne podla taxonu
-  result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
-  result$col = setValuesForVector(result$objects$Taxon, col)
-  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
+  result$pch = as.numeric( .setValuesForVector(result$objects$Taxon, pch))
+  result$col = .setValuesForVector(result$objects$Taxon, col)
+  result$pt.bg = .setValuesForVector(result$objects$Taxon, pt.bg)
 
   # main plot
 
@@ -80,9 +80,9 @@ plotPoints.pcoadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
   # nastav pch a col spravne podla taxonu
-  result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
-  result$col = setValuesForVector(result$objects$Taxon, col)
-  result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
+  result$pch = as.numeric( .setValuesForVector(result$objects$Taxon, pch))
+  result$col = .setValuesForVector(result$objects$Taxon, col)
+  result$pt.bg = .setValuesForVector(result$objects$Taxon, pt.bg)
 
   # main plot
 
@@ -138,7 +138,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     hist_breaks = seq(from = min(xhist$breaks), to = max(xhist$breaks), by = breaks )
 
     # nastav pch, col a pt.bg spravne podla taxonu
-    result$col = setValuesForVector(result$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
+    result$col = .setValuesForVector(result$objects$Taxon, "black") # farba prazdneho znaku, samotna farba bude v pt.bg
 
     if (length(col) == 1) {
       if (col == "black") {
@@ -155,7 +155,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       }
     }
 
-    result$pt.bg = setValuesForVector(result$objects$Taxon, col)
+    result$pt.bg = .setValuesForVector(result$objects$Taxon, col)
 
     ##########  REGION   Tuto to rob v cykle, lebo nevies kolko bude skupin
 
@@ -214,9 +214,9 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
-    result$pch = as.numeric( setValuesForVector(result$objects$Taxon, pch))
-    result$col = setValuesForVector(result$objects$Taxon, col)
-    result$pt.bg = setValuesForVector(result$objects$Taxon, pt.bg)
+    result$pch = as.numeric( .setValuesForVector(result$objects$Taxon, pch))
+    result$col = .setValuesForVector(result$objects$Taxon, col)
+    result$pt.bg = .setValuesForVector(result$objects$Taxon, pt.bg)
 
     # main plot
     graphics::plot(x = result$objects$scores[ ,axes[1]], y = result$objects$scores[ ,axes[2]],

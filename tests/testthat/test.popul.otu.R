@@ -6,7 +6,7 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
                                "Ch1" = 1:8,
                                "Ch2" = 11:18)
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 
 test_that("correct calculations",  {

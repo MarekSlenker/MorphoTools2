@@ -26,7 +26,7 @@ test_that("class data.frame: read and export same data",  {
 
   morphoDataFrame.imported = read.morphodata("../testFiles/morphoDataFrame.exported.txt")
 
-  morphoDataFrame.morphodata = morphodataFromDataFrame(morphoDataFrame)
+  morphoDataFrame.morphodata = .morphodataFromDataFrame(morphoDataFrame)
 
   expect_identical(morphoDataFrame.imported, morphoDataFrame.morphodata)
 })

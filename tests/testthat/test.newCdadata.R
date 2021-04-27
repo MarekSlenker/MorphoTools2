@@ -1,9 +1,9 @@
-context("newCdadata")
+context(".newCdadata")
 
 test_that("check class of new object",  {
 
 
-  newObject = newCdadata()
+  newObject = .newCdadata()
 
   expect_is(newObject, "cdadata")
 

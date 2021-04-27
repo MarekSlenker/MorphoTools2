@@ -11,7 +11,7 @@ plotCharacters <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main
 #' @export
 plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                             col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
-  checkClass(result, "pcadata")
+  .checkClass(result, "pcadata")
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
@@ -55,7 +55,7 @@ plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
 plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, main = NULL, xlim = NULL, ylim = NULL,
                                     col = "red", length = 0.1, angle = 15, labels = TRUE, cex = 0.7, ...) {
 
-  checkClass(result, "cdadata")
+  .checkClass(result, "cdadata")
 
     if (is.null(main)) main = "Total canonical structure coefficients"
 

@@ -2,7 +2,7 @@
 #' @importFrom candisc candisc
 #' @export
 cda.calc <- function(object, passiveSamples = NULL) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
@@ -24,8 +24,8 @@ cda.calc <- function(object, passiveSamples = NULL) {
   objectNoPassiveSamples = object
 
   for (groupName in passiveSamples) {
-    if (groupName %in% objectNoPassiveSamples$Taxon) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Taxon", groupName)
-    if (groupName %in% objectNoPassiveSamples$Population) objectNoPassiveSamples = removeByColumn(objectNoPassiveSamples, "Population", groupName)
+    if (groupName %in% objectNoPassiveSamples$Taxon) objectNoPassiveSamples = .removeByColumn(objectNoPassiveSamples, "Taxon", groupName)
+    if (groupName %in% objectNoPassiveSamples$Population) objectNoPassiveSamples = .removeByColumn(objectNoPassiveSamples, "Population", groupName)
   }
 
   candisc_MK <- function (mod, term, type = "2", manova, ndim = rank, ...)
@@ -118,7 +118,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
   names(cda$eigenvalues) = newNames
   names(cda$pct) = newNames
 
-  cdaResult = newCdadata()
+  cdaResult = .newCdadata()
 
   cdaResult$rank = cda$rank
   cdaResult$eigenValues = cda$eigenvalues[1:cda$rank]

@@ -3,24 +3,24 @@
 
 # internal
 # returns new morphodata object
-newMorphodata <- function() {
-  newMorphodata <- list(
+.newMorphodata <- function() {
+  .newMorphodata <- list(
                       ID = NULL,
                       Population = NULL,
                       Taxon = NULL,
                       data = data.frame()
                       )
 
-  attr(newMorphodata, "class") <- "morphodata"
-  return(newMorphodata)
+  attr(.newMorphodata, "class") <- "morphodata"
+  return(.newMorphodata)
 }
 
 
 # internal
 # returns new pcadata object
-newPcadata <- function() {
+.newPcadata <- function() {
 
-  newPcadata <- list(
+  .newPcadata <- list(
                      objects = list(
                           ID = numeric(),
                           Population = numeric(),
@@ -36,15 +36,15 @@ newPcadata <- function() {
                      scale = numeric()
                      )
 
-  attr(newPcadata, "class") <- "pcadata"
-  return(newPcadata)
+  attr(.newPcadata, "class") <- "pcadata"
+  return(.newPcadata)
 }
 
 # internal
 # returns new pcoadata object
-newPcoadata <- function() {
+.newPcoadata <- function() {
 
-  newPcoadata <- list(
+  .newPcoadata <- list(
     objects = list(
       ID = numeric(),
       Population = numeric(),
@@ -58,17 +58,17 @@ newPcoadata <- function() {
     rank = numeric()
   )
 
-  attr(newPcoadata, "class") <- "pcoadata"
-  return(newPcoadata)
+  attr(.newPcoadata, "class") <- "pcoadata"
+  return(.newPcoadata)
 }
 
 
 
 # internal
 # returns new cdadata object
-newCdadata <- function() {
+.newCdadata <- function() {
 
-  newCdadata <- list(
+  .newCdadata <- list(
     objects = list(
       ID = factor(),
       Population = factor(),
@@ -85,15 +85,15 @@ newCdadata <- function() {
     canrsq = numeric()
     )
 
-  attr(newCdadata, "class") <- "cdadata"
-  return(newCdadata)
+  attr(.newCdadata, "class") <- "cdadata"
+  return(.newCdadata)
 }
 
 
 # internal
 # returns new classifdata object
-newClassifdata <- function() {
-  newClassifdata <- list(
+.newClassifdata <- function() {
+  .newClassifdata <- list(
     ID = character(),
     Population = character(),
     Taxon = character(),
@@ -103,7 +103,7 @@ newClassifdata <- function() {
 
   )
 
-  attr(newClassifdata, "class") <- "classifdata"
-  return(newClassifdata)
+  attr(.newClassifdata, "class") <- "classifdata"
+  return(.newClassifdata)
 }
 

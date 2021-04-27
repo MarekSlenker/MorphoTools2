@@ -1,9 +1,9 @@
-context("newMorphodata")
+context(".newMorphodata")
 
 test_that("check class of new object",  {
 
 
-  newObject = newMorphodata()
+  newObject = .newMorphodata()
 
   expect_is(newObject, "morphodata")
 

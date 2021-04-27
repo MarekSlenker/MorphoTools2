@@ -1,9 +1,9 @@
-context("removeByColumn")
+context(".removeByColumn")
 
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("remove one taxon",  {
-  subData = removeByColumn(data, "Taxon","hybr")
+  subData = .removeByColumn(data, "Taxon","hybr")
 
   expect_equal(length(levels(data$Taxon)) -1, length(levels(subData$Taxon)))
 
@@ -16,7 +16,7 @@ test_that("remove one taxon",  {
 })
 
 test_that("remove multiple taxa",  {
-  subData = removeByColumn(data, "Taxon", c("hybr", "st"))
+  subData = .removeByColumn(data, "Taxon", c("hybr", "st"))
 
   expect_equal(length(levels(data$Taxon)) -2, length(levels(subData$Taxon)))
 
@@ -29,7 +29,7 @@ test_that("remove multiple taxa",  {
 })
 
 test_that("remove one population",  {
-  subData = removeByColumn(data, "Population","BABL")
+  subData = .removeByColumn(data, "Population","BABL")
 
   expect_equal(length(levels(data$Population)) -1, length(levels(subData$Population)))
 
@@ -42,7 +42,7 @@ test_that("remove one population",  {
 })
 
 test_that("remove multiple population",  {
-  subData = removeByColumn(data, "Population", c("RTE", "PREL", "PROS"))
+  subData = .removeByColumn(data, "Population", c("RTE", "PREL", "PROS"))
 
   expect_equal(length(levels(data$Population)) -3, length(levels(subData$Population)))
 

@@ -2,7 +2,7 @@
 #' @export
 transformCharacter <- function(object, character, FUN, newName = NULL) {
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 

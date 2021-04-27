@@ -1,7 +1,7 @@
 #' Shapiro-Wilk Normality Test
 #' @export
 shapiroWilkTest <- function(object, p.value = 0.05) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
 
   characters = colnames(object$data)

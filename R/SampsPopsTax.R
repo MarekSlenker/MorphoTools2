@@ -3,7 +3,7 @@
 #' @rdname read.morphodata
 #' @export
 samples <- function(object) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   return(levels(object$ID))
 }
@@ -12,7 +12,7 @@ samples <- function(object) {
 #' @rdname read.morphodata
 #' @export
 populations <- function(object) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   return(levels(object$Population))
 }
@@ -21,7 +21,7 @@ populations <- function(object) {
 #' @rdname read.morphodata
 #' @export
 taxa <- function(object) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   return(levels(object$Taxon))
 }

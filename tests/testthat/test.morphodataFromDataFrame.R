@@ -1,4 +1,4 @@
-context("morphodataFromDataFrame")
+context(".morphodataFromDataFrame")
 
 morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","id8"),
                              "Population" = c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3", "Pop4", "Pop4"),
@@ -7,7 +7,7 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
                                "Ch1" = 1:8,
                                "Ch2" = 11:18))
 
-morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 
 test_that("checking correctness of parsing dataframe to morphodata",  {
@@ -33,7 +33,7 @@ wrongDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7","
 
 test_that("trying to parse wrong formated data",  {
 
-  expect_error(morphodataFromDataFrame(wrongDataFrame))
+  expect_error(.morphodataFromDataFrame(wrongDataFrame))
 
 
 })

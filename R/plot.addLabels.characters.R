@@ -18,21 +18,9 @@ plotAddLabels.characters.pcadata <- function(result, labels = characters(result)
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  .labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
-
-#' @rdname plotAddLabels.characters
-#' @method plotAddLabels.characters pcoadata
-#' @export
-plotAddLabels.characters.pcoadata <- function(result, labels = characters(result), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
-
-  # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
-
-  labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
-}
 
 
 
@@ -81,12 +69,12 @@ plotAddLabels.characters.cdadata <- function(result, labels = characters(result)
     if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
     if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-    labels_characters_internal(labelTable = result$totalCanonicalStructure, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+    .labels_characters_internal(labelTable = result$totalCanonicalStructure, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }
 }
 
 
-labels_characters_internal <- function(labelTable, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...) {
+.labels_characters_internal <- function(labelTable, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...) {
 
   #skontroluj ci labels patria
   # check existence of CH

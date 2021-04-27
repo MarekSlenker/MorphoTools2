@@ -1,7 +1,7 @@
 #' Principal component analysis (PCA)
 #' @export
 pca.calc <- function(object) {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # xdata<-na.omit(DATA)
   # toto nerobim, nebudem uzivatelovi nic z jeho dat vyhadzovat. nech si to vyrisi sam
@@ -16,7 +16,7 @@ pca.calc <- function(object) {
   }
 
 
-  pcaResult = newPcadata()
+  pcaResult = .newPcadata()
 
   princompRes = stats::princomp(object$data, cor = TRUE)
 

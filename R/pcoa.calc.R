@@ -1,21 +1,21 @@
 #' Principal coordinates analysis (PCoA)
 #' @export
 pcoa.calc <- function(object, distMethod = "euclidean") {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # miesto toho testujem na NA a vyhodim vynimku
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
 
   # find and report constant columns - EE
 
-  pcoaResult = newPcoadata()
+  pcoaResult = .newPcoadata()
   rank = min(length(colnames(object$data)), length(rownames(object$data)))-1 # maximum dimension of the space must be in {1, 2, …, n-1}.
 
-  xRes = stats::cmdscale(calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
+  xRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
                                 eig = TRUE) # only to find numb of possitive eigenvalues
   rank = length(xRes$eig[which(xRes$eig > 0)])
 
-  princompRes = stats::cmdscale(calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
+  princompRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
                                 k = rank, eig = TRUE, x.ret = TRUE)
 
 

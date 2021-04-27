@@ -16,7 +16,7 @@ plotAddEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, c
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
+  .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
 
 
@@ -29,7 +29,7 @@ plotAddEllipses.pcoadata <- function(result, axes = c(1,2), probability = 0.95, 
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
+  .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
 
 
@@ -49,14 +49,14 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
     if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
     if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-    plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
+    .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
   }
 }
 
 
-plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lwd, ...) {
+.plot_ellipses_internal <- function(result, axes, probability, col, type, lty, lwd, ...) {
 
-  result$col = setValuesForVector(result$objects$Taxon, col)
+  result$col = .setValuesForVector(result$objects$Taxon, col)
 
   tt = sqrt(stats::qchisq(probability, 2)) # kvantil rozdelenia
   if (is.infinite(tt)) stop(paste("Probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = FALSE)

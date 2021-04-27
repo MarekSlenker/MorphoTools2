@@ -5,11 +5,11 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
                                       varwidth = FALSE, ...) {
 
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
 
-  bxPlot = giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
+  bxPlot = .giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
   graphics::bxp(bxPlot, outline = outliers, boxfill = col, border = border, xlab = xlab, ylab = ylab, frame = frame, pch = pch, horizontal = horizontal, varwidth = varwidth, ...)
   graphics::title(main, cex.main = cex.main)
@@ -21,7 +21,7 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
 boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
                                 main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
 {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
@@ -32,7 +32,7 @@ boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWh
   for (char in colnames(object$data))
   {
 
-    bxPlot = giveMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
+    bxPlot = .giveMeNiceBoxPlot(object, char, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 
     grDevices::jpeg(filename=paste(getwd(), "/", folderName, "/", char, ".jpg", sep = "" ), width = width, height = height, units = units)
 
@@ -46,7 +46,7 @@ boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWh
 
 
 # internal
-giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
+.giveMeNiceBoxPlot <- function(object, character, upperWhisker, lowerWhisker) {
   # vyrataj klasicky bxplot
   bxPlot = graphics::boxplot(unlist(object$data[character]) ~ object$Taxon, data = object$data, plot = FALSE)
 

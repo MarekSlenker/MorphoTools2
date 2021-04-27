@@ -2,7 +2,7 @@
 #' @export
 
 naMeanSubst <- function(object){
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
    meansubst<-function(x){
       m<-mean(x,na.rm=T)

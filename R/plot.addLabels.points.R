@@ -10,7 +10,7 @@ plotAddLabels.points <- function(result, labels = result$objects$ID, include = T
 #' @export
 plotAddLabels.points.pcadata <- function(result, labels = result$objects$ID, include = TRUE, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
 
-  labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  .labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
 
@@ -19,7 +19,7 @@ plotAddLabels.points.pcadata <- function(result, labels = result$objects$ID, inc
 #' @export
 plotAddLabels.points.pcoadata <- function(result, labels = result$objects$ID, include = TRUE, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
 
-  labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  .labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
 
@@ -32,7 +32,7 @@ plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, inc
 
   if (result$rank == 1){ stop("Unable to plot labels for histogram", call. = FALSE)  }
   else {
-    labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+    .labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }
 
 
@@ -40,7 +40,7 @@ plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, inc
 
 
 # suitable for "pcadata" or "cdadata", as both stores XY coordinates in $scores
-labels_points_internal <- function(object, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...) {
+.labels_points_internal <- function(object, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...) {
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (object$rank == 1) stop("this method is not applicable to histograms", call. = FALSE)

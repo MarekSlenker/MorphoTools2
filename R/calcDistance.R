@@ -1,5 +1,5 @@
 
-calcDistance <- function(object, distMethod, center, scale) {
+.calcDistance <- function(object, distMethod, center, scale) {
 
   switch (distMethod,
           "euclidean" = {  # moze byt scale alebo nie

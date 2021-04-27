@@ -40,7 +40,7 @@ test_that("remove sample by %",  {
                                "Ch1" = c(1,3,4,6,1,7,12,8,NA, NA),
                                "Ch2" = c(11, 12,42,12,32,11,11,2,NA,18))
 
-  morphoMockup = morphodataFromDataFrame(morphoDataFrame)
+  morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
   subData = deleteSample(morphoMockup, missingPercentage = 1)
   expect_equal(length(levels(morphoMockup$Population)), length(levels(subData$Population)))

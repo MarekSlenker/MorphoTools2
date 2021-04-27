@@ -1,7 +1,7 @@
 #' Correlations of characters
 #' @export
 cormat <- function (object, method = "pearson") {
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = FALSE)
 

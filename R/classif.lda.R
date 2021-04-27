@@ -2,7 +2,7 @@
 #' @export
 classif.lda <- function(object, crossval="indiv") {
 
-  checkClass(object, "morphodata")
+  .checkClass(object, "morphodata")
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
@@ -12,7 +12,7 @@ classif.lda <- function(object, crossval="indiv") {
   ntax<-length(levels(object$Taxon))
   char<-colnames(object$data)
 
-  res = newClassifdata()
+  res = .newClassifdata()
 
   if (crossval=="indiv")
   {
@@ -28,8 +28,8 @@ classif.lda <- function(object, crossval="indiv") {
   else if (crossval=="pop")
   {
     for (i in levels(object$Population)) {
-      samp = keepByColumn(object, "Population", i)
-      train = removeByColumn(object, "Population", i)
+      samp = .keepByColumn(object, "Population", i)
+      train = .removeByColumn(object, "Population", i)
 
       lda.train = MASS::lda(stats::as.formula(paste("train$Taxon ~ ", paste(char, collapse = "+"))), data = train$data, prior = rep(1/ntax,ntax))
       lda.samp = stats::predict(lda.train, samp$data)

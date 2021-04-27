@@ -27,8 +27,8 @@ test_that("correct input - NA values", {
                                "Ch1" = c(11,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.lda(sampMockup, trainingMockup), "NA values in 'trainingData'.")
 
@@ -48,8 +48,8 @@ test_that("correct input - NA values", {
                                "Ch1" = c(NA,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.lda(sampMockup, trainingMockup), "NA values in 'sampleData'.")
 
@@ -72,8 +72,8 @@ test_that("correct input - different characters", {
                                "ChX" = c(11,13),
                                "Ch2" = c(31, 32)))
 
-  trainingMockup = morphodataFromDataFrame(trainingDataFrame)
-  sampMockup = morphodataFromDataFrame(sampDataFrame)
+  trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
+  sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
   expect_error(classifSample.lda(sampMockup, trainingMockup), "Characters of 'sampleData' and 'trainingData' are not the same.")
 
