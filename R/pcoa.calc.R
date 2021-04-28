@@ -3,8 +3,8 @@
 pcoa.calc <- function(object, distMethod = "euclidean") {
   .checkClass(object, "morphodata")
 
-  # miesto toho testujem na NA a vyhodim vynimku
-  if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
+
+  # NA niekedy vadia, niekedy nie, zalezitost .calcDistance
 
   # find and report constant columns - EE
 

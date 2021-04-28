@@ -660,6 +660,8 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 # 6. Principal Coordinate Analysis (PCoA)
 
+PCoA is not limited to Euclidean distances, as PCA does
+
 Výsledky PCoA sa interpretujú rovnakým spôsobom ako výsledky PCA. Jediným
 The main difference between PCA and PCoA is that the relationship between
 the original characters and principal coordinates is not linear, and therefore we
@@ -675,6 +677,10 @@ In this case the problem is formulated differently: given a distance matrix of o
 # 7. Non-metric multidimensional scaling (NMDS)
 
 The metric information in the data or distances is not preserved by the ordination. The method of non-metric multidimensional scaling considers the rank order of distances, rather than their actual magnitudes. The objective is to arrange the objects in a few (usually two) dimensions such that the rank order of distances in the new space follows the original rank order as closely as possible. The "goodness" of the non-metric solution is measured by the stress between the original and the new distances. The procedure is iterative, the initial configuration is random or read from disk file in form of data with objects as rows, in free format. You may start immediately requesting two dimensions; if you choose, say, 3 for start, the two-dimensional solution will be obtained from the three-dimensional. Maximum starting dimensionality is 5. A stress of 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points. The Shepard diagram gives a visual comparison of original and new distances. In an ideal case the distances increase monotonically over the original distances. The worse the solution, the more scattered the points in the Shepard diagram. After computations, the ordination of objects and the Shepard diagram can be displayed.
+
+NMDS is not limited to Euclidean distances, as PCA does
+
+co stress plot?   to predpokladam nema zmysel
 
 # 8. Canonical discriminant analysis (CDA)
 

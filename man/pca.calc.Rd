@@ -1,5 +1,4 @@
 \name{pca.calc}
-
 \alias{pca.calc}
 
 \title{Principal Component Analysis}

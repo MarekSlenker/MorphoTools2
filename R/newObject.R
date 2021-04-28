@@ -63,6 +63,32 @@
 }
 
 
+# internal
+# returns new pcadata object
+.newNmdsdata <- function() {
+
+  .newNmdsdata <- list(
+    objects = list(
+      ID = numeric(),
+      Population = numeric(),
+      Taxon = numeric(),
+      scores = numeric()),
+    stress = numeric(),
+    diss = numeric(),
+    dist = numeric(),
+    #eigenVectors = numeric(),
+    #eigenValues = numeric(),
+    #eigenvaluesAsPercent = numeric(),
+    #cumulativePercentageOfEigenvalues = numeric(),
+    groupMeans = data.frame(),
+    distMethod = character(),
+    rank = numeric()
+  )
+
+  attr(.newNmdsdata, "class") <- "nmdsdata"
+  return(.newNmdsdata)
+}
+
 
 # internal
 # returns new cdadata object

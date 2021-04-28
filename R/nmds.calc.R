@@ -1,72 +1,50 @@
 #' Non-metric multidimensional scaling (NMDS)
 #' @export
-nmds.calc <- function(object, distMethod = "euclidean") {
+nmds.calc <- function(object, distMethod = "euclidean", k = 3) {
+  .checkClass(object, "morphodata")
+
+  # NA niekedy vadia, niekedy nie, zalezitost .calcDistance
 
 
-  data(centaurea)
-  centaurea = naMeanSubst(centaurea)
-  centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+  d = .calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE)
 
 
+  monoMDSRes = vegan::monoMDS(d, k = k, model = "global", scaling = TRUE, pc = TRUE, weakties = FALSE)
 
-  d = .calcDistance(centaurea, distMethod = "euclidean", center = TRUE, scale = TRUE)
-
-  pcoa.calc()
-
-  nmds = vegan::monoMDS(d, k = 3, model = "global",#             "local", "linear", "hybrid"),
-                        threshold = 0.8, maxit = 200, weakties = FALSE, stress = 1,
-                        scaling = FALSE, pc = FALSE                        )
-
-  nmds$stress
-
-
-  col = as.numeric(centaurea$Taxon);   col[which(col == 1)] = "red";   col[which(col == 2)] = "green";   col[which(col == 3)] = "blue";   col[which(col == 4)] = "black"
-
-
-  plot3D::polygon3D(nmds$points[,1], nmds$points[,2], nmds$points[,3],col = col, pch = 18)
-
-  plot_e
+  nmdsResult = .newNmdsdata()
 
 
 
+  newNames = NULL
+  for (i in 1:k) {
+    newNames = c(newNames, paste("Nmds", i, sep = ""))
+  }
 
-  metaMDS
+  colnames(monoMDSRes$points) = newNames
+  #names(princompRes$sdev) = newNames
+  #colnames(princompRes$scores) = newNames
+
+  nmdsResult$rank = k
+  nmdsResult$stress = monoMDSRes$stress
+  nmdsResult$distMethod = distMethod
+
+  nmdsResult$diss = monoMDSRes$diss
+  nmdsResult$dist = monoMDSRes$dist
 
 
+  nmdsResult$objects$scores = monoMDSRes$points
+  nmdsResult$objects$ID = object$ID
+  nmdsResult$objects$Population = object$Population
+  nmdsResult$objects$Taxon = object$Taxon
 
 
+  # group centroid locations
+  nmdsResult$groupMeans = stats::aggregate(monoMDSRes$points ~ object$Taxon, FUN = mean)
+  colnames(nmdsResult$groupMeans)[1] = "Taxon"
+
+  return(nmdsResult)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
