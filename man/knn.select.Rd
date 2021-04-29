@@ -5,7 +5,7 @@
 
 
 \description{
-This function search for the optimal number of clusters for the given data set for k-nearest neighbour cross-validatory classification.
+This function search for the optimal number of neighbours for the given data set for k-nearest neighbour cross-validatory classification.
 }
 
 

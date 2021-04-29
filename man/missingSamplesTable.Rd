@@ -15,7 +15,7 @@ missingSamplesTable(object, level)
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
 
-\item{level}{level of groping, one of the following: \code{"taxon"}, populations (\code{"pop"}), or individuals (\code{"indiv"}.)
+\item{level}{level of grouping, one of the following: \code{"taxon"}, populations (\code{"pop"}), or individuals (\code{"indiv"}.)
 }
 }
 

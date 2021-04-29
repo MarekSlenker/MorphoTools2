@@ -75,7 +75,7 @@ If you quit and restart R, you will need to load it again (using the `library` f
 
 ## 3.1 Data import
 
-As with any statistical software, the first thing you want to do is import your raw data. Data can be imported from: (1) plain text files (tab, comma, or whitespace delimited, see below); (2) from Excel spreadsheets through the clipboard in Windows. Following structure of input data is required: 
+As with any statistical software, the first task is import your raw data. Data can be imported from: (1) plain text files (tab, comma, or whitespace delimited, see below); (2) from Excel spreadsheets through the clipboard in Windows. Following structure of input data is required: 
 
 * the first row contains variable names.
 * the next rows contain individuals (samples, or any other kind of sampling units), single individual per row.
@@ -84,7 +84,7 @@ As with any statistical software, the first thing you want to do is import your 
 
 [^1]: In case the **population level is missing or inapplicable** (e.g. more than one individual only in some populations and/or very low number of individuals per population), copy the values from the"ID" column to "Population" column; this will allow analysing such data by most methods but any analyses considering population level are meaningless.
 
-[^2]: **The morphological characters** can be numeric, binary (coded as 0/1), or multi-state ordered categorial characters  (e.g., 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2). On the other hand, unordered categorial characters (e.g. describing colouration: 1 = red, 2 = green, 3 = blue) are not applicable in discriminant analyses. If there is a reason to include such unordered multistate characters, these characters have to be coded as binary characters, as follow: redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1).
+[^2]: **The morphological characters** can be quantitative, binary (coded as 0/1), or multi-state ordered categorical (semiquantitative, rank-ordered) characters  (e.g., 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2). On the other hand, nonordered categorical (qualitative, nominal) characters (e.g. describing colour: 1 = red, 2 = green, 3 = blue) are not applicable in most of the analyses (e.g., principal component or discriminant analyses). If there is a reason to include such unordered multistate characters, these characters either have to be coded as binary characters, as follows: redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1), or, in some cases coefficients for mixed data (e.g., Gower coefficient) should be used.
 
 
 
@@ -101,7 +101,7 @@ As with any statistical software, the first thing you want to do is import your 
 | STGH310 	| STGH       	| ps    	| 35.6 	| 19.2 	| 54.8 	| 0.35 	| 9.5  	|     	| *NA* 	|
 
 
-Use underscores (_) instead of spaces, and avoid special characters (e..g punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (not quoted).
+Use underscores (_) instead of spaces, and avoid special characters (e.g. punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (not quoted).
 
 In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is built-in in this package. Execute command `data(centaurea)` to load this data to your workspace.
 
@@ -110,7 +110,7 @@ data(centaurea)
 ```
 
 
-In genereal, morphological data can be imported using the `read.morphodata()` function, providing path to your data[^3]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
+In general, morphological data can be imported using the `read.morphodata()` function, providing path to your data[^3]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually whitespace `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
 
 [^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.
 
@@ -171,13 +171,13 @@ viewMorphodata(centaurea)
 
 ## 3.2 Data control and manipulation
 
-Raw data can contain errors (e.g., typos in numbers or decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. An assessment of the normality of distribution is a prerequisite for some statistical tests. If this assumption is not met, we can try to improve distribution by transformation, or prefer nonparametric methods that do not require normality.  
+Raw data can contain errors (e.g., typos in numbers or decimal points) and missing values which should be corrected or removed. We should also consider removing significantly correlated characters, that could potentially distort the results of some of the multivariate analyses. An assessment of the normality of distribution of data is a prerequisite for some statistical tests. If this assumption is not met, we can try to improve distribution by transformation, or prefer nonparametric methods that do not require normality of distribution of data.  
 The following steps go through these issues and end up with the cleaned data ready for exploring the morphological differentiation among the taxa (or any defined groups).
 
-### 3.2.1 Assessing normality of data
+### 3.2.1 Assessing whether the data follow normal distribution
 
-An assessment of the normality of data is a prerequisite for many statistical tests. There are two main methods of assessing normality: numerically or graphically.  
-Please note, although all methods available in `MorphoTools2` package are presented here, there is no need to use all of these methods at once. What we need is only a brief summary of whether the data are normally distributed or not.  
+An assessment whether the data follow normal distribution is a prerequisite for many statistical tests, but on the other hand, many analyses are quite robust to moderate deviations from normality. From the here used analyses, normality of distribution is required by Pearson correlation coefficient and Discriminant analysis (both canonical and linear). The normality of distribution of data is not an assumption of the Hierarchical clustering, Principal component analysis, Principal coordinates analysis, nor Non-metric multidimensional scaling.  
+There are two main methods of assessing normality: numerically or graphically. Please note, although all methods available in `MorphoTools2` package are presented here, there is no need to use all of these methods at once. What we need is only a brief summary of whether the data are normally distributed or not.    
 
 #### 3.2.1.1 Shapiro-Wilk normality test  
 &nbsp;  
@@ -242,63 +242,35 @@ qqnormAll(centaurea, folderName = "qqnormPlots")
 
 ---
 
-We find that most of the characters in our dataset have a non-normal distribution. In general, we have two options: we might try a transformation to make the data more like normal or prefer nonparametric methods that do not require normality (Spearman's correlation coefficient instead of Pearson's, and k-nearest neighbours classificatory discriminant analysis instead of Linear DA). 
-The normality of data is not an assumption of Principal component analysis (Shlens, 2014). Canonical discriminant analysis generally requires a multivariate normal distribution of characters within-groups (quantitative, not binary); nevertheless, they are considerably robust to deviations in this respect (Thorpe, 1976; Klecka, 1980).  
-  
-  
+We find that most of the characters in our dataset does not have normal distribution. In general, we have two options: we might try a transformation to make the distribution of data more like normal or prefer nonparametric methods that do not require normality (Spearman's correlation coefficient instead of Pearson's, and k-nearest neighbours classificatory discriminant analysis instead of Linear DA). 
+
 
 Transformation of data is the matter of the next section, but in all of the subsequent analysis, we will use original data and prefer nonparametric methods.
 
 ### 3.2.2 Data transformation
 
-The characters that deviate most from the normal distribution can be transformed to improve their distribution (to become normally distributed or at least to achieve less deviation from normality). From the wide palette of applicable transformations (e.g., logarithmic, square root, cube root, arcsine) you should choose the one that improves the data the most. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation (if there are zero values in the data), because the argument of the logarithm can be only positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
+The characters that deviate most from the normal distribution can be transformed to improve their distribution (to become normally distributed or at least to achieve less deviation from normality). From the wide palette of applicable transformations (e.g., logarithmic, square root, cube root, arcsine) you should choose the one that improves the data the most. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation if there are zero values in the data, because the argument of the logarithm can be only positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
 
-Transformation can be done by `transformCharacter()` function, which in addition to data, the name of the character which should be transformed (`character`), and new name of transformed character (`newName`; not required) takes as argument a `FUN`. The `FUN` is an Anonymous function (also known as a lambda expression), but without a long explanation, this is where to place the function that will transforms the data.
-
+Transformation can be done by `transformCharacter()` function, which in addition to data, the name of the character which should be transformed (`character`), and new name of transformed character (`newName`; not required) takes as argument a `FUN`. The `FUN` is an Anonymous function (also known as a lambda expression), but without a long explanation, this is where to place the function that will transforms the data. Transformed data will replace original data, under the old or new name, if the `newName` argument was used.  
+  
 As the `transformCharacter()` takes as argument another function (`FUN` argument), there is an inexhaustible amount of potential transformations. Here we will mention some of them:  
 
 For a right-skewed (positive) distribution can be used:  
-* logarithmic transformation (natural): `FUN = function(x) log(x+1)`  
-* logarithmic transformation (common): `FUN = function(x) log10(x+1)`  
+* logarithmic transformation (natural): `FUN = function(x) log(100*x+1)`  
+* logarithmic transformation (common): `FUN = function(x) log10(100*x+1)`  
 * square root transformation: `FUN = function(x) sqrt(x)`   
 * cube root transformation: `FUN = function(x) x^(1/3)`   
 * arcsine transformation: `FUN = function(x) asin(sqrt(x))`  
 
 For a left-skewed (negative) distribution can be used:   
-* logarithmic transformation (natural): `FUN = function(x) log((max(x)+1)-x)`  
-* logarithmic transformation (common): `FUN = function(x) log10((max(x)+1)-x)`  
+* logarithmic transformation (natural): `FUN = function(x) log((100*max(x)+1)-x)`  
+* logarithmic transformation (common): `FUN = function(x) log10((100*max(x)+1)-x)`  
 * square root transformation: `FUN = function(x) sqrt((max(x)+1)-x)`    
 * cube root transformation: `FUN = function(x) ((max(x)+1)-x)^(1/3)`    
 * arcsine transformation: `FUN = function(x) asin(sqrt((max(x))-x))`  
 
-In the above examples, we use a number 1 as constant, but note, the chosen constant affect the result, as shown in the figure below.
 
-
-```{r echo = FALSE, eval=TRUE, fig.width=8, fig.height=2}
-par(mfrow=c(1,3))
-par(mar=c(4,4,2,1))
-par(mgp=c(2,0.8,0))
-
-
-c1 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+0.001))
-c2 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+10))
-c3 = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1000))
-
-stats::qqnorm(as.matrix( na.omit(c1$data["SF"])), main = "function(x) log(x+0.001)", cex = 0.9, bty="n")
-stats::qqline(as.matrix( na.omit(c1$data["SF"])), lwd=2)
-
-stats::qqnorm(as.matrix( na.omit(c2$data["SF"])), main = "function(x) log(x+10)", cex = 0.9, bty="n")
-stats::qqline(as.matrix( na.omit(c2$data["SF"])), lwd=2)
-
-stats::qqnorm(as.matrix( na.omit(c3$data["SF"])), main = "function(x) log(x+1000)", cex = 0.9, bty="n")
-stats::qqline(as.matrix( na.omit(c3$data["SF"])), lwd=2)
-
-
-par(mfrow=c(1,1))
-par(mgp=c(3, 1, 0))
-par(mar=c(5, 4, 4, 2) + 0.1)
-
-```
+As stated above, when using a log transformation, a constant should be added to all values to make them all positive before transformation. However, log transformation (together with changing the shape of the distribution) also changes multiplication to sum (the values differ x-times vs. differ by x). For small values of x, adding 1 significantly changes the original ratios, therefore, for log transformation of small numbers is recommended to multiply x by some constant (e.g. 100) at first, and then add 1, as is shown in examples above.  
 
 The following figure depicts the effect of various transformation on the same data. 
 
@@ -469,7 +441,7 @@ centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
-Another available option is to delete samples with a high portion of missing data using `deleteSample()` function. Command `deleteSample(centaurea, missingPercentage = 0.1)` will return samples having no more than 10% of missing data. To remove specific samples, enumerate them in 'sampleName' argument in these function.  
+Another available option is to delete samples with a high portion of missing data using `deleteSample()` function. Command `deleteSample(centaurea, missingPercentage = 0.1)` will return samples having no more than 10% of missing data. To remove specific samples, enumerate them in 'sampleName' argument in these functions.  
 
 Here is the right place to mention also `deleteTaxon()` and another quartet of functions with reversed logic  which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()`, and `keepCharacter()`.
 
@@ -490,9 +462,9 @@ We examined outlier value in "hybr" group and ensured that data do not contain h
 
 # 4. Hierarchical clustering
 
-Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable (Euclidean is the most often used (default), but maximum, Manhattan, Canberra, binary or Minkowski distance can be used as well), and various procedures of clustering based on these distances are available (UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC). The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
+Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable (euclidean (default), but maximum, Manhattan, Canberra, binary or Minkowski distance can be used as well), and various procedures of clustering based on these distances are available (UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC). However, note that for morphometric analysis hardly anything else is used than Euclidean distance and UPGMA or Ward’s method. The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
 
-The dengrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
+The dendrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300,}
 pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "UPGMA")
@@ -505,7 +477,7 @@ Four main clusters were formed in the histogram above, however, some populations
 
 # 5. Principal component analysis (PCA)
 
-Principal components analysis (PCA) is another method without the requirement of *a priori* specification of the samples' membership in taxa (groups). PCA reduces the measured variables into principal components (artificial variables). The first few of them extracts most of the variance in the measured variables. The standardized PCA based on correlation matrix is calculated by `pca.calc()` function (based on package `stats`; R Core Team, 2020), the result is an object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
+Principal component analysis (PCA) is another method without the requirement of *a priori* specification of the samples' membership in taxa (groups). PCA transforms the measured variables into principal components (artificial variables). The first few of them extract most of the variance in the measured variables. The standardized PCA based on correlation matrix is calculated by `pca.calc()` function (based on package `stats`; R Core Team, 2020), the result is an object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. 
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -520,7 +492,7 @@ The summary statistics of the data is available using the function `summary()`. 
 summary(pca.centaurea)
 ```
 
-The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch`[^4] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentations for details.  
+The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch`[^4] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentation for details.  
 
 &nbsp;  
 
@@ -684,7 +656,8 @@ co stress plot?   to predpokladam nema zmysel
 
 # 8. Canonical discriminant analysis (CDA)
 
-The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). We use this analysis to find to what extent can be predefined groups of objects distinguished based on available characters and to identify characters, which contributes the most to this differentiation. Note, that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analysed, only a single axis is computed and the sample scores are displayed as a histogram.  
+The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
+The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analyzed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
 CDA can be calculated by `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variates. Thus, we use them to interpret the character's contribution to group separation. The function `summary()` print summaries of the results of `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
 
@@ -747,7 +720,7 @@ As you can see, the above mentioned characters (ML, MLW, IV and MW) received hig
 &nbsp;  
 &nbsp;  
 
-To gain better insight into the differentiation among remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), we will analyse them separately. The new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
+To gain better insight into the differentiation among remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), we will analyze them separately. The new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}

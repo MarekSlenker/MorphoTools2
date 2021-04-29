@@ -3,8 +3,8 @@
 \contentsline {section}{3. Data import, control and manipulation}{2}{section*.4}%
 \contentsline {subsection}{3.1 Data import}{2}{section*.5}%
 \contentsline {subsection}{3.2 Data control and manipulation}{4}{section*.6}%
-\contentsline {subsubsection}{3.2.1 Assessing normality of data}{4}{section*.7}%
-\contentsline {paragraph}{3.2.1.1 Shapiro-Wilk normality test}{4}{section*.8}%
+\contentsline {subsubsection}{3.2.1 Assessing whether the data follow normal distribution}{4}{section*.7}%
+\contentsline {paragraph}{3.2.1.1 Shapiro-Wilk normality test}{5}{section*.8}%
 \contentsline {paragraph}{3.2.1.2 Histograms}{5}{section*.9}%
 \contentsline {paragraph}{3.2.1.3 Normal Q-Q plot}{6}{section*.10}%
 \contentsline {subsubsection}{3.2.2 Data transformation}{7}{section*.11}%

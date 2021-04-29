@@ -10,7 +10,7 @@ transformCharacter <- function(object, character, FUN, newName = NULL) {
 
   object$data[character] = FUN(object$data[character])
   if (! is.null(newName)) {
-    colnames(object$data[character]) = newName
+    colnames(object$data)[which(colnames(object$data) == character)] = newName
   }
 
   return(object)

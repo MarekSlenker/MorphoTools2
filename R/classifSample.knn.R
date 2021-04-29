@@ -16,12 +16,29 @@ classifSample.knn <- function(sampleData, trainingData, k){
   ntax<-length(levels(trainingData$Taxon))
   char<-colnames(trainingData$data)
 
-  # sampleData$data = scale(sampleData$data, center = TRUE, scale = TRUE)
-  # trainingData$data = scale(trainingData$data, center = TRUE, scale = TRUE)
+
+
+  # ---------
+  # MANUAL SCALE
+  trainingData$data = as.matrix(trainingData$data)
+  # center
+  center = colMeans(trainingData$data, na.rm = TRUE)
+  trainingData$data = sweep(trainingData$data, 2, center, check.margin = FALSE)
+  # scale
+  f <- function(x) {
+    x <- x[!is.na(x)]
+    sqrt(sum(x^2)/max(1, length(x) - 1))
+  }
+  scale = apply(trainingData$data, 2, f)
+  scale[which(scale == 0)] = 1 # nemozme delit nulou
+  trainingData$data <- sweep(trainingData$data, 2, scale, "/", check.margin = FALSE)
+
+  sampleData$data = as.matrix(sampleData$data)
+  sampleData$data = sweep(sampleData$data, 2, center, check.margin = FALSE)
+  sampleData$data = sweep(sampleData$data, 2, scale, "/", check.margin = FALSE)
+  # ---------
 
   # kontrolujem, ci variabilita v ramci znaku je nenulova, inak by to hodil NaN
-
-
   # SCALOVAT?????
   # sampleData$data = apply(sampleData$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
   # trainingData$data = apply(trainingData$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))

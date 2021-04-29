@@ -9,7 +9,7 @@ plotAddLabels.points(result, labels = result$objects$ID, include = TRUE,
 }
 \arguments{
 
-\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{labels}{a vector of label names, which should be included / excluded from plotting, see \code{include}.}
 \item{include}{logical, specify if labels in \code{labels} argument should be plotted or excluded from plotting.}
 \item{axes}{x, y axes of plot.}

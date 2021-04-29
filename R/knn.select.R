@@ -10,7 +10,11 @@ knn.select<-function(object, crossval="indiv"){
 
   k = as.numeric(1:30)
 
-  object$data = scale(object$data, center = TRUE, scale = TRUE)   #
+  # kvoli potencial nulovej variabilite v znaku
+  # ***************
+  # SCALE?????
+  # kontrolujem, ci variabilita v ramci znaku je nenulova, inak by to hodil NaN. Ak je nulova, nepouzijem scale.
+  object$data = apply(object$data, 2, function(x) (scale(x, center = TRUE, scale = stats::var(x) != 0) ))
 
 
   ksel = numeric()

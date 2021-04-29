@@ -4,7 +4,7 @@
 \title{Add Confidence Ellipses to a Plot}
 
 \description{
-This function draws confidence (prediction) ellipses around taxa.
+This function draws prediction ellipses around taxa.
 }
 
 \usage{
@@ -15,7 +15,7 @@ plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 \arguments{
 
-\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{probability}{probability, that a new independent observation from the same population will fall in that ellipse.}
 \item{col}{the colors for labels.}
@@ -26,7 +26,7 @@ plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 
 \details{
-Confidence ellipses with given \code{probability} define the regions where will fall any new independent observation from the respective taxa. The confidence ellipses are quantified using covariance matrices of taxa scores and chi-squared distribution with two degrees of freedom (Friendly et al. 2013).
+Prediction ellipses with given \code{probability} define the regions where will fall any new independent observation from the respective taxa. The prediction ellipses are quantified using covariance matrices of taxa scores and chi-squared distribution with two degrees of freedom (Friendly et al. 2013).
 }
 
 \references{

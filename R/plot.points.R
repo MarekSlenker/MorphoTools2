@@ -1,6 +1,6 @@
 #' The default scatterplot function
 #' @export
-plotPoints <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
+plotPoints <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                         pch = 16, col = "black", pt.bg = "white",
                         breaks = 1, ylim = NULL, xlim = NULL,
                         labels = FALSE,
@@ -107,16 +107,16 @@ plotPoints.nmdsdata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
   if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
-  
+
   # mozem mat menej os, kôli kolko
   if (result$rank < 2) stop("2D plot requires at least 2 axes. Use k = 2 in nmds.calc function.", call. = FALSE)
-	
-	
+
+
   if (is.null(xlab))
-    xlab = colnames(nmdsdata$objects$scores)[axes[1]]
+    xlab = colnames(result$objects$scores)[axes[1]]
 
   if (is.null(ylab))
-    ylab = colnames(nmdsdata$objects$scores)[axes[2]]
+    ylab = colnames(result$objects$scores)[axes[2]]
 
 
   # nastav pch a col spravne podla taxonu
@@ -132,7 +132,7 @@ plotPoints.nmdsdata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
   # legend
   if (legend) plotAddLegend(result, x = legend.pos, pch = pch, col = col, pt.bg = pt.bg, ncol = ncol)
-  
+
 
   # labels
   if (labels) plotAddLabels.points(result, axes = axes, cex = 0.7, pos = 4, offset = 0.5)
