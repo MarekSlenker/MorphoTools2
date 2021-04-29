@@ -28,8 +28,8 @@ nmds.calc <- function(object, distMethod = "euclidean", k = 3) {
   nmdsResult$stress = monoMDSRes$stress
   nmdsResult$distMethod = distMethod
 
-  nmdsResult$diss = monoMDSRes$diss
-  nmdsResult$dist = monoMDSRes$dist
+  #nmdsResult$diss = monoMDSRes$diss
+  #nmdsResult$dist = monoMDSRes$dist
 
 
   nmdsResult$objects$scores = monoMDSRes$points

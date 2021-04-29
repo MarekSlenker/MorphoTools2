@@ -15,17 +15,19 @@
 
 \method{summary}{pcoadata}(object, ...)
 
+\method{summary}{nmdsdata}(object, ...)
+
 \method{summary}{cdadata}(object, ...)
 
 \method{summary}{classifdata}(object, ...)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{cdadata}}', or '\code{\link{classifdata}}'.}
+\item{object}{an object of class '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{nmdsdata}}', '\code{\link{cdadata}}', or '\code{\link{classifdata}}'.}
 \item{...}{additional arguments affecting the summary produced.}
 
 }
 
 \description{
-\code{summary} methods for classes '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{cdadata}}', and '\code{\link{classifdata}}'.
+\code{summary} methods for classes '\code{\link{morphodata}}', '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{nmdsdata}}', '\code{\link{cdadata}}', and '\code{\link{classifdata}}'.
 }

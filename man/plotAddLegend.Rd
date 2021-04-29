@@ -16,7 +16,7 @@ plotAddLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 }
 
 \arguments{
-\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{x, y}{the x and y coordinates or a single keyword from the list \code{"bottomright"}, \code{"bottom"}, \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, \code{"topright"}, \code{"right"}, and \code{"center"}, to be used to position the legend.}
 \item{pch}{the plotting symbols of points appearing in the legend.}
 \item{col}{the colors of points appearing in the legend.}

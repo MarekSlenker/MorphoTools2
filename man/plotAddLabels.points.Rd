@@ -9,7 +9,7 @@ plotAddLabels.points(result, labels = result$objects$ID, include = TRUE,
 }
 \arguments{
 
-\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{an result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{labels}{a vector of label names, which should be included / excluded from plotting, see \code{include}.}
 \item{include}{logical, specify if labels in \code{labels} argument should be plotted or excluded from plotting.}
 \item{axes}{x, y axes of plot.}
@@ -22,7 +22,7 @@ plotAddLabels.points(result, labels = result$objects$ID, include = TRUE,
 
 }
 \description{
-This is a generic function for drawing labels to the data points of \code{\link{pcadata}}, \code{\link{pcoadata}} and \code{\link{cdadata}} objects.
+This is a generic function for drawing labels to the data points of \code{\link{pcadata}}, \code{\link{pcoadata}}, '\code{\link{nmdsdata}}', and \code{\link{cdadata}} objects.
 }
 
 \examples{

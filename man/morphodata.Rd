@@ -1,7 +1,7 @@
 \docType{data}
 \name{morphodata}
 \alias{morphodata}
-\title{Class Morphodata}
+\title{Class morphodata}
 
 \description{
 The morphodata class is designed for storing morphological data of individuals, their IDs and it's appertaining to population and taxon.

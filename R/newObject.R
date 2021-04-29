@@ -64,7 +64,7 @@
 
 
 # internal
-# returns new pcadata object
+# returns new nmdsdata object
 .newNmdsdata <- function() {
 
   .newNmdsdata <- list(
@@ -74,8 +74,8 @@
       Taxon = numeric(),
       scores = numeric()),
     stress = numeric(),
-    diss = numeric(),
-    dist = numeric(),
+    #diss = numeric(),
+    #dist = numeric(),
     #eigenVectors = numeric(),
     #eigenValues = numeric(),
     #eigenvaluesAsPercent = numeric(),

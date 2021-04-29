@@ -22,5 +22,5 @@ test_that("ploting with error parameters",  {
 
   pcaRes = pca.calc(morphoMockup)
 
-  expect_error(plot3Dpoints(pcaRes), "specified axes are out of bounds. Object has only 2 axes." )
+  expect_error(plot3Dpoints(pcaRes), "3D plot requires at least 3 axes. Object has 2 axes." )
 })

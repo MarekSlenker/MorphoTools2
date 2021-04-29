@@ -12,6 +12,10 @@ plot.pcoadata <- function(x, ...) {
   plotPoints(x, ...)
 }
 
+#' @export
+plot.nmdsdata <- function(x, ...) {
+  plotPoints(x, ...)
+}
 
 #' @export
 plot.cdadata <- function(x, ...) {

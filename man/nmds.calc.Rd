@@ -37,8 +37,6 @@ an object of class '\code{\link{nmdsdata}}'.
 
 \examples{
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 nmdsRes = nmds.calc(centaurea, distMethod = "euclidean", k = 3)
 

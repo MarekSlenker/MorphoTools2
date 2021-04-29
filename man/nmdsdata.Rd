@@ -1,12 +1,12 @@
 \docType{data}
-\name{pcoadata}
-\alias{pcoadata}
-\title{Class pcoadata}
+\name{nmdsdata}
+\alias{nmdsdata}
+\title{Class nmdsdata}
 
 \description{
-The pcoadata class is designed for storing results of Principal coordinates analysis (PCoA).}
+The nmdsdata class is designed for storing results of Non-metric multidimensional scaling (NMDS).}
 
-\format{Class \code{pcoadata}.
+\format{Class \code{nmdsdata}.
 \describe{
 	\item{objects}{
 			\describe{
@@ -16,9 +16,7 @@ The pcoadata class is designed for storing results of Principal coordinates anal
 				\item{scores}{ordination scores of cases (objects, OTUs).}
 			}
 	}
-	\item{eigenValues}{eigenvalues of principal coordinates.}
-	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
-	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
+	\item{stress}{stress value, e.i., goodness of fit.}
 	\item{groupMeans}{data.frame containing the means for the taxa.}
 	\item{distMethod}{used distance measure.}
 	\item{rank}{number of possitive eigenvalues.}

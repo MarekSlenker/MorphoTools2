@@ -73,7 +73,18 @@ summary.pcoadata <- function(object, ...) {
 }
 
 
+#' @rdname summary
+#' @export
+summary.nmdsdata <- function(object, ...) {
 
+  cat("object of class 'nmdsdata'; storing results of Non-metric Multidimensional Scaling\n")
+  cat("resemblance coefficient: ", object$distMethod,"\n")
+  
+  cat("\nDimensions: ", object$rank)
+  cat("\nStress: ", object$stress)
+  cat("\nScores scaled to unit root mean square, rotated to principal components")
+
+}
 
 
 #' @rdname summary

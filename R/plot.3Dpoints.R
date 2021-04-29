@@ -5,6 +5,10 @@ plot3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
                           phi = 10, theta = 2, ticktype = "detailed", bty = "u",
                           type = "p", labels = FALSE, legend = FALSE, legend.pos
                           = "topright", ncol = 1, ...) {
+
+  # skontroluj ci axes >= 3;
+  if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = FALSE)
+
   UseMethod("plot3Dpoints")
 }
 
@@ -12,8 +16,7 @@ plot3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
 #' @rdname plot3Dpoints
 #' @method plot3Dpoints pcadata
 #' @export
-plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
-         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
+plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL, pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
@@ -31,8 +34,7 @@ plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
 #' @rdname plot3Dpoints
 #' @method plot3Dpoints pcoadata
 #' @export
-plot3Dpoints.pcoadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
-                                 pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
+plot3Dpoints.pcoadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL, pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
                                  ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
@@ -47,14 +49,34 @@ plot3Dpoints.pcoadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = N
 }
 
 
+
+#' @rdname plot3Dpoints
+#' @method plot3Dpoints nmdsdata
+#' @export
+plot3Dpoints.nmdsdata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
+         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
+         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
+
+  if (is.null(xlab)) xlab = paste(colnames(nmdsdata$objects$scores)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(colnames(nmdsdata$objects$scores)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(colnames(nmdsdata$objects$scores)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+
+
+  .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
+                  pch = pch, col = col, pt.bg = pt.bg, phi = phi, theta = theta,
+                  ticktype = ticktype, bty = bty, type = type,
+                  labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...)
+}
+
+
+
+
 #' @rdname plot3Dpoints
 #' @method plot3Dpoints cdadata
 #' @export
 plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
-
-  if (result$rank < 3) stop(paste("3D plot requires at least 3 axes. Object has ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
   if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")

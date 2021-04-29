@@ -1,7 +1,7 @@
 \docType{data}
 \name{pcadata}
 \alias{pcadata}
-\title{Class Pcadata}
+\title{Class pcadata}
 
 \description{
 The pcadata class is designed for storing results of Principal component analysis (PCA).}
