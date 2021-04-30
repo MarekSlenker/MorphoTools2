@@ -29,3 +29,8 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA") {
   return(clustering)
 }
 
+
+
+
+
+

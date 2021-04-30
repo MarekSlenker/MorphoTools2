@@ -462,7 +462,7 @@ We examined outlier value in "hybr" group and ensured that data do not contain h
 
 # 4. Hierarchical clustering
 
-Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable (euclidean (default), but maximum, Manhattan, Canberra, binary or Minkowski distance can be used as well), and various procedures of clustering based on these distances are available (UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, UPGMC). However, note that for morphometric analysis hardly anything else is used than Euclidean distance and UPGMA or Ward’s method. The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
+Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of group structure in your data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (default), Manhattan, Minkovski; (2) similarity coefficients for binary characters: Jaccard and simple matching; (3) coefficient for mixed data: Gower. Clustering methods based on above coefficients are: UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, or UPGMC. However, note that for morphometric analysis hardly anything else is used than Euclidean distance and UPGMA or Ward’s method. The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
 
 The dendrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
 
@@ -630,29 +630,102 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 
 
-# 6. Principal Coordinate Analysis (PCoA)
+# 6. Principal coordinate analysis (PCoA)
 
-PCoA is not limited to Euclidean distances, as PCA does
+Principal Coordinate Analysis (PCoA) is another method to explore and to visualize similarities or dissimilarities within the data. This method is especially useful in analysis of non-quantitative characters, when Euclidean distance and the corresponding measures of correlation do not provide acceptable model, so that the PCA is not adequate for ordination. PCoA estimates coordinates for a set of objects (rows) in a space, whose relationships are measured by any coefficient of similarity or distance (one of: Euclidean, Manhattan, Minkovski, Jaccard, simple matching, or Gower).
+As the PCoA is computed from distances among objects, therefore, is no information on the influence of original characters on coordinate axes.
 
-Výsledky PCoA sa interpretujú rovnakým spôsobom ako výsledky PCA. Jediným
-The main difference between PCA and PCoA is that the relationship between
-the original characters and principal coordinates is not linear, and therefore we
-do not have information on the influence of particular characters on coordinate
-axes. For quantitative characters we can get at least some information in this
-respect by computing the correlation coefficients between given character values
-and score on the coordinate axes.
 
-In this case the problem is formulated differently: given a distance matrix of objects a coordinate system is sought in which the original distances are preserved completely such that the first few axes usually provide a fairly good representation of distances. Starting from raw data the distances are to be calculated first. The input matrices should be provided in the same way as for most clustering methods. It is assumed, however, that semimatrices contain dissimilarities or squared distances. The coordinates are saved in a new file.
+The PCoA is calculated by `pcoa.calc()` function (based on package `stats`; R Core Team, 2020), the result is an object of class `pcoadata`.
+
+
+```{r echo = TRUE, eval=TRUE}
+pcoa.res = pcoa.calc(centaurea, distMethod = "manhattan")
+summary(pcoa.res)
+```
+
+
+
+
+
+The result can be plotted by `plotPoints()` or `plot3Dpoints()` functions as per usual, extending methods (`plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()`, and `plotAddLegend()`) are applicable as well. Only `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on coordinate axes.
+
+```{r echo = TRUE, eval=TRUE}
+plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
+             phi = 20, theta = 70, legend = T)
+```
+
+
+&nbsp;  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 # 7. Non-metric multidimensional scaling (NMDS)
+
+
+The method of nonmetric multidimensional scaling (MDS, Section 9.3) also
+obtains ordinations of objects from any resemblance matrix. It is better than principal
+coordinate analysis at compressing the distance relationships among objects into, say,
+two or three dimensions. By construction, MDS always obtains a Euclidean
+representation, even from non-Euclidean-embeddable distances. MDS is, however, a
+computer-intensive technique requiring far more computing time than PCoA. For large
+distance matrices, principal coordinate analysis is faster in most cases.
+
 
 The metric information in the data or distances is not preserved by the ordination. The method of non-metric multidimensional scaling considers the rank order of distances, rather than their actual magnitudes. The objective is to arrange the objects in a few (usually two) dimensions such that the rank order of distances in the new space follows the original rank order as closely as possible. The "goodness" of the non-metric solution is measured by the stress between the original and the new distances. The procedure is iterative, the initial configuration is random or read from disk file in form of data with objects as rows, in free format. You may start immediately requesting two dimensions; if you choose, say, 3 for start, the two-dimensional solution will be obtained from the three-dimensional. Maximum starting dimensionality is 5. A stress of 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points. The Shepard diagram gives a visual comparison of original and new distances. In an ideal case the distances increase monotonically over the original distances. The worse the solution, the more scattered the points in the Shepard diagram. After computations, the ordination of objects and the Shepard diagram can be displayed.
 
 NMDS is not limited to Euclidean distances, as PCA does
 
 co stress plot?   to predpokladam nema zmysel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 8. Canonical discriminant analysis (CDA)
 
@@ -911,9 +984,15 @@ The probability, that sample PRIS418 is *C. pseudophrygia* is over 90%.
 
 # Further reading
 
-A brief account of the multivariate methods used in taxonomy:  
+A brief account of the multivariate methods used in taxonomy is given in:  
 
-**Marhold K. (2011)**. Multivariate morphometrics and its application to monography at specific and infraspecific levels. In: Stuessy TF, Lack HW, eds. *Monographic plant systematics: fundamental assessment of plant biodiversity*. Ruggell: A.R.G. Gantner Verlag K. G., 73–99.
+**Marhold K. (2011)**. Multivariate morphometrics and its application to monography at specific and infraspecific levels. In: Stuessy TF, Lack HW, eds. *Monographic plant systematics: fundamental assessment of plant biodiversity*. Ruggell: A.R.G. Gantner Verlag K. G., 73–99.  
+
+For a detailed description of used methods see:
+
+**Legendre P. & Legendre L. (2012)**. *Numerical Ecology*, 3rd English edn. Elsevier Science BV, Amsterdam.
+
+
 
 &nbsp;  
 
@@ -933,11 +1012,6 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 
 
-# How to cite MorphoTools2
-
-**Šlenker, M., Koutecký, P. & Marhold, K. (2021)**. MorphoTools2: an R package for the multivariate morphometric analysis. *https://github.com/MarekSlenker/MorphoTools2*  
-
-Feel free to email me at marek.slenker@savba.sk with any questions, comments, or bug reports!
 
 # References
 
