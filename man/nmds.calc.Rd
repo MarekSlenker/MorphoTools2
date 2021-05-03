@@ -23,10 +23,11 @@ nmds.calc(object, distMethod = "euclidean", k = 3)
 The \code{nmds.calc} function performs Non-metric multidimensional scaling using the \code{\link{monoMDS}} function from package \code{\link{vegan}}.
 The main threat of NMDS is, that this method doesn't preserve distances among objects in the original character space and approximates only the order of the dissimilarities among objects, based on any coefficient of similarity or distance.
 
-Further, multiple runs of the NMDS analysis are needed to ensure that the stable ordination has been reached, as any one run may get "trapped" in local optima which are not representative of true distances.
+Further, multiple runs of the NMDS analysis are needed to ensure that the stable ordination has been reached, as anyone run may get "trapped" in local optima which are not representative of true similarities.
 
 
-The \code{stress} value reflects how well the ordination summarizes the observed distances among the samples. A rule of thumb, 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points
+
+The \code{stress} value reflects how well the ordination summarizes the observed relationship among the samples. A rule of thumb, 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions.
 }
 
 \value{

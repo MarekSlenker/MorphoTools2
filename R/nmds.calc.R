@@ -17,7 +17,7 @@ nmds.calc <- function(object, distMethod = "euclidean", k = 3) {
 
   newNames = NULL
   for (i in 1:k) {
-    newNames = c(newNames, paste("Nmds", i, sep = ""))
+    newNames = c(newNames, paste("axis ", i, sep = ""))
   }
 
   colnames(monoMDSRes$points) = newNames

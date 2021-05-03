@@ -57,9 +57,9 @@ plot3Dpoints.nmdsdata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = N
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste(colnames(nmdsdata$objects$scores)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste(colnames(nmdsdata$objects$scores)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste(colnames(nmdsdata$objects$scores)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste(colnames(result$objects$scores)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(colnames(result$objects$scores)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(colnames(result$objects$scores)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
