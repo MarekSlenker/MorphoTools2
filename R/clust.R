@@ -1,6 +1,6 @@
 #' Hierarchical clustering
 #' @export
-clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA") {
+clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
   .checkClass(object, "morphodata")
 
 
@@ -15,7 +15,7 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA") {
   if (any(is.na(object$data))) warning("Values of some characters are NA.", call. = FALSE)
 
 
-  distances = .calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE)
+  distances = .calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs)
 
   # v parametri method mozme dostat akukolvek metodu, ktora je platna pre hclust
   if (clustMethod == "UPGMA") clustMethod = "average"

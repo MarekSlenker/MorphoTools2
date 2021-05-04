@@ -1,12 +1,11 @@
 ---
-title: \vspace{-2.0cm} MorphoTools2 version 1.0.0 tutorial
+title: \vspace{+2.0cm} MorphoTools2 version 1.0.0 tutorial \vspace{+2.0cm}
 author: |
-  | **Marek Šlenker** \vspace*{0.5pc}
-  | Slovak Academy of Sciences, Bratislava, Slovakia
-  | &
-  | Charles University, Prague, Czechia \vspace*{0.5pc}
-  | *<marek.slenker@savba.sk>*
+  | developed by **Marek Šlenker**\footnotemark[1] \footnotemark[2] \footnotemark[4] \vspace*{0.5pc}
+  | with contribution from **Petr Koutecký**\footnotemark[3] &nbsp;and **Karol Marhold**\footnotemark[1] \footnotemark[2] \vspace*{0.5pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
+
+date: "Date: Jun 2021"
 output:
   pdf_document: default
 vignette: |
@@ -15,7 +14,14 @@ vignette: |
   %\VignetteEngine{knitr::rmarkdown}
 ---
 &nbsp;  
- 
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}	
+\footnotetext[1]{Slovak Academy of Sciences, Bratislava, Slovakia}
+\footnotetext[2]{Charles University, Prague, Czechia}
+\footnotetext[3]{University of South Bohemia, České Budějovice, Czechia}
+\footnotetext[4]{author for correspondence: marek.slenker@savba.sk}
+
+
+\newpage 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -24,21 +30,22 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   rownames = FALSE, 
-  fig.width   = 6,       # the width for plots created by code chunk
-  fig.height  = 5,       # the height for plots created by code chunk
-  fig.align   = 'center', # how to align graphics in the final doc. 'left', 'right', 'center'
-  #fig.path    = 'figs/',  # file path to the directory where knitr shall store the graphics files
-  strip.white = TRUE     # if FALSE knitr will not remove white spaces at the beg or end of code chunk
+  fig.width   = 6,      
+  fig.height  = 5,      
+  fig.align   = 'center',
+  #fig.path    = 'figs/', 
+  strip.white = TRUE    
   #out.width='\\textwidth'
   )
 ```
 
 ```{=latex}
-\renewcommand{\baselinestretch}{0.5}
+\renewcommand{\baselinestretch}{0.4}
+\setcounter{tocdepth}{4}
 \tableofcontents
 \renewcommand{\baselinestretch}{1.0}\normalsize
-```
 
+```
 
 
 
@@ -46,6 +53,7 @@ knitr::opts_chunk$set(
 
 The package `MorphoTools2` is dedicated to multivariate analyses of morphological data. The needed tools are at the moment scattered over several R packages. This package wraps available statistical and graphical tools and provides a comprehensive framework for control and manipulation of the input data, core statistical analysis and the wide palette of functions designed to visualize results, to make the workflow convenient and fast.
 
+\renewcommand{\thefootnote}{\arabic{footnote}}
 
 # 2. Obtaining and installing MorphoTools2 package
 
@@ -614,7 +622,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
               x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 ```
 
-A 3D scatterplot can be produced using the `plot3Dpoints` function. The `theta` adn `phi` arguments defines viewing direction (azimuthal direction and co-latitude, respectively).
+To draw a 3D scatterplot, the `plot3Dpoints` function can be used. The `theta` and `phi` arguments defines viewing direction (azimuthal direction and co-latitude, respectively).
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
@@ -749,9 +757,21 @@ cda.centaurea$totalCanonicalStructure
 ```
 
 
-&nbsp; 
-***
 &nbsp;  
+&nbsp;  
+
+A 3D scatterplot can be produced using the `plot3Dpoints` function. 
+Viewing direction and slope (co-latitude) can be set by `theta` and `phi` arguments, respectively.
+
+
+```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
+```
+
+
+
+
+***
 
 To gain better insight into the differentiation among remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), these taxa will be analysed separately. The new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
 
@@ -770,19 +790,11 @@ cda.stPsHybr$totalCanonicalStructure
 The first axis extract most of the variation. Characters correlated with this axis (IW, ILW, LS, MW, and MLW) are the most suitable for taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibit middle values in these particular characters. The characters correlated with the second axis (IV, ML, and LW) contributes to the separation of hybrid from parental species.
 
 
-&nbsp;  
-&nbsp;  
-
-To draw a 3D scatterplot, the `plot3Dpoints` function can be used. Slope and viewing direction can be set by `phi` and `theta` parameters.
-
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
-```
 
 
----
-#### Passive prediction of samples. 
-Sometimes it is desirable to passively display (or predict) the position of some samples in the canonical space formed by other samples. This approach is applicable for displaying the position of hybrids, type specimens, "atypical" populations (that could not be assigned reliably to any of the predefined groups), etc. Passive samples can be specified using `passiveSamples` argument (accepting both populations and taxa). These samples will be excluded from computing discriminant function, and only passively predicted in multidimensional space. 
+### Passive prediction of samples. 
+
+Sometimes it is desirable to passively display (predict) the position of some samples in the canonical space formed by other samples. This approach is applicable for displaying the position of hybrids, type specimens, "atypical" populations (that could not be assigned reliably to any of the predefined groups), etc. Passive samples can be specified using `passiveSamples` argument (accepting both populations and taxa). These samples will be excluded from computing discriminant function, and only passively predicted in multidimensional space. 
 
 Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note use of semi-transparent colours to show the overlap of the groups. The colours are defined using `rgb()` function in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
 
@@ -810,9 +822,26 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 # 9. Classificatory discriminant analysis
 
-Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analysis. The results than indicate if the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
+Classificatory discriminant analysis (based on packages `MASS` and `class` _______________________________  
+____________________  
+______________________; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results than indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 
-Linear discriminant function (`classif.lda()`) can be used for data with approximately multivariate normal within-class distributions. Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about these distributions. 
+If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Bartlett’s test; `TTTTT_EEEEEEE_SSSSSS_TTTTTTTTT`). If the covariance matrices are equal, the linear discriminant analysis is appropriate. If not, using of quadratic discriminant analysis should be considered. 
+Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
+
+
+
+
+`BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT`
+
+## 9.1 Stepwise discriminant analysis
+
+
+
+## 9.2 Linear discriminant analysis (LDA)
+
+
+
 
 ```{r include=F}
 options(max.print = 460)
@@ -838,8 +867,15 @@ exportRes(object = classif_lda,
 
 
 
+## 9.3 Quadratic discriminant analysis (LDA)
+
 &nbsp;   
 &nbsp;  
+
+
+
+
+## 9.4 k-nearest neighbour classificatory DA
 
 The **k-nearest neighbour** method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
 
@@ -919,6 +955,12 @@ popClassifMatrix = classif.matrix(classifRes.knn, level = "taxon")
 
 exportRes(popClassifMatrix, file = "clipboard")
 ```
+
+
+## 9.5 Classification of sample based on an independent training set.
+
+
+ `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()`
 
 
 

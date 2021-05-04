@@ -1,5 +1,5 @@
 
-.calcDistance <- function(object, distMethod, center, scale) {
+.calcDistance <- function(object, distMethod, center, scale, binaryChs, nominalChs, ordinalChs) {
 
   switch (distMethod,
           "euclidean" = {  # moze byt scale alebo nie
@@ -20,7 +20,21 @@
             )
           },
           "gower" = {
-            cat("gower")
+
+            if (! is.null(binaryChs)) {
+              object$data[binaryChs] = lapply(object$data[binaryChs], as.logical)
+            }
+
+            if (! is.null(nominalChs)) {
+              object$data[nominalChs] = lapply(object$data[nominalChs], as.character)
+            }
+            if (! is.null(ordinalChs)) {
+              object$data[ordinalChs] = lapply(object$data[ordinalChs], ordered)
+            }
+
+            return(
+              stats::as.dist(StatMatch::gower.dist(object$data))
+            )
           },
           "manhattan" = {
             return(

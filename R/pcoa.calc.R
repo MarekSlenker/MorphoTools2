@@ -1,6 +1,6 @@
 #' Principal coordinates analysis (PCoA)
 #' @export
-pcoa.calc <- function(object, distMethod = "euclidean") {
+pcoa.calc <- function(object, distMethod = "euclidean", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
   .checkClass(object, "morphodata")
 
 
@@ -11,11 +11,11 @@ pcoa.calc <- function(object, distMethod = "euclidean") {
   pcoaResult = .newPcoadata()
   rank = min(length(colnames(object$data)), length(rownames(object$data)))-1 # maximum dimension of the space must be in {1, 2, …, n-1}.
 
-  xRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
+  xRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
                                 eig = TRUE) # only to find numb of possitive eigenvalues
   rank = length(xRes$eig[which(xRes$eig > 0)])
 
-  princompRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE),
+  princompRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
                                 k = rank, eig = TRUE, x.ret = TRUE)
 
 

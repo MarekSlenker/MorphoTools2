@@ -1,12 +1,12 @@
 #' Non-metric multidimensional scaling (NMDS)
 #' @export
-nmds.calc <- function(object, distMethod = "euclidean", k = 3) {
+nmds.calc <- function(object, distMethod = "euclidean", k = 3, binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
   .checkClass(object, "morphodata")
 
   # NA niekedy vadia, niekedy nie, zalezitost .calcDistance
 
 
-  d = .calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE)
+  d = .calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs)
 
 
   monoMDSRes = vegan::monoMDS(d, k = k, model = "global", scaling = TRUE, pc = TRUE, weakties = FALSE)

@@ -23,6 +23,20 @@ morphoDataFrame_bin = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","i
 morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 morphoMockup.bin = .morphodataFromDataFrame(morphoDataFrame_bin)
 
+gowerMockup = list(
+  ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
+  Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
+  Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
+  data = data.frame(
+    stemBranching = c(1, 1, 1, 0, 0, 0),   # binaryChs
+    petalColour = c(1, 1, 2, 3, 3, 3),     # nominalChs; 1=white, 2=red, 3=blue
+    leaves = c(1, 1, 1, 2, 2, 3),          # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
+    taste = c(2, 2, 2, 3, 1, 1),           # ordinal; 1=hot, 2=hotter, 3=hottest
+    stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
+    leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
+)
+attr(gowerMockup, "class") <- "morphodata"
+
 
 test_that("correct info about class structure", {
 
@@ -39,8 +53,6 @@ test_that("correct info about class structure", {
 
   expect_error( .calcDistance(morphoMockup, distMethod = "ee"), "distMethod ee is not supported.")
 
-  # ostatne?
-
   d1.bin = .calcDistance(morphoMockup.bin, distMethod = "euclidean", scale = T, center = T)
   expect_equal(paste(d1.bin[1:5], collapse = ","), "3.15524255098646,3.3466401061363,2.23109340409087,2.23109340409087,3.15524255098646")
 
@@ -49,6 +61,13 @@ test_that("correct info about class structure", {
 
   d3.bin = .calcDistance(morphoMockup.bin, distMethod = "simpleMatching", scale = T, center = T)
   expect_equal(paste(d3.bin[15:25], collapse = ","), "0.5,0.707106781186548,0.866025403784439,0.5,0.707106781186548,0.5,0,0.707106781186548,0.5,0.707106781186548,0.707106781186548")
+
+  # gower
+
+
+  g1 = .calcDistance(gowerMockup, distMethod = "gower", binaryChs = c("stemBranching"), nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
+  expect_equal(paste(g1[1:5], collapse = ","), "0.0311131957473421,0.246404002501563,0.875390869293308,0.865853658536585,0.844277673545966")
+  expect_equal(paste(g1[12:17], collapse = ","), "0.82145090681676,0.242213883677298,0.437335834896811,0.235647279549719,NA,NA")
 
 })
 
