@@ -1,10 +1,10 @@
 ---
 title: \vspace{+2.0cm} MorphoTools2 version 1.0.0 tutorial \vspace{+2.0cm}
 author: |
-  | developed by **Marek Šlenker**\footnotemark[1] \footnotemark[2] \footnotemark[4] \vspace*{0.5pc}
-  | with contribution from **Petr Koutecký**\footnotemark[3] &nbsp;and **Karol Marhold**\footnotemark[1] \footnotemark[2] \vspace*{0.5pc}
+  | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
+  | with contribution from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-
+  | \vspace*{0.7pc}
 date: "Date: Jun 2021"
 output:
   pdf_document: default
@@ -15,10 +15,10 @@ vignette: |
 ---
 &nbsp;  
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}	
-\footnotetext[1]{Slovak Academy of Sciences, Bratislava, Slovakia}
-\footnotetext[2]{Charles University, Prague, Czechia}
-\footnotetext[3]{University of South Bohemia, České Budějovice, Czechia}
-\footnotetext[4]{author for correspondence: marek.slenker@savba.sk}
+\footnotetext[2]{Slovak Academy of Sciences, Bratislava, Slovakia}
+\footnotetext[3]{Charles University, Prague, Czechia}  
+\footnotetext[4]{University of South Bohemia, České Budějovice, Czechia \vspace*{0.4pc}}
+\footnotetext[1]{author for correspondence: marek.slenker@savba.sk}
 
 
 \newpage 
@@ -688,6 +688,12 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 &nbsp;  
 
 
+
+
+# 88. Stepwise discriminant analysis
+
+
+
 # 8. Canonical discriminant analysis (CDA)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
@@ -834,11 +840,9 @@ Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without 
 
 `BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT`
 
-## 9.1 Stepwise discriminant analysis
 
 
-
-## 9.2 Linear discriminant analysis (LDA)
+## 9.1 Linear discriminant analysis (LDA)
 
 
 
@@ -867,7 +871,7 @@ exportRes(object = classif_lda,
 
 
 
-## 9.3 Quadratic discriminant analysis (LDA)
+## 9.2 Quadratic discriminant analysis (LDA)
 
 &nbsp;   
 &nbsp;  
@@ -875,7 +879,7 @@ exportRes(object = classif_lda,
 
 
 
-## 9.4 k-nearest neighbour classificatory DA
+## 9.3 k-nearest neighbour classificatory DA
 
 The **k-nearest neighbour** method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
 
