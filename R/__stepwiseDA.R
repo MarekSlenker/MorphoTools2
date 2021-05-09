@@ -1,28 +1,27 @@
 
 dd = read.delim("clipboard", header = F, sep = ",")
-dd = read.delim("clipboard", header = F, sep = ";")
 
 dim(dd)
 
 # greedy.wilks_MK(dd[,2:24], dd[,1])$results
 
 
-niveau = 0.15
 
 
-X=dd[,2:20]; grouping=dd[,1]
+X=dd[,2:22]; grouping=dd[,1]
 
-X=dd[,2:24]; grouping=dd[,1]
 
+
+
+rm(list=setdiff(ls(), "stepdisc"))
+dd = read.delim("clipboard", header = F, sep = ";")
+X=dd[,2:22]; grouping=dd[,1]
 
 stepdisc(X, grouping)
 
-niveau = 0.15
 
 
-
-
-stepdisc <- function(X, grouping, niveau = 0.15, ...){
+stepdisc <- function(X, grouping, Ftoenter = 0.15, Ftoremove = 0.15){
 
   namesset <- FALSE
   saturatedModel = FALSE
@@ -55,9 +54,8 @@ stepdisc <- function(X, grouping, niveau = 0.15, ...){
   }  ### END Help Function
 
 
-  gpVar <- deparse(substitute(grouping))
-  if(!is.null(ncol(grouping)) && ncol(grouping) > 1)
-    stop("only one grouping variable supported")
+  #gpVar <- deparse(substitute(grouping))
+  if(!is.null(ncol(grouping)) && ncol(grouping) > 1) stop("only one grouping variable supported")
 
   X        <- as.matrix(X)               # data matrix
   grouping <- factor(grouping)           # vector of groupings
@@ -66,23 +64,23 @@ stepdisc <- function(X, grouping, niveau = 0.15, ...){
 
   Entered = Removed = character()
 
-  if(k < 2)
-    stop("at least two levels ", "required to do anything meaningful")
-  if(n < 2)
-    stop("n > 1 observations ", "required to do anything meaningful")
+  if(k < 2) stop("at least two levels ", "required to do anything meaningful")
+  if(n < 2) stop("n > 1 observations ", "required to do anything meaningful")
+
+
+
 
   # finding the first variable to accept in the model:
   p           <- ncol(X)                 # number of samples
-  first.pwert <- first.fstat <- numeric(p)
+  enter.Fstat <- enter.PrF <- numeric(p)
   for(j in 1:p){
-    e1       <- aov(X[,j] ~ grouping)
-    e1sum    <- summary(e1)[[1]]
-    first.pwert[j] <- e1sum[["Pr(>F)"]][1]
-    first.fstat[j] <- e1sum[["F value"]][1]
+    enterSum = summary(aov(X[,j] ~ grouping))
+    enter.Fstat[j] <- enterSum[[1]]$`F value`[1]
+    enter.PrF[j] <- enterSum[[1]]$`Pr(>F)`[1]
   }
 
-  if(min(first.pwert) < niveau) {                       # condition for stopping the forward-selection
-    a               <- which.min(first.pwert)
+  if(min(enter.PrF) < Ftoenter) {                       # condition for stopping the forward-selection
+    a               <- which.min(enter.PrF)
     Entered = c(Entered, colnames(X)[a])
     Removed = c(Removed, "")
 
@@ -94,37 +92,22 @@ stepdisc <- function(X, grouping, niveau = 0.15, ...){
     X               <- X[, colnames(X) != auswahl]  # data-matrix of the selection of variables
     p               <- ncol(X)
     # wilks           <- Lambda(matrix(X.mod), grouping)  # Wilks' lambda of the selected model
-    Fstat <- first.fstat[a]           # approx. F-statistic of the Wilks lambda of the selected model / partial Wilks' lambda
-    pwert <- min(first.pwert)                # appropriate p-value of Fstat and Fstat2
-
+    Fstat <- enter.Fstat[a]           # approx. F-statistic of the Wilks lambda of the selected model / partial Wilks' lambda
+    pwert <- enter.PrF[a]              # appropriate p-value of Fstat and Fstat2
 
   } else {weiter <- FALSE}
 
 
+  # ---REMOVE VARIABLE ?  ee
 
-  # ---REMOVE VARIABLE----1st-----------------MK----------- #
-  # Statistics for Removal
-
-  mk_mod = aov(X.mod ~ grouping)
-  mk_mod_sum    <- summary(mk_mod)[[1]]
-
-  mk_mod_sum[["Pr(>F)"]][1]
-  mk_mod_sum[["F value"]][1]
-
-
-  # TODO:   REMORE
-
-  #####################  MK  end
 
 
 
   # finding the next variable to accept in the model:
-  while(weiter && !is.null(p) && p>0)
+  while(weiter && !is.null(p) && p>0 && length(Entered)+1 < nrow(X))
   {
     auswahl     <- NULL          # vector for the names of the significant variables of the selection
-
     enter.Fstat  <- enter.PrF  <- numeric(p)
-
     # ---NAJDI NAJMENSIE F to ENTER----------------MK------- #
     for(j in 1:p){
       enterSum = summary(aov(X[,j] ~ X.mod+grouping))
@@ -132,18 +115,14 @@ stepdisc <- function(X, grouping, niveau = 0.15, ...){
         enter.Fstat[j] <- enterSum[[1]]$`F value`[2]
         enter.PrF[j] <- enterSum[[1]]$`Pr(>F)`[2]
       } else saturatedModel = TRUE
-
     }
 
-    if (saturatedModel) {
-      break
-    }
+    if (saturatedModel) break
 
 
     # ---ENTER VARIABLE----------------------------------- #
     a <- which.min(enter.PrF)[1]       # MK     # most significant variable a (with the smalles Pr(>F))
-
-    if(enter.PrF[a] < niveau)
+    if(enter.PrF[a] < Ftoenter)
     {                 # condition for stopping the forward-selection
       Entered = c(Entered, colnames(X)[a])
       Removed = c(Removed, "")
@@ -177,7 +156,7 @@ stepdisc <- function(X, grouping, niveau = 0.15, ...){
 
     # ---REMOVE VARIABLE----------------------------------- #
     a <- which.max(rem.PrF)[1]
-    if(rem.PrF[a] > niveau){
+    if(rem.PrF[a] > Ftoremove){
       Entered = c(Entered, "")
       Removed = c(Removed, colnames(X.mod)[a])
 
