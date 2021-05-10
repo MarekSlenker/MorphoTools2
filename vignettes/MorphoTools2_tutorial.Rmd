@@ -678,7 +678,7 @@ The NMDS is calculated by `nmds.calc()` function (using the `monoMDS` function f
 The result can be plotted by `plotPoints()` or `plot3Dpoints()` functions, methods `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()`, and `plotAddLegend()` works as usual. Only `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on coordinate axes.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-nmds.res = nmds.calc(centaurea, distMethod = "euclidean", k = 2)
+nmds.res = nmds.calc(centaurea, distMethod = "euclidean", k = 3)
 summary(nmds.res)
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = T)
@@ -692,13 +692,23 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 
 # 88. Stepwise discriminant analysis
 
+In some analyses (PCA, discriminant analyses), a number of characters can not overcome a number of samples. If it does, only a subset of characters can be used. 
+
+Stepwise discriminant analysis can be useful for automatically selecting the "best" variables to use.
+
+
+ PCoA might be used also in the case when there are more
+characters than objects in the analysis
+
+
+All the variables in the data set are found to have potential discriminatory power. These variables are used to develop discrimination models in both the CANDISC and DISCRIM procedure chapters.
 
 
 # 8. Canonical discriminant analysis (CDA)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
 
-Discriminant analysis has some requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any predefined group; (4) for the number of groups (g), characters (p) and total number of objects (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups, and in each group there must be at least two objects.  
+Discriminant analysis has some requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
 
 The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analyzed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
