@@ -690,21 +690,31 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 
 
 
-# 88. Stepwise discriminant analysis
+# 8. Stepwise discriminant analysis
 
-In some analyses (PCA, discriminant analyses), a number of characters can not overcome a number of samples. If it does, only a subset of characters can be used. 
+In some analyses (PCA, discriminant analyses), a number of characters can not overcome a number of samples. If it does, only a subset of the characters can be used. The selection of the most useful characters, ones that contributes the most to the differentiation of predefined groups (taxa), is the aim of the stepwise discriminant analysis.  
 
-Stepwise discriminant analysis can be useful for automatically selecting the "best" variables to use.
+The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those which contribution is no more significant (bellow `F_to_stay` treshold) are excluded before addtion of the next most useful character. When none of the unselected variables meets the entry criterion (their significance is bellow `F_to_enter` treshold), or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, selected characters are printed to console, ordered according their importance for separation of the predefined groups.  
 
-
- PCoA might be used also in the case when there are more
-characters than objects in the analysis
+The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
 
 
-All the variables in the data set are found to have potential discriminatory power. These variables are used to develop discrimination models in both the CANDISC and DISCRIM procedure chapters.
+```{r include=F}
+options(max.print = 260)
+```
+
+```{r echo = TRUE, eval=TRUE}
+stepdisc.calc(centaurea)
+```
+
+```{r include=F}
+options(max.print = 60)
+```
 
 
-# 8. Canonical discriminant analysis (CDA)
+
+
+# 9. Canonical discriminant analysis (CDA)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
 
@@ -836,7 +846,7 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 
 
-# 9. Classificatory discriminant analysis
+# 10. Classificatory discriminant analysis
 
 Classificatory discriminant analysis (based on packages `MASS` and `class` _______________________________  
 ____________________  
@@ -852,7 +862,7 @@ Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without 
 
 
 
-## 9.1 Linear discriminant analysis (LDA)
+## 10.1 Linear discriminant analysis (LDA)
 
 
 
@@ -881,7 +891,7 @@ exportRes(object = classif_lda,
 
 
 
-## 9.2 Quadratic discriminant analysis (LDA)
+## 10.2 Quadratic discriminant analysis (LDA)
 
 &nbsp;   
 &nbsp;  
@@ -889,7 +899,7 @@ exportRes(object = classif_lda,
 
 
 
-## 9.3 k-nearest neighbour classificatory DA
+## 10.3 k-nearest neighbour classificatory DA
 
 The **k-nearest neighbour** method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
 
@@ -971,7 +981,7 @@ exportRes(popClassifMatrix, file = "clipboard")
 ```
 
 
-## 9.5 Classification of sample based on an independent training set.
+## 10.4 Classification of sample based on an independent training set.
 
 
  `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()`

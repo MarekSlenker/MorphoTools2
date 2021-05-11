@@ -15,8 +15,8 @@ stepdisc.calc(object, Ftoenter = 0.15, Ftoremove = 0.15)
 
 \arguments{
 \item{object}{an object of class '\code{\link{morphodata}}'.}
-\item{Ftoenter}{significance levels for a variable to enter the subset.}
-\item{Ftoremove}{significance levels for a variable to stay in the subset.}
+\item{F_to_enter}{significance levels for a variable to enter the subset.}
+\item{F_to_stay}{significance levels for a variable to stay in the subset.}
 }
 
 

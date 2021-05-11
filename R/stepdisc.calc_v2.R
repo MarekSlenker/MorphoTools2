@@ -1,8 +1,6 @@
 
 
-#' Stepwise discriminant analysis
-#' @export
-stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
+.v2_stepdisc.calc <- function(object, Ftoenter = 0.15, Ftoremove = 0.15) {
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
@@ -12,6 +10,23 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   if (length(constantColumns)>0) {
     stop(paste("Characters", paste(constantColumns, collapse = ", "), "are constant."), call. = FALSE)
   }
+
+  #####################
+
+
+
+
+
+  dd = read.delim("clipboard", header = F, sep = "\t")
+
+  X=dd[,2:ncol(dd)]; grouping=dd[,1]
+
+  Ftoenter = 0.15; Ftoremove = 0.15
+  grouping = as.factor(grouping)
+
+
+
+
 
   saturatedModel = FALSE
   X = as.matrix(object$data)     # data matrix
@@ -35,8 +50,11 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
     enter.R2[j] = (enterSum[[1]]$`Sum Sq`[1]/sum(enterSum[[1]]$`Sum Sq`))
   }
 
-  if(min(enter.PrF) < F_to_enter) {                       # condition for stopping the forward-selection
-    a = which.min(enter.PrF)
+
+  cbind(enter.R2, enter.PrF, enter.Fstat )
+
+  if(max(enter.R2) > Ftoenter) {                       # condition for stopping the forward-selection
+    a = which.max(enter.R2)
     Entered = c(Entered, colnames(X)[a])
     Removed = c(Removed, "")
 
@@ -72,11 +90,14 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
       } else saturatedModel = TRUE
     }
 
+    print(cbind(enter.R2, enter.PrF, enter.Fstat ))
+    cat("\n\n")
+
     if (saturatedModel) break
 
     # ---ENTER VARIABLE----------------------------------- #
-    a = which.min(enter.PrF)[1]       # MK     # most significant variable a (with the smalles Pr(>F))
-    if(enter.PrF[a] < F_to_enter)
+    a = which.max(enter.R2)       # MK     # most significant variable a (with the smalles Pr(>F))
+    if(enter.R2[a] > Ftoenter)
     {                 # condition for stopping the forward-selection
       Entered = c(Entered, colnames(X)[a])
       Removed = c(Removed, "")
@@ -110,9 +131,12 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
         rem.R2[j] = (remSum[[1]]$`Sum Sq`[2]/ (sum(remSum[[1]]$`Sum Sq`)-remSum[[1]]$`Sum Sq`[1]))
       }
 
+      print(cbind(rem.R2, rem.Fstat, rem.PrF))
+
+
       # ---REMOVE VARIABLE----------------------------------- #
-      a = which.max(rem.PrF)[1]
-      if(rem.PrF[a] > F_to_stay){
+      a = which.min(rem.R2)[1]
+      if(rem.R2[a] < Ftoremove){
         Entered = c(Entered, "")
         Removed = c(Removed, colnames(X.mod)[a])
 
@@ -139,17 +163,9 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
                       "F Value" = Fstat, "Pr > F" = pwert)
 
   print(resDat)
-  cat("\nselected characters:\n")
+  cat("\nselected variables:\n")
   cat(Entered[Entered != ""])
 }
-
-
-
-
-
-
-
-
 
 
 
