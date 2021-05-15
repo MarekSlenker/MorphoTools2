@@ -692,9 +692,10 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 
 # 8. Stepwise discriminant analysis
 
-In some analyses (PCA, discriminant analyses), a number of characters can not overcome a number of samples. If it does, only a subset of the characters can be used. The selection of the most useful characters, ones that contributes the most to the differentiation of predefined groups (taxa), is the aim of the stepwise discriminant analysis.  
+In some analyses, a number of characters can not overcome a number of samples. If it does, only a subset of the "best" characters (contributing the most to the differentiation of predefined groups (taxa)) have to be selected.
+Another common requirement is linear independence of characters. Character should not be a linear combination of any other character(s). The way to eliminate such unnecessary or redundant characters is the use of a stepwise discriminant analysis.  
 
-The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those which contribution is no more significant (bellow `F_to_stay` treshold) are excluded before addtion of the next most useful character. When none of the unselected variables meets the entry criterion (their significance is bellow `F_to_enter` treshold), or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, selected characters are printed to console, ordered according their importance for separation of the predefined groups.  
+The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those which unique contribution is no more significant (bellow `F_to_stay` treshold) are excluded before addtion of the next most useful character. When none of the unselected variables meets the entry criterion (significance of their unique contribution is bellow `F_to_enter` treshold), or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, selected characters are printed to console, ordered according their importance for separation of the predefined groups.  
 
 The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
 
@@ -718,7 +719,7 @@ options(max.print = 60)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
 
-Discriminant analysis has some requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
+Canonical discriminant analysis has some requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
 
 The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analyzed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
@@ -852,7 +853,24 @@ Classificatory discriminant analysis (based on packages `MASS` and `class` _____
 ____________________  
 ______________________; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results than indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 
-If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Bartlett’s test; `TTTTT_EEEEEEE_SSSSSS_TTTTTTTTT`). If the covariance matrices are equal, the linear discriminant analysis is appropriate. If not, using of quadratic discriminant analysis should be considered. 
+Classificatory discriminant analysis has some requirements ....................................  
+..  
+
+EFEKT lda variables are collinear  - no ze je ich tam vela, a nie je jasny jednoznacny prispevok vybratych znakov. lepsi je mensi model
+
+More importantly, it makes the estimated coefficients impossible to interpret. If an increase in 𝑋1, say, is associated with an decrease in 𝑋2 and they both increase variable 𝑌, every change in 𝑋1 will be compensated by a change in 𝑋2 and you will underestimate the effect of 𝑋1 on 𝑌. In LDA, you would underestimate the effect of 𝑋1 on the classification.
+
+If all you care for is the classification per se, and that after training your model on half of the data and testing it on the other half you get 85-95% accuracy I'd say it is fine.
+
+
+This suggests just what the error message says: some of your variables are collinear. In other words, the elements of one vector are a linear function of the elements of another, such as
+0, 1, 2, 3
+3, 5, 7, 9
+In this case, LDA can't differentiate their influences on the rest of the world.
+
+
+
+If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Bartlett’s test; `TTTTT_EEEEEEE_SSSSSS_TTTTTTTTT`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
 Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
 
 
@@ -873,12 +891,28 @@ options(max.print = 460)
 ```{r echo = TRUE, eval=TRUE}
 classifRes.lda = classif.lda(centaurea)
 
+```
+
+mame tam warning pre multikolinearitu, elbo sa pokusame pouzit velmi vela predictor varaibles - znakov, a prispevok kazdeho je nejednoznacny.
+
+ak cheme len vysledok, je to OK
+
+```{r echo = TRUE, eval=TRUE}
 classif.matrix(classifRes.lda, level = "taxon")
 
 classif.matrix(classifRes.lda, level = "pop")
 ```
 
-The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
+The deta## Coefficients of linear discriminants:
+##                     LD1       LD2
+## Sepal.Length  0.5081196 -0.925690
+## Sepal.Width   1.9631006 -1.206187
+## Petal.Length -2.1214689  1.868896
+## Petal.Width  -2.9806917 -3.850355
+
+
+
+iled classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
 
 
 The results can be exported to the clipboard or file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
@@ -897,6 +931,11 @@ exportRes(object = classif_lda,
 &nbsp;  
 
 
+Well, qda assumes real values (and not factors) in the explanatory 
+variables. If you think it makes sense to ignore this assumption (and I 
+doubt it makes sense), then the error message tells you there is a rank 
+deficiency, i.e. some variables might be collinear.
+Hence at least one of the covariance matrices cannot be inverted.
 
 
 ## 10.3 k-nearest neighbour classificatory DA

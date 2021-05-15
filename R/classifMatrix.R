@@ -14,11 +14,11 @@ classif.matrix <- function(result, level = "taxon") {
     classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     classif = rbind(classif, c("Total", colSums(classif[2:ncol(classif)])))
 
-  if (! is.null(result$correct)) {
-    NofCorrect = stats::aggregate(result$correct$correct, list(Category=result$Taxon), sum)
-    classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
-    classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
-  }
+    if (! is.null(result$correct)) {
+      NofCorrect = stats::aggregate(result$correct$correct, list(Category=result$Taxon), sum)
+      classif = cbind(classif, correct = c( NofCorrect$x, sum(NofCorrect$x)))
+      classif = cbind(classif, "correct[%]" = round((classif$correct / as.numeric(classif$N))*100, digits = 2)   )
+    }
 
 
   } else if (level == "pop")
@@ -46,7 +46,7 @@ classif.matrix <- function(result, level = "taxon") {
     classif = data.frame("ID" = result$ID, "Population" = result$Population, "Taxon" = result$Taxon,
                          "classification" = result$classif, stringsAsFactors = FALSE)
 
-    if (attr(result, "method" ) == "lda") {
+    if (attr(result, "method" ) == "lda" || attr(result, "method" ) == "qda") {
       colnames(result$prob) =  paste("as.", colnames(result$prob), sep = "")
     }
 

@@ -14,6 +14,8 @@ These functions computes discriminant function for classifying observations. Lin
 \usage{
 classif.lda(object, crossval = "indiv")
 
+classif.qda(object, crossval = "indiv")
+
 classif.knn(object, k, crossval = "indiv")
 
 classif.matrix(result, level = "taxon")
@@ -35,6 +37,8 @@ an object of class '\code{\link{classifdata}}'.
 
 \details{
 The \code{classif.lda} performs classification using linear discriminant function with cross-validation using the \code{lda} function from the package \code{MASS}. The prior probabilities of group memberships are equal.
+
+\code{classif.qda?????}
 
 Nonparametric classification method k-nearest neighbours is performed using the \code{knn} and \code{knn.cv} functions from the package \code{class}.
 

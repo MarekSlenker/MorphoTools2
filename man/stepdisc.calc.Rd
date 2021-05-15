@@ -1,7 +1,7 @@
 \name{stepdisc.calc}
 \alias{stepdisc.calc}
 
-\title{Stepwise discriminant analysis}
+\title{Stepwise Discriminant Analysis}
 
 \description{
 This function perform Stepwise discriminant analysis.
