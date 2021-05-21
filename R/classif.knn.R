@@ -26,10 +26,10 @@ classif.knn <- function(object, k, crossval = "indiv"){
     knn.samp = class::knn.cv(train = object$data, cl = object$Taxon, k = k, prob = T, use.all = T)
 
     res$ID = as.character(object$ID)
-    res$Population = as.character(object$Population)
-    res$Taxon = as.character(object$Taxon)
-    res$classif = as.character(knn.samp)
-    res$prob = attr(knn.samp,"prob")
+    res$Population = object$Population
+    res$Taxon = object$Taxon
+    res$classif = knn.samp
+    res$prob = round(attr(knn.samp,"prob"), digits = 4)
   }
   else if (crossval=="pop")
   {
@@ -38,19 +38,28 @@ classif.knn <- function(object, k, crossval = "indiv"){
       train = .removeByColumn(object, "Population", i)
 
       knn.samp = class::knn(train = train$data, test = samp$data, cl = train$Taxon, k = k, prob = TRUE, use.all = TRUE)
+
       res$ID = c(res$ID, as.character(object$ID[which(i == object$Population)]))
-      res$Population = c(res$Population,  as.character(object$Population[which(i == object$Population)]))
-      res$Taxon = c(res$Taxon, as.character(object$Taxon[which(i == object$Population)]))
+      res$Population = c(res$Population,  as.character(object$Population[object$Population == i]  ))
+      res$Taxon = c(res$Taxon, as.character(object$Taxon[object$Population == i] ))
+
       res$classif = c(res$classif, as.character(knn.samp))
       res$prob = c(res$prob, round(attr(knn.samp,"prob"), digits = 4))
+
+
     }
+
+    res$Population = as.factor(res$Population)
+    res$Taxon = as.factor(res$Taxon)
+    res$classif = as.factor(res$classif)
+
   }
 
   res$correct = data.frame("correct" = as.character( res$Taxon) == as.character(res$classif))
   rownames(res$correct) = res$ID
 
-  res$classif = data.frame("classification" = res$classif)
-  rownames(res$classif) = res$ID
+  #res$classif = data.frame("classification" = res$classif)
+  #rownames(res$classif) = res$ID
 
   res$prob = data.frame("Proportion.of.the.votes.for.the.winning.class" = res$prob)
   rownames(res$prob) = res$ID

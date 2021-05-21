@@ -121,9 +121,9 @@
 .newClassifdata <- function() {
   .newClassifdata <- list(
     ID = character(),
-    Population = character(),
-    Taxon = character(),
-    classif = character(),
+    Population = factor(),
+    Taxon = factor(),
+    classif = factor(),
     prob = numeric(),
     correct = logical()
 

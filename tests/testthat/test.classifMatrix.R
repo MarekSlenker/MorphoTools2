@@ -74,12 +74,12 @@ test_that("classifSamp.lda",  {
   options(warn=0)
 
   m = classif.matrix(c, level = "taxon")
-  expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ps")
+  expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ph,as.ps,as.st")
   expect_equal(paste(rownames(m), collapse = ","), "1,2")
   expect_equal(paste(m[,1], collapse = ","), "ps,Total")
 
   m = classif.matrix(c, level = "pop")
-  expect_equal(paste(colnames(m), collapse = ","), "Population,Taxon,N,as.hybr,as.ps")
+  expect_equal(paste(colnames(m), collapse = ","), "Population,Taxon,N,as.hybr,as.ph,as.ps,as.st")
   expect_equal(paste(rownames(m), collapse = ","), "1,2")
   expect_equal(paste(m[,1], collapse = ","), "SOK,Total" )
 

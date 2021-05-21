@@ -48,27 +48,28 @@ classifSample.knn <- function(sampleData, trainingData, k){
 
   knn.samp = class::knn(train = trainingData$data, test = sampleData$data, cl = trainingData$Taxon, k = k, prob = TRUE, use.all = TRUE)
 
+  #res$ID = as.character(sampleData$ID)
+  #res$Population = as.character(sampleData$Population)
+  #res$Taxon = as.character(sampleData$Taxon)
+  ##res$classif = as.character(knn.samp)
+  #res$prob = round(attr(knn.samp,"prob"), digits = 4)
+
   res$ID = as.character(sampleData$ID)
-  res$Population = as.character(sampleData$Population)
-  res$Taxon = as.character(sampleData$Taxon)
-  res$classif = as.character(knn.samp)
+  res$Population = sampleData$Population
+  res$Taxon = sampleData$Taxon
+  res$classif = knn.samp
   res$prob = round(attr(knn.samp,"prob"), digits = 4)
 
 
-  res$classif = data.frame("classification" = res$classif)
-  rownames(res$classif) = res$ID
+  #res$classif = data.frame("classification" = res$classif)
+  #rownames(res$classif) = res$ID
 
   res$prob = data.frame("Proportion.of.the.votes.for.the.winning.class" = res$prob)
   rownames(res$prob) = res$ID
 
 
-
-  attr(res$classif, "prob") = NULL
-  attr(res, "method") <- "knn"
-
-
   res$correct = NULL
-  attr(res$classif, "prob") = NULL
+  #attr(res$classif, "prob") = NULL
   attr(res, "method") <- "knn"
 
   return(res)

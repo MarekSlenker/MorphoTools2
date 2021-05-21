@@ -929,7 +929,7 @@ exportRes(object = classif_lda,
 
 &nbsp;   
 &nbsp;  
-
+does not assume equal covariance matrices amongst the groups
 
 Well, qda assumes real values (and not factors) in the explanatory 
 variables. If you think it makes sense to ignore this assumption (and I 

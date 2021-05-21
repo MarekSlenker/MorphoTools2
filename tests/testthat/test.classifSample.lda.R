@@ -86,9 +86,6 @@ test_that("correctness of calculation",  {
   options(warn=0)
 
   expect_is( classif.lda.SOK, "classifdata")
-  expect_is( classif.lda.SOK$classif, "data.frame")
-  expect_is( classif.lda.SOK$prob, "data.frame")
-  expect_is( classif.lda.SOK$correct, "NULL")
 
   expect_equal( attr(classif.lda.SOK, "method"), "lda")
 

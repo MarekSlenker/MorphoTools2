@@ -8,7 +8,7 @@ classif.matrix <- function(result, level = "taxon") {
 
   if (level == "taxon" )
   {
-    classif = table(result$Taxon, result$classif$classification)
+    classif = table(result$Taxon, result$classif)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
     classif = data.frame("Taxon" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
@@ -23,16 +23,18 @@ classif.matrix <- function(result, level = "taxon") {
 
   } else if (level == "pop")
   {
-    classif = table(result$Population, result$classif$classification)
+    classif = table(result$Population, result$classif)
     classif = data.frame(unclass(classif))
     colnames(classif) = paste("as.", colnames(classif), sep = "")
-    classif = data.frame("Population" = attr(classif,"row.names"), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
+    classif = data.frame("Population" = row.names(classif), "N" = rowSums(classif), classif, row.names = NULL, stringsAsFactors = FALSE)
     tax = data.frame(
-      "Population" = result$Population[ ! duplicated(result$Population, result$Taxon)],
-      "Taxon" = result$Taxon[ ! duplicated(result$Population, result$Taxon)],
+      "Population" = result$Population[ ! duplicated(as.character(result$Population), as.character(result$Taxon))],
+      "Taxon" = result$Taxon[ ! duplicated(as.character(result$Population), as.character(result$Taxon))],
       stringsAsFactors = FALSE
     )
     classif = merge(tax, classif, by = "Population" )
+    classif$Population = as.character(classif$Population)
+    classif$Taxon = as.character(classif$Taxon)
     classif = rbind(classif, c("Total", "", colSums(classif[3:ncol(classif)])))
 
     if (! is.null(result$correct)) {

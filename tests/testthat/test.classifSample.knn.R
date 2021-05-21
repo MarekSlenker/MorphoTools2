@@ -78,19 +78,16 @@ test_that("correct input - different characters", {
 
 test_that("correctness of calculation",  {
   options(warn=-1)
-  c = classif.knn(morphoMockup, k=2)
+  c = classif.knn(morphoMockup, k=7)
   options(warn=0)
 
   expect_is( c, "classifdata")
-  expect_is( c$classif, "data.frame")
-  expect_is( c$prob, "data.frame")
-  expect_is( c$correct, "data.frame")
 
   expect_equal( attr(c, "method"), "knn")
 
-  expect_equal(paste(unlist(c$prob), collapse = ","), "1,1,1,0.5,0.5,1,0.5,0.5")
-  #expect_equal(paste(c$correct, collapse = ","), "c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE)")
-  #expect_equal(paste(c$classif, collapse = ","), "c(\"TaxA\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\", \"TaxB\", \"TaxB\", \"TaxA\")")
+  expect_equal(paste(unlist(c$prob), collapse = ","),"0.5714,0.5714,0.5714,0.5714,0.5714,0.5714,0.5714,0.5714")
+  expect_equal(paste(c$correct, collapse = ","), "c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)")
+  expect_equal(paste(c$classif, collapse = ","), "TaxB,TaxB,TaxB,TaxB,TaxA,TaxA,TaxA,TaxA")
   expect_equal(paste(c$ID, collapse = ","), "id1,id2,id3,id4,id5,id6,id7,id8")
 })
 
@@ -104,13 +101,13 @@ test_that("correctness of calculation  -to iste 2 metodami",  {
   RTE = keepPopulation(data, populationName = "RTE")
 
   options(warn=-1)
-  RTE.classif = classifSample.knn(RTE, bezRTE, k = 2)
-  class_vsetko = classif.knn(data, k = 2, crossval = "pop")
+  RTE.classif = classifSample.knn(RTE, bezRTE, k = 1)
+  class_vsetko = classif.knn(data, k = 1, crossval = "pop")
   options(warn=0)
 
   expect_equal(class_vsetko$ID[473:492], RTE.classif$ID)
-  expect_equal(class_vsetko$Population[473:492], RTE.classif$Population)
-  #expect_equal(paste(class_vsetko$classif[473:492,]), paste(RTE.classif$classif[1:20,]))
+  expect_equal(as.character(class_vsetko$Population[473:492]), as.character(RTE.classif$Population))
+  #Şexpect_equal(paste(class_vsetko$classif[473:492]), paste(RTE.classif$classif[1:20]))
   expect_equal(class_vsetko$prob[473:492,], RTE.classif$prob[,])
 
 })

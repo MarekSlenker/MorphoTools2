@@ -22,9 +22,6 @@ test_that("correctness of calculation",  {
   options(warn=0)
 
   expect_is( c, "classifdata")
-  expect_is( c$classif, "data.frame")
-  expect_is( c$prob, "data.frame")
-  expect_is( c$correct, "data.frame")
 
   expect_equal( attr(c, "method"), "lda")
 
@@ -49,8 +46,10 @@ test_that("correctness of calculation  -to iste 2 metodami",  {
   options(warn=0)
 
   expect_equal(class_vsetko$ID[473:492], RTE.classif$ID)
-  expect_equal(class_vsetko$Population[473:492], RTE.classif$Population)
-  expect_equal(paste(class_vsetko$classif[473:492,]), paste(RTE.classif$classif[1:20,]))
+  expect_equal(as.character(class_vsetko$Population[473:492]), as.character(RTE.classif$Population))
+  expect_equal(paste(class_vsetko$classif[473:492]), paste(RTE.classif$classif[1:20]))
   expect_equal(class_vsetko$prob[473:492,], RTE.classif$prob)
 
 })
+
+

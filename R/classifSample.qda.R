@@ -19,18 +19,18 @@ classifSample.qda <- function(sampleData, trainingData) {
 
   res = .newClassifdata()
 
-  qda.train = MASS::qda(stats::as.formula(paste("trainingData$Taxon ~ ", paste(char, collapse="+"))),
-                        data=trainingData$data, prior = rep(1/ntax,ntax))
-
+  #qda.train = MASS::qda(stats::as.formula(paste("trainingData$Taxon ~ ", paste(char, collapse="+"))), data=trainingData$data, prior = rep(1/ntax,ntax))
+  qda.train = MASS::qda(trainingData$Taxon ~ . , data=trainingData$data, prior = rep(1/ntax,ntax))
   qda.samp = stats::predict(qda.train,sampleData$data)
 
 
   res$ID = as.character(sampleData$ID)
-  res$Population = as.character(sampleData$Population)
-  res$Taxon = as.character(sampleData$Taxon)
+  res$Population = sampleData$Population
+  res$Taxon = sampleData$Taxon
 
-  res$classif = data.frame("classification" = as.character(qda.samp$class))
-  rownames(res$classif) = res$ID
+  #res$classif = data.frame("classification" = as.character(qda.samp$class))
+  res$classif = qda.samp$class
+  #rownames(res$classif) = res$ID
 
   res$prob = round(qda.samp$posterior, digits = 4)
   res$prob = as.data.frame(res$prob)

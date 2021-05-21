@@ -19,18 +19,18 @@ classifSample.lda <- function(sampleData, trainingData) {
 
   res = .newClassifdata()
 
-  lda.train = MASS::lda(stats::as.formula(paste("trainingData$Taxon ~ ", paste(char, collapse="+"))),
-                        data=trainingData$data, prior = rep(1/ntax,ntax))
-
+  #lda.train = MASS::lda(stats::as.formula(paste("trainingData$Taxon ~ ", paste(char, collapse="+"))), data=trainingData$data, prior = rep(1/ntax,ntax))
+  lda.train = MASS::lda(trainingData$Taxon ~ . , data=trainingData$data, prior = rep(1/ntax,ntax))
   lda.samp = stats::predict(lda.train,sampleData$data)
 
 
   res$ID = as.character(sampleData$ID)
-  res$Population = as.character(sampleData$Population)
-  res$Taxon = as.character(sampleData$Taxon)
+  res$Population = sampleData$Population
+  res$Taxon = sampleData$Taxon
 
-  res$classif = data.frame("classification" = as.character(lda.samp$class))
-  rownames(res$classif) = res$ID
+  #res$classif = data.frame("classification" = as.character(lda.samp$class))
+  res$classif = lda.samp$class
+  #rownames(res$classif) = res$ID
 
   res$prob = round(lda.samp$posterior, digits = 4)
   res$prob = as.data.frame(res$prob)
