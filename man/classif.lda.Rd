@@ -1,5 +1,6 @@
 \name{classif.lda}
 \alias{classif.lda}
+\alias{classif.qda}
 \alias{classif.knn}
 \alias{classif.matrix}
 

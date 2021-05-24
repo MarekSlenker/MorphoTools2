@@ -136,11 +136,14 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
   resDat = data.frame("Entered" = Entered, "Removed" = Removed,
                       "Partial R-Square" = R2,
-                      "F Value" = Fstat, "Pr > F" = pwert)
+                      "F Value" = Fstat, "Pr \> F" = pwert)
 
   print(resDat)
   cat("\nselected characters:\n")
-  cat(Entered[Entered != ""])
+  cat(paste(Entered[Entered != ""], collapse = ", "))
+  cat("\n")
+  #cat("\n")
+  #cat(paste("\"", paste(Entered[Entered != ""], collapse = "\", \""), "\"\n"), sep = "")
 }
 
 

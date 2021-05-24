@@ -366,9 +366,12 @@ exportRes(descr_tax, file = "clipboard")
 exportRes(descr_tax, file = "descr_tax.txt")
 ```
 
+**KAROL:  toto sme vkladam**
+Please note, that some of the following statistical analyses requires that no character can be invariant in any taxon. If it does, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the whole character.  
+
 ## 3.6 Correlations of characters
 
-Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this could potentially distort the results. Function `cormat` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One from the pair of highly correlated character can be removed from a dataset using `deleteCharacter()` function, see below.
+Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this could potentially distort the results. Function `cormat()` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One from the pair of highly correlated character can be removed from a dataset using `deleteCharacter()` function, see below.
 
 ```{r echo = TRUE, eval=FALSE}
 correlations.s = cormat(centaurea, method = "spearman")
@@ -463,11 +466,13 @@ After examination of normality of distribution of each character, confirming tha
 
 
 
+\newpage
+
 # 4. Hierarchical clustering
 
 Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of (hierarchical) group structure in data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (default), Manhattan, Minkovski; (2) similarity coefficients for binary characters: Jaccard and simple matching; (3) coefficient for mixed data: Gower. Clustering methods based on above coefficients are: UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, or UPGMC. However, note that for morphometric analysis Euclidean distance and UPGMA or Ward’s method are mostly used. The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
 
-The dendrogram is displayed using `plot` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
+The dendrogram is displayed using `plot()` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300,}
 pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "UPGMA")
@@ -477,6 +482,8 @@ plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
 Four main clusters were formed in the histogram above, however, some populations (BABL, LES, OLE1, OLE2, and PROS) were “incorrectly” clustered, what will require further inspection.
 
 
+
+\newpage
 
 # 5. Principal component analysis (PCA)
 
@@ -622,7 +629,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
               x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 ```
 
-To draw a 3D scatterplot, the `plot3Dpoints` function can be used. The `theta` and `phi` arguments defines viewing direction (azimuthal direction and co-latitude, respectively).
+To draw a 3D scatterplot, the `plot3Dpoints()` function can be used. The `theta` and `phi` arguments defines viewing direction (azimuthal direction and co-latitude, respectively).
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
@@ -635,6 +642,9 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 
 
+
+
+\newpage
 
 # 6. Principal coordinate analysis (PCoA)
 
@@ -665,6 +675,9 @@ plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,1
 
 
 
+
+\newpage
+
 # 7. Non-metric multidimensional scaling (NMDS)
 
 All of the clustering analyses above attempt to preserve the distance relationships among the objects as much as possible. The main difference of the Non-metric multidimensional scaling (NMDS) is, that the preservation of distances is not of primary importance. This analysis is attempting to represent the objects in a small (usually two or three) number of dimensions (specified by `k` argument), preserving the order of distances among objects (similar objects are plotted closer to one another and dissimilar objects far apart).
@@ -673,7 +686,7 @@ Like principal coordinate analysis (PCoA), NMDS is not limited to Euclidean dist
 As NMDS compress the relationships among objects into two or three dimensions, this compression creates a "stress". The stress value can be interpreted as the "goodness" of the solution, where lower is better. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions. Further, multiple runs of the NMDS analysis are needed to ensure that the stable ordination has been reached, as anyone run may get "trapped" in local optima which are not representative of true similarities.
 Similarly to the PCoA, influence of original characters on new axes can not be directly derived. Moreover, axes of the ordination are arbitrary, thus the variation explained by individual axes is unknown.
 
-The NMDS is calculated by `nmds.calc()` function (using the `monoMDS` function from package `vegan`; R Core Team, 2020), the result is an object of class `pcoadata`.
+The NMDS is calculated by `nmds.calc()` function (using the `monoMDS()` function from package `vegan`; R Core Team, 2020), the result is an object of class `pcoadata`.
 
 The result can be plotted by `plotPoints()` or `plot3Dpoints()` functions, methods `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()`, and `plotAddLegend()` works as usual. Only `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on coordinate axes.
 
@@ -690,10 +703,12 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 
 
 
+
+\newpage
+
 # 8. Stepwise discriminant analysis
 
-In some analyses, a number of characters can not overcome a number of samples. If it does, only a subset of the "best" characters (contributing the most to the differentiation of predefined groups (taxa)) have to be selected.
-Another common requirement is linear independence of characters. Character should not be a linear combination of any other character(s). The way to eliminate such unnecessary or redundant characters is the use of a stepwise discriminant analysis.  
+In some analyses, a number of characters can not overcome a number of samples. If it does, only a subset of the "best" characters (contributing the most to the differentiation of predefined groups (taxa)) have to be selected. Another common requirement is linear independence of characters. Character should not be a linear combination of any other character(s). The way to eliminate such unnecessary or redundant characters is the use of a stepwise discriminant analysis.  
 
 The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those which unique contribution is no more significant (bellow `F_to_stay` treshold) are excluded before addtion of the next most useful character. When none of the unselected variables meets the entry criterion (significance of their unique contribution is bellow `F_to_enter` treshold), or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, selected characters are printed to console, ordered according their importance for separation of the predefined groups.  
 
@@ -702,6 +717,7 @@ The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
 
 ```{r include=F}
 options(max.print = 260)
+
 ```
 
 ```{r echo = TRUE, eval=TRUE}
@@ -710,16 +726,21 @@ stepdisc.calc(centaurea)
 
 ```{r include=F}
 options(max.print = 60)
+
 ```
 
 
 
 
+
+\newpage
+
 # 9. Canonical discriminant analysis (CDA)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
 
-Canonical discriminant analysis has some requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
+**KAROL: TUTU TO PISEM VSEOBECNE, lebo neskor sa k tomu vraciame pri classif DA**  
+Discriminant analyses (in general) have requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
 
 The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analyzed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
@@ -787,7 +808,7 @@ cda.centaurea$totalCanonicalStructure
 &nbsp;  
 &nbsp;  
 
-A 3D scatterplot can be produced using the `plot3Dpoints` function. 
+A 3D scatterplot can be produced using the `plot3Dpoints()` function. 
 Viewing direction and slope (co-latitude) can be set by `theta` and `phi` arguments, respectively.
 
 
@@ -847,18 +868,68 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 
 
+
+\newpage
+
 # 10. Classificatory discriminant analysis
 
-Classificatory discriminant analysis (based on packages `MASS` and `class` _______________________________  
-____________________  
-______________________; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results than indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
+Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results than indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix()` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 
-Classificatory discriminant analysis has some requirements ....................................  
-..  
+As stated above, discriminant analyses have some requirements: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects. Canonical DA works reasonably well even if some of these requirements were violated, but Linear and Quadratic classificatory DAs are more strict in this respect (**KAROL, to o CDA je OK???**), which is reflected by warning or error messages.  
+
+To fulfil these requirements, only a subset of characters will be used. 
+Linearly independent characters were identified by Stepwise discriminant analysis (see above). Invariant characters within taxon can be identified by `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the character as a whole.  
+
+```{r include=F}
+options(max.print = 460)
+```
+```{r echo = TRUE, eval=TRUE}
+stepdisc.calc(centaurea)
+
+partialCentaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF", 
+                                    "AP", "IS", "LBA", "LW", "AL", "ILW", "LBS",
+                                    "SFT", "CG", "IL", "LM", "ALW", "AW", "SF") )
+
+descrTaxon(partialCentaurea, format = "$SD")
+
+partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] = 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] = 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] = 0.000001
+```
+
+
+If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Box's M-test; `BoxMTest()`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
+Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
+
+```{r echo = TRUE, eval=TRUE}
+BoxMTest(partialCentaurea)
+
+```
+
+
+The Box’s M test indicated that there is a significant difference in the covariance matrices among taxa (p-value < 0.001) and therefore, Quadratic DA is recommended.
+
+
+
+## 10.1 Linear discriminant analysis (LDA)
+
+
+
+
+
+```{r echo = TRUE, eval=TRUE}
+classifRes.lda = classif.lda(partialCentaurea)
+
+```
+
+
+
+ak cheme len vysledok, je to OK
+
 
 EFEKT lda variables are collinear  - no ze je ich tam vela, a nie je jasny jednoznacny prispevok vybratych znakov. lepsi je mensi model
 
-More importantly, it makes the estimated coefficients impossible to interpret. If an increase in 𝑋1, say, is associated with an decrease in 𝑋2 and they both increase variable 𝑌, every change in 𝑋1 will be compensated by a change in 𝑋2 and you will underestimate the effect of 𝑋1 on 𝑌. In LDA, you would underestimate the effect of 𝑋1 on the classification.
+More importantly, it makes the estimated coefficients impossible to interpret. If an increase in X1, say, is associated with an decrease in X2 and they both increase variable Y, every change in X1 will be compensated by a change in X2 and you will underestimate the effect of X1 on Y. In LDA, you would underestimate the effect of X1 on the classification.
 
 If all you care for is the classification per se, and that after training your model on half of the data and testing it on the other half you get 85-95% accuracy I'd say it is fine.
 
@@ -870,32 +941,9 @@ In this case, LDA can't differentiate their influences on the rest of the world.
 
 
 
-If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Bartlett’s test; `TTTTT_EEEEEEE_SSSSSS_TTTTTTTTT`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
-Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
+The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
 
 
-
-
-`BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT_BARTLETT`
-
-
-
-## 10.1 Linear discriminant analysis (LDA)
-
-
-
-
-```{r include=F}
-options(max.print = 460)
-```
-```{r echo = TRUE, eval=TRUE}
-classifRes.lda = classif.lda(centaurea)
-
-```
-
-mame tam warning pre multikolinearitu, elbo sa pokusame pouzit velmi vela predictor varaibles - znakov, a prispevok kazdeho je nejednoznacny.
-
-ak cheme len vysledok, je to OK
 
 ```{r echo = TRUE, eval=TRUE}
 classif.matrix(classifRes.lda, level = "taxon")
@@ -948,36 +996,7 @@ The optimal number of neighbours to consider is unknown, but it is empirically e
 ```{r echo = FALSE, eval = TRUE}
 knn.select<-function(object, crossval="indiv"){
   k = as.numeric(1:30)
-  ksel = matrix(c(423,423,423,423,423,423,423,423,423,423
-                  ,415,406,415,407,403,417,409,403,413,403
-                  ,442,437,438,438,435,434,434,436,436,440
-                  ,447,445,438,440,441,443,441,438,440,436
-                  ,447,453,448,448,448,448,449,448,450,449
-                  ,454,455,445,440,449,449,446,447,456,441
-                  ,449,452,450,448,447,454,448,448,453,447
-                  ,448,442,443,458,450,453,454,454,451,445
-                  ,449,450,452,450,450,452,449,449,451,450
-                  ,456,447,452,450,446,447,449,451,450,457
-                  ,454,453,453,451,453,453,455,454,452,457
-                  ,459,455,461,454,451,455,452,455,453,458
-                  ,454,450,454,455,453,453,451,448,451,454
-                  ,452,447,454,453,452,450,454,454,447,448
-                  ,451,453,453,454,452,452,455,450,452,451
-                  ,451,451,456,453,454,455,455,452,451,454
-                  ,452,455,452,452,451,452,452,451,451,450
-                  ,450,449,448,445,451,447,447,448,448,444
-                  ,453,452,453,449,452,451,452,449,451,450
-                  ,448,452,451,447,451,447,447,451,452,451
-                  ,448,447,448,448,448,447,453,449,448,445
-                  ,450,449,451,449,451,449,449,449,450,451
-                  ,447,448,448,449,448,448,449,449,451,449
-                  ,444,446,445,443,444,446,443,444,444,446
-                  ,449,451,449,446,450,448,449,448,450,448
-                  ,449,449,448,446,448,449,449,449,451,448
-                  ,447,449,446,445,444,448,449,446,447,447
-                  ,447,444,445,446,445,447,448,446,445,447
-                  ,449,448,447,447,446,448,447,448,448,450
-                  ,445,448,448,450,448,446,447,450,447,449), byrow = T, ncol = 10)
+  ksel = matrix(c(419,419,419,419,419,419,419,419,419,419,416,434,420,407,418,423,426,423,413,417,441,442,438,441,440,440,443,441,439,442,446,447,455,447,446,443,445,435,445,444,457,458,457,459,457,458,456,461,458,462,455,457,452,456,455,459,454,459,451,464,460,458,462,455,461,459,459,458,459,460,458,458,460,463,458,456,461,465,456,464,462,461,458,457,459,460,460,458,461,460,464,459,463,461,460,464,462,462,459,463,457,456,461,459,459,455,458,458,458,458,459,464,466,465,464,458,460,462,462,460,462,461,460,460,462,464,462,463,464,461,460,462,462,464,461,460,460,458,460,463,464,467,467,465,466,466,468,466,470,466,459,460,456,463,457,458,457,458,464,457,456,455,458,459,459,454,455,455,456,457,452,458,454,460,457,456,458,459,453,453,456,457,459,456,457,458,457,454,455,453,450,454,455,451,455,452,452,451,455,454,455,453,455,453,456,454,454,455,454,454,454,455,453,453,453,454,450,452,450,455,454,453,455,455,457,455,455,455,453,455,458,455,454,455,456,457,454,455,457,455,459,460,458,458,457,455,458,460,458,460,458,461,459,460,461,459,459,456,457,458,461,463,461,461,460,463,461,460,459,459,456,455,455,457,454,458,457,454,456,456,453,450,451,453,456,451,453,456,450,456,451,449,453,452,450,449,450,451,448,450), byrow = T, ncol = 10)
   
   ksel = t(ksel)
   
@@ -993,20 +1012,20 @@ knn.select<-function(object, crossval="indiv"){
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 
-  cat("\nThe highest number of correct classifications is at k = 12)\n")
+  cat("\nThe highest number of correct classifications is at k = 15)\n")
 }
 ```
 
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-knn.select(centaurea, crossval = "pop")
+knn.select(partialCentaurea, crossval = "pop")
 ```
 
-The highest number of correct classifications is at k = 12, thus we set `k = 12` in the `classif.knn()` function (to classify individual according its 12 nearest neighbours).
+The highest number of correct classifications is at k = 12, thus we set `k = 15` in the `classif.knn()` function (to classify individual according its 12 nearest neighbours).
 
 ```{r echo = TRUE, eval=TRUE}
-classifRes.knn = classif.knn(centaurea, crossval = "pop", k = 12)
+classifRes.knn = classif.knn(partialCentaurea, crossval = "pop", k = 15)
 
 classif.matrix(classifRes.knn, level = "taxon")
 ```
@@ -1034,8 +1053,8 @@ The another functions, `classifSample.lda()` and `classifSample.knn()` are desig
 Let's remove population PRIS and pretend that sample PRIS418 is a type herbarium specimen of *Centaurea pseudophrygia* and we want to show its similarity with other populations of the species (typically, we have only morphology for old herbarium collections while we have other data for recently studied populations – but to assess their taxonomic identity, we should compare them with types ). To classify PRIS418, run the following code:
 
 ```{r echo = TRUE, eval=TRUE}
-trainingSet = deletePopulation(centaurea, populationName = "PRIS")
-typeSpecimen = keepSample(centaurea, "PRIS418")
+trainingSet = deletePopulation(partialCentaurea, populationName = "PRIS")
+typeSpecimen = keepSample(partialCentaurea, "PRIS418")
 
 classifSample.lda(typeSpecimen, trainingSet)
 
@@ -1046,6 +1065,9 @@ The probability, that sample PRIS418 is *C. pseudophrygia* is over 90%.
 
 
 
+
+
+\newpage
 
 # Further reading
 

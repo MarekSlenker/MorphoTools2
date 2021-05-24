@@ -1,4 +1,4 @@
-#' Classificatory discriminant analysis
+#' @rdname classif.lda
 #' @export
 classif.qda <- function(object, crossval="indiv") {
 

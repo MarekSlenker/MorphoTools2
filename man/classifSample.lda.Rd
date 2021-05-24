@@ -1,6 +1,7 @@
 \name{classifSample.lda}
 \alias{classifSample.knn}
 \alias{classifSample.lda}
+\alias{classifSample.qda}
 
 \title{Classificatory Discriminant Analysis}
 
@@ -11,6 +12,8 @@ Linear discriminant function (\code{classif.lda}) or nonparametric k-nearest nei
 
 \usage{
 classifSample.lda(sampleData, trainingData)
+
+classifSample.qda(sampleData, trainingData)
 
 classifSample.knn(sampleData, trainingData, k)
 }
@@ -30,6 +33,8 @@ an object of class '\code{\link{classifdata}}'.
 
 \details{
 The \code{classifSample.lda} performs classification using linear discriminant function using the \code{lda} function from the package \code{MASS}. Nonparametric classification method \code{classifSample.knn} (k-nearest neighbours) is performed using the \code{knn} functions from the package \code{class}.
+
+\code{classif.qda?????}
 
 The \code{classifSample} functions are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applied to the specific sample (set).
 }

@@ -22,9 +22,9 @@
 \contentsline {section}{9. Canonical discriminant analysis (CDA)}{27}{section*.23}%
 \contentsline {subsubsection}{Passive prediction of samples.}{35}{section*.24}%
 \contentsline {section}{10. Classificatory discriminant analysis}{36}{section*.25}%
-\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{37}{section*.26}%
-\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{38}{section*.27}%
-\contentsline {subsection}{10.3 k-nearest neighbour classificatory DA}{38}{section*.28}%
-\contentsline {subsection}{10.4 Classification of sample based on an independent training set.}{39}{section*.29}%
-\contentsline {section}{Further reading}{40}{section*.30}%
-\contentsline {section}{References}{41}{section*.31}%
+\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{38}{section*.26}%
+\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{40}{section*.27}%
+\contentsline {subsection}{10.3 k-nearest neighbour classificatory DA}{40}{section*.28}%
+\contentsline {subsection}{10.4 Classification of sample based on an independent training set.}{41}{section*.29}%
+\contentsline {section}{Further reading}{42}{section*.30}%
+\contentsline {section}{References}{43}{section*.31}%

@@ -1,4 +1,4 @@
-#' Classificatory discriminant analysis
+#' @rdname classifSample.lda
 #' @export
 classifSample.qda <- function(sampleData, trainingData) {
 
