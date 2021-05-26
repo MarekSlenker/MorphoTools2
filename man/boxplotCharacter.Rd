@@ -16,7 +16,7 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
       horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
 }
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{character}{a morphological character used to plot boxplot.}
 

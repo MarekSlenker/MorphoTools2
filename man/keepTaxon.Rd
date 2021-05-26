@@ -20,7 +20,7 @@ keepCharacter(object, characterName)
 
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{taxonName}{vector of taxa to be kept.}
 
@@ -35,7 +35,7 @@ keepCharacter(object, characterName)
 }
 
 \value{
-an object of class '\code{\link{morphodata}}'
+an object of class \code{\link{morphodata}}
 }
 
 \description{

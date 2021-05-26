@@ -4,7 +4,7 @@
 \title{Class pcoadata}
 
 \description{
-The pcoadata class is designed for storing results of Principal coordinates analysis (PCoA).}
+The \code{pcoadata} class is designed for storing results of Principal coordinates analysis (PCoA).}
 
 \format{Class \code{pcoadata}.
 \describe{

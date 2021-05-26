@@ -12,7 +12,7 @@ missingCharactersTable(object, level)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{level}{level of grouping, one of the following: \code{"taxon"}, populations (\code{"pop"}), or individuals (\code{"indiv"})
 }

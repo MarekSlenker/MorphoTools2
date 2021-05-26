@@ -4,7 +4,7 @@
 \title{Class pcadata}
 
 \description{
-The pcadata class is designed for storing results of Principal component analysis (PCA).}
+The \code{pcadata} class is designed for storing results of Principal component analysis (PCA).}
 
 \format{Class \code{pcadata}.
 \describe{

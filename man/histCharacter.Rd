@@ -12,7 +12,7 @@ histAll(object, folderName = "histograms", taxon = levels(object$Taxon), histogr
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{character}{a morphological character used to plot histogram.}
 

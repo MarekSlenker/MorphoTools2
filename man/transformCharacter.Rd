@@ -11,7 +11,7 @@ This function transforms morphological characters by applying another function p
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{character}{a morphological character that should be transformed.}
 
@@ -31,7 +31,6 @@ data(centaurea)
 
 # For a right-skewed (positive) distribution can be used:
 # Logarithmic transformation
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
 cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log10(x+1))
 # Square root transformation

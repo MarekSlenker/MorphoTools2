@@ -11,7 +11,7 @@ qqnormAll(object, folderName = "qqnormPlots", taxon = levels(object$Taxon),
 
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{character}{a morphological character used to plot Q-Q plot.}
 

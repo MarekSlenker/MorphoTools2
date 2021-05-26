@@ -7,7 +7,7 @@ characters(object)
 
 \arguments{
 
-\item{object}{an object of class '\code{\link{morphodata}}', '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}, \code{\link{pcadata}} or \code{\link{cdadata}}.}
 
 }
 

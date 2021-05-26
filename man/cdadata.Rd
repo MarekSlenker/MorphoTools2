@@ -4,7 +4,7 @@
 \title{Class Cdadata}
 
 \description{
-The cdadata class is designed for storing results of Canonical discriminant analysis.}
+The \code{cdadata} class is designed for storing results of Canonical discriminant analysis.}
 
 \format{Class \code{cdadata}.
 \describe{

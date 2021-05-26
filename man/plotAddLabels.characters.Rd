@@ -9,7 +9,7 @@ plotAddLabels.characters(result, labels = characters(result), include = T,
 }
 \arguments{
 
-\item{result}{an object of class '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
+\item{result}{an object of class \code{\link{pcadata}} or \code{\link{cdadata}}.}
 \item{labels}{a vector of label names, which should be included / excluded from plotting, see \code{include}.}
 \item{include}{logical, specify if labels in \code{labels} argument should be plotted or excluded from plotting.}
 \item{axes}{x, y axes of plot.}

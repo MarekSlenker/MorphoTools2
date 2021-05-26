@@ -3,9 +3,9 @@ title: \vspace{+2.0cm} MorphoTools2 version 1.0.0 tutorial \vspace{+2.0cm}
 author: |
   | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
   | with contribution from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
-  | *https://github.com/MarekSlenker/MorphoTools2*
   | \vspace*{0.7pc}
-date: "Date: Jun 2021"
+  | *https://github.com/MarekSlenker/MorphoTools2*
+date: 'Date: Jun 2021'
 output:
   pdf_document: default
 vignette: |
@@ -366,7 +366,6 @@ exportRes(descr_tax, file = "clipboard")
 exportRes(descr_tax, file = "descr_tax.txt")
 ```
 
-**KAROL:  toto sme vkladam**
 Please note, that some of the following statistical analyses requires that no character can be invariant in any taxon. If it does, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the whole character.  
 
 ## 3.6 Correlations of characters
@@ -739,7 +738,7 @@ options(max.print = 60)
 
 The Canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
 
-**KAROL: TUTU TO PISEM VSEOBECNE, lebo neskor sa k tomu vraciame pri classif DA**  
+
 Discriminant analyses (in general) have requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
 
 The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the Canonical discriminant analysis finds n-1 canonical axes, where n is a number of groups (taxa). If two groups are analyzed, only a single axis is computed and the sample scores are displayed as a histogram.  
@@ -875,10 +874,10 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results than indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix()` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 
-As stated above, discriminant analyses have some requirements: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects. Canonical DA works reasonably well even if some of these requirements were violated, but Linear and Quadratic classificatory DAs are more strict in this respect (**KAROL, to o CDA je OK???**), which is reflected by warning or error messages.  
+As stated above, discriminant analyses have some requirements: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects. Canonical DA works reasonably well even if some of these requirements were violated, but Linear and Quadratic classificatory DAs are more strict in this respect, which is reflected by warning or error messages (rank deficiency).  
 
 To fulfil these requirements, only a subset of characters will be used. 
-Linearly independent characters were identified by Stepwise discriminant analysis (see above). Invariant characters within taxon can be identified by `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the character as a whole.  
+Linearly independent characters will be identified by Stepwise discriminant analysis, invariant characters within taxon by `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the character as a whole. A subset includes all characters identified as most suitable for taxonomic delimitation by PCA and CDA analyses.
 
 ```{r include=F}
 options(max.print = 460)
@@ -892,17 +891,20 @@ partialCentaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW
 
 descrTaxon(partialCentaurea, format = "$SD")
 
-partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] = 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] = 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] = 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] =
+             partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] + 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] =
+             partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] + 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] =
+             partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] + 0.000001
 ```
 
 
-If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. Decision is based on the homogeneity of the within-group covariance matrices (tested by Box's M-test; `BoxMTest()`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
-Nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
+If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. A decision is based on the homogeneity of the within-group covariance matrices (tested by Box's M-test; `BoxMTest()`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
+The nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
 
 ```{r echo = TRUE, eval=TRUE}
-BoxMTest(partialCentaurea)
+boxMTest(partialCentaurea)
 
 ```
 
@@ -914,34 +916,13 @@ The Box’s M test indicated that there is a significant difference in the covar
 ## 10.1 Linear discriminant analysis (LDA)
 
 
-
+Linear discriminant analysis can be calculated by `classif.lda()` function. If collinear variables are present, a warning message is reported. A problem of multicollinearity is not covered in this tutorial, but note if the classification itself is the only thing that matters, a warning can be ignored.
 
 
 ```{r echo = TRUE, eval=TRUE}
 classifRes.lda = classif.lda(partialCentaurea)
-
 ```
 
-
-
-ak cheme len vysledok, je to OK
-
-
-EFEKT lda variables are collinear  - no ze je ich tam vela, a nie je jasny jednoznacny prispevok vybratych znakov. lepsi je mensi model
-
-More importantly, it makes the estimated coefficients impossible to interpret. If an increase in X1, say, is associated with an decrease in X2 and they both increase variable Y, every change in X1 will be compensated by a change in X2 and you will underestimate the effect of X1 on Y. In LDA, you would underestimate the effect of X1 on the classification.
-
-If all you care for is the classification per se, and that after training your model on half of the data and testing it on the other half you get 85-95% accuracy I'd say it is fine.
-
-
-This suggests just what the error message says: some of your variables are collinear. In other words, the elements of one vector are a linear function of the elements of another, such as
-0, 1, 2, 3
-3, 5, 7, 9
-In this case, LDA can't differentiate their influences on the rest of the world.
-
-
-
-The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
 
 
 
@@ -951,16 +932,7 @@ classif.matrix(classifRes.lda, level = "taxon")
 classif.matrix(classifRes.lda, level = "pop")
 ```
 
-The deta## Coefficients of linear discriminants:
-##                     LD1       LD2
-## Sepal.Length  0.5081196 -0.925690
-## Sepal.Width   1.9631006 -1.206187
-## Petal.Length -2.1214689  1.868896
-## Petal.Width  -2.9806917 -3.850355
-
-
-
-iled classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
+The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
 
 
 The results can be exported to the clipboard or file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
@@ -975,15 +947,18 @@ exportRes(object = classif_lda,
 
 ## 10.2 Quadratic discriminant analysis (LDA)
 
-&nbsp;   
-&nbsp;  
-does not assume equal covariance matrices amongst the groups
 
-Well, qda assumes real values (and not factors) in the explanatory 
-variables. If you think it makes sense to ignore this assumption (and I 
-doubt it makes sense), then the error message tells you there is a rank 
-deficiency, i.e. some variables might be collinear.
-Hence at least one of the covariance matrices cannot be inverted.
+Quadratic DA does not assume equal covariance matrices among the groups and can be calculated by `classif.qda()` function.
+
+
+```{r echo = TRUE, eval=TRUE}
+classifRes.qda = classif.qda(partialCentaurea)
+
+
+classif.matrix(classifRes.qda, level = "taxon")
+
+```
+
 
 
 ## 10.3 k-nearest neighbour classificatory DA
@@ -1012,7 +987,7 @@ knn.select<-function(object, crossval="indiv"){
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 
-  cat("\nThe highest number of correct classifications is at k = 15)\n")
+  cat("\nThe highest number of correct classifications is at k = 15\n")
 }
 ```
 
@@ -1022,7 +997,7 @@ knn.select<-function(object, crossval="indiv"){
 knn.select(partialCentaurea, crossval = "pop")
 ```
 
-The highest number of correct classifications is at k = 12, thus we set `k = 15` in the `classif.knn()` function (to classify individual according its 12 nearest neighbours).
+The highest number of correct classifications is at k = 15, thus we set `k = 15` in the `classif.knn()` function (to classify individual according its 15 nearest neighbours).
 
 ```{r echo = TRUE, eval=TRUE}
 classifRes.knn = classif.knn(partialCentaurea, crossval = "pop", k = 15)
@@ -1041,26 +1016,25 @@ exportRes(popClassifMatrix, file = "clipboard")
 
 ## 10.4 Classification of sample based on an independent training set.
 
-
- `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()` `classifSample.qda()`
-
-
-
-The another functions, `classifSample.lda()` and `classifSample.knn()` are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applied to the specific sample (set).  
+The another functions, `classifSample.lda()`, `classifSample.qda()` and `classifSample.knn()` are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applied to the specific sample (set).  
 
 &nbsp;  
 
-Let's remove population PRIS and pretend that sample PRIS418 is a type herbarium specimen of *Centaurea pseudophrygia* and we want to show its similarity with other populations of the species (typically, we have only morphology for old herbarium collections while we have other data for recently studied populations – but to assess their taxonomic identity, we should compare them with types ). To classify PRIS418, run the following code:
+Let's remove population LES and pretend that sample LES1116 is a type herbarium specimen of *Centaurea stenolepis* and we want to show its similarity with other populations of the species (typically, we have only morphology for old herbarium collections while we have other data for recently studied populations – but to assess their taxonomic identity, we should compare them with types ). To classify LES1116, run the following code:
 
 ```{r echo = TRUE, eval=TRUE}
-trainingSet = deletePopulation(partialCentaurea, populationName = "PRIS")
-typeSpecimen = keepSample(partialCentaurea, "PRIS418")
+trainingSet = deletePopulation(partialCentaurea, populationName = "LES")
+typeSpecimen = keepSample(partialCentaurea, "LES1116")
 
 classifSample.lda(typeSpecimen, trainingSet)
 
+classifSample.qda(typeSpecimen, trainingSet)
+
+classifSample.knn(typeSpecimen, trainingSet, k = 4)
+
 ```
 
-The probability, that sample PRIS418 is *C. pseudophrygia* is over 90%. 
+The probability, that sample LES1116 is *C. stenolepis* is over 90%. 
 
 
 
@@ -1085,39 +1059,38 @@ For a detailed description of used methods see:
 
 Selection of papers employing the methods of multivariate morphometrics:
 
-**Lihová J, Kudoh H, Marhold K. (2010).** Morphometric studies of polyploid *Cardamine* species (Brassicaceae) from Japan: solving a long-standing taxonomic and nomenclatural controversy. *Australian Systematic Botany* 23, 94-111. doi: 10.1071/sb09038
+**Lihová J., Kudoh H., Marhold K. (2010).** Morphometric studies of polyploid *Cardamine* species (Brassicaceae) from Japan: solving a long-standing taxonomic and nomenclatural controversy. *Australian Systematic Botany* 23, 94-111. doi: 10.1071/sb09038
 
-**Melichárková A, Španiel S, Marhold K, Hurdu BI, Drescher A, Zozomová-Lihová J. (2019)**. Diversification and independent polyploid origins in the disjunct species *Alyssum repens* from the Southeastern Alps and the Carpathians. *American Journal of Botany* 106, 1499-1518. doi: 10.1002/ajb2.1370
+**Melichárková A., Španiel S., Marhold K., Hurdu B.I., Drescher A., Zozomová-Lihová J. (2019)**. Diversification and independent polyploid origins in the disjunct species *Alyssum repens* from the Southeastern Alps and the Carpathians. *American Journal of Botany* 106, 1499-1518. doi: 10.1002/ajb2.1370
 
-**Skokanová K, Hodálová I, Mereďa P, Slovák M, Kučera, J. (2019)**. The *Cyanus tuberosus* group (Asteraceae) in the Balkans: biological entities require correct names. *Plant Systematics and Evolution* 305, 569–596. doi: 10.1007/s00606-019-01576-4
+**Skokanová K., Hodálová I., Mereďa P., Slovák M., Kučera, J. (2019)**. The *Cyanus tuberosus* group (Asteraceae) in the Balkans: biological entities require correct names. *Plant Systematics and Evolution* 305, 569–596. doi: 10.1007/s00606-019-01576-4
 
-**Šlenker M, Zozomová-Lihová J, Mandáková T, Kudoh H, Zhao Y, Soejima A, et al. (2018)**. Morphology and genome size of the widespread weed *Cardamine occulta*: how it differs from cleistogamic *C. kokaiensis* and other closely related taxa in Europe and Asia. *Botanical Journal of the Linnean Society* 187, 456-482. doi: 10.1093/botlinnean/boy030
+**Šlenker M., Zozomová-Lihová J., Mandáková T., Kudoh H., Zhao Y., Soejima A., et al. (2018)**. Morphology and genome size of the widespread weed *Cardamine occulta*: how it differs from cleistogamic *C. kokaiensis* and other closely related taxa in Europe and Asia. *Botanical Journal of the Linnean Society* 187, 456-482. doi: 10.1093/botlinnean/boy030
 
-**Španiel S, Marhold K, Passalacqua NG, Zozomová-Lihová J. (2011)**. Intricate variation patterns in the diploid-polyploid complex of *Alyssum montanum-A. repens* (Brassicaceae) in the Apennine Peninsula: Evidence for long-term persistence and diversification. *American Journal of Botany* 98, 1887-1904. doi: 10.3732/ajb.1100147
+**Španiel S., Marhold K., Passalacqua N.G., Zozomová-Lihová J. (2011)**. Intricate variation patterns in the diploid-polyploid complex of *Alyssum montanum-A. repens* (Brassicaceae) in the Apennine Peninsula: Evidence for long-term persistence and diversification. *American Journal of Botany* 98, 1887-1904. doi: 10.3732/ajb.1100147
 
-**Šrámková G, Kolář F, Záveská E, Lučanová M, Španiel S, Kolník M, et al. (2019)**. Phylogeography and taxonomic reassessment of *Arabidopsis halleri* - a montane species from Central Europe. *Plant Systematics and Evolution* 305, 885-898. doi: 10.1007/s00606-019-01625-y
+**Šrámková G., Kolář F., Záveská E., Lučanová M., Španiel S., Kolník M., et al. (2019)**. Phylogeography and taxonomic reassessment of *Arabidopsis halleri* - a montane species from Central Europe. *Plant Systematics and Evolution* 305, 885-898. doi: 10.1007/s00606-019-01625-y
 
 
 
 
 # References
 
-**Friendly M, Fox J. (2020)**. candisc: Visualizing Generalized Canonical Discriminant and Canonical
-  Correlation Analysis. R package version 0.8-3. https://CRAN.R-project.org/package=candisc
+**Friendly M., Fox J. (2020)**. candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis. R package version 0.8-3. https://CRAN.R-project.org/package=candisc
 
-**Klecka WR. (1980)**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
+**Klecka W.R. (1980)**. *Discriminant analysis (No. 19)*. Sage University Paper Series on Quantitative Applications in the Social Sciences 07-019.
 
-**Koutecký P. (2007)**. Morphological and ploidy level variation of Centaurea phrygia agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica*, 42, 77-102.
+**Koutecký P. (2007)**. Morphological and ploidy level variation of *Centaurea phrygia* agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. *Folia Geobotanica* 42, 77-102.
 
-**Koutecký P. (2015)**. MorphoTools: a set of R functions for morphometric analysis. *Plant Systematics and Evolution*, 301, 1115-1121.
+**Koutecký P. (2015)**. MorphoTools: a set of R functions for morphometric analysis. *Plant Systematics and Evolution* 301, 1115-1121.
 
-**Koutecký P, Štěpánek J, Baďurová T. (2012)**. Differentiation between diploid and tetraploid Centaurea phrygia: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
+**Koutecký P., Štěpánek J., Baďurová T. (2012)**. Differentiation between diploid and tetraploid *Centaurea phrygia*: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
 
 **Shlens, J. (2014)**. A tutorial on principal component analysis. *ArXiv* preprint arXiv:1404.1100
 
-**Thorpe RS. (1976)**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* 51, 407–425.
+**Thorpe R.S. (1976)**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* 51, 407–425.
 
-**Venables WN, Ripley BD. (2002)**. *Modern Applied Statistics with S, Fourth edition*. New York: Springer. 
+**Venables W.N., Ripley B.D. (2002)**. *Modern Applied Statistics with S, Fourth edition*. New York: Springer. 
 
 
 

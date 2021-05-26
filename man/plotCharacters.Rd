@@ -15,7 +15,7 @@ plotCharacters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
 
 
 \arguments{
-\item{result}{an object of class '\code{\link{pcadata}}' or '\code{\link{cdadata}}'.}
+\item{result}{an object of class \code{\link{pcadata}} or \code{\link{cdadata}}.}
 
 
 \item{axes}{x, y axes of plot.}
@@ -33,6 +33,11 @@ plotCharacters(result, axes = c(1, 2), xlab = NULL, ylab = NULL,
 
 \details{
 The distribution of samples in ordination space is driven by morphological characters. Each character has its own contribution to ordination axes. These contributions are visualised as arrows. The direction and length of the arrows characterize the impact of the morphological characters on the separation of objects along a given axis. This information is stored in eigenvectors or total canonical structure coefficients for Principal component analysis of Canonical discriminant analysis, respectively.
+
+The \code{plotCharacters} method is not applicable to results of \code{\link{pcoa.calc}} and \code{\link{nmds.calc}} analyses, as the influence of original characters on new axes can not be directly derived. Variation explained by individual axes is unknown.
+
+
+
 }
 
 

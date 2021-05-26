@@ -11,9 +11,9 @@ shapiroWilkTest(object, p.value = 0.05)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
-\item{p.value}{a number or \code{NA} are acceptable. In the case of number, the output will be formatted as "normally distributed" or "NOT normally distributed". In the case of \code{NA}, exact p-values will be returned.}
+\item{p.value}{a number or \code{NA} are acceptable. In the case of number, the output will be formatted as \code{"normally distributed"} or \code{"NOT normally distributed"}. In the case of \code{NA}, exact p-values will be returned.}
 }
 
 

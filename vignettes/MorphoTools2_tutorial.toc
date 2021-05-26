@@ -14,17 +14,17 @@
 \contentsline {subsection}{3.8 Missing data}{13}{section*.15}%
 \contentsline {subsubsection}{3.8.1 Removing items}{14}{section*.16}%
 \contentsline {subsubsection}{3.8.2 Replace missing values}{14}{section*.17}%
-\contentsline {section}{4. Hierarchical clustering}{14}{section*.18}%
-\contentsline {section}{5. Principal component analysis (PCA)}{15}{section*.19}%
+\contentsline {section}{4. Hierarchical clustering}{15}{section*.18}%
+\contentsline {section}{5. Principal component analysis (PCA)}{16}{section*.19}%
 \contentsline {section}{6. Principal coordinate analysis (PCoA)}{24}{section*.20}%
-\contentsline {section}{7. Non-metric multidimensional scaling (NMDS)}{25}{section*.21}%
-\contentsline {section}{8. Stepwise discriminant analysis}{26}{section*.22}%
-\contentsline {section}{9. Canonical discriminant analysis (CDA)}{27}{section*.23}%
-\contentsline {subsubsection}{Passive prediction of samples.}{35}{section*.24}%
-\contentsline {section}{10. Classificatory discriminant analysis}{36}{section*.25}%
-\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{38}{section*.26}%
-\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{40}{section*.27}%
-\contentsline {subsection}{10.3 k-nearest neighbour classificatory DA}{40}{section*.28}%
-\contentsline {subsection}{10.4 Classification of sample based on an independent training set.}{41}{section*.29}%
-\contentsline {section}{Further reading}{42}{section*.30}%
-\contentsline {section}{References}{43}{section*.31}%
+\contentsline {section}{7. Non-metric multidimensional scaling (NMDS)}{26}{section*.21}%
+\contentsline {section}{8. Stepwise discriminant analysis}{28}{section*.22}%
+\contentsline {section}{9. Canonical discriminant analysis (CDA)}{29}{section*.23}%
+\contentsline {subsubsection}{Passive prediction of samples.}{36}{section*.24}%
+\contentsline {section}{10. Classificatory discriminant analysis}{38}{section*.25}%
+\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{40}{section*.26}%
+\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{41}{section*.27}%
+\contentsline {subsection}{10.3 k-nearest neighbour classificatory DA}{42}{section*.28}%
+\contentsline {subsection}{10.4 Classification of sample based on an independent training set.}{43}{section*.29}%
+\contentsline {section}{Further reading}{44}{section*.30}%
+\contentsline {section}{References}{44}{section*.31}%

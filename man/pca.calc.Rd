@@ -4,7 +4,7 @@
 \title{Principal Component Analysis}
 
 \description{
-This function performs Principal Component Analysis.
+This function performs Principal component analysis.
 }
 
 \usage{
@@ -12,11 +12,11 @@ pca.calc(object)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 }
 
 \value{
-an object of class '\code{\link{pcadata}}'.
+an object of class \code{\link{pcadata}}.
 }
 
 

@@ -4,7 +4,7 @@
 \title{Class classifdata}
 
 \description{
-The classifdata class is designed for storing results of Classificatory discriminant analysis.}
+The \code{classifdata} class is designed for storing results of Classificatory discriminant analysis.}
 
 \format{Class \code{classifdata}.
 \describe{
@@ -14,7 +14,7 @@ The classifdata class is designed for storing results of Classificatory discrimi
 
 	\item{classif}{classification from discriminant analysis.}
 
-	\item{prob}{posterior probabilities of classification into each taxon (if calculated by \code{\link{classif.lda}}),
+	\item{prob}{posterior probabilities of classification into each taxon (if calculated by \code{\link{classif.lda}} or \code{\link{classif.qda}}),
 	or proportion of the votes for the winning class (calculated by \code{\link{classif.knn}})}
 
 	\item{correct}{logical, correctness of classification.}

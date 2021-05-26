@@ -4,7 +4,7 @@
 \title{Class nmdsdata}
 
 \description{
-The nmdsdata class is designed for storing results of Non-metric multidimensional scaling (NMDS).}
+The \code{nmdsdata} class is designed for storing results of Non-metric multidimensional scaling (NMDS).}
 
 \format{Class \code{nmdsdata}.
 \describe{

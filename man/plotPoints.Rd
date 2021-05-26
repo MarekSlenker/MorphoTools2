@@ -5,7 +5,7 @@
 \title{The Default Scatterplot Function}
 
 \description{
-A generic function for plotting ordination scores stored in '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{nmdsdata}}', and '\code{\link{cdadata}}' objects.
+A generic function for plotting ordination scores stored in \code{\link{pcadata}}, \code{\link{pcoadata}}, \code{\link{nmdsdata}}, and \code{\link{cdadata}} objects.
 }
 
 \usage{
@@ -19,7 +19,7 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 \arguments{
 
-\item{result}{an object of class '\code{\link{pcadata}}', '\code{\link{pcoadata}}', '\code{\link{nmdsdata}}', or '\code{\link{cdadata}}'.}
+\item{result}{an object of class \code{\link{pcadata}}, \code{\link{pcoadata}}, \code{\link{nmdsdata}}, or \code{\link{cdadata}}.}
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
@@ -38,7 +38,7 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
 
 \details{
-This generic method holds separate implementations of plotting points for \code{\link{pcadata}}, \code{\link{pcoadata}}, '\code{\link{nmdsdata}}', and \code{\link{cdadata}} objects.
+This generic method holds separate implementations of plotting points for \code{\link{pcadata}}, \code{\link{pcoadata}}, \code{\link{nmdsdata}}, and \code{\link{cdadata}} objects.
 If only one axis exists, sample scores are displayed as a histogram.
 }
 

@@ -7,11 +7,12 @@ Hierarchical cluster analysis of objects.
 }
 
 \usage{
-clust(object, distMethod = "euclidean", clustMethod = "UPGMA", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL)
+clust(object, distMethod = "euclidean", clustMethod = "UPGMA", binaryChs = NULL,
+              nominalChs = NULL, ordinalChs = NULL)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 \item{distMethod}{the distance measure to be used. This must be one of: \code{"euclidean"} (default), \code{"manhattan"}, \code{"minkowski"}, \code{"jaccard"}, \code{"simpleMatching"}, or \code{"gower"}. See details.}
 \item{clustMethod}{the agglomeration method to be used: \code{"average"} (= \code{"UPGMA"}; default), \code{"complete"}, \code{"ward.D"} (= \code{"Ward"}), \code{"ward.D2"}, \code{"single"}, \code{"mcquitty"} (= \code{"WPGMA"}), \code{"median"} (= \code{"WPGMC"}) or \code{"centroid"} (= \code{"UPGMC"}). See \code{\link{hclust}} for details.}
 
@@ -23,7 +24,7 @@ clust(object, distMethod = "euclidean", clustMethod = "UPGMA", binaryChs = NULL,
 }
 
 \value{
-an object of class '\code{\link{hclust}}'
+an object of class \code{\link{hclust}}
 }
 
 \details{
@@ -47,18 +48,17 @@ plot(clustering.UPGMA, cex=0.6, frame.plot=TRUE, hang=-1,
 
 
 # using gower method
-
 data = list(
     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
     Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
     data = data.frame(
-      stemBranching = c(1, 1, 1, 0, 0, 0),   # binaryChs
-      petalColour = c(1, 1, 2, 3, 3, 3),     # nominalChs; 1=white, 2=red, 3=blue
-      leaves = c(1, 1, 1, 2, 2, 3),          # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
-      taste = c(2, 2, 2, 3, 1, 1),           # ordinal; 1=hot, 2=hotter, 3=hottest
-      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
-      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
+     stemBranching = c(1, 1, 1, 0, 0, 0),  # binaryChs
+     petalColour = c(1, 1, 2, 3, 3, 3),  # nominalChs; 1=white, 2=red, 3=blue
+     leaves = c(1,1,1,2,2,3), # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
+     taste = c(2, 2, 2, 3, 1, 1),   # ordinal; 1=hot, 2=hotter, 3=hottest
+     stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
+     leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
 )
 attr(data, "class") <- "morphodata"
 

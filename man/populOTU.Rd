@@ -5,10 +5,10 @@
 populOTU(object)
 }
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 }
 \value{
-an object of class '\code{\link{morphodata}}'
+an object of class \code{\link{morphodata}}
 }
 \description{
 This function calculates the average value for each character in each population, with the pairwise deletion of missing data.

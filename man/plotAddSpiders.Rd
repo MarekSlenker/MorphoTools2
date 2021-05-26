@@ -9,13 +9,12 @@ This function connects taxa's points with its centroids, thus forms a "spider" d
 
 \usage{
 
-plotAddSpiders(result, axes = c(1,2), col = "black",
-                lty = 1, lwd = 1, ...)
+plotAddSpiders(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...)
 
 }
 \arguments{
 
-\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, \code{\link{nmds.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{col}{the colors for labels.}
 \item{lty}{the line type. Line types can either be specified as one of following types: 0=blank, 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, 5=longdash, 6=twodash.}

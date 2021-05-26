@@ -4,16 +4,17 @@
 \title{Principal coordinates analysis (PCoA)}
 
 \description{
-This function performs Principal Coordinates Analysis.
+This function performs Principal coordinates analysis.
 }
 
 
 \usage{
-pcoa.calc(object, distMethod = "euclidean", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL)
+pcoa.calc(object, distMethod = "euclidean", binaryChs = NULL,
+               nominalChs = NULL, ordinalChs = NULL)
 }
 
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 \item{distMethod}{the distance measure to be used. This must be one of: \code{"euclidean"}, \code{"manhattan"}, \code{"minkowski"}, \code{"jaccard"}, \code{"simpleMatching"}, or \code{"gower"}. See details.}
 \item{binaryChs, nominalChs, ordinalChs}{names of categorical ordinal, categorical nominal (multistate), and binary characters. Needed for Gower's dissimilarity coefficient only, see details.}
 }
@@ -29,7 +30,7 @@ The Gower's dissimilarity coefficient can handle different types of variables. C
 
 
 \value{
-an object of class '\code{\link{pcoadata}}'.
+an object of class \code{\link{pcoadata}}.
 }
 
 
@@ -47,22 +48,22 @@ plotPoints(pcoRes, axes = c(1,2), col = c("red","green","blue","black"),
 
 
 # using gower method
-
 data = list(
     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
     Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
     data = data.frame(
-      stemBranching = c(1, 1, 1, 0, 0, 0),   # binaryChs
-      petalColour = c(1, 1, 2, 3, 3, 3),     # nominalChs; 1=white, 2=red, 3=blue
-      leaves = c(1, 1, 1, 2, 2, 3),          # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
-      taste = c(2, 2, 2, 3, 1, 1),           # ordinal; 1=hot, 2=hotter, 3=hottest
-      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
-      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
+     stemBranching = c(1, 1, 1, 0, 0, 0),  # binaryChs
+     petalColour = c(1, 1, 2, 3, 3, 3),  # nominalChs; 1=white, 2=red, 3=blue
+     leaves = c(1,1,1,2,2,3), # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
+     taste = c(2, 2, 2, 3, 1, 1),   # ordinal; 1=hot, 2=hotter, 3=hottest
+     stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
+     leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
 )
 attr(data, "class") <- "morphodata"
 
-pcoaGower = pcoa.calc(data, distMethod = "gower",binaryChs = c("stemBranching"), nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
+pcoaGower = pcoa.calc(data, distMethod = "gower",binaryChs = c("stemBranching"),
+                      nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
 
 plotPoints(pcoaGower, axes = c(1,2), col = c("red","green"),
            pch=c(20,17), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")

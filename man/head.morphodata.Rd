@@ -21,7 +21,7 @@ Returns the first or last parts of a object.
 }
 
 \arguments{
-\item{x}{an object of class '\code{\link{morphodata}}' or '\code{\link{classifdata}}'.}
+\item{x}{an object of class \code{\link{morphodata}} or \code{\link{classifdata}}.}
 
 \item{n}{number of rows to print.}
 

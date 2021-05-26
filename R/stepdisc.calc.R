@@ -29,7 +29,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   p = ncol(X)                 # number of samples
   enter.Fstat = enter.PrF = enter.R2 = numeric(p)
   for(j in 1:p){
-    enterSum = summary(aov(X[,j] ~ grouping))
+    enterSum = summary(stats::aov(X[,j] ~ grouping))
     enter.Fstat[j] = enterSum[[1]]$`F value`[1]
     enter.PrF[j] = enterSum[[1]]$`Pr(>F)`[1]
     enter.R2[j] = (enterSum[[1]]$`Sum Sq`[1]/sum(enterSum[[1]]$`Sum Sq`))
@@ -64,7 +64,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
     enter.Fstat = enter.PrF = enter.R2 = numeric(p)
     # ---NAJDI NAJMENSIE F to ENTER----------------MK------- #
     for(j in 1:p){
-      enterSum = summary(aov(X[,j] ~ X.mod+grouping))
+      enterSum = summary(stats::aov(X[,j] ~ X.mod+grouping))
       if ((!is.null(enterSum[[1]]$`F value`[2])) && (!is.na(enterSum[[1]]$`F value`[2]))) {  # model is not saturated
         enter.Fstat[j] = enterSum[[1]]$`F value`[2]
         enter.PrF[j] = enterSum[[1]]$`Pr(>F)`[2]
@@ -103,7 +103,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
       rem.Fstat = rem.PrF = rem.R2 = numeric(ncol(X.mod))
 
       for(j in 1:ncol(X.mod)){
-        remSum = summary(aov(X.mod[,j] ~ X.mod[,-j]+grouping))
+        remSum = summary(stats::aov(X.mod[,j] ~ X.mod[,-j]+grouping))
 
         rem.Fstat[j] = remSum[[1]]$`F value`[2]
         rem.PrF[j] = remSum[[1]]$`Pr(>F)`[2]
@@ -134,9 +134,8 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
   if(!exists("X.mod")) stop("unable to perform required calculations, perhaps not enough observations?")
 
-  resDat = data.frame("Entered" = Entered, "Removed" = Removed,
-                      "Partial R-Square" = R2,
-                      "F Value" = Fstat, "Pr \> F" = pwert)
+  resDat = data.frame(Entered, Removed, R2, Fstat, pwert)
+  colnames(resDat) = c("Entered", "Removed", "Partial R-Square", "F Value", "Pr > F")
 
   print(resDat)
   cat("\nselected characters:\n")
@@ -145,14 +144,6 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   #cat("\n")
   #cat(paste("\"", paste(Entered[Entered != ""], collapse = "\", \""), "\"\n"), sep = "")
 }
-
-
-
-
-
-
-
-
 
 
 

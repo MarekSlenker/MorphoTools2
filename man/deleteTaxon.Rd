@@ -15,7 +15,7 @@ deleteSample(object, sampleName = NULL, missingPercentage = NA)
 deleteCharacter(object, characterName)
 }
 \arguments{
-\item{object}{object of class '\code{\link{morphodata}}'.}
+\item{object}{object of class \code{\link{morphodata}}.}
 
 \item{taxonName}{vector of taxa to be removed.}
 
@@ -30,7 +30,7 @@ deleteCharacter(object, characterName)
 
 
 \value{
-an object of class '\code{\link{morphodata}}'
+an object of class \code{\link{morphodata}}
 }
 
 \description{

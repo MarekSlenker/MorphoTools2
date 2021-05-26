@@ -1,7 +1,7 @@
 \name{plotAddEllipses}
 \alias{plotAddEllipses}
 
-\title{Add Confidence Ellipses to a Plot}
+\title{Add Prediction Ellipses to a Plot}
 
 \description{
 This function draws prediction ellipses around taxa.
@@ -15,7 +15,7 @@ plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 }
 \arguments{
 
-\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, '\code{\link{nmds.calc}}', or \code{\link{cda.calc}}, has to by plotted at first.}
+\item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, \code{\link{nmds.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{probability}{probability, that a new independent observation from the same population will fall in that ellipse.}
 \item{col}{the colors for labels.}
@@ -30,7 +30,7 @@ Prediction ellipses with given \code{probability} define the regions where will 
 }
 
 \references{
-\strong{Friendly, M., Monette, G. & Fox, J. (2013)}. Elliptical insights: understanding statistical methods through elliptical geometry. \emph{Statistical Science} \strong{28}: 1-39.
+\strong{Friendly M., Monette G., Fox J. (2013)}. Elliptical insights: understanding statistical methods through elliptical geometry. \emph{Statistical Science} 28, 1-39.
 
 }
 

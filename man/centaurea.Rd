@@ -19,5 +19,5 @@ The sample data include part of data sets from previously published studies by K
 \keyword{datasets}
 
 \references{
-\strong{Koutecký, P. (2007)}. Morphological and ploidy level variation of \emph{Centaurea phrygia} agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. \emph{Folia Geobotanica} \strong{42}: 77-102.\cr
-\strong{Koutecký, P., Štěpánek, J. & Baďurová, T. (2012)}. Differentiation between diploid and tetraploid \emph{Centaurea phrygia}: mating barriers, morphology and geographic distribution. \emph{Preslia} \strong{84}: 1-32.}
+\strong{Koutecký P. (2007)}. Morphological and ploidy level variation of \emph{Centaurea phrygia} agg.(Asteraceae) in the Czech Republic, Slovakia and Ukraine. \emph{Folia Geobotanica} 42, 77-102.\cr
+\strong{Koutecký P., Štěpánek J., Baďurová T. (2012)}. Differentiation between diploid and tetraploid \emph{Centaurea phrygia}: mating barriers, morphology and geographic distribution. \emph{Preslia} 84, 1-32.}

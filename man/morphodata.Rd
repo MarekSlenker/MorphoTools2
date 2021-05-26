@@ -4,7 +4,7 @@
 \title{Class morphodata}
 
 \description{
-The morphodata class is designed for storing morphological data of individuals, their IDs and it's appertaining to population and taxon.
+The \code{morphodata} class is designed for storing morphological data of individuals, their IDs and it's appertaining to population and taxon.
 }
 
 \format{Class \code{morphodata}.

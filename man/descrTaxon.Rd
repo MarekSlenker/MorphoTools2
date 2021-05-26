@@ -13,7 +13,7 @@ descrPopulation(object, format = NULL, decimalPlaces = 3)
 descrAll(object, format = NULL, decimalPlaces = 3)
 }
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{format}{form to which will be formatted descriptive characters. See Details.}
 
@@ -28,7 +28,7 @@ The following statistics are computed: number of observations, mean, standard de
  (minimum), 5\%, 25\% (lower quartile), 50\% (median), 75\% (upper quartile), 95\% and 100\% (maximum).
 
 The \code{format} argument brings a handy way how to receive only what is wanted and in format what is desired.
-Otherways, if format remains NULL, output table contains all calculated descriptors.
+Otherways, if format remains \code{NULL}, output table contains all calculated descriptors.
 The format argument is a single string, where keywords will be replaced by particular values.
 
 Keywords: \code{"$MEAN"} = mean; \code{"$SD"} = standard deviation; \code{"$MIN"} = minimum; \code{"$5\%"} = 5th percentile;

@@ -4,7 +4,7 @@
 \title{Correlations of Characters}
 
 \description{
-The cormat function calculates the matrix of the correlation coefficients of the characters.
+The \code{cormat} function calculates the matrix of the correlation coefficients of the characters.
 }
 
 
@@ -14,7 +14,7 @@ cormat(object, method = "pearson")
 cormatSignifTest(object, method = "pearson", alternative = "two.sided")
 }
 \arguments{
-\item{object}{an object of class '\code{\link{morphodata}}'.}
+\item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{method}{a character string indicating which correlation coefficient is to be used for the test.
 One of \code{"pearson"} (default), or \code{"spearman"} can be applied.}
@@ -24,12 +24,12 @@ One of \code{"pearson"} (default), or \code{"spearman"} can be applied.}
 }
 
 \value{
-an object of class '\code{\link{data.frame}}'
+an object of class \code{\link{data.frame}}
 }
 
 \details{
 This function returns table with pairwise correlation coefficients for each pair of
-morphological characters. The results are formatted as data frames to allow export with the \code{\link{exportRes}} function.
+morphological characters. The result is formatted as a \code{data.frame} to allow export with the \code{\link{exportRes}} function.
 
 Significance tests are usually unnecessary for morphometric analysis. Anyway,
 if tests are needed, they can be computed using the \code{\link{cormatSignifTest}} function.

@@ -9,6 +9,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
   if (any(is.na(sampleData$data))) stop("NA values in 'sampleData'.", call. = FALSE)
   if (any(is.na(trainingData$data))) stop("NA values in 'trainingData'.", call. = FALSE)
 
+  if (missing(k)) stop("argument \"k\" is missing, with no default.", call. = FALSE)
 
   if (! all(colnames(sampleData$data) == colnames(trainingData$data)))
     stop("Characters of 'sampleData' and 'trainingData' are not the same.", call. = FALSE)
