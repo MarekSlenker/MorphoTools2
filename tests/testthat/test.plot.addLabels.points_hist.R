@@ -13,7 +13,7 @@ test_that("cda scatter - no labels allowed",  {
   cdaRes = cda.calc(morphoMockup)
 
   plotPoints(cdaRes)
-  expect_error(plotAddLabels.points(cdaRes), "Unable to plot labels for histogram")
+  expect_error(plotAddLabels.points(cdaRes), "unable to plot labels for histogram.")
 
   })
 

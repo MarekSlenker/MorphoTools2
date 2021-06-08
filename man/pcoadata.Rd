@@ -4,7 +4,7 @@
 \title{Class pcoadata}
 
 \description{
-The \code{pcoadata} class is designed for storing results of Principal coordinates analysis (PCoA).}
+The \code{pcoadata} class is designed for storing results of principal coordinates analysis (PCoA).}
 
 \format{Class \code{pcoadata}.
 \describe{
@@ -19,7 +19,7 @@ The \code{pcoadata} class is designed for storing results of Principal coordinat
 	\item{eigenValues}{eigenvalues of principal coordinates.}
 	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
 	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
-	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
 	\item{distMethod}{used distance measure.}
 	\item{rank}{number of possitive eigenvalues.}
 

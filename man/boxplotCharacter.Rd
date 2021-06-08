@@ -28,9 +28,9 @@ boxplotAll(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05
 
 \item{upperWhisker}{percentile to which the upper whisker is extended.}
 
-\item{col}{background color for the boxes.}
+\item{col}{background colour for the boxes.}
 
-\item{border}{color of outliers and the lines.}
+\item{border}{colour of outliers and the lines.}
 
 \item{frame}{logical, if \code{TRUE}, a 'frame' (box around the plot) is drawn.}
 
@@ -66,9 +66,9 @@ The \code{boxplotAll} function produces boxplots for each morphological characte
 \examples{
 data(centaurea)
 
-boxplotCharacter(centaurea, character= "ST", col = "orange", border = "red")
+boxplotCharacter(centaurea, character = "ST", col = "orange", border = "red")
 
-boxplotCharacter(centaurea, character= "ST", outliers = FALSE,
+boxplotCharacter(centaurea, character = "ST", outliers = FALSE,
           lowerWhisker = 0.1, upperWhisker = 0.9)
 
 boxplotCharacter(centaurea, "ST", varwidth = TRUE, notch = TRUE,

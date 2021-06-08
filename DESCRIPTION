@@ -15,8 +15,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Imports:
-    stats, utils, car, candisc, vegan, ade4, StatMatch, methods, heplots, MASS, class, ellipse, plot3D
-Suggests: 
-    testthat, knitr, rmarkdown
+Imports: ade4, candisc, car, class, ellipse, heplots, MASS, methods, plot3D, StatMatch, utils, vegan, stats
+Suggests: testthat, knitr, rmarkdown
 VignetteBuilder: knitr

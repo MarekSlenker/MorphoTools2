@@ -19,8 +19,7 @@ naMeanSubst <- function(object){
     object$data[popPositions,] = sapply(object$data[popPositions,], meansubst)
 
     if (any(is.na(object$data[popPositions,])))
-      warning("Unable to replace NAs in characters ", toString(colnames(object$data)[c(is.na(object$data[popPositions[1],]))]),
-      " in population ", pop, ". Probably all values of that character are NA.", call. = FALSE)
+      warning("Unable to replace NAs in characters ", toString(colnames(object$data)[c(is.na(object$data[popPositions[1],]))]), " in population ", pop, ". Probably all values of that character are NA.", call. = FALSE)
   }
   return(object)
 }

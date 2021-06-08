@@ -37,12 +37,12 @@ if tests are needed, they can be computed using the \code{\link{cormatSignifTest
 \examples{
 data(centaurea)
 
-correlations.p = cormat(centaurea, method="pearson")
-correlations.s = cormat(centaurea, method="spearman")
+correlations.p = cormat(centaurea, method = "pearson")
+correlations.s = cormat(centaurea, method = "spearman")
 
-exportRes(correlations.p, file="~/correlations.pearson.txt")
-exportRes(correlations.s, file="~/correlations.spearman.txt")
+# exportRes(correlations.p, file = "correlations.pearson.txt")
+# exportRes(correlations.s, file = "correlations.spearman.txt")
 
-correlations.p = cormatSignifTest(centaurea, method="pearson")
+correlations.p = cormatSignifTest(centaurea, method = "pearson")
 
 }

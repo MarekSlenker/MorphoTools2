@@ -4,7 +4,7 @@
 \title{Principal Component Analysis}
 
 \description{
-This function performs Principal component analysis.
+This function performs principal component analysis.
 }
 
 \usage{
@@ -34,7 +34,7 @@ pcaRes = pca.calc(centaurea)
 
 summary(pcaRes)
 
-plotPoints(pcaRes, axes = c(1,2), col = c("red","green","blue","black"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
+plotPoints(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
+  pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
 
 }

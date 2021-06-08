@@ -1,4 +1,4 @@
-#' Add legends to plot
+#' Add legend to plot
 #' @export
 plotAddLegend <- function(result, x = "topright", y = NULL, pch = 16, col = "black",
                            pt.bg = "white", pt.cex = cex, pt.lwd = 1, x.intersp = 1,

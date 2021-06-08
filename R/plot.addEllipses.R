@@ -54,7 +54,7 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
   # hist
   if (result$rank == 1) {
 
-    stop("The method plotAddEllipses() is not applicable to histogram.", call. = FALSE)
+    stop("the method plotAddEllipses() is not applicable to histogram.", call. = FALSE)
   }
 
   if (result$rank > 1)  {
@@ -73,7 +73,7 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
   result$col = .setValuesForVector(result$objects$Taxon, col)
 
   tt = sqrt(stats::qchisq(probability, 2)) # kvantil rozdelenia
-  if (is.infinite(tt)) stop(paste("Probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = FALSE)
+  if (is.infinite(tt)) stop(paste("probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = FALSE)
 
   for (taxon in levels(result$objects$Taxon)) {
     taxData = data.frame(result$objects$scores[which(taxon == result$objects$Taxon),  axes[1]],

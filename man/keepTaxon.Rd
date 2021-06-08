@@ -39,7 +39,7 @@ an object of class \code{\link{morphodata}}
 }
 
 \description{
-These functions keep only selected taxa, populations, samples or morphological characters in morphodata object. The samples can be kept by names using \code{sampleName} argument, or by the threshold. Each sample holding less or equal portion of missing data the desired threshold \code{missingPercentage} will be kept. Only one parameter can be specified in one run.
+These functions keep only selected taxa, populations, samples or morphological characters in \code{morphodata} object. The samples can be kept by names using \code{sampleName} argument, or by the threshold. Each sample holding less or equal portion of missing data than the desired threshold (\code{missingPercentage}) will be kept. Only one parameter can be specified in one run.
 }
 
 \examples{

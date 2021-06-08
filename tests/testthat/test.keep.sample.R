@@ -10,7 +10,7 @@ test_that("wrong input",  {
 
   expect_error(keepSample(data, sampleName = "ds", missingPercentage = 2), "Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs." )
 
-  expect_error(keepSample(data, sampleName = 2), "'missingPercentage' is not a string" )
+  expect_error(keepSample(data, sampleName = 2), "'sampleName' is not a string." )
 
   expect_error(keepSample(data, missingPercentage = "ds"), "'missingPercentage' is not numeric." )
 })

@@ -26,7 +26,7 @@ test_that("plotAddSpiders error input",  {
   expect_error(plotAddSpiders(cdaRes, axes = c(1,5)), "specified axes are out of bounds. Object has only 3 axes.")
 
   cdaRes = cda.calc(morphoMockup)
-  expect_error(plotAddSpiders(cdaRes), "The method plotAddSpiders() is not applicable to histogram.", fixed = TRUE)
+  expect_error(plotAddSpiders(cdaRes), "the method plotAddSpiders() is not applicable to histogram.", fixed = TRUE)
 
   pcaRes = pca.calc(centaurea)
   expect_error(plotAddEllipses(pcaRes, axes = 1), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)

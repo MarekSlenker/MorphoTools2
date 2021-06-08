@@ -38,7 +38,7 @@ plotAddLabels.points.nmdsdata <- function(result, labels = result$objects$ID, in
 plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, include = TRUE, axes = c(1,2), pos = NULL, offset = 0.5, cex = 1, col = NULL, ...) {
   # todo ak je rank 1, vyhod chybu  + testuj s rank 1
 
-  if (result$rank == 1){ stop("Unable to plot labels for histogram", call. = FALSE)  }
+  if (result$rank == 1){ stop("unable to plot labels for histogram.", call. = FALSE)  }
   else {
     .labels_points_internal(result, labels, include, axes, pos = pos, offset = offset, cex = cex, col = col, ...)
   }
@@ -57,7 +57,7 @@ plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, inc
   #skontroluj ci labels patria
   # check existence of CH
   for (lab in labels) {
-    if (! (lab %in% object$objects$ID)) stop(paste("label", lab , "does not exist"), call. = FALSE)
+    if (! (lab %in% object$objects$ID)) stop(paste("label", lab , "does not exist."), call. = FALSE)
   }
 
   labelsToPlot = which(unlist(lapply(object$objects$ID, as.character)) %in% labels)
@@ -72,7 +72,7 @@ plotAddLabels.points.cdadata <- function(result, labels = result$objects$ID, inc
   } else{
 
     if (length(labelsToPlot) == length(unlist(lapply(object$objects$ID, as.character))))
-        stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = FALSE)
+        stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels."), call. = FALSE)
 
     graphics::text(x = object$objects$scores[ ,axes[1]][-labelsToPlot], y = object$objects$scores[ ,axes[2]][-labelsToPlot],
          labels = object$objects$ID[-labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)

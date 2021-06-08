@@ -70,7 +70,17 @@ missingSamplesTable <- function(object, level) {
   )
 
 
-  missingTable = stats::aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2))
+  # missingTable = stats::aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2))
+
+
+  missingTable = data.frame(
+    stats::aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2)),
+    "missing.percentage" = stats::aggregate( apply(object$data, 1, function(x) mean(is.na(x))),  # MEAN
+                      aggLevel, function(x) round(mean(x), digits = 2))$x,
+    "numb.of.missing.values"= stats::aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
+                      aggLevel, sum)$x
+  )
+
 
   t = as.data.frame(table(aggLevel))
 

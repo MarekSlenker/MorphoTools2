@@ -4,7 +4,7 @@
 \title{Stepwise Discriminant Analysis}
 
 \description{
-This function perform Stepwise discriminant analysis.
+This function perform stepwise discriminant analysis.
 }
 
 
@@ -22,7 +22,7 @@ stepdisc.calc(object, F_to_enter = 0.15, F_to_stay = 0.15)
 
 
 \details{
-The \code{stepdisc.calc} function performs a stepwise discriminant analysis to select the "best" subset of the quantitative variables for use in discriminating among the groups (taxa).
+The \code{stepdisc.calc} function performs a stepwise discriminant analysis to select the ``best'' subset of the quantitative variables for use in discriminating among the groups (taxa).
 }
 
 \examples{

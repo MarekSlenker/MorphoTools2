@@ -4,7 +4,7 @@
 \title{Class classifdata}
 
 \description{
-The \code{classifdata} class is designed for storing results of Classificatory discriminant analysis.}
+The \code{classifdata} class is designed for storing results of classificatory discriminant analysis.}
 
 \format{Class \code{classifdata}.
 \describe{

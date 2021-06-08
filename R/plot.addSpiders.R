@@ -56,7 +56,7 @@ plotAddSpiders.cdadata <- function(result, axes = c(1,2), col = "black", lty = 1
   # hist
   if (result$rank == 1) {
 
-    stop("The method plotAddSpiders() is not applicable to histogram.", call. = FALSE)
+    stop("the method plotAddSpiders() is not applicable to histogram.", call. = FALSE)
   }
 
   if (result$rank > 1)  {

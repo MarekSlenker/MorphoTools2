@@ -10,7 +10,7 @@ classifSample.qda <- function(sampleData, trainingData) {
   if (any(is.na(trainingData$data))) stop("NA values in 'trainingData'.", call. = FALSE)
 
   if (! all(colnames(sampleData$data) == colnames(trainingData$data)))
-    stop("Characters of 'sampleData' and 'trainingData' are not the same.", call. = FALSE)
+    stop("characters of 'sampleData' and 'trainingData' are not the same.", call. = FALSE)
 
 
   ntax<-length(levels(trainingData$Taxon))

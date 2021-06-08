@@ -75,7 +75,7 @@ test_that("correct input - different characters", {
   trainingMockup = .morphodataFromDataFrame(trainingDataFrame)
   sampMockup = .morphodataFromDataFrame(sampDataFrame)
 
-  expect_error(classifSample.lda(sampMockup, trainingMockup), "Characters of 'sampleData' and 'trainingData' are not the same.")
+  expect_error(classifSample.lda(sampMockup, trainingMockup), "characters of 'sampleData' and 'trainingData' are not the same.")
 
 })
 

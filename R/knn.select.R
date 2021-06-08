@@ -5,8 +5,8 @@ knn.select<-function(object, crossval="indiv"){
   .checkClass(object, "morphodata")
 
   # matica musi byt plna
-  if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
-  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\"")
+  if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
+  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".")
 
   k = as.numeric(1:30)
 

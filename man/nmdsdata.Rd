@@ -4,7 +4,7 @@
 \title{Class nmdsdata}
 
 \description{
-The \code{nmdsdata} class is designed for storing results of Non-metric multidimensional scaling (NMDS).}
+The \code{nmdsdata} class is designed for storing results of non-metric multidimensional scaling (NMDS).}
 
 \format{Class \code{nmdsdata}.
 \describe{
@@ -17,7 +17,7 @@ The \code{nmdsdata} class is designed for storing results of Non-metric multidim
 			}
 	}
 	\item{stress}{stress value, e.i., goodness of fit.}
-	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
 	\item{distMethod}{used distance measure.}
 	\item{rank}{number of possitive eigenvalues.}
 

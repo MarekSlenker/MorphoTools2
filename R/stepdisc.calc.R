@@ -5,12 +5,12 @@
 stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
   # matica musi byt plna
-  if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
+  if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
 
   # find and report constant columns
   constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
   if (length(constantColumns)>0) {
-    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are constant."), call. = FALSE)
+    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are invariant."), call. = FALSE)
   }
 
   saturatedModel = FALSE
@@ -21,8 +21,8 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
   Entered = Removed = character()
 
-  if(k < 2) stop("at least two levels ", "required to do anything meaningful")
-  if(n < 2) stop("n > 1 observations ", "required to do anything meaningful")
+  if(k < 2) stop("at least two levels required to do anything meaningful", call. = FALSE)
+  if(n < 2) stop("n > 1 observations required to do anything meaningful", call. = FALSE)
 
 
   # finding the first variable to accept in the model:
@@ -132,7 +132,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   }
 
 
-  if(!exists("X.mod")) stop("unable to perform required calculations, perhaps not enough observations?")
+  if(!exists("X.mod")) stop("unable to perform required calculations, perhaps not enough observations?", call. = FALSE)
 
   resDat = data.frame(Entered, Removed, R2, Fstat, pwert)
   colnames(resDat) = c("Entered", "Removed", "Partial R-Square", "F Value", "Pr > F")

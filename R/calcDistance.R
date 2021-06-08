@@ -8,13 +8,13 @@
             )
           },
           "jaccard" = { # ziadne scale
-            if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
+            if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
             return(
               ade4::dist.binary(object$data, method = 1, diag = FALSE, upper = FALSE)
             )
           },
           "simpleMatching" = {
-            if (any(is.na(object$data))) stop("NA values in 'object' ", call. = FALSE)
+            if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
             return(
               ade4::dist.binary(object$data, method = 2, diag = FALSE, upper = FALSE)
             )

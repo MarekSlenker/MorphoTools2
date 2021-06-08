@@ -4,7 +4,7 @@
 \title{Class pcadata}
 
 \description{
-The \code{pcadata} class is designed for storing results of Principal component analysis (PCA).}
+The \code{pcadata} class is designed for storing results of principal component analysis (PCA).}
 
 \format{Class \code{pcadata}.
 \describe{
@@ -20,7 +20,7 @@ The \code{pcadata} class is designed for storing results of Principal component 
 	\item{eigenValues}{eigenvalues of principal components, i.e., proportion of variation of the original dataset expressed by individual axes.}
 	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
 	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
-	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
 	\item{rank}{number of principal components.}
 	\item{center, scale}{the centring and scaling of the input data.}
 

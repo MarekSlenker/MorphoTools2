@@ -3,7 +3,7 @@
 read.morphodata <- function(file, dec = ".", sep = "\t", ...){
   data = utils::read.delim(file, header = TRUE, dec = dec, sep = sep, ...)
 
-  if (dim(data)[2] <= 3) stop("incorrect data format", call.=FALSE)
+  if (dim(data)[2] <= 3) stop("incorrect data format.", call. = FALSE)
 
   return(.morphodataFromDataFrame(data))
 }

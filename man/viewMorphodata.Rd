@@ -15,3 +15,9 @@ viewMorphodata(object)
 }
 
 
+\examples{
+data(centaurea)
+
+# viewMorphodata(centaurea)
+
+}

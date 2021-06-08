@@ -8,7 +8,7 @@ A generic function for plotting ordination scores stored in \code{\link{pcadata}
 
 
 \usage{
-plot3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
+plot3Dpoints(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL,
   pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
   ticktype = "detailed", bty = "u", type = "p", labels = FALSE,
  legend = FALSE, legend.pos = "topright", ncol = 1, ...)
@@ -20,9 +20,9 @@ plot3Dpoints(result, axes = c(1,2,3), xlab=NULL, ylab=NULL, zlab=NULL,
 \item{axes}{x, y, z axes of plot.}
 \item{xlab, ylab, zlab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols, see \code{\link{points}}.}
-\item{col}{the colors for points. Multiple colors can be specified so that each taxon can be given its own color. If there are fewer colors than taxa, they are recycled in the standard fashion.}
-\item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
-\item{theta, phi}{the angles defining the viewing direction. Theta gives the azimuthal direction and phi the colatitude, see \code{\link{persp}}.}
+\item{col}{the colours for points. Multiple colours can be specified so that each taxon can be given its own colour. If there are fewer colours than taxa, they are recycled in the standard fashion.}
+\item{pt.bg}{the background colours for points. Multiple colours can be specified, as above.}
+\item{theta, phi}{the angles defining the viewing direction. \code{Theta} gives the azimuthal direction and \code{phi} the colatitude, see \code{\link{persp}}.}
 \item{ticktype}{character: \code{"simple"} draws just an arrow parallel to the axis to indicate direction of increase; \code{"detailed"} draws normal ticks as per 2D plots.}
 \item{bty}{the type of the box. One of \code{"g", "b2", "bl", "f", "u"} can be specified.}
 \item{type}{the type of plot points, \code{"p"} for points, or \code{"h"} for vertical spikes.}
@@ -43,7 +43,8 @@ centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plot3Dpoints(pcaRes,col = c("red","green","blue","black"), pch=c(20,17,8,21), pt.bg = "orange")
+plot3Dpoints(pcaRes, col = c("red", "green", "blue", "black"), pch = c(20,17,8,21),
+                 pt.bg = "orange")
 }
 
 

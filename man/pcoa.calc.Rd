@@ -1,10 +1,10 @@
 \name{pcoa.calc}
 \alias{pcoa.calc}
 
-\title{Principal coordinates analysis (PCoA)}
+\title{Principal Coordinates Analysis (PCoA)}
 
 \description{
-This function performs Principal coordinates analysis.
+This function performs principal coordinates analysis.
 }
 
 
@@ -42,12 +42,12 @@ pcoRes = pcoa.calc(centaurea, distMethod = "manhattan")
 
 summary(pcoRes)
 
-plotPoints(pcoRes, axes = c(1,2), col = c("red","green","blue","black"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
+plotPoints(pcoRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
+  pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
 
 
 
-# using gower method
+# using Gower's method
 data = list(
     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
@@ -60,13 +60,13 @@ data = list(
      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
 )
-attr(data, "class") <- "morphodata"
+attr(data, "class") = "morphodata"
 
-pcoaGower = pcoa.calc(data, distMethod = "gower",binaryChs = c("stemBranching"),
+pcoaGower = pcoa.calc(data, distMethod = "gower", binaryChs = c("stemBranching"),
                       nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
 
 plotPoints(pcoaGower, axes = c(1,2), col = c("red","green"),
-           pch=c(20,17), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
+           pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
 
 
 

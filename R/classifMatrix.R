@@ -1,4 +1,4 @@
-#' @rdname classif.lda
+#' Format the Classifdata to Summary Table
 #' @export
 classif.matrix <- function(result, level = "taxon") {
 

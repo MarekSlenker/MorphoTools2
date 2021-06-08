@@ -34,7 +34,7 @@ an object of class \code{\link{morphodata}}
 }
 
 \description{
-These functions remove particular taxa, populations, samples or morphological characters from morphodata object. The samples can be deleted by names using \code{sampleName} argument, or each sample above the desired threshold \code{missingPercentage} will be deleted. Only one parameter can be specified in one run.
+These functions remove particular taxa, populations, samples or morphological characters from \code{morphodata} object. The samples can be deleted by names using \code{sampleName} argument, or each sample above the desired threshold \code{missingPercentage} will be deleted. Only one parameter can be specified in one run.
 
 
 }

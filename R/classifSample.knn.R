@@ -12,7 +12,7 @@ classifSample.knn <- function(sampleData, trainingData, k){
   if (missing(k)) stop("argument \"k\" is missing, with no default.", call. = FALSE)
 
   if (! all(colnames(sampleData$data) == colnames(trainingData$data)))
-    stop("Characters of 'sampleData' and 'trainingData' are not the same.", call. = FALSE)
+    stop("characters of 'sampleData' and 'trainingData' are not the same.", call. = FALSE)
 
   ntax<-length(levels(trainingData$Taxon))
   char<-colnames(trainingData$data)

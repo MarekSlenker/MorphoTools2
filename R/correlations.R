@@ -3,7 +3,7 @@
 cormat <- function (object, method = "pearson") {
   .checkClass(object, "morphodata")
 
-  if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = FALSE)
+  if (! (method %in% c("pearson", "spearman"))) stop(paste("method", method , "is not supported."), call. = FALSE)
 
   corelations = stats::cor(object$data, use="pairwise.complete.obs", method = method)
   corelations = round(corelations, digits = 3)
@@ -21,7 +21,7 @@ cormat <- function (object, method = "pearson") {
 #' @export
 cormatSignifTest <- function(object, method = "pearson", alternative = "two.sided") {
 
-  if (! (method %in% c("pearson", "spearman"))) stop(paste("Method", method , "is not supported."), call. = FALSE)
+  if (! (method %in% c("pearson", "spearman"))) stop(paste("method", method , "is not supported."), call. = FALSE)
 
   table = matrix(data = numeric(), nrow = ncol(object$data), ncol = ncol(object$data))
   colnames(table) = colnames(object$data)

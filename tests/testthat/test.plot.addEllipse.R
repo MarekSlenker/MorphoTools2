@@ -24,10 +24,10 @@ test_that("plotAddEllipses error input",  {
 
   expect_error(plotAddEllipses(cdaRes, axes = 1), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)
   expect_error(plotAddEllipses(cdaRes, axes = c(1,5)), "specified axes are out of bounds. Object has only 3 axes.")
-  expect_error(plotAddEllipses(cdaRes, probability = 1), "Probability = 1 caused infinite size of ellipses.")
+  expect_error(plotAddEllipses(cdaRes, probability = 1), "probability = 1 caused infinite size of ellipses.")
 
   cdaRes = cda.calc(morphoMockup)
-  expect_error(plotAddEllipses(cdaRes), "The method plotAddEllipses() is not applicable to histogram.", fixed = TRUE)
+  expect_error(plotAddEllipses(cdaRes), "the method plotAddEllipses() is not applicable to histogram.", fixed = TRUE)
 
   pcaRes = pca.calc(centaurea)
   expect_error(plotAddEllipses(pcaRes, axes = 1), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)

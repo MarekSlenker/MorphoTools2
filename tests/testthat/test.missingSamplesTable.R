@@ -18,18 +18,18 @@ test_that("wrong input",  {
 
 test_that("missingSamplesTable",  {
   t = missingSamplesTable(data, "taxon")
-  expect_equal(paste(t[1,], collapse = ";"), "1;120;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0.28;0.29;0.29;0.29")
-  expect_equal(paste(dim(t), collapse = ";"), "4;27")
+  expect_equal(paste(t[1,], collapse = ";"), "1;120;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0.28;0.29;0.29;0.29;0.05;139")
+  expect_equal(paste(dim(t), collapse = ";"), "4;29")
 
   t = missingSamplesTable(data, "pop")
-  expect_equal(paste(t[1,], collapse = ";"), "1;20;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0.2;0.2;0.2;0.2")
-  expect_equal(paste(dim(t), collapse = ";"), "33;27")
+  expect_equal(paste(t[1,], collapse = ";"), "1;20;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0.2;0.2;0.2;0.2;0.03;16")
+  expect_equal(paste(dim(t), collapse = ";"), "33;29")
 
   t = missingSamplesTable(data, "indiv")
-  expect_equal(paste(t[1,], collapse = ";"), "1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0")
-  expect_equal(paste(dim(t), collapse = ";"), "652;27")
+  expect_equal(paste(t[1,], collapse = ";"), "1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0")
+  expect_equal(paste(dim(t), collapse = ";"), "652;29")
 
   t = missingSamplesTable(morphoMockup, "pop")
-  expect_equal(paste(t[1,], collapse = ";"), "1;2;0;0;0")
-  expect_equal(paste(dim(t), collapse = ";"), "4;5")
+  expect_equal(paste(t[1,], collapse = ";"), "1;2;0;0;0;0;0")
+  expect_equal(paste(dim(t), collapse = ";"), "4;7")
 })

@@ -23,11 +23,16 @@ knn.select(object, crossval = "indiv")
 \details{
 The \code{knn.select} function compute number of correctly classified individuals for k values ranging from 1 to 30 and highlight the value with the highest success rate. Ties (i.e., when there are the same numbers of votes for two or more groups) are broken at random, and thus several iterations may yield different results. Therefore, the functions compute 10 iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered.
 
-The mode of crossvalidation is set by the parameter \code{crossval}. The default \code{"indiv"} uses the standard one-leave-out method. However, as some hierarchical structure is usually present in the data (individuals from a population are not completely independent observations, as they are morphologically closer to each other than to individuals from other populations), the value \code{"pop"} sets whole populations as leave-out units. The latter method does not allow classification if there is only one population for a taxon and is more sensitive to "atypical" populations, which usually leads to a somewhat lower classification success rate.
+The mode of crossvalidation is set by the parameter \code{crossval}. The default \code{"indiv"} uses the standard one-leave-out method. However, as some hierarchical structure is usually present in the data (individuals from a population are not completely independent observations, as they are morphologically closer to each other than to individuals from other populations), the value \code{"pop"} sets whole populations as leave-out units. The latter method does not allow classification if there is only one population for a taxon and is more sensitive to ``atypical'' populations, which usually leads to a somewhat lower classification success rate.
 }
 
 \seealso{
-\code{\link{classif.lda}}, \code{\link{classif.knn}}
+\code{\link{classif.lda}},
+\code{\link{classifSample.lda}},
+\code{\link{classif.qda}},
+\code{\link{classifSample.qda}},
+\code{\link{classif.knn}},
+\code{\link{classifSample.knn}}
 }
 
 

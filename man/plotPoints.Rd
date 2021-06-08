@@ -23,8 +23,8 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
 \item{pch}{a vector of plotting characters or symbols: see \code{\link{points}}.}
-\item{col}{the colors for points. Multiple colors can be specified so that each taxon can be given its own color. If there are fewer colors than taxa, they are recycled in the standard fashion.}
-\item{pt.bg}{the background colors for points. Multiple colors can be specified, as above.}
+\item{col}{the colours for points. Multiple colours can be specified so that each taxon can be given its own colour. If there are fewer colours than taxa, they are recycled in the standard fashion.}
+\item{pt.bg}{the background colours for points. Multiple colours can be specified, as above.}
 \item{breaks}{a numeric, giving the width of one histogram bar.}
 \item{xlim, ylim}{the range of x and y axes.}
 \item{labels}{logical, if \code{TRUE}, labels are displayed. Only restricted number of parameters are supported. For more precise labels plotting, use \code{\link{plotAddLabels.points}} directly.}
@@ -49,15 +49,15 @@ centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 
-plotPoints(pcaRes, axes = c(1,2), col = c("red","green","blue","red"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE, legend.pos="bottomright")
+plotPoints(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"),
+  pch = c(20, 17, 8, 21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
 
 plotPoints(pcaRes, main = "My PCA plot", frame.plot = FALSE, cex = 0.8)
 
 cdaRes = cda.calc(centaurea)
 
-plotPoints(cdaRes, col = c("red","green","blue","red"),
-  pch=c(20,17,8,21), pt.bg = "orange", legend=TRUE)
+plotPoints(cdaRes, col = c("red", "green", "blue", "red"),
+  pch = c(20, 17, 8, 21), pt.bg = "orange", legend = TRUE)
 }
 
 

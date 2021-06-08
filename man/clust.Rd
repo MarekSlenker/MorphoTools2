@@ -43,11 +43,11 @@ data(centaurea)
 
 clustering.UPGMA = clust(centaurea)
 
-plot(clustering.UPGMA, cex=0.6, frame.plot=TRUE, hang=-1,
-        main="", sub="", xlab="", ylab="distance")
+plot(clustering.UPGMA, cex = 0.6, frame.plot = TRUE, hang = -1,
+        main = "", sub = "", xlab = "", ylab = "distance")
 
 
-# using gower method
+# using Gower's method
 data = list(
     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
@@ -60,14 +60,14 @@ data = list(
      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
 )
-attr(data, "class") <- "morphodata"
+attr(data, "class") = "morphodata"
 
 clustering.GOWER = clust(data, distMethod = "gower", clustMethod = "UPGMA",
                                binaryChs = c("stemBranching"),
                                nominalChs = c("petalColour", "leaves"),
                                ordinalChs = c("taste"))
 
-plot(clustering.GOWER, cex=0.6, frame.plot=TRUE, hang=-1,
-        main="", sub="", xlab="", ylab="distance")
+plot(clustering.GOWER, cex = 0.6, frame.plot = TRUE, hang = -1,
+        main = "", sub = "", xlab = "", ylab = "distance")
 
 }

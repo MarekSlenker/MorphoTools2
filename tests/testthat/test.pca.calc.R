@@ -40,7 +40,7 @@ test_that("correctness of calculation",  {
 
 test_that("constant values",  {
 
-  expect_error(pca.calc(constantMockup), "Characters Ch2 are constant.")
+  expect_error(pca.calc(constantMockup), "characters Ch2 are invariant.")
 
 
 })

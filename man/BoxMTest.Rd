@@ -26,7 +26,8 @@ boxMTest(object)
 \examples{
 data(centaurea)
 
-# remove NAs and linearly dependent characters
+# remove NAs and linearly dependent characters (characters with unique contributions
+#                  can be identified by stepwise discriminant analysis.)
 centaurea = naMeanSubst(centaurea)
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 centaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF",
@@ -35,10 +36,10 @@ centaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF"
 # add a small constant to characters witch are invariant within taxa
 centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] =
              centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] + 0.000001
-centaurea$data[ centaurea$Taxon == "ph"  , "IV" ][1] =
-             centaurea$data[ centaurea$Taxon == "ph"  , "IV" ][1] + 0.000001
-centaurea$data[ centaurea$Taxon == "st"  , "LBS"][1] =
-             centaurea$data[ centaurea$Taxon == "st"  , "LBS"][1] + 0.000001
+centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
+             centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] + 0.000001
+centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
+             centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
 
 
 

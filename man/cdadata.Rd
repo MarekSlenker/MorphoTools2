@@ -4,7 +4,7 @@
 \title{Class Cdadata}
 
 \description{
-The \code{cdadata} class is designed for storing results of Canonical discriminant analysis.}
+The \code{cdadata} class is designed for storing results of canonical discriminant analysis.}
 
 \format{Class \code{cdadata}.
 \describe{
@@ -20,7 +20,7 @@ The \code{cdadata} class is designed for storing results of Canonical discrimina
 	\item{eigenValues}{eigenvalues, i.e., proportion of variation of the original dataset expressed by individual axes.}
 	\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
 	\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
-	\item{groupMeans}{data.frame containing the means for the taxa.}
+	\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
 	\item{rank}{number of non-zero eigenvalues.}
 	\item{coeffs.raw}{matrix containing the raw canonical coefficients.}
 	\item{coeffs.std}{matrix containing the standardized canonical coefficients.}

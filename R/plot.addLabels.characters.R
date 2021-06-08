@@ -3,7 +3,7 @@
 #' Add labels to a plot
 #' @export
 plotAddLabels.characters <- function(result, labels = characters(result),
-                                      include = T, axes = c(1, 2), pos = NULL, offset = 0.5,
+                                      include = TRUE, axes = c(1, 2), pos = NULL, offset = 0.5,
                                       cex = 0.7, col = NULL, ...) {
   UseMethod("plotAddLabels.characters")
 }
@@ -40,7 +40,7 @@ plotAddLabels.characters.cdadata <- function(result, labels = characters(result)
     y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
 
     for (lab in labels) {
-      if (! (lab %in% rownames(result$totalCanonicalStructure))) stop(paste("label", lab , "does not exist"), call. = FALSE)
+      if (! (lab %in% rownames(result$totalCanonicalStructure))) stop(paste("label", lab , "does not exist."), call. = FALSE)
     }
 
     labelsToPlot = which(rownames(result$totalCanonicalStructure) %in% labels)
@@ -54,7 +54,7 @@ plotAddLabels.characters.cdadata <- function(result, labels = characters(result)
 
     } else{
 
-      if (length(labelsToPlot) == length(rownames(result$totalCanonicalStructure))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = FALSE) }
+      if (length(labelsToPlot) == length(rownames(result$totalCanonicalStructure))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels."), call. = FALSE) }
       graphics::text(x = result$totalCanonicalStructure[,1][-labelsToPlot], y = y[-labelsToPlot], labels = rownames(result$totalCanonicalStructure)[-labelsToPlot],
            pos = pos, offset = offset, cex = cex, col = col, ...)
 
@@ -79,7 +79,7 @@ plotAddLabels.characters.cdadata <- function(result, labels = characters(result)
   #skontroluj ci labels patria
   # check existence of CH
   for (lab in labels) {
-    if (! (lab %in% rownames(labelTable))) stop(paste("label", lab , "does not exist"), call. = FALSE)
+    if (! (lab %in% rownames(labelTable))) stop(paste("label", lab , "does not exist."), call. = FALSE)
   }
 
   labelsToPlot = which(rownames(labelTable) %in% labels)
@@ -92,7 +92,7 @@ plotAddLabels.characters.cdadata <- function(result, labels = characters(result)
 
   } else{
 
-    if (length(labelsToPlot) == length(rownames(labelTable))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels"), call. = FALSE) }
+    if (length(labelsToPlot) == length(rownames(labelTable))) { stop(paste("No labels to plot. You specified to exclude (include = FALSE) all labels."), call. = FALSE) }
     graphics::text(x = labelTable[ ,axes[1]][-labelsToPlot], y = labelTable[ ,axes[2]][-labelsToPlot],
          labels = rownames(labelTable)[-labelsToPlot], pos = pos, offset = offset, cex = cex, col = col, ...)
 

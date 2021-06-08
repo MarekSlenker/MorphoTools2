@@ -21,7 +21,7 @@ This function transforms morphological characters by applying another function p
 }
 
 \details{
-Transformation is applied to characters to improve their distribution (to become normally distributed or at least to achieve less deviation from normality). The \code{FUN} argument takes any function, able to accept as input any of the character specified by \code{character} argument.
+Transformation is applied to characters to improve their distribution (to become normally distributed or at least to achieve lesser deviation from normality). The \code{FUN} argument takes any function, able to accept as input any value of the character specified by \code{character} argument.
 
 Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation (if there are zero values in the data), because the argument of the logarithm can be only positive numbers. The arcsine transformation is applicable for proportions and percentages (for values ranging from 0 to 1).
 }
