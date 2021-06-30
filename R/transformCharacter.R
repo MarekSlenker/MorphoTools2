@@ -4,7 +4,7 @@ transformCharacter <- function(object, character, FUN, newName = NULL) {
 
   .checkClass(object, "morphodata")
 
-  if (!(character %in% colnames(object$data))) stop(paste("Character", character, "was not found in attached data."), call. = FALSE)
+  if (!(character %in% colnames(object$data))) stop(paste("Character \"", character, "\" was not found in attached data.", sep = ""), call. = FALSE)
 
 
 

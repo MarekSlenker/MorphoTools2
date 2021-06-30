@@ -6,7 +6,7 @@ classif.knn <- function(object, k, crossval = "indiv"){
 
 
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)  # matica musi byt plna
-  if (missing(k)) stop("Argument 'k\' is missing, there is no default value.", call. = FALSE)
+  if (missing(k)) stop("Argument 'k' is missing, there is no default value.", call. = FALSE)
   if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".", call. = FALSE)
 
 

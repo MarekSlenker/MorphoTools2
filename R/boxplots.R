@@ -7,7 +7,7 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
 
   .checkClass(object, "morphodata")
 
-  if (!(character %in% colnames(object$data))) stop(paste("Character", character, "was not found in attached data."), call. = FALSE)
+  if (!(character %in% colnames(object$data))) stop(paste("Character \"", character, "\" was not found in attached data.", sep = ""), call. = FALSE)
 
   bxPlot = .giveMeNiceBoxPlot(object, character, upperWhisker = upperWhisker, lowerWhisker = lowerWhisker)
 

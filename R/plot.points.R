@@ -154,11 +154,11 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     # HISTOGRAM
 
     if (length(axes) > 1){
-             if (!(all(axes == c(1,2)))) warning("The object has only one axis, which will be plotted", call. = FALSE)
+             if (!(all(axes == c(1,2)))) warning("The object has only one axis, which will be plotted.", call. = FALSE)
     }
 
     if (length(axes) == 1){
-            if (axes != 1) warning("The object has only one axis, which will be plotted", call. = FALSE)
+            if (axes != 1) warning("The object has only one axis, which will be plotted.", call. = FALSE)
     }
 
     taxlev = levels(result$objects$Taxon)
