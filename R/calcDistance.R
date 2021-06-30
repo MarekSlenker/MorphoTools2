@@ -46,7 +46,7 @@
               stats::dist(object$data, method = "minkowski", diag = FALSE, upper = FALSE)
             )
           },
-          stop(paste("distMethod", distMethod , "is not supported."), call. = FALSE)
+          stop(paste("distMethod \"", distMethod , "\" is not supported.", sep = ""), call. = FALSE)
 
     )
 

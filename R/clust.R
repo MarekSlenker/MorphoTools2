@@ -9,8 +9,8 @@ clust <- function(object, distMethod = "euclidean", clustMethod = "UPGMA", binar
 
 
   # skontroluj argumenty
-  # if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod", distMethod , "is not supported."), call. = FALSE)
-  if (! (clustMethod %in% supportedClustMethods)) stop(paste("clustMethod", clustMethod , "is not supported."), call. = FALSE)
+  # if (! (distMethod %in% supportedDistMethods)) stop(paste("distMethod = \"", distMethod , "\" is not supported.", sep = ""), call. = FALSE)
+  if (! (clustMethod %in% supportedClustMethods)) stop(paste("clustMethod \"", clustMethod , "\" is not supported.", sep = ""), call. = FALSE)
 
   if (any(is.na(object$data))) warning("Values of some characters are NA.", call. = FALSE)
 

@@ -4,7 +4,7 @@ classif.matrix <- function(result, level = "taxon") {
 
   .checkClass(result, "classifdata")
 
-  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
+  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\".", call. = FALSE)
 
   if (level == "taxon" )
   {

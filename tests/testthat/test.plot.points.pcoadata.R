@@ -22,7 +22,7 @@ test_that("ploting with error parameters",  {
 
   expect_is(pcoaRes, "pcoadata")
 
-  expect_error(plotPoints(pcoaRes, axes = c(3,33)), "specified axes are out of bounds. Object has only 5 axes." )
+  expect_error(plotPoints(pcoaRes, axes = c(3,33)), "Specified axes are out of bounds. Object has only 5 axes." )
 
   expect_error(plotPoints(pcoaRes, axes = c(1,1,2))) # "you have to specifi 2 axes (e.g., axes = c(1,2))"
 })

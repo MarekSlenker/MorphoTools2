@@ -13,8 +13,8 @@ plotAddSpiders <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 
 plotAddSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
 }
@@ -27,8 +27,8 @@ plotAddSpiders.pcadata <- function(result, axes = c(1,2), col = "black", lty = 1
 plotAddSpiders.pcoadata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
 }
@@ -40,8 +40,8 @@ plotAddSpiders.pcoadata <- function(result, axes = c(1,2), col = "black", lty = 
 plotAddSpiders.nmdsdata <- function(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
 }
@@ -56,14 +56,14 @@ plotAddSpiders.cdadata <- function(result, axes = c(1,2), col = "black", lty = 1
   # hist
   if (result$rank == 1) {
 
-    stop("the method plotAddSpiders() is not applicable to histogram.", call. = FALSE)
+    stop("The method plotAddSpiders() is not applicable to histogram.", call. = FALSE)
   }
 
   if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-    if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+    if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+    if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
     .plot_spiders_internal(result, axes = axes, col = col, lty = lty, lwd = lwd, ...)
   }

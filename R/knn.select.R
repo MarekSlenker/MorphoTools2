@@ -6,7 +6,7 @@ knn.select<-function(object, crossval="indiv"){
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
-  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".")
+  if (crossval!="indiv" & crossval!="pop") stop("Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".", call. = FALSE)
 
   k = as.numeric(1:30)
 

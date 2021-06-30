@@ -3,13 +3,13 @@ context("deleteSample")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("wrong input",  {
-  expect_error(deleteSample(data, "unexisting"), "sample unexisting does not exist" )
+  expect_error(deleteSample(data, "unexisting"), "Sample \"unexisting\" does not exist." )
 
   expect_error(deleteSample(data), "One of the arguments: 'sampleName' or 'missingPercentage' has to be specified." )
 
   expect_error(deleteSample(data, sampleName = "ds", missingPercentage = 2), "Not implemented, use arguments 'sampleName' and 'missingPercentage' in separate runs." )
 
-  expect_error(deleteSample(data, sampleName = 2), "sample 2 does not exist" )
+  expect_error(deleteSample(data, sampleName = 2), "Sample \"2\" does not exist." )
 
   expect_error(deleteSample(data, missingPercentage = "ds"), "'missingPercentage' is not numeric." )
 })

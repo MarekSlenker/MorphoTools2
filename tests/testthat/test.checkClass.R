@@ -17,7 +17,7 @@ test_that("checkung class morphodata",  {
 
   .checkClass(dataMockup, c("class", "morphodata") )
 
-  expect_error(.checkClass(dataMockup, "class" ), "object is not of class 'class'")
+  expect_error(.checkClass(dataMockup, "class" ), "Object is not of class 'class'.")
 })
 
 

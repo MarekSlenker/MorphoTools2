@@ -13,7 +13,7 @@ test_that("correct input", {
   data("centaurea")
   expect_error(cda.calc(centaurea), "NA values in 'object'")
 
-  expect_error(cda.calc(morphoMockup, passiveSamples = "ee"), "taxon ee was not found in attached data.")
+  expect_error(cda.calc(morphoMockup, passiveSamples = "ee"), "Taxon \"ee\" was not found in attached data.")
 })
 
 test_that("correctness of calculation",  {

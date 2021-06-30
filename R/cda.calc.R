@@ -10,11 +10,11 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # find and report constant columns
   constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
   if (length(constantColumns)>0) {
-    stop(paste("characters", paste(constantColumns, collapse = ", "), "are invariant."), call. = FALSE)
+    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are invariant."), call. = FALSE)
   }
 
   for (pasSample in passiveSamples) {
-    if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("taxon", pasSample, "was not found in attached data."), call. = FALSE)
+    if (! ((pasSample %in% levels(object$Taxon)) || pasSample %in% levels(object$Population) ) ) stop(paste("Taxon \"", pasSample, "\" was not found in attached data.", sep = ""), call. = FALSE)
   }
 
   # vypocitaj na zaklade skratenej matice (bez pop alebo taxa)

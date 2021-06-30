@@ -15,7 +15,7 @@ test_that("correct input", {
 
   expect_error(classif.knn(morphoMockup, k = 6, crossval = "ee"), "Invalid crossvalidation unit. Consider using \"indiv\" or \"pop\".")
 
-  expect_error(classif.knn(morphoMockup), "argument \"k\" is missing, with no default.")
+  expect_error(classif.knn(morphoMockup), "Argument 'k' is missing, there is no default value.")
 
 })
 

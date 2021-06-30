@@ -51,7 +51,7 @@ test_that("correct info about class structure", {
   d3 = .calcDistance(morphoMockup, distMethod = "simpleMatching", scale = T, center = T)
   expect_equal(paste(d3[15:25], collapse = ","), "0,0,0,0,0,0,0,0,0,0,0")
 
-  expect_error( .calcDistance(morphoMockup, distMethod = "ee"), "distMethod ee is not supported.")
+  expect_error( .calcDistance(morphoMockup, distMethod = "ee"), "distMethod \"ee\" is not supported.")
 
   d1.bin = .calcDistance(morphoMockup.bin, distMethod = "euclidean", scale = T, center = T)
   expect_equal(paste(d1.bin[1:5], collapse = ","), "3.15524255098646,3.3466401061363,2.23109340409087,2.23109340409087,3.15524255098646")

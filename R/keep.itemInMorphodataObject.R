@@ -5,7 +5,7 @@ keepTaxon <- function(object, taxonName) {
 
   # skontroluj ci object ma taxName
   for (tax in taxonName) {
-    if (! (tax %in% object$Taxon)) stop(paste("taxon", tax , "does not exist."), call. = FALSE)
+    if (! (tax %in% object$Taxon)) stop(paste("Taxon \"", tax , "\" does not exist.", sep = ""), call. = FALSE)
   }
 
   return(.keepByColumn(object, "Taxon", taxonName))
@@ -19,7 +19,7 @@ keepPopulation <- function(object, populationName) {
 
   # skontroluj ci object ma popname
   for (pop in populationName) {
-    if (! (pop %in% object$Population)) stop(paste("population", pop , "does not exist."), call. = FALSE)
+    if (! (pop %in% object$Population)) stop(paste("Population \"", pop , "\" does not exist.", sep = ""), call. = FALSE)
   }
 
   return(.keepByColumn(object, "Population", populationName))
@@ -41,7 +41,7 @@ keepSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 
     # skontroluj ci object ma popname
     for (samp in sampleName) {
-      if (! (samp %in% object$ID)) stop(paste("sample", samp , "does not exist."), call. = FALSE)
+      if (! (samp %in% object$ID)) stop(paste("Sample \"", samp , "\" does not exist.", sep = ""), call. = FALSE)
     }
 
     return(.keepByColumn(object, "ID", sampleName))
@@ -76,7 +76,7 @@ keepCharacter <- function(object, characterName) {
 
   # check existence of CH
   for (ch in characterName) {
-    if (! (ch %in% colnames(object$data))) stop(paste("character", ch , "does not exist."), call. = FALSE)
+    if (! (ch %in% colnames(object$data))) stop(paste("Character \"", ch , "\" does not exist.", sep = ""), call. = FALSE)
   }
 
   # character - moze byt i viac

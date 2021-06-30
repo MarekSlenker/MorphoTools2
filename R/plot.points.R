@@ -16,8 +16,8 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
                          labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
     xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
@@ -63,8 +63,8 @@ plotPoints.pcoadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                                labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
     xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
@@ -105,8 +105,8 @@ plotPoints.nmdsdata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
                          labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   # mozem mat menej os, kôli kolko
   if (result$rank < 2) stop("2D plot requires at least 2 axes. Use k = 2 in nmds.calc function.", call. = FALSE)
@@ -240,8 +240,8 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     # SCATTERPLOT
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-    if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-    if (max(axes) > length(result$eigenValues)) stop(paste("specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
+    if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+    if (max(axes) > length(result$eigenValues)) stop(paste("Specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
 
     if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
     if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")

@@ -3,7 +3,7 @@ context("keepCharecter")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("trying to remove unexisting character",  {
-  expect_error(keepCharacter(data, "unexistingCh"), "character unexistingCh does not exist")
+  expect_error(keepCharacter(data, "unexistingCh"), "Character \"unexistingCh\" does not exist.")
 })
 
 

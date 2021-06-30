@@ -3,7 +3,7 @@ context("deletePopulation")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("remove unexisting population",  {
-  expect_error(deletePopulation(data, "unexisting"), "population unexisting does not exist" )
+  expect_error(deletePopulation(data, "unexisting"), "Population \"unexisting\" does not exist." )
 })
 
 test_that("remove one population",  {

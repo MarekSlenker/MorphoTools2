@@ -22,7 +22,7 @@ test_that("ploting with error parameters",  {
 
   expect_is(cdaRes, "cdadata")
 
-  expect_error(plotPoints(cdaRes, axes = c(3,33)), "specified axes are out of bounds. Object has only 2 axes." )
+  expect_error(plotPoints(cdaRes, axes = c(3,33)), "Specified axes are out of bounds. Object has only 2 axes." )
 
-  expect_error(plotPoints(cdaRes, axes = c(1,1,2)), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE) #
+  expect_error(plotPoints(cdaRes, axes = c(1,1,2)), "You have to specify 2 axes (e.g., axes = c(1,2)).", fixed = TRUE) #
 })

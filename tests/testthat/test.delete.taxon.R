@@ -3,7 +3,7 @@ context("deleteTaxon")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("remove unexisting taxon",  {
-  expect_error(deleteTaxon(data, "unexisting"), "taxon unexisting does not exist" )
+  expect_error(deleteTaxon(data, "unexisting"), "Taxon \"unexisting\" does not exist." )
 })
 
 test_that("remove one taxon",  {

@@ -12,7 +12,7 @@ pca.calc <- function(object) {
   # find and report constant columns
   constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
   if (length(constantColumns)>0) {
-    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are invariant."), call. = FALSE)
+    stop(paste("Characters \"", paste(constantColumns, collapse = ", "), "\" are invariant.", sep = ""), call. = FALSE)
   }
 
 

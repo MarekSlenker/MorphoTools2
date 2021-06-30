@@ -99,8 +99,8 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
                             labels = labels, legend = legend, legend.pos = legend.pos, ncol = ncol, ...) {
 
   # skontroluj ci axes = 3; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 3) stop("you have to specify 3 axes (e.g., axes = c(1,2,3))", call. = FALSE)
-  if (max(axes) > object$rank) stop(paste("specified axes are out of bounds. Object has only ", object$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 3) stop("You have to specify 3 axes (e.g., axes = c(1,2,3)).", call. = FALSE)
+  if (max(axes) > object$rank) stop(paste("Specified axes are out of bounds. Object has only ", object$rank, " axes.", sep = "" ), call. = FALSE)
 
 
   # nastav pch a col spravne podla taxonu

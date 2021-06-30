@@ -21,8 +21,8 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
   Entered = Removed = character()
 
-  if(k < 2) stop("at least two levels required to do anything meaningful", call. = FALSE)
-  if(n < 2) stop("n > 1 observations required to do anything meaningful", call. = FALSE)
+  if(k < 2) stop("At least two levels required to do anything meaningful.", call. = FALSE)
+  if(n < 2) stop("n > 1 observations required to do anything meaningful.", call. = FALSE)
 
 
   # finding the first variable to accept in the model:
@@ -132,7 +132,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   }
 
 
-  if(!exists("X.mod")) stop("unable to perform required calculations, perhaps not enough observations?", call. = FALSE)
+  if(!exists("X.mod")) stop("Unable to perform required calculations, perhaps not enough observations?", call. = FALSE)
 
   resDat = data.frame(Entered, Removed, R2, Fstat, pwert)
   colnames(resDat) = c("Entered", "Removed", "Partial R-Square", "F Value", "Pr > F")

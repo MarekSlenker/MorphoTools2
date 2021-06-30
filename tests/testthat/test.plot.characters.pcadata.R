@@ -25,6 +25,6 @@ test_that("ploting with error parameters",  {
 
   expect_error(plotCharacters(pcaRes, axes = c(1,1,2))) # "you have to specifi 2 axes (e.g., axes = c(1,2))"
 
-  expect_error(plotCharacters(pcaRes, axes = c(3,55)), "specified axes are out of bounds. Object has only 25 axes." )
+  expect_error(plotCharacters(pcaRes, axes = c(3,55)), "Specified axes are out of bounds. Object has only 25 axes." )
 
 })

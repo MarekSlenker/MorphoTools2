@@ -6,7 +6,7 @@
 missingCharactersTable <- function(object, level) {
   .checkClass(object, "morphodata")
 
-  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
+  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\".", call. = FALSE)
 
   switch(level,
      taxon={
@@ -55,7 +55,7 @@ missingCharactersTable <- function(object, level) {
 missingSamplesTable <- function(object, level) {
   .checkClass(object, "morphodata")
 
-  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
+  if (level!="taxon" & level!="pop" & level!="indiv")  stop("Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\".", call. = FALSE)
 
   switch(level,
          taxon={

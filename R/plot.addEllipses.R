@@ -13,8 +13,8 @@ plotAddEllipses <- function(result, axes = c(1,2), probability = 0.95, col = "bl
 plotAddEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
@@ -26,8 +26,8 @@ plotAddEllipses.pcadata <- function(result, axes = c(1,2), probability = 0.95, c
 plotAddEllipses.pcoadata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
@@ -39,8 +39,8 @@ plotAddEllipses.pcoadata <- function(result, axes = c(1,2), probability = 0.95, 
 plotAddEllipses.nmdsdata <- function(result, axes = c(1,2), probability = 0.95, col = "black", type = "l", lty = 1, lwd = 1, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-  if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-  if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+  if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
+  if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
 }
@@ -54,14 +54,14 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
   # hist
   if (result$rank == 1) {
 
-    stop("the method plotAddEllipses() is not applicable to histogram.", call. = FALSE)
+    stop("The method plotAddEllipses() is not applicable to histogram.", call. = FALSE)
   }
 
   if (result$rank > 1)  {
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
-    if (length(axes) != 2) stop("you have to specify 2 axes (e.g., axes = c(1,2))", call. = FALSE)
-    if (max(axes) > result$rank) stop(paste("specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
+    if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2))..", call. = FALSE)
+    if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
     .plot_ellipses_internal(result, axes = axes, probability = probability, col = col, type = type, lty = lty, lwd = lwd, ...)
   }
@@ -73,7 +73,7 @@ plotAddEllipses.cdadata <- function(result, axes = c(1,2), probability = 0.95, c
   result$col = .setValuesForVector(result$objects$Taxon, col)
 
   tt = sqrt(stats::qchisq(probability, 2)) # kvantil rozdelenia
-  if (is.infinite(tt)) stop(paste("probability = ", probability, " caused infinite size of ellipses.", sep = ""), call. = FALSE)
+  if (is.infinite(tt)) stop(paste("\"probability = ", probability, "\" caused infinite size of ellipses.", sep = ""), call. = FALSE)
 
   for (taxon in levels(result$objects$Taxon)) {
     taxData = data.frame(result$objects$scores[which(taxon == result$objects$Taxon),  axes[1]],

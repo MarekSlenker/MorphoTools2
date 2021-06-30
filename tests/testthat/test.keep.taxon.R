@@ -3,7 +3,7 @@ context("keepTaxon")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("keeping unexisting taxon",  {
-  expect_error(keepTaxon(data, "unexisting"), "taxon unexisting does not exist" )
+  expect_error(keepTaxon(data, "unexisting"), "Taxon \"unexisting\" does not exist." )
 })
 
 test_that("keep one taxon",  {

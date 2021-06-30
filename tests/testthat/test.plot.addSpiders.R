@@ -22,15 +22,15 @@ test_that("plotAddSpiders error input",  {
 
   plotPoints(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5)
 
-  expect_error(plotAddSpiders(cdaRes, axes = 1), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)
-  expect_error(plotAddSpiders(cdaRes, axes = c(1,5)), "specified axes are out of bounds. Object has only 3 axes.")
+  expect_error(plotAddSpiders(cdaRes, axes = 1), "You have to specify 2 axes (e.g., axes = c(1,2)).", fixed = TRUE)
+  expect_error(plotAddSpiders(cdaRes, axes = c(1,5)), "Specified axes are out of bounds. Object has only 3 axes.")
 
   cdaRes = cda.calc(morphoMockup)
-  expect_error(plotAddSpiders(cdaRes), "the method plotAddSpiders() is not applicable to histogram.", fixed = TRUE)
+  expect_error(plotAddSpiders(cdaRes), "The method plotAddSpiders() is not applicable to histogram.", fixed = TRUE)
 
   pcaRes = pca.calc(centaurea)
-  expect_error(plotAddEllipses(pcaRes, axes = 1), "you have to specify 2 axes (e.g., axes = c(1,2))", fixed = TRUE)
-  expect_error(plotAddEllipses(pcaRes, axes = c(1,45)), "specified axes are out of bounds. Object has only 25 axes.")
+  expect_error(plotAddEllipses(pcaRes, axes = 1), "You have to specify 2 axes (e.g., axes = c(1,2)).", fixed = TRUE)
+  expect_error(plotAddEllipses(pcaRes, axes = c(1,45)), "Specified axes are out of bounds. Object has only 25 axes.")
 })
 
 

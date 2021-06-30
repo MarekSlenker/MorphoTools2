@@ -21,8 +21,8 @@ morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 morphoMockup_NA = .morphodataFromDataFrame(morphoDataFrame_NA)
 
 test_that("notsupported methods",  {
-  expect_error(clust(morphoMockup, distMethod = "notsupported"), "distMethod notsupported is not supported")
-  expect_error(clust(morphoMockup, clustMethod = "notsupported"), "clustMethod notsupported is not supported")
+  expect_error(clust(morphoMockup, distMethod = "notsupported"), "distMethod \"notsupported\" is not supported.")
+  expect_error(clust(morphoMockup, clustMethod = "notsupported"), "clustMethod \"notsupported\" is not supported.")
 })
 
 test_that("NA in data",  {

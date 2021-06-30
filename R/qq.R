@@ -6,7 +6,7 @@
 qqnormCharacter <- function(object, character, taxon = levels(object$Taxon), main = NULL, ...) {
   .checkClass(object, "morphodata")
 
-  if (!(character %in% colnames(object$data))) stop(paste("character", character, "was not found in attached data."), call. = FALSE)
+  if (!(character %in% colnames(object$data))) stop(paste("Character", character, "was not found in attached data."), call. = FALSE)
 
   opar <- graphics::par(no.readonly = TRUE)
 

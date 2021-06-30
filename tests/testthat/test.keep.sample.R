@@ -4,7 +4,7 @@ data = read.morphodata("../testFiles/sample.txt")
 
 
 test_that("wrong input",  {
-  expect_error(keepSample(data, "unexisting"), "sample unexisting does not exist" )
+  expect_error(keepSample(data, "unexisting"), "Sample \"unexisting\" does not exist." )
 
   expect_error(keepSample(data), "One of the arguments: 'sampleName' or 'missingPercentage' has to be specified." )
 
