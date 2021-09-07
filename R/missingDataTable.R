@@ -12,19 +12,22 @@ missingCharactersTable <- function(object, level) {
      taxon={
          aggLevel = list(object$Taxon)
          header = data.frame(unique(object$Taxon))
-         colnames(header) = level
+         cname = "Taxon"
+         colnames(header) = cname
 
       },
      pop={
            aggLevel = list(object$Population)
           header = data.frame(object$Population, object$Taxon)
           header = header[! duplicated(header[,1]),]
-           colnames(header) = c(level, "Taxon")
+          cname = "Population"
+           colnames(header) = c(cname, "Taxon")
       },
      indiv={
            aggLevel = list(object$ID)
           header = data.frame(object$ID, object$Population, object$Taxon)
-          colnames(header) = c(level, "Population", "Taxon")
+          cname = "ID"
+          colnames(header) = c(cname, "Population", "Taxon")
       }
   )
 
@@ -37,11 +40,11 @@ missingCharactersTable <- function(object, level) {
 
   t = as.data.frame(table(aggLevel))
 
-  colnames(missingTable) = c(level, "missing.percentage", "numb.of.missing.values")
-  colnames(t) = c(level, "N")
+  colnames(missingTable) = c(cname, "missing.percentage", "missing.values")
+  colnames(t) = c(cname, "N")
 
-  missingTable = merge(t, missingTable, by=level)
-  missingTable = merge(header, missingTable, by=level)
+  missingTable = merge(t, missingTable, by=cname)
+  missingTable = merge(header, missingTable, by=cname)
   # SORT??
   # missingTable = missingTable[order(-missingTable$missing.percentage),]
 
@@ -60,12 +63,15 @@ missingSamplesTable <- function(object, level) {
   switch(level,
          taxon={
            aggLevel = list(object$Taxon)
+           cname = "Taxon"
          },
          pop={
            aggLevel = list(object$Population)
+           cname = "Population"
          },
          indiv={
            aggLevel = list(object$ID)
+           cname = "ID"
          }
   )
 
@@ -77,17 +83,17 @@ missingSamplesTable <- function(object, level) {
     stats::aggregate( object$data, aggLevel, function(x) round(mean(is.na(x)), digits = 2)),
     "missing.percentage" = stats::aggregate( apply(object$data, 1, function(x) mean(is.na(x))),  # MEAN
                       aggLevel, function(x) round(mean(x), digits = 2))$x,
-    "numb.of.missing.values"= stats::aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
+    "missing.values"= stats::aggregate( apply(object$data, 1, function(x) sum(is.na(x))),   # SUM
                       aggLevel, sum)$x
   )
 
 
   t = as.data.frame(table(aggLevel))
 
-  colnames(missingTable)[1] = level
-  colnames(t) = c(level, "N")
+  colnames(missingTable)[1] = cname
+  colnames(t) = c(cname, "N")
 
-  missingTable = merge(t, missingTable, by=level)
+  missingTable = merge(t, missingTable, by=cname)
 
   return(missingTable)
 }
