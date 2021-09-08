@@ -2,7 +2,7 @@
 title: \vspace{+2.0cm} MorphoTools2 version 1.0.0 tutorial \vspace{+2.0cm}
 author: |
   | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
-  | with contribution from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
+  | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
 date: 'Date: Jun 2021'
@@ -51,13 +51,13 @@ knitr::opts_chunk$set(
 
 # 1. Introduction
 
-The package `MorphoTools2` is dedicated to multivariate analyses of morphological data. The needed tools are at the moment scattered over several R packages. This package wraps available statistical and graphical tools and provides a comprehensive framework for control and manipulation of the input data, core statistical analysis and the wide palette of functions designed to visualize results, to make the workflow convenient and fast.
+The package `MorphoTools2` is intended for multivariate analyses of morphological data. At the moment, various necessary tools are scattered across several R packages. This package wraps available statistical and graphical tools and provides a comprehensive framework for checking and manipulating input data, performing core statistical analyses and running a wide palette of functions designed to visualize results, making the workflow convenient and fast.
 
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
-# 2. Obtaining and installing MorphoTools2 package
+# 2. Obtaining and installing the MorphoTools2 package
 
-The R console and base system can be downloaded at <http://www.r-project.org/>. Once R is installed, `MorphoTools2` can be installed and loaded by typing the following commands into the R console:
+The R console and base system can be downloaded from <http://www.r-project.org>. Once R is installed, `MorphoTools2` can be installed and loaded by typing the following commands into the R console:
 
 
 ```{r eval=FALSE, include=TRUE}
@@ -69,32 +69,32 @@ library(MorphoTools2)
 library(MorphoTools2)
 ```
 
-To get the latest version of `MorphoTools2` package, install it using the `devtools::install_github()` function from the `devtools` package.
+To get the latest version of the `MorphoTools2` package, install it using the `devtools::install_github()` function from the `devtools` package.
 
 ```{r include=TRUE, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("MarekSlenker/MorphoTools2")
 ```
 
-After quiting or restarting R, package need to be loaded again (using the `library` function as shown above).
+After quitting or restarting R, the package needs to be loaded again (using the `library` function as shown above).
 
-# 3. Data import, control and manipulation
+# 3. Data import, checking and manipulation
 
-As with any statistical software, the first task is to import raw data. However, raw data can contain errors (e.g., typos in numbers or decimal points) and missing values which should be corrected or removed. We should also consider removing very highly correlated characters, that could potentially distort the results of some of the multivariate analyses. Moreover, an assessment of the normality of distribution of data is a prerequisite for some statistical tests. If this assumption is not met, the distribution of data can be improved by transformation, or nonparametric methods that do not require normality of distribution of data can be preferred. The following chapters go through these issues and end up with the cleaned data ready for exploring the morphological differentiation among the taxa (or any defined groups).
+As with any statistical software, the first task is to import raw data. However, raw data may contain errors (e.g. typos in numbers or decimal points) and missing values which should be corrected or removed. One should also consider removing very highly correlated characters that could distort the results of some multivariate analyses. Moreover, an assessment of the normality of distribution of data is a prerequisite for some statistical tests. If this assumption is not met, the distribution of data can be improved by transformation, or non-parametric methods that do not require normality of distribution of data can be preferred. The following chapters go through these issues and end up with a cleaned-up dataset ready for exploring the morphological differentiation among taxa (or any defined groups).
 
 
 ## 3.1 Data import
 
-Data can be imported from plain text files (tab, comma, or white (blank) space delimited, see below), or from Excel spreadsheets through the clipboard in Windows. Following structure of input data is required: 
+Data can be imported from plain text files (tab-, comma-, or space-delimited, see below) or from spreadsheet files. The following structure of input data is required: 
 
-* the first row contains variable names.
-* the next rows contain individuals (samples, or any other kind of sampling units), single individual per row.
-* the first three columns include unique identifiers for individuals, populations and taxa/groups, respectively. Columns have to be named as “ID”, “Population” and “Taxon”[^1].
-* fourth and next columns stores morphological characters[^2].
+* the first row containing variable names;
+* rows each containing values for a single individual sample or any other kind of sampling unit;
+* the first three columns containing unique identifiers of individuals, populations and taxa/groups (named “ID”, “Population” and “Taxon”)[^1]; and
+* the fourth and next columns holding values of morphological characters[^2].
 
-[^1]: In case the **population level is missing or inapplicable** (e.g. more than one individual only in some populations and/or very low number of individuals per population), copy the values from the"ID" column to "Population" column; this will allow analysing such data by most methods but any analyses considering population level are meaningless.
+[^1]: If the **population level is missing or inapplicable** (e.g. more than one individual only in some populations and/or very low number of individuals per population), copy the values from the "ID" column to the "Population" column. This will allow analysing such data by most methods except analyses considering the population level.
 
-[^2]: **The morphological characters** can be quantitative, binary (coded as 0/1), or multi-state ordered categorical (semiquantitative, rank-ordered) characters  (e.g., 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2). On the other hand, nonordered categorical (qualitative, nominal) characters (e.g. describing colour: 1 = red, 2 = green, 3 = blue) are not applicable in most of the analyses (e.g., principal component or discriminant analyses). If there is a reason to include such unordered multistate characters, these characters either have to be coded as binary characters, as follows: redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1), or, in some cases coefficients for mixed data (e.g., Gower coefficient) should be used.
+[^2]: **The morphological characters** can be quantitative, binary (coded as 0/1), or multi-state ordered categorical (semiquantitative, rank-ordered) characters  (e.g. 1 = small, 2 = medium, 3 = large, where change from state 1 to 3 is more costly than change from 1 to 2). By contrast, unordered categorical (qualitative, nominal) characters (e.g. describing colour: 1 = red, 2 = green, 3 = blue) are not applicable in most analyses (e.g. principal component or discriminant analyses). If there is a reason to include such unordered multistate characters, these characters either have to be coded as binary characters as follows: redFlowers (0/1), greenFlowers (0/1), blueFlowers (0/1), or, in some cases, coefficients for mixed data (e.g. the Gower coefficient) should be used.
 
 
 
@@ -111,16 +111,16 @@ Data can be imported from plain text files (tab, comma, or white (blank) space d
 | STGH310 	| STGH       	| ps    	| 35.6 	| 19.2 	| 54.8 	| 0.35 	| 9.5  	|     	| *NA* 	|
 
 
-Use underscores (_) instead of spaces, and avoid special characters (e.g. punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (not quoted).
+Use underscores (_) instead of spaces, and avoid special characters (e.g. punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (without quotes).
 
-In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is built-in in this package. Execute command `data(centaurea)` to load this data to R workspace.
+In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is included with this package. Execute the command `data(centaurea)` to load this data to the R workspace.
 
 ```{r eval = TRUE, echo = TRUE}
 data(centaurea)
 ```
 
 
-In general, morphological data can be imported using the `read.morphodata()` function, providing path to data[^3]. Argument `dec` stands for the character used in the file for decimal separator, `sep` is a column delimiter character, usually blank space `""`, comma `","` or tab `"\t"`. The default values are a dot and tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the Excel spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
+In general, morphological data can be imported using the `read.morphodata()` function, providing a path to the data[^3]. The argument `dec` stands for the character used in the file for the decimal separator,  and `sep` is the column delimiter character, usually a blank space `""`, comma `","` or tab `"\t"`. The default values are a dot and a tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
 
 [^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.
 
@@ -133,7 +133,7 @@ centaurea = read.morphodata(file = "clipboard")
 ```
 
 
-The dataset now exists as a `morphodata` object in R. The `morphodata` object, as well as other objects used later, is defined as a `list`. In R lists act as containers for data. Elements stored in `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see contained elements. Command `centaurea$Taxon` print values on R console. Run `?morphodata` to see what a `morphodata` object contains. 
+The dataset now exists as a `morphodata` object in R. The `morphodata` object, like other objects used later, is defined as a `list`. In R, lists act as containers for data. Elements stored in the `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see the contained elements. The command `centaurea$Taxon` prints the values to the R console. Run `?morphodata` to see the structure of a `morphodata` object. 
 
 Alternatively, the following commands display basic information about the dataset or show data in the data viewer.
 
@@ -180,14 +180,14 @@ viewMorphodata(centaurea)
 ```
 
 
-## 3.2 Assessing whether the data follow normal distribution
+## 3.2 Assessing normality of data
 
-An assessment whether the data follow normal distribution is a prerequisite for many statistical tests, but on the other hand, many analyses are quite robust to moderate deviations from normality. From the here used analyses, normality of distribution is required by Pearson correlation coefficient and discriminant analysis (both canonical and linear or quadratic classificatory analysis). The normality of distribution of data is not an inevitable assumption of the hierarchical clustering, principal component analysis, principal coordinates analysis, nor non-metric multidimensional scaling.  
-There are two main methods of assessing normality: numerically or graphically. Please note, although all methods available in `MorphoTools2` package are presented here, there is no need to use all of these methods at once. What we need is only a brief summary of whether the data are normally distributed or not.    
+An assessment whether the data are approximately normally distributed is a prerequisite for many statistical tests, even though many analyses are quite robust to moderate deviations from normality. Out of the analyses used here, normality of distribution is required by Pearson’s correlation coefficient and discriminant analysis (both canonical and linear or quadratic classificatory analysis). The normality of distribution of data is not an inevitable assumption of hierarchical clustering, principal component analysis, principal coordinates analysis or non-metric multidimensional scaling.  
+There are two main approaches to assessing normality: numerical and graphical. Please note that, although all methods available in the `MorphoTools2` package are presented here, there is no need to use all these methods at once.    
 
-### 3.2.1 Shapiro-Wilk normality test  
+### 3.2.1 Shapiro-Wilk test of normality  
 
-The normality of distribution of each character on the level of taxon/group can be tested using the Shapiro-Wilk statistic. If the calculated p-value of a certain character is below a threshold (0.05 is the default, but can be changed using the `p.value` argument), we can reject the null hypothesis that characters are normally distributed. The default behaviour is to print only *`normally distributed`* or *`NOT normally distributed`* as result, but setting `p.value = NA` displays the exact p-values.
+The normality of distribution of each character at the level of a taxon can be tested using the Shapiro-Wilk statistic. If the calculated p-value of a certain character is below a set threshold (0.05 is the default, but this can be changed using the `p.value` argument), we can reject the null hypothesis that characters are normally distributed. The default behaviour is to print only *`normally distributed`* or *`NOT normally distributed`* as the result, but setting the `p.value` to `NA` displays the exact p-values.
 
 
 ```{r include=F}
@@ -198,7 +198,7 @@ shapiroWilkTest(centaurea)
 
 ```
 
-As the results are rather extensive (depending on number of groups and characters), they can be set assigned an object and exported  to the clipboard or file using the `exportRes()` function. This function is designed to export the spreadsheet-like results. If needed, default decimal separator (`dec`) and column delimiter character (`sep`) can be changed by particular arguments. See `exportRes()` documentation for details.  
+Because the results are rather extensive (depending on the number of groups and characters), they can be assigned to an object and exported to the clipboard or a file using the `exportRes()` function. This function is designed to export the results in a spreadsheet-like form. If needed, the default decimal separator (`dec`) and column delimiter character (`sep`) can be changed using the respective arguments; see the `exportRes()` function’s documentation for details.  
 
 ```{r echo = TRUE, eval=FALSE}
 swTest = shapiroWilkTest(centaurea)
@@ -208,14 +208,14 @@ exportRes(swTest, file = "D:/Projects/Centaurea_PSE/dataAnalysis/shapiroWilkTest
 
 ### 3.2.2 Histograms  
 
-The histograms are a traditional way of displaying the shape of the distribution of data. Function `histCharacter()` displays a within-group distribution of each taxon for particular character. A density curve smoothing out the histogram (black) and the normal distribution curve (red) are drawn as default but can be removed using `densityLine = FALSE`, and `normDistLine = FALSE` arguments. Missing data are omitted.  
+Histograms are a traditional way of displaying the shape of the distribution of data. The function `histCharacter()` displays the within-group distribution of values of a particular character for each taxon. The density curve smoothing of the histogram (black) and the normal distribution curve (red) are drawn as default but can be removed by setting the `densityLine`, and `normDistLine` arguments to `FALSE`. Missing data are omitted.  
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px'}
 histCharacter(centaurea, character = "SF")
 ```
 
 
-To plot histograms for all characters with default settings to a new folder (in the working directory) use `histAll()` function.
+To save histograms for all characters with default settings to a new folder (in the working directory), use the `histAll()` function.
 
 ```{r echo = TRUE, eval=FALSE}
 histAll(centaurea, folderName = "histograms")
@@ -225,9 +225,9 @@ histAll(centaurea, folderName = "histograms")
 
 ### 3.2.3 Normal Q-Q plot  
 
-The normal Q-Q plot is another graphical method of assessing normality. The points should lie as close to the line as possible with no obvious pattern coming away from the line. Deviations from this line correspond to various types of non-normality.
+The normal Q-Q plot is another graphical method of assessing normality. The points should lie as close to the line as possible, with no obvious pattern of deviation from the line. Deviations from this line correspond to various types of non-normality.
 
-Function `qqnormCharacter()` draws Q-Q plot for each taxon for a particular character, function `qqnormAll()` do the same for all of the characters (and save images to a new folder). Missing data are omitted.  
+The function `qqnormCharacter()` draws a Q-Q plot for each taxon and a particular character. The function `qqnormAll()` does the same for all characters (and save images to a new folder). Missing data are omitted.  
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '420px', out.height= '300px'}
@@ -243,27 +243,27 @@ qqnormAll(centaurea, folderName = "qqnormPlots")
 
 ***
 
-The most of the characters in the centaurea dataset do not have normal distribution. In general, there are two options: 
-the distribution of data can be improved by transformation to make it more like normal, or nonparametric methods that do not require normality of distribution (Spearman's correlation coefficient instead of Pearson's, and k-nearest neighbours classificatory discriminant analysis instead of linear or quadratic DA) can be preferred.  
+Most of the characters in the centaurea dataset do not have normal distribution. In general, there are two options: 
+The distribution of data can be improved by transformation to make it more like normal, or non-parametric methods that do not require normality of distribution (Spearman's correlation coefficient instead of Pearson's and k nearest neighbours classificatory discriminant analysis instead of linear or quadratic DA) may be preferred.  
 
-Transformation of data is the matter of the next section, but in all of the subsequent analysis, the original data will be used and nonparametric methods preferred.  
+The transformation of data is addressed in the following section. However, in all following analyses, the original data are used and non-parametric methods preferred.  
 
 ## 3.3 Data transformation
 
-The characters that deviate most from the normal distribution can be transformed to improve their distribution (to become normally distributed or at least to achieve lower deviation from normality). From the wide palette of applicable transformations (e.g., logarithmic, square root, cube root, arcsine) the one which improves the distribution of a particular character the most should be chosen. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation if there are zero values in the data, because the argument of the logarithm can be only positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
+The characters that deviate the most from the normal distribution can be transformed to improve their distribution (to make them normally distributed or at least to achieve lower deviation from normality). From the wide palette of applicable transformations (e.g. logarithmic, square root, cube root, arcsine), the one which improves the distribution of a particular character the most should be chosen. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation if there are zero values in the data, because the argument of the logarithm can only take positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
 
-Transformation can be done by `transformCharacter()` function, which in addition to data, the name of the character which should be transformed (`character`), and new name of transformed character (`newName`; not required) takes as argument a `FUN`. The `FUN` is an Anonymous function (also known as a lambda expression), but without a long explanation, this is where to place the function that will transforms the data. Transformed data will replace original data, under the old or new name, if the `newName` argument was used.  
+Transformation can be done using the `transformCharacter()` function, which, in addition to the data object, the name of the character to be transformed (`character`) and a new name for the transformed character (`newName`; not required), takes as argument an anonymous function (`FUN`), also known as a lambda expression. Without long explanation, this is where to place the function that will transform the data. Transformed values will replace original values of the character, under the old or new name, if the `newName` argument is set.  
   
-As the `transformCharacter()` takes as argument another function (`FUN` argument), there is an inexhaustible amount of potential transformations. Here we will mention some of them:  
+As the `transformCharacter()` takes another function as an argument (`FUN`), there is an inexhaustible amount of potential transformations:  
 
-For a right-skewed (positive) distribution can be used:  
+For a right-skewed (positive) distribution, the following can be used:  
 * logarithmic transformation (natural): `FUN = function(x) log(100*x+1)`  
 * logarithmic transformation (common): `FUN = function(x) log10(100*x+1)`  
 * square root transformation: `FUN = function(x) sqrt(x)`   
 * cube root transformation: `FUN = function(x) x^(1/3)`   
 * arcsine transformation: `FUN = function(x) asin(sqrt(x))`  
 
-For a left-skewed (negative) distribution can be used:   
+For a left-skewed (negative) distribution, the following can be used:   
 * logarithmic transformation (natural): `FUN = function(x) log((100*max(x)+1)-x)`  
 * logarithmic transformation (common): `FUN = function(x) log10((100*max(x)+1)-x)`  
 * square root transformation: `FUN = function(x) sqrt((max(x)+1)-x)`    
@@ -271,9 +271,9 @@ For a left-skewed (negative) distribution can be used:
 * arcsine transformation: `FUN = function(x) asin(sqrt((max(x))-x))`  
 
 
-As stated above, when using a log transformation, a constant should be added to all values to make them all positive before transformation. However, log transformation (together with changing the shape of the distribution) also changes multiplication to sum (the values differ x-times vs. differ by x). For small values of x, adding 1 significantly changes the original ratios, therefore, for log transformation of small numbers is recommended to multiply x by some constant (e.g. 100) at first, and then add 1, as is shown in examples above.  
+As stated above, when applying a log transformation, a constant should be added to all values to make them all positive before transformation. However, log transformation (besides changing the shape of the distribution) also changes multiplication to sum (the values differ x-times vs differ by x). For small values of x, adding 1 significantly alters the original ratios, so when log-transforming small numbers, it is recommended to first multiply x by some constant (e.g. 100), and then add 1, as is shown in examples above.  
 
-The following figure depicts the effect of various transformation on the same data. 
+The following figure depicts the effects of different types of transformation on the same data. 
 
 ```{r echo = FALSE, eval=TRUE, out.width = '420px', out.height= '300px'}
 par(mfrow=c(2,2))
@@ -307,7 +307,7 @@ par(mar=c(5, 4, 4, 2) + 0.1)
 
 ```
 
-So finally, to apply square root transformation on character `SF`, the following code can be used.
+So finally, to apply a square root transformation to character `SF`, the following code can be used.
 
 
 ```{r echo = TRUE, eval = FALSE}
@@ -320,9 +320,9 @@ centaurea = transformCharacter(centaurea, character = "SF", FUN = function(x) sq
 
 ## 3.4 Box Plots
 
-Boxplots are handy tools for detection of outlier values (potential typos, missing decimal points, etc.), between-species dissimilarities and critical morphological values discriminating among species.  
+Boxplots are a handy tool for detecting of outlier values (potential typos, missing decimal points, etc.), between-species dissimilarities and critical morphological values discriminating among species.  
 
-Boxplots can be calculated for a particular character using `boxplotCharacter()` or for all characters at once running `boxplotAll()` function, that saves all boxplots to a new folder in working directory (or to any location). The box is drawn from first to third quartile (25th - 75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to desired percentiles using `lowerWhisker` and `upperWhisker` arguments. Missing data are omitted. Many graphic parameters can be set, run `?boxplotCharacter` for details. 
+Boxplots can be produced for a particular character using the `boxplotCharacter()` function or for all characters at once by invoking the `boxplotAll()` function, which saves all boxplots to a new folder in working directory or other location. A box is drawn from the first to the third quartile (25th-75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to the desired percentiles using the arguments `lowerWhisker` and `upperWhisker`. Missing data are omitted. Many graphic parameters can be set; run `?boxplotCharacter` for details. 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
 boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"))
@@ -338,9 +338,9 @@ boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
 ```
 
 
-The default behaviour is to plot outliers (asterisks, can be changed by `pch` argument; `outliers = FALSE` will suppress plotting outliers) and to show the trimmed range (omitting 10% most extreme values) using whiskers.  
+The default behaviour is to plot outliers (as asterisks be default, but this can be changed in the `pch` argument; `outliers = FALSE` will suppress the plotting of outliers) and to show the trimmed range (omitting 10% of the most extreme values) using whiskers.  
 
-To plot boxplots for all characters with default settings to new folder (in the working directory):
+Boxplots for all characters with the default settings can be saved to a new folder (in the working directory) using the following command:
 
 ```{r echo = TRUE, eval=FALSE}
 boxplotAll(centaurea, folderName = "boxplots")
@@ -350,38 +350,38 @@ boxplotAll(centaurea, folderName = "boxplots")
 
 ## 3.5 Descriptive statistics
 
-The table of descriptive statistics is a less comfortable way of detecting outlier values, but it can be used for reporting descriptive statistics of morphological characters. This statistics can be calculated on the levels of populations, taxa/groups or for the whole dataset, using `descrPopulation()`, `descrTaxon()` or `descrAll()`, respectively. 
+The table of descriptive statistics is a less comfortable way of detecting outlier values. However, it can be used for reporting descriptive statistics for morphological characters. These statistics can be calculated at the levels of populations, taxa/groups or for the whole dataset, using the functions `descrPopulation()`, `descrTaxon()` or `descrAll()`, respectively. 
 
 
-Using argument `format`, the desired output format can be specified. Keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%`, `$MAX` will be replaced by actual values. The default behaviour (`format = NULL`) is to produces a table with all values. Run `?descrTaxon` for more details.
+Using the argument `format`, the desired output format can be specified. The keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%` and `$MAX` are then replaced by actual values. The default behaviour (`format = NULL`) is to produce a table with all values. Run `?descrTaxon` for more details.
 
 ```{r echo = TRUE, eval=TRUE}
 descrTaxon(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
 ```
 
-The results can be assigned to an object and copied to the clipboard (fails for large data) or exported to file, both using the `exportRes()` function.
+The results can be assigned to an object and copied to the clipboard (this fails with extensive datasets) or exported to file, both using the `exportRes()` function.
 ```{r eval=FALSE, include=TRUE}
 descr_tax = descrTaxon(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
 exportRes(descr_tax, file = "clipboard")
 exportRes(descr_tax, file = "descr_tax.txt")
 ```
 
-Please note, that some of the following discriminant analyses require that no character is invariant in any taxon/group. If it is, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the whole character.  
+Please note that some of the following discriminant analyses require that no character is invariant in any taxon or group. If it is, a more common practice is to add a small constant (e.g. 0.000001) to some value instead of removing the whole character.  
 
 ## 3.6 Correlations of characters
 
-Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this could potentially distort the results. Function `cormat()` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One from the pair of highly correlated character can be removed from a dataset using `deleteCharacter()` function, see below.
+Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this can distort the results. The function `cormat()` calculates the correlation coefficients of the characters, Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One of the pair of highly correlated characters can be removed from the dataset using the `deleteCharacter()` function, see below.
 
 ```{r echo = TRUE, eval=FALSE}
 correlations.s = cormat(centaurea, method = "spearman")
 exportRes(correlations.s, file="correlations.spearman.txt")
 ```
 
-Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the `cormatSignifTest()` function.
+Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be performeed using the `cormatSignifTest()` function.
 
 ## 3.7 Populations as operational taxonomic units
 
-To simplify the overall structure especially in large datasets, using populations instead of individuals can be considered. This means that each population will be represented by averages of the individuals' values. Missing values will be ignored.
+To simplify the overall structure, especially with large datasets, using populations instead of individuals can be considered. This means that each population will be represented by averages of the individuals' values. Missing values will be ignored.
 
 ```{r echo = FALSE, eval = TRUE}
 populOTU <-function(object, crossval="indiv"){
@@ -402,12 +402,12 @@ pops = populOTU(centaurea)
 options(warn = defaultW)
 ```
 
-There is a warning that the values of some characters are NA. How to deal with missing data, will be discussed in the following section.
+There is a warning that the values of some characters are NA. How to deal with missing data is discussed in the following section.
 
 
 ## 3.8 Missing data
 
-Missing values are not accepted in majority of the morphological analyses, and MorphoTools2 do not edit user's data in the background. The user has to do his/her own decision, what to do with missing values. There are two options: remove or replace. But before doing anything else, let us have a look at the descriptive statistic about missing data using `missingCharactersTable()` and `missingSamplesTable()` functions. The amount of missing data can be summarized on various levels, namely "`taxon`", populations ("`pop`"), or individuals ("`indiv`"). 
+Missing values are not accepted in the majority of morphological analyses. The decision what to do with missing values is on the user. There are two options: remove or replace. However, before doing anything else, let us have a look at the descriptive statistic about missing data, using the `missingCharactersTable()` and `missingSamplesTable()` functions. The amount of missing data can be summarized at various levels, namely "`taxon`", populations ("`pop`"), or individuals ("`indiv`"). 
 
 ```{r include=F}
 options(max.print = 800)
@@ -415,7 +415,7 @@ centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "CZLE"
 # centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST",  "IW", "ILW", "MW", "MLW", "AL", "ALW"))
 ```
 ```{r echo = TRUE, eval=TRUE}
-# for demonstration only. Not all populations are displayed.
+# For demonstration only. Not all populations are displayed.
 missingCharactersTable(centaurea, level = "pop")
 ```
 
@@ -427,7 +427,7 @@ centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST",  "IW", "ILW
 ```
 
 ```{r echo = TRUE, eval = TRUE}
-# for demonstration purposes only. Only a subset of data is displayed.
+# For demonstration purposes only. Only a subset of data is displayed.
 missingSamplesTable(centaurea, level = "pop")
 ```
 
@@ -437,24 +437,24 @@ options(max.print = 60)
 ```
 
 
-As previous warnings indicated, populations LIP and PREL have the highest percentage of missing values in morphological characters (16%; 80 values per population are missing). The latter table shows that characters AL, AW, ALW, and AP are completely missing in these populations and 95% samples of population KOZH lack values of these characters.
+As indicated by the warnings above, populations LIP and PREL have the highest percentages of missing values in morphological characters (16%; 80 values per population are missing). The latter table shows that the characters AL, AW, ALW and AP are completely missing in these populations and 95% samples of population KOZH lack values of these characters.
 
 ### 3.8.1 Removing items
 
-Previous descriptive tables showed that four characters in two populations are completely missing. User should decide between deleting characters using `deleteCharacter()` or populations using `deletePopulation()` function. As character AP looks promising for delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be kept and the populations removed.
+The descriptive tables above show that four characters in two populations are completely missing. The user should decide between deleting the characters, using the `deleteCharacter()` function, or the populations, using the `deletePopulation()` function. As the character AP looks promising for the delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be retained and the populations removed.
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
-Another available option is to delete samples with a high portion of missing data using `deleteSample()` function. Command `deleteSample(centaurea, missingPercentage = 0.1)` will return a new `morphodata` object (dataset) where only samples having no more than 10% of missing data were retained. To remove specific samples, enumerate them in 'sampleName' argument in these functions.  
+Another available option is to delete samples with a high portion of missing data using the `deleteSample()` function. The command `deleteSample(centaurea, missingPercentage = 0.1)` returns a new `morphodata` object (dataset), retaining only samples having no more than 10% of missing data. To remove specific samples, enumerate them in the 'sampleName' argument in these functions.  
 
-Here is the right place to mention also `deleteTaxon()` and another quartet of functions with reversed logic  which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()`, and `keepCharacter()`.
+Here is the right place to mention also `deleteTaxon()` and another four functions with reversed logic,  which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()` and `keepCharacter()`.
 
-### 3.8.2 Replace missing values    
+### 3.8.2 Replacing missing values    
 
-Missing values can be substituted by the average value of the respective character in the respective population. However, the mean substitution introduces values that are not present in the original dataset. This approach is acceptable only if: there are relatively few missing values; these missing values are scattered throughout many characters (each character includes only a few missing values); removing all individuals or all characters with missing data would unacceptably reduce the data set. To substitute remaining missing values by average value, use function `naMeanSubst()`.
+Missing values can be substituted by the average value of the respective character in the respective population. However, substitution by the mean introduces values that are not present in the original dataset. This approach is acceptable only if the following conditions are met: There are relatively few missing values; these missing values are scattered across characters (each character including only a few missing values); and removing all individuals or all characters with missing data would unacceptably reduce the dataset. To substitute remaining missing values by an average value, use the function `naMeanSubst()`.
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = naMeanSubst(centaurea)
@@ -462,7 +462,7 @@ centaurea = naMeanSubst(centaurea)
 
 
 ***
-After examination of normality of distribution of each character, confirming that data do not contain highly correlated characters, replacing missing values by the average values, and removing remaining NAs, centaurea dataset is prepared for further analyses. It is not a bad idea to save a copy of it using `exportRes()` function. 
+After examining the normality of distribution of each character, confirming that the data do not contain highly correlated characters, replacing missing values by average values and removing remaining NAs, the centaurea dataset is prepared for further analyses. It is not a bad idea to save a copy of it using the `exportRes()` function. 
 
 
 
@@ -471,16 +471,16 @@ After examination of normality of distribution of each character, confirming tha
 
 # 4. Hierarchical clustering
 
-Hierarchical classification is one of the methods that do not require *a priori* specification of the samples' membership in taxa (groups). Therefore, this method is recommended to use first to be able to get an insight into the existence of (hierarchical) group structure in data. Both individuals and populations can be used, but in large datasets (hundreds of specimens or more) the dendrograms for individuals may be somewhat messy and populations are better choice. Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (default), Manhattan, Minkovski; (2) similarity coefficients for binary characters: Jaccard and simple matching; (3) coefficient for mixed data: Gower. Clustering methods available here using the above coefficients are: UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC, or UPGMC. However, note that for morphometric analysis Euclidean distance and UPGMA or Ward’s method are mostly used. The function includes standardization of the characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
+Hierarchical classification is one of the methods that do not require *a priori* specification of the membership of samples in taxa (groups). Therefore, this method is recommended to be used first in order to gain insight into the existence of a (hierarchical) group structure in the data. Both individuals and populations can be used, but with large datasets (of hundreds of specimens or more) dendrograms for individuals may be somewhat messy and populations are a better choice. Various measures of distance between observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (default), Manhattan, Minkovski; (2) similarity coefficients for binary characters: Jaccard and simple matching; and (3) coefficient for mixed data: Gower. The clustering methods available with this package, using the above coefficients are: UPGMA (default), Ward's method, single linkage, complete linkage, WPGMA, WPGMC and UPGMC. However, note that for morphometric analysis, Euclidean distance and UPGMA or Ward’s method are the most commonly used. The function includes the standardization of characters to a zero mean and a unit standard deviation. For further details, run `?clust`.  
 
-The dendrogram is displayed using `plot()` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot, negative values causing labels aligned at zero.
+The dendrogram is displayed using the `plot()` function with usual graphical parameters. The parameter `hang` controls distance of the labels from the plot; negative values cause labels to be aligned at zero.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300,}
-pops_hierClust = clust(pops, distMethod = "euclidean", clustMethod = "UPGMA")
+pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
 plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
 ```
 
-Several main clusters were formed in the dendrogram above, however, some populations (BABL, LES, OLE1, OLE2, and PROS) were “incorrectly” clustered, what requires further inspection.
+Several main clusters were formed in the dendrogram above, however, some populations (BABL, LES, OLE1, OLE2, and PROS) were clustered “incorrectly”, requiring further inspection.
 
 
 
@@ -488,7 +488,7 @@ Several main clusters were formed in the dendrogram above, however, some populat
 
 # 5. Principal component analysis (PCA)
 
-Principal component analysis (PCA) is another method without the requirement of *a priori* specification of the samples' membership in taxa (groups). PCA transforms the measured variables into principal components (artificial variables). The first few of them extract most of the variance in the measured variables. The standardized PCA based on correlation matrix is calculated by `pca.calc()` function (based on package `stats`; R Core Team, 2020), the result is an object of class `pcadata`. Run `?pcadata` for the help page about the elements of this object. Note the limitation of PCA with regard to the number of analysed characters. It should be lower than the number of analysed objects.
+Principal component analysis (PCA) is another method without the requirement for the *a priori* specification of the samples' membership in taxa (groups). PCA transforms the measured variables into principal components (artificial variables). The first few of them extract most of the variance in the measured variables. Standardized PCA based on a correlation matrix is calculated by the `pca.calc()` function (based on the package `stats`; R Core Team, 2020); the result is an object of the class `pcadata`. Run `?pcadata` for the help page about the elements of this object. Note the limitation of PCA with regard to the number of analysed characters. It should be lower than the number of objects analysed.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -496,14 +496,14 @@ pca.centaurea = pca.calc(centaurea)
 ```
 
 
-The summary statistics of the data is available using the function `summary()`. The eigenvalues indicate the proportion of variation of the original dataset expressed by individual axes, usually are presented as a percentage of their total sum (eigenvalues as percent). The eigenvectors express the direction of vectors characterizing the influence of the original characters on the principal component axes. The output of summary() function is usually truncated. To get a full listing, execute a `pca.centaurea$eigenValues`, `pca.centaurea$eigenvaluesAsPercent`, `pca.centaurea$cumulativePercentageOfEigenvalues`, and `pca.centaurea$eigenVectors` (values will be printed to console).
+The summary statistics of the data are available through the function `summary()`. Eigenvalues indicate the proportion of variation of the original dataset expressed by individual axes. They are usually presented as a percentage of their total sum (eigenvalues as percentages). Eigenvectors express the direction of vectors characterizing the influence of the original characters on the principal component axes. The output of the `summary()` function is usually truncated. To get a full listing, execute the following commands: `pca.centaurea$eigenvalues`, `pca.centaurea$eigenvaluesAsPercent`, `pca.centaurea$cumulativePercentageOfEigenvalues`, and `pca.centaurea$eigenvectors` (values will be printed on the console).
 
 
 ```{r echo = TRUE, eval=TRUE}
 summary(pca.centaurea)
 ```
 
-The result can be plotted by `plotPoints()` function. The parameter `axes` define principal components to plot (1st and 2nd being default) and `col` and `pch`[^4] control colour and type of plotting character, respectively (the same for each points or specific for each group (Taxon)). Usual graphical parameters control axes, size of point, etc., several parameters define the appearance and position of a legend; see `plotPoints()` documentation for details.  
+The result can be plotted using the `plotPoints()` function. The parameter `axes` define which principal components to plot (the 1st and 2nd being default), and the parametes `col` and `pch`[^4] control the colour and type of plotting character, respectively (the same for each points or specific for each taxon). The usual graphical parameters affect the axes, data point symbol size, etc., and several parameters define the appearance and position of the legend; see the documentation for `plotPoints()` for details.  
 
 &nbsp;  
 
@@ -521,14 +521,14 @@ plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2)
 ```
 
 
-The coordinates of the individuals (populations) on the principal components (sample scores) are stored in `pca.centaurea$objects$scores` and can be exported by `exportRes()` function. The dollar sign (`$`) enables one to extract items from a object, same as above.
+The coordinates of the individuals (populations) in the principal component space (sample scores) are stored in `pca.centaurea$objects$scores` and can be exported using the `exportRes()` function. The dollar sign (`$`) enables one to extract items from an object, as above.
 
 ```{r echo = TRUE, eval=FALSE}
 exportRes(pca.centaurea$objects$scores, file="scoresPCA.centaurea.txt")
 ```
 
-The character loadings (eigenvectors) express the influence of the original characters on the main components. Eigenvectors are stored in `pca.centaurea$eigenVectors` and can be exported by `exportRes()` function.
-Function `plotCharacters()` draws character loadings as arrows. 
+The character loadings (eigenvectors) express the influence of the original characters on the main components. Eigenvectors are stored in `pca.centaurea$eigenvectors` and can be exported using the `exportRes()` function.
+The function `plotCharacters()` draws character loadings as arrows. 
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
@@ -536,24 +536,24 @@ plotCharacters(pca.centaurea, cex = 1.2)
 
 ```
 ```{r echo = TRUE, eval=FALSE}
-exportRes(pca.centaurea$eigenVectors, file="eigenVectors.centaurea.txt")
+exportRes(pca.centaurea$eigenvectors, file="eigenvectors.centaurea.txt")
 
 ```
 
-Ordination diagrams of PCA showed relatively compact groupings corresponding to taxa with partial overlaps. First two components (axes) extracted 20.65% and 14.26% of the overall variability in data. Characters ILW, IW, are strongly correlated with the direction of separation of taxa *C. pseudophrygia*, *C. stenolepis* (“ps”, “st”) and their putative hybrid “hybr”. The *C. phrygia* s.str. ("ph") is separated in the diagonal direction, highly correlated with MW, ML, IV, and MLW characters.
+Ordination diagrams of PCA resulted in relatively compact groupings corresponding to taxa with partial overlaps. The first two components (axes) extracted 20.65% and 14.26% of the overall variability in the data. The characters ILW and IW are strongly correlated with the direction of the separation of the taxa *C. pseudophrygia* and *C. stenolepis* (“ps”, “st”) and their putative hybrid “hybr”. *Centaurea phrygia* s.str. ("ph") is separated in the diagonal direction, being highly correlated with the characters MW, ML, IV and MLW.
 
-The `plotPoints()` and `plotCharacters()` are a default plotting functions. Simple point's labels and legend can be added using argument `labels = TRUE` and `legend = TRUE`, respectively. 
+The `plotPoints()` and `plotCharacters()` are default plotting functions. Simple data point labels and a legend can be added using the arguments `labels = TRUE` and `legend = TRUE`, respectively. 
 
 
-For more precise control of labels and legend, or adding additional elements to plot, the following functions can be used:  
+For more precise control of labels and the legend, or adding elements to the plot, the following functions can be used:  
 
 * `plotAddLabels.points()`, `plotAddLabels.characters()` allows to include or exclude specified labels (`include`), specify the label's position (`pos`), offset (`offset`), colours (`col`), magnification (`cex`), etc.
 
-* `plotAddLegend()` allows to specify position using keyword (`x`[^5]), number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc.
+* `plotAddLegend()` allows to specify the position using a keyword (`x`[^5]), the number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc.
 
-* `plotAddEllipses()` draws prediction ellipses around taxa. Ellipses with given probability (`probability`) define the regions where will fall any new independent observation from the respective taxa.
+* `plotAddEllipses()` draws prediction ellipses around taxa. Ellipses with a given probability (`probability`) define regions where any new independent observation belonging to the respective taxa will fall.
 
-* `plotAddSpiders()` connects points with its group centroid, thus forms a "spider" diagram.
+* `plotAddSpiders()` connects points with their group centroid, thus forming a "spider" diagram.
 
 
 [^5]: **legend position**: `"topleft"`, `"topright"`, `"bottomleft"`, `"bottomright"`, `"top"`, `"left"`, `"bottom"`, `"right"`, and `"center"`.
@@ -569,7 +569,7 @@ plotPoints(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
             legend = F, labels = F)
 
 plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
-                      "CERM","DOM" ,"KOZH","KOT"), include = FALSE, pos = 4, cex=0.7)
+                      "CERM","DOM","KOZH","KOT"), include = FALSE, pos = 4, cex=0.7)
 plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
                       pos = 2,cex = 0.75)
 plotAddLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"),pos=3,offset=0.7,cex=0.75)
@@ -588,17 +588,17 @@ plotAddLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
-               x = "bottomright", pt.cex = 1.3, box.type = "n" ,ncol = 2)
+               x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 
-# semi-transparent spider
-plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
-                                      rgb(0,255,0,max=255,alpha=130), # green
-                                      rgb(255,0,0,max=255,alpha=130), # red
-                                      rgb(255,102,0,max=255,alpha=130))) # orange
+# Semi-transparent spiders
+plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255, max=255, alpha=130), # blue
+                                      rgb(0,255,0, max=255, alpha=130), # green
+                                      rgb(255,0,0, max=255, alpha=130), # red
+                                      rgb(255,102,0, max=255, alpha=130))) # orange
 ```
 
 
-To highlight only some groups, `NA` for other colours can be used.
+To highlight only some groups in colour, set the colour values of groups not to be highlighted to `NA`.
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -630,7 +630,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
               x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 ```
 
-To draw a 3D scatterplot, the `plot3Dpoints()` function can be used. The `theta` and `phi` arguments define viewing direction (azimuthal direction and co-latitude, respectively).
+To draw a 3D scatterplot, the `plot3Dpoints()` function can be used. The `theta` and `phi` arguments define the viewing direction (azimuthal direction and co-latitude, respectively).
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
@@ -649,14 +649,14 @@ plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T )
 
 # 6. Principal coordinate analysis (PCoA)
 
-Principal coordinate analysis (PCoA) is another method to explore and to visualize similarities or dissimilarities within the data. This method is especially useful in analysis of non-quantitative characters, when Euclidean distance and the corresponding measures of correlation do not provide acceptable model, so that the PCA is not adequate for ordination. PCoA estimates coordinates for a set of objects (rows) in a space, whose relationships are measured by any coefficient of similarity or distance (one of: Euclidean, Manhattan, Minkovski, Jaccard, simple matching, or Gower). PCoA might be used also in the case when there are more characters than objects in the analysis. As the PCoA is computed from distances among objects, therefore there is no direct information on the influence of original characters on coordinate axes.
+Principal coordinate analysis (PCoA) is another method for exploring and visualizing similarities or dissimilarities within the data. This method is especially useful in analyses of non-quantitative characters, when Euclidean distance and the corresponding measures of correlation do not provide acceptable model, so PCA is not adequate for ordination. PCoA estimates coordinates for a set of objects (rows) in a space, whose relationships are measured by any coefficient of similarity or distance (Euclidean, Manhattan, Minkovski, Jaccard, simple matching, or Gower). PCoA might be used also when there are more characters than objects in the analysis. As PCoA is computed from distances among objects, so there is no direct information on the influence of the original characters on the coordinate axes.
 
 
-The PCoA is calculated by `pcoa.calc()` function (based on package `stats`; R Core Team, 2020), the result is an object of class `pcoadata`.
+PCoA is performed by the `pcoa.calc()` function (based on the `stats` package; R Core Team, 2020); the result is an object of the class `pcoadata`.
 
 
 ```{r echo = TRUE, eval=TRUE}
-pcoa.res = pcoa.calc(centaurea, distMethod = "manhattan")
+pcoa.res = pcoa.calc(centaurea, distMethod = "Manhattan")
 summary(pcoa.res)
 ```
 
@@ -664,7 +664,7 @@ summary(pcoa.res)
 
 
 
-The result can be plotted by `plotPoints()` or `plot3Dpoints()` functions as per usual, extending methods (`plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()`, and `plotAddLegend()`) are applicable as well. Only `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on coordinate axes.
+The result can be plotted by either the `plotPoints()` or `plot3Dpoints()` function as per usual. The extending functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` are available, too. Only the function `plotCharacters()` cannot be used, as there is no information on the influence of the original characters on the coordinate axes.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
@@ -681,18 +681,18 @@ plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,1
 
 # 7. Non-metric multidimensional scaling (NMDS)
 
-All of the clustering and ordination analyses above attempt to preserve the distance relationships among the objects as much as possible. The main difference of the non-metric multidimensional scaling (NMDS) is, that the preservation of distances is not of primary importance. This analysis is attempting to represent the objects in a small (usually two or three) number of dimensions (specified by `k` argument), preserving the order of distances among objects (similar objects are plotted closer to one another and dissimilar objects far apart).
+All of the clustering and ordination analyses mentioned above attempt to preserve the distance relationships among the objects as much as possible. The main difference with non-metric multidimensional scaling (NMDS) is that the preservation of distances is not of primary importance. This analysis attempts to represent the objects in a small number of dimensions (usually two or three) specified by the argument `k`, preserving the order of distances among objects (similar objects are plotted closer to one another and dissimilar objects far apart).
 Like principal coordinate analysis (PCoA), NMDS is not limited to Euclidean distance; it can produce ordinations using any coefficient of similarity or distance.
 
-As NMDS compress the relationships among objects into two or three dimensions, this compression creates a "stress". The stress value can be interpreted as the "goodness" of the solution, where lower is better. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions. Further, multiple runs of the NMDS analysis are needed to ensure that the stable ordination has been reached, as anyone run may get "trapped" in local optima which are not representative of true similarities.
-Similarly to the PCoA, influence of original characters on new axes cannot  be directly derived. Moreover, axes of the ordination are arbitrary, thus the variation explained by individual axes is unknown.
+Because NMDS compresses the relationships among objects into two or three dimensions, this compression creates "stress". This stress value can be interpreted as the "goodness" of the solution, lower values being better. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions. Further, multiple runs of the NMDS analysis are needed to ensure that a stable ordination has been reached, as any single run may get "trapped" in local optima which are not representative of true similarities.
+Similarly to PCoA, the influence of the original characters on new axes cannot be derived directly. Moreover, the ordination axes are arbitrary, so the variation explained by individual axes is unknown.
 
-The NMDS is calculated by `nmds.calc()` function (using the `monoMDS()` function from package `vegan`; R Core Team, 2020), the result is an object of class `pcoadata`.
+The NMDS is calculated by the `nmds.calc()` function, using the `monoMDS()` function from the package `vegan` (R Core Team, 2020); the result is an object of class `pcoadata`.
 
-The result can be plotted by `plotPoints()` or `plot3Dpoints()` functions, methods `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()`, and `plotAddLegend()` works as usual. Only `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on coordinate axes.
+The result can be plotted with the functions `plotPoints()` or `plot3Dpoints()`, the functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` work as usual. Only the `plotCharacters()` function is not applicable, as there is no information on the influence of original characters on the coordinate axes.
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-nmds.res = nmds.calc(centaurea, distMethod = "euclidean", k = 3)
+nmds.res = nmds.calc(centaurea, distMethod = "Euclidean", k = 3)
 summary(nmds.res)
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
             legend = T)
@@ -703,11 +703,11 @@ plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18)
 
 # 8. Stepwise discriminant analysis
 
-In some analyses, a number of characters cannot  overcome a number of samples. If it does, in many cases only a subset of the "best" characters (contributing the most to the differentiation of predefined groups (taxa)) have to be selected. Another common requirement is linear independence of characters. Character should not be a linear combination of any other character(s). The way to eliminate such unnecessary or redundant characters is the use of a stepwise discriminant analysis.  
+In some analyses, the number of characters must not exceed the number of samples. If it does, in many cases only a subset of the "best" characters contributing the most to the differentiation of taxa (predefined groups) have to be selected. Another common requirement is the linear independence of characters. No character should not be a linear combination of any other character(s). The way to eliminate such unnecessary or redundant characters is to use stepwise discriminant analysis.  
 
-The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those which unique contribution is no more significant (bellow `F_to_stay` treshold) are excluded before addition of the next most useful character. When none of the unselected variables meets the entry criterion (significance of their unique contribution is bellow `F_to_enter` treshold), or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, selected characters are printed to console, ordered according their importance for separation of the predefined groups.  
+The most useful characters are identified and added to the selection step by step. After adding a new character, the significance of all the characters in the model is tested, and those whose unique contribution is no more significant (bellow the `FToStay` threshold) are excluded before the addition of the next most useful character. When none of the unselected variables meets the entry criterion (the significance of their unique contribution is bellow the `FToEnter` threshold) or the maximum number of characters (depending on the number of individuals and defined groups) is reached, the selection process stops. After the final step, the selected characters are printed to the console, ordered according their importance for the separation of the predefined groups.  
 
-The stepwise discriminant analysis is calculated by `stepdisc.calc()` function.
+Stepwise discriminant analysis is calculated by the `stepdisc.calc()` function.
 
 
 ```{r include=F}
@@ -732,14 +732,14 @@ options(max.print = 60)
 
 # 9. Canonical discriminant analysis (CDA)
 
-The canonical discriminant analysis finds linear combinations of the original variables that provide maximal separation among *a priori* defined groups (by `Taxon` column in input data). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning.  
+The canonical discriminant analysis finds linear combinations of the original variables that provide maximum separation among *a priori* defined groups (by the `Taxon` column in the input data). Group membership should be defined using some independent, non-morphological data (e.g. on ploidy levels, geographic origin or genetic groups) to avoid circular reasoning.  
 
 
-Discriminant analyses (in general) have requirements concerning number, correlation and variability of characters: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects.  
+Discriminant analyses (in general) have requirements concerning the number, correlation and variability of characters: (1) No character may be a linear combination of any other character; (2) No pair of characters may be highly correlated; (3) No character may be invariant in any taxon (group); (4) For the number of taxa (g), characters (p) and the total number of samples (n), the following should hold: 0 < p < (n - g); and (5) There must be at least two groups (taxa) and in each group there must be at least two objects.  
 
-The CDA analysis is used to find to what extent the predefined groups of objects can be distinguished based on available characters, and to identify characters, which mostly contribute to this differentiation. Note that the canonical discriminant analysis finds n-1 meaningful canonical axes, where n is a number of groups (taxa). If two groups are analysed, only a single axis is computed and the sample scores are displayed as a histogram.  
+The CDA analysis is used to ascertain the extent to which the predefined groups of objects can be distinguished based on available characters and to identify characters which contribute the most to this differentiation. Note that canonical discriminant analysis finds n-1 meaningful canonical axes, where n is the number of groups (taxa). If two groups are analysed, only a single axis is computed and the sample scores are displayed as a histogram.  
 
-CDA can be calculated by `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). A result is an object of class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, i.e., total-sample correlations between the original variables and the canonical variates. Thus, these coefficients are used to interpret the character's contribution to group separation. The function `summary()` print summaries of the results of `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
+CDA can be applied by invoking the `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). The result is an object of the class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, specifically total-sample correlations between the original variables and the canonical variates. Thus, these coefficients are used to interpret the contribution of different characters to the separation of groups. The function `summary()` prints summaries of the results of the `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -778,15 +778,15 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
-The CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis.  
+This CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis.  
 
 ```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
 plotCharacters(cda.centaurea, cex = 1.2)
 ```
 
-Function `plotCharacters()` called with object of class `cdadata` as argument visualise total canonical structure coefficients as arrows. Direction and length of arrows indicate characters' contribution to separation of groups. Characters ML, MLW, IV and MW are oriented in the direction of separation of *C. phrygia* s.str. ("ph"), thus these characters contributed the most significantly, which is in accordance with the results of PCA. 
+The function `plotCharacters()`, called with an object of the class `cdadata` as an argument, visualizes total canonical structure coefficients as arrows. The direction and length of the arrows indicate the characters' contribution to the separation of groups. The characters ML, MLW, IV and MW are oriented in the direction of the separation of *C. phrygia* s.str. ("ph"), so they contributed the most significantly, which is in accordance with the results of PCA. 
 
-The total canonical structure coefficients are one of the elements of the object of class `cdadata` and can be accessed by the `$` notation. The above-mentioned characters (ML, MLW, IV and MW) received highest scores at the first canonical axis (regardless of plus or minus sign). Results can be exported using the `exportRes()` function. 
+The total canonical structure coefficients are elements of an object of the class `cdadata` and can be accessed using the `$` notation. The above-mentioned characters (ML, MLW, IV and MW) received the highest absolute scores along the first canonical axis (regardless of sign). The results can be exported using the `exportRes()` function. 
 
 
 
@@ -803,8 +803,7 @@ cda.centaurea$totalCanonicalStructure
 &nbsp;  
 &nbsp;  
 
-A 3D scatterplot can be produced using the `plot3Dpoints()` function. 
-Viewing direction and slope (co-latitude) can be set by `theta` and `phi` arguments, respectively.
+A 3D scatterplot can be produced using the `plot3Dpoints()` function. The viewing direction and slope (co-latitude) can be set using the `theta` and `phi` arguments, respectively.
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -816,7 +815,7 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 
 ***
 
-To gain better insight into the differentiation among remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), these taxa will be analysed separately. The new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
+To gain better insight into the differentiation among the remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), these taxa will be analysed separately. A new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -830,16 +829,17 @@ plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18),
 cda.stPsHybr$totalCanonicalStructure
 ```
 
-The first axis extract most of the variation. Characters correlated with this axis (IW, ILW, LS, MW, and MLW) are the most suitable for taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibit middle values in these particular characters. The characters correlated with the second axis (IV, ML, and LW) contributes to the separation of hybrid from parental species.
+The first axis captures most of the variation. Characters correlated with this axis (IW, ILW, LS, MW, and MLW) are the most suitable for the taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibits intermediate values of these particular characters. The characters correlated with the second axis (IV, ML, and LW) contribute to the separation of the hybrid from the parental species.
 
 
 
 
 ### Passive prediction of samples. 
 
-Sometimes it is desirable to passively display (predict) the position of some samples in the canonical space derived using the other samples. This approach is applicable for displaying the position of hybrids, type specimens, "atypical" populations (that could not be assigned reliably to any of the predefined groups), etc. Passive samples can be specified using `passiveSamples` argument (accepting both populations and taxa). These samples will be excluded from computing discriminant function, and only passively predicted in multidimensional space. 
+Sometimes it is desirable to passively display (predict) the position of certain samples in the canonical space
+formed by other samples. This approach is useful for displaying the position of hybrids, type specimens, "atypical" populations (that could not be assigned reliably to any of the predefined groups), etc. Passive samples can be specified using the `passiveSamples` argument (accepting both populations and taxa). These samples are excluded from the computation of the discriminant function and only passively predicted in the multidimensional space. 
 
-Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note use of semi-transparent colours to show the overlap of the groups. The colours are defined using `rgb()` function in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
+Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note use of semi-transparent colours to show the overlap of the groups. The colours are defined using the `rgb()` function, in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
@@ -868,12 +868,11 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
 
 # 10. Classificatory discriminant analysis
 
-Classificatory discriminant analysis (based on packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). The group membership should be defined using some independent data, i.e. other than morphology itself (such as ploidy levels, geographic origin, or genetic groups), to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results then indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, we do not have two independent datasets (training and sample). In that case, we use a cross validation procedure, in which part of the dataset is used for computing the criteria that are applied on the remaining observations and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied for the individual left out) but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of class `classifdata`. The `classif.matrix()` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
+Classificatory discriminant analysis (based on the packages `MASS` and `class`; Venables & Ripley, 2002) is used to classify observations (sample dataset) into known groups, using criteria (discriminant functions) based on other observations with known group membership (training dataset). Group membership should be defined using independent, non-morphological data of some sort, for example on ploidy levels, geographic origin or genetic groups, to avoid circular reasoning. If a morphological character has to be used to define groups, it should be excluded from further analyses. The results then indicate whether the retained characters are able to separate the groups in addition to the defining character. Often, however, we do not have two independent datasets (training and sample). We then opt for a cross validation procedure, in which part of the dataset is used to compute the criteria that are applied to the remaining observations, and the procedure is repeated until all observations are classified. The default is leave-one-out cross validation (the criterion is based on n – 1 individuals, and applied to the individual left out), but it is also possible to use whole populations as leave-out units (as individuals from a population are not completely independent observations and may be morphologically closer to each other than to individuals from other populations). The cross-validation mode can be specified by the argument `crossval` as `"indiv"` or `"pop"`  (the former, which is the default option, is applied in the example below). The resulting classification is then compared with the original (*a priori*) classification of individuals into groups. The result of classificatory DA is stored in an object of the class `classifdata`. The `classif.matrix()` function formats the results of the above functions as a summary classification table of taxa, populations or individuals. The results (classification tables) can be exported using the `exportRes()` function.  
 
-As stated above, discriminant analyses have some requirements: (1) no character can be a linear combination of any other character; (2) no pair of characters can be highly correlated; (3) no character can be invariant in any taxon (group); (4) for the number of taxa (g), characters (p) and total number of samples (n) should hold: 0 < p < (n - g), and (5) there must be at least two groups (taxa), and in each group there must be at least two objects. Violation of these requirements is reflected by warning or error messages (rank deficiency).  
+As stated above, discriminant analyses have certain requirements: (1) No character may be a linear combination of any other character; (2) No pair of characters may be highly correlated; (3) No character may be invariant in any taxon (group); (4) For the number of taxa (g), characters (p) and total number of samples (n) the following should hold: 0 < p < (n - g); and (5) There must be at least two groups (taxa) and in each group there must be at least two objects. Violation of these requirements is reflected by warning or error messages (rank deficiency).  
 
-To fulfil these requirements, only a subset of characters will be used. 
-Linearly independent characters will be identified by stepwise discriminant analysis, invariant characters within taxon by `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value, than to remove the character as a whole. A subset includes all characters identified as most suitable for taxonomic delimitation by PCA and CDA analyses.
+To fulfil these requirements, only a subset of characters is used. Linearly independent characters can be identified by stepwise discriminant analysis and invariant characters within a taxon are revealed by the `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value than to remove the character as a whole. The subset includes all characters identified as most suitable for taxonomic delimitation by PCA and CDA analyses.
 
 ```{r include=F}
 options(max.print = 460)
@@ -889,15 +888,15 @@ descrTaxon(partialCentaurea, format = "$SD")
 
 partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] =
              partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] + 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] =
-             partialCentaurea$data[ partialCentaurea$Taxon == "ph"  , "IV" ][1] + 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] =
-             partialCentaurea$data[ partialCentaurea$Taxon == "st"  , "LBS"][1] + 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "ph", "IV" ][1] =
+             partialCentaurea$data[ partialCentaurea$Taxon == "ph", "IV" ][1] + 0.000001
+partialCentaurea$data[ partialCentaurea$Taxon == "st", "LBS"][1] =
+             partialCentaurea$data[ partialCentaurea$Taxon == "st", "LBS"][1] + 0.000001
 ```
 
 
-If data have approximately normal distribution, Linear (LDA; `classif.lda()`) or Quadratic (QDA; `classif.qda()`) discriminant function can be used. A decision is based on the homogeneity of the within-group covariance matrices (tested by Box's M-test; `BoxMTest()`). LDA assumes equality of covariances among characters (the predictor variables). This assumption is relaxed with the QDA.  
-The nonparametric k-nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
+If the data have an approximately normal distribution, linear (LDA; `classif.lda()`) or quadratic (QDA; `classif.qda()`) discriminant function can be used. The decision what analysis to use should be based on the homogeneity of the within-group covariance matrices (tested by Box's M-test; `BoxMTest()`). LDA assumes equality of covariances among the characters (the predictor variables). This assumption is relaxed with QDA.  
+The non-parametric k nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
 
 ```{r echo = TRUE, eval=TRUE}
 boxMTest(partialCentaurea)
@@ -905,14 +904,14 @@ boxMTest(partialCentaurea)
 ```
 
 
-The Box’s M test indicated that there is a significant difference in the covariance matrices among taxa (p-value < 0.001) and therefore, Quadratic DA is recommended.
+The Box’s M test indicates that there is a significant difference in the covariance matrices among taxa (p-value < 0.001), so quadratic DA is recommended.
 
 
 
 ## 10.1 Linear discriminant analysis (LDA)
 
 
-Linear discriminant analysis can be calculated by `classif.lda()` function. If collinear variables are present, a warning message is reported. A problem of multicollinearity is not covered in this tutorial, but note if the classification itself is the only thing that matters, a warning can be ignored.
+Linear discriminant analysis can be performed by invoking the `classif.lda()` function. If collinear variables are present, a warning message is returned. The problem of multicollinearity is not covered in this tutorial, but note that if the classification itself is the only thing that matters, the warning can be ignored.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -928,10 +927,10 @@ classif.matrix(classifRes.lda, level = "taxon")
 classif.matrix(classifRes.lda, level = "pop")
 ```
 
-The detailed classification of populations is very useful, as it can reveal some atypical or incorrectly assigned populations. Most of the populations from the sample data are successfully classified (generally over 70% correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) have a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
+A detailed classification of populations is very useful, as it can reveal atypical or incorrectly assigned populations. Most of the populations from the sample data were classified successfully (generally over 70% of correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) yielded a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
 
 
-The results can be exported to the clipboard or file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
+The results can be exported to the clipboard or a file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
 
 ```{r echo = TRUE, eval=FALSE}
 classif_lda = classif.matrix(classifRes.lda, level = "indiv")
@@ -944,7 +943,7 @@ exportRes(object = classif_lda,
 ## 10.2 Quadratic discriminant analysis (LDA)
 
 
-Quadratic DA does not assume equal covariance matrices among the groups and can be calculated by `classif.qda()` function.
+Quadratic DA does not assume equal covariance matrices among groups and can be calculated by the `classif.qda()` function.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -957,11 +956,11 @@ classif.matrix(classifRes.qda, level = "taxon")
 
 
 
-## 10.3 k-nearest neighbour classificatory DA
+## 10.3 K nearest neighbour classificatory DA
 
-The **k-nearest neighbour** method classifies an individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardised to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
+The **k nearest neighbour** method classifies an each individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardized to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
 
-The optimal number of neighbours to consider is unknown, but it is empirically estimated from the data. The `knn.select()` searches for the optimal k for the given data set. The function can use two cross-validation methods (by individuals and populations) in a similar way as the classificatory discriminant analysis functions (the latter is used in the example below). The function computes the number of correctly classified individuals for k values from 1 to 30 and highlight the value with the highest success rate. Ties (i.e., when there are the same numbers of votes for two or more groups) are broken at random, and thus several iterations may yield different results. Therefore, the functions compute 10 iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered. 
+The optimum number of neighbours to consider is unknown, but it is estimated empirically from the data. The `knn.select()` function searches for the optimal k for the given dataset. The function can use two cross-validation methods (by individuals and populations) in a similar way as with classificatory discriminant analysis functions (the latter is used in the example below). The function computes the number of correctly classified individuals for k values from 1 to 30 and highlights the value with the greatest success rate. Ties (i.e. when there are the same numbers of votes for two or more groups) are broken at random, so subsequent iterations may yield different results. Therefore, the functions compute ten iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered. 
 
 
 ```{r echo = FALSE, eval = TRUE}
@@ -983,7 +982,7 @@ knn.select<-function(object, crossval="indiv"){
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 
-  cat("\nThe highest number of correct classifications is at k = 15\n")
+  cat("\nThe highest number of correct classifications is at k = 15.\n")
 }
 ```
 
@@ -993,7 +992,7 @@ knn.select<-function(object, crossval="indiv"){
 knn.select(partialCentaurea, crossval = "pop")
 ```
 
-The highest number of correct classifications is at k = 15, thus we set `k = 15` in the `classif.knn()` function (to classify individual according its 15 nearest neighbours).
+The highest number of correct classifications is at k = 15, so we set `k` to equal 15 in the `classif.knn()` function (to classify each individual according its 15 nearest neighbours).
 
 ```{r echo = TRUE, eval=TRUE}
 classifRes.knn = classif.knn(partialCentaurea, crossval = "pop", k = 15)
@@ -1010,13 +1009,13 @@ exportRes(popClassifMatrix, file = "clipboard")
 ```
 
 
-## 10.4 Classification of sample based on an independent training set.
+## 10.4 Classification of sample individuals based on an independent training set.
 
-The another functions, `classifSample.lda()`, `classifSample.qda()` and `classifSample.knn()` are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. Discriminant criterion is developed from the original (training) dataset and applied to the specific sample (set).  
+The functions `classifSample.lda()`, `classifSample.qda()` and `classifSample.knn()` are designed to classify hybrid populations, type herbarium specimens, atypical samples, entirely new data, etc. A discriminant criterion is devised from the original (training) dataset and applied to the specific sample(s).  
 
 &nbsp;  
 
-Let's remove population LES and pretend that sample LES1116 is a type herbarium specimen of *Centaurea stenolepis* and we want to show its similarity with other populations of the species (typically, we have only morphology for old herbarium collections while we have other data for recently studied populations – but to assess their taxonomic identity, we should compare them with types ). To classify LES1116, run the following code:
+Let us remove population LES, that and pretend that sample LES1116 is a type herbarium specimen of *Centaurea stenolepis* and that we want to quantify its similarity with other populations of the species (typically, we have only morphology for old herbarium collections while we have other data for recently studied populations – but to assess their taxonomic identity, we should compare them with types). To classify LES1116, run the following code:
 
 ```{r echo = TRUE, eval=TRUE}
 trainingSet = deletePopulation(partialCentaurea, populationName = "LES")
@@ -1030,7 +1029,7 @@ classifSample.knn(typeSpecimen, trainingSet, k = 4)
 
 ```
 
-The probability, that sample LES1116 is *C. stenolepis* is over 90%. 
+The probability that sample LES1116 is of *C. stenolepis* is over 90%. 
 
 
 
@@ -1045,7 +1044,7 @@ A brief account of the multivariate methods used in taxonomy is given in:
 
 **Marhold K. (2011)**. Multivariate morphometrics and its application to monography at specific and infraspecific levels. In: Stuessy TF, Lack HW, eds. *Monographic plant systematics: fundamental assessment of plant biodiversity*. Ruggell: A.R.G. Gantner Verlag K. G., 73–99.  
 
-For a detailed description of used methods see:
+For a detailed description of the methods used, see:
 
 **Legendre P. & Legendre L. (2012)**. *Numerical Ecology*, 3rd English edn. Elsevier Science BV, Amsterdam.
 

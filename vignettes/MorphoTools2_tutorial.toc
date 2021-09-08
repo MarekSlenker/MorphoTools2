@@ -1,9 +1,9 @@
 \contentsline {section}{1. Introduction}{3}{section*.2}%
-\contentsline {section}{2. Obtaining and installing MorphoTools2 package}{3}{section*.3}%
-\contentsline {section}{3. Data import, control and manipulation}{3}{section*.4}%
+\contentsline {section}{2. Obtaining and installing the MorphoTools2 package}{3}{section*.3}%
+\contentsline {section}{3. Data import, checking and manipulation}{3}{section*.4}%
 \contentsline {subsection}{3.1 Data import}{3}{section*.5}%
-\contentsline {subsection}{3.2 Assessing whether the data follow normal distribution}{5}{section*.6}%
-\contentsline {subsubsection}{3.2.1 Shapiro-Wilk normality test}{5}{section*.7}%
+\contentsline {subsection}{3.2 Assessing normality of data}{5}{section*.6}%
+\contentsline {subsubsection}{3.2.1 Shapiro-Wilk test of normality}{5}{section*.7}%
 \contentsline {subsubsection}{3.2.2 Histograms}{6}{section*.8}%
 \contentsline {subsubsection}{3.2.3 Normal Q-Q plot}{7}{section*.9}%
 \contentsline {subsection}{3.3 Data transformation}{8}{section*.10}%
@@ -13,7 +13,7 @@
 \contentsline {subsection}{3.7 Populations as operational taxonomic units}{12}{section*.14}%
 \contentsline {subsection}{3.8 Missing data}{13}{section*.15}%
 \contentsline {subsubsection}{3.8.1 Removing items}{14}{section*.16}%
-\contentsline {subsubsection}{3.8.2 Replace missing values}{14}{section*.17}%
+\contentsline {subsubsection}{3.8.2 Replacing missing values}{14}{section*.17}%
 \contentsline {section}{4. Hierarchical clustering}{15}{section*.18}%
 \contentsline {section}{5. Principal component analysis (PCA)}{16}{section*.19}%
 \contentsline {section}{6. Principal coordinate analysis (PCoA)}{24}{section*.20}%
