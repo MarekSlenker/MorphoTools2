@@ -20,7 +20,7 @@ exportRes.morphodata <- function(object, file = "", dec = ".", sep = "\t", row.n
 #' @export
 exportRes.data.frame <- function(object, file = "", dec = ".", sep = "\t", row.names = FALSE, col.names = TRUE) {
 
-  utils::write.table(object, file = file, dec = dec, sep = sep, quote = F, row.names = row.names, col.names = col.names, na = "")
+  utils::write.table(object, file = file, dec = dec, sep = sep, quote = FALSE, row.names = row.names, col.names = col.names, na = "")
 }
 
 

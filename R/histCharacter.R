@@ -28,7 +28,7 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
-    dir.create(paste(getwd(), "/",folderName, "/", sep = ""), showWarnings = T, recursive = F)
+    dir.create(paste(getwd(), "/",folderName, "/", sep = ""), showWarnings = TRUE, recursive = FALSE)
   }
 
   # hists plot for characters

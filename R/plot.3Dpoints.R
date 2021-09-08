@@ -19,9 +19,9 @@ plot3Dpoints <- function(result, axes = c(1, 2, 3), xlab = NULL, ylab = NULL,
 plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL, pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]]," (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]]," (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(names(result$eigenvalues)[axes[3]]," (", round(result$eigenvaluesAsPercentages[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -37,9 +37,9 @@ plot3Dpoints.pcadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
 plot3Dpoints.pcoadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NULL, zlab = NULL, pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
                                  ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]]," (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]]," (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(names(result$eigenvalues)[axes[3]]," (", round(result$eigenvaluesAsPercentages[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -57,9 +57,9 @@ plot3Dpoints.nmdsdata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = N
          pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
          ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste(colnames(result$objects$scores)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste(colnames(result$objects$scores)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste(colnames(result$objects$scores)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste(colnames(result$objects$scores)[axes[1]]," (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(colnames(result$objects$scores)[axes[2]]," (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(colnames(result$objects$scores)[axes[3]]," (", round(result$eigenvaluesAsPercentages[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -78,9 +78,9 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
         pch = 16, col = "black", pt.bg = "white", phi = 10, theta = 2,
         ticktype = "detailed", bty = "u", type = "p", labels = FALSE, legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
-  if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]]," (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]]," (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
-  if (is.null(zlab)) zlab = paste(names(result$eigenValues)[axes[3]]," (", round(result$eigenvaluesAsPercent[axes[3]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]]," (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]]," (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
+  if (is.null(zlab)) zlab = paste(names(result$eigenvalues)[axes[3]]," (", round(result$eigenvaluesAsPercentages[axes[3]]*100, digits = 2) ,"%)", sep = "")
 
 
   .plot3D_internal(result, axes = axes, xlab = xlab, ylab = ylab, zlab = zlab,
@@ -110,7 +110,7 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
 
   # main plot
   plot3D::scatter3D(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]], z = object$objects$scores[ ,axes[3]],
-            colvar = NULL, colkey = T, col = object$col, pch = object$pch, bg.col = object$pt.bg,
+            colvar = NULL, colkey = TRUE, col = object$col, pch = object$pch, bg.col = object$pt.bg,
             phi = phi, theta = theta, ticktype = ticktype, bty = bty, type = type, xlab = xlab, ylab = ylab, zlab = zlab, ...)
 
 
@@ -124,7 +124,7 @@ plot3Dpoints.cdadata <- function(result, axes = c(1,2,3), xlab = NULL, ylab = NU
 
   # labels
   {
-    if (labels == T)
+    if (labels == TRUE)
       plot3D::text3D(x = object$objects$scores[ ,axes[1]], y = object$objects$scores[ ,axes[2]], z = object$objects$scores[ ,axes[3]],
              labels  = object$objects$ID,
              add = TRUE, cex = 0.8)

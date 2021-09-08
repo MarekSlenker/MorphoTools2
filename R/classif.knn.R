@@ -23,7 +23,7 @@ classif.knn <- function(object, k, crossval = "indiv"){
 
   if (crossval=="indiv")
   {
-    knn.samp = class::knn.cv(train = object$data, cl = object$Taxon, k = k, prob = T, use.all = T)
+    knn.samp = class::knn.cv(train = object$data, cl = object$Taxon, k = k, prob = TRUE, use.all = TRUE)
 
     res$ID = as.character(object$ID)
     res$Population = object$Population

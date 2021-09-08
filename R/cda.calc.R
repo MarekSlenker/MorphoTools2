@@ -43,7 +43,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     dfh <- manova$df[[term]]
     Sp <- E/dfe
     tdecomp <- function(m) {
-      wm <- eigen(m, symmetric = T)  # povodne symmetric T
+      wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
       p <- ncol(m)
       wmd <- wm$values
 
@@ -62,7 +62,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     eInv <- solve(Tm)
 
     eHe <- t(eInv) %*% H %*% eInv
-    dc <- eigen(eHe, symmetric = T)  # povodne symmetric T
+    dc <- eigen(eHe, symmetric = TRUE)  # povodne symmetric T
     rank <- min(dfh, sum(dc$values > 0))
     pct <- 100 * dc$values/sum(dc$values)
     if (ndim > rank) {
@@ -120,12 +120,12 @@ cda.calc <- function(object, passiveSamples = NULL) {
   cdaResult = .newCdadata()
 
   cdaResult$rank = cda$rank
-  cdaResult$eigenValues = cda$eigenvalues[1:cda$rank]
+  cdaResult$eigenvalues = cda$eigenvalues[1:cda$rank]
   cdaResult$canrsq = cda$canrsq
-  cdaResult$eigenvaluesAsPercent = cda$pct[1:cda$rank] / 100
+  cdaResult$eigenvaluesAsPercentages = cda$pct[1:cda$rank] / 100
 
   for (i in cdaResult$rank:1) {
-    cdaResult$cumulativePercentageOfEigenvalues[i] = sum(cdaResult$eigenvaluesAsPercent[1:i])
+    cdaResult$cumulativePercentageOfEigenvalues[i] = sum(cdaResult$eigenvaluesAsPercentages[1:i])
   }
 
   cdaResult$coeffs.raw = cda$coeffs.raw

@@ -8,13 +8,13 @@ This function performs Non-metric multidimensional scaling.
 }
 
 \usage{
-nmds.calc(object, distMethod = "euclidean", k = 3, binaryChs = NULL,
+nmds.calc(object, distMethod = "Euclidean", k = 3, binaryChs = NULL,
                     nominalChs = NULL, ordinalChs = NULL)
 }
 
 \arguments{
 \item{object}{an object of class \code{\link{morphodata}}.}
-\item{distMethod}{the distance measure to be used. This must be one of: \code{"euclidean"}, \code{"manhattan"}, \code{"minkowski"}, \code{"jaccard"}, \code{"simpleMatching"}, or \code{"gower"}. See details.}
+\item{distMethod}{the distance measure to be used. This must be one of: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}, \code{"Jaccard"}, \code{"simpleMatching"}, or \code{"Gower"}. See details.}
 \item{k}{number of dimensions.}
 \item{binaryChs, nominalChs, ordinalChs}{names of categorical ordinal, categorical nominal (multistate), and binary characters. Needed for Gower's dissimilarity coefficient only, see details.}
 
@@ -29,7 +29,7 @@ Further, multiple runs of the NMDS analysis are needed to ensure that the stable
 
 The \code{stress} value reflects how well the ordination summarizes the observed relationship among the samples. A rule of thumb, 0.1-0.2 is considered fairly good, but there is no general rule since the stress is greatly influenced by the number of points. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions.
 
-Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (\code{"euclidean"}), Manhattan (\code{"manhattan"}), Minkovski (\code{"minkowski"}); (2) similarity coefficients for binary characters: Jaccard (\code{"jaccard"}) and simple matching (\code{"simpleMatching"}); (3) coefficient for mixed data: Gower (\code{"gower"}).
+Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}; (2) similarity coefficients for binary characters: \code{"Jaccard"} and simple matching (\code{"simpleMatching"}); (3) coefficient for mixed data: (\code{"Gower"}).
 
 The Gower's dissimilarity coefficient can handle different types of variables. Characters have to be divided into four categories: (1) quantitative characters, (2) categorical ordinal characters, (3) categorical nominal (multistate) characters, and (4) binary characters. All characters are considered to be quantitative characters unless otherwise specified. Other types of characters have to be explicitly specified. To mark characters as ordinal, nominal, or binary, enumerate them by names using \code{ordinalChs}, \code{nominalChs}, and \code{binaryChs} arguments, respectively.
 
@@ -45,7 +45,7 @@ an object of class \code{\link{nmdsdata}}.
 \examples{
 data(centaurea)
 
-nmdsRes = nmds.calc(centaurea, distMethod = "euclidean", k = 3)
+nmdsRes = nmds.calc(centaurea, distMethod = "Euclidean", k = 3)
 
 summary(nmdsRes)
 
@@ -69,13 +69,11 @@ data = list(
 )
 attr(data, "class") = "morphodata"
 
-nmdsGower = nmds.calc(data, distMethod = "gower", k = 2, binaryChs = c("stemBranching"),
+nmdsGower = nmds.calc(data, distMethod = "Gower", k = 2, binaryChs = c("stemBranching"),
                       nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
 
 plotPoints(nmdsGower, axes = c(1,2), col = c("red","green"),
            pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
-
-
 
 
 }

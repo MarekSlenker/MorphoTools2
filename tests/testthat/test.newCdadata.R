@@ -9,7 +9,7 @@ test_that("check class of new object",  {
 
   expect_output(str(newObject), "List of 10")
 
-  expect_named(newObject, c('objects', 'eigenValues', 'eigenvaluesAsPercent', 'cumulativePercentageOfEigenvalues', 'groupMeans', 'rank',
+  expect_named(newObject, c('objects', 'eigenvalues', 'eigenvaluesAsPercentages', 'cumulativePercentageOfEigenvalues', 'groupMeans', 'rank',
                             'coeffs.std', 'coeffs.raw', 'totalCanonicalStructure', 'canrsq'))
 
   expect_named(newObject$objects, c('ID', 'Population', 'Taxon', 'scores'))

@@ -24,17 +24,17 @@ test_that("correctness of calculation",  {
   expect_is(pcaRes, "pcadata")
 
 
-  names(pca_princomp$sdev) = colnames(pcaRes$eigenVectors)
-  colnames(pca_princomp$loadings) = colnames(pcaRes$eigenVectors)
-  colnames(pca_princomp$scores) = colnames(pcaRes$eigenVectors)
+  names(pca_princomp$sdev) = colnames(pcaRes$eigenvectors)
+  colnames(pca_princomp$loadings) = colnames(pcaRes$eigenvectors)
+  colnames(pca_princomp$scores) = colnames(pcaRes$eigenvectors)
 
 
   expect_equal(pcaRes$center, pca_princomp$center)
   expect_equal(pcaRes$scale, pca_princomp$scale)
   expect_equal(as.data.frame(pcaRes$objects$scores, row.names = NA), as.data.frame(pca_princomp$scores, row.names = NA))
-  expect_equal(pcaRes$eigenVectors[,], pca_princomp$loadings[,])
-  expect_equal(pcaRes$eigenValues, sapply(pca_princomp$sdev,function(x) x^2))
-  expect_true(is.numeric(pcaRes$eigenvaluesAsPercent))
+  expect_equal(pcaRes$eigenvectors[,], pca_princomp$loadings[,])
+  expect_equal(pcaRes$eigenvalues, sapply(pca_princomp$sdev,function(x) x^2))
+  expect_true(is.numeric(pcaRes$eigenvaluesAsPercentages))
   expect_true(is.numeric(pcaRes$cumulativePercentageOfEigenvalues))
 })
 

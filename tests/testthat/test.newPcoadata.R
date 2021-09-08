@@ -7,7 +7,7 @@ test_that("check class of new object",  {
 
   expect_is(newObject, "pcoadata")
 
-  expect_named(newObject, c('objects', 'eigenValues', 'eigenvaluesAsPercent', 'cumulativePercentageOfEigenvalues', 'groupMeans', 'distMethod', 'rank'))
+  expect_named(newObject, c('objects', 'eigenvalues', 'eigenvaluesAsPercentages', 'cumulativePercentageOfEigenvalues', 'groupMeans', 'distMethod', 'rank'))
 
   expect_named(newObject$objects, c('ID', 'Population', 'Taxon', 'scores'))
 

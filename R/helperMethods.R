@@ -3,7 +3,7 @@
 characters <- function(object) {
   switch (class(object),
     "cdadata" = return(rownames(object$totalCanonicalStructure)),
-    "pcadata" = return(rownames(object$eigenVectors)),
+    "pcadata" = return(rownames(object$eigenvectors)),
     "morphodata" = return(colnames(object$data))
   )
   stop(paste("Not implemented for class '", class(object), "'.", sep = ""), call. = FALSE)

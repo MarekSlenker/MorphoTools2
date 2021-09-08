@@ -23,7 +23,7 @@ knn.select<-function(object, crossval="indiv"){
     for (j in 1:10)
     {
       kselj = sapply(k, FUN = function(k){
-                                  knn.samp = class::knn.cv(train = object$data,cl =  object$Taxon, k = k, prob = F, use.all = T)
+                                  knn.samp = class::knn.cv(train = object$data,cl =  object$Taxon, k = k, prob = FALSE, use.all = TRUE)
                                   return(sum(as.character(object$Taxon) == as.character(knn.samp))) })
       ksel = rbind(ksel,kselj)
 
@@ -41,7 +41,7 @@ knn.select<-function(object, crossval="indiv"){
                                     train = .removeByColumn(object, "Population", pop)
 
                                     knn.samp = class::knn(train = train$data, test = samp$data,
-                                                          cl = train$Taxon, k = k, use.all = T)
+                                                          cl = train$Taxon, k = k, use.all = TRUE)
 
                                     resPop = sum(as.character(samp$Taxon) == as.character(knn.samp))
                                     res<-sum(res,resPop)
@@ -60,7 +60,7 @@ knn.select<-function(object, crossval="indiv"){
 
   sapply(k[-1],function(x) graphics::arrows(x, kselmin[x], x, kselmax[x], code = 3, angle = 90, length = 0.07))
 
-  cat("\nThe highest number of correct classifications is at k = ", which(kselmean==max(kselmean)), "\n")
+  cat("\nThe highest number of correct classifications is at k = ", which(kselmean==max(kselmean)), ".\n")
 }
 
 

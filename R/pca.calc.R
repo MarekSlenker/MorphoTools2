@@ -38,12 +38,12 @@ pca.calc <- function(object) {
   pcaResult$objects$Population = object$Population
   pcaResult$objects$Taxon = object$Taxon
 
-  pcaResult$eigenVectors = princompRes$loadings[,] #[,1:length(princompRes$sdev)]
+  pcaResult$eigenvectors = princompRes$loadings[,] #[,1:length(princompRes$sdev)]
 
 
   vars <- princompRes$sdev^2
-  pcaResult$eigenValues = vars # sapply(princompRes$sdev,function(x) x^2)
-  pcaResult$eigenvaluesAsPercent = round(vars/sum(vars), 5)
+  pcaResult$eigenvalues = vars # sapply(princompRes$sdev,function(x) x^2)
+  pcaResult$eigenvaluesAsPercentages = round(vars/sum(vars), 5)
   pcaResult$cumulativePercentageOfEigenvalues = round(cumsum(vars/sum(vars)), 5)
 
 

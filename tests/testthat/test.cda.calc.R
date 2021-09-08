@@ -32,9 +32,9 @@ test_that("correctness of calculation",  {
 
 
   expect_equal(cdaRes$rank, candisc_cda$rank)
-  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues[1:cdaRes$rank])
+  expect_equal(cdaRes$eigenvalues, candisc_cda$eigenvalues[1:cdaRes$rank])
   expect_equal(cdaRes$canrsq, candisc_cda$canrsq)
-  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct[1:cdaRes$rank] / 100)
+  expect_equal(cdaRes$eigenvaluesAsPercentages, candisc_cda$pct[1:cdaRes$rank] / 100)
   expect_equal(cdaRes$coeffs.raw, candisc_cda$coeffs.raw)
   expect_equal(cdaRes$coeffs.std, candisc_cda$coeffs.std)
   expect_equal(cdaRes$totalCanonicalStructure, candisc_cda$structure)
@@ -44,7 +44,7 @@ test_that("correctness of calculation",  {
 
   expect_equal(cdaRes$objects$scores$Can1, candisc_cda$scores$Can1)
 
-  expect_true(is.numeric(cdaRes$eigenvaluesAsPercent) )
+  expect_true(is.numeric(cdaRes$eigenvaluesAsPercentages) )
   expect_true(is.numeric(cdaRes$cumulativePercentageOfEigenvalues) )
   expect_true(is.numeric(cdaRes$groupMeans$Can1) )
 
@@ -67,9 +67,9 @@ test_that("correctness of calculation - passive sample",  {
   names(candisc_cda$pct) = names(cdaRes$eigenvalues)
 
   expect_equal(cdaRes$rank, candisc_cda$rank)
-  expect_equal(cdaRes$eigenValues, candisc_cda$eigenvalues[1:cdaRes$rank])
+  expect_equal(cdaRes$eigenvalues, candisc_cda$eigenvalues[1:cdaRes$rank])
   expect_equal(cdaRes$canrsq, candisc_cda$canrsq)
-  expect_equal(cdaRes$eigenvaluesAsPercent, candisc_cda$pct[1:cdaRes$rank] / 100)
+  expect_equal(cdaRes$eigenvaluesAsPercentages, candisc_cda$pct[1:cdaRes$rank] / 100)
   expect_equal(cdaRes$coeffs.raw, candisc_cda$coeffs.raw)
   expect_equal(cdaRes$coeffs.std, candisc_cda$coeffs.std)
   expect_equal(cdaRes$totalCanonicalStructure, candisc_cda$structure)

@@ -87,31 +87,31 @@ descrAll <- function(object, format = NULL, decimalPlaces = 3) {
     descrStatistic[ , "N", group] = length(groupPositions)
 
     # mean
-    descrStatistic[ , "Mean", group] = sapply(object$data[groupPositions, ], mean, na.rm=T)
+    descrStatistic[ , "Mean", group] = sapply(object$data[groupPositions, ], mean, na.rm = TRUE)
 
     # SD
-    descrStatistic[ , "SD", group] = sapply(object$data[groupPositions, ], stats::sd, na.rm=T)
+    descrStatistic[ , "SD", group] = sapply(object$data[groupPositions, ], stats::sd, na.rm=TRUE)
 
     # Min
-    descrStatistic[ , "Min", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0, na.rm=T)
+    descrStatistic[ , "Min", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0, na.rm=TRUE)
 
     # 5%
-    descrStatistic[ , "5%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.05, na.rm=T)
+    descrStatistic[ , "5%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.05, na.rm=TRUE)
 
     # 25%
-    descrStatistic[ , "25%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.25, na.rm=T)
+    descrStatistic[ , "25%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.25, na.rm=TRUE)
 
     # Median
-    descrStatistic[ , "Median", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.5, na.rm=T)
+    descrStatistic[ , "Median", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.5, na.rm=TRUE)
 
     # 75%
-    descrStatistic[ , "75%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.75, na.rm=T)
+    descrStatistic[ , "75%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.75, na.rm=TRUE)
 
     # 95%
-    descrStatistic[ , "95%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.95, na.rm=T)
+    descrStatistic[ , "95%", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=0.95, na.rm=TRUE)
 
     # Max
-    descrStatistic[ , "Max", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=1, na.rm=T)
+    descrStatistic[ , "Max", group] = sapply(object$data[groupPositions, ], stats::quantile, probs=1, na.rm=TRUE)
   }
 
   descrStatistic = round(descrStatistic, digits = digits)

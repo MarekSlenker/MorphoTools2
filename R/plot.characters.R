@@ -15,32 +15,32 @@ plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
-  if (max(axes) > length(result$eigenValues)) stop(paste("Specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
+  if (max(axes) > length(result$eigenvalues)) stop(paste("Specified axes are out of bounds. Object has only ", length(result$eigenvalues), " axes.", sep = "" ), call. = FALSE)
 
-  if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]])
-  if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]])
+  if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]])
+  if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]])
   if (is.null(main)) main = "Eigenvectors"
 
-  if (is.null(xlim)) xlim = c(max(abs(result$eigenVectors[ ,axes[1]]))*-1, max(abs(result$eigenVectors[ ,axes[1]])))* 1.05 # + 5%
-  if (is.null(ylim)) ylim = c(max(abs(result$eigenVectors[ ,axes[2]]))*-1, max(abs(result$eigenVectors[ ,axes[2]])))* 1.05 # + 5%
+  if (is.null(xlim)) xlim = c(max(abs(result$eigenvectors[ ,axes[1]]))*-1, max(abs(result$eigenvectors[ ,axes[1]])))* 1.05 # + 5%
+  if (is.null(ylim)) ylim = c(max(abs(result$eigenvectors[ ,axes[2]]))*-1, max(abs(result$eigenvectors[ ,axes[2]])))* 1.05 # + 5%
 
 
   # main plot
 
-  graphics::plot(x = result$eigenVectors[ ,axes[1]], y = result$eigenVectors[ ,axes[2]],
+  graphics::plot(x = result$eigenvectors[ ,axes[1]], y = result$eigenvectors[ ,axes[2]],
          type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, main = main)
   graphics::abline(h = 0,v = 0,lty = 2,col = "grey")
-  graphics::arrows(0, 0, result$eigenVectors[ ,axes[1]], result$eigenVectors[ ,axes[2]],
+  graphics::arrows(0, 0, result$eigenvectors[ ,axes[1]], result$eigenvectors[ ,axes[2]],
          col = col, length = length, angle = angle, ...)
 
   if (labels) {
-    labs = row.names(result$eigenVectors)
-    for (ch in 1:nrow(result$eigenVectors)) {
+    labs = row.names(result$eigenvectors)
+    for (ch in 1:nrow(result$eigenvectors)) {
       # hore
-      if (result$eigenVectors[ ,axes[2]][ch] > 0) graphics::text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+      if (result$eigenvectors[ ,axes[2]][ch] > 0) graphics::text(x = result$eigenvectors[ ,axes[1]][ch], y = result$eigenvectors[ ,axes[2]][ch],
                labels = labs[ch], cex = cex, pos = 3, offset = 0.5)
       # dole
-      else graphics::text(x = result$eigenVectors[ ,axes[1]][ch], y = result$eigenVectors[ ,axes[2]][ch],
+      else graphics::text(x = result$eigenvectors[ ,axes[1]][ch], y = result$eigenvectors[ ,axes[2]][ch],
              labels = labs[ch], cex = cex, pos = 1, offset = 0.5)
       }
   }
@@ -100,8 +100,8 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
     if (max(axes) > ncol(result$totalCanonicalStructure)) stop(paste("Specified axes are out of bounds. Object has only ", ncol(result$totalCanonicalStructure), " axes.", sep = "" ), call. = FALSE)
 
 
-    if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]])
-    if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]])
+    if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]])
+    if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]])
 
     if (is.null(xlim)) xlim = c(max(abs(result$totalCanonicalStructure[ ,axes[1]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[1]])))* 1.05 # + 5%
     if (is.null(ylim)) ylim = c(max(abs(result$totalCanonicalStructure[ ,axes[2]]))*-1, max(abs(result$totalCanonicalStructure[ ,axes[2]])))* 1.05 # + 5%

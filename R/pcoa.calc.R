@@ -1,6 +1,6 @@
 #' Principal coordinates analysis (PCoA)
 #' @export
-pcoa.calc <- function(object, distMethod = "euclidean", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
+pcoa.calc <- function(object, distMethod = "Euclidean", binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
   .checkClass(object, "morphodata")
 
 
@@ -35,8 +35,8 @@ pcoa.calc <- function(object, distMethod = "euclidean", binaryChs = NULL, nomina
   pcoaResult$objects$Population = object$Population
   pcoaResult$objects$Taxon = object$Taxon
 
-  pcoaResult$eigenValues = princompRes$eig[1:rank]
-  pcoaResult$eigenvaluesAsPercent = round(princompRes$eig/sum(princompRes$eig[1:rank]), 5)[1:rank]
+  pcoaResult$eigenvalues = princompRes$eig[1:rank]
+  pcoaResult$eigenvaluesAsPercentages = round(princompRes$eig/sum(princompRes$eig[1:rank]), 5)[1:rank]
   pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(princompRes$eig[1:rank]/sum(princompRes$eig[1:rank])), 5)[1:rank]
 
   # group centroid locations

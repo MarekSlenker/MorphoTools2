@@ -25,7 +25,7 @@ boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWh
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
-    dir.create(paste(getwd(), "/",folderName, "/", sep = ""), showWarnings = T, recursive = F)
+    dir.create(paste(getwd(), "/",folderName, "/", sep = ""), showWarnings = TRUE, recursive = FALSE)
   }
 
   # box and whisker plot for characters

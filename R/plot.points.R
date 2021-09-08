@@ -20,10 +20,10 @@ plotPoints.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
   if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
-    xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    xlab = paste(names(result$eigenvalues)[axes[1]], " (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
 
   if (is.null(ylab))
-    ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    ylab = paste(names(result$eigenvalues)[axes[2]], " (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
 
   # nastav pch a col spravne podla taxonu
@@ -67,10 +67,10 @@ plotPoints.pcoadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
   if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
   if (is.null(xlab))
-    xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    xlab = paste(names(result$eigenvalues)[axes[1]], " (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
 
   if (is.null(ylab))
-    ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    ylab = paste(names(result$eigenvalues)[axes[2]], " (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
 
   # nastav pch a col spravne podla taxonu
@@ -218,7 +218,7 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
     #   plotni v cykle
     graphics::plot(histograms[[1]], main="", xlab = "canonical score", ylab = "count", col = histograms[[1]]$pt.bg, ylim = ylim, xlim = xlim, axes = FALSE, ...)
     for (i in 2:length(taxlev)) {
-      graphics::plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = F, add = TRUE)
+      graphics::plot(histograms[[i]], col = histograms[[i]]$pt.bg, axes = FALSE, add = TRUE)
     }
 
     ########### ENDREGION
@@ -241,10 +241,10 @@ plotPoints.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 
     # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
     if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
-    if (max(axes) > length(result$eigenValues)) stop(paste("Specified axes are out of bounds. Object has only ", length(result$eigenValues), " axes.", sep = "" ), call. = FALSE)
+    if (max(axes) > length(result$eigenvalues)) stop(paste("Specified axes are out of bounds. Object has only ", length(result$eigenvalues), " axes.", sep = "" ), call. = FALSE)
 
-    if (is.null(xlab)) xlab = paste(names(result$eigenValues)[axes[1]], " (", round(result$eigenvaluesAsPercent[axes[1]]*100, digits = 2) ,"%)", sep = "")
-    if (is.null(ylab)) ylab = paste(names(result$eigenValues)[axes[2]], " (", round(result$eigenvaluesAsPercent[axes[2]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(xlab)) xlab = paste(names(result$eigenvalues)[axes[1]], " (", round(result$eigenvaluesAsPercentages[axes[1]]*100, digits = 2) ,"%)", sep = "")
+    if (is.null(ylab)) ylab = paste(names(result$eigenvalues)[axes[2]], " (", round(result$eigenvaluesAsPercentages[axes[2]]*100, digits = 2) ,"%)", sep = "")
 
     # nastav pch a col spravne podla taxonu
     result$pch = as.numeric( .setValuesForVector(result$objects$Taxon, pch))

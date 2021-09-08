@@ -1,10 +1,10 @@
 
 .calcDistance <- function(object, distMethod, center, scale, binaryChs, nominalChs, ordinalChs) {
 
-  switch (distMethod,
+  switch (tolower(distMethod),
           "euclidean" = {  # moze byt scale alebo nie
             return(
-              stats::dist(scale(object$data, center = center, scale = scale), method = distMethod)
+              stats::dist(scale(object$data, center = center, scale = scale), method = "euclidean")
             )
           },
           "jaccard" = { # ziadne scale
@@ -13,7 +13,7 @@
               ade4::dist.binary(object$data, method = 1, diag = FALSE, upper = FALSE)
             )
           },
-          "simpleMatching" = {
+          "simplematching" = {
             if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
             return(
               ade4::dist.binary(object$data, method = 2, diag = FALSE, upper = FALSE)

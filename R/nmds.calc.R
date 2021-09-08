@@ -1,6 +1,6 @@
 #' Non-metric multidimensional scaling (NMDS)
 #' @export
-nmds.calc <- function(object, distMethod = "euclidean", k = 3, binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
+nmds.calc <- function(object, distMethod = "Euclidean", k = 3, binaryChs = NULL, nominalChs = NULL, ordinalChs = NULL) {
   .checkClass(object, "morphodata")
 
   # NA niekedy vadia, niekedy nie, zalezitost .calcDistance

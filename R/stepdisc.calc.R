@@ -2,7 +2,7 @@
 
 #' Stepwise discriminant analysis
 #' @export
-stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
+stepdisc.calc <- function(object, FToEnter = 0.15, FToStay = 0.15) {
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
@@ -35,7 +35,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
     enter.R2[j] = (enterSum[[1]]$`Sum Sq`[1]/sum(enterSum[[1]]$`Sum Sq`))
   }
 
-  if(min(enter.PrF) < F_to_enter) {                       # condition for stopping the forward-selection
+  if(min(enter.PrF) < FToEnter) {                       # condition for stopping the forward-selection
     a = which.min(enter.PrF)
     Entered = c(Entered, colnames(X)[a])
     Removed = c(Removed, "")
@@ -76,7 +76,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
     # ---ENTER VARIABLE----------------------------------- #
     a = which.min(enter.PrF)[1]       # MK     # most significant variable a (with the smalles Pr(>F))
-    if(enter.PrF[a] < F_to_enter)
+    if(enter.PrF[a] < FToEnter)
     {                 # condition for stopping the forward-selection
       Entered = c(Entered, colnames(X)[a])
       Removed = c(Removed, "")
@@ -112,7 +112,7 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
 
       # ---REMOVE VARIABLE----------------------------------- #
       a = which.max(rem.PrF)[1]
-      if(rem.PrF[a] > F_to_stay){
+      if(rem.PrF[a] > FToStay){
         Entered = c(Entered, "")
         Removed = c(Removed, colnames(X.mod)[a])
 
@@ -135,10 +135,10 @@ stepdisc.calc <- function(object, F_to_enter = 0.15, F_to_stay = 0.15) {
   if(!exists("X.mod")) stop("Unable to perform required calculations, perhaps not enough observations?", call. = FALSE)
 
   resDat = data.frame(Entered, Removed, R2, Fstat, pwert)
-  colnames(resDat) = c("Entered", "Removed", "Partial R-Square", "F Value", "Pr > F")
+  colnames(resDat) = c("Entered", "Removed", "Partial R-square", "F-value", "Pr > F")
 
   print(resDat)
-  cat("\nselected characters:\n")
+  cat("\nSelected characters:\n")
   cat(paste(Entered[Entered != ""], collapse = ", "))
   cat("\n")
   #cat("\n")

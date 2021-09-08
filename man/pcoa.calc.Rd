@@ -9,13 +9,13 @@ This function performs principal coordinates analysis.
 
 
 \usage{
-pcoa.calc(object, distMethod = "euclidean", binaryChs = NULL,
+pcoa.calc(object, distMethod = "Euclidean", binaryChs = NULL,
                nominalChs = NULL, ordinalChs = NULL)
 }
 
 \arguments{
 \item{object}{an object of class \code{\link{morphodata}}.}
-\item{distMethod}{the distance measure to be used. This must be one of: \code{"euclidean"}, \code{"manhattan"}, \code{"minkowski"}, \code{"jaccard"}, \code{"simpleMatching"}, or \code{"gower"}. See details.}
+\item{distMethod}{the distance measure to be used. This must be one of: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}, \code{"Jaccard"}, \code{"simpleMatching"}, or \code{"Gower"}. See details.}
 \item{binaryChs, nominalChs, ordinalChs}{names of categorical ordinal, categorical nominal (multistate), and binary characters. Needed for Gower's dissimilarity coefficient only, see details.}
 }
 
@@ -23,7 +23,7 @@ pcoa.calc(object, distMethod = "euclidean", binaryChs = NULL,
 The \code{pcoa.calc} function performs principal coordinates analysis using the \code{\link{cmdscale}} function from package \code{\link{stats}}.
 Principal coordinates analysis estimates coordinates for a set of objects in a space. Distances among objects is approximationy of the dissimilarities, based on any similarity or distance coefficient.
 
-Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: Euclidean (\code{"euclidean"}), Manhattan (\code{"manhattan"}), Minkovski (\code{"minkowski"}); (2) similarity coefficients for binary characters: Jaccard (\code{"jaccard"}) and simple matching (\code{"simpleMatching"}); (3) coefficient for mixed data: Gower (\code{"gower"}).
+Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}; (2) similarity coefficients for binary characters: \code{"Jaccard"} and simple matching (\code{"simpleMatching"}); (3) coefficient for mixed data: (\code{"Gower"}).
 
 The Gower's dissimilarity coefficient can handle different types of variables. Characters have to be divided into four categories: (1) quantitative characters, (2) categorical ordinal characters, (3) categorical nominal (multistate) characters, and (4) binary characters. All characters are considered to be quantitative characters unless otherwise specified. Other types of characters have to be explicitly specified. To mark characters as ordinal, nominal, or binary, enumerate them by names using \code{ordinalChs}, \code{nominalChs}, and \code{binaryChs} arguments, respectively.
 }
@@ -38,7 +38,7 @@ an object of class \code{\link{pcoadata}}.
 \examples{
 data(centaurea)
 
-pcoRes = pcoa.calc(centaurea, distMethod = "manhattan")
+pcoRes = pcoa.calc(centaurea, distMethod = "Manhattan")
 
 summary(pcoRes)
 
@@ -62,7 +62,7 @@ data = list(
 )
 attr(data, "class") = "morphodata"
 
-pcoaGower = pcoa.calc(data, distMethod = "gower", binaryChs = c("stemBranching"),
+pcoaGower = pcoa.calc(data, distMethod = "Gower", binaryChs = c("stemBranching"),
                       nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
 
 plotPoints(pcoaGower, axes = c(1,2), col = c("red","green"),

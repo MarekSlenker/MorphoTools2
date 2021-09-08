@@ -11,6 +11,6 @@ morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 test_that("characters",  {
 
-  expect_error(boxplotCharacter(morphoMockup, "X_char", 0.95, 0.05), "Character X_char was not found in attached data.")
+  expect_error(boxplotCharacter(morphoMockup, "X_char", 0.95, 0.05), "Character \"X_char\" was not found in attached data.")
 
 })

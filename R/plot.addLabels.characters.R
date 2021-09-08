@@ -12,13 +12,13 @@ plotAddLabels.characters <- function(result, labels = characters(result),
 #' @rdname plotAddLabels.characters
 #' @method plotAddLabels.characters pcadata
 #' @export
-plotAddLabels.characters.pcadata <- function(result, labels = characters(result), include = T, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
+plotAddLabels.characters.pcadata <- function(result, labels = characters(result), include = TRUE, axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
 
   # skontroluj ci axes = 2; a ci uzivatel nezadal cislo osi mimo rozsahu
   if (length(axes) != 2) stop("You have to specify 2 axes (e.g., axes = c(1,2)).", call. = FALSE)
   if (max(axes) > result$rank) stop(paste("Specified axes are out of bounds. Object has only ", result$rank, " axes.", sep = "" ), call. = FALSE)
 
-  .labels_characters_internal(labelTable = result$eigenVectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
+  .labels_characters_internal(labelTable = result$eigenvectors, labels = labels, include = include, axes = axes, pos = pos, offset = offset, cex = cex, col = col, ...)
 }
 
 
@@ -28,7 +28,7 @@ plotAddLabels.characters.pcadata <- function(result, labels = characters(result)
 #' @rdname plotAddLabels.characters
 #' @method plotAddLabels.characters cdadata
 #' @export
-plotAddLabels.characters.cdadata <- function(result, labels = characters(result), include = T, axes = c(1,2),
+plotAddLabels.characters.cdadata <- function(result, labels = characters(result), include = TRUE, axes = c(1,2),
                                               pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...) {
 
   # hist
