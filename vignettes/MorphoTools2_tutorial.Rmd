@@ -13,7 +13,8 @@ vignette: |
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 classoption: a4paper
-fontsize: 10pt
+fontsize: 11pt
+indent: false
 ---
 &nbsp;  
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}	
@@ -34,9 +35,8 @@ knitr::opts_chunk$set(
   rownames = FALSE, 
   #fig.width   = 6,      
   #fig.height  = 5,      
-  fig.align   = 'center',
+  fig.align   = 'center'
   #fig.path    = 'figs/', 
-  strip.white = TRUE    
   #out.width='\\textwidth'
   )
 ```
@@ -46,16 +46,16 @@ knitr::opts_chunk$set(
 \setcounter{tocdepth}{4}
 \tableofcontents
 \renewcommand{\baselinestretch}{1.0}\normalsize
-
 ```
 
-
+\newpage 
 
 # 1. Introduction
 
 The package `MorphoTools2` is intended for multivariate analyses of morphological data. At the moment, various necessary tools are scattered across several R packages. This package wraps available statistical and graphical tools and provides a comprehensive framework for checking and manipulating input data, performing core statistical analyses and running a wide palette of functions designed to visualize results, making the workflow convenient and fast.
 
 \renewcommand{\thefootnote}{\arabic{footnote}}
+
 
 # 2. Obtaining and installing the MorphoTools2 package
 
@@ -87,12 +87,12 @@ As with any statistical software, the first task is to import raw data. However,
 
 ## 3.1 Data import
 
-Data can be imported from plain text files (tab-, comma-, or space-delimited, see below) or from spreadsheet files. The following structure of input data is required:\vspace{-0.4cm}
+Data can be imported from plain text files (tab-, comma-, or space-delimited, see below) or from spreadsheet files. The following structure of input data is required:
 
 * the first row containing variable names;
 * rows each containing values for a single individual sample or any other kind of sampling unit;
 * the first three columns containing unique identifiers of individuals, populations and taxa/groups (named “ID”, “Population” and “Taxon”)[^1]; and
-* the fourth and next columns holding values of morphological characters[^2].\vspace{-0.2cm}
+* the fourth and next columns holding values of morphological characters[^2].
 
 [^1]: If the **population level is missing or inapplicable** (e.g. more than one individual only in some populations and/or very low number of individuals per population), copy the values from the "ID" column to the "Population" column. This will allow analysing such data by most methods except analyses considering the population level.
 
@@ -112,9 +112,9 @@ Data can be imported from plain text files (tab-, comma-, or space-delimited, se
 | STGH310 	| STGH       	| ps    	| 35.6 	| 19.2 	| 54.8 	| 0.35 	| 9.5  	|     	| *NA* 	|
 
 
-\vspace{-0.2cm}Use underscores (_) instead of spaces, and avoid special characters (e.g. punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (without quotes).
+Use underscores (_) instead of spaces, and avoid special characters (e.g. punctuation marks). Missing values have to be represented as empty cells or by the text `NA` (without quotes).
 
-In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is included with this package. Execute the command `data(centaurea)` to load this data to the R workspace. \vspace{-0.1cm}
+In this tutorial, we will use the centaurea dataset, containing measurements of 25 morphological characters of three diploid species of the *Centaurea phrygia* complex: *C. phrygia* s.str. (abbreviated "ph"), *C. pseudophrygia* ("ps") and *C. stenolepis* ("st") and the putative hybrid of the last two species abbreviated as "hybr" (for details, see Koutecký, 2015). The centaurea dataset is included with this package. Execute the command `data(centaurea)` to load this data to the R workspace.
 
 ```{r eval = TRUE, echo = TRUE}
 data(centaurea)
@@ -123,14 +123,15 @@ data(centaurea)
 
 In general, morphological data can be imported using the `read.morphodata()` function, providing a path to the data[^3]. The argument `dec` stands for the character used in the file for the decimal separator, and `sep` is the column delimiter character, usually a blank space `""`, comma `","` or tab `"\t"`. The default values are a dot and a tab (`"\t"`), respectively, and these may be omitted from the function call. To read data from clipboard (select cells in the spreadsheet, press Ctrl+C ), set `file = "clipboard"`.
 
-[^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.\vspace{-0.1cm}
+[^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.
 
 ```{r eval = FALSE, echo = TRUE}
 centaurea = read.morphodata(file = "<PATH TO centaurea.txt>", dec = ".", sep = "\t")
 centaurea = read.morphodata(file = "clipboard")
 ```
 
-\vspace{-0.1cm}The dataset now exists as a `morphodata` object in R. The `morphodata` object, like other objects used later, is defined as a `list`. In R, lists act as containers for data. Elements stored in the `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see the contained elements. The command `centaurea$Taxon` prints the values to the R console. Run `?morphodata` to see the structure of a `morphodata` object. Alternatively, the following commands display basic information about the dataset or show data in the data viewer.
+\vspace{+1cm}
+The dataset now exists as a `morphodata` object in R. The `morphodata` object, like other objects used later, is defined as a `list`. In R, lists act as containers for data. Elements stored in the `morphodata` object can be referenced by the `$` notation. Type `centaurea$` and press the tab key to see the contained elements. The command `centaurea$Taxon` prints the values to the R console. Run `?morphodata` to see the structure of a `morphodata` object. Alternatively, the following commands display basic information about the dataset or show data in the data viewer.
 
 ```{r echo = FALSE, eval = TRUE}
 summary<-function(object){
@@ -152,7 +153,7 @@ rm(summary)
 ```
 \vspace{-0.4cm}
 ```{r include=F}
-options(max.print = 36)
+options(max.print = 78)
 ```
 ```{r echo = TRUE, eval=TRUE}
 samples(centaurea)
@@ -186,7 +187,7 @@ The normality of distribution of each character at the level of a taxon can be t
 
 
 ```{r include=F}
-options(max.print = 38)
+options(max.print = 28)
 ```
 ```{r echo = TRUE, eval=TRUE}
 shapiroWilkTest(centaurea)
@@ -198,7 +199,7 @@ Because the results are rather extensive (depending on the number of groups and 
 ```{r echo = TRUE, eval=FALSE}
 swTest = shapiroWilkTest(centaurea)
 exportRes(swTest, file = "clipboard")
-exportRes(swTest, file = "D:/Projects/Centaurea_PSE/dataAnalysis/shapiroWilkTest.txt")
+exportRes(swTest, file = "D:/Projects/Centaurea/morpho/shapiroWilkTest.txt")
 ```
 
 ### 3.2.2 Histograms  
@@ -216,14 +217,15 @@ To save histograms for all characters with default settings to a new folder (in 
 histAll(centaurea, folderName = "histograms")
 ```
 
-\vspace{1cm}
+
 
 ### 3.2.3 Normal Q-Q plot  
 
 The normal Q-Q plot is another graphical method of assessing normality. The points should lie as close to the line as possible, with no obvious pattern of deviation from the line. Deviations from this line correspond to various types of non-normality.
 
 The function `qqnormCharacter()` draws a Q-Q plot for each taxon and a particular character. The function `qqnormAll()` does the same for all characters (and save images to a new folder). Missing data are omitted. 
-\vspace{1cm}
+
+\newpage 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '300px'}
 qqnormCharacter(centaurea, character = "SF")
@@ -306,12 +308,12 @@ So finally, to apply a square root transformation to character `SF`, the followi
 
 
 ```{r echo = TRUE, eval = FALSE}
-centaurea = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt(x), 
-                               newName = "SF.sqrt")
+centaurea = transformCharacter(centaurea, character = "SF", newName = "SF.sqrt", 
+                               FUN = function(x) sqrt(x))
 ```
 
 
-
+\newpage 
 
 ## 3.4 Box Plots
 
@@ -319,12 +321,17 @@ Boxplots are a handy tool for detecting outlier values (potential typos, missing
 
 Boxplots can be produced for a particular character using the `boxplotCharacter()` function or for all characters at once by invoking the `boxplotAll()` function, which saves all boxplots to a new folder in the working directory or other location. A box is drawn from the first to the third quartile (25th-75th percentiles), a horizontal line drawn inside denotes the median (50th percentile). The whiskers can be extended to the desired percentiles using the arguments `lowerWhisker` and `upperWhisker`. Missing data are omitted. Many graphic parameters can be set; run `?boxplotCharacter` for details. 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
+boxplotCharacter(centaurea, character="AL", col=c("blue","green","red","orange"))
+```
+```{r echo = FALSE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+graphics::par(mar=c(2,1,2,1))
 boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"))
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
-boxplotCharacter(centaurea, character = "AL", lowerWhisker = 0.1, upperWhisker = 1, pch = 1)
+boxplotCharacter(centaurea, character = "AL", pch = 1,
+                 lowerWhisker = 0.1, upperWhisker = 1)
 ```
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
@@ -350,6 +357,9 @@ The table of descriptive statistics is a less comfortable way of detecting outli
 
 Using the argument `format`, the desired output format can be specified. The keywords `$MEAN`, `$SD`, `$MIN`, `$5%`, `$25%`, `$MEDIAN`, `$75%`, `$95%` and `$MAX` are then replaced by actual values. The default behaviour (`format = NULL`) is to produce a table with all values. Run `?descrTaxon` for more details.
 
+```{r include=F}
+options(max.print = 40)
+```
 ```{r echo = TRUE, eval=TRUE}
 descrTaxon(centaurea, format = "($MEAN ± $SD)", decimalPlaces = 2)
 ```
@@ -374,6 +384,10 @@ exportRes(correlations.s, file = "correlations.spearman.txt")
 ```
 
 Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be performeed using the `cormatSignifTest()` function.
+
+```{r echo = TRUE, eval=FALSE}
+correlations.s.signifTest = cormatSignifTest(centaurea, method = "spearman")
+```
 
 ## 3.7 Populations as operational taxonomic units
 
@@ -407,7 +421,7 @@ Missing values are not accepted in the majority of morphological analyses. The d
 
 ```{r include=F}
 options(max.print = 800)
-centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT", "KASH", "KRO", "MIL", "NSED", "OLE1", "OLE2", "PRIS", "PROS", "SOK", "STGH"))
+centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT", "KASH", "KRO", "MIL", "NSED", "CERM", "BABL", "OLE1", "OLE2", "PRIS", "PROS", "SOK", "STGH"))
 # centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW"))
 ```
 ```{r echo = TRUE, eval=TRUE}
@@ -456,6 +470,8 @@ Missing values can be substituted by the average value of the respective charact
 centaurea = naMeanSubst(centaurea)
 ```
 
+&nbsp;  
+&nbsp;  
 
 ***
 After examining the normality of distribution of each character, confirming that the data do not contain highly correlated characters, replacing missing values by average values and removing remaining NAs, the centaurea dataset is prepared for further analyses. It is not a bad idea to save a copy of it using the `exportRes()` function. 
@@ -496,7 +512,7 @@ The summary statistics of the data are available through the function `summary()
 
 
 ```{r include=F}
-options(max.print = 76)
+options(max.print = 64)
 ```
 ```{r echo = TRUE, eval=TRUE}
 summary(pca.centaurea)
@@ -508,9 +524,18 @@ The result can be plotted using the `plotPoints()` function. The parameter `axes
 ![](./pch.png){width=100%}
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
+```{r echo = TRUE, eval=FALSE, out.width = '320px', dpi=300}
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes=c(1,2),
            pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+
+```
+
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes=c(1,2), cex = 0.9,
+           pch = c(8,17,20,18))
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), box.lwd = 0.9,
+x = "bottomright", cex = 0.8, ncol = 2)
 
 ```
 
@@ -525,10 +550,19 @@ The character loadings (eigenvectors) express the influence of the original char
 The function `plotCharacters()` draws character loadings as arrows. 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
-plotCharacters(pca.centaurea, cex = 1.2)
+```{r echo = TRUE, eval=FALSE}
+plotCharacters(pca.centaurea)
 
 ```
+
+
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5))
+
+```
+
+
 ```{r echo = TRUE, eval=FALSE}
 exportRes(pca.centaurea$eigenvectors, file="eigenvectors.centaurea.txt")
 
@@ -539,52 +573,83 @@ Ordination diagrams of PCA resulted in relatively compact groupings correspondin
 The `plotPoints()` and `plotCharacters()` are default plotting functions. Simple data point labels and a legend can be added using the arguments `labels = TRUE` and `legend = TRUE`, respectively. 
 
 
-For more precise control of labels and the legend, or adding elements to the plot, the following functions can be used:  
+For more precise control of labels and the legend, or adding elements to the plot, the following functions can be used:  \vspace{-0.3cm}
 
-* `plotAddLabels.points()`, `plotAddLabels.characters()` allows to include or exclude specified labels (`include`), specify the label's position (`pos`), offset (`offset`), colours (`col`), magnification (`cex`), etc.
+* `plotAddLabels.points()`, `plotAddLabels.characters()` allows to include or exclude specified labels (`include`), specify the label's position (`pos`), offset (`offset`), colours (`col`), magnification (`cex`), etc. \vspace{-0.1cm}
 
-* `plotAddLegend()` allows to specify the position using a keyword (`x`[^5]), the number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc.
+* `plotAddLegend()` allows to specify the position using a keyword (`x`[^5]), the number of columns (`ncol`), expansion and interspacing factors (`cex`, `pt.cex`, `x.intersp`, `y.intersp`), line width (`lwd`), borders parameters (e.g., `box.type`, `box.lty`, `box.lwd`), etc. \vspace{-0.1cm}
 
-* `plotAddEllipses()` draws prediction ellipses around taxa. Ellipses with a given probability (`probability`) define regions where any new independent observation belonging to the respective taxa will fall.
+* `plotAddEllipses()` draws prediction ellipses around taxa. Ellipses with a given probability (`probability`) define regions where any new independent observation belonging to the respective taxa will fall. \vspace{-0.1cm}
 
-* `plotAddSpiders()` connects points with their group centroid, thus forming a "spider" diagram.
+* `plotAddSpiders()` connects points with their group centroid, thus forming a "spider" diagram. \vspace{-0.1cm}
 
 
 [^5]: **legend position**: `"topleft"`, `"topright"`, `"bottomleft"`, `"bottomright"`, `"top"`, `"left"`, `"bottom"`, `"right"` and `"center"`.
 
 
 
-```{r echo = TRUE, eval=TRUE, fig.height = 4, fig.width = 4, out.width = "4.5in"}
+```{r echo = TRUE, eval=FALSE}
 pca.pops = pca.calc(pops)
-plotPoints(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
+plotPoints(pca.pops, col = c("blue","green","red","orange"), pch=c(8,17,20,18), 
             legend = FALSE, labels = FALSE)
-plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","KRO","DUB","MIL",
-                      "CERM","DOM","KOZH","KOT"), include = FALSE, pos = 4, cex = 0.7)
-plotAddLabels.points(pca.pops, labels = c("PROS","SOK","KASH","BOL","CERM", "DOM"), 
+plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","KRO","DUB",
+          "MIL","CERM","DOM","KOZH","KOT"), include=FALSE, pos=4, cex=0.7)
+plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"), 
+                      pos = 2, cex = 0.7)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+pca.pops = pca.calc(pops)
+plotPoints(pca.pops, col = c("blue","green","red","orange"), pch=c(8,17,20,18), 
+            legend = FALSE, labels = FALSE)
+plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","KRO","DUB",
+          "MIL","CERM","DOM","KOZH","KOT"), include=FALSE, pos=4, cex=0.7)
+plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"), 
                       pos = 2, cex = 0.75)
-plotAddLabels.points(pca.pops,labels=c("KRO","MIL","KOZH"), pos=3, offset=0.7, cex=0.75)
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plotCharacters(pca.pops, labels = FALSE)
-plotAddLabels.characters(pca.pops, labels = c("ILW","MLW", "LBA"), pos = 4,cex = 0.75)
-plotAddLabels.characters(pca.pops,labels=c("IW","SFT","MW"),pos=2,offset=0.7,cex=0.75)
+plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
+plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5))
+
+plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
+plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
 ```
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+
+```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
-               x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
+               x = "bottomright", cex = 0.8, box.type = "n", ncol = 2)
 
 # Semi-transparent spiders
-plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255, max=255, alpha=130), # blue
-                                      rgb(0,255,0, max=255, alpha=130), # green
-                                      rgb(255,0,0, max=255, alpha=130), # red
-                                      rgb(255,102,0, max=255, alpha=130))) # orange
+plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
+                                    rgb(0,255,0, max=255, alpha=50), # green
+                                    rgb(255,0,0, max=255, alpha=50), # red
+                                    # orange
+                                    rgb(255,102,0, max=255, alpha=50)))
 ```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
+               x = "bottomright", cex = 0.8, box.type = "n", ncol = 2)
+
+# Semi-transparent spiders
+plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
+                                    rgb(0,255,0, max=255, alpha=50), # green
+                                    rgb(255,0,0, max=255, alpha=50), # red
+                                    rgb(255,102,0, max=255, alpha=50))) # orange
+```
 
 
 
@@ -594,46 +659,79 @@ plotAddSpiders(pca.centaurea, col = c(rgb(0,0,255, max=255, alpha=130), # blue
 To highlight only some groups in colour, set the colour values of groups not to be highlighted to `NA`.
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
-plotAddSpiders(pca.centaurea, col = c(NA, # blue
-                                      NA, # green
-                                      NA, # red
-                                      rgb(255,102,0,max=255,alpha=130))) # orange
+plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=50)))
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
+
+plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=50)))
 ```
 
 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
+               x = "bottomright", cex = 0.7, pt.cex = 1.3, box.type = "n", ncol = 2)
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
+```
+
+
+
+```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
-              x = "bottomright", pt.cex = 1.3, box.type = "n", ncol = 2)
+                       x = "bottomright", box.type = "n", ncol = 2)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
+
+plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
+
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
+              x = "bottomright", pt.cex = 0.8, cex = 0.8, box.type = "n", ncol = 2)
 ```
 
+\newpage 
 To draw a 3D scatterplot, the `plot3Dpoints()` function can be used. The `theta` and `phi` arguments define the viewing direction (azimuthal direction and co-latitude, respectively).
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), phi = 20, theta = 30)
+```{r echo = TRUE, eval=FALSE}
+plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"),
+             phi = 20, theta = 30)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.8,
+             phi = 20, theta = 30)
 ```
 
-
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T)
 ```
-
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T, cex = 0.8)
+```
 
 
 
@@ -648,49 +746,77 @@ Principal coordinate analysis (PCoA) is another method for exploring and visuali
 PCoA is performed by the `pcoa.calc()` function (based on the `stats` package; R Core Team, 2020); the result is an object of the class `pcoadata`.
 
 
+```{r echo = FALSE, eval=TRUE}
+summary.pcoadata <- function(object) {
+
+  cat("Object of class 'pcoadata'; storing results of principal coordinates analysis\n")
+  cat("Resemblance coefficient: ", object$distMethod,"\n")
+  cat("\nVariation explained by individual axes")
+  if (object$rank>3) {
+    cat(" (listing of axes is truncated):\n")
+  } else {
+    cat(":\n")
+  }
+
+  descrTable = data.frame(row.names = names(object$eigenvaluesAsPercentages[1: min(object$rank, 3)]),
+                          "Eigenvalues" = round(object$eigenvalues[1: min(object$rank, 3)], digits = 4),
+                          "Eigenvalues as percentages" = round(object$eigenvaluesAsPercentages[1: min(object$rank, 3)], digits = 4),
+                          "Cumulative percentage of eigenvalues" = round(object$cumulativePercentageOfEigenvalues[1: min(object$rank, 3)], digits = 4)
+  )
+  names(descrTable) = gsub(pattern = '\\.' , replacement = " ", x = names(descrTable))
+  descrTable = t(descrTable)
+
+  print(descrTable)
+}
+```
+
 ```{r echo = TRUE, eval=TRUE}
 pcoa.res = pcoa.calc(centaurea, distMethod = "Manhattan")
 summary(pcoa.res)
 ```
 
 
-
-
-
 The result can be plotted by either the `plotPoints()` or `plot3Dpoints()` function as per usual. The extending functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` are available, too. Only the function `plotCharacters()` cannot be used, as there is no information on the influence of the original characters on the coordinate axes.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
              phi = 20, theta = 70, legend = T)
 ```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
+             phi = 20, theta = 70, legend = F)
+plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), box.lwd = 0.9,
+              x = "topright", cex = 0.8)
 
-
-&nbsp;  
-
-
-
+```
 
 \newpage
 
 # 7. Non-metric multidimensional scaling (NMDS)
 
-All of the clustering and ordination analyses mentioned above attempt to preserve the distance relationships among the objects as much as possible. The main difference with non-metric multidimensional scaling (NMDS) is that the preservation of distances is not of primary importance. This analysis attempts to represent the objects in a small number of dimensions (usually two or three) specified by the argument `k`, preserving the order of distances among objects (similar objects are plotted closer to one another and dissimilar objects far apart).
-Like principal coordinate analysis (PCoA), NMDS is not limited to Euclidean distance; it can produce ordinations using any coefficient of similarity or distance.
+All of the clustering and ordination analyses mentioned above attempt to preserve the distance relationships among the objects as much as possible. The main difference with non-metric multidimensional scaling (NMDS) is that the preservation of distances is not of primary importance. This analysis attempts to represent the objects in a small number of dimensions (usually two or three) specified by the argument `k`, preserving the order of distances among objects (similar objects are plotted closer to one another and dissimilar objects far apart). Like principal coordinate analysis (PCoA), NMDS is not limited to Euclidean distance; it can produce ordinations using any coefficient of similarity or distance.
+\vspace{-0.1cm}
 
 Because NMDS compresses the relationships among objects into two or three dimensions, this compression creates "stress". This stress value can be interpreted as the "goodness" of the solution, lower values being better. Since stress decreases as dimensionality increases, the optimal solution is when the decrease in stress is small after decreasing the number of dimensions. Further, multiple runs of the NMDS analysis are needed to ensure that a stable ordination has been reached, as any single run may get "trapped" in local optima which are not representative of true similarities.
 Similarly to PCoA, the influence of the original characters on new axes cannot be derived directly. Moreover, the ordination axes are arbitrary, so the variation explained by individual axes is unknown.
+\vspace{-0.1cm}
 
-The NMDS is calculated by the `nmds.calc()` function, using the `monoMDS()` function from the package `vegan` (R Core Team, 2020); the result is an object of class `pcoadata`.
-
-The result can be plotted with the functions `plotPoints()` or `plot3Dpoints()`; the functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` work as usual. Only the `plotCharacters()` function is not applicable, as there is no information on the influence of the original characters on the coordinate axes.
+The NMDS is calculated by the `nmds.calc()` function, using the `monoMDS()` function from the package `vegan` (R Core Team, 2020); the result is an object of class `pcoadata`. The result can be plotted with the functions `plotPoints()` or `plot3Dpoints()`; the functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` work as usual. Only the `plotCharacters()` function is not applicable, as there is no information on the influence of the original characters on the coordinate axes.
+\vspace{-0.1cm}
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 nmds.res = nmds.calc(centaurea, distMethod = "Euclidean", k = 3)
 summary(nmds.res)
-plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
-            legend = T)
 ```
-
+\vspace{-0.6cm}
+```{r echo = TRUE, eval=FALSE}
+plotPoints(nmds.res, col = c("blue","green","red","orange"), pch=c(8,17,20,18))
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=2.7}
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18))
+```
 
 \newpage
 
@@ -734,19 +860,41 @@ The CDA analysis is used to ascertain the extent to which the predefined groups 
 
 CDA can be applied by invoking the `cda.calc()` function (using the `candisc` package; Friendly & Fox, 2020). The result is an object of the class `cdadata`, and among other elements (run `?cdadata` for details) it stores total canonical structure coefficients, specifically total-sample correlations between the original variables and the canonical variates. Thus, these coefficients are used to interpret the contribution of different characters to the separation of groups. The function `summary()` prints summaries of the results of the `cda.calc()` function (variation explained by individual axes, total canonical structure coefficients).
 
+```{r include=F}
+options(max.print = 34)
 
+```
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 cda.centaurea = cda.calc(centaurea)
 
 summary(cda.centaurea)
-
-plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
-           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
-
-
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo=TRUE, eval=FALSE}
+plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
+           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
+           pch = c(8,17,20,18), legend = F)
+plotAddLegend(cda.centaurea, col = c("blue","green","red","orange"), box.lwd = 0.9,
+              x = "bottomright", cex = 0.8, ncol = 2)
+```
+
+&nbsp;  
+&nbsp;  
+
+```{r echo = TRUE, eval=FALSE}
+plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
+plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
+                                      NA, # green
+                                      rgb(255,0,0,max=255,alpha=130), # red
+                                      rgb(255,102,0,max=255,alpha=130))) # orange
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       NA, # green
@@ -754,15 +902,34 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
+\newpage 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
+plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
+plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
+
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
 
 ```
 
+&nbsp;  
+&nbsp;  
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+
+```{r echo = TRUE, eval=FALSE}
+plotPoints(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.4)
+plotAddEllipses(cda.centaurea, col = c("blue","green","red","orange"), lwd = 2)
+plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
+                                      rgb(0,255,0,max=255,alpha=130), # green
+                                      rgb(255,0,0,max=255,alpha=130), # red
+                                      rgb(255,102,0,max=255,alpha=130))) # orange
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.4)
 plotAddEllipses(cda.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
@@ -771,10 +938,16 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
+\newpage 
+
 This CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis.  
 
-```{r echo = TRUE, eval=TRUE, out.width = '220px', fig.height = 6.5, dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plotCharacters(cda.centaurea, cex = 1.2)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+plotCharacters(cda.centaurea, cex = 0.7, xlim=c(-1, 1),ylim=c(-1, 1))
 ```
 
 The function `plotCharacters()`, called with an object of the class `cdadata` as an argument, visualizes total canonical structure coefficients as arrows. The direction and length of the arrows indicate the characters' contribution to the separation of groups. The characters ML, MLW, IV and MW are oriented in the direction of the separation of *C. phrygia* s.str. ("ph"), so they contributed the most significantly, which is in accordance with the results of PCA. 
@@ -786,23 +959,40 @@ The total canonical structure coefficients are elements of an object of the clas
 ```{r include=F}
 options(max.print = 100)
 ```
-```{r echo = TRUE, eval=TRUE}
+```{r echo = TRUE, eval=FALSE}
 exportRes(cda.centaurea$totalCanonicalStructure, file = "centaurea_TCS.txt")
-
-cda.centaurea$totalCanonicalStructure
 ```
 
+\vspace{-0.7cm}
 
-&nbsp;  
-&nbsp;  
+```{r echo = FALSE , eval=TRUE}
+cc = cda.centaurea$totalCanonicalStructure
+cda.centaurea$totalCanonicalStructure = cda.centaurea$totalCanonicalStructure[-c(1,2,3,4,5, 6,7, 8, 9 ,10,11),]
+```
+```{r echo = TRUE, eval=TRUE}
+# For demonstration purposes only. Only a subset of data is displayed.
+cda.centaurea$totalCanonicalStructure
 
+```
+
+TODO: TU POKRACUJ
+******************************
+
+
+
+
+\newpage 
 A 3D scatterplot can be produced using the `plot3Dpoints()` function. The viewing direction and slope (co-latitude) can be set using the `theta` and `phi` arguments, respectively.
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
+plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), 
+                            phi = 12, theta = 25)
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
 ```
-
 
 
 
@@ -813,15 +1003,26 @@ To gain better insight into the differentiation among the remaining taxa (*C. ps
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 stPsHybr = deleteTaxon(centaurea, taxonName = "ph")
-
 cda.stPsHybr = cda.calc(stPsHybr)
-
+```
+\vspace{-0.9cm}
+```{r echo = TRUE, eval=FALSE}
 plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
             legend = T, ncol = 2, legend.pos="bottomright")
-
-cda.stPsHybr$totalCanonicalStructure
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
+            legend = F)
+plotAddLegend(cda.stPsHybr, col = c("blue","red","orange"), box.lwd = 0.9,
+              x = "bottomright", cex = 0.75, ncol = 2)
 ```
 
+
+
+```{r echo = TRUE, eval=TRUE}
+cda.stPsHybr$totalCanonicalStructure
+```
 The first axis captures most of the variation. Characters correlated with this axis (IW, ILW, LS, MW and MLW) are the most suitable for the taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibits intermediate values of these particular characters. The characters correlated with the second axis (IV, ML and LW) contribute to the separation of the hybrid from the parental species.
 
 
@@ -834,7 +1035,7 @@ Sometimes it is desirable to passively display (predict) the position of certain
 Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note the use of semi-transparent colours to show the overlap of the groups. The colours are defined using the `rgb()` function, in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
 
 cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
 
@@ -843,6 +1044,24 @@ plotPoints(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
                         rgb(255,0,0, alpha=160, max=255), # red
                         rgb(255,102,0, alpha=160, max=255))) # orange, 
 ```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+
+cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
+
+plotPoints(cda.stPs_passiveHybr, legend = F, breaks = 0.2,
+                col = c(rgb(0,0,255, alpha=255, max=255), # blue
+                        rgb(255,0,0, alpha=160, max=255), # red
+                        rgb(255,102,0, alpha=160, max=255))) # orange, 
+plotAddLegend(cda.stPs_passiveHybr, pch = 22, col = "black", box.lwd = 0.9, pt.bg= c("blue","red","orange"),
+              x = "topright", cex = 0.8, ncol = 1)
+```
+
+
+
+
+
+
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
 plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
@@ -1081,12 +1300,5 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 
 
-
-
-```{r echo = FALSE, eval=TRUE}
-# rm unwanted files
-unlink("centaurea_TCS.txt")
-
-```
 
 

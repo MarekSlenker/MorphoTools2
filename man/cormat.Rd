@@ -9,15 +9,15 @@ The \code{cormat} function calculates the matrix of the correlation coefficients
 
 
 \usage{
-cormat(object, method = "pearson")
+cormat(object, method = "Pearson")
 
-cormatSignifTest(object, method = "pearson", alternative = "two.sided")
+cormatSignifTest(object, method = "Pearson", alternative = "two.sided")
 }
 \arguments{
 \item{object}{an object of class \code{\link{morphodata}}.}
 
 \item{method}{a character string indicating which correlation coefficient is to be used for the test.
-One of \code{"pearson"} (default), or \code{"spearman"} can be applied.}
+One of \code{"Pearson"} (default), or \code{"Ppearman"} can be applied.}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of \code{"two.sided"} (default),
 \code{"greater"} (positive association) or \code{"less"} (negative association).}
@@ -37,12 +37,12 @@ if tests are needed, they can be computed using the \code{\link{cormatSignifTest
 \examples{
 data(centaurea)
 
-correlations.p = cormat(centaurea, method = "pearson")
-correlations.s = cormat(centaurea, method = "spearman")
+correlations.p = cormat(centaurea, method = "Pearson")
+correlations.s = cormat(centaurea, method = "Spearman")
 
 # exportRes(correlations.p, file = "correlations.pearson.txt")
 # exportRes(correlations.s, file = "correlations.spearman.txt")
 
-correlations.p = cormatSignifTest(centaurea, method = "pearson")
+correlations.p = cormatSignifTest(centaurea, method = "Pearson")
 
 }
