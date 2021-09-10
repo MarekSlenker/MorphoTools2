@@ -20,11 +20,11 @@
 \contentsline {section}{7. Non-metric multidimensional scaling (NMDS)}{24}{section*.21}%
 \contentsline {section}{8. Stepwise discriminant analysis}{25}{section*.22}%
 \contentsline {section}{9. Canonical discriminant analysis (CDA)}{26}{section*.23}%
-\contentsline {subsubsection}{Passive prediction of samples.}{32}{section*.24}%
-\contentsline {section}{10. Classificatory discriminant analysis}{34}{section*.25}%
-\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{36}{section*.26}%
-\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{37}{section*.27}%
-\contentsline {subsection}{10.3 K nearest neighbour classificatory DA}{38}{section*.28}%
-\contentsline {subsection}{10.4 Classification of sample individuals based on an independent training set.}{39}{section*.29}%
-\contentsline {section}{Further reading}{40}{section*.30}%
+\contentsline {subsubsection}{Passive prediction of samples.}{31}{section*.24}%
+\contentsline {section}{10. Classificatory discriminant analysis}{33}{section*.25}%
+\contentsline {subsection}{10.1 Linear discriminant analysis (LDA)}{35}{section*.26}%
+\contentsline {subsection}{10.2 Quadratic discriminant analysis (LDA)}{36}{section*.27}%
+\contentsline {subsection}{10.3 K nearest neighbour classificatory DA}{37}{section*.28}%
+\contentsline {subsection}{10.4 Classification of sample individuals based on an independent training set.}{38}{section*.29}%
+\contentsline {section}{Further reading}{39}{section*.30}%
 \contentsline {section}{References}{40}{section*.31}%

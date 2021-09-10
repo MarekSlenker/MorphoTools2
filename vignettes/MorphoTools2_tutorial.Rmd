@@ -966,18 +966,13 @@ exportRes(cda.centaurea$totalCanonicalStructure, file = "centaurea_TCS.txt")
 \vspace{-0.7cm}
 
 ```{r echo = FALSE , eval=TRUE}
-cc = cda.centaurea$totalCanonicalStructure
-cda.centaurea$totalCanonicalStructure = cda.centaurea$totalCanonicalStructure[-c(1,2,3,4,5, 6,7, 8, 9 ,10,11),]
+cda.centaurea$totalCanonicalStructure = cda.centaurea$totalCanonicalStructure[c(1,2,3,6,11,13,14,16, 17, 18,21,24,25),]
 ```
 ```{r echo = TRUE, eval=TRUE}
 # For demonstration purposes only. Only a subset of data is displayed.
 cda.centaurea$totalCanonicalStructure
 
 ```
-
-TODO: TU POKRACUJ
-******************************
-
 
 
 
@@ -1058,12 +1053,19 @@ plotAddLegend(cda.stPs_passiveHybr, pch = 22, col = "black", box.lwd = 0.9, pt.b
 ```
 
 
+&nbsp;  
+&nbsp;  
 
 
 
-
-
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
+plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
+                col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
+                        rgb(255,255,255, alpha=80, max=255), # ps - white
+                        rgb(255,255,255, alpha=80, max=255))) # st - white 
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
 plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
                         rgb(255,255,255, alpha=80, max=255), # ps - white
@@ -1091,18 +1093,18 @@ options(max.print = 460)
 ```{r echo = TRUE, eval=TRUE}
 stepdisc.calc(centaurea)
 
-partialCentaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF", 
-                                    "AP", "IS", "LBA", "LW", "AL", "ILW", "LBS",
-                                    "SFT", "CG", "IL", "LM", "ALW", "AW", "SF") )
+partialCent = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV",
+                          "MW", "MF", "AP", "IS", "LBA", "LW", "AL", "ILW",
+                          "LBS","SFT", "CG", "IL", "LM", "ALW", "AW", "SF"))
 
-descrTaxon(partialCentaurea, format = "$SD")
+descrTaxon(partialCent, format = "$SD")
 
-partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] =
-             partialCentaurea$data[ partialCentaurea$Taxon == "hybr", "LM" ][1] + 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "ph", "IV" ][1] =
-             partialCentaurea$data[ partialCentaurea$Taxon == "ph", "IV" ][1] + 0.000001
-partialCentaurea$data[ partialCentaurea$Taxon == "st", "LBS"][1] =
-             partialCentaurea$data[ partialCentaurea$Taxon == "st", "LBS"][1] + 0.000001
+partialCent$data[ partialCent$Taxon == "hybr", "LM" ][1] =
+             partialCent$data[partialCent$Taxon=="hybr","LM"][1] + 0.000001
+partialCent$data[ partialCent$Taxon == "ph", "IV" ][1] =
+             partialCent$data[partialCent$Taxon=="ph","IV"][1] + 0.000001
+partialCent$data[ partialCent$Taxon == "st", "LBS"][1] =
+             partialCent$data[partialCent$Taxon=="st","LBS"][1] + 0.000001
 ```
 
 
@@ -1110,7 +1112,7 @@ If the data have an approximately normal distribution, linear (LDA; `classif.lda
 The non-parametric k nearest neighbours method (`classif.knn()`) can be used without making any assumptions about data distributions. 
 
 ```{r echo = TRUE, eval=TRUE}
-boxMTest(partialCentaurea)
+boxMTest(partialCent)
 
 ```
 
@@ -1126,7 +1128,7 @@ Linear discriminant analysis can be performed by invoking the `classif.lda()` fu
 
 
 ```{r echo = TRUE, eval=TRUE}
-classifRes.lda = classif.lda(partialCentaurea)
+classifRes.lda = classif.lda(partialCent)
 ```
 
 
@@ -1145,8 +1147,7 @@ The results can be exported to the clipboard or a file using the `exportRes()` f
 
 ```{r echo = TRUE, eval=FALSE}
 classif_lda = classif.matrix(classifRes.lda, level = "indiv")
-exportRes(object = classif_lda,
-          file = "lda_classifMatrix.txt")
+exportRes(object = classif_lda, file = "lda_classifMatrix.txt")
 ```
 
 
@@ -1158,7 +1159,7 @@ Quadratic DA does not assume equal covariance matrices among groups and can be c
 
 
 ```{r echo = TRUE, eval=TRUE}
-classifRes.qda = classif.qda(partialCentaurea)
+classifRes.qda = classif.qda(partialCent)
 
 
 classif.matrix(classifRes.qda, level = "taxon")
@@ -1199,14 +1200,18 @@ knn.select<-function(object, crossval="indiv"){
 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
-knn.select(partialCentaurea, crossval = "pop")
+```{r echo = TRUE, eval=FALSE}
+knn.select(partialCent, crossval = "pop")
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 0.5, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+knn.select(partialCent, crossval = "pop")
 ```
 
 The highest number of correct classifications is at k = 15, so we set `k` to equal 15 in the `classif.knn()` function (to classify each individual according its 15 nearest neighbours).
 
 ```{r echo = TRUE, eval=TRUE}
-classifRes.knn = classif.knn(partialCentaurea, crossval = "pop", k = 15)
+classifRes.knn = classif.knn(partialCent, crossval = "pop", k = 15)
 
 classif.matrix(classifRes.knn, level = "taxon")
 ```
@@ -1229,8 +1234,8 @@ The functions `classifSample.lda()`, `classifSample.qda()` and `classifSample.kn
 Let us remove population LES, that and pretend that sample LES1116 is a type herbarium specimen of *Centaurea stenolepis* and that we want to quantify its similarity with other populations of the species. To classify LES1116, run the following code:
 
 ```{r echo = TRUE, eval=TRUE}
-trainingSet = deletePopulation(partialCentaurea, populationName = "LES")
-typeSpecimen = keepSample(partialCentaurea, "LES1116")
+trainingSet = deletePopulation(partialCent, populationName = "LES")
+typeSpecimen = keepSample(partialCent, "LES1116")
 
 classifSample.lda(typeSpecimen, trainingSet)
 
@@ -1255,12 +1260,15 @@ A brief account of the multivariate methods used in taxonomy is given in:
 
 **Marhold K. (2011)**. Multivariate morphometrics and its application to monography at specific and infraspecific levels. In: Stuessy TF, Lack HW, eds. *Monographic plant systematics: fundamental assessment of plant biodiversity*. Ruggell: A.R.G. Gantner Verlag K. G., 73–99.  
 
+&nbsp;  
+&nbsp;  
+
 For a detailed description of the methods used, see:
 
 **Legendre P. & Legendre L. (2012)**. *Numerical Ecology*, 3rd English edn. Elsevier Science BV, Amsterdam.
 
 
-
+&nbsp;  
 &nbsp;  
 
 Selection of papers employing the methods of multivariate morphometrics:
@@ -1279,7 +1287,7 @@ Selection of papers employing the methods of multivariate morphometrics:
 
 
 
-
+\newpage
 # References
 
 **Friendly M., Fox J. (2020)**. candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis. R package version 0.8-3. https://CRAN.R-project.org/package=candisc
