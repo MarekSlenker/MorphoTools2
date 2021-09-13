@@ -11,7 +11,7 @@
 \contentsline {subsection}{3.5 Descriptive statistics}{11}{section*.12}%
 \contentsline {subsection}{3.6 Correlations of characters}{12}{section*.13}%
 \contentsline {subsection}{3.7 Populations as operational taxonomic units}{12}{section*.14}%
-\contentsline {subsection}{3.8 Missing data}{12}{section*.15}%
+\contentsline {subsection}{3.8 Missing data}{13}{section*.15}%
 \contentsline {subsubsection}{3.8.1 Removing items}{14}{section*.16}%
 \contentsline {subsubsection}{3.8.2 Replacing missing values}{14}{section*.17}%
 \contentsline {section}{4. Hierarchical clustering}{15}{section*.18}%

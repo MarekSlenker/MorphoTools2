@@ -28,7 +28,7 @@ plotCharacters.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
   # main plot
 
   graphics::plot(x = result$eigenvectors[ ,axes[1]], y = result$eigenvectors[ ,axes[2]],
-         type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, main = main)
+         type = "n", xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, main = main, ...)
   graphics::abline(h = 0,v = 0,lty = 2,col = "grey")
   graphics::arrows(0, 0, result$eigenvectors[ ,axes[1]], result$eigenvectors[ ,axes[2]],
          col = col, length = length, angle = angle, ...)
@@ -75,7 +75,7 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
     y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
 
     graphics::plot(x = result$totalCanonicalStructure[,1], y = y, xlab = xlab, ylab = ylab, xlim = xlim,
-         ylim = c(0,length(result$totalCanonicalStructure[,1])+1),type = "n", yaxt = "n", main = main)
+         ylim = c(0,length(result$totalCanonicalStructure[,1])+1),type = "n", yaxt = "n", main = main, ...)
 
     graphics::abline(v = 0,lty = 2,col = "grey")
     graphics::arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
@@ -110,7 +110,7 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
     # main plot
 
     graphics::plot(x = result$totalCanonicalStructure[,axes[1]], y = result$totalCanonicalStructure[,axes[2]],
-         xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n", main = main)
+         xlab = xlab, ylab = ylab, xlim = xlim, ylim = ylim, type = "n", main = main, ...)
 
     graphics::abline(h = 0,v = 0,lty = 2,col = "grey")
     graphics::arrows(0, 0, result$totalCanonicalStructure[,axes[1]], result$totalCanonicalStructure[,axes[2]],

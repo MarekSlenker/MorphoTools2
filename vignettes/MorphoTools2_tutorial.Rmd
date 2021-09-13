@@ -18,9 +18,9 @@ indent: false
 ---
 &nbsp;  
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}	
-\footnotetext[2]{Slovak Academy of Sciences, Bratislava, Slovakia}
-\footnotetext[3]{Charles University, Prague, Czechia}  
-\footnotetext[4]{University of South Bohemia, České Budějovice, Czechia \vspace*{0.4pc}}
+\footnotetext[2]{Institute of Botany, Plant Science and Biodiversity Centre, Slovak Academy of Sciences, Bratislava, Slovakia}
+\footnotetext[3]{Department of Botany, Faculty of Science, Charles University, Prague, Czechia}  
+\footnotetext[4]{Department of Botany, Faculty of Science, University of South Bohemia, České Budějovice, Czechia \vspace*{0.4pc}}
 \footnotetext[1]{author for correspondence: marek.slenker@savba.sk}
 
 
@@ -324,21 +324,32 @@ Boxplots can be produced for a particular character using the `boxplotCharacter(
 ```{r echo = TRUE, eval=FALSE}
 boxplotCharacter(centaurea, character="AL", col=c("blue","green","red","orange"))
 ```
-```{r echo = FALSE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
-graphics::par(mar=c(2,1,2,1))
-boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"))
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"), cex.main=1.3)
 ```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+
+```{r echo = TRUE, eval=FALSE}
 boxplotCharacter(centaurea, character = "AL", pch = 1,
                  lowerWhisker = 0.1, upperWhisker = 1)
 ```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+boxplotCharacter(centaurea, character = "AL", pch = 1, cex.main=1.3,
+                 lowerWhisker = 0.1, upperWhisker = 1)
+```
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', out.height= '200px', dpi=300}
+
+```{r echo = TRUE, eval=FALSE}
 boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
                  frame = FALSE, horizontal = T, notch = TRUE)
 ```
-
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+boxplotCharacter(centaurea, character = "AL", outliers = FALSE,cex.main=1.3,
+                 frame = FALSE, horizontal = T, notch = TRUE)
+```
 
 The default behaviour is to plot outliers (as asterisks be default, but this can be changed in the `pch` argument; `outliers = FALSE` will suppress the plotting of outliers) and to show the trimmed range (omitting 10% of the most extreme values) using whiskers.  
 
@@ -487,9 +498,14 @@ Hierarchical classification is one of the methods that do not require *a priori*
 
 The dendrogram is displayed using the `plot()` function with usual graphical parameters. The parameter `hang` controls the distance of the labels from the plot; negative values cause labels to be aligned at zero.
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300,}
+```{r echo = TRUE, eval=FALSE}
 pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
 plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
+```
+```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+graphics::par(mar=c(3, 4.1, 1.5, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
+pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
+plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance", cex=0.6, cex.main=1)
 ```
 
 Several main clusters were formed in the dendrogram above; however, some populations (BABL, LES, OLE1, OLE2 and PROS) were clustered “incorrectly”, requiring further inspection.
@@ -558,7 +574,7 @@ plotCharacters(pca.centaurea)
 
 ```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
-plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5))
+plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
 ```
 
@@ -598,7 +614,7 @@ plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"),
                       pos = 2, cex = 0.7)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 pca.pops = pca.calc(pops)
 plotPoints(pca.pops, col = c("blue","green","red","orange"), pch=c(8,17,20,18), 
             legend = FALSE, labels = FALSE)
@@ -616,7 +632,7 @@ plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
-plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5))
+plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
 plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
 plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
@@ -638,7 +654,7 @@ plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
                                     rgb(255,102,0, max=255, alpha=50)))
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
@@ -651,24 +667,19 @@ plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
                                     rgb(255,102,0, max=255, alpha=50))) # orange
 ```
 
-
-
-
-
-
 To highlight only some groups in colour, set the colour values of groups not to be highlighted to `NA`.
 
 
 ```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
-plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=50)))
+plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=100)))
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
-plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=50)))
+plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=100)))
 ```
 
 
@@ -683,7 +694,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                x = "bottomright", cex = 0.7, pt.cex = 1.3, box.type = "n", ncol = 2)
@@ -692,7 +703,8 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
 
-
+&nbsp;  
+&nbsp;  
 
 ```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
@@ -703,7 +715,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
                        x = "bottomright", box.type = "n", ncol = 2)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
@@ -720,16 +732,19 @@ plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"),
              phi = 20, theta = 30)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.8,
              phi = 20, theta = 30)
 ```
+
+&nbsp;  
+&nbsp;  
 
 ```{r echo = TRUE, eval=FALSE}
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T, cex = 0.8)
 ```
 
@@ -783,7 +798,7 @@ plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,1
              phi = 20, theta = 70, legend = T)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
              phi = 20, theta = 70, legend = F)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), box.lwd = 0.9,
@@ -814,7 +829,7 @@ summary(nmds.res)
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch=c(8,17,20,18))
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=2.7}
-graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18))
 ```
 
@@ -876,7 +891,7 @@ plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2)
            pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
            pch = c(8,17,20,18), legend = F)
 plotAddLegend(cda.centaurea, col = c("blue","green","red","orange"), box.lwd = 0.9,
@@ -894,7 +909,7 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       NA, # green
@@ -910,7 +925,7 @@ plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
 
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
 
@@ -929,7 +944,7 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.4)
 plotAddEllipses(cda.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
@@ -947,7 +962,7 @@ plotCharacters(cda.centaurea, cex = 1.2)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
-plotCharacters(cda.centaurea, cex = 0.7, xlim=c(-1, 1),ylim=c(-1, 1))
+plotCharacters(cda.centaurea, cex = 0.7, xlim=c(-1, 1),ylim=c(-1, 1), cex.main=0.9)
 ```
 
 The function `plotCharacters()`, called with an object of the class `cdadata` as an argument, visualizes total canonical structure coefficients as arrows. The direction and length of the arrows indicate the characters' contribution to the separation of groups. The characters ML, MLW, IV and MW are oriented in the direction of the separation of *C. phrygia* s.str. ("ph"), so they contributed the most significantly, which is in accordance with the results of PCA. 
@@ -985,7 +1000,7 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"),
                             phi = 12, theta = 25)
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
 ```
 
@@ -1006,7 +1021,7 @@ plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18),
             legend = T, ncol = 2, legend.pos="bottomright")
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
             legend = F)
 plotAddLegend(cda.stPsHybr, col = c("blue","red","orange"), box.lwd = 0.9,
@@ -1040,7 +1055,7 @@ plotPoints(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
                         rgb(255,102,0, alpha=160, max=255))) # orange, 
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 
 cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
 
@@ -1065,7 +1080,7 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                         rgb(255,255,255, alpha=80, max=255))) # st - white 
 ```
 ```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
-graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8)
+graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
                         rgb(255,255,255, alpha=80, max=255), # ps - white

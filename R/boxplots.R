@@ -1,7 +1,7 @@
 #' Box Plots
 #' @export
 boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
-                                      main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
+                                      main = character, cex.main = 1.5, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE,
                                       varwidth = FALSE, ...) {
 
 
@@ -19,7 +19,7 @@ boxplotCharacter <- function(object, character, outliers = TRUE, lowerWhisker = 
 #' @rdname boxplotCharacter
 #' @export
 boxplotAll <- function(object, folderName = "boxplots", outliers = TRUE, lowerWhisker = 0.05, upperWhisker = 0.95, col = "white", border = "black",
-                                main = character, cex.main = 2, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
+                                main = character, cex.main = 1.5, xlab = NULL, ylab = NULL, frame = TRUE, pch = 8, horizontal = FALSE, varwidth = FALSE, width = 480, height = 480, units = "px", ...)
 {
   .checkClass(object, "morphodata")
 
