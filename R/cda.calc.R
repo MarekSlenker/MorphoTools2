@@ -42,22 +42,26 @@ cda.calc <- function(object, passiveSamples = NULL) {
     dfe <- manova$error.df
     dfh <- manova$df[[term]]
     Sp <- E/dfe
-    tdecomp <- function(m) {
-      wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
-      p <- ncol(m)
-      wmd <- wm$values
 
-      # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
-      options(warn=-1) # MK
-      diasq=diag(sqrt(wmd))
-      malaBlbost = replace(diasq, is.na(diasq), -1.4E-4)  # MK
-      options(warn=0) # MK
+    # tdecomp <- function(m) {
+    #    wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
+    #    p <- ncol(m)
+    #    wmd <- wm$values
 
-      out <- t(wm$vectors %*% malaBlbost)  # MK
-      #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
-      out
-    }
-    Tm <- tdecomp(E)
+    #    # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
+    #    options(warn=-1) # MK
+    #    diasq=diag(sqrt(wmd))
+    #    malaBlbost = replace(diasq, is.na(diasq), -1.4E-4)  # MK
+    #    options(warn=0) # MK
+
+    #    out <- t(wm$vectors %*% malaBlbost)  # MK
+    #    #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
+    #    out
+    #}
+    # Tm <- tdecomp(E)
+
+    Tm <- fpc::tdecomp(E)
+
 
     eInv <- solve(Tm)
 
