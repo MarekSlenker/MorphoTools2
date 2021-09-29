@@ -12,7 +12,12 @@ pca.calc <- function(object) {
   # find and report constant columns
   constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
   if (length(constantColumns)>0) {
-    stop(paste("Characters \"", paste(constantColumns, collapse = ", "), "\" are invariant.", sep = ""), call. = FALSE)
+    stop(paste("Characters \"", paste(constantColumns, collapse = "\", \""), "\" are invariant.", sep = ""), call. = FALSE)
+  }
+
+  # number of characters (2) should be lower than the number of samples (1)
+  if (dim(object$data)[2] >= dim(object$data)[1]) {
+    stop("Number of characters should be lower than the number of samples (analyzed objects).", call. = FALSE)
   }
 
 

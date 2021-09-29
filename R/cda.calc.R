@@ -10,7 +10,12 @@ cda.calc <- function(object, passiveSamples = NULL) {
   # find and report constant columns
   constantColumns = colnames(object$data)[apply(object$data, 2, function(x) (abs(max(x)-min(x)))==0 )]
   if (length(constantColumns)>0) {
-    stop(paste("Characters", paste(constantColumns, collapse = ", "), "are invariant."), call. = FALSE)
+    stop(paste("Characters \"", paste(constantColumns, collapse = "\", \""), "\" are invariant.", sep = ""), call. = FALSE)
+  }
+
+  #          characters          samoles  taxa _____________________________________
+  if (dim(object$data)[2] >= (length(object$ID) - length(levels(object$Taxon)))) {
+    warning("For the number of taxa (g), characters (p) and the total number of samples (n), the following should hold: 0 < p < (n - g);", call. = FALSE)
   }
 
   for (pasSample in passiveSamples) {
@@ -43,7 +48,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     dfh <- manova$df[[term]]
     Sp <- E/dfe
 
-    # tdecomp <- function(m) {
+    #tdecomp <- function(m) {
     #    wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
     #    p <- ncol(m)
     #    wmd <- wm$values
@@ -58,7 +63,7 @@ cda.calc <- function(object, passiveSamples = NULL) {
     #    #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
     #    out
     #}
-    # Tm <- tdecomp(E)
+    #Tm <- tdecomp(E)
 
     Tm <- fpc::tdecomp(E)
 
