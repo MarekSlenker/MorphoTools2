@@ -13,7 +13,12 @@ pcoa.calc <- function(object, distMethod = "Euclidean", binaryChs = NULL, nomina
 
   xRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
                                 eig = TRUE) # only to find numb of possitive eigenvalues
-  rank = length(xRes$eig[which(xRes$eig > 0)])
+
+  if (length(xRes$eig[which(xRes$eig > 0)]) == length(xRes$eig)) {
+    rank = length(xRes$eig)-1  # maximum dimension of the space must be in {1, 2, …, n-1}.
+  } else {
+    rank = length(xRes$eig[which(xRes$eig > 0)])  # maximum dimension of the space must be in {1, 2, …, n-1}.
+  }
 
   princompRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
                                 k = rank, eig = TRUE, x.ret = TRUE)
