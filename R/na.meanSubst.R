@@ -5,7 +5,7 @@ naMeanSubst <- function(object){
   .checkClass(object, "morphodata")
 
    meansubst<-function(x){
-      m<-mean(x,na.rm=T)
+      m<-mean(x,na.rm=TRUE)
       if (is.nan(m)) m<-NA
       x[which(is.na(x))]<-m
       x = round(x, digits = 3)
