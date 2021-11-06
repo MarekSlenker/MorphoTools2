@@ -4,7 +4,6 @@
 # MorphoTools2
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 The package `MorphoTools2` is intended for multivariate analyses of

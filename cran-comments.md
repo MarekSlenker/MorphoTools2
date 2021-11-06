@@ -13,8 +13,7 @@
      compacted ‘MorphoTools2_tutorial.pdf’ from 1202Kb to 877Kb
   consider running tools::compactPDF(gs_quality = "ebook") on these files
   
-> I rebuld this package using "--compact-vignettes=both" argument  
-  
+> I rebuld this package using "devtools::build(args = c('--resave-data','--compact-vignettes="gs+qpdf"'))"
 
 
 * checking CRAN incoming feasibility ... **NOTE**: Possibly misspelled words in DESCRIPTION:  Morphometric (3:21)  
