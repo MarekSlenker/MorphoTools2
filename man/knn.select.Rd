@@ -3,11 +3,9 @@
 
 \title{Search for the Optimal K-nearest Neighbours}
 
-
 \description{
 This function search for the optimal number of neighbours for the given data set for k-nearest neighbour cross-validatory classification.
 }
-
 
 \usage{
 knn.select(object, crossval = "indiv")
@@ -18,7 +16,9 @@ knn.select(object, crossval = "indiv")
 \item{crossval}{crossvalidation mode, sets individual (\code{"indiv"}; default, one-leave-out method) or whole populations (\code{"pop"}) as leave-out unit.}
 }
 
-
+\value{
+Optimal number of neighbours is written to the console, and plot with all Ks is produced.
+}
 
 \details{
 The \code{knn.select} function compute number of correctly classified individuals for k values ranging from 1 to 30 and highlight the value with the highest success rate. Ties (i.e., when there are the same numbers of votes for two or more groups) are broken at random, and thus several iterations may yield different results. Therefore, the functions compute 10 iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered.
@@ -42,9 +42,7 @@ data(centaurea)
 centaurea = naMeanSubst(centaurea)
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
-
 # classification by nonparametric k-nearest neighbour method
-knn.select(centaurea, crossval = "indiv")
+\dontrun{knn.select(centaurea, crossval = "indiv")}
 classifRes.knn = classif.knn(centaurea, k = 12, crossval = "indiv")
-
 }

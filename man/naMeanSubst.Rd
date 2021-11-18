@@ -1,18 +1,29 @@
 \name{naMeanSubst}
 \alias{naMeanSubst}
+
 \title{Replace Missing Data by Population Average}
-\usage{
-naMeanSubst(object)
-}
-\arguments{
-\item{object}{an object of class \code{\link{morphodata}}.}
-}
-\value{
-an object of class \code{\link{morphodata}}
-}
+
 \description{
 This function substitutes missing data using the average value of the respective character in the respective population.
 }
+
+\usage{
+naMeanSubst(object)
+}
+
+\arguments{
+\item{object}{an object of class \code{\link{morphodata}}.}
+}
+
+\value{
+an object of class \code{\link{morphodata}} with the following elements:
+
+\item{ID}{IDs of each row of \code{data} object.}
+\item{Population}{population membership of each row of \code{data} object.}
+\item{Taxon}{taxon membership of each row of \code{data} object.}
+\item{data}{\code{data.frame} of individuals (rows) and values of measured morphological characters (columns).}
+}
+
 \details{
 Generally, most of the multivariate analyses require a full data matrix.
 The preferred approach is to reduce the data set to complete observations only (i.e., perform the casewise deletion of

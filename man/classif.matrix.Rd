@@ -3,13 +3,9 @@
 
 \title{Format the Classifdata to Summary Table}
 
-
-
-
 \description{
 The \code{classif.matrix} method formats the results stored in \code{classifdata} class to a summary classification table of taxa, populations, or individuals.
 }
-
 
 \usage{
 classif.matrix(result, level = "taxon")
@@ -20,7 +16,9 @@ classif.matrix(result, level = "taxon")
 \item{level}{level of grouping of classification matrix, \code{"taxon"} (default), populations (\code{"pop"}), or individuals (\code{"indiv"})}
 }
 
-
+\value{
+a \code{data.frame}
+}
 
 
 \examples{

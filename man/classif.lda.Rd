@@ -1,17 +1,13 @@
-\encoding{UTF-8}
 \name{classif.lda}
 \alias{classif.lda}
 \alias{classif.qda}
 \alias{classif.knn}
 
-
 \title{Classificatory Discriminant Analysis}
-
 
 \description{
 These functions computes discriminant function for classifying observations. Linear discriminant function (\code{classif.lda}), quadratic discriminant function (\code{classif.qda}), or nonparametric k-nearest neighbours classification method (\code{classif.knn}) can be used.
 }
-
 
 \usage{
 classif.lda(object, crossval = "indiv")
@@ -19,7 +15,6 @@ classif.lda(object, crossval = "indiv")
 classif.qda(object, crossval = "indiv")
 
 classif.knn(object, k, crossval = "indiv")
-
 }
 
 \arguments{
@@ -28,9 +23,16 @@ classif.knn(object, k, crossval = "indiv")
 \item{k}{number of neighbours considered for the k-nearest neighbours method.}
 }
 
-
 \value{
-an object of class \code{\link{classifdata}}.
+an object of class \code{\link{classifdata}} with the following elements:
+
+\item{ID}{IDs of each row.}
+\item{Population}{population membership of each row.}
+\item{Taxon}{taxon membership of each row.}
+\item{classif}{classification from discriminant analysis.}
+\item{prob}{posterior probabilities of classification into each taxon (if calculated by \code{\link{classif.lda}} or \code{\link{classif.qda}}),
+or proportion of the votes for the winning class (calculated by \code{\link{classif.knn}})}
+\item{correct}{logical, correctness of classification.}
 }
 
 
@@ -77,7 +79,8 @@ classifRes.lda = classif.lda(centaurea, crossval = "indiv")
 classifRes.qda = classif.qda(centaurea, crossval = "indiv")
 
 # classification by nonparametric k-nearest neighbour method
-# USE knn.select(centaurea, crossval = "pop") to find the optimal K.
+# use knn.select to find the optimal K.
+\dontrun{knn.select(centaurea, crossval = "pop")}
 classifRes.knn = classif.knn(centaurea, k = 12, crossval = "pop")
 
 # exporting results

@@ -41,6 +41,8 @@ shapiroWilkTest <- function(object, p.value = 0.05) {
     shapiroWilkStatistic[lowerThenP] = "NOT normally distributed"
 
   }
+  shapiroWilkStatistic = as.data.frame(shapiroWilkStatistic)
+
   return(shapiroWilkStatistic)
 }
 

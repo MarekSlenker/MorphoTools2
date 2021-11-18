@@ -25,11 +25,11 @@ indent: false
 
 
 \newpage 
-
-```{r, include = FALSE}
+```{r, eval=TRUE, include = FALSE}
 knitr::opts_chunk$set(
+  dev="png",
   highlight = TRUE,
-  dpi = 300,
+  dpi = 150,
   collapse = TRUE,
   comment = "#>",
   rownames = FALSE, 
@@ -39,6 +39,7 @@ knitr::opts_chunk$set(
   #fig.path    = 'figs/', 
   #out.width='\\textwidth'
   )
+old.par <- par(no.readonly = TRUE)  
 ```
 
 ```{=latex}
@@ -273,6 +274,7 @@ As stated above, when applying a log transformation, a constant should be added 
 The following figure depicts the effects of different types of transformation on the same data. 
 
 ```{r echo = FALSE, eval=TRUE, out.width = '320px', out.height= '300px'}
+
 par(mfrow=c(2,2))
 par(mar=c(4,4,2,1))
 par(mgp=c(2,0.8,0))
@@ -297,11 +299,6 @@ stats::qqnorm(as.matrix( na.omit(centCubeRoot$data["SF"])), main = "x^(1/3) tran
 stats::qqline(as.matrix( na.omit(centCubeRoot$data["SF"])), lwd=2)
 
 
-
-par(mfrow=c(1,1))
-par(mgp=c(3, 1, 0))
-par(mar=c(5, 4, 4, 2) + 0.1)
-
 ```
 
 So finally, to apply a square root transformation to character `SF`, the following code can be used.
@@ -324,9 +321,10 @@ Boxplots can be produced for a particular character using the `boxplotCharacter(
 ```{r echo = TRUE, eval=FALSE}
 boxplotCharacter(centaurea, character="AL", col=c("blue","green","red","orange"))
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","orange"), cex.main=1.3)
+
 ```
 
 
@@ -334,10 +332,11 @@ boxplotCharacter(centaurea, character = "AL", col = c("blue","green","red","oran
 boxplotCharacter(centaurea, character = "AL", pch = 1,
                  lowerWhisker = 0.1, upperWhisker = 1)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 boxplotCharacter(centaurea, character = "AL", pch = 1, cex.main=1.3,
                  lowerWhisker = 0.1, upperWhisker = 1)
+                 
 ```
 
 
@@ -345,10 +344,11 @@ boxplotCharacter(centaurea, character = "AL", pch = 1, cex.main=1.3,
 boxplotCharacter(centaurea, character = "AL", outliers = FALSE,
                  frame = FALSE, horizontal = T, notch = TRUE)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 1.8, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 boxplotCharacter(centaurea, character = "AL", outliers = FALSE,cex.main=1.3,
                  frame = FALSE, horizontal = T, notch = TRUE)
+                 
 ```
 
 The default behaviour is to plot outliers (as asterisks be default, but this can be changed in the `pch` argument; `outliers = FALSE` will suppress the plotting of outliers) and to show the trimmed range (omitting 10% of the most extreme values) using whiskers.  
@@ -417,10 +417,7 @@ pops = populOTU(centaurea)
 rm(populOTU)
 ```
 ```{r echo = FALSE, eval=TRUE, warning=FALSE}
-defaultW <- getOption("warn")
-options(warn = -1)
 pops = populOTU(centaurea)
-options(warn = defaultW)
 ```
 
 There is a warning that the values of some characters are NA. How to deal with missing data is discussed in the following section.
@@ -430,7 +427,7 @@ There is a warning that the values of some characters are NA. How to deal with m
 
 Missing values are not accepted in the majority of morphological analyses. The decision what to do with missing values is on the user. There are two options: remove or replace. However, before doing anything else, let us have a look at the descriptive statistic about missing data, using the `missingCharactersTable()` and `missingSamplesTable()` functions. The amount of missing data can be summarized at various levels, namely "`taxon`", populations ("`pop`"), or individuals ("`indiv`"). 
 
-```{r include=F}
+```{r include = FALSE}
 options(max.print = 800)
 centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT", "KASH", "KRO", "MIL", "NSED", "CERM", "BABL", "OLE1", "OLE2", "PRIS", "PROS", "SOK", "STGH"))
 # centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW"))
@@ -440,9 +437,7 @@ centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT"
 missingCharactersTable(centaurea, level = "pop")
 ```
 
-
-
-```{r include=F}
+```{r include = FALSE}
 centaurea$data = centaurea$data[-seq(4,10,1)]
 centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW", "AW", "IL"))
 ```
@@ -452,7 +447,7 @@ centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW"
 missingSamplesTable(centaurea, level = "pop")
 ```
 
-```{r include=F}
+```{r include = FALSE}
 data("centaurea")
 options(max.print = 60)
 ```
@@ -502,10 +497,11 @@ The dendrogram is displayed using the `plot()` function with usual graphical par
 pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
 plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 1.5, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
 plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance", cex=0.6, cex.main=1)
+
 ```
 
 Several main clusters were formed in the dendrogram above; however, some populations (BABL, LES, OLE1, OLE2 and PROS) were clustered “incorrectly”, requiring further inspection.
@@ -540,13 +536,13 @@ The result can be plotted using the `plotPoints()` function. The parameter `axes
 ![](./pch.png){width=100%}
 
 
-```{r echo = TRUE, eval=FALSE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes=c(1,2),
            pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
 
 ```
 
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), axes=c(1,2), cex = 0.9,
            pch = c(8,17,20,18))
@@ -572,7 +568,7 @@ plotCharacters(pca.centaurea)
 ```
 
 
-```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
@@ -581,7 +577,6 @@ plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), ce
 
 ```{r echo = TRUE, eval=FALSE}
 exportRes(pca.centaurea$eigenvectors, file="eigenvectors.centaurea.txt")
-
 ```
 
 Ordination diagrams of PCA resulted in relatively compact groupings corresponding to taxa with partial overlaps. The first two components (axes) extracted 20.65% and 14.26% of the overall variability in the data. The characters ILW and IW are strongly correlated with the direction of the separation of the taxa *C. pseudophrygia* and *C. stenolepis* (“ps”, “st”) and their putative hybrid “hybr”. *Centaurea phrygia* s.str. ("ph") is separated in the diagonal direction, being highly correlated with the characters MW, ML, IV and MLW.
@@ -613,7 +608,7 @@ plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","KRO","DUB",
 plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"), 
                       pos = 2, cex = 0.7)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 pca.pops = pca.calc(pops)
 plotPoints(pca.pops, col = c("blue","green","red","orange"), pch=c(8,17,20,18), 
@@ -622,6 +617,7 @@ plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","KRO","DUB",
           "MIL","CERM","DOM","KOZH","KOT"), include=FALSE, pos=4, cex=0.7)
 plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"), 
                       pos = 2, cex = 0.75)
+                      
 ```
 
 
@@ -630,12 +626,13 @@ plotCharacters(pca.pops, labels = FALSE)
 plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
 plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
 plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
 plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
+
 ```
 
 
@@ -653,7 +650,7 @@ plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
                                     # orange
                                     rgb(255,102,0, max=255, alpha=50)))
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
@@ -665,6 +662,7 @@ plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
                                     rgb(0,255,0, max=255, alpha=50), # green
                                     rgb(255,0,0, max=255, alpha=50), # red
                                     rgb(255,102,0, max=255, alpha=50))) # orange
+
 ```
 
 To highlight only some groups in colour, set the colour values of groups not to be highlighted to `NA`.
@@ -675,11 +673,12 @@ plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
 plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=100)))
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
 
 plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=100)))
+
 ```
 
 
@@ -693,7 +692,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.7)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
@@ -701,6 +700,7 @@ plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"),
 
 
 plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
+
 ```
 
 &nbsp;  
@@ -714,7 +714,7 @@ plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
                        x = "bottomright", box.type = "n", ncol = 2)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(pca.centaurea, type = "n", xlim = c(-5,7.5), ylim = c(-5,4))
 
@@ -722,6 +722,7 @@ plotAddEllipses(pca.centaurea, col = c("blue","green","red","orange"), lwd = 2)
 
 plotAddLegend(pca.centaurea, col = c("blue","green","red","orange"), 
               x = "bottomright", pt.cex = 0.8, cex = 0.8, box.type = "n", ncol = 2)
+              
 ```
 
 \newpage 
@@ -731,10 +732,11 @@ To draw a 3D scatterplot, the `plot3Dpoints()` function can be used. The `theta`
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"),
              phi = 20, theta = 30)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.8,
              phi = 20, theta = 30)
+             
 ```
 
 &nbsp;  
@@ -743,9 +745,10 @@ plot3Dpoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.8,
 ```{r echo = TRUE, eval=FALSE}
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pca.pops, col = c("blue","green","red","orange"), labels = T, cex = 0.8)
+
 ```
 
 
@@ -797,7 +800,7 @@ The result can be plotted by either the `plotPoints()` or `plot3Dpoints()` funct
 plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
              phi = 20, theta = 70, legend = T)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(pcoa.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18), 
              phi = 20, theta = 70, legend = F)
@@ -820,7 +823,7 @@ Similarly to PCoA, the influence of the original characters on new axes cannot b
 The NMDS is calculated by the `nmds.calc()` function, using the `monoMDS()` function from the package `vegan` (R Core Team, 2020); the result is an object of class `pcoadata`. The result can be plotted with the functions `plotPoints()` or `plot3Dpoints()`; the functions `plotAddEllipses()`, `plotAddSpiders()`, `plotAddLabels.points()` and `plotAddLegend()` work as usual. Only the `plotCharacters()` function is not applicable, as there is no information on the influence of the original characters on the coordinate axes.
 \vspace{-0.1cm}
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px'}
 nmds.res = nmds.calc(centaurea, distMethod = "Euclidean", k = 3)
 summary(nmds.res)
 ```
@@ -828,9 +831,10 @@ summary(nmds.res)
 ```{r echo = TRUE, eval=FALSE}
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch=c(8,17,20,18))
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=2.7}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=2.7}
 graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(nmds.res, col = c("blue","green","red","orange"), pch = c(8,17,20,18))
+
 ```
 
 \newpage
@@ -846,7 +850,6 @@ Stepwise discriminant analysis is calculated by the `stepdisc.calc()` function.
 
 ```{r include=F}
 options(max.print = 260)
-
 ```
 
 ```{r echo = TRUE, eval=TRUE}
@@ -857,9 +860,6 @@ stepdisc.calc(centaurea)
 options(max.print = 60)
 
 ```
-
-
-
 
 
 \newpage
@@ -879,7 +879,7 @@ CDA can be applied by invoking the `cda.calc()` function (using the `candisc` pa
 options(max.print = 34)
 
 ```
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px'}
 cda.centaurea = cda.calc(centaurea)
 
 summary(cda.centaurea)
@@ -890,7 +890,7 @@ summary(cda.centaurea)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
            pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), axes = c(1, 2),
            pch = c(8,17,20,18), legend = F)
@@ -908,7 +908,7 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,0,0,max=255,alpha=130), # red
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
@@ -924,7 +924,7 @@ plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
 
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c(NA, "green", NA, NA), cex = 0.8)
 plotAddEllipses(cda.centaurea, col = c("blue", NA, "red", "orange"), lwd = 2)
@@ -943,7 +943,7 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,0,0,max=255,alpha=130), # red
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.4)
 plotAddEllipses(cda.centaurea, col = c("blue","green","red","orange"), lwd = 2)
@@ -960,7 +960,7 @@ This CDA ordination diagram unequivocally supports the morphological differentia
 ```{r echo = TRUE, eval=FALSE}
 plotCharacters(cda.centaurea, cex = 1.2)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 3.8, dpi=300, fig.height=3.3}
+```{r echo = FALSE, eval=TRUE, fig.width= 3.8, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotCharacters(cda.centaurea, cex = 0.7, xlim=c(-1, 1),ylim=c(-1, 1), cex.main=0.9)
 ```
@@ -999,7 +999,7 @@ A 3D scatterplot can be produced using the `plot3Dpoints()` function. The viewin
 plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), 
                             phi = 12, theta = 25)
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, theta = 25)
 ```
@@ -1011,7 +1011,7 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 To gain better insight into the differentiation among the remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), these taxa will be analysed separately. A new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
 
 
-```{r echo = TRUE, eval=TRUE, out.width = '320px', dpi=300}
+```{r echo = TRUE, eval=TRUE, out.width = '320px'}
 stPsHybr = deleteTaxon(centaurea, taxonName = "ph")
 cda.stPsHybr = cda.calc(stPsHybr)
 ```
@@ -1020,7 +1020,7 @@ cda.stPsHybr = cda.calc(stPsHybr)
 plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
             legend = T, ncol = 2, legend.pos="bottomright")
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
             legend = F)
@@ -1054,7 +1054,7 @@ plotPoints(cda.stPs_passiveHybr, legend = T, breaks = 0.2,
                         rgb(255,0,0, alpha=160, max=255), # red
                         rgb(255,102,0, alpha=160, max=255))) # orange, 
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 
 cda.stPs_passiveHybr = cda.calc(stPsHybr, passiveSamples = "hybr")
@@ -1079,7 +1079,7 @@ plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                         rgb(255,255,255, alpha=80, max=255), # ps - white
                         rgb(255,255,255, alpha=80, max=255))) # st - white 
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotPoints(cda.stPs_passiveHybr, breaks = 0.2,
                 col = c(rgb(0,0,0, alpha=255, max=255), # hybr - black
@@ -1218,7 +1218,7 @@ knn.select<-function(object, crossval="indiv"){
 ```{r echo = TRUE, eval=FALSE}
 knn.select(partialCent, crossval = "pop")
 ```
-```{r echo = FALSE, eval=TRUE, fig.width= 5, dpi=300, fig.height=3}
+```{r echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 0.5, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 knn.select(partialCent, crossval = "pop")
 ```
@@ -1264,7 +1264,9 @@ The probability that sample LES1116 is of *C. stenolepis* is over 90%.
 
 
 
-
+```{r echo = FALSE, eval=TRUE}
+par(old.par)
+```
 
 
 \newpage

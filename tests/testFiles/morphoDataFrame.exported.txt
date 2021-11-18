@@ -1,9 +1,0 @@
-ID	Population	Taxon	data.Ch1	data.Ch2
-id1	Pop1	TaxA	1	11
-id2	Pop1	TaxA	2	12
-id3	Pop2	TaxA	3	13
-id4	Pop2	TaxA	4	14
-id5	Pop3	TaxB	5	15
-id6	Pop3	TaxB	6	16
-id7	Pop4	TaxB	7	17
-id8	Pop4	TaxB	8	18

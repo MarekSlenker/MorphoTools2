@@ -5,9 +5,10 @@ test_that("class morphodata: read and export same data",  {
 
   data = read.morphodata("../testFiles/sample_mockup.txt")
 
-  exportRes(data, file = "../testFiles/sample_mockup.exported.txt")
+  file0 = tempfile(pattern = "file", tmpdir = tempdir(), fileext = ".txt")
+  exportRes(data, file = file0)
 
-  exportedData = read.morphodata("../testFiles/sample_mockup.exported.txt")
+  exportedData = read.morphodata(file0)
 
   expect_identical(data, exportedData)
 })
@@ -22,9 +23,10 @@ test_that("class data.frame: read and export same data",  {
                                  "Ch1" = 1:8,
                                  "Ch2" = 11:18))
 
-  exportRes(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
+  file1 = tempfile(pattern = "file", tmpdir = tempdir(), fileext = ".txt")
+  exportRes(morphoDataFrame, file = file1)
 
-  morphoDataFrame.imported = read.morphodata("../testFiles/morphoDataFrame.exported.txt")
+  morphoDataFrame.imported = read.morphodata(file1)
 
   morphoDataFrame.morphodata = .morphodataFromDataFrame(morphoDataFrame)
 
@@ -40,9 +42,10 @@ test_that("class data.frame: compare as tables",  {
                                  "Ch1" = 1:8,
                                  "Ch2" = 11:18))
 
-  exportRes(morphoDataFrame, file = "../testFiles/morphoDataFrame.exported.txt")
+  file2 = tempfile(pattern = "file", tmpdir = tempdir(), fileext = ".txt")
+  exportRes(morphoDataFrame, file = file2)
 
-  DFImported = read.delim("../testFiles/morphoDataFrame.exported.txt")
+  DFImported = read.delim(file2)
 
   expect_identical(morphoDataFrame, DFImported)
 })

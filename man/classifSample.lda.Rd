@@ -18,7 +18,6 @@ classifSample.qda(sampleData, trainingData)
 classifSample.knn(sampleData, trainingData, k)
 }
 
-
 \arguments{
 \item{sampleData}{observations which should be classified. An object of class \code{\link{morphodata}}.}
 \item{trainingData}{observations for computing discriminant function. An object of class \code{\link{morphodata}}.}
@@ -26,7 +25,15 @@ classifSample.knn(sampleData, trainingData, k)
 }
 
 \value{
-an object of class \code{\link{classifdata}}.
+an object of class \code{\link{classifdata}} with the following elements:
+
+\item{ID}{IDs of each row.}
+\item{Population}{population membership of each row.}
+\item{Taxon}{taxon membership of each row.}
+\item{classif}{classification from discriminant analysis.}
+\item{prob}{posterior probabilities of classification into each taxon (if calculated by \code{\link{classif.lda}} or \code{\link{classif.qda}}),
+or proportion of the votes for the winning class (calculated by \code{\link{classif.knn}})}
+\item{correct}{logical, correctness of classification.}
 }
 
 
@@ -63,7 +70,6 @@ centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
 centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
              centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
 
-#
 
 trainingSet = deletePopulation(centaurea, populationName = "LES")
 LES = keepPopulation(centaurea, populationName = "LES")
@@ -76,7 +82,8 @@ classifSample.lda(LES, trainingSet)
 classifSample.qda(LES, trainingSet)
 
 # classification by nonparametric k-nearest neighbour method
-# USE knn.select(trainingSet) to find the optimal K.
+# use knn.select to find the optimal K.
+\dontrun{knn.select(trainingSet)}
 classifSample.knn(LES, trainingSet, k = 12)
 }
 

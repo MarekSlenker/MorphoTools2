@@ -1,5 +1,6 @@
 \name{clust}
 \alias{clust}
+
 \title{Hierarchical Clustering}
 
 \description{
@@ -17,15 +18,12 @@ clust(object, distMethod = "Euclidean", clustMethod = "UPGMA", binaryChs = NULL,
 \item{clustMethod}{the agglomeration method to be used: \code{"average"} (= \code{"UPGMA"}; default), \code{"complete"}, \code{"ward.D"} (= \code{"Ward"}), \code{"ward.D2"}, \code{"single"}, \code{"Mcquitty"} (= \code{"WPGMA"}), \code{"median"} (= \code{"WPGMC"}) or \code{"centroid"} (= \code{"UPGMC"}). See \code{\link{hclust}} for details.}
 
 \item{binaryChs, nominalChs, ordinalChs}{names of categorical ordinal, categorical nominal (multistate), and binary characters. Needed for Gower's dissimilarity coefficient only, see details.}
-
-
-
-
 }
 
 \value{
-an object of class \code{\link{hclust}}
+An object of class \code{'hclust'}. It encodes a stepwise dendrogram.
 }
+
 
 \details{
 This function performs agglomerative hierarchical clustering.

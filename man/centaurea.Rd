@@ -3,7 +3,6 @@
 \alias{centaurea}
 \title{25 Morphological Characters of Three Species of the \emph{Centaurea phrygia} Complex}
 
-
 \usage{
 data(centaurea)
 }
@@ -13,9 +12,16 @@ The sample data include part of data sets from previously published studies by K
 }
 
 
-\format{an object of class \code{\link{morphodata}}.
-}
+\format{
+an object of class \code{\link{morphodata}} with the following elements:
 
+\tabular{lrlrl}{
+  \tab \code{ID} \tab IDs of each row of \code{data} object. \cr
+  \tab \code{Population} \tab population membership of each row of \code{data} object. \cr
+  \tab \code{Taxon} \tab taxon membership of each row of \code{data} object. \cr
+  \tab \code{data} \tab \code{data.frame} of individuals (rows) and values of measured morphological characters (columns). \cr
+  }
+}
 
 \keyword{datasets}
 

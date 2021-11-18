@@ -3,7 +3,6 @@
 
 \title{Box's M-test for Homogeneity of Covariance Matrices}
 
-
 \description{
 The \code{boxMTest} function performs Box's (1949) M-test for homogeneity of covariance matrices. The null hypothesis for this test is that the observed covariance matrices for the dependent variables are equal across groups.
 }
@@ -16,9 +15,12 @@ boxMTest(object)
 \item{object}{an object of class \code{\link{morphodata}}.}
 }
 
+\value{
+None. Used for its side effect.
+}
+
 \references{
 \strong{Box G.E.P. (1949)}. A general distribution theory for a class of likelihood criteria. \emph{Biometrika} 36, 317-346.
-
 }
 
 
@@ -40,8 +42,6 @@ centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
              centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] + 0.000001
 centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
              centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
-
-
 
 boxMTest(centaurea)
 }

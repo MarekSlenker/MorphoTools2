@@ -2,22 +2,28 @@
 \alias{transformCharacter}
 \title{Transformation of Character}
 
-\usage{
-transformCharacter(object, character, FUN, newName = NULL)
-}
-
 \description{
 This function transforms morphological characters by applying another function passed in the argument.
 }
 
+\usage{
+transformCharacter(object, character, FUN, newName = NULL)
+}
+
 \arguments{
 \item{object}{an object of class \code{\link{morphodata}}.}
-
 \item{character}{a morphological character that should be transformed.}
-
 \item{FUN}{the transforming function to be applied to character.}
-
 \item{newName}{a name to rename the original character. If \code{NULL}, the name of the transformed character remains the same.}
+}
+
+\value{
+an object of class \code{\link{morphodata}} with the following elements:
+
+\item{ID}{IDs of each row of \code{data} object.}
+\item{Population}{population membership of each row of \code{data} object.}
+\item{Taxon}{taxon membership of each row of \code{data} object.}
+\item{data}{\code{data.frame} of individuals (rows) and values of measured morphological characters (columns).}
 }
 
 \details{

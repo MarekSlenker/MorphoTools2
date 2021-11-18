@@ -1,7 +1,6 @@
 \name{plotAddLegend}
 \alias{plotAddLegend}
 
-
 \title{Add Legend to a Plot}
 
 \description{
@@ -32,6 +31,10 @@ plotAddLegend(result, x = "topright", y = NULL, pch = 16, col = "black",
 \item{...}{further arguments to be passed to \code{\link{legend}} or other graphical parameters in \code{\link{par}}.}
 }
 
+\value{
+None. Used for its side effect of adding elements to a plot.
+}
+
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
@@ -44,12 +47,7 @@ plotPoints(pcaRes, col = c("red", "green", "blue", "red"),
 
 plotAddLegend(pcaRes, x = "bottomright", col = c("red", "green", "blue", "red"),
                pch = c(20, 17, 8, 21), pt.bg = "orange", ncol = 2)
-
 }
-
-
-
-
 
 
 

@@ -8,13 +8,11 @@ This function draws prediction ellipses around taxa.
 }
 
 \usage{
-
 plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
                   type = "l", lty = 1, lwd = 1, ...)
-
 }
-\arguments{
 
+\arguments{
 \item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, \code{\link{nmds.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{probability}{probability, that a new independent observation from the same population will fall in that ellipse.}
@@ -25,13 +23,16 @@ plotAddEllipses(result, axes = c(1,2), probability = 0.95, col = "black",
 \item{...}{further arguments to be passed to \code{\link{lines}} or other graphical parameters in \code{\link{par}}.}
 }
 
+\value{
+None. Used for its side effect of adding elements to a plot.
+}
+
 \details{
 Prediction ellipses with given \code{probability} define the regions where will fall any new independent observation from the respective taxa. The prediction ellipses are quantified using covariance matrices of taxa scores and chi-squared distribution with two degrees of freedom (Friendly et al. 2013).
 }
 
 \references{
 \strong{Friendly M., Monette G., Fox J. (2013)}. Elliptical insights: understanding statistical methods through elliptical geometry. \emph{Statistical Science} 28, 1-39.
-
 }
 
 \examples{

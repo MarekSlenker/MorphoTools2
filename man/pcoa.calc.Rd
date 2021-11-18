@@ -28,12 +28,24 @@ Various measures of distance between the observations (rows) are applicable: (1)
 The Gower's dissimilarity coefficient can handle different types of variables. Characters have to be divided into four categories: (1) quantitative characters, (2) categorical ordinal characters, (3) categorical nominal (multistate) characters, and (4) binary characters. All characters are considered to be quantitative characters unless otherwise specified. Other types of characters have to be explicitly specified. To mark characters as ordinal, nominal, or binary, enumerate them by names using \code{ordinalChs}, \code{nominalChs}, and \code{binaryChs} arguments, respectively.
 }
 
-
 \value{
-an object of class \code{\link{pcoadata}}.
+an object of class \code{\link{pcoadata}} with the following elements:
+
+\item{objects}{}
+\tabular{lrl}{
+\tab \code{ID} \tab IDs of each row of \code{scores} object. \cr
+\tab \code{Population} \tab population membership of each row of \code{scores} object. \cr
+\tab \code{Taxon} \tab taxon membership of each row of \code{scores} object. \cr
+\tab \code{scores} \tab ordination scores of cases (objects, OTUs). \cr
 }
 
-
+\item{eigenValues}{eigenvalues of principal coordinates.}
+\item{eigenvaluesAsPercent}{eigenvalues as percent, percentage of their total sum. }
+\item{cumulativePercentageOfEigenvalues}{cumulative percentage of eigenvalues. }
+\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
+\item{distMethod}{used distance measure.}
+\item{rank}{number of possitive eigenvalues.}
+}
 
 \examples{
 data(centaurea)
@@ -44,8 +56,6 @@ summary(pcoRes)
 
 plotPoints(pcoRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
   pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
-
-
 
 # using Gower's method
 data = list(
@@ -67,7 +77,4 @@ pcoaGower = pcoa.calc(data, distMethod = "Gower", binaryChs = c("stemBranching")
 
 plotPoints(pcoaGower, axes = c(1,2), col = c("red","green"),
            pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
-
-
-
 }

@@ -1,6 +1,7 @@
 \docType{data}
 \name{nmdsdata}
 \alias{nmdsdata}
+
 \title{Class nmdsdata}
 
 \description{

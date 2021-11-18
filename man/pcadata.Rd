@@ -1,10 +1,12 @@
 \docType{data}
 \name{pcadata}
 \alias{pcadata}
+
 \title{Class pcadata}
 
 \description{
-The \code{pcadata} class is designed for storing results of principal component analysis (PCA).}
+The \code{pcadata} class is designed for storing results of principal component analysis (PCA).
+}
 
 \format{Class \code{pcadata}.
 \describe{

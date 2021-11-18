@@ -1,18 +1,19 @@
 \name{cormat}
 \alias{cormat}
 \alias{cormatSignifTest}
+
 \title{Correlations of Characters}
 
 \description{
 The \code{cormat} function calculates the matrix of the correlation coefficients of the characters.
 }
 
-
 \usage{
 cormat(object, method = "Pearson")
 
 cormatSignifTest(object, method = "Pearson", alternative = "two.sided")
 }
+
 \arguments{
 \item{object}{an object of class \code{\link{morphodata}}.}
 
@@ -24,7 +25,7 @@ One of \code{"Pearson"} (default), or \code{"Ppearman"} can be applied.}
 }
 
 \value{
-an object of class \code{\link{data.frame}}
+a \code{data.frame}
 }
 
 \details{
@@ -40,8 +41,8 @@ data(centaurea)
 correlations.p = cormat(centaurea, method = "Pearson")
 correlations.s = cormat(centaurea, method = "Spearman")
 
-# exportRes(correlations.p, file = "correlations.pearson.txt")
-# exportRes(correlations.s, file = "correlations.spearman.txt")
+\dontrun{exportRes(correlations.p, file = "correlations.pearson.txt")}
+\dontrun{exportRes(correlations.s, file = "correlations.spearman.txt")}
 
 correlations.p = cormatSignifTest(centaurea, method = "Pearson")
 

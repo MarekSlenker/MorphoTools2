@@ -8,12 +8,10 @@ This function connects taxa's points with its centroids, thus forms a ``spider''
 }
 
 \usage{
-
 plotAddSpiders(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...)
-
 }
-\arguments{
 
+\arguments{
 \item{result}{result of \code{\link{pca.calc}}, \code{\link{pcoa.calc}}, \code{\link{nmds.calc}}, or \code{\link{cda.calc}}, has to by plotted at first.}
 \item{axes}{x, y axes of plot.}
 \item{col}{the colours for labels.}
@@ -22,6 +20,9 @@ plotAddSpiders(result, axes = c(1,2), col = "black", lty = 1, lwd = 1, ...)
 \item{...}{further arguments to be passed to \code{\link{lines}} or other graphical parameters in \code{\link{par}}.}
 }
 
+\value{
+None. Used for its side effect of adding elements to a plot.
+}
 
 \examples{
 data(centaurea)
@@ -47,5 +48,4 @@ plotAddSpiders(pcaRes, col = c(rgb(255, 0, 0, max = 255, alpha = 150), # red
                                rgb(0, 255, 0, max = 255, alpha = 150), # green
                                rgb(0, 0, 255, max = 255, alpha = 150), # blue
                                rgb(0, 0, 0, max = 255, alpha = 150))) # black
-
 }

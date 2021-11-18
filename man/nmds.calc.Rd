@@ -17,9 +17,23 @@ nmds.calc(object, distMethod = "Euclidean", k = 3, binaryChs = NULL,
 \item{distMethod}{the distance measure to be used. This must be one of: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}, \code{"Jaccard"}, \code{"simpleMatching"}, or \code{"Gower"}. See details.}
 \item{k}{number of dimensions.}
 \item{binaryChs, nominalChs, ordinalChs}{names of categorical ordinal, categorical nominal (multistate), and binary characters. Needed for Gower's dissimilarity coefficient only, see details.}
-
 }
 
+\value{
+an object of class \code{\link{nmdsdata}} with the following elements:
+
+\item{objects}{}
+\tabular{lrl}{
+  \tab \code{ID} \tab IDs of each row of \code{scores} object. \cr
+  \tab \code{Population} \tab population membership of each row of \code{scores} object. \cr
+  \tab \code{Taxon} \tab taxon membership of each row of \code{scores} object. \cr
+  \tab \code{scores} \tab ordination scores of cases (objects, OTUs). \cr
+}
+\item{stress}{stress value, e.i., goodness of fit.}
+\item{groupMeans}{\code{data.frame} containing the means for the taxa.}
+\item{distMethod}{used distance measure.}
+\item{rank}{number of possitive eigenvalues.}
+}
 
 \details{
 The \code{nmds.calc} function performs non-metric multidimensional scaling using the \code{\link{monoMDS}} function from package \code{\link{vegan}}.
@@ -32,14 +46,7 @@ The \code{stress} value reflects how well the ordination summarizes the observed
 Various measures of distance between the observations (rows) are applicable: (1) coefficients of distance for quantitative and binary characters: \code{"Euclidean"}, \code{"Manhattan"}, \code{"Minkowski"}; (2) similarity coefficients for binary characters: \code{"Jaccard"} and simple matching (\code{"simpleMatching"}); (3) coefficient for mixed data: (\code{"Gower"}).
 
 The Gower's dissimilarity coefficient can handle different types of variables. Characters have to be divided into four categories: (1) quantitative characters, (2) categorical ordinal characters, (3) categorical nominal (multistate) characters, and (4) binary characters. All characters are considered to be quantitative characters unless otherwise specified. Other types of characters have to be explicitly specified. To mark characters as ordinal, nominal, or binary, enumerate them by names using \code{ordinalChs}, \code{nominalChs}, and \code{binaryChs} arguments, respectively.
-
-
 }
-
-\value{
-an object of class \code{\link{nmdsdata}}.
-}
-
 
 
 \examples{
@@ -51,8 +58,6 @@ summary(nmdsRes)
 
 plotPoints(nmdsRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
   pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
-
-
 
 # using Gower's method
 data = list(
@@ -74,7 +79,5 @@ nmdsGower = nmds.calc(data, distMethod = "Gower", k = 2, binaryChs = c("stemBran
 
 plotPoints(nmdsGower, axes = c(1,2), col = c("red","green"),
            pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
-
-
 }
 

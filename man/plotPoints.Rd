@@ -1,5 +1,4 @@
 \name{plotPoints}
-
 \alias{plotPoints}
 
 \title{The Default Scatterplot Function}
@@ -13,12 +12,9 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", breaks = 1,
       ylim = NULL, xlim = NULL, labels = FALSE, legend = FALSE,
       legend.pos = "topright", ncol = 1, ...)
-
-
 }
 
 \arguments{
-
 \item{result}{an object of class \code{\link{pcadata}}, \code{\link{pcoadata}}, \code{\link{nmdsdata}}, or \code{\link{cdadata}}.}
 \item{axes}{x, y axes of plot.}
 \item{xlab, ylab}{a title of the respective axes.}
@@ -31,11 +27,12 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{legend}{logical, if \code{TRUE}, legend is displayed. Only restricted number of legend parameters are supported. For more precise legend plotting, use \code{\link{plotAddLegend}} directly.}
 \item{legend.pos}{a single keyword from the list \code{"bottomright"}, \code{"bottom"}, \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, \code{"topright"}, \code{"right"}, and \code{"center"}, to be used to position the legend.}
 \item{ncol}{the number of columns in which to set the legend items.}
-
 \item{...}{further arguments to be passed to \code{\link{plot.default}} or other graphical parameters in \code{\link{par}}.}
-
 }
 
+\value{
+None. Used for its side effect of producing a plot.
+}
 
 \details{
 This generic method holds separate implementations of plotting points for \code{\link{pcadata}}, \code{\link{pcoadata}}, \code{\link{nmdsdata}}, and \code{\link{cdadata}} objects.

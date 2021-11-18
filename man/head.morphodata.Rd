@@ -22,11 +22,18 @@ Returns the first or last parts of a object.
 
 \arguments{
 \item{x}{an object of class \code{\link{morphodata}} or \code{\link{classifdata}}.}
-
 \item{n}{number of rows to print.}
-
 \item{...}{arguments to be passed to or from other methods.}
 }
+
+\value{
+a \code{data.frame}
+}
+
+\details{
+Object passed as parameter is formated to \code{data.frame}. A \code{head()} (\code{tail()}) returns the first (last) \code{n} rows when \code{n} >= 0 or all but the last (first) \code{n} rows when \code{n} < 0.
+}
+
 
 
 \examples{

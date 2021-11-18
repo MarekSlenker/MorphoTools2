@@ -14,10 +14,12 @@ viewMorphodata(object)
 \item{object}{an object of class \code{\link{morphodata}}.}
 }
 
+\value{
+None. Used for its side effect.
+}
 
 \examples{
 data(centaurea)
 
-# viewMorphodata(centaurea)
-
+\dontrun{viewMorphodata(centaurea)}
 }
