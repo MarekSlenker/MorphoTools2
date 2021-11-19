@@ -20,10 +20,8 @@ test_that("correct input", {
 })
 
 test_that("correctness of calculation",  {
-  options(warn=-1)
-  c = classif.knn(morphoMockup, k=2)
-  options(warn=0)
-
+  c = suppressWarnings(classif.knn(morphoMockup, k=2))
+  
   expect_is( c, "classifdata")
 
   expect_equal( attr(c, "method"), "knn")
@@ -43,11 +41,9 @@ test_that("correctness of calculation  -to iste 2 metodami",  {
   bezRTE = deletePopulation(data, populationName = "RTE")
   RTE = keepPopulation(data, populationName = "RTE")
 
-  options(warn=-1)
-  RTE.classif = classifSample.knn(RTE, bezRTE, k = 2)
+  RTE.classif = suppressWarnings(classifSample.knn(RTE, bezRTE, k = 2))
   class_vsetko = classif.knn(data, k = 2, crossval = "pop")
-  options(warn=0)
-
+  
   expect_equal(class_vsetko$ID[473:492], RTE.classif$ID)
   expect_equal(as.character(class_vsetko$Population[473:492]), as.character(RTE.classif$Population))
   #expect_equal(paste(class_vsetko$classif[473:492,]), paste(RTE.classif$classif[1:20,]))

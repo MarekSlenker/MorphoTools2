@@ -1,30 +1,24 @@
 context("classif.matrix")
 
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 trainingSet = deletePopulation(centaurea, populationName = "SOK")
 SOK = keepPopulation(centaurea, populationName = "SOK")
 
-options(warn=0)
-
 
 test_that("correct input", {
-  options(warn=-1)
-  c = classif.lda(centaurea)
-  options(warn=0)
-
+  
+  c = suppressWarnings(classif.lda(centaurea))
+  
   expect_error(classif.matrix(c, level = "ds"), "Invalid level of grouping. Consider using \"taxon\", \"pop\" or \"indiv\"")
 })
 
 
 test_that("classif.lda",  {
-  options(warn=-1)
-  c = classif.lda(centaurea)
-  options(warn=0)
-
+  c = suppressWarnings(classif.lda(centaurea))
+  
   m = classif.matrix(c, level = "taxon")
   expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ph,as.ps,as.st,correct,correct[%]")
   expect_equal(paste(rownames(m), collapse = ","), "1,2,3,4,5")
@@ -45,10 +39,8 @@ test_that("classif.lda",  {
 })
 
 test_that("classif.knn",  {
-  options(warn=-1)
-  c = classif.knn(centaurea, k = 6)
-  options(warn=0)
-
+  c = suppressWarnings(classif.knn(centaurea, k = 6))
+  
   m = classif.matrix(c, level = "taxon")
   expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ph,as.ps,as.st,correct,correct[%]")
   expect_equal(paste(rownames(m), collapse = ","), "1,2,3,4,5")
@@ -69,10 +61,8 @@ test_that("classif.knn",  {
 })
 
 test_that("classifSamp.lda",  {
-  options(warn=-1)
-  c = classifSample.lda(SOK, trainingSet)
-  options(warn=0)
-
+  c = suppressWarnings(classifSample.lda(SOK, trainingSet))
+  
   m = classif.matrix(c, level = "taxon")
   expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ph,as.ps,as.st")
   expect_equal(paste(rownames(m), collapse = ","), "1,2")
@@ -91,10 +81,8 @@ test_that("classifSamp.lda",  {
 })
 
 test_that("classifSamp.knn",  {
-  options(warn=-1)
-  c = classifSample.knn(SOK, trainingSet, k = 1)
-  options(warn=0)
-
+  c = suppressWarnings(classifSample.knn(SOK, trainingSet, k = 1))
+  
   m = classif.matrix(c, level = "taxon")
   expect_equal(paste(colnames(m), collapse = ","), "Taxon,N,as.hybr,as.ph,as.ps,as.st")
   expect_equal(paste(rownames(m), collapse = ","), "1,2")

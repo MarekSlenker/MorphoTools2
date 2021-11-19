@@ -66,10 +66,6 @@ descrAll <- function(object, format = NULL, decimalPlaces = 3) {
 
 
 # internal
-
-# @param object object of class morphodata
-# @param column Population, Taxon, or whole dataset - levels for calculating descriptive statistics
-
 .descrByGroup <- function(object, column, digits) {
   # obj je triedy morfodata, skontrolovane vyssie
 
@@ -122,11 +118,6 @@ descrAll <- function(object, format = NULL, decimalPlaces = 3) {
 
 
 # internal
-
-# @param object object of class morphodata
-# @param descrStatistic object retrived from mthod .descrByGroup()
-# @param format form to which will be formated descriptive characters
-
 .formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
   outputTable = as.data.frame(matrix(NA, nrow = length(characters) + 2, ncol = length(groups) + 1))
 
@@ -169,10 +160,6 @@ descrAll <- function(object, format = NULL, decimalPlaces = 3) {
 
 
 # internal
-
-# @param object object of class morphodata
-# @param descrStatistic object retrived from mthod .descrByGroup()
-# @param format form to which will be formated descriptive characters
 .un.formatDescrStatistic <- function(groups, characters, descrStatistic, format) {
 
   outputTable = data.frame("characters" = c("Taxon",  characters))

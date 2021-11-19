@@ -17,7 +17,7 @@ missingCharactersTable(object, level)
 }
 
 \value{
-a \code{data.frame}
+A \code{data.frame} summarizing a number of missing values.
 }
 
 \examples{

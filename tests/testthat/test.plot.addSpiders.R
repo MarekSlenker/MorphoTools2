@@ -10,17 +10,13 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
 morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
-options(warn=0)
 
 test_that("plotAddSpiders error input",  {
 
   cdaRes = cda.calc(centaurea)
-
-  plotPoints(cdaRes, pch =c(18,16), col = c("red", "green", "blue", "black", "yellow"), cex = 0.5)
 
   expect_error(plotAddSpiders(cdaRes, axes = 1), "You have to specify 2 axes (e.g., axes = c(1,2)).", fixed = TRUE)
   expect_error(plotAddSpiders(cdaRes, axes = c(1,5)), "Specified axes are out of bounds. Object has only 3 axes.")

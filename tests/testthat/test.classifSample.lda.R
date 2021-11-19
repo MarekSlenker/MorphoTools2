@@ -1,14 +1,13 @@
 context("classifSample.lda")
 
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 trainingSet = deletePopulation(centaurea, populationName = "SOK")
 SOK = keepPopulation(centaurea, populationName = "SOK")
 
-options(warn=0)
+
 
 
 
@@ -81,10 +80,8 @@ test_that("correct input - different characters", {
 
 
 test_that("correctness of calculation",  {
-  options(warn=-1)
-  classif.lda.SOK = classifSample.lda(SOK, trainingSet)
-  options(warn=0)
-
+  classif.lda.SOK = suppressWarnings(classifSample.lda(SOK, trainingSet))
+  
   expect_is( classif.lda.SOK, "classifdata")
 
   expect_equal( attr(classif.lda.SOK, "method"), "lda")

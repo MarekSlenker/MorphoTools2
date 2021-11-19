@@ -11,9 +11,9 @@ Histograms are produced for the level of taxa/groups, to displays a within-group
 histCharacter(object, character, taxon = levels(object$Taxon), histogram = TRUE,
         col = "lightgray", main = NULL, densityLine = TRUE, normDistLine = TRUE, ...)
 
-histAll(object, folderName = "histograms", taxon = levels(object$Taxon), histogram = TRUE,
-        col = "lightgray", main = NULL, densityLine = TRUE, normDistLine = TRUE,
-        width = 480, height = 480, units = "px", ...)
+histAll(object, folderName = "histograms", taxon = levels(object$Taxon), 
+		histogram = TRUE, col = "lightgray", main = NULL, densityLine = TRUE,
+		normDistLine = TRUE, width = 480, height = 480, units = "px", ...)
 }
 
 \arguments{

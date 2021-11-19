@@ -15,11 +15,11 @@ The sample data include part of data sets from previously published studies by K
 \format{
 an object of class \code{\link{morphodata}} with the following elements:
 
-\tabular{lrlrl}{
+\tabular{lrl}{
   \tab \code{ID} \tab IDs of each row of \code{data} object. \cr
   \tab \code{Population} \tab population membership of each row of \code{data} object. \cr
   \tab \code{Taxon} \tab taxon membership of each row of \code{data} object. \cr
-  \tab \code{data} \tab \code{data.frame} of individuals (rows) and values of measured morphological characters (columns). \cr
+  \tab \code{data} \tab \code{data.frame} of individuals (rows) and values of morphological characters (columns). \cr
   }
 }
 

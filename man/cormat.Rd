@@ -25,15 +25,13 @@ One of \code{"Pearson"} (default), or \code{"Ppearman"} can be applied.}
 }
 
 \value{
-a \code{data.frame}
+A \code{data.frame}, storing correlation coefficients for each pair of morphological characters.
 }
 
 \details{
-This function returns table with pairwise correlation coefficients for each pair of
-morphological characters. The result is formatted as a \code{data.frame} to allow export with the \code{\link{exportRes}} function.
+This function returns table with pairwise correlation coefficients for each pair of morphological characters. The result is formatted as a \code{data.frame} to allow export with the \code{\link{exportRes}} function.
 
-Significance tests are usually unnecessary for morphometric analysis. Anyway,
-if tests are needed, they can be computed using the \code{\link{cormatSignifTest}} function.
+Significance tests are usually unnecessary for morphometric analysis. Anyway, if tests are needed, they can be computed using the \code{\link{cormatSignifTest}} function.
 }
 \examples{
 data(centaurea)

@@ -48,14 +48,14 @@ cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) asin
 
 # For a left-skewed (negative) distribution can be used:
 # Logarithmic transformation
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log((max(x)+1)-x))
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log10((max(x)+1)-x))
+cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) log((max(x)+1)-x))
+cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) log10((max(x)+1)-x))
 # Square root transformation
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt((max(x)+1)-x))
+cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) sqrt((max(x)+1)-x))
 # Cube root transformation
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) ((max(x)+1)-x)^(1/3))
+cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) ((max(x)+1)-x)^(1/3))
 # Arcsine transformation
-cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) asin(sqrt((max(x))-x)))
+cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) asin(sqrt((max(x))-x)))
 
 
 }

@@ -1,13 +1,9 @@
 context("plotCharacters.cdadata_scatter")
 
-
-
 # locally suppress warnings
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
-options(warn=0)
 
 cdaRes = cda.calc(centaurea)
 

@@ -9,11 +9,9 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
 morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 # locally suppress warnings
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
-options(warn=0)
 
 
 test_that("ploting with error parameters",  {

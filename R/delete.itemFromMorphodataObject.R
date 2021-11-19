@@ -99,9 +99,6 @@ deleteCharacter <- function(object, characterName) {
 
 
 # internal
-# @param object object of class morphodata
-# @param column column where to look for groupName
-# @param groupName name of particular Population or Taxon, which should be removed
 .removeByColumn <- function(object, column, groupName) {
   # obj je triedy morfodata, skontrolovane vyssie
 

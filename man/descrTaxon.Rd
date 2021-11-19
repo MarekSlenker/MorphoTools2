@@ -24,7 +24,7 @@ descrAll(object, format = NULL, decimalPlaces = 3)
 }
 
 \value{
-A \code{data.frame} with the calculated statistical descriptors.
+A \code{data.frame} with calculated statistical descriptors.
 }
 
 \details{

@@ -4,7 +4,7 @@
 \title{Export Data}
 
 \description{
-This function is designed for exporting results, stored in objects of MorphoTools package.
+This function is designed for exporting results, stored in objects of \code{MorphoTools2} package.
 }
 
 \usage{

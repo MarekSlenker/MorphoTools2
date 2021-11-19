@@ -54,11 +54,9 @@ cda.calc <- function(object, passiveSamples = NULL) {
     #    wmd <- wm$values
 
     #    # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
-    #    options(warn=-1) # MK
-    #    diasq=diag(sqrt(wmd))
+    #    diasq=suppressWarnings(diag(sqrt(wmd)))
     #    malaBlbost = replace(diasq, is.na(diasq), -1.4E-4)  # MK
-    #    options(warn=0) # MK
-
+    
     #    out <- t(wm$vectors %*% malaBlbost)  # MK
     #    #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
     #    out

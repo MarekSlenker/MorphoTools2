@@ -17,7 +17,7 @@ knn.select(object, crossval = "indiv")
 }
 
 \value{
-Optimal number of neighbours is written to the console, and plot with all Ks is produced.
+Optimal number of neighbours is written to the console, and plot displaying all Ks is produced.
 }
 
 \details{

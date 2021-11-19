@@ -17,7 +17,7 @@ shapiroWilkTest(object, p.value = 0.05)
 }
 
 \value{
-a \code{data.frame}
+A \code{data.frame}, storing results of Shapiro-Wilk normality test.
 }
 
 \examples{

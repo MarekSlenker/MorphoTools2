@@ -9,17 +9,18 @@ morphoDataFrame = data.frame("ID" = c("id1","id2","id3","id4","id5","id6","id7",
 morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 # locally suppress warnings
-options(warn=-1)
 data(centaurea)
-centaurea = naMeanSubst(centaurea)
+centaurea = suppressWarnings(naMeanSubst(centaurea))
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 centaurea = deleteTaxon(centaurea, taxonName = c("hybr", "ph"))
-options(warn=0)
 
 cdaRes = cda.calc(centaurea)
 
 
 test_that("hist",  {
+  pdf(NULL)
+  on.exit(dev.off())
+  plot.new()
 
   expect_warning(plotCharacters(cdaRes, axes = c(1,3)), "The object has only one axis, which will be plotted")
 

@@ -27,7 +27,7 @@ Returns the first or last parts of a object.
 }
 
 \value{
-a \code{data.frame}
+A \code{data.frame}, containing the first or last \code{n} individuals of the passed object.
 }
 
 \details{

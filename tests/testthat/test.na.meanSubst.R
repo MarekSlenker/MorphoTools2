@@ -25,10 +25,7 @@ test_that("some NAs remains",  {
                                  "Ch2" = c(11, NA, 13, NA, 15, NA, 17, 18))
   morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
-  # locally suppress warnings
-  options(warn=-1)
-  meanMockup = naMeanSubst(morphoMockup)
-  options(warn=0)
+  meanMockup = suppressWarnings(naMeanSubst(morphoMockup))
 
   expect_is(meanMockup, "morphodata")
 
@@ -36,3 +33,4 @@ test_that("some NAs remains",  {
 
   expect_warning(naMeanSubst(morphoMockup), "Unable to replace NAs in characters Ch1 in population Pop4. Probably all values of that character are NA.")
 })
+

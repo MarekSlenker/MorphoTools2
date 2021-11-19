@@ -6,14 +6,10 @@ histCharacter <- function(object, character, taxon = levels(object$Taxon), histo
 
   if (!(character %in% colnames(object$data))) stop(paste("Character \"", character, "\" was not found in attached data.", sep = ""), call. = FALSE)
 
-  opar <- graphics::par(no.readonly = TRUE)
+  oldpar = graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))            
 
   .histInternal(object, character, taxon, histogram, col, main, densityLine, normDistLine, ...)
-
-
-  graphics::par(opar)
-
-
 
 }
 
@@ -24,7 +20,8 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
 
   .checkClass(object, "morphodata")
 
-  opar <- graphics::par(no.readonly = TRUE)
+  oldpar = graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))            
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
@@ -40,9 +37,6 @@ histAll <- function(object,  folderName = "histograms", taxon = levels(object$Ta
 
     grDevices::dev.off()
   }
-
-  graphics::par(opar)
-
 
 }
 

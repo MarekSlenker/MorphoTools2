@@ -8,13 +8,10 @@ qqnormCharacter <- function(object, character, taxon = levels(object$Taxon), mai
 
   if (!(character %in% colnames(object$data))) stop(paste("Character \"", character, "\" was not found in attached data.", sep = ""), call. = FALSE)
 
-
-  opar <- graphics::par(no.readonly = TRUE)
-
+  oldpar = graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))            
 
   .qqnormInternal(object, character, taxon, main, ...)
-
-  graphics::par(opar)
 }
 
 #' @rdname qqnormCharacter
@@ -23,8 +20,8 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
 
   .checkClass(object, "morphodata")
 
-  opar <- graphics::par(no.readonly = TRUE)
-
+  oldpar = graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(oldpar))            
 
   # check for dir existence. if not, make a new dir
   if (!(dir.exists(paste(getwd(), "/", folderName, sep = ""))))  {
@@ -40,9 +37,6 @@ qqnormAll <- function(object,  folderName = "qqnormPlots", taxon = levels(object
 
     grDevices::dev.off()
   }
-
-  graphics::par(opar)
-
 
 }
 

@@ -17,7 +17,7 @@ classif.matrix(result, level = "taxon")
 }
 
 \value{
-a \code{data.frame}
+A \code{data.frame}, summary classification table.
 }
 
 
