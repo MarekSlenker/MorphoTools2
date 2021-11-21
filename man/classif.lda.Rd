@@ -80,7 +80,7 @@ classifRes.qda = classif.qda(centaurea, crossval = "indiv")
 
 # classification by nonparametric k-nearest neighbour method
 # use knn.select to find the optimal K.
-\dontrun{knn.select(centaurea, crossval = "pop")}
+\donttest{knn.select(centaurea, crossval = "pop")}
 classifRes.knn = classif.knn(centaurea, k = 12, crossval = "pop")
 
 # exporting results

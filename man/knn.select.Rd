@@ -43,6 +43,6 @@ centaurea = naMeanSubst(centaurea)
 centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 # classification by nonparametric k-nearest neighbour method
-\dontrun{knn.select(centaurea, crossval = "indiv")}
+\donttest{knn.select(centaurea, crossval = "indiv")}
 classifRes.knn = classif.knn(centaurea, k = 12, crossval = "indiv")
 }

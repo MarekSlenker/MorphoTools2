@@ -83,7 +83,7 @@ classifSample.qda(LES, trainingSet)
 
 # classification by nonparametric k-nearest neighbour method
 # use knn.select to find the optimal K.
-\dontrun{knn.select(trainingSet)}
+\donttest{knn.select(trainingSet)}
 classifSample.knn(LES, trainingSet, k = 12)
 }
 

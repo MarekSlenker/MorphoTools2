@@ -42,5 +42,5 @@ data(centaurea)
 
 histCharacter(centaurea, character = "IW", breaks = seq(0.5, 2.5, 0.1))
 
-\dontrun{histAll(centaurea, folderName = "../histograms")}
+\donttest{histAll(centaurea, folderName = "../histograms")}
 }

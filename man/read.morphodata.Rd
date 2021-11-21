@@ -59,9 +59,9 @@ If there are missing values in the data, they must be represented as empty cells
 data = read.morphodata(file = system.file("extdata", "centaurea.txt",
     package = "MorphoTools2"), dec = ".", sep = "\t")
 
-\dontrun{data = read.morphodata(file = "morphodata.txt", dec = ".", sep = "\t")}
+\donttest{data = read.morphodata(file = "morphodata.txt", dec = ".", sep = "\t")}
 
-\dontrun{data = read.morphodata("clipboard")}
+\donttest{data = read.morphodata("clipboard")}
 
 summary(data)
 samples(data)

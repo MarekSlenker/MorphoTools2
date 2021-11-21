@@ -25,10 +25,10 @@ data(centaurea)
 
 sW = shapiroWilkTest(centaurea)
 
-\dontrun{exportRes(sW, file = "sW_test.txt")}
+\donttest{exportRes(sW, file = "sW_test.txt")}
 
 sW = shapiroWilkTest(centaurea, p.value = NA)
 
-\dontrun{exportRes(sW, file = "sW_test.txt")}
+\donttest{exportRes(sW, file = "sW_test.txt")}
 }
 

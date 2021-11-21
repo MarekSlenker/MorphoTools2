@@ -5,9 +5,11 @@
 
 ### Resubmission
 
-This is a resubmission. In the cran-comments file I provide a reply to **Gregor Seyer**s' notes:  
+This is a resubmission. In the cran-comments.md file, I provide answers to reviewers comments:  
 
+> Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:10.....> or <arXiv:.....>?
 
+For now, there is no published work to reference in the description. When a publication becomes available (likely before the next version of the package), I will update it.
 
 > Please omit the redundant "An R package for" from your description field. 
 > Please add more details about the package functionality and implemented methods in your Description text.
