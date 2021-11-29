@@ -11,8 +11,7 @@ test_that("correctness of calculation",  {
   expect_is(pcoaRes, "pcoadata")
 
 
-  names(pcoa_cmdscale$eig) = names(pcoaRes$eigenvalues)
-  expect_equal( pcoaRes$eigenvalues, pcoa_cmdscale$eig[1:pcoaRes$rank])
+  expect_equal(pcoaRes$eigenvalues, pcoa_cmdscale$eig)
 
   expect_equal(pcoaRes$distMethod, "euclidean")
 

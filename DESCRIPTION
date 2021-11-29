@@ -1,12 +1,12 @@
 Package: MorphoTools2
 Type: Package
 Title: Multivariate Morphometric Analysis
-Version: 0.9.0
+Version: 0.9.1
 Date: 2021-11-05
-Author: Marek Slenker [aut, cre] (https://orcid.org/0000-0002-5919-890X)
-        Petr Koutecky [ctb] (https://orcid.org/0000-0002-3455-850X)
+Author: Marek Šlenker [aut, cre] (https://orcid.org/0000-0002-5919-890X)
+        Petr Koutecký [ctb] (https://orcid.org/0000-0002-3455-850X)
         Karol Marhold [ctb] (https://orcid.org/0000-0002-7658-0844)
-Maintainer: Marek Slenker <marek.slenker@savba.sk>
+Maintainer: Marek Šlenker <marek.slenker@savba.sk>
 Description: Tools for multivariate analyses of morphological data, wrapped in one package, to make the workflow convenient and fast. Statistical and graphical tools provide a comprehensive framework for checking and manipulating input data, statistical analyses, and visualization of results. Several methods are provided for the analysis of raw data, to make the dataset ready for downstream analyses. Integrated statistical methods include hierarchical classification, principal component analysis, principal coordinates analysis, non-metric multidimensional scaling, and multiple discriminant analyses: canonical, stepwise, and classificatory (linear, quadratic, and the non-parametric k nearest neighbours). The philosophy of the package will be described in Šlenker et al. (in prep).
 URL: https://github.com/MarekSlenker/MorphoTools2
 BugReports: https://github.com/MarekSlenker/MorphoTools2/issues
