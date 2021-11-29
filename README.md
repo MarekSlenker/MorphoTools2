@@ -19,13 +19,13 @@ making the workflow convenient and fast.
 ## Installation
 
 You can install the released version of MorphoTools2 from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://CRAN.R-project.org/package=MorphoTools2) with:
 
 ``` r
 install.packages("MorphoTools2")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+And the development version from [GitHub](https://github.com/MarekSlenker/MorphoTools2) with:
 
 ``` r
 # install.packages("devtools")
