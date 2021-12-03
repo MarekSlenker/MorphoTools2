@@ -4,12 +4,10 @@
 # MorphoTools2
 
 <!-- badges: start -->
-
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/MorphoTools2)](https://CRAN.R-project.org/package=MorphoTools2)
-[![CRAN Downloads
-Total](https://cranlogs.r-pkg.org/badges/MorphoTools2?color=brightgreen)](https://cran.r-project.org/package=MorphoTools2)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/MorphoTools2)](https://CRAN.R-project.org/package=MorphoTools2)
+[![CRAN Downloads
+Total](https://cranlogs.r-pkg.org/badges/MorphoTools2?color=brightgreen)](https://cran.r-project.org/package=MorphoTools2)
 <!-- badges: end -->
 
 The package `MorphoTools2` is intended for multivariate analyses of
