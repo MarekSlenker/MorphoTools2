@@ -35,7 +35,7 @@ test_that("correctness of calculation  -to iste 2 metodami",  {
   data = read.morphodata("../testFiles/samplePlnaMatica.txt")
 
 
-  bezRTE = deletePopulation(data, populationName = "RTE")
+  bezRTE = removePopulation(data, populationName = "RTE")
   RTE = keepPopulation(data, populationName = "RTE")
 
   RTE.classif = suppressWarnings(classifSample.lda(RTE, bezRTE))

@@ -1,8 +1,8 @@
-\name{deleteTaxon}
-\alias{deleteTaxon}
-\alias{deletePopulation}
-\alias{deleteSample}
-\alias{deleteCharacter}
+\name{removeTaxon}
+\alias{removeTaxon}
+\alias{removePopulation}
+\alias{removeSample}
+\alias{removeCharacter}
 
 \title{Remove Items (Taxa, Populations, Morphological Characters) from Morphodata Object}
 
@@ -11,13 +11,13 @@ These functions remove particular taxa, populations, samples or morphological ch
 }
 
 \usage{
-deleteTaxon(object, taxonName)
+removeTaxon(object, taxonName)
 
-deletePopulation(object, populationName)
+removePopulation(object, populationName)
 
-deleteSample(object, sampleName = NULL, missingPercentage = NA)
+removeSample(object, sampleName = NULL, missingPercentage = NA)
 
-deleteCharacter(object, characterName)
+removeCharacter(object, characterName)
 }
 
 \arguments{
@@ -43,12 +43,12 @@ an object of class \code{\link{morphodata}} with the following elements:
 \examples{
 data(centaurea)
 
-centaurea.3tax = deleteTaxon(centaurea, "hybr")
-centaurea.PsSt = deleteTaxon(centaurea, c("ph", "hybr"))
+centaurea.3tax = removeTaxon(centaurea, "hybr")
+centaurea.PsSt = removeTaxon(centaurea, c("ph", "hybr"))
 
-centaurea.short = deletePopulation(centaurea, c("LIP", "PREL"))
+centaurea.short = removePopulation(centaurea, c("LIP", "PREL"))
 
-centaurea.NA_0.1 = deleteSample(centaurea, missingPercentage = 0.1)
+centaurea.NA_0.1 = removeSample(centaurea, missingPercentage = 0.1)
 
-centaurea.short = deleteCharacter(centaurea, "LL")
+centaurea.short = removeCharacter(centaurea, "LL")
 }

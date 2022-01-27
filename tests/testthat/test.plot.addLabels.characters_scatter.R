@@ -9,7 +9,7 @@ morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 
 data(centaurea)
 centaurea = suppressWarnings(naMeanSubst(centaurea))
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 
 test_that("pca wrong input",  {

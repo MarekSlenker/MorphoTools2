@@ -388,7 +388,7 @@ Please note that some of the following statistical analyses require that no char
 
 ## 3.6 Correlations of characters
 
-Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this can distort the results. The function `cormat()` calculates the correlation coefficients of the characters, be it Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One of the pair of highly correlated characters can be removed from the dataset using the `deleteCharacter()` function, see below.
+Highly correlated characters (r > |0.95|) should not be used in discriminant analysis, as this can distort the results. The function `cormat()` calculates the correlation coefficients of the characters, be it Pearson’s (default) or Spearman’s (does not require normally distributed data). The results can be exported with the `exportRes()` function. One of the pair of highly correlated characters can be removed from the dataset using the `removeCharacter()` function, see below.
 
 ```{r echo = TRUE, eval=FALSE}
 correlations.s = cormat(centaurea, method = "spearman")
@@ -430,8 +430,8 @@ Missing values are not accepted in the majority of morphological analyses. The d
 
 ```{r include = FALSE}
 options(max.print = 800)
-centaurea = deletePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT", "KASH", "KRO", "MIL", "NSED", "CERM", "BABL", "OLE1", "OLE2", "PRIS", "PROS", "SOK", "STGH"))
-# centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW"))
+centaurea = removePopulation(centaurea, populationName = c("BRT", "CERV", "HVLT", "KASH", "KRO", "MIL", "NSED", "CERM", "BABL", "OLE1", "OLE2", "PRIS", "PROS", "SOK", "STGH"))
+# centaurea = removeCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW"))
 ```
 ```{r echo = TRUE, eval=TRUE}
 # For demonstration only. Not all populations are displayed.
@@ -440,7 +440,7 @@ missingCharactersTable(centaurea, level = "pop")
 
 ```{r include = FALSE}
 centaurea$data = centaurea$data[-seq(4,10,1)]
-centaurea = deleteCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW", "AW", "IL"))
+centaurea = removeCharacter(centaurea, characterName = c("SF", "ST", "IW", "ILW", "MW", "MLW", "AL", "ALW", "AW", "IL"))
 ```
 
 ```{r echo = TRUE, eval = TRUE}
@@ -458,16 +458,16 @@ As indicated by the warnings above, populations LIP and PREL have the highest pe
 
 ### 3.8.1 Removing items
 
-The descriptive tables above show that four characters in two populations are completely missing. The user should decide between deleting the characters, using the `deleteCharacter()` function, or the populations, using the `deletePopulation()` function. As the character AP looks promising for the delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be retained and the populations removed.
+The descriptive tables above show that four characters in two populations are completely missing. The user should decide between deleting the characters, using the `removeCharacter()` function, or the populations, using the `removePopulation()` function. As the character AP looks promising for the delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be retained and the populations removed.
 
 ```{r echo = TRUE, eval=TRUE}
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
-pops = deletePopulation(pops, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+pops = removePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
-Another available option is to delete samples with a high portion of missing data using the `deleteSample()` function. The command `deleteSample(centaurea, missingPercentage = 0.1)` returns a new `morphodata` object (dataset), retaining only samples having no more than 10% of missing data. To remove specific samples, enumerate them in the 'sampleName' argument in these functions.  
+Another available option is to delete samples with a high portion of missing data using the `removeSample()` function. The command `removeSample(centaurea, missingPercentage = 0.1)` returns a new `morphodata` object (dataset), retaining only samples having no more than 10% of missing data. To remove specific samples, enumerate them in the 'sampleName' argument in these functions.  
 
-Here is the right place to mention also `deleteTaxon()` and another four functions with reversed logic, which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()` and `keepCharacter()`.
+Here is the right place to mention also `removeTaxon()` and another four functions with reversed logic, which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()` and `keepCharacter()`.
 
 ### 3.8.2 Replacing missing values    
 
@@ -1013,7 +1013,7 @@ To gain better insight into the differentiation among the remaining taxa (*C. ps
 
 
 ```{r echo = TRUE, eval=TRUE, out.width = '320px'}
-stPsHybr = deleteTaxon(centaurea, taxonName = "ph")
+stPsHybr = removeTaxon(centaurea, taxonName = "ph")
 cda.stPsHybr = cda.calc(stPsHybr)
 ```
 \vspace{-0.9cm}
@@ -1250,7 +1250,7 @@ The functions `classifSample.lda()`, `classifSample.qda()` and `classifSample.kn
 Let us remove population LES, and pretend that sample LES1116 is a type herbarium specimen of *Centaurea stenolepis* and that we want to quantify its similarity with other populations of the species. To classify LES1116, run the following code:
 
 ```{r echo = TRUE, eval=TRUE}
-trainingSet = deletePopulation(partialCent, populationName = "LES")
+trainingSet = removePopulation(partialCent, populationName = "LES")
 typeSpecimen = keepSample(partialCent, "LES1116")
 
 classifSample.lda(typeSpecimen, trainingSet)

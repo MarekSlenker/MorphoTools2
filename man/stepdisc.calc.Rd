@@ -28,7 +28,7 @@ The \code{stepdisc.calc} function performs a stepwise discriminant analysis to s
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 stepdisc.calc(centaurea)
 }

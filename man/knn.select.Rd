@@ -40,7 +40,7 @@ The mode of crossvalidation is set by the parameter \code{crossval}. The default
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 # classification by nonparametric k-nearest neighbour method
 \donttest{knn.select(centaurea, crossval = "indiv")}

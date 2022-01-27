@@ -3,12 +3,12 @@ context("deleteCharecter")
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("trying to remove unexisting character",  {
-  expect_error(deleteCharacter(data, "unexistingCh"), "Character \"unexistingCh\" does not exist")
+  expect_error(removeCharacter(data, "unexistingCh"), "Character \"unexistingCh\" does not exist")
 })
 
 
 test_that("remove one character",  {
-  subData = deleteCharacter(data, "LL")
+  subData = removeCharacter(data, "LL")
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -21,7 +21,7 @@ test_that("remove one character",  {
 })
 
 test_that("remove more characters",  {
-  subData = deleteCharacter(data, c("LL", "LLW", "MLW"))
+  subData = removeCharacter(data, c("LL", "LLW", "MLW"))
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 
@@ -34,7 +34,7 @@ test_that("remove more characters",  {
 })
 
 test_that("remove all but one characters",  {
-  subData = deleteCharacter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","AW","ALW"))
+  subData = removeCharacter(data, c("SN","SF","ST","SFT","LL","LW","LLW","LM","LBA","LBS","LS","IL","IW","ILW","CG","ML","MW","MLW","MF","IS","IV","AL","AW","ALW"))
 
   expect_equal(dim(data$data)[1], dim(subData$data)[1])
 

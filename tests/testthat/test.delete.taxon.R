@@ -1,13 +1,13 @@
-context("deleteTaxon")
+context("removeTaxon")
 
 data = read.morphodata("../testFiles/sample.txt")
 
 test_that("remove unexisting taxon",  {
-  expect_error(deleteTaxon(data, "unexisting"), "Taxon \"unexisting\" does not exist." )
+  expect_error(removeTaxon(data, "unexisting"), "Taxon \"unexisting\" does not exist." )
 })
 
 test_that("remove one taxon",  {
-  subData = deleteTaxon(data, "hybr")
+  subData = removeTaxon(data, "hybr")
 
   expect_equal(length(levels(data$Taxon)) -1, length(levels(subData$Taxon)))
 

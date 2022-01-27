@@ -41,7 +41,7 @@ The \code{pca.calc} function performs an R type principal component analysis usi
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 

@@ -38,7 +38,7 @@ Prediction ellipses with given \code{probability} define the regions where will 
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 

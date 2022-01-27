@@ -45,7 +45,7 @@ The \code{cda.calc} function performs canonical discriminant analysis using the 
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 cdaRes = cda.calc(centaurea)
 

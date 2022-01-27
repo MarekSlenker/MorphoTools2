@@ -1,6 +1,6 @@
 #' Remove items (Taxa, Populations, morphological characters) from an morphodata object
 #' @export
-deleteTaxon <- function(object, taxonName) {
+removeTaxon <- function(object, taxonName) {
   .checkClass(object, "morphodata")
 
   # skontroluj ci object ma taxName
@@ -12,9 +12,9 @@ deleteTaxon <- function(object, taxonName) {
 }
 
 
-#' @rdname deleteTaxon
+#' @rdname removeTaxon
 #' @export
-deletePopulation <- function(object, populationName) {
+removePopulation <- function(object, populationName) {
   .checkClass(object, "morphodata")
 
   # skontroluj ci object ma popname
@@ -25,9 +25,9 @@ deletePopulation <- function(object, populationName) {
   return(.removeByColumn(object, "Population", populationName))
 }
 
-#' @rdname deleteTaxon
+#' @rdname removeTaxon
 #' @export
-deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
+removeSample <- function(object, sampleName = NULL, missingPercentage = NA) {
   .checkClass(object, "morphodata")
 
   # nemozu byt oba nenulova
@@ -67,9 +67,9 @@ deleteSample <- function(object, sampleName = NULL, missingPercentage = NA) {
 }
 
 
-#' @rdname deleteTaxon
+#' @rdname removeTaxon
 #' @export
-deleteCharacter <- function(object, characterName) {
+removeCharacter <- function(object, characterName) {
   .checkClass(object, "morphodata")
 
   # check existence of CH

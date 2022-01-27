@@ -18,35 +18,42 @@ pcoa.calc <- function(object, distMethod = "Euclidean", binaryChs = NULL, nomina
     rank = length(object$ID)-1
   }
 
-  princompRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
+  cmdscaleRes = stats::cmdscale(.calcDistance(object, distMethod = distMethod, center = TRUE, scale = TRUE, binaryChs = binaryChs, nominalChs = nominalChs, ordinalChs = ordinalChs),
                                 k = rank, eig = TRUE, x.ret = TRUE)
 
+
+  # NAMES: cmdscaleRes$points
   newNames = NULL
-  for (i in 1:rank) {
+  for (i in 1:dim(cmdscaleRes$points)[2]) {
     newNames = c(newNames, paste("PCo", i, sep = ""))
   }
+  #cmdscaleRes$points = as.data.frame(cmdscaleRes$points) # update2
+  colnames(cmdscaleRes$points) = newNames
 
 
-  attr(princompRes$points, "dimnames")[[2]] = newNames
-  #colnames(princompRes$points) = newNames
 
   pcoaResult$rank = rank
   pcoaResult$distMethod = distMethod
 
-  pcoaResult$objects$scores = princompRes$points
+  pcoaResult$objects$scores = cmdscaleRes$points
   pcoaResult$objects$ID = object$ID
   pcoaResult$objects$Population = object$Population
   pcoaResult$objects$Taxon = object$Taxon
 
-  pcoaResult$eigenvalues = princompRes$eig #[1:rank]
-  pcoaResult$eigenvaluesAsPercentages = round(princompRes$eig[1:rank]/sum(princompRes$eig[1:rank]), 5)
-  pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(princompRes$eig[1:rank]/sum(princompRes$eig[1:rank])), 5)
+  pcoaResult$eigenvalues = cmdscaleRes$eig #[1:rank]
+  pcoaResult$eigenvaluesAsPercentages = round(cmdscaleRes$eig[1:rank]/sum(cmdscaleRes$eig[1:rank]), 5)
+  pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(cmdscaleRes$eig[1:rank]/sum(cmdscaleRes$eig[1:rank])), 5)
 
+  newNames = NULL
+  for (i in 1:length(pcoaResult$eigenvaluesAsPercentages)) {
+    newNames = c(newNames, paste("PCo", i, sep = ""))
+  }
   names(pcoaResult$eigenvaluesAsPercentages) = newNames
   names(pcoaResult$cumulativePercentageOfEigenvalues) = newNames
 
   # group centroid locations
-  pcoaResult$groupMeans = stats::aggregate(princompRes$points ~ object$Taxon, FUN = mean)
+  pcoaResult$groupMeans = stats::aggregate(cmdscaleRes$points ~ object$Taxon, FUN = mean)
+
   colnames(pcoaResult$groupMeans)[1] = "Taxon"
 
   return(pcoaResult)

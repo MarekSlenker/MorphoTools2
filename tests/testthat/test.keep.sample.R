@@ -48,17 +48,17 @@ test_that("keep sample by %",  {
   expect_equal(length(morphoMockup$Population) , length(subData$Population))
   expect_equal(paste((subData$ID), collapse = ","), "id1,id2,id3,id4,id5,id6,id7,id8,id9,id10")
 
-  subData = deleteSample(morphoMockup, missingPercentage = 0.7)
+  subData = removeSample(morphoMockup, missingPercentage = 0.7)
   expect_equal(length(levels(morphoMockup$Population)), length(levels(subData$Population)))
   expect_equal(length(morphoMockup$Population) -1 , length(subData$Population))
   expect_equal(paste((subData$ID), collapse = ","), "id1,id2,id3,id4,id5,id6,id7,id8,id10")
 
-  subData = deleteSample(morphoMockup, missingPercentage = 0.4)
+  subData = removeSample(morphoMockup, missingPercentage = 0.4)
   expect_equal(length(levels(morphoMockup$Population)), length(levels(subData$Population)))
   expect_equal(length(morphoMockup$Population) -2 , length(subData$Population))
   expect_equal(paste((subData$ID), collapse = ","), "id1,id2,id3,id4,id5,id6,id7,id8")
 
-  subData = deleteSample(morphoMockup, missingPercentage = 0.1)
+  subData = removeSample(morphoMockup, missingPercentage = 0.1)
   expect_equal(length(levels(morphoMockup$Population)), length(levels(subData$Population)))
   expect_equal(length(morphoMockup$Population) -3 , length(subData$Population))
   expect_equal(paste((subData$ID), collapse = ","), "id1,id2,id3,id4,id5,id6,id8")

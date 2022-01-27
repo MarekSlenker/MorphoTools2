@@ -48,22 +48,22 @@ cda.calc <- function(object, passiveSamples = NULL) {
     dfh <- manova$df[[term]]
     Sp <- E/dfe
 
-    #tdecomp <- function(m) {
-    #    wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
-    #    p <- ncol(m)
-    #    wmd <- wm$values
+    tdecomp <- function(m) {
+        wm <- eigen(m, symmetric = TRUE)  # povodne symmetric T
+        p <- ncol(m)
+        wmd <- wm$values
 
-    #    # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
-    #    diasq=suppressWarnings(diag(sqrt(wmd)))
-    #    malaBlbost = replace(diasq, is.na(diasq), -1.4E-4)  # MK
-    
-    #    out <- t(wm$vectors %*% malaBlbost)  # MK
-    #    #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
-    #    out
-    #}
-    #Tm <- tdecomp(E)
+        # tam kde sa wmd blizi 0, odmocnina z toho spravi NaN, tak z toho teraz spravim nieco veelmi male (z NaN)
+        diasq=suppressWarnings(diag(sqrt(wmd)))
+        malaBlbost = replace(diasq, is.na(diasq), -1.4E-4)  # MK
 
-    Tm <- fpc::tdecomp(E)
+        out <- t(wm$vectors %*% malaBlbost)  # MK
+        #out <- t(wm$vectors %*% diag(sqrt(wmd))) # candisc
+        out
+    }
+    Tm <- tdecomp(E)
+
+    # Tm <- fpc::tdecomp(E)   # Error in eigen(eHe, symmetric = TRUE) : infinite or missing values in 'x'
 
 
     eInv <- solve(Tm)

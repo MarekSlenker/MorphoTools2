@@ -25,7 +25,7 @@ A \code{data.frame}, summary classification table.
 data(centaurea)
 
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 # classification by linear discriminant function
 classifRes.lda = classif.lda(centaurea, crossval = "indiv")

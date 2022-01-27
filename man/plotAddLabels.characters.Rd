@@ -32,7 +32,7 @@ None. Used for its side effect of adding elements to a plot.
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 
 pcaRes = pca.calc(centaurea)

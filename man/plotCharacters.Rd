@@ -42,7 +42,7 @@ The \code{plotCharacters} method is not applicable to results of the principal c
 \examples{
 data(centaurea)
 centaurea = naMeanSubst(centaurea)
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 pcaRes = pca.calc(centaurea)
 

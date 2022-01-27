@@ -2,7 +2,7 @@ context("plotAddLabels.characters_hist")
 
 data(centaurea)
 centaurea = suppressWarnings(naMeanSubst(centaurea))
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
 cdaRes = cda.calc(centaurea, passiveSamples = c("hybr", "ph"))
 

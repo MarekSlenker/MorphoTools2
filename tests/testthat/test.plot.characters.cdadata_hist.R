@@ -11,8 +11,8 @@ morphoMockup = .morphodataFromDataFrame(morphoDataFrame)
 # locally suppress warnings
 data(centaurea)
 centaurea = suppressWarnings(naMeanSubst(centaurea))
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
-centaurea = deleteTaxon(centaurea, taxonName = c("hybr", "ph"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removeTaxon(centaurea, taxonName = c("hybr", "ph"))
 
 cdaRes = cda.calc(centaurea)
 

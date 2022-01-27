@@ -2,9 +2,9 @@ context("classif.matrix")
 
 data(centaurea)
 centaurea = suppressWarnings(naMeanSubst(centaurea))
-centaurea = deletePopulation(centaurea, populationName = c("LIP", "PREL"))
+centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 
-trainingSet = deletePopulation(centaurea, populationName = "SOK")
+trainingSet = removePopulation(centaurea, populationName = "SOK")
 SOK = keepPopulation(centaurea, populationName = "SOK")
 
 
