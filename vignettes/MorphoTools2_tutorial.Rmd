@@ -537,7 +537,7 @@ summary(pca.centaurea)
 The result can be plotted using the `plotPoints()` function. The parameter `axes` define which principal components to plot (the 1st and 2nd being default), and the parameters `col` and `pch`[^4] control the colour and type of plotting character, respectively (the same for each point or specific for each taxon). The usual graphical parameters affect the axes, data point symbol size, etc., and several parameters define the appearance and position of the legend; see the documentation for `plotPoints()` for details.  
 
 [^4]: **Plotting symbols commonly used in R**  
-![](./pch.png){width=100%}
+![](./pch.pdf){width=100%}
 
 
 ```{r echo = TRUE, eval=FALSE}
