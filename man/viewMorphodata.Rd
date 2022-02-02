@@ -21,5 +21,5 @@ None. Used for its side effect.
 \examples{
 data(centaurea)
 
-\donttest{viewMorphodata(centaurea)}
+\donttest{\dontrun{viewMorphodata(centaurea)}}
 }

@@ -29,7 +29,7 @@ None. Used for its side effect.
 data(centaurea)
 
 descr = descrTaxon(centaurea, format = "($MEAN ± $SD)")
-\donttest{exportRes(descr, file = "centaurea_descrTax.txt")}
+\donttest{\dontrun{exportRes(descr, file = "centaurea_descrTax.txt")}}
 }
 
 

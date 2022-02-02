@@ -66,5 +66,5 @@ boxplotCharacter(centaurea, "ST", boxlty = 1, medlwd = 5,
           whisklty = 2, whiskcol = "red", staplecol = "red",
           outcol = "grey30", pch = "-")
 
-\donttest{boxplotAll(centaurea, folderName = "../boxplots")}
+\donttest{\dontrun{boxplotAll(centaurea, folderName = "../boxplots")}}
 }

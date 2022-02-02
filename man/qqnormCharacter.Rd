@@ -37,5 +37,5 @@ data(centaurea)
 
 qqnormCharacter(centaurea, character = "SF")
 
-\donttest{qqnormAll(centaurea, folderName = "../qqnormPlots")}
+\donttest{\dontrun{qqnormAll(centaurea, folderName = "../qqnormPlots")}}
 }

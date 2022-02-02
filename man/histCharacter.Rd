@@ -11,7 +11,7 @@ Histograms are produced for the level of taxa/groups, to displays a within-group
 histCharacter(object, character, taxon = levels(object$Taxon), histogram = TRUE,
         col = "lightgray", main = NULL, densityLine = TRUE, normDistLine = TRUE, ...)
 
-histAll(object, folderName = "histograms", taxon = levels(object$Taxon), 
+histAll(object, folderName = "histograms", taxon = levels(object$Taxon),
 		histogram = TRUE, col = "lightgray", main = NULL, densityLine = TRUE,
 		normDistLine = TRUE, width = 480, height = 480, units = "px", ...)
 }
@@ -42,5 +42,5 @@ data(centaurea)
 
 histCharacter(centaurea, character = "IW", breaks = seq(0.5, 2.5, 0.1))
 
-\donttest{histAll(centaurea, folderName = "../histograms")}
+\donttest{\dontrun{histAll(centaurea, folderName = "../histograms")}}
 }

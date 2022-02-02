@@ -39,9 +39,8 @@ data(centaurea)
 correlations.p = cormat(centaurea, method = "Pearson")
 correlations.s = cormat(centaurea, method = "Spearman")
 
-\donttest{exportRes(correlations.p, file = "correlations.pearson.txt")}
-\donttest{exportRes(correlations.s, file = "correlations.spearman.txt")}
+\donttest{\dontrun{exportRes(correlations.p, file = "correlations.pearson.txt")}}
+\donttest{\dontrun{exportRes(correlations.s, file = "correlations.spearman.txt")}}
 
 correlations.p = cormatSignifTest(centaurea, method = "Pearson")
-
 }
