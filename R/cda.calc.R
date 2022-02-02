@@ -3,7 +3,7 @@
 #' @export
 cda.calc <- function(object, passiveSamples = NULL) {
   .checkClass(object, "morphodata")
-
+  
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)
 

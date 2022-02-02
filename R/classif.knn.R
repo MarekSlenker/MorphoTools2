@@ -3,7 +3,7 @@
 classif.knn <- function(object, k, crossval = "indiv"){
 
   .checkClass(object, "morphodata")
-
+  
 
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)  # matica musi byt plna
   if (missing(k)) stop("Argument 'k' is missing, there is no default value.", call. = FALSE)

@@ -5,10 +5,9 @@ author: |
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-date: 'Date: Jun 2021'
+date: 'Date: Februar 2022'
 output:
-  pdf_document: 
-    latex_engine: lualatex
+  pdf_document
 vignette: |
   %\VignetteIndexEntry{MorphoTools2_tutorial}
   %\VignetteEncoding{UTF-8}
@@ -28,9 +27,9 @@ indent: false
 \newpage 
 ```{r, eval=TRUE, include = FALSE}
 knitr::opts_chunk$set(
-  dev="png",
+  dev="pdf",
   highlight = TRUE,
-  dpi = 150,
+  dpi = 1,
   collapse = TRUE,
   comment = "#>",
   rownames = FALSE, 
@@ -417,8 +416,8 @@ pops = populOTU(centaurea)
 ```{r echo = FALSE, eval = TRUE}
 rm(populOTU)
 ```
-```{r echo = FALSE, eval=TRUE, warning=FALSE}
-pops = populOTU(centaurea)
+```{r echo = FALSE, eval=TRUE}
+pops = suppressWarnings(populOTU(centaurea))
 ```
 
 There is a warning that the values of some characters are NA. How to deal with missing data is discussed in the following section.
@@ -458,14 +457,14 @@ As indicated by the warnings above, populations LIP and PREL have the highest pe
 
 ### 3.8.1 Removing items
 
-The descriptive tables above show that four characters in two populations are completely missing. The user should decide between deleting the characters, using the `removeCharacter()` function, or the populations, using the `removePopulation()` function. As the character AP looks promising for the delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be retained and the populations removed.
+The descriptive tables above show that four characters in two populations are completely missing. The user should decide between removing the characters, using the `removeCharacter()` function, or the populations, using the `removePopulation()` function. As the character AP looks promising for the delimitation of *C. pseudophrygia* and *C. stenolepis*, characters will be retained and the populations removed.
 
 ```{r echo = TRUE, eval=TRUE}
 centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
 pops = removePopulation(pops, populationName = c("LIP", "PREL"))
 ```
 
-Another available option is to delete samples with a high portion of missing data using the `removeSample()` function. The command `removeSample(centaurea, missingPercentage = 0.1)` returns a new `morphodata` object (dataset), retaining only samples having no more than 10% of missing data. To remove specific samples, enumerate them in the 'sampleName' argument in these functions.  
+Another available option is to remove samples with a high portion of missing data using the `removeSample()` function. The command `removeSample(centaurea, missingPercentage = 0.1)` returns a new `morphodata` object (dataset), retaining only samples having no more than 10% of missing data. To remove specific samples, enumerate them in the 'sampleName' argument in these functions.  
 
 Here is the right place to mention also `removeTaxon()` and another four functions with reversed logic, which will return only mentioned samples, populations, taxa or characters: `keepSample()`, `keepPopulation()`, `keepTaxon()` and `keepCharacter()`.
 
@@ -473,8 +472,12 @@ Here is the right place to mention also `removeTaxon()` and another four functio
 
 Missing values can be substituted by the average value of the respective character in the respective population. However, substitution by the mean introduces values that are not present in the original dataset. This approach is acceptable only if the following conditions are met: There are relatively few missing values; these missing values are scattered across characters (each character including only a few missing values); and removing all individuals or all characters with missing data would unacceptably reduce the dataset. To substitute remaining missing values by an average value, use the function `naMeanSubst()`.
 
-```{r echo = TRUE, eval=TRUE}
+```{r echo = TRUE, eval=FALSE}
 centaurea = naMeanSubst(centaurea)
+```
+```{r include = FALSE}
+centaurea = suppressWarnings(naMeanSubst(centaurea))
+
 ```
 
 &nbsp;  
@@ -495,13 +498,13 @@ Hierarchical classification is one of the methods that do not require *a priori*
 The dendrogram is displayed using the `plot()` function with usual graphical parameters. The parameter `hang` controls the distance of the labels from the plot; negative values cause labels to be aligned at zero.
 
 ```{r echo = TRUE, eval=FALSE}
-pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
-plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
+hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
+plot(hierClust, hang = -1, sub = "", xlab = "", ylab = "distance")
 ```
 ```{r hierClust, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
 graphics::par(mar=c(3, 4.1, 1.5, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
-pops_hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
-plot(pops_hierClust, hang = -1, sub = "", xlab = "", ylab = "distance", cex=0.6, cex.main=1)
+hierClust = clust(pops, distMethod = "Euclidean", clustMethod = "UPGMA")
+plot(hierClust, hang = -1, sub = "", xlab = "", ylab = "distance", cex=0.6, cex.main=1)
 
 ```
 

@@ -4,7 +4,8 @@ classifSample.knn <- function(sampleData, trainingData, k){
 
   .checkClass(sampleData, "morphodata")
   .checkClass(trainingData, "morphodata")
-
+  
+  
   # matica musi byt plna
   if (any(is.na(sampleData$data))) stop("NA values in 'sampleData'.", call. = FALSE)
   if (any(is.na(trainingData$data))) stop("NA values in 'trainingData'.", call. = FALSE)
