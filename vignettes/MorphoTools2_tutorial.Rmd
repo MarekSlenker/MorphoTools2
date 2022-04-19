@@ -64,7 +64,7 @@ The R console and base system can be downloaded from <http://www.r-project.org>.
 
 
 ```{r eval=FALSE, include=TRUE}
-install.packages(MorphoTools2)
+install.packages("MorphoTools2")
 library(MorphoTools2)
 
 ```
