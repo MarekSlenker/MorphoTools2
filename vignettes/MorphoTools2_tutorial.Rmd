@@ -5,7 +5,7 @@ author: |
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-date: 'Date: Februar 2022'
+date: 'Date: March 2022'
 output:
   pdf_document
 vignette: |
@@ -127,7 +127,7 @@ In general, morphological data can be imported using the `read.morphodata()` fun
 [^3]: **Example dataset** in txt and xlsx formats are stored in the "extdata" directory of the MorphoTools2 package installation directory. To find the path to the package location run `system.file("extdata", package = "MorphoTools2")`.
 
 ```{r eval = FALSE, echo = TRUE}
-centaurea = read.morphodata(file = "<PATH TO centaurea.txt>", dec = ".", sep = "\t")
+centaurea = read.morphodata(file = "<PATH>/centaurea.txt", dec = ".", sep = "\t")
 centaurea = read.morphodata(file = "clipboard")
 ```
 
@@ -250,7 +250,7 @@ The transformation of data is addressed in the following section. However, in al
 
 The characters that deviate the most from the normal distribution can be transformed to improve their distribution (to make them normally distributed or at least to achieve lower deviation from normality). From the wide palette of applicable transformations (e.g. logarithmic, square root, cube root, arcsine), the one which improves the distribution of a particular character the most should be chosen. Note that, when using a log transformation, a constant should be added to all values to make them all positive before transformation if there are zero values in the data, because the argument of the logarithm can only take positive numbers. The arcsine transformation is often used for proportions and percentages (for values ranging from 0 to 1).  
 
-Transformation can be done using the `transformCharacter()` function, which, in addition to the data object, the name of the character to be transformed (`character`) and a new name for the transformed character (`newName`; not required), takes as argument an anonymous function (`FUN`), also known as a lambda expression. Without long explanation, this is where to place the function that will transform the data. Transformed values will replace original values of the character, under the old or new name, if the `newName` argument is set.  
+Transformation can be done using the `transformCharacter()` function, which, in addition to the data object, the name of the character to be transformed (`character`) and a new name for the transformed character (`newName`; not required), takes as argument an anonymous function (`FUN`), also known as a lambda expression. Without long explanation, this is where to place the function that will transforms the data. Transformed values will replace original values of the character, under the old or new name, if the `newName` argument is set.  
   
 As the `transformCharacter()` takes another function as an argument (`FUN`), there is an inexhaustible amount of potential transformations:  
 
