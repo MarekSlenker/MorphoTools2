@@ -123,6 +123,7 @@
     ID = character(),
     Population = factor(),
     Taxon = factor(),
+    classif.funs = NULL,
     classif = factor(),
     prob = numeric(),
     correct = logical()

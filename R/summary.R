@@ -127,15 +127,17 @@ summary.classifdata <- function(object, ...) {
 
   cat("Object of class 'classifdata'; storing results of classificatory discriminant analysis\n\n")
 
-  descrTable = data.frame("ID" = object$ID,
-                          "Population" = object$Population,
-                          "Taxon" = object$Taxon,
-                          "classification" = object$classif,
-                          "probability" = object$prob,
-                          "correct" = object$correct)
-  rownames(descrTable) = NULL
+  #descrTable = data.frame("ID" = object$ID,
+  #                        "Population" = object$Population,
+  #                        "Taxon" = object$Taxon,
+  #                        "classification" = object$classif,
+  #                        "probability" = object$prob,
+  #                        "correct" = object$correct)
+  #rownames(descrTable) = NULL
+  #print(descrTable)
 
-  print(descrTable)
+  print.classifdata(object)
+
 }
 
 
