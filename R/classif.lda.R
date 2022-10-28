@@ -112,7 +112,7 @@ classif.lda <- function(object, crossval="indiv") {
     W <- W + w[,,i]
 
   V <- W/(nrow(object$data) - ntax)
-  iV <- solve(V)
+  iV <- solve(V, tol = -Inf) # inac to blbne
 
   class.funs <- matrix(NA, nrow = v + 1, ncol = ntax)
   colnames(class.funs) <- levels(object$Taxon)

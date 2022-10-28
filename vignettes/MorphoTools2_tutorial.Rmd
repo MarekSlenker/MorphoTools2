@@ -5,7 +5,7 @@ author: |
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-date: 'Date: March 2022'
+date: 'Date: November 2022'
 output:
   pdf_document
 vignette: |
@@ -1159,7 +1159,10 @@ options(max.print = 185)
 summary(classifRes.lda)
 ```
 
-KAROL ->  The coefficients of the linear discriminant functions (above) can be directly applied to classify unknown individuals. The sums of constant and multiples of each character by the corresponding coefficient are compared among the groups [^6]. The unknown individual is classified into the group that shows the higher score. If the populations leave-out cross-validation mode is selected (`crossval = "pop"`), each taxon must be represented by at least two populations.
+The coefficients of the linear discriminant functions (above) can be directly applied to classify individuals of unknown group membership. The sums of constant and multiples of each character by the corresponding coefficient are compared among the groups [^6]. The unknown individual is classified into the group that shows the higher score. If the populations leave-out cross-validation mode is selected (`crossval = "pop"`): (1) each taxon must be represented by at least two populations; (2) coefficients of classification functions are computed as averages of coefficients retrieved after each run with one population removed.
+
+
+
 
 
 [^6]: **Linear Discriminant Function for hybrids:**  
