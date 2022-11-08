@@ -2,7 +2,7 @@
 #' @export
 classif.qda <- function(object, crossval="indiv") {
 
-  .checkClass(object, "morphodata")
+  if (!inherits(object, "morphodata")) stop("object not of class \"morphodata\"")
 
   # matica musi byt plna
   if (any(is.na(object$data))) stop("NA values in 'object'.", call. = FALSE)

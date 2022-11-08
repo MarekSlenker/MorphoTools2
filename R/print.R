@@ -7,6 +7,14 @@ print.classifdata <- function(x, ...) {
 
 
   print(toPrint, ...)
+
+  if (! is.null(x$classif.funs)){
+    cat(paste("\nLinear Discriminant Function for", paste(levels(x$Taxon), collapse = ", "), "\n"))
+    # oldopt = getOption("scipen", default = NULL)
+    # options(scipen=999)
+      print( noquote( format( round( x$classif.funs, digits = 3), scientific = FALSE) ),  ...)
+    # options(scipen=oldopt)
+  }
 }
 
 #' @export

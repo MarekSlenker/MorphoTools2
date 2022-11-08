@@ -29,6 +29,9 @@ an object of class \code{\link{classifdata}} with the following elements:
 \item{ID}{IDs of each row.}
 \item{Population}{population membership of each row.}
 \item{Taxon}{taxon membership of each row.}
+
+\item{classif.funs}{the classification functions computed for raw characters (descriptors). If \code{crossval = "pop"}, means of coefficients of classification functions are computed.}
+
 \item{classif}{classification from discriminant analysis.}
 \item{prob}{posterior probabilities of classification into each taxon (if calculated by \code{\link{classif.lda}} or \code{\link{classif.qda}}),
 or proportion of the votes for the winning class (calculated by \code{\link{classif.knn}})}
@@ -44,6 +47,8 @@ LDA and QDA analyses have some requirements: (1) no character can be a linear co
 Nonparametric classification method k-nearest neighbours is performed using the \code{knn} and \code{knn.cv} functions from the package \code{class}.
 
 The mode of crossvalidation is set by the parameter \code{crossval}. The default \code{"indiv"} uses the standard one-leave-out method. However, as some hierarchical structure is usually present in the data (individuals from a population are not completely independent observations, as they are morphologically closer to each other than to individuals from other populations), the value \code{"pop"} sets whole populations as leave-out units. The latter method does not allow classification if there is only one population for a taxon and is more sensitive to ``atypical'' populations, which usually leads to a somewhat lower classification success rate.
+
+The coefficients of the linear discriminant functions (above) can be directly applied to classify individuals of unknown group membership. The sums of constant and multiples of each character by the corresponding coefficient are compared among the groups. The unknown individual is classified into the group that shows the higher score. If the populations leave-out cross-validation mode is selected (\code{crossval = "pop"}): (1) each taxon must be represented by at least two populations; (2) coefficients of classification functions are computed as averages of coefficients retrieved after each run with one population removed.
 }
 
 \seealso{

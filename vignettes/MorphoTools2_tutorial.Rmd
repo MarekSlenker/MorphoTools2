@@ -1,11 +1,11 @@
 ---
-title: \vspace{+2.0cm} MorphoTools2 version 1.0.0 tutorial \vspace{+2.0cm}
+title: \vspace{+2.0cm} MorphoTools2 version 1.0.1.0 tutorial \vspace{+2.0cm}
 author: |
   | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-date: 'Date: March 2022'
+date: 'Date: November 2022'
 output:
   pdf_document
 vignette: |
@@ -65,7 +65,7 @@ The R console and base system can be downloaded from <http://www.r-project.org>.
 
 ```{r eval=FALSE, include=TRUE}
 install.packages("MorphoTools2")
-library(MorphoTools2)
+library("MorphoTools2")
 
 ```
 ```{r include=FALSE, eval=TRUE}
@@ -1104,7 +1104,8 @@ Classificatory discriminant analysis (based on the packages `MASS` and `class`; 
 
 As stated above, discriminant analyses have certain requirements: (1) No character may be a linear combination of any other character; (2) No pair of characters may be highly correlated; (3) No character may be invariant in any taxon (group); (4) For the number of taxa (g), characters (p) and total number of samples (n) the following should hold: 0 < p < (n - g); and (5) There must be at least two groups (taxa) and in each group there must be at least two objects. Violation of these requirements is reflected by warning or error messages (rank deficiency).  
 
-To fulfil these requirements, only a subset of characters is used. Linearly independent characters can be identified by stepwise discriminant analysis and invariant characters within a taxon are revealed by the `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value than to remove the character as a whole. The subset includes all characters identified as most suitable for taxonomic delimitation by PCA and CDA analyses.
+To fulfill these requirements, only a subset of characters is used. Linearly independent characters can be identified by stepwise discriminant analysis and invariant characters within a taxon are revealed by the `descrTaxon()` function. If invariant characters are present, a more common practice is to add a small constant (e.g. 0.000001) to some value than to remove the character as a whole. The subset includes all characters identified as most suitable for taxonomic delimitation by PCA and CDA analyses.  
+
 
 ```{r include=F}
 options(max.print = 460)
@@ -1143,8 +1144,7 @@ The Box’s M test indicates that there is a significant difference in the covar
 ## 10.1 Linear discriminant analysis (LDA)
 
 
-Linear discriminant analysis can be performed by invoking the `classif.lda()` function. If collinear variables are present, a warning message is returned. The problem of multicollinearity is not covered in this tutorial, but note that if the classification itself is the only thing that matters, the warning can be ignored.
-
+Linear discriminant analysis can be performed by invoking the `classif.lda()` function. If collinear variables are present, a warning message is returned. The problem of multicollinearity is not covered in this tutorial, but note that if the classification itself is the only thing that matters, the warning can be ignored. 
 
 ```{r echo = TRUE, eval=TRUE}
 classifRes.lda = classif.lda(partialCent)
@@ -1152,26 +1152,50 @@ classifRes.lda = classif.lda(partialCent)
 
 
 
+```{r include=F}
+options(max.print = 185)
+```
+```{r echo = TRUE, eval=TRUE}
+summary(classifRes.lda)
+```
+
+The coefficients of the linear discriminant functions (above) can be directly applied to classify individuals of unknown group membership. The sums of constant and multiples of each character by the corresponding coefficient are compared among the groups [^6]. The unknown individual is classified into the group that shows the higher score. If the populations leave-out cross-validation mode is selected (`crossval = "pop"`): (1) each taxon must be represented by at least two populations; (2) coefficients of classification functions are computed as averages of coefficients retrieved after each run with one population removed.
+
+
+
+
+
+[^6]: **Linear Discriminant Function for hybrids:**  
+f(x)= -1214.13 -1.72\*MLW +2.73\*ML +745.56\*IW -11.33\*LS +3.55\*IV -24.75\*MW +3.22\*MF +23.65\*AP +6.92\*IS +7.79\*LBA -0.21\*LW -200.69\*AL +877.07\*ILW -2.25\*LBS +12.88\*SFT +6.91\*CG -575.64\*IL +7.24\*LM +370.98\*ALW +703.39\*AW -0.31\*SF  
+**for *C. phrygia* s.str. (ph): **  
+f(x)= -1200.68 -1.61\*MLW +0.08\*ML +761.40\*IW -11.32\*LS -0.71\*IV -14.53\*MW +2.47\*MF +24.45\*AP +3.64\*IS +4.74\*LBA -1.15\*LW -197.08\*AL +884.17\*ILW -1.85\*LBS +14.43\*SFT +4.04\*CG -581.50\*IL +10.70\*LM +368.90\*ALW +694.94\*AW -0.26\*SF  
+**for *C. pseudophrygia* (ps):**  
+f(x)= -1233.54 -1.93\*MLW +2.49\*ML +761.11\*IW -12.54\*LS +2.21\*IV -24.75\*MW +3.20\*MF +25.57\*AP +6.43\*IS +5.26\*LBA -1.34\*LW -198.85\*AL +888.27\*ILW -0.45\*LBS +8.37\*SFT +6.39\*CG -582.43\*IL +8.36\*LM +370.93\*ALW +702.99\*AW -0.27\*SF  
+**for *C. stenolepis* (st):  **  
+f(x)= -1212.07 -1.15\*MLW +1.84\*ML +764.51\*IW -5.93\*LS -1.10\*IV -20.77\*MW +3.02\*MF +19.12\*AP +6.46\*IS +6.98\*LBA -1.21\*LW -199.48\*AL +902.53\*ILW -1.16\*LBS +8.91\*SFT +6.22\*CG -590.23\*IL +8.20\*LM +363.97\*ALW +692.32\*AW -0.22\*SF
+
+
+
+\newpage
+
+A summary of how the discriminant function classifies the data used to develop the function can be displayed as a table for taxa, populations or individuals.
+
 
 ```{r echo = TRUE, eval=TRUE}
 classif.matrix(classifRes.lda, level = "taxon")
-
+```
+```{r include=F}
+options(max.print = 250)
+```
+```{r echo = TRUE, eval=TRUE}
 classif.matrix(classifRes.lda, level = "pop")
 ```
 
 A detailed classification of populations is very useful, as it can reveal atypical or incorrectly assigned populations. Most of the populations from the sample data were classified successfully (generally over 70% of correct classifications and often 100%), but some populations (BABL, CERM, LES, OLE2, PROS) yielded a maximum of 65% of correct classifications. Moreover, almost all of them were “incorrectly” clustered by hierarchical classification, and the positions of these populations in the PCA ordination plot are within clusters of different taxa. Such populations require further attention. For example, these results may indicate previously unrecognized hybridization.  
 
 
-The results can be exported to the clipboard or a file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
 
-```{r echo = TRUE, eval=FALSE}
-classif_lda = classif.matrix(classifRes.lda, level = "indiv")
-exportRes(object = classif_lda, file = "lda_classifMatrix.txt")
-```
-
-
-
-## 10.2 Quadratic discriminant analysis (LDA)
+## 10.2 Quadratic discriminant analysis (QDA)
 
 
 Quadratic DA does not assume equal covariance matrices among groups and can be calculated by the `classif.qda()` function.
@@ -1182,16 +1206,24 @@ classifRes.qda = classif.qda(partialCent)
 
 
 classif.matrix(classifRes.qda, level = "taxon")
-
 ```
 
+The results can be exported to the clipboard or a file using the `exportRes()` function. In the example below, posterior probabilities of classification of an individual into each group are exported. 
 
+```{r echo = TRUE, eval=FALSE}
+classif_qda = classif.matrix(classifRes.qda, level = "indiv")
+
+exportRes(object = classif_qda, file = "qda_classifMatrix.txt")
+```
+
+\vspace{+1cm}
 
 ## 10.3 K nearest neighbour classificatory DA
 
 The **k nearest neighbour** method classifies each individual according to the *a priori* classification of its k neighbours (by Euclidean distance) using a majority vote. As this method uses Euclidean distance, the characters are standardized to a zero mean and a unit variance. The cross-validation mode can be set as `"indiv"` or `"pop"`, in the same manner as above.
 
 The optimum number of neighbours to consider is unknown, but it is estimated empirically from the data. The `knn.select()` function searches for the optimal k for the given dataset. The function can use two cross-validation methods (by individuals and populations) in a similar way as with classificatory discriminant analysis functions (the latter is used in the example below). The function computes the number of correctly classified individuals for k values from 1 to 30 and highlights the value with the greatest success rate. Ties (i.e. when there are the same numbers of votes for two or more groups) are broken at random, so subsequent iterations may yield different results. Therefore, the functions compute ten iterations, and the average success rates for each k are used; the minimum and maximum success rates for each k are also displayed as error bars. Note that several k values may have nearly the same success rates; if this is the case, the similarity of iterations may also be considered. 
+
 
 
 ```{r echo = FALSE, eval = TRUE}
@@ -1201,9 +1233,9 @@ knn.select<-function(object, crossval="indiv"){
   
   ksel = t(ksel)
   
-  for (j in 1:10)
+  for (j in seq(10,100,10))
   {
-    cat("Tested ", j*10, "% of Ks \n")
+    cat("Tested ", j, "% of Ks \n")
   }
   
   kselmean = apply(ksel, MARGIN = 2, FUN = mean)
@@ -1243,6 +1275,7 @@ popClassifMatrix = classif.matrix(classifRes.knn, level = "taxon")
 exportRes(popClassifMatrix, file = "clipboard")
 ```
 
+\newpage
 
 ## 10.4 Classification of sample individuals based on an independent training set.
 
@@ -1322,6 +1355,8 @@ Selection of papers employing the methods of multivariate morphometrics:
 **Koutecký P., Štěpánek J., Baďurová T. (2012)**. Differentiation between diploid and tetraploid *Centaurea phrygia*: mating barriers, morphology and geographic distribution. *Preslia* 84, 1-32.
 
 **Shlens, J. (2014)**. A tutorial on principal component analysis. *ArXiv* preprint arXiv:1404.1100
+
+**Španiel S., Marhold K., Hodálová I., Lihová J. (2008)**. Diploid and Tetraploid Cytotypes of *Centaurea stoebe* (Asteraceae) in Central Europe: Morphological Differentiation and Cytotype Distribution Patterns. *Folia Geobotanica* 43, 131–158.
 
 **Thorpe R.S. (1976)**. Biometric analysis of geographic variation and racial affinities. *Biological Reviews of the Cambridge Philosophical Society* 51, 407–425.
 
