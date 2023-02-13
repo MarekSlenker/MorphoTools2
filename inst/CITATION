@@ -1,14 +1,12 @@
-citHeader("To cite MorphoTools2 in publications, please use:")
-
-citEntry(
-  entry    = "Article",
-  title    = "MorphoTools2: an R package for multivariate morphometric analysis",
-  author   = "Šlenker, M., Koutecký, P., Marhold, K.",
-  journal  = "Bioinformatics",
-  year     = "2022",
-  volume   = "38",
-  number   = "10",
-  pages    = "2954-2955",
-  url      = "https://doi.org/10.1093/bioinformatics/btac173",
-  textVersion = "Šlenker, M., Koutecký, P. & Marhold, K. (2022). MorphoTools2: an R package for multivariate morphometric analysis. Bioinformatics 38: 2954-2955. https://doi.org/10.1093/bioinformatics/btac173"
+bibentry(bibtype = "Article",
+         author = c(person(given="Marek",family="Šlenker", role = c("aut", "cre"), comment = "https://orcid.org/0000-0002-5919-890X"),
+                                         person(given="Petr",family="Koutecký", role = "ctb", comment = "https://orcid.org/0000-0002-3455-850X"),
+                                         person(given="Karol",family="Marhold", role = "ctb", comment = "https://orcid.org/0000-0002-7658-0844")),
+         title = "MorphoTools2: an R package for multivariate morphometric analysis",
+         journal = "Bioinformatics",
+         year = "2022",
+         volume = "38",
+         number = "10",
+         pages = "2954-2955",
+         doi = "10.1093/bioinformatics/btac173"
 )
