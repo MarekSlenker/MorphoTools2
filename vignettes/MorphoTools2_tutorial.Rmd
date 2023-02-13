@@ -5,7 +5,7 @@ author: |
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
   | \vspace*{0.7pc}
   | *https://github.com/MarekSlenker/MorphoTools2*
-date: 'Date: November 2022'
+date: 'Date: October 2022'
 output:
   pdf_document
 vignette: |
