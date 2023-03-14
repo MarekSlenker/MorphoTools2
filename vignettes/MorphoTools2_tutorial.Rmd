@@ -1,8 +1,6 @@
 ---
 title: |
-  ```{=tex}
   \vspace{+2.0cm} MorphoTools2 version 1.0.1.0 tutorial \vspace{+2.0cm}
-  ```
 author: |
   | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
