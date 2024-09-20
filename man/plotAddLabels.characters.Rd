@@ -9,7 +9,7 @@ This is a generic function for drawing labels to the character arrows of \code{\
 
 \usage{
 plotAddLabels.characters(result, labels = characters(result), include = TRUE,
-      axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, ...)
+   axes = c(1,2), pos = NULL, offset = 0.5, cex = 0.7, col = NULL, breaks = 1, ...)
 }
 
 \arguments{
@@ -21,6 +21,7 @@ plotAddLabels.characters(result, labels = characters(result), include = TRUE,
 \item{offset}{when pos is specified, this value controls the distance (offset) of the text label from the point in fractions of a character width.}
 \item{cex}{character expansion factor for text.}
 \item{col}{the colours for labels.}
+\item{breaks}{a numeric, giving the width of one histogram bar.}
 \item{...}{further arguments to be passed to \code{\link{text}} or other graphical parameters in \code{\link{par}}.}
 }
 

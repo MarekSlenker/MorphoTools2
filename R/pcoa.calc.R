@@ -48,6 +48,7 @@ pcoa.calc <- function(object, distMethod = "Euclidean", binaryChs = NULL, nomina
   for (i in 1:length(pcoaResult$eigenvaluesAsPercentages)) {
     newNames = c(newNames, paste("PCo", i, sep = ""))
   }
+  names(pcoaResult$eigenvalues) = newNames
   names(pcoaResult$eigenvaluesAsPercentages) = newNames
   names(pcoaResult$cumulativePercentageOfEigenvalues) = newNames
 

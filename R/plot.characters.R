@@ -69,10 +69,36 @@ plotCharacters.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NU
 
     # main plot
 
-    y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
+    # y = seq(length(result$totalCanonicalStructure[,1]), 1, -1)
+    # Height of plot BEGIN
+    taxlev = levels(result$objects$Taxon)
+    scores = as.numeric(result$objects$scores$Can1) # TIT ZNEMEA
+    xhist = graphics::hist(scores, plot = FALSE)
+    hist_breaks = seq(from = min(xhist$breaks), to = max(xhist$breaks), by = 1 )
+    # struktura pre skladovanie hystogramov
+    histograms = list(list(list(),list(),list(),list(),list(),list()))
+    for (i in 1:length(taxlev)) {
+      histograms[[i]] = graphics::hist(scores[result$objects$Taxon == taxlev[i]], plot = FALSE, breaks = hist_breaks )
+    }
+    #   MAX porovnanaj v cykle, na konci cyklu budes mat max zo vsetkych - na nastavien ylim
+    ymax = 0
+    if (is.null(ylim)) {
+      for (i in 1:length(taxlev)) {
+        ymax = max( c(ymax, histograms[[i]]$counts))
+      }
+      # hrajkanie sa s delenim a zvyskom po delenie, aby som nasiel nablizsie cislo delitelne 10
+      upperLim = ymax  %/% 10; if ((ymax %% 10) > 0) upperLim = upperLim + 1; upperLim = upperLim * 10
+      ylim = c(0, upperLim)
+      y = seq(upperLim*0.9, 1,length.out = length(result$totalCanonicalStructure[,1]))
+    } else {
+      y = seq(max(ylim)*0.9, 1,length.out = length(result$totalCanonicalStructure[,1]))
+    }
+    # Height of plot END
+
+
 
     graphics::plot(x = result$totalCanonicalStructure[,1], y = y, xlab = xlab, ylab = ylab, xlim = xlim,
-         ylim = c(0,length(result$totalCanonicalStructure[,1])+1),type = "n", yaxt = "n", main = main, ...)
+         ylim = c(0,max(y)+max(y)*0.1),type = "n", yaxt = "n", main = main, ...)
 
     graphics::abline(v = 0,lty = 2,col = "grey")
     graphics::arrows(x0 = 0, y0 = y, x1 = result$totalCanonicalStructure[,1], y1 = y, col = col, length = length, angle = angle, ...)
