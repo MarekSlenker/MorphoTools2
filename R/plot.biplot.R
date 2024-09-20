@@ -2,7 +2,7 @@
 #' @export
 plotBiplot <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, pch = 16, col = "black", pt.bg = "white", breaks = 1,
                        xlim = NULL, ylim = NULL,
-                       labels = FALSE, arrowLabels = TRUE,
+                       labels = FALSE, arrowLabels = TRUE, colArrowLabels = "black",
                        angle = 15, length = 0.1, arrowCol = "red",
                        legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
   UseMethod("plotBiplot")
@@ -14,7 +14,7 @@ plotBiplot <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, pch = 16
 #' @export
 plotBiplot.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, pch = 16, col = "black", pt.bg = "white", breaks = 1,
                                xlim = NULL, ylim = NULL,
-                               labels = FALSE, arrowLabels = TRUE,
+                               labels = FALSE, arrowLabels = TRUE,colArrowLabels = "black",
                                angle = 15, length = 0.1, arrowCol = "red",
                                legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -48,7 +48,7 @@ plotBiplot.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
 
 
   # labels
-  if (arrowLabels) plotAddLabels.characters(result, axes = axes, col = arrowCol)
+  if (arrowLabels) plotAddLabels.characters(result, axes = axes, col = colArrowLabels)
 
 }
 
@@ -59,7 +59,7 @@ plotBiplot.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
 #' @export
 plotBiplot.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, pch = 16, col = "black", pt.bg = "white", breaks = 1,
                                xlim = NULL, ylim = NULL,
-                               labels = FALSE, arrowLabels = TRUE,
+                               labels = FALSE, arrowLabels = TRUE,colArrowLabels = "black",
                                angle = 15, length = 0.1, arrowCol = "red",
                                legend = FALSE, legend.pos = "topright", ncol = 1, ...) {
 
@@ -138,6 +138,6 @@ plotBiplot.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
 
 
   # labels
-  if (arrowLabels) plotAddLabels.characters(result, axes = axes, col = arrowCol, breaks = breaks)
+  if (arrowLabels) plotAddLabels.characters(result, axes = axes, col = colArrowLabels, breaks = breaks)
 
 }

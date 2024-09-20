@@ -1,6 +1,6 @@
 ---
 title: |
-  \vspace{+2.0cm} MorphoTools2 version 1.0.1.0 tutorial \vspace{+2.0cm}
+  \vspace{+2.0cm} MorphoTools2 version 1.0.2.0 tutorial \vspace{+2.0cm}
 author: |
   | developed by **Marek Šlenker**\footnotemark[2] \footnotemark[3] \footnotemark[1] \vspace*{0.5pc}
   | with contributions from **Petr Koutecký**\footnotemark[4] &nbsp;and **Karol Marhold**\footnotemark[2] \footnotemark[3] \vspace*{0.7pc}
@@ -584,6 +584,21 @@ plotCharacters(pca.centaurea, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), ce
 exportRes(pca.centaurea$eigenvectors, file="eigenvectors.centaurea.txt")
 ```
 
+Both observation coordinates and variables of multivariate data (character loadings) can be displayed in the same plot (biplot) using the `plotBiplot()` function. By plotting both, the relationship between variables and data points can be seen in a single chart, making it easier for the PCA results to be interpreted and analyzed.
+
+```{r echo = TRUE, eval=FALSE}
+plotBiplot(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.4,
+           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+```
+```{r plotBiplot, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
+pca.pops = pca.calc(pops)
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.5, 0.5, 0), cex.axis=1, cex.lab=0.8, lwd=0.9)
+# plotBiplot(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18))
+plotBiplot(pca.centaurea, col = c("blue","green","red","orange"), pch = c(8,17,20,18),
+           cex = 0.4,legend = T, ncol = 2, legend.pos="bottomright")
+
+```
+
 Ordination diagrams of PCA resulted in relatively compact groupings corresponding to taxa with partial overlaps. The first two components (axes) extracted 20.65% and 14.26% of the overall variability in the data. The characters ILW and IW are strongly correlated with the direction of the separation of the taxa *C. pseudophrygia* and *C. stenolepis* (“ps”, “st”) and their putative hybrid “hybr”. *Centaurea phrygia* s.str. ("ph") is separated in the diagonal direction, being highly correlated with the characters MW, ML, IV and MLW.
 
 The `plotPoints()` and `plotCharacters()` are default plotting functions. Simple data point labels and a legend can be added using the arguments `labels = TRUE` and `legend = TRUE`, respectively. 
@@ -628,20 +643,33 @@ plotAddLabels.points(pca.pops, labels=c("PROS","SOK","KASH","BOL","CERM","DOM"),
 
 ```{r echo = TRUE, eval=FALSE}
 plotCharacters(pca.pops, labels = FALSE)
-plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
-plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
+plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA","IW","SFT"),cex=0.75)
 ```
 ```{r pca.pops.characters, echo = FALSE, eval=TRUE, fig.width= 3.8, fig.height=3.3}
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
-plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA"),pos=4,cex=0.75)
-plotAddLabels.characters(pca.pops,labels=c("IW","SFT"),pos=2,offset=0.7)
+plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA","IW","SFT"),pos=4,cex=0.75)
 
 ```
 
+&nbsp;  
+&nbsp;  
 
 
+```{r echo = TRUE, eval=FALSE}
+plotBiplot(pca.pops, col = c("blue","green","red","orange"),
+           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+```
+```{r plotBiplot2, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
+pca.pops = pca.calc(pops)
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.5, 0.5, 0), cex.axis=1, cex.lab=0.8, lwd=0.9)
+plotBiplot(pca.pops, col = c("blue","green","red","orange"), pch = c(8,17,20,18),
+           legend = T, ncol = 2, legend.pos="bottomright")
+
+```
+
+\newpage
 
 ```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
@@ -670,12 +698,12 @@ plotAddSpiders(pca.centaurea, col=c(rgb(0,0,255, max=255, alpha=50), # blue
 
 ```
 
+&nbsp;  
 To highlight only some groups in colour, set the colour values of groups not to be highlighted to `NA`.
 
 
 ```{r echo = TRUE, eval=FALSE}
 plotPoints(pca.centaurea, col = c("blue","green","red","orange"), cex = 0.5)
-
 plotAddSpiders(pca.centaurea, col=c(NA,NA,NA,rgb(255,102,0,max=255,alpha=100)))
 ```
 ```{r pca.spiders2, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
@@ -958,9 +986,9 @@ plotAddSpiders(cda.centaurea, col = c(rgb(0,0,255,max=255,alpha=130), # blue
                                       rgb(255,102,0,max=255,alpha=130))) # orange
 ```
 
-\newpage 
+Those CDA ordination diagrams unequivocally support the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis.  
 
-This CDA ordination diagram unequivocally supports the morphological differentiation of *C. phrygia* s.str. ("ph") along the first axis.  
+\newpage 
 
 ```{r echo = TRUE, eval=FALSE}
 plotCharacters(cda.centaurea, cex = 1.2)
@@ -970,7 +998,21 @@ graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0
 plotCharacters(cda.centaurea, cex = 0.7, xlim=c(-1, 1),ylim=c(-1, 1), cex.main=0.9)
 ```
 
-The function `plotCharacters()`, called with an object of the class `cdadata` as an argument, visualizes total canonical structure coefficients as arrows. The direction and length of the arrows indicate the characters' contribution to the separation of groups. The characters ML, MLW, IV and MW are oriented in the direction of the separation of *C. phrygia* s.str. ("ph"), so they contributed the most significantly, which is in accordance with the results of PCA. 
+The function `plotCharacters()`, called with an object of the class `cdadata` as an argument, visualizes total canonical structure coefficients as arrows. The biplot function (`plotBiplot()`) overlays ordination diagram and total canonical structure coefficients, helping to visualize the relationships in data.
+
+
+```{r echo = TRUE, eval=FALSE}
+plotBiplot(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.5,
+           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+```
+```{r plotBiplot3, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.5, 0.5, 0), cex.axis=1, cex.lab=0.8, lwd=0.9)
+plotBiplot(cda.centaurea, col = c("blue","green","red","orange"), cex = 0.5,
+           pch = c(8,17,20,18), legend = T, ncol = 2, legend.pos="bottomright")
+```
+
+
+The direction and length of the arrows indicate the characters' contribution to the separation of groups. The characters ML, MLW, IV and MW are oriented in the direction of the separation of *C. phrygia* s.str. ("ph"), so they contributed the most significantly, which is in accordance with the results of PCA. 
 
 The total canonical structure coefficients are elements of an object of the class `cdadata` and can be accessed using the `$` notation. The above-mentioned characters (ML, MLW, IV and MW) received the highest absolute scores along the first canonical axis (regardless of sign). The results can be exported using the `exportRes()` function. 
 
@@ -995,8 +1037,6 @@ cda.centaurea$totalCanonicalStructure
 ```
 
 
-
-\newpage 
 A 3D scatterplot can be produced using the `plot3Dpoints()` function. The viewing direction and slope (co-latitude) can be set using the `theta` and `phi` arguments, respectively.
 
 
@@ -1011,6 +1051,7 @@ plot3Dpoints(cda.centaurea, col = c("blue","green","red","orange"), phi = 12, th
 
 
 
+\newpage
 ***
 
 To gain better insight into the differentiation among the remaining taxa (*C. pseudophrygia*, *C. stenolepis* and their putative hybrid), these taxa will be analysed separately. A new subdataset (stPsHybr) will be created by removing *C. phrygia* from the original dataset. 
@@ -1034,13 +1075,29 @@ plotAddLegend(cda.stPsHybr, col = c("blue","red","orange"), box.lwd = 0.9,
 ```
 
 
-
+```{r include=F}
+options(max.print = 38)
+```
 ```{r echo = TRUE, eval=TRUE}
 cda.stPsHybr$totalCanonicalStructure
 ```
 The first axis captures most of the variation. Characters correlated with this axis (IW, ILW, LS, MW and MLW) are the most suitable for the taxonomic delimitation of *C. pseudophrygia* (“ps”) and *C. stenolepis* (“st”), while their hybrid exhibits intermediate values of these particular characters. The characters correlated with the second axis (IV, ML and LW) contribute to the separation of the hybrid from the parental species.
 
 
+```{r echo = TRUE, eval=FALSE}
+plotBiplot(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
+            legend = T, ncol = 2, legend.pos="bottomright")
+```
+```{r plotBiplot5, echo = FALSE, eval=TRUE, fig.width= 5, fig.height=3}
+graphics::par(mar=c(2.8, 4.1, 0, 2.1), mgp=c(1.5, 0.5, 0), cex.axis=1, cex.lab=0.8, lwd=0.9)
+plotBiplot(cda.stPsHybr, col = c("blue","red","orange"), pch = c(8,20,18), 
+            legend = T, ncol = 2, legend.pos="bottomleft")
+
+```
+
+&nbsp;  
+&nbsp;  
+&nbsp;  
 
 
 ### Passive prediction of samples. 
@@ -1049,6 +1106,7 @@ Sometimes it is desirable to passively display (predict) the position of certain
 
 Note that in the following example, in which hybrids are passively projected into the analysis of parental species, only two "active" groups are present, "ps" and "st". In such a case, there is only one canonical axis and the sample scores are displayed as a histogram instead of a scatterplot by the `plotPoints()` function. The additional parameter `breaks` allows to define the width of intervals (histogram columns). Also note the use of semi-transparent colours to show the overlap of the groups. The colours are defined using the `rgb()` function, in which the argument `alpha` defines opacity, in the example below on a scale 0 (fully transparent) to 255 (solid).
 
+\newpage
 
 ```{r echo = TRUE, eval=FALSE}
 

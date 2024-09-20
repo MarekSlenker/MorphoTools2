@@ -11,7 +11,7 @@ A generic function for plotting ordination scores and the character's contributi
 plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", breaks = 1,
       xlim = NULL, ylim = NULL, labels = FALSE, arrowLabels = TRUE,
-      angle = 15, length = 0.1, arrowCol = "red",
+      colArrowLabels = "black", angle = 15, length = 0.1, arrowCol = "red",
       legend = FALSE, legend.pos = "topright", ncol = 1, ...)
 }
 
@@ -26,6 +26,7 @@ plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
 \item{xlim, ylim}{the range of x and y axes.}
 \item{labels}{logical, if \code{TRUE}, object's labels are displayed.}
 \item{arrowLabels}{logical, if \code{TRUE}, character's labels are displayed.}
+\item{colArrowLabels}{the colours for character's labels.}
 \item{angle}{angle from the shaft of the arrow to the edge of the arrow head.}
 \item{length}{length of the edges of the arrow head (in inches).}
 \item{arrowCol}{the colour for arrows.}
