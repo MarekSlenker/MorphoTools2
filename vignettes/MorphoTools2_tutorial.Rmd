@@ -649,7 +649,7 @@ plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA","IW","SFT"),cex=0.7
 graphics::par(mar=c(3, 4.1, 2, 2.1), mgp=c(1.7, 0.6, 0), cex.axis=0.8, cex.lab=0.8, lwd=0.9)
 plotCharacters(pca.pops, labels = FALSE, cex = 0.5, xlim=c(-0.5, 0.5),ylim=c(-0.5, 0.5), cex.main=0.9)
 
-plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA","IW","SFT"),pos=4,cex=0.75)
+plotAddLabels.characters(pca.pops,labels=c("ILW","MLW","LBA","IW","SFT"),cex=0.75)
 
 ```
 

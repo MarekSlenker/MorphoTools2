@@ -8,7 +8,7 @@ A generic function for plotting ordination scores and the character's contributi
 }
 
 \usage{
-plotPoints(result, axes = c(1,2), xlab = NULL, ylab = NULL,
+plotBiplot(result, axes = c(1,2), xlab = NULL, ylab = NULL,
       pch = 16, col = "black", pt.bg = "white", breaks = 1,
       xlim = NULL, ylim = NULL, labels = FALSE, arrowLabels = TRUE,
       colArrowLabels = "black", angle = 15, length = 0.1, arrowCol = "red",

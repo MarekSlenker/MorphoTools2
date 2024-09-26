@@ -40,7 +40,7 @@ pcoa.calc <- function(object, distMethod = "Euclidean", binaryChs = NULL, nomina
   pcoaResult$objects$Population = object$Population
   pcoaResult$objects$Taxon = object$Taxon
 
-  pcoaResult$eigenvalues = cmdscaleRes$eig #[1:rank]
+  pcoaResult$eigenvalues = cmdscaleRes$eig[1:rank]
   pcoaResult$eigenvaluesAsPercentages = round(cmdscaleRes$eig[1:rank]/sum(cmdscaleRes$eig[1:rank]), 5)
   pcoaResult$cumulativePercentageOfEigenvalues = round(cumsum(cmdscaleRes$eig[1:rank]/sum(cmdscaleRes$eig[1:rank])), 5)
 
