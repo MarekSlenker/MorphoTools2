@@ -26,9 +26,9 @@ plotBiplot.pcadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
 
   # rescale variable coordinates
   r = min(
-    max(result$objects$scores[ ,axes[1]])/max(result$eigenvectors[ ,axes[1]]),
+    abs(max(result$objects$scores[ ,axes[1]]))/abs(max(result$eigenvectors[ ,axes[1]])),
     abs(min(result$objects$scores[ ,axes[1]]))/abs(min(result$eigenvectors[ ,axes[1]])),
-    max(result$objects$scores[ ,axes[2]])/max(result$eigenvectors[ ,axes[2]]),
+    abs(max(result$objects$scores[ ,axes[2]]))/abs(max(result$eigenvectors[ ,axes[2]])),
     abs(min(result$objects$scores[ ,axes[2]]))/abs(min(result$eigenvectors[ ,axes[2]]))
   )
   # r = min(
@@ -73,14 +73,14 @@ plotBiplot.cdadata <- function(result, axes = c(1,2), xlab = NULL, ylab = NULL, 
   # rescale variable coordinates
   if (result$rank == 1) {
     # HISTOGRAMOVE
-    r = min( max(result$objects$scores)/max(result$totalCanonicalStructure),
+    r = min( abs(max(result$objects$scores))/abs(max(result$totalCanonicalStructure)),
              abs(min(result$objects$scores))/abs(min(result$totalCanonicalStructure))    )
   } else {
     # rescale variable coordinates
     r = min(
-      max(result$objects$scores[ ,axes[1]])/max(result$totalCanonicalStructure[ ,axes[1]]),
+      abs(max(result$objects$scores[ ,axes[1]]))/abs(max(result$totalCanonicalStructure[ ,axes[1]])),
       abs(min(result$objects$scores[ ,axes[1]]))/abs(min(result$totalCanonicalStructure[ ,axes[1]])),
-      max(result$objects$scores[ ,axes[2]])/max(result$totalCanonicalStructure[ ,axes[2]]),
+      abs(max(result$objects$scores[ ,axes[2]]))/abs(max(result$totalCanonicalStructure[ ,axes[2]])),
       abs(min(result$objects$scores[ ,axes[2]]))/abs(min(result$totalCanonicalStructure[ ,axes[2]]))
     )
 
